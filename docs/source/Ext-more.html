@@ -401,7 +401,7 @@ Ext.ns(&quot;Ext.grid&quot;, &quot;Ext.list&quot;, &quot;Ext.dd&quot;, &quot;Ext
         document.execCommand(&quot;BackgroundImageCache&quot;, false, true);
     } catch(e) {}
 
-    Ext.setVersion(&#39;extjs&#39;, &#39;4.0.0beta1&#39;);
+    Ext.setVersion(&#39;extjs&#39;, &#39;4.0.0beta2&#39;);
     Ext.apply(Ext, {
         <a name="prop-Ext-SSL_SECURE_URL"></a>/**
          * URL to a blank file used by Ext when in secure mode for iframe src and onReady src to prevent
@@ -727,8 +727,12 @@ function(el){
             }
 
             if(force === true || scrollWidth === null){
+                // BrowserBug: IE9
+                // When IE9 positions an element offscreen via offsets, the offsetWidth is
+                // inaccurately reported. For IE9 only, we render on screen before removing.
+                var cssClass = Ext.isIE9 ? &#39;&#39; : Ext.baseCSSPrefix + &#39;hide-offsets&#39;;
                     // Append our div, do our calculation and then remove it
-                var div = Ext.getBody().createChild(&#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;hide-offsets&quot; style=&quot;width:100px;height:50px;overflow:hidden;&quot;&gt;&lt;div style=&quot;height:200px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&#39;),
+                var div = Ext.getBody().createChild(&#39;&lt;div class=&quot;&#39; + cssClass + &#39;&quot; style=&quot;width:100px;height:50px;overflow:hidden;&quot;&gt;&lt;div style=&quot;height:200px;&quot;&gt;&lt;/div&gt;&lt;/div&gt;&#39;),
                     child = div.child(&#39;div&#39;, true);
                 var w1 = child.offsetWidth;
                 div.setStyle(&#39;overflow&#39;, (Ext.isWebKit || Ext.isGecko) ? &#39;auto&#39; : &#39;scroll&#39;);
@@ -782,8 +786,8 @@ function(el){
         },
 
         <a name="method-Ext-clean"></a>/**
-         * Creates a copy of the passed Array with falsy values removed.
-         * @param {Array/NodeList} arr The Array from which to remove falsy values.
+         * Creates a copy of the passed Array with falsey values removed.
+         * @param {Array/NodeList} arr The Array from which to remove falsey values.
          * @return {Array} The new, compressed Array.
          */
         clean : function(arr){

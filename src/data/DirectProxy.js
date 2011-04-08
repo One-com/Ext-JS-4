@@ -117,8 +117,18 @@ paramOrder: 'param1|param2|param'
         var me = this;
         
         return function(data, event){
-            me.processResponse(event.status, operation, request, data, callback, scope);
+            me.processResponse(event.status, operation, request, event, callback, scope);
         };
+    },
+    
+    // inherit docs
+    extractResponseData: function(response){
+        return Ext.isDefined(response.result) ? response.result : response.data;
+    },
+    
+    // inherit docs
+    setException: function(operation, response) {
+        operation.setException(response.message);
     },
     
     // inherit docs

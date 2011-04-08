@@ -1,7 +1,7 @@
 Ext.require([
     'Ext.form.File',
     'Ext.form.FormPanel',
-    'Ext.window.MessageBoxWindow'
+    'Ext.window.MessageBox'
 ]);
 
 Ext.onReady(function(){

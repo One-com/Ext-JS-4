@@ -12,7 +12,7 @@ myMask.show();
 
  * @constructor
  * Create a new LoadMask
- * @param {Mixed} el The element or DOM node, or its id
+ * @param {Mixed} el The element, element ID, or DOM node you wish to mask. Also, may be a Component who's element you wish to mask.
  * @param {Object} config The config object
  */
 
@@ -54,7 +54,11 @@ Ext.define('Ext.LoadMask', {
     constructor : function(el, config) {
         var me = this;
 
-        me.el = Ext.get(el);
+        if (el.isComponent) {
+            me.bindComponent(el);
+        } else {
+            me.el = Ext.get(el);
+        }
         Ext.apply(me, config);
 
         me.addEvents('beforeshow', 'show', 'hide');
@@ -62,6 +66,41 @@ Ext.define('Ext.LoadMask', {
             me.bindStore(me.store, true);
         }
         me.mixins.observable.constructor.call(me, config);
+    },
+
+    bindComponent: function(comp) {
+        var me = this,
+            listeners = {
+                resize: me.onComponentResize,
+                scope: me
+            };
+
+        if (comp.el) {
+            me.onComponentRender(comp);
+        } else {
+            listeners.render = {
+                fn: me.onComponentRender,
+                scope: me,
+                single: true
+            };
+        }
+        me.mon(comp, listeners);
+    },
+
+    /**
+     * @private
+     * Called if we were configured with a Component, and that Component was not yet rendered. Collects the element to mask.
+     */
+    onComponentRender: function(comp) {
+        this.el = comp.getContentTarget();
+    },
+
+    /**
+     * @private
+     * Called when this LoadMask's Component is resized. The isMasked method also re-centers any displayed message.
+     */
+    onComponentResize: function(comp, w, h) {
+        this.el.isMasked();
     },
 
     /**

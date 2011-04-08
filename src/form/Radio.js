@@ -2,8 +2,8 @@
  * @class Ext.form.Radio
  * @extends Ext.form.Checkbox
 
-Single radio field. Same as Checkbox, but provided as a convenience for automatically setting the input type. 
-Radio grouping is handled automatically by the browser if you give each radio in a group the same name.
+Single radio field. Similar to checkbox, but automatically handles making sure only one radio is checked
+at a time within a group of radios with the same name.
 
 __Labeling:__
 In addition to the {@link Ext.form.Labelable standard field labeling options}, radio buttons 
@@ -21,10 +21,9 @@ The following values will check the radio:
 
 Any other value will uncheck it.
 
-In addition to the main boolean value, you may also specify a separate {@link #inputValue}. This will be
-used as the `value` attribute of the radio input and will be submitted as the parameter value when the form
-is {@link Ext.form.Basic#submit submitted}. You will want to set this value if you have multiple radio buttons
-with the same {@link #name}, as is almost always the case.
+In addition to the main boolean value, you may also specify a separate {@link #inputValue}. This will be sent
+as the parameter value when the form is {@link Ext.form.Basic#submit submitted}. You will want to set this
+value if you have multiple radio buttons with the same {@link #name}, as is almost always the case.
 
 __Example usage:__
 
@@ -39,8 +38,7 @@ __Example usage:__
                 fieldLabel : 'Size',
                 defaultType: 'radiofield',
                 defaults: {
-                    hideLabel: true,
-                    flex     : 1
+                    flex: 1
                 },
                 layout: 'hbox',
                 items: [
@@ -67,8 +65,7 @@ __Example usage:__
                 fieldLabel : 'Color',
                 defaultType: 'radiofield',
                 defaults: {
-                    hideLabel: true,
-                    flex     : 1
+                    flex: 1
                 },
                 layout: 'hbox',
                 items: [
@@ -187,7 +184,8 @@ Ext.define('Ext.form.Radio', {
     
     // private
     inputType: 'radio',
-    
+    ariaRole: 'radio',
+
     /**
      * If this radio is part of a group, it will return the selected value
      * @return {String}
@@ -198,24 +196,34 @@ Ext.define('Ext.form.Radio', {
     },
 
     /**
+     * @private Handle click on the radio button
+     */
+    onBoxClick: function(e) {
+        var me = this;
+        if (!me.disabled && !me.readOnly) {
+            this.setValue(true);
+        }
+    },
+
+    /**
      * Sets either the checked/unchecked status of this Radio, or, if a string value
      * is passed, checks a sibling Radio of the same name whose value is the value specified.
      * @param value {String/Boolean} Checked value, or the value of the sibling radio button to check.
-     * @return {Boolean} The value that was set
+     * @return {Ext.form.Radio} this
      */
-    setRawValue: function(v) {
+    setValue: function(v) {
         var me = this,
             active;
             
         if (Ext.isBoolean(v)) {
-            Ext.form.Radio.superclass.setRawValue.call(me, v);
+            me.callParent(arguments);
         } else {
-            active = this.getManager().getWithValue(me.name, v).getAt(0);
+            active = me.getManager().getWithValue(me.name, v).getAt(0);
             if (active) {
-                active.setRawValue(true);
+                active.setValue(true);
             }
         }
-        return me.checked;
+        return me;
     },
     
     // inherit docs

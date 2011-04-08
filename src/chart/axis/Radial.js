@@ -95,7 +95,7 @@ Ext.define('Ext.chart.axis.Radial', {
             labelArray = [], label,
             fields = [], nfields,
             categories = [], xField,
-            aggregate = !!this.maximum,
+            aggregate = !this.maximum,
             maxValue = this.maximum || 0,
             steps = this.steps, i = 0, j, dx, dy,
             pi2 = Math.PI * 2,
@@ -123,7 +123,6 @@ Ext.define('Ext.chart.axis.Radial', {
             }
             categories.push(record.get(xField));
         });
-
         if (!this.labelArray) {
             if (display != 'categories') {
                 //draw scale

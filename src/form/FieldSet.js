@@ -2,8 +2,8 @@
  * @class Ext.form.FieldSet
  * @extends Ext.container.Container
 
-A container for grouping sets of fields, rendered as a HTML `<fieldset>` element. The {@link #title}
-config will be rendered as the fieldset's `<legend>`.
+A container for grouping sets of fields, rendered as a HTML `fieldset` element. The {@link #title}
+config will be rendered as the fieldset's `legend`.
 
 While FieldSets commonly contain simple groups of fields, they are general {@link Ext.container.Container Containers}
 and may therefore contain any type of components in their {@link #items}, including other nested containers.
@@ -246,7 +246,6 @@ Ext.define('Ext.form.FieldSet', {
             name: me.checkboxName || me.id + suffix,
             cls: me.baseCls + '-header' + suffix,
             checked: !me.collapsed,
-            hideLabel: true,
             listeners: {
                 change: me.onCheckChange,
                 scope: me

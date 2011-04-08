@@ -364,7 +364,7 @@ items: [{
         <div id="center-details">
             <h2>Ext.ux.layout.CenterLayout</h2>
             <p>This is a custom layout for centering contents within a container.  The only requirement is
-            that the container have a single child panel with a width specified (fixed or percentage).
+            that the container have a single child panel with a fixed width or a percentage ratio specified.
             The child panel can then contain  any content, including other components, that will display
             centered within the main container. To make the centered panel non-visual, remove the title
             and add <tt>border:false</tt> to the child config.</p>
@@ -373,7 +373,7 @@ items: [{
 layout:'ux.center',
 items: {
     title: 'Centered Panel',
-    flex: 0.75,
+    widthRatio: 0.75,
     html: 'Some content'
 }
             </code></pre>

@@ -1,13 +1,14 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.ControllerManager"></a>/**
+ * @author Ed Spencer
  * @class Ext.ControllerManager
  * @extends Ext.AbstractManager
- * @author Ed Spencer
- * @private
- * @singleton
  * 
  * &lt;p&gt;Keeps track of all of the registered controllers. This should very rarely need to be used by developers. This 
  * is simply an {@link Ext.AbstractManager AbstractManager} with a custom {@link #register} function which sets up
  * the controller and its linked {@link Ext.Application application}.&lt;/p&gt;
+ *
+ * @private
+ * @singleton
  */
 Ext.define(&#39;Ext.ControllerManager&#39;, {
     extend: &#39;Ext.AbstractManager&#39;,

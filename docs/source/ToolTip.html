@@ -438,14 +438,15 @@ myGrid.on(&#39;render&#39;, function(grid) {
      */
     show: function() {
         var me = this;
+
+        // Show this Component first, so that sizing can be calculated
+        // pre-show it off screen so that the el will have dimensions
+        Ext.tip.Tip.superclass.show.call(me);
+        me.setPagePosition(-10000, -10000);
+
         if (me.anchor) {
-            // pre-show it off screen so that the el will have dimensions
-            // for positioning calcs when getting xy next
-            Ext.tip.Tip.superclass.show.call(me);
-            me.setPagePosition(-10000, -10000);
             me.anchor = me.origAnchor;
         }
-
         me.showAt(me.getTargetXY());
 
         if (me.anchor) {
@@ -462,7 +463,10 @@ myGrid.on(&#39;render&#39;, function(grid) {
         me.lastActive = new Date();
         me.clearTimers();
 
-        Ext.tip.Tip.superclass.show.call(me);
+        // Only call if this is hidden. May have been called from show above.
+        if (!me.isVisible()) {
+            Ext.tip.Tip.superclass.show.call(me);
+        }
 
         // Show may have been vetoed.
         if (me.isVisible()) {
@@ -573,6 +577,7 @@ myGrid.on(&#39;render&#39;, function(grid) {
 
     // private
     onDisable: function() {
+        this.callParent();
         this.clearTimers();
         this.hide();
     },

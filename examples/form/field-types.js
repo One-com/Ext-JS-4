@@ -64,6 +64,7 @@ Ext.onReady(function() {
             value: 'radiovalue2',
             fieldLabel: '',
             labelSeparator: '',
+            hideEmptyLabel: false,
             boxLabel: 'radio 2'
         }, {
             xtype: 'datefield',

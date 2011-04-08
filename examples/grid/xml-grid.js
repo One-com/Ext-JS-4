@@ -35,7 +35,7 @@ Ext.onReady(function(){
     // create the grid
     var grid = new Ext.grid.GridPanel({
         store: store,
-        headers: [
+        columns: [
             {text: "Author", flex: 1, dataIndex: 'Author', sortable: true},
             {text: "Title", width: 180, dataIndex: 'Title', sortable: true},
             {text: "Manufacturer", width: 115, dataIndex: 'Manufacturer', sortable: true},

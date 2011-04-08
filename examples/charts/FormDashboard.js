@@ -8,11 +8,15 @@ Ext.require([
 
 
 Ext.onReady(function(){
+    
+    //use a renderer for values in the data view.
+    function perc(v) {
+        return v + '%';
+    }
 
     var bd = Ext.getBody(),
         form = false,
         rec = false,
-        selectingRow = false,
         selectedStoreItem = false,
         //performs the highlight of an item in the bar series
         selectItem = function(storeItem) {
@@ -58,9 +62,6 @@ Ext.onReady(function(){
                 // buffer so we don't refire while the user is still typing
                 buffer: 200,
                 change: function(field, newValue, oldValue, listener) {
-                    if (selectingRow) {
-                        return;
-                    }
                     form.updateRecord(rec);
                     updateRecord(rec);
                 }
@@ -171,15 +172,13 @@ Ext.onReady(function(){
                 size: 2
             },
             style: {
-                fill: '#273f68'
+                fill: '#273f68',
+                opacity: 0.5,
+                'stroke-width': 0.5
             },
             label: {
                 display: true,
                 field: 'Name'
-            },
-            style: {
-                'opacity': 0.5,
-                'stroke-width': 0.5
             }
         }]
     });
@@ -192,7 +191,7 @@ Ext.onReady(function(){
         title:'Company Data',
         border: false,
 
-        headers: [
+        columns: [
             {
                 id       :'company',
                 text   : 'Company',
@@ -239,13 +238,20 @@ Ext.onReady(function(){
 
         listeners: {
             selectionchange: function(model, records) {
-                var json, name, i, l, items, series;
+                var json, name, i, l, items, series, fields;
                 if (records[0]) {
                     rec = records[0];
-                    selectingRow = true;
                     form = form || this.up('form').getForm();
+                    fields = form.getFields();
+                    // prevent change events from firing
+                    fields.each(function(field){
+                        field.suspendEvents();
+                    });
                     form.loadRecord(rec);
-                    selectingRow = false;
+                    updateRecord(rec);
+                    fields.each(function(field){
+                        field.resumeEvents();
+                    });
                 }
             }
         }
@@ -324,11 +330,6 @@ Ext.onReady(function(){
              selectItem(selectedStoreItem);
         }    
     });
-
-    //use a renderer for values in the data view.
-    function perc(v) {
-        return v + '%';
-    }
 
     /*
      * Here is where we create the Form

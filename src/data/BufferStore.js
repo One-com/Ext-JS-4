@@ -1,6 +1,16 @@
+/**
+ * @class Ext.data.BufferStore
+ * @extends Ext.data.Store
+ * @ignore
+ */
 Ext.define('Ext.data.BufferStore', {
     extend: 'Ext.data.Store',
     alias: 'store.buffer',
+    sortOnLoad: false,
+    filterOnLoad: false,
+    /**
+     * @cfg {Number} purgePageCount The number of pages to keep in the cache before purging additional records. A value of 0 indicates to never purge the prefetched data.
+     */
     purgePageCount: 5,
     
     constructor: function() {
@@ -120,15 +130,24 @@ Ext.define('Ext.data.BufferStore', {
     cacheRecords: function(records, operation) {
         var me     = this,
             i      = 0,
-            length = records.length;
+            length = records.length,
+            start  = operation ? operation.start : 0;
+        
+        if (!Ext.isDefined(me.totalCount)) {
+            me.totalCount = records.length;
+            me.fireEvent('totalcountchange', me.totalCount);
+        }
         
         for (; i < length; i++) {
             // this is the true index, not the viewIndex
-            records[i].index = operation.start + i;
+            records[i].index = start + i;
         }
         
         me.prefetchData.addAll(records);
-        this.purgeRecords();
+        if (me.purgePageCount) {
+            me.purgeRecords();
+        }
+        
     },
     
     
@@ -298,7 +317,28 @@ Ext.define('Ext.data.BufferStore', {
     // because prefetchData is stored by index
     // this invalidates all of the prefetchedData
     sort: function() {
-        this.prefetchData.clear();
-        this.callParent(arguments);
+        var me = this,
+            prefetchData = this.prefetchData;
+
+        if (me.remoteSort) {
+            prefetchData.clear();
+            me.callParent(arguments);
+        } else {
+            var sorters = this.getSorters(),
+                start = me.guaranteedStart,
+                end = me.guaranteedEnd,
+                range;
+
+            if (sorters.length) {
+                prefetchData.sort(sorters);
+                range = prefetchData.getRange();
+                prefetchData.clear();
+                me.cacheRecords(range);
+                delete me.guaranteedStart;
+                delete me.guaranteedEnd;
+                me.guaranteeRange(start, end);
+            }
+            me.callParent(arguments);
+        }
     }
 });

@@ -84,6 +84,8 @@
         height: 11px;
         
         font-size: 0; /*for IE*/
+        
+        border-bottom: 0;
     }
     .#{$prefix}form-spinner-down {
         background-position: 0 -11px;

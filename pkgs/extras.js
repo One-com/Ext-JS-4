@@ -567,7 +567,7 @@ Ext.ns("Ext.grid", "Ext.list", "Ext.dd", "Ext.tree", "Ext.form", "Ext.menu",
         document.execCommand("BackgroundImageCache", false, true);
     } catch(e) {}
 
-    Ext.setVersion('extjs', '4.0.0beta1');
+    Ext.setVersion('extjs', '4.0.0beta2');
     Ext.apply(Ext, {
         /**
          * URL to a blank file used by Ext when in secure mode for iframe src and onReady src to prevent
@@ -897,8 +897,12 @@ Ext.addBehaviors({
             }
 
             if(force === true || scrollWidth === null){
+                // BrowserBug: IE9
+                // When IE9 positions an element offscreen via offsets, the offsetWidth is
+                // inaccurately reported. For IE9 only, we render on screen before removing.
+                var cssClass = Ext.isIE9 ? '' : Ext.baseCSSPrefix + 'hide-offsets';
                     // Append our div, do our calculation and then remove it
-                var div = Ext.getBody().createChild('<div class="' + Ext.baseCSSPrefix + 'hide-offsets" style="width:100px;height:50px;overflow:hidden;"><div style="height:200px;"></div></div>'),
+                var div = Ext.getBody().createChild('<div class="' + cssClass + '" style="width:100px;height:50px;overflow:hidden;"><div style="height:200px;"></div></div>'),
                     child = div.child('div', true);
                 var w1 = child.offsetWidth;
                 div.setStyle('overflow', (Ext.isWebKit || Ext.isGecko) ? 'auto' : 'scroll');
@@ -954,8 +958,8 @@ ImageComponent = Ext.extend(Ext.Component, {
         },
 
         /**
-         * Creates a copy of the passed Array with falsy values removed.
-         * @param {Array/NodeList} arr The Array from which to remove falsy values.
+         * Creates a copy of the passed Array with falsey values removed.
+         * @param {Array/NodeList} arr The Array from which to remove falsey values.
          * @return {Array} The new, compressed Array.
          */
         clean : function(arr){
@@ -2039,6 +2043,12 @@ Ext.supports = {
     },
 
     /**
+     * @property CSS3BoxShadow True if document environment supports the CSS3 box-shadow style.
+     * @type {Boolean}
+     */
+    CSS3BoxShadow: Ext.isDefined(document.documentElement.style.boxShadow),
+
+    /**
      * @property ClassList True if document environment supports the HTML5 classList API.
      * @type {Boolean}
      */
@@ -2327,6 +2337,17 @@ Ext.supports = {
             fn: function(doc, div){
                 var el = Ext.get(div.childNodes[1].firstChild);
                 return el.getWidth() == 210;
+            }
+        },
+        
+        /**
+         * @property ArraySort True if the Array sort native method isn't bugged.
+         * @type {Boolean}
+         */
+        {
+            identity: 'ArraySort',
+            fn: function() {
+                return [1, 3].sort(function(a,b) { return b < a; })[0] === 1;
             }
         }
     ]

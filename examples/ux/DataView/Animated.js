@@ -84,11 +84,15 @@ Ext.define('Ext.ux.DataView.Animated', {
             
             //hide old items
             Ext.each(removed, function(item) {
-                Ext.fly(this.dataviewID + '-' + item.internalId).animate({
+                var id = this.dataviewID + '-' + item.internalId;
+                Ext.fly(id).animate({
                     remove  : false,
                     duration: duration,
                     opacity : 0,
-                    useDisplay: true
+                    useDisplay: true,
+                    callback: function() {
+                        Ext.fly(id).setDisplayed(false);
+                    }
                 });
             }, this);
             
@@ -145,16 +149,12 @@ Ext.define('Ext.ux.DataView.Animated', {
             Ext.iterate(previous, function(id, item) {
                 var oldPos = oldPositions[id],
                     el     = elCache[id];
-                    
+
                 if (el.getStyle('position') != 'absolute') {
                     elCache[id].applyStyles({
                         position: 'absolute',
                         left    : oldPos.left + "px",
-                        top     : oldPos.top + "px",
-
-                        //we set the width here to make ListViews work correctly. This is not needed for DataViews
-                        width   : el.getWidth(!Ext.isIE || Ext.isStrict) + el.getMargin('lr'),
-                        height  : el.getHeight(!Ext.isIE || Ext.isStrict) + el.getMargin('tb')
+                        top     : oldPos.top + "px"
                     });
                 }
             });
@@ -218,7 +218,7 @@ Ext.define('Ext.ux.DataView.Animated', {
                         Ext.fly(dataviewID + '-' + id).applyStyles({
                             top : midTop + "px",
                             left: midLeft + "px"
-                        });
+                        }).setDisplayed(true);
                     }
                 }
             };
@@ -236,7 +236,7 @@ Ext.define('Ext.ux.DataView.Animated', {
                 Ext.fly(this.dataviewID + '-' + item.internalId).applyStyles({
                     top    : newPositions[item.internalId].top + "px",
                     left   : newPositions[item.internalId].left + "px"
-                });
+                }).setDisplayed(true);
                 
                 Ext.fly(this.dataviewID + '-' + item.internalId).animate({
                     remove  : false,

@@ -96,7 +96,7 @@ Ext.onReady(function(){
     var grid = Ext.createWidget('gridpanel', {
         title:'Sliding Pager',
         store: store,
-        headers: [{
+        columns: [{
                 id:'company',
                 text: 'Company',
                 sortable: true,

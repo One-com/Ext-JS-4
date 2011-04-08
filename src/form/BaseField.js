@@ -119,6 +119,12 @@ Ext.define('Ext.form.BaseField', {
     fieldCls : Ext.baseCSSPrefix + 'form-field',
 
     /**
+     * @cfg {String} fieldStyle Optional CSS style(s) to be applied to the {@link #inputEl field input element}.
+     * Should be a valid argument to {@link Ext.core.Element#applyStyles}. Defaults to undefined. See also the
+     * {@link #setFieldStyle} method for changing the style after initialization.
+     */
+
+    /**
      * @cfg {String} focusCls The CSS class to use when the field receives focus (defaults to 'x-form-focus')
      */
     focusCls : Ext.baseCSSPrefix + 'form-focus',
@@ -148,8 +154,9 @@ Ext.define('Ext.form.BaseField', {
      * within a {@link Ext.form.FormPanel}, you can use the FormPanel's {@link Ext.form.FormPanel#pollForChanges}
      * configuration to set up such a task automatically.</p>
      */
-    checkChangeEvents: Ext.isIE ? ['change', 'propertychange'] :
-                                  ['change', 'input', 'textInput', 'keyup', 'dragdrop'],
+    checkChangeEvents: Ext.isIE && document.documentMode < 9 ? 
+                        ['change', 'propertychange'] :
+                        ['change', 'input', 'textInput', 'keyup', 'dragdrop'],
 
     /**
      * @cfg {Number} checkChangeBuffer
@@ -170,6 +177,11 @@ Ext.define('Ext.form.BaseField', {
      * <code>{@link Ext.form.Trigger#hideTrigger hideTrigger}</code>.</p>
      */
     readOnly : false,
+
+    /**
+     * @cfg {String} readOnlyCls The CSS class applied to the component's main element when it is {@link #readOnly}.
+     */
+    readOnlyCls: Ext.baseCSSPrefix + 'form-readonly',
 
     /**
      * @cfg {String} inputId
@@ -297,9 +309,24 @@ var form = new Ext.form.FormPanel({
         return Ext.applyIf(this.callParent(), this.getLabelableRenderData());
     },
 
+    /**
+     * Set the {@link #fieldStyle CSS style} of the {@link #inputEl field input element}.
+     * @param {String/Object/Function} style The style(s) to apply. Should be a valid argument to
+     * {@link Ext.core.Element#applyStyles}.
+     */
+    setFieldStyle: function(style) {
+        var me = this,
+            inputEl = me.inputEl;
+        if (inputEl) {
+            inputEl.applyStyles(style);
+        }
+        me.fieldStyle = style;
+    },
+
     // private
     onRender : function() {
         var me = this,
+            fieldStyle = me.fieldStyle,
             renderSelectors = me.renderSelectors;
 
         Ext.applyIf(renderSelectors, me.getLabelableSelectors());
@@ -323,6 +350,9 @@ var form = new Ext.form.FormPanel({
         }
         if (me.disabled) {
             me.disable();
+        }
+        if (fieldStyle) {
+            me.setFieldStyle(fieldStyle);
         }
 
         me.renderActiveError();
@@ -498,10 +528,14 @@ var form = new Ext.form.FormPanel({
      * @param {Boolean} readOnly Whether the field should be read only.
      */
     setReadOnly: function(readOnly) {
-        if (this.inputEl) {
-            this.inputEl.dom.readOnly = readOnly;
+        var me = this,
+            inputEl = me.inputEl;
+        if (inputEl) {
+            inputEl.dom.readOnly = readOnly;
+            inputEl.dom.setAttribute('aria-readonly', readOnly);
         }
-        this.readOnly = readOnly;
+        me[readOnly ? 'addCls' : 'removeCls'](me.readOnlyCls);
+        me.readOnly = readOnly;
     },
 
     // private
@@ -598,8 +632,8 @@ var form = new Ext.form.FormPanel({
 
 
     /**
-     * <p>Uses {@link #getErrors} to build an array of validation errors. If any errors are found, {@link #markInvalid}
-     * is called with the first and false is returned, otherwise true is returned.</p>
+     * <p>Uses {@link #getErrors} to build an array of validation errors. If any errors are found, they are passed
+     * to {@link #markInvalid} and false is returned, otherwise true is returned.</p>
      * <p>Previously, subclasses were invited to provide an implementation of this to process validations - from 3.2
      * onwards {@link #getErrors} should be overridden instead.</p>
      * @param {Mixed} value The value to validate
@@ -607,15 +641,13 @@ var form = new Ext.form.FormPanel({
      */
     validateValue: function(value) {
         var me = this,
-            error = me.getErrors(value)[0], //currently we only show 1 error at a time for a field, so just use the first one
-            undef,
-            isValid = error === undef;
-
+            errors = me.getErrors(value),
+            isValid = Ext.isEmpty(errors);
         if (!me.preventMark) {
             if (isValid) {
                 me.clearInvalid();
             } else {
-                me.markInvalid(error);
+                me.markInvalid(errors);
             }
         }
 
@@ -623,21 +655,21 @@ var form = new Ext.form.FormPanel({
     },
 
     /**
-     * <p>Display an error message associated with this field, using {@link #msgTarget} to determine how to
-     * display the message and applying {@link #invalidCls} to the field's UI element.</p>
+     * <p>Display one or more error messages associated with this field, using {@link #msgTarget} to determine how to
+     * display the messages and applying {@link #invalidCls} to the field's UI element.</p>
      * <p><b>Note</b>: this method does not cause the Field's {@link #validate} method to return <code>false</code>
      * if the value does <i>pass</i> validation. So simply marking a Field as invalid will not prevent
      * submission of forms submitted with the {@link Ext.form.action.Submit#clientValidation} option set.</p>
      * {@link #isValid invalid}.
-     * @param {String} msg (optional) The validation message (defaults to {@link #invalidText})
+     * @param {String/Array} errors The validation message(s) to display.
      */
-    markInvalid : function(msg) {
+    markInvalid : function(errors) {
         // Save the message and fire the 'invalid' event
         var me = this,
             oldMsg = me.getActiveError();
-        this.setActiveError(msg);
-        if (oldMsg !== msg) {
-            this.doComponentLayout();
+        me.setActiveErrors(Ext.Array.from(errors));
+        if (oldMsg !== me.getActiveError()) {
+            me.doComponentLayout();
         }
     },
 

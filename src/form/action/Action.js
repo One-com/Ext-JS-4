@@ -83,12 +83,12 @@ Ext.define('Ext.form.action.Action', {
      */
 
     /**
-     * @cfg {String} waitMsg The message to be displayed by a call to {@link Ext.window.MessageBoxWindow#wait}
+     * @cfg {String} waitMsg The message to be displayed by a call to {@link Ext.window.MessageBox#wait}
      * during the time the action is being processed.
      */
 
     /**
-     * @cfg {String} waitTitle The title to be displayed by a call to {@link Ext.window.MessageBoxWindow#wait}
+     * @cfg {String} waitTitle The title to be displayed by a call to {@link Ext.window.MessageBox#wait}
      * during the time the action is being processed.
      */
 

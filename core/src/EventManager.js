@@ -249,7 +249,7 @@ Ext.EventManager = {
                 fn = Ext.Function.createInterceptor(fn, this.contains, this);
             }
             eventName = eventName == 'mouseenter' ? 'mouseover' : 'mouseout';
-        } else if (eventName == 'mousewheel' && !Ext.supports.MouseWheel){
+        } else if (eventName == 'mousewheel' && !Ext.supports.MouseWheel && !Ext.isOpera){
             eventName = 'DOMMouseScroll';
         }
         return {

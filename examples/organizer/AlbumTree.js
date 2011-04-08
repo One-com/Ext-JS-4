@@ -9,22 +9,11 @@ Ext.define('Ext.org.AlbumTree', {
     viewConfig: {
         plugins: [{
             ddGroup: 'organizerDD',
-            ptype  : 'treeviewdd'
+            ptype  : 'treeviewdragdrop'
         }]
     },
     
     displayField: 'name',
-    
-    root: {
-        name: 'Root',
-        allowDrop: false,
-        children: [
-            {
-                name   : 'Album 1',
-                iconCls: 'album-btn'
-            }
-        ]
-    },
     
     initComponent: function() {
         this.count = 1;
@@ -39,7 +28,19 @@ Ext.define('Ext.org.AlbumTree', {
         ];
         
         this.store = Ext.create('Ext.data.TreeStore', {
-            fields: ['name']
+            fields: ['name'],
+            
+            root: {
+                name: 'Root',
+                allowDrop: false,
+                expanded: true,
+                children: [
+                    {
+                        name   : 'Album 1',
+                        iconCls: 'album-btn'
+                    }
+                ]
+            }
         });
         
         this.callParent();

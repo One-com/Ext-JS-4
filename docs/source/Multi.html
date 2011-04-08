@@ -708,7 +708,8 @@ Ext.define(&#39;Ext.slider.Multi&#39;, {
             me.setValue(i, val);
         });
         me.clearInvalid();
-        me.wasValid = true;
+        // delete here so we reset back to the original state
+        delete me.wasValid;
     },
     
     // private

@@ -191,7 +191,7 @@ Ext.EventManager = {
 
         if (!Ext.cache[id]){
             Ext.core.Element.addToCache(new Ext.core.Element(element), id);
-            if(skip){
+            if (skip) {
                 Ext.cache[id].skipGarbageCollection = true;
             }
         }
@@ -249,7 +249,7 @@ Ext.EventManager = {
                 fn = Ext.Function.createInterceptor(fn, this.contains, this);
             }
             eventName = eventName == &#39;mouseenter&#39; ? &#39;mouseover&#39; : &#39;mouseout&#39;;
-        } else if (eventName == &#39;mousewheel&#39; &amp;&amp; !Ext.supports.MouseWheel){
+        } else if (eventName == &#39;mousewheel&#39; &amp;&amp; !Ext.supports.MouseWheel &amp;&amp; !Ext.isOpera){
             eventName = &#39;DOMMouseScroll&#39;;
         }
         return {
@@ -423,8 +423,11 @@ Ext.EventManager = {
     */
     removeAll : function(element){
         var dom = Ext.getDom(element),
-            cache = this.getElementEventCache(dom),
-            ev;
+            cache, ev;
+        if (!dom) {
+            return;
+        }
+        cache = this.getElementEventCache(dom);
 
         for (ev in cache) {
             if (cache.hasOwnProperty(ev)) {
@@ -761,6 +764,7 @@ Ext.EventManager = {
     fireUnload: function() {
         // wrap in a try catch, could have some problems during unload
         try {
+            this.removeUnloadListener();
             // Work around FF3 remembering the last scroll position when refreshing the grid and then losing grid view
             if (Ext.isGecko3) {
                 var gridviews = Ext.ComponentQuery.query(&#39;gridview&#39;),
@@ -778,9 +782,6 @@ Ext.EventManager = {
                     Ext.EventManager.removeAll(el);
                 }
             }
-            delete Ext.cache;
-            delete Ext.Element._flyweights;
-            this.removeUnloadListener();
         } catch(e) {
         }
     },

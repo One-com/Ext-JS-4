@@ -13,7 +13,7 @@ Ext.define('Ext.layout.component.form.Field', {
 
     extend: 'Ext.layout.Component',
 
-    requires: ['Ext.tip.QuickTips'],
+    uses: ['Ext.tip.QuickTip'],
 
     /* End Definitions */
 
@@ -29,11 +29,19 @@ Ext.define('Ext.layout.component.form.Field', {
             owner = me.owner,
             labelStrategy = me.getLabelStrategy(),
             errorStrategy = me.getErrorStrategy(),
-            info;
+            isDefined = Ext.isDefined,
+            lastSize, lastWidth, lastHeight, info, undef;
 
+        if (isDefined(width) || isDefined(height)) {
+            me.setTargetSize(width, height);
+        }
+
+        lastSize = me.lastComponentSize || {};
+        lastWidth = lastSize.width;
+        lastHeight = lastSize.height;
         info = {
-            width: width,
-            height: height,
+            width: lastWidth >= 0 ? lastWidth : undef,
+            height: lastHeight >= 0 ? lastHeight : undef,
 
             // insets for the bodyEl from each side of the component layout area
             insets: {
@@ -51,9 +59,6 @@ Ext.define('Ext.layout.component.form.Field', {
         // perform preparation on the label and error (setting css classes, qtips, etc.)
         labelStrategy.prepare(owner, info);
         errorStrategy.prepare(owner, info);
-
-        // preparation may have adjusted the target dimensions
-        me.setTargetSize(info.width, info.height);
 
         // calculate the horizontal insets for the label and error
         labelStrategy.adjustHorizInsets(owner, info);
@@ -85,8 +90,9 @@ Ext.define('Ext.layout.component.form.Field', {
         var me = this,
             owner = me.owner,
             insets = info.insets,
+            totalWidth = info.width,
             totalHeight = info.height,
-            width = info.width - insets.left - insets.right,
+            width = Ext.isNumber(totalWidth) ? totalWidth - insets.left - insets.right : totalWidth,
             height = Ext.isNumber(totalHeight) ? totalHeight - insets.top - insets.bottom : totalHeight;
 
         // size the bodyEl
@@ -153,25 +159,9 @@ Ext.define('Ext.layout.component.form.Field', {
                 layoutVert: emptyFn
             },
             left = applyIf({
-                prepare: function(owner, info) {
-                    base.prepare(owner, info);
-                    // For auto-width, set the target width to the label size plus the body size; we can't just
-                    // use the outer el width because the body may be wrapping to below the label at this point;
-                    // also we want the shrink-wrapped size and not the full width of the container.
-                    if (!Ext.isNumber(info.width)) {
-                        info.width = (owner.hideLabel ? 0 : owner.labelWidth + owner.labelPad) + owner.getBodyNaturalWidth();
-                    }
-                },
                 adjustHorizInsets: function(owner, info) {
-                    if (!owner.hideLabel) {
+                    if (owner.labelEl) {
                         info.insets.left += owner.labelWidth + owner.labelPad;
-                    }
-                },
-                layoutHoriz: function(owner, info) {
-                    if (!owner.hideLabel) {
-                        var labelEl = owner.labelEl;
-                        labelEl.setWidth(owner.labelWidth);
-                        labelEl.setStyle('marginRight', owner.labelPad + 'px');
                     }
                 }
             }, base);
@@ -184,31 +174,10 @@ Ext.define('Ext.layout.component.form.Field', {
              * Label displayed above the bodyEl
              */
             top: applyIf({
-                prepare: function(owner, info) {
-                    base.prepare(owner, info);
-                    if (!Ext.isNumber(info.width)) {
-                        var width = owner.getBodyNaturalWidth(),
-                            labelEl = owner.labelEl;
-                        if (labelEl) {
-                            // Use unwrapped label width if greater than body width
-                            width = Math.max(width, labelEl.getTextWidth());
-                        }
-                        info.width = width;
-                    }
-                },
                 adjustVertInsets: function(owner, info) {
-                    if (!owner.hideLabel) {
-                        info.insets.top += owner.labelEl.getHeight() + owner.labelPad;
-                    }
-                },
-                layoutHoriz: function(owner, info) {
-                    if (!owner.hideLabel) {
-                        owner.labelEl.setWidth(info.width);
-                    }
-                },
-                layoutVert: function(owner, info) {
-                    if (!owner.hideLabel) {
-                        owner.labelEl.setStyle('marginBottom', owner.labelPad + 'px');
+                    var labelEl = owner.labelEl;
+                    if (labelEl) {
+                        info.insets.top += labelEl.getHeight() + owner.labelPad;
                     }
                 }
             }, base),
@@ -232,11 +201,24 @@ Ext.define('Ext.layout.component.form.Field', {
      * An appropriate one will be chosen based on the owner field's {@link Ext.form.Field#msgTarget} config.
      */
     errorStrategies: (function() {
+        function setDisplayed(el, displayed) {
+            var wasDisplayed = el.getStyle('display') !== 'none';
+            if (displayed !== wasDisplayed) {
+                el.setDisplayed(displayed);
+            }
+        }
+
+        function setStyle(el, name, value) {
+            if (el.getStyle(name) !== value) {
+                el.setStyle(name, value);
+            }
+        }
+
         var applyIf = Ext.applyIf,
             emptyFn = Ext.emptyFn,
             base = {
                 prepare: function(owner) {
-                    owner.errorEl.setDisplayed(false);
+                    setDisplayed(owner.errorEl, false);
                 },
                 adjustHorizInsets: emptyFn,
                 adjustVertInsets: emptyFn,
@@ -254,10 +236,9 @@ Ext.define('Ext.layout.component.form.Field', {
                 prepare: function(owner) {
                     var errorEl = owner.errorEl;
                     errorEl.addCls(Ext.baseCSSPrefix + 'form-invalid-icon');
-                    errorEl.dom.qtip = owner.activeError || '';
-                    errorEl.dom.setAttribute('ext:qclass', Ext.baseCSSPrefix + 'form-invalid-tip');
-                    Ext.tip.QuickTips.init();
-                    errorEl.setDisplayed(owner.hasActiveError());
+                    Ext.layout.component.form.Field.initTip();
+                    errorEl.dom.errorqtip = owner.getActiveError() || '';
+                    setDisplayed(errorEl, owner.hasActiveError());
                 },
                 adjustHorizInsets: function(owner, info) {
                     if (owner.autoFitErrors && owner.hasActiveError()) {
@@ -265,10 +246,18 @@ Ext.define('Ext.layout.component.form.Field', {
                     }
                 },
                 layoutHoriz: function(owner, info) {
-                    owner.errorEl.setLeft(info.width - info.insets.right);
+                    if (owner.hasActiveError()) {
+                        var width = info.width;
+                        if (!Ext.isNumber(width)) {
+                            width = owner.el.getWidth();
+                        }
+                        setStyle(owner.errorEl, 'left', width - info.insets.right + 'px');
+                    }
                 },
                 layoutVert: function(owner, info) {
-                    owner.errorEl.setTop(info.insets.top);
+                    if (owner.hasActiveError()) {
+                        setStyle(owner.errorEl, 'top', info.insets.top + 'px');
+                    }
                 }
             }, base),
 
@@ -282,7 +271,7 @@ Ext.define('Ext.layout.component.form.Field', {
                     if (!errorEl.hasCls(cls)) {
                         errorEl.addCls(cls);
                     }
-                    errorEl.setDisplayed(owner.hasActiveError());
+                    setDisplayed(errorEl, owner.hasActiveError());
                 },
                 adjustVertInsets: function(owner, info) {
                     if (owner.autoFitErrors) {
@@ -291,9 +280,13 @@ Ext.define('Ext.layout.component.form.Field', {
                 },
                 layoutHoriz: function(owner, info) {
                     var errorEl = owner.errorEl,
-                        insets = info.insets;
-                    errorEl.setWidth(info.width - insets.right - insets.left);
-                    errorEl.setStyle('marginLeft', insets.left + 'px');
+                        insets = info.insets,
+                        width = info.width;
+
+                    if (Ext.isNumber(width)) {
+                        setStyle(errorEl, 'width', width - insets.right - insets.left + 'px');
+                    }
+                    setStyle(errorEl, 'marginLeft', insets.left + 'px');
                 }
             }, base),
 
@@ -302,11 +295,9 @@ Ext.define('Ext.layout.component.form.Field', {
              */
             qtip: applyIf({
                 prepare: function(owner) {
-                    var elDom = owner.getActionEl().dom;
-                    owner.errorEl.setDisplayed(false);
-                    elDom.qtip = owner.activeError || '';
-                    elDom.setAttribute('ext:qclass', Ext.baseCSSPrefix + 'form-invalid-tip');
-                    Ext.tip.QuickTips.init();
+                    setDisplayed(owner.errorEl, false);
+                    Ext.layout.component.form.Field.initTip();
+                    owner.getActionEl().dom.errorqtip = owner.getActiveError() || '';
                 }
             }, base),
 
@@ -315,8 +306,8 @@ Ext.define('Ext.layout.component.form.Field', {
              */
             title: applyIf({
                 prepare: function(owner) {
-                    owner.errorEl.setDisplayed(false);
-                    owner.el.dom.title = owner.activeError || '';
+                    setDisplayed(owner.errorEl, false);
+                    owner.el.dom.title = owner.getActiveError() || '';
                 }
             }, base),
 
@@ -325,15 +316,43 @@ Ext.define('Ext.layout.component.form.Field', {
              */
             elementId: applyIf({
                 prepare: function(owner) {
-                    owner.errorEl.setDisplayed(false);
-                    var targetEl = Ext.getDom(owner.msgTarget);
+                    setDisplayed(owner.errorEl, false);
+                    var targetEl = Ext.fly(owner.msgTarget);
                     if (targetEl) {
-                        targetEl.innerHTML = owner.activeError;
-                        targetEl.style.display = owner.hasActiveError() ? '' : 'none';
+                        targetEl.dom.innerHTML = owner.getActiveError() || '';
+                        targetEl.setDisplayed(owner.hasActiveError());
                     }
                 }
             }, base)
         };
-    })()
+    })(),
+
+    statics: {
+        /**
+         * Use a custom QuickTip instance separate from the main QuickTips singleton, so that we
+         * can give it a custom frame style. Responds to errorqtip rather than the qtip property.
+         */
+        initTip: function() {
+            var tip = this.tip;
+            if (!tip) {
+                tip = this.tip = Ext.create('Ext.tip.QuickTip', {
+                    baseCls: Ext.baseCSSPrefix + 'form-invalid-tip',
+                    renderTo: Ext.getBody()
+                });
+                tip.tagConfig = Ext.apply({}, {attribute: 'errorqtip'}, tip.tagConfig);
+            }
+        },
+
+        /**
+         * Destroy the error tip instance.
+         */
+        destroyTip: function() {
+            var tip = this.tip;
+            if (tip) {
+                tip.destroy();
+                delete this.tip;
+            }
+        }
+    }
 
 });

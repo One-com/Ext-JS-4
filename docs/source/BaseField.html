@@ -118,6 +118,12 @@ Ext.define(&#39;Ext.form.BaseField&#39;, {
      */
     fieldCls : Ext.baseCSSPrefix + &#39;form-field&#39;,
 
+    <a name="cfg-Ext.form.BaseField-fieldStyle"></a>/**
+     * @cfg {String} fieldStyle Optional CSS style(s) to be applied to the {@link #inputEl field input element}.
+     * Should be a valid argument to {@link Ext.core.Element#applyStyles}. Defaults to undefined. See also the
+     * {@link #setFieldStyle} method for changing the style after initialization.
+     */
+
     <a name="cfg-Ext.form.BaseField-focusCls"></a>/**
      * @cfg {String} focusCls The CSS class to use when the field receives focus (defaults to &#39;x-form-focus&#39;)
      */
@@ -148,8 +154,9 @@ Ext.define(&#39;Ext.form.BaseField&#39;, {
      * within a {@link Ext.form.FormPanel}, you can use the FormPanel&#39;s {@link Ext.form.FormPanel#pollForChanges}
      * configuration to set up such a task automatically.&lt;/p&gt;
      */
-    checkChangeEvents: Ext.isIE ? [&#39;change&#39;, &#39;propertychange&#39;] :
-                                  [&#39;change&#39;, &#39;input&#39;, &#39;textInput&#39;, &#39;keyup&#39;, &#39;dragdrop&#39;],
+    checkChangeEvents: Ext.isIE &amp;&amp; document.documentMode &lt; 9 ? 
+                        [&#39;change&#39;, &#39;propertychange&#39;] :
+                        [&#39;change&#39;, &#39;input&#39;, &#39;textInput&#39;, &#39;keyup&#39;, &#39;dragdrop&#39;],
 
     <a name="cfg-Ext.form.BaseField-checkChangeBuffer"></a>/**
      * @cfg {Number} checkChangeBuffer
@@ -170,6 +177,11 @@ Ext.define(&#39;Ext.form.BaseField&#39;, {
      * &lt;code&gt;{@link Ext.form.Trigger#hideTrigger hideTrigger}&lt;/code&gt;.&lt;/p&gt;
      */
     readOnly : false,
+
+    <a name="cfg-Ext.form.BaseField-readOnlyCls"></a>/**
+     * @cfg {String} readOnlyCls The CSS class applied to the component&#39;s main element when it is {@link #readOnly}.
+     */
+    readOnlyCls: Ext.baseCSSPrefix + &#39;form-readonly&#39;,
 
     <a name="cfg-Ext.form.BaseField-inputId"></a>/**
      * @cfg {String} inputId
@@ -295,9 +307,24 @@ Ext.define(&#39;Ext.form.BaseField&#39;, {
         return Ext.applyIf(this.callParent(), this.getLabelableRenderData());
     },
 
+    <a name="method-Ext.form.BaseField-setFieldStyle"></a>/**
+     * Set the {@link #fieldStyle CSS style} of the {@link #inputEl field input element}.
+     * @param {String/Object/Function} style The style(s) to apply. Should be a valid argument to
+     * {@link Ext.core.Element#applyStyles}.
+     */
+    setFieldStyle: function(style) {
+        var me = this,
+            inputEl = me.inputEl;
+        if (inputEl) {
+            inputEl.applyStyles(style);
+        }
+        me.fieldStyle = style;
+    },
+
     // private
     onRender : function() {
         var me = this,
+            fieldStyle = me.fieldStyle,
             renderSelectors = me.renderSelectors;
 
         Ext.applyIf(renderSelectors, me.getLabelableSelectors());
@@ -321,6 +348,9 @@ Ext.define(&#39;Ext.form.BaseField&#39;, {
         }
         if (me.disabled) {
             me.disable();
+        }
+        if (fieldStyle) {
+            me.setFieldStyle(fieldStyle);
         }
 
         me.renderActiveError();
@@ -496,10 +526,14 @@ Ext.define(&#39;Ext.form.BaseField&#39;, {
      * @param {Boolean} readOnly Whether the field should be read only.
      */
     setReadOnly: function(readOnly) {
-        if (this.inputEl) {
-            this.inputEl.dom.readOnly = readOnly;
+        var me = this,
+            inputEl = me.inputEl;
+        if (inputEl) {
+            inputEl.dom.readOnly = readOnly;
+            inputEl.dom.setAttribute(&#39;aria-readonly&#39;, readOnly);
         }
-        this.readOnly = readOnly;
+        me[readOnly ? &#39;addCls&#39; : &#39;removeCls&#39;](me.readOnlyCls);
+        me.readOnly = readOnly;
     },
 
     // private
@@ -596,8 +630,8 @@ Ext.define(&#39;Ext.form.BaseField&#39;, {
 
 
     <a name="method-Ext.form.BaseField-validateValue"></a>/**
-     * &lt;p&gt;Uses {@link #getErrors} to build an array of validation errors. If any errors are found, {@link #markInvalid}
-     * is called with the first and false is returned, otherwise true is returned.&lt;/p&gt;
+     * &lt;p&gt;Uses {@link #getErrors} to build an array of validation errors. If any errors are found, they are passed
+     * to {@link #markInvalid} and false is returned, otherwise true is returned.&lt;/p&gt;
      * &lt;p&gt;Previously, subclasses were invited to provide an implementation of this to process validations - from 3.2
      * onwards {@link #getErrors} should be overridden instead.&lt;/p&gt;
      * @param {Mixed} value The value to validate
@@ -605,15 +639,13 @@ Ext.define(&#39;Ext.form.BaseField&#39;, {
      */
     validateValue: function(value) {
         var me = this,
-            error = me.getErrors(value)[0], //currently we only show 1 error at a time for a field, so just use the first one
-            undef,
-            isValid = error === undef;
-
+            errors = me.getErrors(value),
+            isValid = Ext.isEmpty(errors);
         if (!me.preventMark) {
             if (isValid) {
                 me.clearInvalid();
             } else {
-                me.markInvalid(error);
+                me.markInvalid(errors);
             }
         }
 
@@ -621,21 +653,21 @@ Ext.define(&#39;Ext.form.BaseField&#39;, {
     },
 
     <a name="method-Ext.form.BaseField-markInvalid"></a>/**
-     * &lt;p&gt;Display an error message associated with this field, using {@link #msgTarget} to determine how to
-     * display the message and applying {@link #invalidCls} to the field&#39;s UI element.&lt;/p&gt;
+     * &lt;p&gt;Display one or more error messages associated with this field, using {@link #msgTarget} to determine how to
+     * display the messages and applying {@link #invalidCls} to the field&#39;s UI element.&lt;/p&gt;
      * &lt;p&gt;&lt;b&gt;Note&lt;/b&gt;: this method does not cause the Field&#39;s {@link #validate} method to return &lt;code&gt;false&lt;/code&gt;
      * if the value does &lt;i&gt;pass&lt;/i&gt; validation. So simply marking a Field as invalid will not prevent
      * submission of forms submitted with the {@link Ext.form.action.Submit#clientValidation} option set.&lt;/p&gt;
      * {@link #isValid invalid}.
-     * @param {String} msg (optional) The validation message (defaults to {@link #invalidText})
+     * @param {String/Array} errors The validation message(s) to display.
      */
-    markInvalid : function(msg) {
+    markInvalid : function(errors) {
         // Save the message and fire the &#39;invalid&#39; event
         var me = this,
             oldMsg = me.getActiveError();
-        this.setActiveError(msg);
-        if (oldMsg !== msg) {
-            this.doComponentLayout();
+        me.setActiveErrors(Ext.Array.from(errors));
+        if (oldMsg !== me.getActiveError()) {
+            me.doComponentLayout();
         }
     },
 

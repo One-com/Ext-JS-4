@@ -11,7 +11,7 @@ Ext.define('ForumBrowser.ForumList', {
     initComponent: function(){
         Ext.apply(this, {
             viewConfig: {
-                getRowClass: function(record){
+                getRowClass: function(record) {
                     if (!record.get('leaf')) {
                         return 'forum-parent';
                     }
@@ -19,6 +19,9 @@ Ext.define('ForumBrowser.ForumList', {
             },
             store: Ext.create('Ext.data.TreeStore', {
                 model: 'ForumBrowser.Forum',
+                root: {
+                    expanded: true
+                },
                 proxy: {
                     type: 'scripttag',
                     url: 'http://sencha.com/forum/forums-remote.php',
@@ -42,7 +45,7 @@ Ext.define('ForumBrowser.ForumList', {
     },
     
     onFirstLoad: function(){
-        var rec = this.getView().treeStore.getNodeById(this.defaultForum);
+        var rec = this.store.getNodeById(this.defaultForum);
         this.getSelectionModel().select(rec);
     },
     

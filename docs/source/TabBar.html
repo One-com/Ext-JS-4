@@ -70,7 +70,6 @@ Ext.define(&#39;Ext.tab.TabBar&#39;, {
         // TabBar must override the Header&#39;s align setting.
         me.layout.align = (me.orientation == &#39;vertical&#39;) ? &#39;left&#39; : &#39;top&#39;;
         me.layout.overflowHandler = Ext.create(&#39;Ext.layout.container.boxOverflow.Scroller&#39;, me.layout);
-        me.layout.overflowHandler.on(&#39;scroll&#39;, me.updateStrip, me);
         me.items.removeAt(me.items.getCount() - 1);
         me.items.removeAt(me.items.getCount() - 1);
         
@@ -108,13 +107,29 @@ Ext.define(&#39;Ext.tab.TabBar&#39;, {
             delegate: &#39;.&#39; + Ext.baseCSSPrefix + &#39;tab&#39;
         });
         me.callParent(arguments);
+        
     },
 
     afterComponentLayout : function() {
         var me = this;
+        
+        //this is a dirty hack for gecko3. for some reason the left value does not get applied to the first
+        //tab, and removing the float:left and re applying it fixes it. #507 on jira
+        if (Ext.isGecko3) {
+            var tabBodyEl = me.body.child(&#39;.x-horizontal-box-overflow-body&#39;);
+            
+            if (tabBodyEl) {
+                var oldValue = tabBodyEl.dom.style.cssFloat;
 
+                tabBodyEl.dom.style.cssFloat = &quot;none&quot;;
+                Ext.defer(function() {
+                    tabBodyEl.dom.style.cssFloat = oldValue;
+                }, 1);
+            }
+        }
+        
         me.callParent(arguments);
-        me.updateStrip();
+        me.strip.setWidth(me.el.getWidth());
     },
 
     // @private
@@ -186,32 +201,6 @@ Ext.define(&#39;Ext.tab.TabBar&#39;, {
             tab.el.scrollIntoView(me.layout.getRenderTarget());
         }
         me.activeTab = tab;
-        me.updateStrip();
         me.fireEvent(&#39;change&#39;, me, tab, tab.card);
-    },
-    
-    /**
-     * @private
-     * Makes the strip border move under the active tab.
-     */
-    updateStrip: function() {
-        var me = this,
-            stripBorder,
-            activeTab = me.activeTab,
-            top = (me.dock == &#39;top&#39;);
-
-        // @TODO: clean up this super nasty (really nasty) uber nasty hack
-        Ext.defer(function() {
-            if (me.rendered &amp;&amp; activeTab &amp;&amp; activeTab.rendered) {
-                me.strip.setWidth(me.el.getWidth());
-                if (!me.stripBorder) {
-                    me.stripBorder = me.body.createChild({
-                        cls: me.baseCls + &#39;-strip-border&#39;
-                    });
-                }
-                me.stripBorder.setWidth(activeTab.getWidth());
-                me.stripBorder.alignTo(activeTab.el, (top ? &#39;bl&#39; : &#39;tl&#39;));
-            }
-        }, 1);
     }
 });￿</pre></pre></body></html>

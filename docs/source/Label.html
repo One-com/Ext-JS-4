@@ -9,7 +9,7 @@ in that form using the {@link #forId} property.
 and associated config properties ({@link Ext.form.Labelable#labelAlign}, {@link Ext.form.Labelable#labelWidth},
 etc.) in field components themselves, as that allows labels to be uniformly sized throughout the form.
 Ext.form.Label should only be used when your layout can not be achieved with the standard
-{@link Ext.layout.component.form.Field field layout}.
+{@link Ext.form.Labelable field layout}.
 
 You will likely be associating the label with a field component that extends {@link Ext.form.BaseField}, so
 you should make sure the {@link #forId} is set to the same value as the {@link Ext.form.BaseField#inputId inputId}

@@ -90,7 +90,7 @@ Ext.define('Ext.chart.axis.Axis', {
             math = Math,
             mmax = math.max,
             mmin = math.min,
-            store = me.chart.store,
+            store = me.chart.substore || me.chart.store,
             series = me.chart.series.items,
             fields = me.fields,
             ln = fields.length,
@@ -162,7 +162,7 @@ Ext.define('Ext.chart.axis.Axis', {
         if (me.adjustMinimumByMajorUnit) {
             out.from -= out.step;
         }
-        me.prevMin = min;
+        me.prevMin = min == max? 0 : min;
         me.prevMax = max;
         return out;
     },

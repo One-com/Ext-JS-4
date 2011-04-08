@@ -46,6 +46,11 @@ Ext.define('Ext.tip.Tip', {
      * the browser viewport. Defaults to false.
      */
     constrainPosition : true,
+    
+    /**
+     * @inherited
+     */
+    frame: false,
 
     // private panel overrides
     autoRender: true,

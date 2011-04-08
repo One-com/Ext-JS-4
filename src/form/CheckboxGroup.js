@@ -108,16 +108,8 @@ Ext.define('Ext.form.CheckboxGroup', {
     // private
     layout: 'checkboxgroup',
 
-    baseFieldDefaults: {
-        hideLabel: true
-    },
-
     initComponent: function() {
         var me = this;
-
-        // Default all children to hide their main fieldLabel
-        me.fieldDefaults = Ext.apply({}, me.fieldDefaults, me.baseFieldDefaults);
-
         me.callParent();
         me.initField();
     },
@@ -360,15 +352,14 @@ myCheckboxGroup.setValue({
 
     validate: function() {
         var me = this,
-            error = me.getErrors()[0],
-            undef,
-            isValid = error === undef,
+            errors = me.getErrors(),
+            isValid = Ext.isEmpty(errors),
             wasValid = !me.hasActiveError();
 
         if (isValid) {
             me.unsetActiveError();
         } else {
-            me.setActiveError(error);
+            me.setActiveError(errors);
         }
         if (isValid !== wasValid) {
             me.fireEvent('validitychange', me, isValid);

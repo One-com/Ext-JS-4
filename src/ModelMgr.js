@@ -15,9 +15,9 @@ Ext.define('Ext.ModelMgr', {
     typeName: 'mtype',
     
     /**
+     * Private stack of associations that must be created once their associated model has been defined
      * @property associationStack
      * @type Array
-     * Private stack of associations that must be created once their associated model has been defined
      */
     associationStack: [],
     

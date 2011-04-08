@@ -476,7 +476,7 @@
 (function() {
 
 // Current core version
-var version = '4.0.0beta1',
+var version = '4.0.0beta2',
     Version = Ext.Version = Ext.extend(Object, {
 
         /**
@@ -1081,6 +1081,8 @@ Ext.Number = {
  * @param {Mixed} value Should be a number, but any type will be handled appropriately
  * @param {Number} defaultValue The value to return if the original value is non-numeric
  * @return {Number} Value, if numeric, else defaultValue
+ * @member Ext
+ * @method num
  */
 Ext.num = function(v, defaultValue) {
     v = Number(Ext.isEmpty(v) || Ext.isArray(v) || typeof v === 'boolean' || (typeof v === 'string' && Ext.String.trim(v).length === 0) ? NaN : v);
@@ -1108,10 +1110,20 @@ Ext.num = function(v, defaultValue) {
         supportsIndexOf = 'indexOf' in arrayPrototype,
         supportsEvery = 'every' in arrayPrototype,
         supportsSome = 'some' in arrayPrototype,
-        supportsFilter = 'filter' in arrayPrototype;
+        supportsFilter = 'filter' in arrayPrototype,
+        // default sort comparison function
+        _defaultSortFn = function(a, b) {
+            a = a.toString();
+            b = b.toString();
+            if(a === b){
+                return 0;
+            }
 
+            return (a < b) ? -1 : 1;
+        };
+        
     Ext.Array = {
-        /**
+        /*
          * Iterates an array calling the supplied function.
          * @param {Array/NodeList/Mixed} array The array to be iterated. If this
          * argument is not really an array, the supplied function is called once.
@@ -1125,12 +1137,13 @@ Ext.num = function(v, defaultValue) {
 - `allItems`: {Array} The `array` passed as the first argument to `Ext.each`
 
          * @param {Object} scope The scope (`this` reference) in which the specified function is executed.
+         * @param {Boolean} inverse Allows to inverse iteration (Optional) 
          * Defaults to the `item` at the current `index`
          * within the passed `array`.
          * @return {Boolean} See description for the fn parameter.
          * @markdown
          */
-        each: function(array, fn, scope) {
+        each: function(array, fn, scope, inverse) {
             if (Ext.isEmpty(array, true)) {
                 return 0;
             }
@@ -1138,13 +1151,21 @@ Ext.num = function(v, defaultValue) {
             if (!Ext.isIterable(array) || Ext.isPrimitive(array)) {
                 array = [array];
             }
-
-            for (var i = 0, len = array.length; i < len; i++) {
-                if (fn.call(scope || array[i], array[i], i, array) === false) {
-                    return i;
+            var length = array.length,
+                i;
+            if (inverse !== true) {
+                for (i = 0; i < length; i++) {
+                    if (fn.call(scope || array[i], array[i], i, array) === false) {
+                        return i;
+                    }
+                }
+            } else {
+                for (i = length - 1; i > -1; i--) {
+                    if (fn.call(scope || array[i], array[i], i, array) === false) {
+                        return i;
+                    }
                 }
             }
-
             return true;
         },
 
@@ -1270,7 +1291,7 @@ Ext.num = function(v, defaultValue) {
         },
 
         /**
-         * Executes the specified function for each array element until the function returns a falsy value.
+         * Executes the specified function for each array element until the function returns a falsey value.
          * If such an item is found, the function will return false immediately.
          * Otherwise, it will return true.
          * @param {Array} array
@@ -1542,6 +1563,43 @@ Ext.num = function(v, defaultValue) {
             }
 
             return clone;
+        },
+        
+
+        /**
+         * Sorts the elements of an Array.
+         * By default, this method sorts the elements alphabetically and ascending.
+         * @param {Array} array The array to sort.
+         * @param {Function} sortFn (optional) The comparision function.
+         * @return {Array} The sorted array.
+         */       
+        sort: function(array, sortFn) {
+            if (Ext.supports.ArraySort) {
+                return array.sort(sortFn);
+            } else {
+                var length = array.length,
+                    i = 0,
+                    comparison,
+                    j, min, tmp;
+                
+                sortFn = sortFn || _defaultSortFn;
+                
+                for (; i < length; i++) {
+                    min = i;
+                    for (j = i + 1; j < length; j++) {
+                        comparison = sortFn(array[j], array[min]);
+                        if (comparison < 0 || comparison === false) {
+                            min = j;
+                        }
+                    }
+                    if (min !== i) {
+                            tmp = array[i];
+                            array[i] = array[min];
+                            array[min] = tmp;
+                    }
+                }
+                return array;
+            }
         }
     };
 
@@ -1748,6 +1806,29 @@ sayHiToFriend('Brian'); // alerts "Hi, Brian"
     },
 
     /**
+    * Creates a delegate (callback) which, when called, executes after a specific delay.
+    * @param {Function} fn The function which will be called on a delay when the returned function is called.
+    * Optionally, a replacement (or additional) argument list may be specified.
+    * @param {Number} delay The number of milliseconds to defer execution by whenever called.
+    * @param {Object} scope (optional) The scope (<code>this</code> reference) used by the function at execution time.
+    * @param {Array} args (optional) Override arguments for the call. (Defaults to the arguments passed by the caller)
+    * @param {Boolean/Number} appendArgs (optional) if True args are appended to call args instead of overriding,
+    * if a number the args are inserted at the specified position.
+    * @return {Function} A function which, when called, executes the original function after the specified delay.
+    */
+    createDelayed: function(fn, delay, scope, args, appendArgs) {
+        if (scope || args) {
+            fn = Ext.Function.bind(fn, scope, args, appendArgs);
+        }
+        return function() {
+            var me = this;
+            setTimeout(function() {
+                fn.apply(me, arguments);
+            }, delay);
+        };
+    },
+
+    /**
      * Calls this function after the number of millseconds specified, optionally in a specific scope. Example usage:
      * <pre><code>
 var sayHi = function(name){
@@ -1783,7 +1864,6 @@ Ext.Function.defer(function(){
         fn();
         return 0;
     },
-
 
     /**
      * Create a combined function call sequence of the original function + the passed function.
@@ -3749,14 +3829,9 @@ var Base = Ext.Base = function() {};
          * @private
          */
         ownMethod: function(name, fn) {
-            var originalFn, className;
+            var originalFn;
 
-            if (fn === Ext.emptyFn) {
-                this.prototype[name] = fn;
-                return;
-            }
-
-            if (fn.$isOwned) {
+            if (fn.$owner !== undefined && fn !== Ext.emptyFn) {
                 originalFn = fn;
 
                 fn = function() {
@@ -3764,13 +3839,13 @@ var Base = Ext.Base = function() {};
                 };
             }
 
+            var className;
             className = Ext.getClassName(this);
             if (className) {
                 fn.displayName = className + '#' + name;
             }
             fn.$owner = this;
             fn.$name = name;
-            fn.$isOwned = true;
 
             this.prototype[name] = fn;
         },
@@ -3779,7 +3854,7 @@ var Base = Ext.Base = function() {};
          * @private
          */
         borrowMethod: function(name, fn) {
-            if (!fn.$isOwned) {
+            if (fn.$owner === undefined) {
                 this.ownMethod(name, fn);
             }
             else {
@@ -3788,8 +3863,7 @@ var Base = Ext.Base = function() {};
         },
 
         /**
-         * Add / override static properties of this class. This method is a {@link Ext.Function#flexSetter flexSetter}.
-         * It can either accept an object of key - value pairs or 2 arguments of name - value.
+         * Add / override static properties of this class.
 
     Ext.define('My.cool.Class', {
         ...
@@ -3801,22 +3875,24 @@ var Base = Ext.Base = function() {};
         method2: function() { ... }     // My.cool.Class.method2 = function() { ... };
     });
 
-    My.cool.Class.addStatics('method3', function(){ ... }); // My.cool.Class.method3 = function() { ... };
-
-         * @property extend
+         * @property addStatics
          * @static
          * @type Function
-         * @param {String/Object} name See {@link Ext.Function#flexSetter flexSetter}
-         * @param {Mixed} value See {@link Ext.Function#flexSetter flexSetter}
+         * @param {Object} members
          * @markdown
          */
-        addStatics: flexSetter(function(name, value) {
-            this[name] = value;
-        }),
+        addStatics: function(members) {
+            for (var name in members) {
+                if (members.hasOwnProperty(name)) {
+                    this[name] = members[name];
+                }
+            }
+
+            return this;
+        },
 
         /**
-         * Add / override prototype properties of this class. This method is a {@link Ext.Function#flexSetter flexSetter}.
-         * It can either accept an object of key - value pairs or 2 arguments of name - value.
+         * Add / override prototype properties of this class.
 
     Ext.define('My.cool.Class', {
         ...
@@ -3834,28 +3910,42 @@ var Base = Ext.Base = function() {};
     cool.method1();
     cool.method2();
 
-    // name - value arguments
-    My.cool.Class.extend('method3', function(){ ... });
-    cool.method3();
-
-         * @property implement
+         * @property extend
          * @static
          * @type Function
-         * @param {String/Object} name See {@link Ext.Function#flexSetter flexSetter}
-         * @param {Mixed} value See {@link Ext.Function#flexSetter flexSetter}
+         * @param {Object} members
          * @markdown
          */
-        extend: flexSetter(function(name, value) {
-            if (Ext.isObject(this.prototype[name]) && Ext.isObject(value)) {
-                Ext.Object.merge(this.prototype[name], value);
+        extend: function(members) {
+            var name, i, member;
+
+            for (name in members) {
+                if (members.hasOwnProperty(name)) {
+                    member = members[name];
+
+                    if (member instanceof Function) {
+                        this.ownMethod(name, member);
+                    }
+                    else {
+                        this.prototype[name] = member;
+                    }
+                }
             }
-            else if (Ext.isFunction(value)) {
-                this.ownMethod(name, value);
+
+            if (Ext.enumerables) {
+                var enumerables = Ext.enumerables;
+
+                for (i = enumerables.length; i--;) {
+                    name = enumerables[i];
+
+                    if (members.hasOwnProperty(name)) {
+                        this.ownMethod(name, members[name]);
+                    }
+                }
             }
-            else {
-                this.prototype[name] = value;
-            }
-        }),
+
+            return this;
+        },
 
         /**
          * This method is deprecated, please use {@link Ext.Base#extend} instead
@@ -4212,7 +4302,7 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
      * @return {Ext.Base} The newly created class
      */
     Ext.Class = function(newClass, classData, createdFn) {
-        if (Ext.isObject(newClass)) {
+        if (!(newClass instanceof Function)) {
             createdFn = classData;
             classData = newClass;
             newClass = function() {
@@ -4221,7 +4311,7 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
         }
 
         var self = this.constructor,
-            preprocessors = Ext.Array.from(classData.preprocessors || self.getDefaultPreprocessors()),
+            preprocessors = (classData.preprocessors || self.getDefaultPreprocessors()).slice(),
             staticProp, process;
 
         for (staticProp in Ext.Base) {
@@ -4236,6 +4326,11 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
             var name = preprocessors.shift();
 
             if (!name) {
+                if (data.config && cls.prototype.config) {
+                    Ext.Object.merge(cls.prototype.config, data.config);
+                    delete data.config;
+                }
+
                 cls.extend(data);
 
                 if (Ext.isFunction(createdFn)) {
@@ -4372,40 +4467,58 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
     });
 
     Ext.Class.registerPreprocessor({
+
+        /**
+         * @cfg {String} extend
+
+The name of the class to extend.
+
+    Ext.define('Developer', {
+         extend: 'Person'
+    });
+    
+         * @markdown
+         */
         extend: function(cls, data, fn) {
             var extend = data.extend,
                 base = Ext.Base,
+                basePrototype = base.prototype,
                 temp = function() {},
-                parent, i, k, ln, staticName, parentStatics;
+                parent, i, k, ln, staticName, parentStatics,
+                parentPrototype, clsPrototype;
 
-            if (typeof extend === 'function' && extend !== Object) {
+            if (extend !== undefined && extend !== Object) {
                 parent = extend;
             }
             else {
                 parent = base;
             }
 
-            temp.prototype = parent.prototype;
+            parentPrototype = parent.prototype;
+
+            temp.prototype = parentPrototype;
             cls.prototype = new temp();
 
+            clsPrototype = cls.prototype;
+
             if (!('$class' in parent)) {
-                for (i in base.prototype) {
-                    if (!parent.prototype[i]) {
-                        parent.prototype[i] = base.prototype[i];
+                for (i in basePrototype) {
+                    if (!parentPrototype[i]) {
+                        parentPrototype[i] = basePrototype[i];
                     }
                 }
             }
 
-            cls.prototype.self = cls;
+            clsPrototype.self = cls;
 
             if (data.hasOwnProperty('constructor')) {
-                cls.prototype.constructor = cls;
+                clsPrototype.constructor = cls;
             }
             else {
-                cls.prototype.constructor = parent.prototype.constructor;
+                clsPrototype.constructor = parentPrototype.constructor;
             }
 
-            cls.superclass = cls.prototype.superclass = parent.prototype;
+            cls.superclass = clsPrototype.superclass = parentPrototype;
 
             delete data.extend;
 
@@ -4423,13 +4536,34 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
             }
 
             // Merge the parent class' config object without referencing it
-            Ext.merge(cls.prototype.config, parent.prototype.config || {});
+            Ext.Object.merge(clsPrototype.config, parentPrototype.config || {});
 
             if (fn) {
                 fn.call(this, cls, data);
             }
         },
+        
+        /**
+         * @cfg {Object} mixins
 
+An object containing key-value pairs where the key serves as an refrence if you need to access the 
+mixin class directly. For example, say you want to write a method `sing` but you have already mixed
+in a class `CanSing` that also has a method `sing`, you can access it as follows:
+
+    Ext.define('CoolPerson', {
+
+         mixins: {
+             canSing: 'CanSing'
+         },
+
+         sing: function() {
+             alert("Ahem....");
+             this.mixins.canSing.sing.call(this);
+         }
+    });
+
+         * @markdown
+         */
         mixins: function(cls, data, fn) {
             var mixins = data.mixins;
 
@@ -4444,6 +4578,10 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
             }
         },
 
+        /**
+         * @cfg {Object} config
+         * Specifies the config options for a class and provides getters and setters for each option. See the intro docs for examples.
+         */
         config: function(cls, data, fn) {
             var config = data.config;
 
@@ -4501,36 +4639,37 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
                 fn.call(this, cls, data);
             }
         },
-
+        
+        /**
+         * @cfg {Object} statics
+         * Static methods. See class introduction documentation for examples.
+         */
         statics: function(cls, data, fn) {
             var statics = data.statics,
                 inheritableStatics = data.inheritableStatics,
                 name;
 
-            if (Ext.isObject(statics) || Ext.isObject(inheritableStatics)) {
-
-                if (statics) {
-                    for (name in statics) {
-                        if (statics.hasOwnProperty(name)) {
-                            cls[name] = statics[name];
-                        }
+            if (statics !== undefined) {
+                for (name in statics) {
+                    if (statics.hasOwnProperty(name)) {
+                        cls[name] = statics[name];
                     }
-
-                    delete data.statics;
                 }
 
-                if (inheritableStatics) {
-                    cls.$inheritableStatics = [];
+                delete data.statics;
+            }
 
-                    for (name in inheritableStatics) {
-                        if (inheritableStatics.hasOwnProperty(name)) {
-                            cls[name] = inheritableStatics[name];
-                            cls.$inheritableStatics.push(name);
-                        }
+            if (inheritableStatics !== undefined) {
+                cls.$inheritableStatics = [];
+
+                for (name in inheritableStatics) {
+                    if (inheritableStatics.hasOwnProperty(name)) {
+                        cls[name] = inheritableStatics[name];
+                        cls.$inheritableStatics.push(name);
                     }
-
-                    delete data.inheritableStatics;
                 }
+
+                delete data.inheritableStatics;
             }
 
             if (fn) {
@@ -5412,7 +5551,7 @@ these convenient shorthands:
         create: alias(Manager, 'instantiate'),
 
         /**
-         *
+         * @private
          * @param {Mixed} item
          * @param {String} namespace
          */
@@ -5683,7 +5822,12 @@ Everything should now load via asynchronous mode.
 
 # Deployment #
 
-It's important to note that dynamic loading should only be used during development on your local machines. During production, all dependencies should be combined into one single JavaScript file. Ext.Loader makes the whole process of transitioning from / to between development / maintenance and production as easy as possible. Internally {@link Ext.Loader.history} maintains the list of all dependencies your application needs in the exact loading sequence. It's as simple as concatenating all files in this array into one, then include it on top of your application.
+It's important to note that dynamic loading should only be used during development on your local machines.
+During production, all dependencies should be combined into one single JavaScript file. Ext.Loader makes
+the whole process of transitioning from / to between development / maintenance and production as easy as
+possible. Internally {@link Ext.Loader#history Ext.Loader.history} maintains the list of all dependencies your application
+needs in the exact loading sequence. It's as simple as concatenating all files in this array into one,
+then include it on top of your application.
 
 This process will be automated with Sencha Command, to be released and documented towards Ext JS 4 Final.
 
@@ -5791,11 +5935,18 @@ This process will be automated with Sencha Command, to be released and documente
             enableDeadlockDetection: true,
 
             /**
-             * @cfg {Boolean} enableCacheBuster
-             * Appends current date in integer format to script files to prevent caching
+             * @cfg {Boolean} disableCaching
+             * Appends current timestamp to script files to prevent caching
              * Defaults to true
              */
-            enableCacheBuster: true,
+            disableCaching: true,
+
+            /**
+             * @cfg {String} disableCachingParam
+             * The get parameter name for the cache buster's timestamp.
+             * Defaults to '_dc'
+             */
+            disableCachingParam: '_dc',
 
             /**
              * @cfg {Object} paths
@@ -5837,7 +5988,7 @@ This process will be automated with Sencha Command, to be released and documente
       });
     </script>
 
-         * Refer to {@link Ext.Loader#config} for the list of possible properties
+         * Refer to {@link Ext.Loader#configs} for the list of possible properties
          *
          * @param {Object} config The config object to override the default values in {@link Ext.Loader#config}
          * @return {Ext.Loader} this
@@ -5845,10 +5996,10 @@ This process will be automated with Sencha Command, to be released and documente
          */
         setConfig: function(name, value) {
             if (Ext.isObject(name) && arguments.length === 1) {
-                Ext.merge(this.config, name);
+                Ext.Object.merge(this.config, name);
             }
             else {
-                this.config[name] = (Ext.isObject(value)) ? Ext.merge(this.config[name], value) : value;
+                this.config[name] = (Ext.isObject(value)) ? Ext.Object.merge(this.config[name], value) : value;
             }
 
             return this;
@@ -5922,7 +6073,7 @@ This process will be automated with Sencha Command, to be released and documente
             }
 
             for (prefix in paths) {
-                if (paths.hasOwnProperty(prefix) && prefix === className.substring(0, prefix.length)) {
+                if (paths.hasOwnProperty(prefix) && prefix + '.' === className.substring(0, prefix.length + 1)) {
                     if (prefix.length > deepestPrefix.length) {
                         deepestPrefix = prefix;
                     }
@@ -6037,7 +6188,7 @@ This process will be automated with Sencha Command, to be released and documente
          */
         loadScriptFile: function(url, onLoad, onError, scope, synchronous) {
             var me = this,
-                noCacheUrl = url + (this.getConfig('enableCacheBuster') ? '?' + Ext.Date.now() : ''),
+                noCacheUrl = url + (this.getConfig('disableCaching') ? ('?' + this.getConfig('disableCachingParam') + '=' + Ext.Date.now()) : ''),
                 fileName = url.split('/').pop(),
                 xhr, status, onScriptError;
 
@@ -6395,25 +6546,32 @@ This process will be automated with Sencha Command, to be released and documente
     };
 
     /**
-     * Convenient shortcut to {@link Ext.Loader#require}
+     * Convenient shortcut to {@link Ext.Loader Ext.Loader.require}. Please see the introduction documentation for
+     * {@link Ext.Loader} for examples.
      * @member Ext
      * @method require
      */
-    Ext.require = Ext.Function.alias(Loader, 'require');
+    Ext.require = function() {
+        return Loader.require.apply(Loader, arguments);
+    };
 
     /**
      * Convenient shortcut to {@link Ext.Loader#requirePackages}
      * @member Ext
      * @method requirePackages
      */
-    Ext.requirePackages = Ext.Function.alias(Loader, 'requirePackages');
+    Ext.requirePackages = function() {
+        return Loader.requirePackages.apply(Loader, arguments);
+    };
 
     /**
      * Convenient shortcut to {@link Ext.Loader#exclude}
      * @member Ext
      * @method exclude
      */
-    Ext.exclude = Ext.Function.alias(Loader, 'exclude');
+    Ext.exclude = function() {
+        return Loader.exclude.apply(Loader, arguments);
+    };
 
     /**
      * @member Ext
@@ -7144,7 +7302,7 @@ Ext.ns("Ext.grid", "Ext.list", "Ext.dd", "Ext.tree", "Ext.form", "Ext.menu",
         document.execCommand("BackgroundImageCache", false, true);
     } catch(e) {}
 
-    Ext.setVersion('extjs', '4.0.0beta1');
+    Ext.setVersion('extjs', '4.0.0beta2');
     Ext.apply(Ext, {
         /**
          * URL to a blank file used by Ext when in secure mode for iframe src and onReady src to prevent
@@ -7474,8 +7632,12 @@ Ext.addBehaviors({
             }
 
             if(force === true || scrollWidth === null){
+                // BrowserBug: IE9
+                // When IE9 positions an element offscreen via offsets, the offsetWidth is
+                // inaccurately reported. For IE9 only, we render on screen before removing.
+                var cssClass = Ext.isIE9 ? '' : Ext.baseCSSPrefix + 'hide-offsets';
                     // Append our div, do our calculation and then remove it
-                var div = Ext.getBody().createChild('<div class="' + Ext.baseCSSPrefix + 'hide-offsets" style="width:100px;height:50px;overflow:hidden;"><div style="height:200px;"></div></div>'),
+                var div = Ext.getBody().createChild('<div class="' + cssClass + '" style="width:100px;height:50px;overflow:hidden;"><div style="height:200px;"></div></div>'),
                     child = div.child('div', true);
                 var w1 = child.offsetWidth;
                 div.setStyle('overflow', (Ext.isWebKit || Ext.isGecko) ? 'auto' : 'scroll');
@@ -7531,8 +7693,8 @@ ImageComponent = Ext.extend(Ext.Component, {
         },
 
         /**
-         * Creates a copy of the passed Array with falsy values removed.
-         * @param {Array/NodeList} arr The Array from which to remove falsy values.
+         * Creates a copy of the passed Array with falsey values removed.
+         * @param {Array/NodeList} arr The Array from which to remove falsey values.
          * @return {Array} The new, compressed Array.
          */
         clean : function(arr){
@@ -8616,6 +8778,12 @@ Ext.supports = {
     },
 
     /**
+     * @property CSS3BoxShadow True if document environment supports the CSS3 box-shadow style.
+     * @type {Boolean}
+     */
+    CSS3BoxShadow: Ext.isDefined(document.documentElement.style.boxShadow),
+
+    /**
      * @property ClassList True if document environment supports the HTML5 classList API.
      * @type {Boolean}
      */
@@ -8904,6 +9072,17 @@ Ext.supports = {
             fn: function(doc, div){
                 var el = Ext.get(div.childNodes[1].firstChild);
                 return el.getWidth() == 210;
+            }
+        },
+        
+        /**
+         * @property ArraySort True if the Array sort native method isn't bugged.
+         * @type {Boolean}
+         */
+        {
+            identity: 'ArraySort',
+            fn: function() {
+                return [1, 3].sort(function(a,b) { return b < a; })[0] === 1;
             }
         }
     ]
@@ -12003,7 +12182,7 @@ Ext.core.Element.addMethods({
          */
         getColor : function(attr, defaultValue, prefix){
             var v = this.getStyle(attr),
-                color = prefix === 'undefined' ? prefix : '#',
+                color = prefix || prefix === '' ? prefix : '#',
                 h;
 
             if(!v || (/transparent|inherit/.test(v))) {
@@ -12061,22 +12240,31 @@ Ext.core.Element.addMethods({
          * the default animation (<tt>{duration: .35, easing: 'easeIn'}</tt>)
          * @return {Ext.core.Element} this
          */
-         setOpacity : function(opacity, animate){
+        setOpacity: function(opacity, animate) {
             var me = this,
-                s = me.dom.style,
-                val;
+                dom = me.dom,
+                val,
+                style;
 
-            if(!animate || !me.anim){
-                if(!Ext.supports.Opacity){
-                    opacity = opacity < 1 ? 'alpha(opacity=' + opacity * 100 + ')' : '';
-                    val = s.filter.replace(opacityRe, '').replace(trimRe, '');
+            if (!me.dom) {
+                return me;
+            }
 
-                    s.zoom = 1;
-                    s.filter = val + (val.length > 0 ? ' ' : '') + opacity;
-                }else{
-                    s.opacity = opacity;
+            style = me.dom.style;
+
+            if (!animate || !me.anim) {
+                if (!Ext.supports.Opacity) {
+                    opacity = opacity < 1 ? 'alpha(opacity=' + opacity * 100 + ')': '';
+                    val = style.filter.replace(opacityRe, '').replace(trimRe, '');
+
+                    style.zoom = 1;
+                    style.filter = val + (val.length > 0 ? ' ': '') + opacity;
                 }
-            }else{
+                else {
+                    style.opacity = opacity;
+                }
+            }
+            else {
                 if (!Ext.isObject(animate)) {
                     animate = {
                         duration: 350,
@@ -12087,10 +12275,12 @@ Ext.core.Element.addMethods({
                     to: {
                         opacity: opacity
                     }
-                }, animate));
+                },
+                animate));
             }
             return me;
         },
+
 
         /**
          * Clears any opacity settings from this element. Required in some cases for IE.
@@ -13641,10 +13831,10 @@ el.highlight("0000ff", { attr: 'color', duration: 2 });
 
 // common config options shown with default values
 el.highlight("ffff9c", {
-    attr: "background-color", //can be any valid CSS property (attribute) that supports a color value
+    attr: "backgroundColor", //can be any valid CSS property (attribute) that supports a color value
     endColor: (current color) or "ffffff",
     easing: 'easeIn',
-    duration: 1
+    duration: 1000
 });
 </code></pre>
      * @param {String} color (optional) The highlight color. Should be a 6 char hex color without the leading # (defaults to yellow: 'ffff9c')
@@ -13655,38 +13845,52 @@ el.highlight("ffff9c", {
         var me = this,
             dom = me.dom,
             from = {},
-            restore, to, attr;
+            restore, to, attr, lns, event, fn;
 
         o = o || {};
-        attr = o.attr || "backgroundColor";
+        lns = o.listeners || {};
+        attr = o.attr || 'backgroundColor';
+        from[attr] = color || 'ffff9c';
+        
         if (!o.to) {
             to = {};
-            to[attr] = o.endColor || "#ffff9c";
+            to[attr] = o.endColor || me.getColor(attr, 'ffffff', '');
         }
         else {
             to = o.to;
         }
+        
+        // Don't apply directly on lns, since we reference it in our own callbacks below
+        o.listeners = Ext.apply(Ext.apply({}, lns), {
+            beforeanimate: function() {
+                restore = dom.style[attr];
+                me.clearOpacity();
+                me.show();
+                
+                event = lns.beforeanimate;
+                if (event) {
+                    fn = event.fn || event;
+                    return fn.apply(event.scope || lns.scope || window, arguments);
+                }
+            },
+            afteranimate: function() {
+                if (dom) {
+                    dom.style[attr] = restore;
+                }
+                
+                event = lns.afteranimate;
+                if (event) {
+                    fn = event.fn || event;
+                    fn.apply(event.scope || lns.scope || window, arguments);
+                }
+            }
+        });
 
         me.animate(Ext.apply({}, o, {
             duration: 1000,
             easing: 'ease-in',
-            to: to,
-            listeners: {
-                beforeanimate: {
-                    fn: function() {
-                        restore = dom.style[attr];
-                        me.clearOpacity();
-                        me.show();
-                    }
-                },
-                afteranimate: {
-                    fn: function() {
-                        if (dom) {
-                            dom.style[attr] = restore;
-                        }
-                    }
-                }
-            }
+            from: from,
+            to: to
         }));
         return me;
     }
@@ -14356,14 +14560,16 @@ Ext.require('Ext.util.DelayedTask', function() {
                     },
                     handler = fn;
 
+                // The order is important. The 'single' wrapper must be wrapped by the 'buffer' and 'delayed' wrapper
+                // because the event removal that the single listener does destroys the listener's DelayedTask(s)
+                if (o.single) {
+                    handler = createSingle(handler, listener, o, scope);
+                }
                 if (o.delay) {
                     handler = createDelayed(handler, listener, o, scope);
                 }
                 if (o.buffer) {
                     handler = createBuffered(handler, listener, o, scope);
-                }
-                if (o.single) {
-                    handler = createSingle(handler, listener, o, scope);
                 }
 
                 listener.fireFn = handler;
@@ -14718,7 +14924,7 @@ Ext.EventManager = {
                 fn = Ext.Function.createInterceptor(fn, this.contains, this);
             }
             eventName = eventName == 'mouseenter' ? 'mouseover' : 'mouseout';
-        } else if (eventName == 'mousewheel' && !Ext.supports.MouseWheel){
+        } else if (eventName == 'mousewheel' && !Ext.supports.MouseWheel && !Ext.isOpera){
             eventName = 'DOMMouseScroll';
         }
         return {
@@ -17182,11 +17388,14 @@ Ext.override(Ext.core.Element, {
      * @return {Region} A Ext.util.Region containing "top, left, bottom, right" member data.
      */
     getViewRegion: function() {
-        var pos = this.getXY(),
-            top = pos[1] + this.getBorderWidth('t') + this.getPadding('t'),
-            left = pos[0] + this.getBorderWidth('l') + this.getPadding('l');
+        var isBody = this.dom === document.body,
+            pos = isBody ? [0, 0] : this.getXY(),
+            top = pos[1] + (isBody ?  0 : this.getBorderWidth('t') + this.getPadding('t')),
+            left = pos[0] + (isBody ? 0 : this.getBorderWidth('l') + this.getPadding('l')),
+            width = isBody ? Ext.core.Element.getViewportWidth() : this.getWidth(true),
+            height = isBody ? Ext.core.Element.getViewportHeight() : this.getHeight(true);
         
-        return new Ext.util.Region(top, left + this.getWidth(true), top + this.getHeight(true), left);
+        return new Ext.util.Region(top, left + width, top + height, left);
     },
 
     /**
@@ -17575,13 +17784,21 @@ Ext.core.Element.addMethods(
                 }
             },
             /**
-             * Returns true if this element is masked
+             * Returns true if this element is masked. Also re-centers any displayed message within the mask.
              * @return {Boolean}
              */
             isMasked : function() {
-                var m = data(this.dom, 'mask');
-                // force to bool
-                return !!(m && m.isVisible());
+                var me = this,
+                    mask = data(me.dom, 'mask'),
+                    maskMsg = data(me.dom, 'maskMsg');
+
+                if (mask && mask.isVisible()) {
+                    if (maskMsg) {
+                        maskMsg.center(me);
+                    }
+                    return true;
+                }
+                return false;
             },
 
             /**

@@ -83,7 +83,7 @@ Ext.define('Ext.app.GridPortlet', {
             store: store,
             stripeRows: true,
             columnLines: true,
-            headers: [{
+            columns: [{
                 id       :'company',
                 text   : 'Company',
                 //width: 120,

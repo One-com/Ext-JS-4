@@ -85,7 +85,7 @@ Ext.onReady(function(){
             groupHdTpl: '{name}',
             hideGroupedHeader: true
         }],
-        headers: [{
+        columns: [{
             text: 'Task',
             flex: 1,
             sortable: true,

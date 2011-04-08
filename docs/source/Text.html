@@ -18,7 +18,7 @@ The Text field has a useful set of validations built in:
 
 In addition, custom validations may be added:
  
-- {@link #vtype} specifies a virtual type implementation from {@link Ext.form.VType} which can contain
+- {@link #vtype} specifies a virtual type implementation from {@link Ext.form.VTypes} which can contain
   custom validation logic
 - {@link #validator} allows a custom arbitrary function to be called during validation
 
@@ -380,14 +380,21 @@ Ext.define(&#39;Ext.form.Text&#39;, {
 
     applyEmptyText : function(){
         var me = this,
-            emptyText = me.emptyText;
+            emptyText = me.emptyText,
+            isEmpty;
 
         if (me.rendered &amp;&amp; emptyText) {
+            isEmpty = me.getRawValue().length &lt; 1 &amp;&amp; !me.hasFocus;
+            
             if (Ext.supports.Placeholder) {
                 me.inputEl.dom.placeholder = emptyText;
-            }
-            else if (me.getRawValue().length &lt; 1 &amp;&amp; !me.hasFocus) {
+            } else if (isEmpty) {
                 me.setRawValue(emptyText);
+            }
+            
+            //all browsers need this because of a styling issue with chrome + placeholders.
+            //the text isnt vertically aligned when empty (and using the placeholder)
+            if (isEmpty) {
                 me.inputEl.addCls(me.emptyCls);
             }
 
@@ -405,7 +412,9 @@ Ext.define(&#39;Ext.form.Text&#39;, {
         if (emptyText &amp;&amp; !Ext.supports.Placeholder &amp;&amp; inputEl.dom.value === emptyText) {
             me.setRawValue(&#39;&#39;);
             isEmpty = true;
-            inputEl.removeCls(this.emptyCls);
+            inputEl.removeCls(me.emptyCls);
+        } else if (Ext.supports.Placeholder) {
+            me.inputEl.removeCls(me.emptyCls);
         }
         if (me.selectOnFocus || isEmpty) {
             inputEl.dom.select();
@@ -557,16 +566,11 @@ for any failing validations. Validation rules are processed in the following ord
         }
 
         if (value.length &lt; 1 || value === emptyText) {
-            if (allowBlank) {
-                //if value is blank and allowBlank is true, there cannot be any additional errors
-                return errors;
-            } else {
+            if (!allowBlank) {
                 errors.push(me.blankText);
             }
-        }
-
-        if (!allowBlank &amp;&amp; (value.length &lt; 1 || value === emptyText)) { // if it&#39;s blank
-            errors.push(me.blankText);
+            //if value is blank, there cannot be any additional errors
+            return errors;
         }
 
         if (value.length &lt; me.minLength) {
@@ -584,7 +588,7 @@ for any failing validations. Validation rules are processed in the following ord
         }
 
         if (regex &amp;&amp; !regex.test(value)) {
-            errors.push(me.regexText);
+            errors.push(me.regexText || me.invalidText);
         }
 
         return errors;

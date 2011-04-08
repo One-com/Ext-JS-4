@@ -240,12 +240,6 @@ Ext.define('Ext.window.Window', {
              */
             'restore'
         );
-
-        // Initialize as visible.
-        if (me.hidden === false) {
-            me.hidden = true;
-            me.show();
-        }
         
         if (me.modal) {
             me.ariaRole = 'dialog';
@@ -263,23 +257,22 @@ Ext.define('Ext.window.Window', {
                 events.push(event);
             }
         });
-        this.callParent();    
+        this.callParent();
     },
-    
+
     getState: function() {
         var me = this,
             state = me.callParent() || {},
             maximized = !!me.maximized;
-            
-        
+
         state.maximized = maximized;
         Ext.apply(state, {
             size: maximized ? me.restoreSize : me.getSize(),
-            pos: maximized ? me.restorePos : me.getPosition(true)
+            pos: maximized ? me.restorePos : me.getPosition()
         });
         return state;
     },
-    
+
     applyState: function(state){
         var me = this;
         
@@ -321,10 +314,13 @@ Ext.define('Ext.window.Window', {
     // private
     afterRender: function() {
         var me = this,
+            hidden = me.hidden,
             keyMap;
-            
+          
+        me.hidden = false;
         // Component's afterRender sizes and positions the Component
         me.callParent();
+        me.hidden = hidden;
 
         // Create the proxy after the size has been applied in Component.afterRender
         me.proxy = me.getProxy();
@@ -396,11 +392,13 @@ Ext.define('Ext.window.Window', {
     // private
     beforeDestroy: function() {
         var me = this;
-        
+
         if (me.rendered) {
+            delete this.animateTarget;
             me.hide();
             Ext.destroy(
-                me.focusEl
+                me.focusEl,
+                me.keyMap
             );
         }
         me.callParent();
@@ -490,18 +488,12 @@ Ext.define('Ext.window.Window', {
         if (me.keyMap) {
             me.keyMap.enable();
         }
-
-        // BrowserBug. Explain the browser bug in the comment.
-        if (animateTarget && (Ext.isIE || Ext.isWebKit)) {
-            size = me.getSize();
-            me.onResize(size.width, size.height);
-        }
     },
 
     // private
     doClose: function() {
         var me = this;
-        
+
         // immediate close
         if (me.hidden) {
             me.fireEvent('close', me);
@@ -510,36 +502,6 @@ Ext.define('Ext.window.Window', {
             // close after hiding
             me.hide(me.animTarget, me.doClose, me);
         }
-    },
-
-    /**
-     * Hides the window, setting it to invisible and applying negative offsets.
-     * @param {String/Element} animateTarget (optional) The target element or id to which the window should
-     * animate while hiding (defaults to null with no animation)
-     * @param {Function} callback (optional) A callback function to call after the window is hidden
-     * @param {Object} scope (optional) The scope (<code>this</code> reference) in which the callback is executed. 
-     * Defaults to this Window.
-     * @return {Ext.window.Window} this
-     */
-    hide: function(animateTarget, cb, scope) {
-        var me = this;
-        
-        if (me.hidden || me.fireEvent('beforehide', me) === false) {
-            return me;
-        }
-        if (cb) {
-            me.on('hide', cb, scope, {
-                single: true
-            });
-        }
-        me.hidden = true;
-        if (me.animateTarget) {
-            me.animHide();
-        } else {
-            me.el.hide();
-            me.afterHide();
-        }
-        return me;
     },
 
     // private
@@ -581,7 +543,7 @@ Ext.define('Ext.window.Window', {
 
     afterCollapse: function() {
         var me = this;
-        
+
         if (me.maximizable) {
             me.tools.maximize.hide();
             me.tools.restore.hide();

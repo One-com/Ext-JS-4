@@ -14,7 +14,7 @@ Ext.define('Ext.grid.HeaderDragZone', {
         Ext.grid.HeaderDragZone.superclass.constructor.call(this, headerCt.el);
         this.proxy.el.addCls(Ext.baseCSSPrefix + 'grid-col-dd');
     },
-    
+
     getDragData: function(e) {
         var header = e.getTarget('.'+this.colHeaderCls),
             headerCmp;
@@ -50,5 +50,9 @@ Ext.define('Ext.grid.HeaderDragZone', {
     afterRepair: function() {
         this.callParent();
         this.headerCt.dragging = false;
+    },
+    
+    getRepairXY: function() {
+        return this.dragData.header.el.getXY();
     }
 });

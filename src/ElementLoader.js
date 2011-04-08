@@ -11,7 +11,7 @@ Ext.get('el').load({
 });
  * </code></pre>
  * <p>
- * In general this class will not be instanced directly, rather the {@link Ext.Element#load} method
+ * In general this class will not be instanced directly, rather the {@link Ext.core.Element#load} method
  * will be used.
  * </p>
  */
@@ -34,12 +34,10 @@ Ext.define('Ext.ElementLoader', {
                 var target = loader.getTarget(),
                     html = response.responseText,
                     id,
-                    dom,
                     interval;
                     
                 if (active.scripts) {
                     id = Ext.id();
-                    dom = target.dom;
                     html += '<span id="' + id + '"></span>';
                     // Set this in a timer because it may take a little time to update the dom
                     interval = setInterval(function(){
@@ -84,7 +82,7 @@ Ext.define('Ext.ElementLoader', {
                                 Ext.removeNode(el);
                             }
                     }, 50);
-                    dom.innerHTML = html.replace(/(?:<script.*?>)((\n|\r|.)*?)(?:<\/script>)/ig, '');
+                    target.update(html.replace(/(?:<script.*?>)((\n|\r|.)*?)(?:<\/script>)/ig, ''));
                 } else {
                     target.update(html);
                 }

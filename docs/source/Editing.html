@@ -1,13 +1,13 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.grid.Editing"></a>/**
  * @class Ext.grid.Editing
- * &lt;p&gt;This class provides cell editing on selected {@link Ext.grid.Header columns}.
- * The editable columns are specified by providing an {@link Ext.grid.Header#editor editor}
- * in the {@link Ext.grid.Header column configuration}.&lt;/p&gt;
+ * &lt;p&gt;This class provides cell editing on selected {@link Ext.grid.column.Column columns}.
+ * The editable columns are specified by providing an {@link Ext.grid.column.Column#editor editor}
+ * in the {@link Ext.grid.column.Column column configuration}.&lt;/p&gt;
  * &lt;p&gt;Editability of columns may be controlled programatically by inserting an implementation
- * of {@link Ext.grid.Header#isCellEditable isCellEditable} into the {@link Ext.grid.Header Header}.&lt;/p&gt;
+ * of {@link Ext.grid.column.Column#isCellEditable isCellEditable} into the {@link Ext.grid.column.Column Header}.&lt;/p&gt;
  * &lt;p&gt;Editing is performed on the value of the &lt;i&gt;field&lt;/i&gt; specified by the column&#39;s
- * &lt;tt&gt;{@link Ext.grid.Header#dataIndex dataIndex}&lt;/tt&gt; in the backing {@link Ext.data.Store Store}
- * (so if you are using a {@link Ext.grid.Header#setRenderer renderer} in order to display
+ * &lt;tt&gt;{@link Ext.grid.column.Column#dataIndex dataIndex}&lt;/tt&gt; in the backing {@link Ext.data.Store Store}
+ * (so if you are using a {@link Ext.grid.column.Column#setRenderer renderer} in order to display
  * transformed data, this must be accounted for).&lt;/p&gt;
  * &lt;p&gt;If a value-to-description mapping is used to render a column, then a {@link Ext.form.Field#ComboBox ComboBox}
  * which uses the same {@link Ext.form.Field#valueField value}-to-{@link Ext.form.Field#displayFieldField description}
@@ -68,54 +68,16 @@ Ext.define(&#39;Ext.grid.Editing&#39;, {
         this.mixins.observable.constructor.call(this, config);
     },
 
-    // key getter for this.editors MixedCollection
-    getKey: function(obj) {
-        return obj.name;
-    },
-
-    // Retrieve an individual editor and create it
-    // if it doesn&#39;t already exist.
-    getEditor: function(name, dontCreate) {
-        var ed = this.editors.get(name);
-        if (!ed) {
-            return false;
-        }
-        if (ed.events || dontCreate) {
-            return ed;
-        } else {
-            ed = Ext.ComponentMgr.create(ed, &#39;textfield&#39;);
-            this.editors.add(ed);
-            return ed;
-        }
-    },
-
-    setEditor: function(name, ed) {
-        // destroy the existing editor if its already been created
-        // 2nd arg indicates not to wrap the configuration so that
-        // we don&#39;t create and then immediately destroy.
-        var oldEd = this.getEditor(name, true);
-        if (oldEd.destroy) {
-            oldEd.destroy();
-        }
-
-        this.editors.add(ed);
-    },
-    
-    afterRender: function() {
-        this.initCancelTrigger();
-        this.initEditTrigger();
-    },
-
     // private
-    init : function(grid){
+    init: function(grid){
         this.grid = grid;
         // Marks the grid as editable, so that the SelectionModel
         // can make appropriate decisions during navigation
         grid.isEditable = true;
+        grid.editingPlugin = grid.view.editingPlugin = this;
 
-        grid.on(&#39;render&#39;, this.afterRender, this, {buffer: 50});
-        grid.on(&#39;resize&#39;, this.onGridResize, this);
-
+        grid.on(&#39;render&#39;, this.afterRender, this, {buffer: 50, single: true});
+        this.mon(grid, &#39;resize&#39;, this.onGridResize, this);
 
         this.activeEditor = null;
 
@@ -154,7 +116,8 @@ function afterEdit(e) {
     // execute an XHR to send/commit data to the server, in callback do (if successful):
     e.record.commit();
 };
-             * <br><span style="display: none">/**</span>             * @param {Object} e An edit event (see above for description)
+             * <br><span style="display: none">/**</span>             * @param {{@link Ext.grid.Editing}} editor
+             * @param {Object} e An edit event (see above for description)
              */
             &quot;afteredit&quot;,
             <a name="event-Ext.grid.Editing-validateedit"></a>/**
@@ -187,6 +150,53 @@ function afterEdit(e) {
              */
             &quot;validateedit&quot;
         );
+    },
+
+    /**
+     * @private
+     * AbstractComponent calls destroy on all its plugins at destroy time.
+     */
+    destroy: function() {
+        this.editors.each(Ext.destroy, Ext);
+        this.editors.clear();
+    },
+
+    // key getter for this.editors MixedCollection
+    getKey: function(obj) {
+        return obj.name;
+    },
+
+    // Retrieve an individual editor and create it
+    // if it doesn&#39;t already exist.
+    getEditor: function(name, dontCreate) {
+        var ed = this.editors.get(name);
+        if (!ed) {
+            return false;
+        }
+        if (ed.events || dontCreate) {
+            return ed;
+        } else {
+            ed = Ext.ComponentMgr.create(ed, &#39;textfield&#39;);
+            this.editors.add(ed);
+            return ed;
+        }
+    },
+
+    setEditor: function(name, ed) {
+        // destroy the existing editor if its already been created
+        // 2nd arg indicates not to wrap the configuration so that
+        // we don&#39;t create and then immediately destroy.
+        var oldEd = this.getEditor(name, true);
+        if (oldEd.destroy) {
+            oldEd.destroy();
+        }
+
+        this.editors.add(ed);
+    },
+    
+    afterRender: function() {
+        this.initCancelTrigger();
+        this.initEditTrigger();
     },
 
     // private

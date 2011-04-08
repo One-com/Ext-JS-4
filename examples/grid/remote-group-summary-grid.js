@@ -64,7 +64,7 @@ Ext.onReady(function(){
             hideGroupedHeader: true,
             remoteRoot: 'summaryData'
         }],
-        headers: [{
+        columns: [{
             text: 'Task',
             flex: 1,
             sortable: true,

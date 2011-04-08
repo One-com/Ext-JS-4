@@ -50,7 +50,7 @@ Ext.define('Ext.ux.CellFieldDropZone', {
                 return {
                     node: cell,
                     record: v.getRecord(row),
-                    fieldName: me.grid.headers[columnIndex].dataIndex
+                    fieldName: me.grid.columns[columnIndex].dataIndex
                 };
             }
         }
@@ -273,7 +273,7 @@ Ext.onReady(function(){
     // create the Grid
     var grid = new Ext.grid.GridPanel({
         store: store,
-        headers: [
+        columns: [
             {id:'company',header: "Company", width: 160, sortable: true, dataIndex: 'company'},
             {header: "Price", width: 75, sortable: true, renderer: 'usMoney', dataIndex: 'price'},
             {header: "Change", width: 75, sortable: true, renderer: change, dataIndex: 'change'},

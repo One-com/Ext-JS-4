@@ -131,9 +131,9 @@ Ext.define(&#39;Ext.form.Trigger&#39;, {
             triggerWrap: &#39;.&#39; + triggerWrapCls
         });
         Ext.applyIf(me.subTplData, {
-            size: 16,
             triggerWrapCls: triggerWrapCls,
-            triggerEl: Ext.core.DomHelper.markup(triggerConfigs)
+            triggerEl: Ext.core.DomHelper.markup(triggerConfigs),
+            clearCls: me.clearCls
         });
 
         me.callParent(arguments);
@@ -289,7 +289,7 @@ Ext.define(&#39;Ext.form.Trigger&#39;, {
 
     // private
     checkTab: function(me, e) {
-        if (e.getKey() == e.TAB) {
+        if (!this.ignoreMonitorTab &amp;&amp; e.getKey() == e.TAB) {
             this.triggerBlur();
         }
     },
@@ -370,7 +370,10 @@ Ext.define(&#39;Ext.form.Trigger&#39;, {
             &#39;&lt;tpl if=&quot;size&quot;&gt;size=&quot;{size}&quot; &lt;/tpl&gt;&#39;,
             &#39;&lt;tpl if=&quot;tabIdx&quot;&gt;tabIndex=&quot;{tabIdx}&quot; &lt;/tpl&gt;&#39;,
             &#39;class=&quot;{fieldCls} {typeCls}&quot; autocomplete=&quot;off&quot; /&gt;&#39;,
-        &#39;&lt;div class=&quot;{triggerWrapCls}&quot; role=&quot;presentation&quot;&gt;{triggerEl}&lt;/div&gt;&#39;,
+        &#39;&lt;div class=&quot;{triggerWrapCls}&quot; role=&quot;presentation&quot;&gt;&#39;,
+            &#39;{triggerEl}&#39;,
+            &#39;&lt;div class=&quot;{clearCls}&quot; role=&quot;presentation&quot;&gt;&lt;/div&gt;&#39;,
+        &#39;&lt;/div&gt;&#39;,
         {
             compiled: true,
             disableFormats: true

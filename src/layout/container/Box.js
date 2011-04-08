@@ -330,7 +330,7 @@ Ext.define('Ext.layout.container.Box', {
                 }
 
                 //sort by descending amount of width remaining before minWidth is reached
-                minSizes.sort(me.minSizeSortFn);
+                Ext.Array.sort(minSizes, me.minSizeSortFn);
 
                 /*
                  * Distribute the shortfall (difference between total desired size of all items and actual size available)
@@ -372,7 +372,7 @@ Ext.define('Ext.layout.container.Box', {
                 // The flexed boxes need to be sorted in ascending order of maxSize to work properly
                 // so that unallocated space caused by maxWidth being less than flexed width
                 // can be reallocated to subsequent flexed boxes.
-                flexedBoxes.sort(me.flexSortFn);
+                Ext.Array.sort(flexedBoxes, me.flexSortFn);
 
                 // Calculate the size of each flexed item, and attempt to set it.
                 for (i = 0; i < flexedBoxes.length; i++) {
@@ -383,7 +383,9 @@ Ext.define('Ext.layout.container.Box', {
                     flexedSize = math.ceil((child.flex / remainingFlex) * remainingSpace);
                     // Implement maxSize check
                     flexedSize = math.min(child['max' + parallelPrefixCap] || infiniteValue, flexedSize);
-                    remainingSpace -= (flexedSize + childMargins[me.parallelBefore]);
+
+                    // Remaining space has already had all parallel margins subtracted from it, so just subtract consumed size
+                    remainingSpace -= flexedSize;
                     remainingFlex -= child.flex;
 
                     calcs.dirtySize = calcs.dirtySize || calcs[parallelPrefix] != flexedSize;

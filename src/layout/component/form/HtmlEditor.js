@@ -21,7 +21,9 @@ Ext.define('Ext.layout.component.form.HtmlEditor', {
             iframe = owner.iframeEl,
             editorHeight;
 
-        width -= bodyEl.getFrameWidth('lr');
+        if (Ext.isNumber(width)) {
+            width -= bodyEl.getFrameWidth('lr');
+        }
         toolbar.setWidth(width);
         textarea.setWidth(width);
         iframe.setWidth(width);

@@ -67,23 +67,10 @@ Ext.define('Ext.grid.Scroller', {
             if (!center) {
                 return false;
             }
-            
-            var centerEl          = center.el.dom,
-                centerScrollWidth = centerEl.scrollWidth,
-                // clientWidth often returns 0 in IE resulting in an
-                // infinity result, here we use offsetWidth bc there are
-                // no possible scrollbars and we dont care about margins
-                centerClientWidth = centerEl.offsetWidth,
-                scrollerWidth     = this.getWidth(),
-                threshold = Ext.getScrollBarWidth() - 2;
-
-                
-            width = Math.round(centerScrollWidth * scrollerWidth / centerClientWidth);
-            // because the scroller is completely virtualized, it is easy to get into a couple
-            // pixel rounding error. This makes no overflow occur if the user is +/- the threshold
-            if (scrollerWidth > (width - threshold) /*&& scrollerWidth < (width + threshold)*/) {
-                width = scrollerWidth;
-            }
+            // center is not guaranteed to have content, such as when there
+            // are zero rows in the grid/tree. We read the width from the
+            // headerCt instead.
+            width = center.headerCt.getFullWidth();
         } else {
             var tbl = owner.el.down('.' + Ext.baseCSSPrefix + 'grid-view');
             if (!tbl) {
@@ -107,7 +94,7 @@ Ext.define('Ext.grid.Scroller', {
     },
     
     invalidate: function(firstPass) {
-        if (!this.el || !this.ownerCt) {
+        if (!this.stretchEl || !this.ownerCt) {
             return;
         }
         var size  = this.getSizeCalculation(),
@@ -184,33 +171,10 @@ Ext.define('Ext.grid.Scroller', {
     
     // synchronize the scroller with the bound gridviews
     onElScroll: function(event, target) {
-        var dock = this.dock,
-            owner = this.getPanel(),
-            items = owner.query('tableview'),
-            i = 0,
-            len = items.length,
-            center,
-            centerEl,
-            centerScrollWidth,
-            centerClientWidth,
-            width;
-
         // Set a flag so we refuse to respond to outside control while we are scrolling the client.
         this.scrollInProgress = true;
 
-        if (dock === 'top' || dock === 'bottom') {
-            center = items[1] || items[0];
-            centerEl = center.el.dom;
-            centerScrollWidth = centerEl.scrollWidth;
-            centerClientWidth = centerEl.offsetWidth;    
-            width = this.getWidth();
-
-            centerEl.scrollLeft = Math.ceil(target.scrollLeft/width * centerClientWidth);
-        } else {
-            for (; i < len; i++) {
-                items[i].el.dom.scrollTop = target.scrollTop;
-            }
-        }
+        this.fireEvent('bodyscroll', event, target);
 
         // Clear barrier flag in 100 miliseconds (Unless this is called again, ie: they are dragging the bar)
         this.clearScrollInProgress();

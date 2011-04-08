@@ -25,7 +25,7 @@
     
     textarea {
         color: $form-field-color;
-        
+        overflow: auto;
         background: repeat-x 0 0;
         background-color: $form-field-background-color;
         @if $form-field-background-image {
@@ -73,7 +73,6 @@
 
     .#{$prefix}form-error-msg {
 		margin-left: 2px;
-		
 		background: transparent no-repeat 0 2px;
     }
 
@@ -97,6 +96,12 @@
         color: $form-field-empty-color;
     }
     
+    .#{$prefix}webkit {
+        .#{$prefix}form-empty-field {
+            line-height: 15px;
+        }
+    }
+    
     .#{$prefix}form-display-field {
         padding-top: 2px;
     }
@@ -109,19 +114,22 @@
     
     @if $include-ie {
         .#{$prefix}ie .#{$prefix}form-file {
-            height: 22px;
+            height: $form-field-height + 1;
             
             line-height: 18px;
             
             vertical-align: middle;
         }
 
-        .#{$prefix}strict .#{$prefix}ie6 .#{$prefix}form-text,
-        .#{$prefix}strict .#{$prefix}ie7 .#{$prefix}form-text {
-            height: 18px;
+        .#{$prefix}strict .#{$prefix}ie6 .#{$prefix}form-text {
+            height: $form-field-height - 3;
             line-height: 16px !important;
         }
-
+        
+        .#{$prefix}strict .#{$prefix}ie7 .#{$prefix}form-text {
+            height: $form-field-height - 4;
+            line-height: 16px !important;
+        }
 
         .#{$prefix}ie6 .#{$prefix}form-composite .#{$prefix}form-text.#{$prefix}box-item,
         .#{$prefix}ie7 .#{$prefix}form-composite .#{$prefix}form-text.#{$prefix}box-item {

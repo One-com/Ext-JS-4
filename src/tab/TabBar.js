@@ -70,7 +70,6 @@ Ext.define('Ext.tab.TabBar', {
         // TabBar must override the Header's align setting.
         me.layout.align = (me.orientation == 'vertical') ? 'left' : 'top';
         me.layout.overflowHandler = Ext.create('Ext.layout.container.boxOverflow.Scroller', me.layout);
-        me.layout.overflowHandler.on('scroll', me.updateStrip, me);
         me.items.removeAt(me.items.getCount() - 1);
         me.items.removeAt(me.items.getCount() - 1);
         
@@ -108,13 +107,29 @@ Ext.define('Ext.tab.TabBar', {
             delegate: '.' + Ext.baseCSSPrefix + 'tab'
         });
         me.callParent(arguments);
+        
     },
 
     afterComponentLayout : function() {
         var me = this;
+        
+        //this is a dirty hack for gecko3. for some reason the left value does not get applied to the first
+        //tab, and removing the float:left and re applying it fixes it. #507 on jira
+        if (Ext.isGecko3) {
+            var tabBodyEl = me.body.child('.x-horizontal-box-overflow-body');
+            
+            if (tabBodyEl) {
+                var oldValue = tabBodyEl.dom.style.cssFloat;
 
+                tabBodyEl.dom.style.cssFloat = "none";
+                Ext.defer(function() {
+                    tabBodyEl.dom.style.cssFloat = oldValue;
+                }, 1);
+            }
+        }
+        
         me.callParent(arguments);
-        me.updateStrip();
+        me.strip.setWidth(me.el.getWidth());
     },
 
     // @private
@@ -186,32 +201,6 @@ Ext.define('Ext.tab.TabBar', {
             tab.el.scrollIntoView(me.layout.getRenderTarget());
         }
         me.activeTab = tab;
-        me.updateStrip();
         me.fireEvent('change', me, tab, tab.card);
-    },
-    
-    /**
-     * @private
-     * Makes the strip border move under the active tab.
-     */
-    updateStrip: function() {
-        var me = this,
-            stripBorder,
-            activeTab = me.activeTab,
-            top = (me.dock == 'top');
-
-        // @TODO: clean up this super nasty (really nasty) uber nasty hack
-        Ext.defer(function() {
-            if (me.rendered && activeTab && activeTab.rendered) {
-                me.strip.setWidth(me.el.getWidth());
-                if (!me.stripBorder) {
-                    me.stripBorder = me.body.createChild({
-                        cls: me.baseCls + '-strip-border'
-                    });
-                }
-                me.stripBorder.setWidth(activeTab.getWidth());
-                me.stripBorder.alignTo(activeTab.el, (top ? 'bl' : 'tl'));
-            }
-        }, 1);
     }
 });

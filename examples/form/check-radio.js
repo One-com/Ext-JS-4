@@ -1,7 +1,7 @@
 Ext.require([
     'Ext.form.*',
     'Ext.layout.container.Column',
-    'Ext.window.MessageBoxWindow',
+    'Ext.window.MessageBox',
     'Ext.fx.target.Element'
 ]);
 

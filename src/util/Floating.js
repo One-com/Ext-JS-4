@@ -21,16 +21,12 @@ Ext.define('Ext.util.Floating', {
      */
     shadow: 'sides',
 
-    /**
-     * Construction of a floating Component involves transforming the el into a Layer based around that el.
-     * @param config
-     */
     constructor: function(config) {
         this.floating = true;
         this.el = new Ext.Layer(Ext.apply({}, config, {
             hideMode: this.hideMode,
             hidden: this.hidden,
-            shadow: this.shadow,
+            shadow: Ext.isDefined(this.shadow) ? this.shadow : 'sides',
             shadowOffset: this.shadowOffset,
             constrain: false,
             shim: this.shim === false ? false : undefined
@@ -130,7 +126,7 @@ Ext.define('Ext.util.Floating', {
     setActive: function(active) {
         if (active) {
             if (!this.maximized) {
-                //this.el.enableShadow(true);
+                this.el.enableShadow(true);
             }
             this.fireEvent('activate', this);
         } else {
@@ -156,6 +152,13 @@ Ext.define('Ext.util.Floating', {
         var xy = this.el.getAlignToXY(this.container, 'c-c');
         this.setPagePosition(xy);
         return this;
+    },
+
+    // private
+    syncShadow : function(){
+        if (this.floating) {
+            this.el.sync(true);
+        }
     },
 
     // private

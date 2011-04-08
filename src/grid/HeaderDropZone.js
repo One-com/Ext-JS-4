@@ -59,8 +59,8 @@ Ext.define('Ext.grid.HeaderDropZone', {
         var location = this.getLocation(e, node),
             header = location.header,
             pos    = location.pos,
-            nextHd = draggedHeader.nextSibling('gridheader:not([hidden])'),
-            prevHd = draggedHeader.previousSibling('gridheader:not([hidden])'),
+            nextHd = draggedHeader.nextSibling('gridcolumn:not([hidden])'),
+            prevHd = draggedHeader.previousSibling('gridcolumn:not([hidden])'),
             region, topIndicator, bottomIndicator, topAnchor, bottomAnchor,
             topXY, bottomXY, headerCtEl, minX, maxX;
 

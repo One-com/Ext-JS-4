@@ -26,11 +26,15 @@ Ext.define('Ext.layout.component.form.Trigger', {
             triggerWrap = owner.triggerWrap,
             triggerWidth = owner.getTriggerWidth();
 
-        // Decrease the field's width by the width of the triggers. Both the field and the triggerWrap
-        // are floated left in CSS so they'll stack up side by side.
-        me.setElementSize(inputEl, width - triggerWidth);
-
-        // Explicitly set the triggerWrap's width, to prevent wrapping
-        triggerWrap.setWidth(triggerWidth);
+        // If we or our ancestor is hidden, we can get a triggerWidth calculation
+        // of 0.  We don't want to resize in this case.
+        if (owner.hideTrigger || owner.readOnly || triggerWidth > 0) {
+            // Decrease the field's width by the width of the triggers. Both the field and the triggerWrap
+            // are floated left in CSS so they'll stack up side by side.
+            me.setElementSize(inputEl, Ext.isNumber(width) ? width - triggerWidth : width);
+    
+            // Explicitly set the triggerWrap's width, to prevent wrapping
+            triggerWrap.setWidth(triggerWidth);
+        }
     }
 });

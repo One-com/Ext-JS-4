@@ -83,7 +83,7 @@ Ext.onReady(function() {
     var grid = new Ext.grid.GridPanel({
         store: store,
         columnLines: true,
-        headers: [
+        columns: [
             {
                 text     : 'Company',
                 flex     : 1,
@@ -119,7 +119,7 @@ Ext.onReady(function() {
                 dataIndex: 'lastChange'
             },
             {
-                xtype: 'actionheader',
+                xtype: 'actioncolumn',
                 width: 50,
                 items: [{
                     icon   : '../shared/icons/fam/delete.gif',  // Use a URL in the icon config

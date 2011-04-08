@@ -1,3 +1,8 @@
+/**
+ * @class Ext.data.JsonWriter
+ * @extends Ext.data.Writer
+ * @ignore
+ */
 Ext.define('Ext.data.JsonWriter', {
     extend: 'Ext.data.Writer',
     alias: 'writer.json',

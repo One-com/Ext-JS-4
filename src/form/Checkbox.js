@@ -2,7 +2,7 @@
  * @class Ext.form.Checkbox
  * @extends Ext.form.BaseField
 
-Single checkbox field. Can be used as a direct replacement for traditional checkbox fields. Also serves as a 
+Single checkbox field. Can be used as a direct replacement for traditional checkbox fields. Also serves as a
 parent class for {@link Ext.form.Radio radio buttons}.
 
 __Labeling:__ In addition to the {@link Ext.form.Labelable standard field labeling options}, checkboxes
@@ -20,9 +20,9 @@ The following values will check the checkbox:
 Any other value will uncheck the checkbox.
 
 In addition to the main boolean value, you may also specify a separate {@link #inputValue}. This will be
-used as the `value` attribute of the checkbox and will be submitted as the parameter value when the form
-is {@link Ext.form.Basic#submit submitted}. You will want to set this value if you have multiple checkboxes
-with the same {@link #name}. If not specified, the value `on` will be used.
+sent as the parameter value when the form is {@link Ext.form.Basic#submit submitted}. You will want to set
+this value if you have multiple checkboxes with the same {@link #name}. If not specified, the value `on`
+will be used.
 
 __Example usage:__
 
@@ -36,9 +36,6 @@ __Example usage:__
                 xtype      : 'fieldcontainer',
                 fieldLabel : 'Toppings',
                 defaultType: 'checkboxfield',
-                defaults: {
-                    hideLabel: true
-                },
                 items: [
                     {
                         boxLabel  : 'Anchovies',
@@ -111,10 +108,11 @@ Ext.define('Ext.form.Checkbox', {
     isCheckbox: true,
     
     /**
-     * @cfg {String} focusCls The CSS class to use when the checkbox receives focus (defaults to <tt>''</tt>)
+     * @cfg {String} focusCls The CSS class to use when the checkbox receives focus
+     * (defaults to <tt>'x-form-cb-focus'</tt>)
      */
-    focusCls: '',
-    
+    focusCls: Ext.baseCSSPrefix + 'form-cb-focus',
+
     /**
      * @cfg {String} fieldCls The default CSS class for the checkbox (defaults to <tt>'x-form-field'</tt>)
      */
@@ -132,15 +130,25 @@ Ext.define('Ext.form.Checkbox', {
     checked: false,
 
     /**
-     * @cfg {Array} checkChangeEvents
-     * <p>List of event names that will trigger checking for changes in the checkbox's state. See
-     * {@link Ext.form.BaseField#checkChangeEvents} for details. Defaults to <tt>['click', 'change']</tt> for checkboxes.</p>
+     * @cfg {String} checkedCls The CSS class added to the component's main element when it is in the checked state.
      */
-    checkChangeEvents: ['click', 'change'],
+    checkedCls: Ext.baseCSSPrefix + 'form-cb-checked',
 
     /**
-     * @cfg {String} boxLabel An optional text label that will appear after the checkbox.
+     * @cfg {String} boxLabel An optional text label that will appear next to the checkbox. Whether it appears before
+     * or after the checkbox is determined by the {@link #boxLabelAlign} config (defaults to after).
      */
+
+    /**
+     * @cfg {String} boxLabelCls The CSS class to be applied to the {@link #boxLabel} element
+     */
+    boxLabelCls: Ext.baseCSSPrefix + 'form-cb-label',
+
+    /**
+     * @cfg {String} boxLabelAlign The position relative to the checkbox where the {@link #boxLabel} should
+     * appear. Recognized values are <tt>'before'</tt> and <tt>'after'</tt>. Defaults to <tt>'after'</tt>.
+     */
+    boxLabelAlign: 'after',
 
     /**
      * @cfg {String} inputValue The value that should go into the generated input element's value attribute and
@@ -148,8 +156,6 @@ Ext.define('Ext.form.Checkbox', {
      */
     inputValue: 'on',
 
-    inputType: 'checkbox',
-    
     /**
      * @cfg {Function} handler A function called when the {@link #checked} value changes (can be used instead of
      * handling the {@link #change change event}). The handler is passed the following parameters:
@@ -163,6 +169,11 @@ Ext.define('Ext.form.Checkbox', {
      * @cfg {Object} scope An object to use as the scope ('this' reference) of the {@link #handler} function
      * (defaults to this Checkbox).
      */
+
+    // private overrides
+    checkChangeEvents: [],
+    inputType: 'checkbox',
+    ariaRole: 'checkbox',
 
     // private
     onRe: /^on$/i,
@@ -199,14 +210,31 @@ Ext.define('Ext.form.Checkbox', {
              * A reference to the label element created for the {@link #boxLabel}. Only present if the
              * component has been rendered and has a boxLabel configured.
              */
-            boxLabelEl: 'label.' + Ext.baseCSSPrefix + 'form-cb-label'
+            boxLabelEl: 'label.' + me.boxLabelCls
         });
         Ext.applyIf(me.subTplData, {
             boxLabel: me.boxLabel,
-            inputValue: me.inputValue
+            boxLabelCls: me.boxLabelCls,
+            boxLabelAlign: me.boxLabelAlign
         });
         
         me.callParent(arguments);
+    },
+
+    initEvents: function() {
+        var me = this;
+        me.callParent();
+        me.mon(me.inputEl, 'click', me.onBoxClick, me);
+    },
+
+    /**
+     * @private Handle click on the checkbox button
+     */
+    onBoxClick: function(e) {
+        var me = this;
+        if (!me.disabled && !me.readOnly) {
+            this.setValue(!this.checked);
+        }
     },
 
     /**
@@ -214,9 +242,6 @@ Ext.define('Ext.form.Checkbox', {
      * @return {Boolean} True if checked, else false
      */
     getRawValue: function() {
-        if (this.rendered) {
-            this.checked = this.inputEl.dom.checked;
-        }
         return this.checked;
     },
 
@@ -225,7 +250,7 @@ Ext.define('Ext.form.Checkbox', {
      * @return {Boolean} True if checked, else false
      */
     getValue: function() {
-        return this.getRawValue();
+        return this.checked;
     },
     
     /**
@@ -233,7 +258,7 @@ Ext.define('Ext.form.Checkbox', {
      * @return {Boolean/null} True if checked, null if not.
      */
     getSubmitValue: function() {
-        return this.getValue() ? this.inputValue : null;
+        return this.checked ? this.inputValue : null;
     },
 
     /**
@@ -245,15 +270,14 @@ Ext.define('Ext.form.Checkbox', {
      */
     setRawValue: function(value) {
         var me = this,
-            check,
+            inputEl = me.inputEl,
             inputValue = me.inputValue,
             checked = (value === true || value === 'true' || value === '1' ||
                       ((Ext.isString(value) && inputValue) ? value == inputValue : me.onRe.test(value)));
 
-        if (me.rendered) {
-            check = me.inputEl.dom;
-            check.checked = checked;
-            check.defaultChecked = checked;
+        if (inputEl) {
+            inputEl.dom.setAttribute('aria-checked', checked);
+            me[checked ? 'addCls' : 'removeCls'](me.checkedCls);
         }
 
         me.checked = me.rawValue = checked;
@@ -302,7 +326,7 @@ Ext.define('Ext.form.Checkbox', {
         if (handler) {
             handler.call(me.scope || me, me, newVal);
         }
-        Ext.form.Checkbox.superclass.onChange.call(this, newVal, oldVal);
+        me.callParent(arguments);
     },
     
     // inherit docs
@@ -310,28 +334,42 @@ Ext.define('Ext.form.Checkbox', {
         return Ext.form.CheckboxManager;
     },
 
-    /**
-     * @private When calculating body width, temporarily set it to nowrap
-     */
-    getBodyNaturalWidth: function() {
-        var bodyEl = this.bodyEl,
-            whitespace = 'white-space',
-            width, rect;
-        bodyEl.setStyle(whitespace, 'nowrap');
-        width = bodyEl.getWidth();
-        bodyEl.setStyle(whitespace, '');
-        return width;
+    onEnable: function() {
+        var me = this,
+            inputEl = me.inputEl;
+        me.callParent();
+        if (inputEl) {
+            // Can still be disabled if the field is readOnly
+            inputEl.dom.disabled = me.readOnly;
+        }
+    },
+
+    setReadOnly: function(readOnly) {
+        var me = this,
+            inputEl = me.inputEl;
+        if (inputEl) {
+            // Set the button to disabled when readonly
+            inputEl.dom.disabled = readOnly || me.disabled;
+        }
+        me.readOnly = readOnly;
     }
+
 },
 function() {
+    var boxLabelTpl = '<label class="{boxLabelCls} {boxLabelCls}-{boxLabelAlign}" for="{id}">{boxLabel}</label>';
+
     this.prototype.fieldSubTpl = new Ext.XTemplate(
-        '<input id="{id}" type="{type}" ',
-        '<tpl if="name">name="{name}" </tpl>',
-        '<tpl if="tabIdx">tabIndex="{tabIdx}" </tpl>',
-        '<tpl if="inputValue">value="{inputValue}" </tpl>',
-        'class="{fieldCls} {typeCls}" autocomplete="off"/>',
-        '<tpl if="boxLabel">',
-            '<label class="' + Ext.baseCSSPrefix + 'form-cb-label" for="{id}">{boxLabel}</label>',
+        '<tpl if="boxLabel && boxLabelAlign == \'before\'">',
+            boxLabelTpl,
+        '</tpl>',
+        // Creates not an actual checkbox, but a button which is given aria role="checkbox" and
+        // styled with a custom checkbox image. This allows greater control and consistency in
+        // styling, and using a button allows it to gain focus and handle keyboard nav properly.
+        '<input type="button" id="{id}" ',
+            '<tpl if="tabIdx">tabIndex="{tabIdx}" </tpl>',
+            'class="{fieldCls} {typeCls}" autocomplete="off" hidefocus="true" />',
+        '<tpl if="boxLabel && boxLabelAlign == \'after\'">',
+            boxLabelTpl,
         '</tpl>',
         {
             disableFormats: true,

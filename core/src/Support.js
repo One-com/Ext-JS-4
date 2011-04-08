@@ -164,6 +164,12 @@ Ext.supports = {
     },
 
     /**
+     * @property CSS3BoxShadow True if document environment supports the CSS3 box-shadow style.
+     * @type {Boolean}
+     */
+    CSS3BoxShadow: Ext.isDefined(document.documentElement.style.boxShadow),
+
+    /**
      * @property ClassList True if document environment supports the HTML5 classList API.
      * @type {Boolean}
      */
@@ -452,6 +458,17 @@ Ext.supports = {
             fn: function(doc, div){
                 var el = Ext.get(div.childNodes[1].firstChild);
                 return el.getWidth() == 210;
+            }
+        },
+        
+        /**
+         * @property ArraySort True if the Array sort native method isn't bugged.
+         * @type {Boolean}
+         */
+        {
+            identity: 'ArraySort',
+            fn: function() {
+                return [1, 3].sort(function(a,b) { return b < a; })[0] === 1;
             }
         }
     ]

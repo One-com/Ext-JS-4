@@ -84,7 +84,7 @@ and {@link Ext.grid.GridPanel#beforestatesave beforestatesave} events in order t
 
     var grid = new Ext.grid.GridPanel({
          store: store,
-         headers: ...,
+         columns: ...,
          filters: [filtersCfg],
          height: 400,
          width: 700,
@@ -99,7 +99,7 @@ and {@link Ext.grid.GridPanel#beforestatesave beforestatesave} events in order t
  * @markdown
  */
 Ext.define('Ext.ux.grid.FiltersFeature', {
-    extend: 'Ext.grid.Feature',
+    extend: 'Ext.grid.feature.Feature',
     alias: 'feature.filters',
     uses: [
         'Ext.ux.grid.menu.ListMenu',

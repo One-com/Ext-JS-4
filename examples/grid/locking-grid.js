@@ -1,6 +1,5 @@
 Ext.require([
     'Ext.grid.*',
-    'Ext.grid.LockingGridPanel',
     'Ext.data.*',
     'Ext.util.*',
     'Ext.state.*'
@@ -81,10 +80,10 @@ Ext.onReady(function() {
     });
 
     // create the Grid
-    var grid = new Ext.grid.LockingGridPanel({
+    var grid = new Ext.grid.GridPanel({
         store: store,
         columnLines: true,
-        headers: [{
+        columns: [{
             text     : 'Company',
             locked   : true,
             width    : 200,

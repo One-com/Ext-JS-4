@@ -55,7 +55,7 @@ Ext.define('FeedViewer.FeedGrid', {
                     itemdblclick: this.onRowDblClick
                 }
             },
-            headers: [{
+            columns: [{
                 text: 'Title',
                 dataIndex: 'title',
                 flex: 1,

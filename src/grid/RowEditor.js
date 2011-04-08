@@ -78,6 +78,7 @@ Ext.define('Ext.grid.RowEditor', {
     afterRender: function() {
         var me = this,
             plugin = me.editingPlugin;
+            
         me.callParent(arguments);
         me.renderTo.on('scroll', me.onCtScroll, me, { buffer: 100 });
         
@@ -87,8 +88,14 @@ Ext.define('Ext.grid.RowEditor', {
             stopPropagation: true
         });
         
+        me.el.swallowEvent([
+            'keypress',
+            'keydown'
+        ]);
+        
         me.keyNav = Ext.create('Ext.util.KeyNav', me.el, {
             enter: plugin.completeEdit,
+            esc: plugin.onEscKey,
             scope: plugin
         });
         
@@ -154,22 +161,32 @@ Ext.define('Ext.grid.RowEditor', {
     },
     
     onColumnResize: function(column, width) {
-        column.getField().setWidth(width - 5);
-        this.reposition();
+        column.getField().setWidth(width - 2);
+        if (this.isVisible()) {
+            this.reposition();
+        }
     },
     
     onColumnHide: function(column) {
         column.getField().hide();
-        this.reposition();
+        if (this.isVisible()) {
+            this.reposition();
+        }
     },
     
     onColumnShow: function(column) {
-        column.getField().show();
-        this.reposition();
+        var field = column.getField();
+        field.setWidth(column.getWidth() - 2).show();
+        if (this.isVisible()) {
+            this.reposition();
+        }
     },
     
     onColumnMove: function(column, fromIdx, toIdx) {
-        this.move(fromIdx, toIdx);
+        var field = column.getField();
+        if (this.items.indexOf(field) != toIdx) {
+            this.move(fromIdx, toIdx);
+        }
     },
     
     onFieldAdd: function(hm, fieldId, column) {
@@ -275,11 +292,16 @@ Ext.define('Ext.grid.RowEditor', {
             top, rowH, newHeight,
             
             invalidateScroller = function() {
+                // Bring our row into view if necessary, so a row editor that's already
+                // visible and animated to the row will appear smooth
+                if (scroller) {
+                    row.scrollIntoView(scroller.el, false);
+                    scroller.invalidate();
+                    btnEl.scrollIntoView(scroller.el, false);
+                }
+                
                 if (animate && animate.callback) {
                     animate.callback();
-                }
-                if (scroller) {
-                    scroller.invalidate();
                 }
             };
 
@@ -378,8 +400,14 @@ Ext.define('Ext.grid.RowEditor', {
     },
     
     loadRecord: function(record) {
-        var me = this;
-        me.getForm().loadRecord(record);
+        var me = this,
+            form = me.getForm();
+        form.loadRecord(record);
+        if (form.isValid()) {
+            me.hideToolTip();
+        } else {
+            me.showToolTip();
+        }
         
         // render display fields so they honor the column renderer/template
         Ext.Array.forEach(me.query('>displayfield'), function(field) {
@@ -420,7 +448,7 @@ Ext.define('Ext.grid.RowEditor', {
 
     startEdit: function(params) {
         var me = this,
-            field,
+            field, record,
             
             focusCell = function() {
                 field = me.getField(params.colIdx);
@@ -431,8 +459,13 @@ Ext.define('Ext.grid.RowEditor', {
         
         // Store our params
         me.params = params;
+        record = params.record;
 
-        me.loadRecord(params.record);
+        // make sure our row is selected before editing
+        params.grid.getSelectionModel().select(record);
+        
+        // Reload the record data
+        me.loadRecord(record);
         
         if (!me.isVisible()) {
             me.show();
@@ -466,19 +499,17 @@ Ext.define('Ext.grid.RowEditor', {
         return true;
     },
 
-    // synchronize the floating buttons panel
     onShow: function() {
         var me = this;
         me.callParent(arguments);
         me.reposition();
-        me.hideToolTip();
     },
 
-    // synchronize the floating buttons panel
     onHide: function() {
         var me = this;
         me.callParent(arguments);
         me.hideToolTip();
+        me.invalidateScroller();
         if (me.params) {
             me.params.view.focus();
         }
@@ -568,5 +599,15 @@ Ext.define('Ext.grid.RowEditor', {
         }, me);
         
         return '<ul>' + errors.join('') + '</ul>';
+    },
+    
+    invalidateScroller: function() {
+        var me = this,
+            params = me.params,
+            scroller = params.grid.verticalScroller;
+        
+        if (scroller) {
+            scroller.invalidate();
+        }
     }
 });

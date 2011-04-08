@@ -37,6 +37,8 @@ Ext.define('Ext.chart.series.Area', {
     /* Begin Definitions */
 
     extend: 'Ext.chart.series.Cartesian',
+    
+    alias: 'series.area',
 
     requires: ['Ext.chart.axis.Axis', 'Ext.draw.Color', 'Ext.fx.Anim'],
 

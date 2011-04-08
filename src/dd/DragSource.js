@@ -36,6 +36,13 @@ Ext.define('Ext.dd.DragSource', {
      * Defaults to true. If true, animates the proxy element back to the position of the handle element used to trigger the drag.
      */
     animRepair: true,
+    
+    /**
+     * @cfg {String} repairHighlightColor The color to use when visually highlighting the drag source in the afterRepair
+     * method after a failed drop (defaults to 'c3daf9' - light blue). The color must be a 6 digit hex value, without
+     * a preceding '#'.
+     */
+    repairHighlightColor: 'c3daf9',
 
     constructor: function(el, config) {
         this.el = Ext.get(el);
@@ -265,10 +272,11 @@ Ext.define('Ext.dd.DragSource', {
 
     // private
     afterRepair: function() {
+        var me = this;
         if (Ext.enableFx) {
-            this.el.highlight(this.hlColor || "c3daf9");
+            me.el.highlight(me.repairHighlightColor);
         }
-        this.dragging = false;
+        me.dragging = false;
     },
 
     /**

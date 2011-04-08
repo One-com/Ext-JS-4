@@ -9,6 +9,9 @@ Ext.onReady(function() {
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
     var store = new Ext.data.TreeStore({
+        root: {
+            expanded: true
+        },
         proxy: {
             type: 'direct',
             directFn: TestAction.getTree,

@@ -268,7 +268,7 @@
          */
         getColor : function(attr, defaultValue, prefix){
             var v = this.getStyle(attr),
-                color = prefix === &#39;undefined&#39; ? prefix : &#39;#&#39;,
+                color = prefix || prefix === &#39;&#39; ? prefix : &#39;#&#39;,
                 h;
 
             if(!v || (/transparent|inherit/.test(v))) {
@@ -326,22 +326,31 @@
          * the default animation (&lt;tt&gt;{duration: .35, easing: &#39;easeIn&#39;}&lt;/tt&gt;)
          * @return {Ext.core.Element} this
          */
-         setOpacity : function(opacity, animate){
+        setOpacity: function(opacity, animate) {
             var me = this,
-                s = me.dom.style,
-                val;
+                dom = me.dom,
+                val,
+                style;
 
-            if(!animate || !me.anim){
-                if(!Ext.supports.Opacity){
-                    opacity = opacity &lt; 1 ? &#39;alpha(opacity=&#39; + opacity * 100 + &#39;)&#39; : &#39;&#39;;
-                    val = s.filter.replace(opacityRe, &#39;&#39;).replace(trimRe, &#39;&#39;);
+            if (!me.dom) {
+                return me;
+            }
 
-                    s.zoom = 1;
-                    s.filter = val + (val.length &gt; 0 ? &#39; &#39; : &#39;&#39;) + opacity;
-                }else{
-                    s.opacity = opacity;
+            style = me.dom.style;
+
+            if (!animate || !me.anim) {
+                if (!Ext.supports.Opacity) {
+                    opacity = opacity &lt; 1 ? &#39;alpha(opacity=&#39; + opacity * 100 + &#39;)&#39;: &#39;&#39;;
+                    val = style.filter.replace(opacityRe, &#39;&#39;).replace(trimRe, &#39;&#39;);
+
+                    style.zoom = 1;
+                    style.filter = val + (val.length &gt; 0 ? &#39; &#39;: &#39;&#39;) + opacity;
                 }
-            }else{
+                else {
+                    style.opacity = opacity;
+                }
+            }
+            else {
                 if (!Ext.isObject(animate)) {
                     animate = {
                         duration: 350,
@@ -352,10 +361,12 @@
                     to: {
                         opacity: opacity
                     }
-                }, animate));
+                },
+                animate));
             }
             return me;
         },
+
 
         <a name="method-Ext.core.Element-clearOpacity"></a>/**
          * Clears any opacity settings from this element. Required in some cases for IE.

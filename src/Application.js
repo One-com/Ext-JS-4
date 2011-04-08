@@ -1,6 +1,6 @@
 /**
- * @class Ext.Application
  * @author Ed Spencer
+ * @class Ext.Application
  *
  * <p>Represents a Sencha Application. Most Applications consist of at least the application's name and a launch
  * function:</p>

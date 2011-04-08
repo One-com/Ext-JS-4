@@ -1,13 +1,14 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.state.Provider"></a>/**
  * @class Ext.state.Provider
- * Abstract base class for state provider implementations. The provider is responsible
+ * &lt;p&gt;Abstract base class for state provider implementations. The provider is responsible
  * for setting values  and extracting values to/from the underlying storage source. The 
  * storage source can vary and the details should be implemented in a subclass. For example
- * a provider could use a server side database or the browser localstorage where supported. 
- * This class provides methods for encoding and decoding &lt;b&gt;typed&lt;/b&gt; variables including 
+ * a provider could use a server side database or the browser localstorage where supported.&lt;/p&gt;
+ *
+ * &lt;p&gt;This class provides methods for encoding and decoding &lt;b&gt;typed&lt;/b&gt; variables including 
  * dates and defines the Provider interface. By default these methods put the value and the
  * type information into a delimited string that can be stored. These should be overridden in 
- * a subclass if you want to change the format of the encoded value and subsequent decoding.
+ * a subclass if you want to change the format of the encoded value and subsequent decoding.&lt;/p&gt;
  */
 Ext.define(&#39;Ext.state.Provider&#39;, {
     mixins: {

@@ -31,19 +31,19 @@ Ext.define('Ext.multisort.Panel', {
                     changeDirection: this.updateStoreSorters
                 }
             },
-            items: [
-                'Sort on these fields:',
-                {
-                    xtype: 'sortbutton',
-                    text : 'Type',
-                    dataIndex: 'type'
-                },
-                {
-                    xtype: 'sortbutton',
-                    text : 'Name',
-                    dataIndex: 'name'
-                }
-            ]
+            items: [{
+                xtype: 'tbtext',
+                text: 'Sort on these fields:',
+                reorderable: false
+            }, {
+                xtype: 'sortbutton',
+                text : 'Type',
+                dataIndex: 'type'
+            }, {
+               xtype: 'sortbutton',
+                text : 'Name',
+                dataIndex: 'name'
+            }]
         });
         
         this.items = {
@@ -51,7 +51,8 @@ Ext.define('Ext.multisort.Panel', {
             tpl: [
                 '<tpl for=".">',
                     '<div class="item">',
-                        '<img src="../../datasets/touch-icons/{thumb}" />',
+                        (!Ext.isIE6? '<img src="../../datasets/touch-icons/{thumb}" />' : 
+                        '<div style="position:relative;width:74px;height:74px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'../../datasets/touch-icons/{thumb}\')"></div>'),
                         '<h3>{name}</h3>',
                     '</div>',
                 '</tpl>'

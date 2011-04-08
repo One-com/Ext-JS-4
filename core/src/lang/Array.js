@@ -19,10 +19,20 @@
         supportsIndexOf = 'indexOf' in arrayPrototype,
         supportsEvery = 'every' in arrayPrototype,
         supportsSome = 'some' in arrayPrototype,
-        supportsFilter = 'filter' in arrayPrototype;
+        supportsFilter = 'filter' in arrayPrototype,
+        // default sort comparison function
+        _defaultSortFn = function(a, b) {
+            a = a.toString();
+            b = b.toString();
+            if(a === b){
+                return 0;
+            }
 
+            return (a < b) ? -1 : 1;
+        };
+        
     Ext.Array = {
-        /**
+        /*
          * Iterates an array calling the supplied function.
          * @param {Array/NodeList/Mixed} array The array to be iterated. If this
          * argument is not really an array, the supplied function is called once.
@@ -36,12 +46,13 @@
 - `allItems`: {Array} The `array` passed as the first argument to `Ext.each`
 
          * @param {Object} scope The scope (`this` reference) in which the specified function is executed.
+         * @param {Boolean} inverse Allows to inverse iteration (Optional) 
          * Defaults to the `item` at the current `index`
          * within the passed `array`.
          * @return {Boolean} See description for the fn parameter.
          * @markdown
          */
-        each: function(array, fn, scope) {
+        each: function(array, fn, scope, inverse) {
             if (Ext.isEmpty(array, true)) {
                 return 0;
             }
@@ -49,13 +60,21 @@
             if (!Ext.isIterable(array) || Ext.isPrimitive(array)) {
                 array = [array];
             }
-
-            for (var i = 0, len = array.length; i < len; i++) {
-                if (fn.call(scope || array[i], array[i], i, array) === false) {
-                    return i;
+            var length = array.length,
+                i;
+            if (inverse !== true) {
+                for (i = 0; i < length; i++) {
+                    if (fn.call(scope || array[i], array[i], i, array) === false) {
+                        return i;
+                    }
+                }
+            } else {
+                for (i = length - 1; i > -1; i--) {
+                    if (fn.call(scope || array[i], array[i], i, array) === false) {
+                        return i;
+                    }
                 }
             }
-
             return true;
         },
 
@@ -183,7 +202,7 @@
         },
 
         /**
-         * Executes the specified function for each array element until the function returns a falsy value.
+         * Executes the specified function for each array element until the function returns a falsey value.
          * If such an item is found, the function will return false immediately.
          * Otherwise, it will return true.
          * @param {Array} array
@@ -457,6 +476,43 @@
             }
 
             return clone;
+        },
+        
+
+        /**
+         * Sorts the elements of an Array.
+         * By default, this method sorts the elements alphabetically and ascending.
+         * @param {Array} array The array to sort.
+         * @param {Function} sortFn (optional) The comparision function.
+         * @return {Array} The sorted array.
+         */       
+        sort: function(array, sortFn) {
+            if (Ext.supports.ArraySort) {
+                return array.sort(sortFn);
+            } else {
+                var length = array.length,
+                    i = 0,
+                    comparison,
+                    j, min, tmp;
+                
+                sortFn = sortFn || _defaultSortFn;
+                
+                for (; i < length; i++) {
+                    min = i;
+                    for (j = i + 1; j < length; j++) {
+                        comparison = sortFn(array[j], array[min]);
+                        if (comparison < 0 || comparison === false) {
+                            min = j;
+                        }
+                    }
+                    if (min !== i) {
+                            tmp = array[i];
+                            array[i] = array[min];
+                            array[min] = tmp;
+                    }
+                }
+                return array;
+            }
         }
     };
 

@@ -219,6 +219,7 @@ Example usage:
  * @constructor
  * @param {Object} config The configuration options
  * @xtype tabpanel
+ * @markdown
  */
 Ext.define(&#39;Ext.tab.TabPanel&#39;, {
     extend: &#39;Ext.panel.Panel&#39;,
@@ -266,9 +267,9 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
 
     <a name="cfg-Ext.tab.TabPanel-deferredRender"></a>/**
      * @cfg {Boolean} deferredRender
-     * &lt;p&gt;&lt;tt&gt;true&lt;/tt&gt; by default to defer the rendering of child &lt;tt&gt;{@link Ext.Container#items items}&lt;/tt&gt;
+     * &lt;p&gt;&lt;tt&gt;true&lt;/tt&gt; by default to defer the rendering of child &lt;tt&gt;{@link Ext.container.Container#items items}&lt;/tt&gt;
      * to the browsers DOM until a tab is activated. &lt;tt&gt;false&lt;/tt&gt; will render all contained
-     * &lt;tt&gt;{@link Ext.Container#items items}&lt;/tt&gt; as soon as the {@link Ext.layout.container.Card layout}
+     * &lt;tt&gt;{@link Ext.container.Container#items items}&lt;/tt&gt; as soon as the {@link Ext.layout.container.Card layout}
      * is rendered. If there is a significant amount of content or a lot of heavy controls being
      * rendered into panels that are not displayed by default, setting this to &lt;tt&gt;true&lt;/tt&gt; might
      * improve performance.&lt;/p&gt;
@@ -402,6 +403,16 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
             disabled: item.disabled,
             closable: item.closable,
             tabBar: me.tabBar
+        });
+        
+        item.on({
+            scope : me,
+            enable: function() {
+                item.tab.enable();
+            },
+            disable: function() {
+                item.tab.disable();
+            }
         });
 
         if (item.isPanel) {

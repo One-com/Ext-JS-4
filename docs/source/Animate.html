@@ -2,7 +2,11 @@
  * @class Ext.util.Animate
  * This animation class is a mixin.
 
-Ext.util.Animate provides an API for the creation of animated transitions of properties and styles.  This class is used as a mixin and currently applied to {@link Ext.Element}, {@link Ext.CompositeElement}, {@link Ext.draw.Sprite}, {@link Ext.draw.SpriteGroup}, and {@link Ext.Component}.  Note that Components have a limited subset of what attributes can be animated such as top, left, x, y, height, width, and opacity (color, paddings, and margins can not be animated).
+Ext.util.Animate provides an API for the creation of animated transitions of properties and styles.  
+This class is used as a mixin and currently applied to {@link Ext.core.Element}, {@link Ext.CompositeElement}, 
+{@link Ext.draw.Sprite}, {@link Ext.draw.SpriteGroup}, and {@link Ext.Component}.  Note that Components 
+have a limited subset of what attributes can be animated such as top, left, x, y, height, width, and 
+opacity (color, paddings, and margins can not be animated).
 
 __Animation Basics__
 
@@ -125,7 +129,7 @@ You can also set up complex animations with {@link Ext.fx.Anim#keyframe keyframe
 
 __Animation Events__
 
-Each animation you create has events for {@link Ext.fx.Anim#beforeanimation beforeanimation}, {@link Ext.fx.Anim#afteranimation afteranimation}, and {@link Ext.fx.Anim#lastframe lastframe}.  Keyframed animations adds an additional {@link Ext.fx.Animator#keyframe keyframe} event which fires for each keyframe in your animation.
+Each animation you create has events for {@link Ext.fx.Anim#beforeanimation beforeanimation}, {@link Ext.fx.Anim#afteranimate afteranimate}, and {@link Ext.fx.Anim#lastframe lastframe}.  Keyframed animations adds an additional {@link Ext.fx.Animator#keyframe keyframe} event which fires for each keyframe in your animation.
 
 All animations support the {@link Ext.util.Observable#listeners listeners} configuration to attact functions to these events.
    

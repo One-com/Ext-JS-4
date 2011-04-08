@@ -9,7 +9,7 @@ hook up an instance of {@link Ext.form.Basic} (plus other conveniences related t
 
 #Form Actions#
 
-The Basic class delegates the handling of form loads and submits to instances of {@link Ext.form.Action}.
+The Basic class delegates the handling of form loads and submits to instances of {@link Ext.form.action.Action}.
 See the various Action implementations for specific details of each one's functionality, as well as the
 documentation for {@link #doAction} which details the configuration options that can be specified in
 each action call.
@@ -75,7 +75,7 @@ Ext.define('Ext.form.Basic', {
     extend: 'Ext.util.Observable',
     alternateClassName: 'Ext.form.BasicForm',
     requires: ['Ext.util.MixedCollection', 'Ext.form.action.Load', 'Ext.form.action.Submit',
-               'Ext.window.MessageBoxWindow', 'Ext.data.Errors'],
+               'Ext.window.MessageBox', 'Ext.data.Errors'],
 
     constructor: function(owner, config) {
         var me = this,

@@ -235,10 +235,11 @@ var panel = new Ext.panel.Panel({
      */
     addDocked : function(items, pos) {
         var me = this,
-            items = me.prepareItems(items),
             i = 0,
-            length = items.length,
-            item;
+            item, length;
+
+        items = me.prepareItems(items);
+        length = items.length;
 
         for (; i < length; i++) {
             item = items[i];
@@ -326,6 +327,9 @@ var panel = new Ext.panel.Panel({
      */
     getDockedItems : function(cqSelector) {
         var me = this,
+            // Start with a weight of 1, so users can provide <= 0 to come before top items
+            // Odd numbers, so users can provide a weight to come in between if desired
+            defaultWeight = { top: 1, left: 3, right: 5, bottom: 7 },
             dockedItems,
             i, len;
 
@@ -338,14 +342,17 @@ var panel = new Ext.panel.Panel({
                 dockedItems = me.dockedItems.items.slice();
             }
 
-            dockedItems.sort(function(a, b) {
-                var aw = a.weight || 0,
-                    bw = b.weight || 0;
+            Ext.Array.sort(dockedItems, function(a, b) {
+                // Docked items are ordered by their visual representation by default (t,l,r,b)
+                // TODO: Enforce position ordering, and have weights be sub-ordering within positions?
+                var aw = a.weight || defaultWeight[a.dock],
+                    bw = b.weight || defaultWeight[b.dock];
                 if (Ext.isNumber(aw) && Ext.isNumber(bw)) {
                     return aw - bw;
                 }
                 return 0;
             });
+            
             return dockedItems;
         }
         return [];
@@ -357,8 +364,25 @@ var panel = new Ext.panel.Panel({
     },
 
     getRefItems: function(deep) {
-        // deep fetches all docked items, and their descendants using '*' selector and then '* *'
-        return this.callParent(arguments).concat(this.getDockedItems(deep ? '*,* *' : undefined));
+        var items = this.callParent(arguments),
+            // deep fetches all docked items, and their descendants using '*' selector and then '* *'
+            dockedItems = this.getDockedItems(deep ? '*,* *' : undefined),
+            ln = dockedItems.length,
+            i = 0,
+            item;
+        
+        // Find the index where we go from top/left docked items to right/bottom docked items
+        for (; i < ln; i++) {
+            item = dockedItems[i];
+            if (item.dock === 'right' || item.dock === 'bottom') {
+                break;
+            }
+        }
+        
+        // Return docked items in the top/left position before our container items, and
+        // return right/bottom positioned items after our container items.
+        // See AbstractDock.renderItems() for more information.
+        return dockedItems.splice(0, i).concat(items).concat(dockedItems);
     },
 
     beforeDestroy: function(){

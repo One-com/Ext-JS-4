@@ -172,13 +172,8 @@ Ext.define('Ext.ux.DataView.Draggable', {
     prepareGhost: function(records) {
         var ghost = this.createGhost(records),
             store = ghost.store;
-        
-        store.suspendEvents();
-        store.each(function(record) {
-            store.remove(record);
-        });
-        
-        store.resumeEvents();
+
+        store.removeAll();
         store.add(records);
         
         return ghost.getEl();

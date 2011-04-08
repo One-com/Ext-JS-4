@@ -182,7 +182,11 @@ disabledDates: [&quot;^03&quot;]
     initTimeFormat: &#39;H&#39;,
 
     matchFieldWidth: false,
-
+    <a name="cfg-Ext.form.Date-startDay"></a>/**
+     * @cfg {Number} startDay
+     * Day index at which the week should begin, 0-based (defaults to 0, which is Sunday)
+     */
+    startDay: 0,
     
     initComponent : function(){
         var me = this,
@@ -199,6 +203,18 @@ disabledDates: [&quot;^03&quot;]
         }
         me.disabledDatesRE = null;
         me.initDisabledDays();
+
+        me.callParent();
+    },
+
+    initValue: function() {
+        var me = this,
+            value = me.value;
+
+        // If a String value was supplied, try to convert it to a proper Date
+        if (Ext.isString(value)) {
+            me.value = me.rawToValue(value);
+        }
 
         me.callParent();
     },
@@ -295,7 +311,7 @@ disabledDates: [&quot;^03&quot;]
         var me = this,
             format = Ext.String.format,
             clearTime = Ext.Date.clearTime,
-            errors = Ext.form.Date.superclass.getErrors.apply(me, arguments),
+            errors = me.callParent(arguments),
             disabledDays = me.disabledDays,
             disabledDatesRE = me.disabledDatesRE,
             minValue = me.minValue,
@@ -349,7 +365,7 @@ disabledDates: [&quot;^03&quot;]
     },
 
     rawToValue: function(rawValue) {
-        return this.parseDate(rawValue) || null;
+        return this.parseDate(rawValue) || rawValue || null;
     },
 
     valueToRaw: function(value) {
@@ -407,10 +423,9 @@ dateField.setValue(&#39;2006-05-04&#39;);
     getSubmitValue: function() {
         var me = this,
             format = me.submitFormat || me.format,
-            value = me.getValue(),
-            submitValue = value ? Ext.Date.format(value, format) : null;
+            value = me.getValue();
             
-        return (me.disabled || !me.submitValue) ? null : submitValue;
+        return value ? Ext.Date.format(value, format) : null;
     },
 
     /**
@@ -452,16 +467,17 @@ dateField.setValue(&#39;2006-05-04&#39;);
                 floating: true,
                 hidden: true,
                 focusOnShow: true,
-                minDate : me.minValue,
-                maxDate : me.maxValue,
-                disabledDatesRE : me.disabledDatesRE,
-                disabledDatesText : me.disabledDatesText,
-                disabledDays : me.disabledDays,
-                disabledDaysText : me.disabledDaysText,
-                format : me.format,
-                showToday : me.showToday,
-                minText : format(me.minText, me.formatDate(me.minValue)),
-                maxText : format(me.maxText, me.formatDate(me.maxValue)),
+                minDate: me.minValue,
+                maxDate: me.maxValue,
+                disabledDatesRE: me.disabledDatesRE,
+                disabledDatesText: me.disabledDatesText,
+                disabledDays: me.disabledDays,
+                disabledDaysText: me.disabledDaysText,
+                format: me.format,
+                showToday: me.showToday,
+                startDay: me.startDay,
+                minText: format(me.minText, me.formatDate(me.minValue)),
+                maxText: format(me.maxText, me.formatDate(me.maxValue)),
                 listeners: {
                     scope: me,
                     select: me.onSelect

@@ -25,7 +25,7 @@ Ext.onReady(function() {
         store: store,
         viewConfig: {
             plugins: {
-                ptype: 'treeviewdd'
+                ptype: 'treeviewdragdrop'
             }
         },
         renderTo: 'tree-div',

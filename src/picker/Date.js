@@ -220,7 +220,7 @@ Ext.define('Ext.picker.Date', {
         me.activeCls = me.baseCls + '-active';
         me.nextCls = me.baseCls + '-prevday';
         me.todayCls = me.baseCls + '-today';
-
+        me.dayNames = me.dayNames.slice(me.startDay).concat(me.dayNames.slice(0, me.startDay));
         Ext.picker.Date.superclass.initComponent.call(me);
 
         me.value = me.value ?

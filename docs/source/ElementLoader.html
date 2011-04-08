@@ -9,7 +9,7 @@
     }
 });
  * <br><span style="display: none">/**</span> * &lt;p&gt;
- * In general this class will not be instanced directly, rather the {@link Ext.Element#load} method
+ * In general this class will not be instanced directly, rather the {@link Ext.core.Element#load} method
  * will be used.
  * &lt;/p&gt;
  */
@@ -32,12 +32,10 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
                 var target = loader.getTarget(),
                     html = response.responseText,
                     id,
-                    dom,
                     interval;
                     
                 if (active.scripts) {
                     id = Ext.id();
-                    dom = target.dom;
                     html += &#39;&lt;span id=&quot;&#39; + id + &#39;&quot;&gt;&lt;/span&gt;&#39;;
                     // Set this in a timer because it may take a little time to update the dom
                     interval = setInterval(function(){
@@ -82,7 +80,7 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
                                 Ext.removeNode(el);
                             }
                     }, 50);
-                    dom.innerHTML = html.replace(/(?:&lt;script.*?&gt;)((\n|\r|.)*?)(?:&lt;\/script&gt;)/ig, &#39;&#39;);
+                    target.update(html.replace(/(?:&lt;script.*?&gt;)((\n|\r|.)*?)(?:&lt;\/script&gt;)/ig, &#39;&#39;));
                 } else {
                     target.update(html);
                 }

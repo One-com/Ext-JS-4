@@ -652,10 +652,10 @@ el.highlight(&quot;0000ff&quot;, { attr: &#39;color&#39;, duration: 2 });
 
 // common config options shown with default values
 el.highlight(&quot;ffff9c&quot;, {
-    attr: &quot;background-color&quot;, //can be any valid CSS property (attribute) that supports a color value
+    attr: &quot;backgroundColor&quot;, //can be any valid CSS property (attribute) that supports a color value
     endColor: (current color) or &quot;ffffff&quot;,
     easing: &#39;easeIn&#39;,
-    duration: 1
+    duration: 1000
 });
 <br><span style="display: none">/**</span>     * @param {String} color (optional) The highlight color. Should be a 6 char hex color without the leading # (defaults to yellow: &#39;ffff9c&#39;)
      * @param {Object} options (optional) Object literal with any of the Fx config options
@@ -665,38 +665,52 @@ el.highlight(&quot;ffff9c&quot;, {
         var me = this,
             dom = me.dom,
             from = {},
-            restore, to, attr;
+            restore, to, attr, lns, event, fn;
 
         o = o || {};
-        attr = o.attr || &quot;backgroundColor&quot;;
+        lns = o.listeners || {};
+        attr = o.attr || &#39;backgroundColor&#39;;
+        from[attr] = color || &#39;ffff9c&#39;;
+        
         if (!o.to) {
             to = {};
-            to[attr] = o.endColor || &quot;#ffff9c&quot;;
+            to[attr] = o.endColor || me.getColor(attr, &#39;ffffff&#39;, &#39;&#39;);
         }
         else {
             to = o.to;
         }
+        
+        // Don&#39;t apply directly on lns, since we reference it in our own callbacks below
+        o.listeners = Ext.apply(Ext.apply({}, lns), {
+            beforeanimate: function() {
+                restore = dom.style[attr];
+                me.clearOpacity();
+                me.show();
+                
+                event = lns.beforeanimate;
+                if (event) {
+                    fn = event.fn || event;
+                    return fn.apply(event.scope || lns.scope || window, arguments);
+                }
+            },
+            afteranimate: function() {
+                if (dom) {
+                    dom.style[attr] = restore;
+                }
+                
+                event = lns.afteranimate;
+                if (event) {
+                    fn = event.fn || event;
+                    fn.apply(event.scope || lns.scope || window, arguments);
+                }
+            }
+        });
 
         me.animate(Ext.apply({}, o, {
             duration: 1000,
             easing: &#39;ease-in&#39;,
-            to: to,
-            listeners: {
-                beforeanimate: {
-                    fn: function() {
-                        restore = dom.style[attr];
-                        me.clearOpacity();
-                        me.show();
-                    }
-                },
-                afteranimate: {
-                    fn: function() {
-                        if (dom) {
-                            dom.style[attr] = restore;
-                        }
-                    }
-                }
-            }
+            from: from,
+            to: to
         }));
         return me;
     }

@@ -1,5 +1,6 @@
 Ext.require([
-    'Ext.window.MessageBoxWindow'
+    'Ext.window.MessageBox',
+    'Ext.tip.*'
 ]);
 
 Ext.onReady(function(){

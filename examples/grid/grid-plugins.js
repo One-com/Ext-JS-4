@@ -79,7 +79,7 @@ Ext.onReady(function(){
 
     var grid1 = new Ext.grid.GridPanel({
         store: getLocalStore(),
-        headers: [
+        columns: [
             {text: "Company", flex: 1, dataIndex: 'company'},
             {text: "Price", renderer: Ext.util.Format.usMoney, dataIndex: 'price'},
             {text: "Change", dataIndex: 'change'},
@@ -109,7 +109,7 @@ Ext.onReady(function(){
     var grid2 = new Ext.grid.GridPanel({
         store: getLocalStore(),
         selModel: sm,
-        headers: [
+        columns: [
             {text: "Company", width: 200, dataIndex: 'company'},
             {text: "Price", renderer: Ext.util.Format.usMoney, dataIndex: 'price'},
             {text: "Change", dataIndex: 'change'},
@@ -130,7 +130,7 @@ Ext.onReady(function(){
     ////////////////////////////////////////////////////////////////////////////////////////
     var grid3 = new Ext.grid.GridPanel({
         store: getLocalStore(),
-        headers: [
+        columns: [
             new Ext.grid.RowNumberer(),
             {text: "Company", flex: 1, sortable: true, dataIndex: 'company'},
             {text: "Price", width: 120, sortable: true, renderer: Ext.util.Format.usMoney, dataIndex: 'price'},
@@ -152,7 +152,7 @@ Ext.onReady(function(){
     var grid4 = new Ext.grid.GridPanel({
         id:'button-grid',
         store: getLocalStore(),
-        headers: [
+        columns: [
             {text: "Company", flex: 1, sortable: true, dataIndex: 'company'},
             {text: "Price", width: 120, sortable: true, renderer: Ext.util.Format.usMoney, dataIndex: 'price'},
             {text: "Change", width: 120, sortable: true, dataIndex: 'change'},
@@ -162,26 +162,36 @@ Ext.onReady(function(){
         columnLines: true,
 
         // inline buttons
-        fbar: [{text:'Save'},{text:'Cancel'}],
-        buttonAlign:'center',
-
-        // inline toolbars
-        tbar:[{
-            text:'Add Something',
-            tooltip:'Add a new row',
-            iconCls:'add'
-        }, '-', {
-            text:'Options',
-            tooltip:'Blah blah blah blaht',
-            iconCls:'option'
-        },'-',{
-            text:'Remove Something',
-            tooltip:'Remove the selected item',
-            iconCls:'remove',
-
-            // Place a reference in the GridPanel
-            ref: '../removeButton',
-            disabled: true
+        dockedItems: [{
+            xtype: 'toolbar',
+            dock: 'bottom',
+            ui: 'footer',
+            layout: {
+                pack: 'center'
+            },
+            items: [{
+                minWidth: 80,
+                text: 'Save'
+            },{
+                minWidth: 80,
+                text: 'Cancel'
+            }]
+        }, {
+            xtype: 'toolbar',
+            items: [{
+                text:'Add Something',
+                tooltip:'Add a new row',
+                iconCls:'add'
+            }, '-', {
+                text:'Options',
+                tooltip:'Set options',
+                iconCls:'option'
+            },'-',{
+                text:'Remove Something',
+                tooltip:'Remove the selected item',
+                iconCls:'remove',
+                disabled: true
+            }]
         }],
 
         width: 600,

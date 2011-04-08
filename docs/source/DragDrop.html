@@ -985,7 +985,7 @@ Ext.define(&#39;Ext.dd.DragDrop&#39;, {
             }
         }
 
-        this.xTicks.sort(this.DDMInstance.numericSort) ;
+        Ext.Array.sort(this.xTicks, this.DDMInstance.numericSort);
     },
 
     /**
@@ -1014,7 +1014,7 @@ Ext.define(&#39;Ext.dd.DragDrop&#39;, {
             }
         }
 
-        this.yTicks.sort(this.DDMInstance.numericSort) ;
+        Ext.Array.sort(this.yTicks, this.DDMInstance.numericSort);
     },
 
     <a name="method-Ext.dd.DragDrop-setXConstraint"></a>/**

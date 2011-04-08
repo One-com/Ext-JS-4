@@ -10,7 +10,7 @@ Ext.define('Ext.ux.GroupTabPanel', {
     alias: 'widget.grouptabpanel',
     
     requires:[
-        'Ext.data.TreeStore',
+        'Ext.data.*',
         'Ext.tree.*',
         'Ext.layout.*'
     ],
@@ -48,10 +48,10 @@ Ext.define('Ext.ux.GroupTabPanel', {
             useArrows: true,
             animate: false,
             viewConfig: {
-                trackOver: false
+                overItemCls: ''
             },
-            headers: [{
-                xtype: 'treeheader',
+            columns: [{
+                xtype: 'treecolumn',
                 sortable: false,
                 dataIndex: 'text',
                 flex: 1,
@@ -289,6 +289,7 @@ Ext.define('Ext.ux.GroupTabPanel', {
         
        return new Ext.data.TreeStore({
             fields: ['id', 'text', 'activeGroup', 'activeTab'],
+            root: {expanded: true},
             proxy: {
                 type: 'memory',
                 data: data

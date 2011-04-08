@@ -43,7 +43,7 @@ Ext.define('FeedViewer.FeedGrid', {
                 }
             }),
             
-            headers: [{
+            columns: [{
                 text: 'Title',
                 dataIndex: 'title',
                 flex: 1,

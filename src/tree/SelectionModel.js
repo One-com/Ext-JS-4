@@ -25,7 +25,7 @@ Ext.define('Ext.tree.SelectionModel', {
             // tree node is already expanded, go down instead
             // this handles both the case where we navigate to firstChild and if
             // there are no children to the nextSibling
-            if (focused.expanded) {
+            if (focused.isExpanded()) {
                 this.onKeyDown(e, t);
             // if its not a leaf node, expand it
             } else if (!focused.isLeaf()) {
@@ -60,6 +60,23 @@ Ext.define('Ext.tree.SelectionModel', {
                     viewSm.select(parentNode);
                 }
             }
+        }
+    },
+    
+    onKeyPress: function(e, t) {
+        var selected, checked;
+        
+        if (e.getKey() === e.SPACE || e.getKey() === e.ENTER) {
+            e.stopEvent();
+            selected = this.getLastSelected();
+            if (selected && selected.isLeaf()) {
+                checked = selected.get('checked');
+                if (Ext.isBoolean(checked)) {
+                    selected.set('checked', !checked);
+                }
+            }
+        } else {
+            this.callParent(arguments);
         }
     }
 });

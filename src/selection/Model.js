@@ -170,24 +170,33 @@ Ext.define('Ext.selection.Model', {
     /**
      * Selects a range of rows if the selection model {@link #isLocked is not locked}.
      * All rows in between startRow and endRow are also selected.
-     * @param {Number} startRow The index of the first row in the range
-     * @param {Number} endRow The index of the last row in the range
+     * @param {Ext.data.Model/Number} startRow The record or index of the first row in the range
+     * @param {Ext.data.Model/Number} endRow The record or index of the last row in the range
      * @param {Boolean} keepExisting (optional) True to retain existing selections
      */
-    selectRange : function(startRecord, endRecord, keepExisting, dir){
+    selectRange : function(startRow, endRow, keepExisting, dir){
         var me = this,
             store = me.store,
-            startRow = store.indexOf(startRecord),
-            endRow = store.indexOf(endRecord),
             selectedCount = 0,
             i,
             tmp,
             dontDeselect;
-
+        
         if (me.isLocked()){
             return;
         }
-
+        
+        if (!keepExisting) {
+            me.clearSelections();
+        }
+        
+        if (!Ext.isNumber(startRow)) {
+            startRow = store.indexOf(startRow);
+        } 
+        if (!Ext.isNumber(endRow)) {
+            endRow = store.indexOf(endRow);
+        }
+        
         // swap values
         if (startRow > endRow){
             tmp = endRow;
@@ -353,11 +362,11 @@ Ext.define('Ext.selection.Model', {
      * Set a record as the last focused record. This does NOT mean
      * that the record has been selected.
      */
-    setLastFocused: function(record) {
+    setLastFocused: function(record, supressFocus) {
         var me = this,
             recordBeforeLast = me.lastFocused;
         me.lastFocused = record;
-        me.onLastFocusChanged(recordBeforeLast, record);
+        me.onLastFocusChanged(recordBeforeLast, record, supressFocus);
     },
     
     /**
@@ -477,7 +486,8 @@ Ext.define('Ext.selection.Model', {
         me.clearSelections();
         
         if (me.store.indexOf(lastFocused) !== -1) {
-            this.setLastFocused(lastFocused);
+            // restore the last focus but supress restoring focus
+            this.setLastFocused(lastFocused, true);
         }
 
         if (toBeSelected.length) {

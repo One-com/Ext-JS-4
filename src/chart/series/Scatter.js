@@ -58,6 +58,7 @@ Ext.define('Ext.chart.series.Scatter', {
     /* End Definitions */
 
     type: 'scatter',
+    alias: 'series.scatter',
 
     /**
      * @cfg {Object} markerCfg

@@ -45,10 +45,9 @@ Ext.onReady(function() {
                 fields = me.getForm().getFields();
                 errors = [];
                 fields.each(function(field) {
-                    var error = field.getErrors()[0];
-                    if (error) {
+                    Ext.Array.forEach(field.getErrors(), function(error) {
                         errors.push({name: field.getFieldLabel(), error: error});
-                    }
+                    });
                 });
                 errorCmp.setErrors(errors);
                 me.hasBeenDirty = true;
@@ -175,6 +174,7 @@ Ext.onReady(function() {
                             anchor: 'top',
                             mouseOffset: [-11, -2],
                             closable: true,
+                            constrainPosition: false,
                             cls: 'errors-tip'
                         });
                         tip.show();

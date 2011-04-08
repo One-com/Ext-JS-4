@@ -146,7 +146,7 @@ function getCombinationLayouts() {
                                      ],
                                      data: myData
                                  }),
-                                 headers: [
+                                 columns: [
                                      {
                                          text     : 'Company',
                                          flex     : 1,

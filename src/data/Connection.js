@@ -62,6 +62,10 @@ Ext.define('Ext.data.Connection', {
      * @cfg {Number} timeout (Optional) The timeout in milliseconds to be used for requests. (defaults to 30000)
      */
     timeout : 30000,
+    
+    /**
+     * @param {Object} extraParams (Optional) Any parameters to be appended to the request.
+     */
 
     useDefaultHeader : true,
     defaultPostHeader : 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -411,7 +415,7 @@ failure: function(response, opts) {
     setupOptions: function(options, scope){
         var me =  this,
             params = options.params || {},
-            extraParams = options.extraParams,
+            extraParams = me.extraParams,
             urlParams = options.urlParams,
             url = options.url || me.url,
             jsonData = options.jsonData,

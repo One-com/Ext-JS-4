@@ -70,7 +70,7 @@ Ext.define('Ext.layout.container.Border', {
     extend: 'Ext.layout.Container',
     requires: ['Ext.resizer.Splitter', 'Ext.container.Container', 'Ext.fx.Anim'],
     alternateClassName: 'Ext.layout.BorderLayout',
-    
+
     targetCls: Ext.baseCSSPrefix + 'border-layout-ct',
 
     itemCls: Ext.baseCSSPrefix + 'border-item',
@@ -509,8 +509,8 @@ Ext.define('Ext.layout.container.Border', {
                         }
                     } : null
                 };
-                // Hack for IE6/7's inability to display an inline-block
-                if ((Ext.isIE6 || Ext.isIE7) && !horiz) {
+                // Hack for IE6/7/IEQuirks's inability to display an inline-block
+                if ((Ext.isIE6 || Ext.isIE7 || (Ext.isIEQuirks)) && !horiz) {
                     placeHolder.width = 25;
                 }
                 placeHolder[horiz ? 'tools' : 'items'] = [{
@@ -630,7 +630,7 @@ Ext.define('Ext.layout.container.Border', {
             comp.fireEvent('collapse', comp);
         }
 
-        /**
+        /*
          * Set everything to the new positions. Note that we
          * only want to animate the collapse if it wasn't configured
          * initially with collapsed: true
@@ -947,7 +947,11 @@ Ext.define('Ext.layout.container.Border', {
      * Can't do this in onDestroy because they may remove a Component and use it elsewhere.
      */
     onRegionDestroy: function(comp) {
-        Ext.destroy(comp.placeHolder);
+        var placeHolder = comp.placeHolder;
+        if (placeHolder) {
+            delete placeHolder.ownerCt;
+            placeHolder.destroy();
+        }
     },
 
     /*
@@ -962,9 +966,11 @@ Ext.define('Ext.layout.container.Border', {
 
         if (shadowContainer) {
             delete shadowContainer.ownerCt;
+            Ext.destroy(shadowContainer);
         }
 
         if (embeddedContainer) {
+            delete embeddedContainer.ownerCt;
             Ext.destroy(embeddedContainer);
         }
         delete me.regions;

@@ -11,7 +11,8 @@ Ext.define('Ext.org.ImageView', {
         '<tpl for=".">',
             '<div class="thumb-wrap">',
                 '<div class="thumb">',
-                    '<img src="../view/chooser/icons/{thumb}" />',
+                    (!Ext.isIE6? '<img src="../view/chooser/icons/{thumb}" />' : 
+                    '<div style="width:76px;height:76px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'../view/chooser/icons/{thumb}\')"></div>'),
                 '</div>',
                 '<span>{name}</span>',
             '</div>',

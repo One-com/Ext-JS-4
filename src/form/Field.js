@@ -191,9 +191,12 @@ Ext.define('Ext.form.Field', {
      * See {@link Ext.form.Basic}.{@link Ext.form.Basic#trackResetOnLoad trackResetOnLoad}
      */
     reset : function(){
-        this.setValue(this.originalValue);
-        this.clearInvalid();
-        this.wasValid = true;
+        var me = this;
+        
+        me.setValue(me.originalValue);
+        me.clearInvalid();
+        // delete here so we reset back to the original state
+        delete me.wasValid;
     },
 
     /**
@@ -298,7 +301,7 @@ Ext.define('Ext.form.Field', {
      */
     isValid : function() {
         var me = this;
-        return me.disabled || me.getErrors().length === 0;
+        return me.disabled || Ext.isEmpty(me.getErrors());
     },
 
     /**

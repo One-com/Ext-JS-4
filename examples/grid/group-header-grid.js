@@ -83,14 +83,14 @@ Ext.onReady(function() {
     var grid = new Ext.grid.GridPanel({
         store: store,
         columnLines: true,
-        headers: [{
+        columns: [{
             text     : 'Company',
             flex     : 1,
             sortable : false, 
             dataIndex: 'company'
         }, {
             text: 'Stock Price',
-            headers: [{
+            columns: [{
                 text     : 'Price', 
                 width    : 75, 
                 sortable : true, 

@@ -10,7 +10,7 @@ Ext.require([
     'Ext.util.*',
     'Ext.state.*',
     'Ext.form.*',
-    'Ext.ux.CheckHeader'
+    'Ext.ux.CheckColumn'
 ]);
 
 Ext.onReady(function(){
@@ -64,7 +64,7 @@ Ext.onReady(function(){
     // to use for the editor at each header.
     var grid = new Ext.grid.GridPanel({
         store: store,
-        headers: [{
+        columns: [{
             id: 'common',
             header: 'Common Name',
             dataIndex: 'common',
@@ -115,7 +115,7 @@ Ext.onReady(function(){
                 disabledDaysText: 'Plants are not available on the weekends'
             }
         }, {
-            xtype: 'checkheader',
+            xtype: 'checkcolumn',
             header: 'Indoor?',
             dataIndex: 'indoor',
             width: 55

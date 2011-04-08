@@ -117,7 +117,7 @@ Ext.define('Ext.tip.QuickTip', {
             e.preventDefault();
         }else{
             cfg = this.tagConfig;
-            ttp = t.qtip || Ext.fly(t).getAttribute(cfg.attribute, cfg.namespace);
+            ttp = t[cfg.attribute] || Ext.fly(t).getAttribute(cfg.attribute, cfg.namespace);
         }
         return ttp;
     },

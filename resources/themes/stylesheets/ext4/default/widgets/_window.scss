@@ -3,6 +3,9 @@
         outline: none;
         border-color: $window-border-color;
         @include inner-border($window-inner-border-width, $window-inner-border-color);
+        
+        @include border-radius($window-border-radius);
+        
         .#{$prefix}window-wrap {
             position: relative;
 
@@ -74,7 +77,7 @@
         .#{$prefix}window-header-left {
             padding: 5px 0px 5px 0px;
         }
-}
+    }
 
     .#{$prefix}window-header {
         border-color: $window-border-color;

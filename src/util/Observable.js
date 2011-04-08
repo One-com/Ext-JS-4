@@ -518,7 +518,7 @@ this.addEvents('storeloaded', 'storecleared');
             oldName,
             newName;
 
-        for(; i < len; i++){
+        for (; i < len; i++) {
             oldName = events[i].substr(prefix.length);
             newName = prefix + oldName;
             me.events[newName] = me.events[newName] || true;

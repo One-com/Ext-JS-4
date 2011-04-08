@@ -238,7 +238,7 @@ Ext.define('Ext.data.WebStorageProxy', {
             }
         }
 
-        obj = me.getStorageObject(),
+        obj = me.getStorageObject();
         key = me.getRecordKey(id);
         
         //keep the cache up to date
@@ -343,10 +343,10 @@ Ext.define('Ext.data.WebStorageProxy', {
     getNextId: function() {
         var obj  = this.getStorageObject(),
             key  = this.getRecordCounterKey(),
-            last = obj[key],
+            last = obj.getItem(key),
             ids, id;
         
-        if (!Ext.isNumber(last)) {
+        if (last === null) {
             ids = this.getIds();
             last = ids[ids.length - 1] || 0;
         }

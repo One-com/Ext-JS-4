@@ -3,7 +3,6 @@ Ext.define('Ext.grid.CellEditor', {
     constructor: function(config) {
         if (config.field) {
             config.field.monitorTab = false;
-            config.field.hideLabel = true;
         }
         config.autoSize = {
             width: 'boundEl'

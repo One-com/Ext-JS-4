@@ -63,15 +63,10 @@
         )));
     } @else if $type == grid-cell-special {
         @include background-image(linear-gradient(left, color_stops(
-            adjust-color($base-color, $hue: 0deg, $saturation: -55.556%, $lightness: 13.529%),
-            adjust-color($base-color, $hue: 220.0deg, $saturation: -47.447%, $lightness: 8.627%)
+            $bg-color,
+            darken($bg-color, 5)
         )));
-    } @else if $type == grid-cell-special-over {
-        @include background-image(linear-gradient(left, color_stops(
-            adjust-color($base-color, $hue: 0.0deg, $saturation: 26.263%, $lightness: 11.569%),
-            $bg-color
-        )));
-    } @else if $type == glossy-button {
+    } @else if $type == glossy-button or $type == glossy-button-disabled {
         @include background-image(linear-gradient($direction, color_stops(
             $bg-color,
             adjust-color($bg-color, $hue: 0deg, $saturation: 0%, $lightness: -2.353%) 48%,

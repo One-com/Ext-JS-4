@@ -51,7 +51,7 @@ Ext.define('Ext.layout.container.AbstractCard', {
     beforeLayout: function() {
         var me = this;
         me.activeItem = me.getActiveItem();
-        if (me.deferredRender) {
+        if (me.activeItem && me.deferredRender) {
             me.renderItems([me.activeItem], me.getRenderTarget());
             return true;
         }
@@ -110,7 +110,7 @@ Ext.define('Ext.layout.container.AbstractCard', {
         if (item && item.isComponent) {
             return item;
         }
-        else if (typeof item == 'number' || item == undefined) {
+        else if (typeof item == 'number' || item === undefined) {
             return this.getLayoutItems()[item || 0];
         }
         else {
@@ -132,7 +132,7 @@ Ext.define('Ext.layout.container.AbstractCard', {
     onRemove: function(component) {
         if (component === this.activeItem) {
             this.activeItem = null;
-            if (this.owner.items.getCount() == 0) {
+            if (this.owner.items.getCount() === 0) {
                 this.firstActivated = false;
             }
         }

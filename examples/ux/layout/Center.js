@@ -15,7 +15,7 @@ var p = new Ext.Panel({
     layout: 'ux.center',
     items: [{
         title: 'Centered Content',
-        flex: 0.75,
+        widthRatio: 0.75,
         html: 'Some content'
     }]
 });
@@ -45,8 +45,8 @@ Ext.define('Ext.ux.layout.Center', {
         if(item && height > 0) {
             if (width) {
                 width = item.width;
-                if (Ext.isNumber(item.flex)) {
-                    width = this.owner.el.getWidth() * item.flex;
+                if (Ext.isNumber(item.widthRatio)) {
+                    width = Math.round(this.owner.el.getWidth() * item.widthRatio);
                 }
             } 
             item.setSize(width, height);

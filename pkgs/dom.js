@@ -3093,7 +3093,7 @@ Ext.core.Element.addMethods({
          */
         getColor : function(attr, defaultValue, prefix){
             var v = this.getStyle(attr),
-                color = prefix === 'undefined' ? prefix : '#',
+                color = prefix || prefix === '' ? prefix : '#',
                 h;
 
             if(!v || (/transparent|inherit/.test(v))) {
@@ -3151,22 +3151,31 @@ Ext.core.Element.addMethods({
          * the default animation (<tt>{duration: .35, easing: 'easeIn'}</tt>)
          * @return {Ext.core.Element} this
          */
-         setOpacity : function(opacity, animate){
+        setOpacity: function(opacity, animate) {
             var me = this,
-                s = me.dom.style,
-                val;
+                dom = me.dom,
+                val,
+                style;
 
-            if(!animate || !me.anim){
-                if(!Ext.supports.Opacity){
-                    opacity = opacity < 1 ? 'alpha(opacity=' + opacity * 100 + ')' : '';
-                    val = s.filter.replace(opacityRe, '').replace(trimRe, '');
+            if (!me.dom) {
+                return me;
+            }
 
-                    s.zoom = 1;
-                    s.filter = val + (val.length > 0 ? ' ' : '') + opacity;
-                }else{
-                    s.opacity = opacity;
+            style = me.dom.style;
+
+            if (!animate || !me.anim) {
+                if (!Ext.supports.Opacity) {
+                    opacity = opacity < 1 ? 'alpha(opacity=' + opacity * 100 + ')': '';
+                    val = style.filter.replace(opacityRe, '').replace(trimRe, '');
+
+                    style.zoom = 1;
+                    style.filter = val + (val.length > 0 ? ' ': '') + opacity;
                 }
-            }else{
+                else {
+                    style.opacity = opacity;
+                }
+            }
+            else {
                 if (!Ext.isObject(animate)) {
                     animate = {
                         duration: 350,
@@ -3177,10 +3186,12 @@ Ext.core.Element.addMethods({
                     to: {
                         opacity: opacity
                     }
-                }, animate));
+                },
+                animate));
             }
             return me;
         },
+
 
         /**
          * Clears any opacity settings from this element. Required in some cases for IE.
@@ -4731,10 +4742,10 @@ el.highlight("0000ff", { attr: 'color', duration: 2 });
 
 // common config options shown with default values
 el.highlight("ffff9c", {
-    attr: "background-color", //can be any valid CSS property (attribute) that supports a color value
+    attr: "backgroundColor", //can be any valid CSS property (attribute) that supports a color value
     endColor: (current color) or "ffffff",
     easing: 'easeIn',
-    duration: 1
+    duration: 1000
 });
 </code></pre>
      * @param {String} color (optional) The highlight color. Should be a 6 char hex color without the leading # (defaults to yellow: 'ffff9c')
@@ -4745,38 +4756,52 @@ el.highlight("ffff9c", {
         var me = this,
             dom = me.dom,
             from = {},
-            restore, to, attr;
+            restore, to, attr, lns, event, fn;
 
         o = o || {};
-        attr = o.attr || "backgroundColor";
+        lns = o.listeners || {};
+        attr = o.attr || 'backgroundColor';
+        from[attr] = color || 'ffff9c';
+        
         if (!o.to) {
             to = {};
-            to[attr] = o.endColor || "#ffff9c";
+            to[attr] = o.endColor || me.getColor(attr, 'ffffff', '');
         }
         else {
             to = o.to;
         }
+        
+        // Don't apply directly on lns, since we reference it in our own callbacks below
+        o.listeners = Ext.apply(Ext.apply({}, lns), {
+            beforeanimate: function() {
+                restore = dom.style[attr];
+                me.clearOpacity();
+                me.show();
+                
+                event = lns.beforeanimate;
+                if (event) {
+                    fn = event.fn || event;
+                    return fn.apply(event.scope || lns.scope || window, arguments);
+                }
+            },
+            afteranimate: function() {
+                if (dom) {
+                    dom.style[attr] = restore;
+                }
+                
+                event = lns.afteranimate;
+                if (event) {
+                    fn = event.fn || event;
+                    fn.apply(event.scope || lns.scope || window, arguments);
+                }
+            }
+        });
 
         me.animate(Ext.apply({}, o, {
             duration: 1000,
             easing: 'ease-in',
-            to: to,
-            listeners: {
-                beforeanimate: {
-                    fn: function() {
-                        restore = dom.style[attr];
-                        me.clearOpacity();
-                        me.show();
-                    }
-                },
-                afteranimate: {
-                    fn: function() {
-                        if (dom) {
-                            dom.style[attr] = restore;
-                        }
-                    }
-                }
-            }
+            from: from,
+            to: to
         }));
         return me;
     }
@@ -5448,14 +5473,16 @@ Ext.require('Ext.util.DelayedTask', function() {
                     },
                     handler = fn;
 
+                // The order is important. The 'single' wrapper must be wrapped by the 'buffer' and 'delayed' wrapper
+                // because the event removal that the single listener does destroys the listener's DelayedTask(s)
+                if (o.single) {
+                    handler = createSingle(handler, listener, o, scope);
+                }
                 if (o.delay) {
                     handler = createDelayed(handler, listener, o, scope);
                 }
                 if (o.buffer) {
                     handler = createBuffered(handler, listener, o, scope);
-                }
-                if (o.single) {
-                    handler = createSingle(handler, listener, o, scope);
                 }
 
                 listener.fireFn = handler;
@@ -5810,7 +5837,7 @@ Ext.EventManager = {
                 fn = Ext.Function.createInterceptor(fn, this.contains, this);
             }
             eventName = eventName == 'mouseenter' ? 'mouseover' : 'mouseout';
-        } else if (eventName == 'mousewheel' && !Ext.supports.MouseWheel){
+        } else if (eventName == 'mousewheel' && !Ext.supports.MouseWheel && !Ext.isOpera){
             eventName = 'DOMMouseScroll';
         }
         return {
@@ -8274,11 +8301,14 @@ Ext.override(Ext.core.Element, {
      * @return {Region} A Ext.util.Region containing "top, left, bottom, right" member data.
      */
     getViewRegion: function() {
-        var pos = this.getXY(),
-            top = pos[1] + this.getBorderWidth('t') + this.getPadding('t'),
-            left = pos[0] + this.getBorderWidth('l') + this.getPadding('l');
+        var isBody = this.dom === document.body,
+            pos = isBody ? [0, 0] : this.getXY(),
+            top = pos[1] + (isBody ?  0 : this.getBorderWidth('t') + this.getPadding('t')),
+            left = pos[0] + (isBody ? 0 : this.getBorderWidth('l') + this.getPadding('l')),
+            width = isBody ? Ext.core.Element.getViewportWidth() : this.getWidth(true),
+            height = isBody ? Ext.core.Element.getViewportHeight() : this.getHeight(true);
         
-        return new Ext.util.Region(top, left + this.getWidth(true), top + this.getHeight(true), left);
+        return new Ext.util.Region(top, left + width, top + height, left);
     },
 
     /**
@@ -8667,13 +8697,21 @@ Ext.core.Element.addMethods(
                 }
             },
             /**
-             * Returns true if this element is masked
+             * Returns true if this element is masked. Also re-centers any displayed message within the mask.
              * @return {Boolean}
              */
             isMasked : function() {
-                var m = data(this.dom, 'mask');
-                // force to bool
-                return !!(m && m.isVisible());
+                var me = this,
+                    mask = data(me.dom, 'mask'),
+                    maskMsg = data(me.dom, 'maskMsg');
+
+                if (mask && mask.isVisible()) {
+                    if (maskMsg) {
+                        maskMsg.center(me);
+                    }
+                    return true;
+                }
+                return false;
             },
 
             /**

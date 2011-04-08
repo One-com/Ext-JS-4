@@ -77,7 +77,7 @@ Ext.define('Ext.chart.series.Series', {
         });
         
         me.shadowGroups = [];
-
+        
         me.mixins.labels.constructor.call(me, config);
         me.mixins.highlights.constructor.call(me, config);
         me.mixins.tips.constructor.call(me, config);
@@ -198,12 +198,10 @@ Ext.define('Ext.chart.series.Series', {
             items = me.items,
             bbox = me.bbox,
             item, i, ln;
-
         // Check bounds
         if (!Ext.draw.Draw.withinBox(x, y, bbox)) {
             return null;
         }
-        
         for (i = 0, ln = items.length; i < ln; i++) {
             if (items[i] && this.isItemInPoint(x, y, items[i], i)) {
                 return items[i];

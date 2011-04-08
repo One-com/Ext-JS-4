@@ -97,8 +97,9 @@ Ext.define(&#39;Ext.container.ButtonGroup&#39;, {
 
         // Pugly hack for a pugly browser:
         // If not an explicitly set width, then size the width to match the inner table
-        if (this.layout.table &amp;&amp; (!Ext.isStrict || Ext.isIE6) &amp;&amp; !this.width) {
-            this.el.setWidth(this.layout.table.offsetWidth + this.frameSize.left + this.frameSize.right);
+        if (this.layout.table &amp;&amp; (Ext.isIEQuirks || Ext.isIE6) &amp;&amp; !this.width) {
+            var t = this.getTargetEl();
+            t.setWidth(this.layout.table.offsetWidth + t.getPadding(&#39;lr&#39;));
         }
     },
 

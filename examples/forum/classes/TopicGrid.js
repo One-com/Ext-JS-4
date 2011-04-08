@@ -41,7 +41,7 @@ Ext.define('ForumBrowser.TopicGrid', {
                     select: this.onSelect
                 }    
             }),
-            headers: [
+            columns: [
             {
                 header: 'Topic',
                 dataIndex: 'title',

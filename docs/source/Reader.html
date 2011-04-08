@@ -140,9 +140,10 @@ Ext.define(&#39;Ext.data.Reader&#39;, {
     
     <a name="cfg-Ext.data.Reader-idProperty"></a>/**
      * @cfg {String} idProperty Name of the property within a row object
-     * that contains a record identifier value.  Defaults to &lt;tt&gt;id&lt;/tt&gt;
+     * that contains a record identifier value.  Defaults to &lt;tt&gt;The id of the model&lt;/tt&gt;.
+     * If an idProperty is explicitly specified it will override that of the one specified
+     * on the model
      */
-    idProperty: &#39;id&#39;,
 
     <a name="cfg-Ext.data.Reader-totalProperty"></a>/**
      * @cfg {String} totalProperty Name of the property from which to
@@ -184,7 +185,7 @@ Ext.define(&#39;Ext.data.Reader&#39;, {
     
     constructor: function(config) {
         Ext.apply(this, config || {});
-
+        
         this.model = Ext.ModelMgr.getModel(config.model);
         if (this.model) {
             this.buildExtractors();
@@ -303,7 +304,7 @@ Ext.define(&#39;Ext.data.Reader&#39;, {
             Model   = me.model,
             i       = 0,
             length  = root.length,
-            idProp  = me.idProperty,
+            idProp  = me.idProperty || Model.prototype.idProperty,
             node, id, record;
             
         if (!root.length &amp;&amp; Ext.isObject(root)) {
@@ -460,7 +461,7 @@ Ext.define(&#39;Ext.data.Reader&#39;, {
      */
     buildExtractors: function(force) {
         var me          = this,
-            idProp      = me.id || me.idProperty,
+            idProp      = me.idProperty || me.model.prototype.idProperty,
             totalProp   = me.totalProperty,
             successProp = me.successProperty,
             messageProp = me.messageProperty,

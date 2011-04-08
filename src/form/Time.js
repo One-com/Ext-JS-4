@@ -145,6 +145,18 @@ Ext.define('Ext.form.Time', {
         Ext.form.Time.superclass.initComponent.call(me);
     },
 
+    initValue: function() {
+        var me = this,
+            value = me.value;
+
+        // If a String value was supplied, try to convert it to a proper Date object
+        if (Ext.isString(value)) {
+            me.value = me.rawToValue(value);
+        }
+
+        me.callParent();
+    },
+
     /**
      * Replaces any existing {@link #minValue} with the new time and refreshes the picker's range.
      * @param {Date/String} value The minimum time that can be selected
@@ -193,7 +205,7 @@ Ext.define('Ext.form.Time', {
     },
 
     rawToValue: function(rawValue) {
-        return this.parseDate(rawValue) || null;
+        return this.parseDate(rawValue) || rawValue || null;
     },
 
     valueToRaw: function(value) {
@@ -211,7 +223,7 @@ Ext.define('Ext.form.Time', {
     getErrors: function(value) {
         var me = this,
             format = Ext.String.format,
-            errors = Ext.form.Time.superclass.getErrors.apply(me, arguments),
+            errors = me.callParent(arguments),
             minValue = me.minValue,
             maxValue = me.maxValue,
             date;
@@ -293,10 +305,9 @@ Ext.define('Ext.form.Time', {
     getSubmitValue: function() {
         var me = this,
             format = me.submitFormat || me.format,
-            value = me.getValue(),
-            submitValue = value ? Ext.Date.format(value, format) : null;
+            value = me.getValue();
             
-        return (me.disabled || !me.submitValue) ? null : submitValue;
+        return value ? Ext.Date.format(value, format) : null;
     },
 
     /**
@@ -332,11 +343,12 @@ Ext.define('Ext.form.Time', {
     /**
      * @private
      * Enables the key nav for the Time picker when it is expanded.
-     * TODO this is exactly the same logic as ComboBox, should factor out.
+     * TODO this is largely the same logic as ComboBox, should factor out.
      */
     onExpand: function() {
         var me = this,
             keyNav = me.pickerKeyNav,
+            selectOnTab = me.selectOnTab,
             picker = me.getPicker(),
             lastSelected = picker.getSelectionModel().lastSelected,
             itemNode;
@@ -344,9 +356,20 @@ Ext.define('Ext.form.Time', {
         if (!keyNav) {
             keyNav = me.pickerKeyNav = new Ext.view.BoundListKeyNav(this.inputEl, {
                 boundList: picker,
-                selectOnTab: me.selectOnTab,
-                forceKeyDown: true
+                forceKeyDown: true,
+                tab: function(e) {
+                    if (selectOnTab) {
+                        this.selectHighlighted(e);
+                        me.triggerBlur();
+                    }
+                    // Tab key event is allowed to propagate to field
+                    return true;
+                }
             });
+            // stop tab monitoring from Ext.form.Trigger so it doesn't short-circuit selectOnTab
+            if (selectOnTab) {
+                me.ignoreMonitorTab = true;
+            }
         }
         Ext.defer(keyNav.enable, 1, keyNav); //wait a bit so it doesn't react to the down arrow opening the picker
 
@@ -365,9 +388,11 @@ Ext.define('Ext.form.Time', {
      * Disables the key nav for the Time picker when it is collapsed.
      */
     onCollapse: function() {
-        var keyNav = this.pickerKeyNav;
+        var me = this,
+            keyNav = me.pickerKeyNav;
         if (keyNav) {
             keyNav.disable();
+            me.ignoreMonitorTab = false;
         }
     },
 

@@ -8,7 +8,7 @@ Ext.require([
 ]);
 
 Ext.onReady(function() {
-    var tabCount = 3;
+    var tabCount = 4;
 
     var tabPanel = Ext.create('Ext.tab.TabPanel', {
         renderTo: Ext.getBody(),
@@ -19,18 +19,30 @@ Ext.onReady(function() {
         plugins: Ext.create('Ext.ux.TabReorderer'),
         items: [{
             xtype: 'panel',
-            title: 'First Panel',
+            title: 'Tab 1',
             html : 'Test 1',
             closable: true
         }, {
             xtype: 'panel',
-            title: 'Second Panel',
+            title: 'Tab 2',
             html : 'Test 2',
             closable: true
         }, {
             xtype: 'panel',
-            title: 'Third Panel',
-            html : 'Test 3: Reorderable set to false',
+            title: 'Tab 3',
+            html : 'Test 3',
+            closable: true
+        }, {
+            xtype: 'panel',
+            title: 'Non Reorderable',
+            html : "I can't be moved",
+            reorderable: false,
+            closable: true
+        
+        },{
+            xtype: 'panel',
+            title: 'Tab 4',
+            html : 'Test 4',
             closable: true
         }],
 

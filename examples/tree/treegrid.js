@@ -40,15 +40,15 @@ Ext.onReady(function() {
         multiSelect: true,
         singleExpand: true,
         //the 'columns' property is now 'headers'
-        headers: [{
-            xtype: 'treeheader', //this is so we know which column will show the tree
+        columns: [{
+            xtype: 'treecolumn', //this is so we know which column will show the tree
             text: 'Task',
             flex: 2,
             sortable: true,
             dataIndex: 'task'
         },{
             //we must use the templateheader component so we can use a custom tpl
-            xtype: 'templateheader',
+            xtype: 'templatecolumn',
             text: 'Duration',
             flex: 1,
             sortable: true,

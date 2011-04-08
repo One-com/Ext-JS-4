@@ -42,25 +42,36 @@ Ext.define('Ext.layout.Component', {
     beforeLayout : function(width, height, isSetSize, layoutOwner) {
         this.callParent(arguments);
 
-        var owner = this.owner,
+        var me = this,
+            owner = me.owner,
             ownerCt = owner.ownerCt,
+            layout = owner.layout,
             isVisible = owner.isVisible(true),
             ownerElChild = owner.el.child,
             layoutCollection;
 
         /**
         * Do not layout calculatedSized components for fixedLayouts unless the ownerCt == layoutOwner
+        * fixedLayouts means layouts which are never auto/auto in the sizing that comes from their ownerCt.
+        * Currently 3 layouts MAY be auto/auto (Auto, Border, and Box)
+        * The reason for not allowing component layouts is to stop component layouts from things such as Updater
+        * Heavily used in form Validation currently.
         */
-        if (!isSetSize && ownerCt && ownerCt.layout && ownerCt.layout.fixedLayout && ownerCt != layoutOwner) {
-            ownerCt.layout.bindToOwnerCtComponent = true;
+        if (!isSetSize && !me.childrenChanged && ownerCt && ownerCt.layout && ownerCt.layout.fixedLayout && ownerCt != layoutOwner) {
+            if (!owner.suspendLayout && layout && layout.isLayout && !layout.layoutBusy) {
+                layout.layout();
+            }
             return false;
         }
 
         // If an ownerCt is hidden, add my reference onto the layoutOnShow stack.  Set the needsLayout flag.
-        if (!isVisible && owner.hiddenAncestor) {
-            layoutCollection = owner.hiddenAncestor.layoutOnShow;
-            layoutCollection.remove(owner);
-            layoutCollection.add(owner);
+        // If the owner itself is a directly hidden floater, set the needsLayout object on that for when it is shown.
+        if (!isVisible && (owner.hiddenAncestor || owner.floating)) {
+            if (owner.hiddenAncestor) {
+                layoutCollection = owner.hiddenAncestor.layoutOnShow;
+                layoutCollection.remove(owner);
+                layoutCollection.add(owner);
+            }
             owner.needsLayout = {
                 width: width,
                 height: height,
@@ -69,8 +80,8 @@ Ext.define('Ext.layout.Component', {
         }
 
         if (isVisible && this.needsLayout(width, height)) {
-            this.rawWidth = width;
-            this.rawHeight = height;
+            me.rawWidth = width;
+            me.rawHeight = height;
             return true;
         }
         else {
@@ -151,6 +162,11 @@ Ext.define('Ext.layout.Component', {
             );
         }
 
+        me.autoSized = {
+            width: !Ext.isNumber(width),
+            height: !Ext.isNumber(height)
+        };
+
         me.lastComponentSize = {
             width: width,
             height: height
@@ -186,34 +202,44 @@ Ext.define('Ext.layout.Component', {
         return this.targetInfo;
     },
 
-    afterLayout : function(width, height, isSetSize, ownerCt) {
+    doOwnerCtLayouts: function() {
         var owner = this.owner,
-            layout = owner.layout,
             ownerCt = owner.ownerCt,
-            ownerCtSize, activeSize, ownerSize;
+            ownerComponentLayout, ownerContainerLayout;
 
-        owner.afterComponentLayout(this.rawWidth, this.rawHeight, isSetSize);
+        if (!ownerCt) {
+            return;
+        }
+
+        ownerComponentLayout = ownerCt.componentLayout;
+        ownerContainerLayout = ownerCt.layout;
+
+        if (!owner.floating && ownerComponentLayout && ownerComponentLayout.monitorChildren && !ownerComponentLayout.layoutBusy) {
+            ownerComponentLayout.childrenChanged = true;
+
+            if (!ownerCt.suspendLayout && ownerContainerLayout && !ownerContainerLayout.layoutBusy) {
+                // AutoContainer Layout and Dock with auto in some dimension
+                if (ownerContainerLayout.bindToOwnerCtComponent === true) {
+                    ownerCt.doComponentLayout();
+                }
+                // Box Layouts
+                else if (ownerContainerLayout.bindToOwnerCtContainer === true) {
+                    ownerContainerLayout.layout();
+                }
+            }
+        }
+    },
+
+    afterLayout : function(width, height, isSetSize, layoutOwner) {
+        var me = this,
+            owner = me.owner,
+            layout = owner.layout;
 
         // Run the container layout if it exists (layout for child items)
         // **Unless automatic laying out is suspended, or the layout is currently running**
         if (!owner.suspendLayout && layout && layout.isLayout && !layout.layoutBusy) {
             layout.layout();
         }
-
-        if (!owner.floating && ownerCt && ownerCt.componentLayout && ownerCt.componentLayout.monitorChildren && !ownerCt.componentLayout.layoutBusy) {
-            ownerCt.componentLayout.childrenChanged = true;
-
-            if (ownerCt.componentLayout.bindToOwnerCtComponent === true) {
-                ownerCt.doComponentLayout();
-            }
-            else if (!ownerCt.suspendLayout && ownerCt.layout && !ownerCt.layout.layoutBusy) {
-                if (ownerCt.layout.bindToOwnerCtComponent === true) {
-                    ownerCt.doComponentLayout();
-                }
-                else if (ownerCt.componentLayout.bindToOwnerCtContainer === true || ownerCt.layout.bindToOwnerCtContainer === true) {
-                    ownerCt.layout.layout();
-                }
-            }
-        }
+        owner.afterComponentLayout(width, height, isSetSize, layoutOwner);
     }
 });

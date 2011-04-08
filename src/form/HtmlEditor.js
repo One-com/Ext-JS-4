@@ -237,12 +237,14 @@ Ext.define('Ext.form.HtmlEditor', {
                     if (selectEl) {
                         selectEl.dom.disabled = true;
                     }
+                    Ext.Component.superclass.onDisable.apply(arguments);
                 },
                 onEnable: function() {
                     var selectEl = this.selectEl;
                     if (selectEl) {
                         selectEl.dom.disabled = false;
                     }
+                    Ext.Component.superclass.onEnable.apply(arguments);
                 }
             });
 
@@ -401,20 +403,29 @@ Ext.define('Ext.form.HtmlEditor', {
      */
     setReadOnly: function(readOnly) {
         var me = this,
+            textareaEl = me.textareaEl,
+            iframeEl = me.iframeEl,
             body;
 
         me.readOnly = readOnly;
+
+        if (textareaEl) {
+            textareaEl.dom.readOnly = readOnly;
+        }
+
         if (me.initialized) {
+            body = me.getEditorBody();
             if (Ext.isIE) {
-                me.getEditorBody().contentEditable = !readOnly;
+                // Hide the iframe while setting contentEditable so it doesn't grab focus
+                iframeEl.setDisplayed(false);
+                body.contentEditable = !readOnly;
+                iframeEl.setDisplayed(true);
             } else {
                 me.setDesignMode(!readOnly);
             }
-            body = me.getEditorBody();
             if (body) {
                 body.style.cursor = readOnly ? 'default' : 'text';
             }
-            me.textareaEl.dom.readOnly = readOnly;
             me.disableItems(readOnly);
         }
     },
@@ -424,7 +435,10 @@ Ext.define('Ext.form.HtmlEditor', {
      * is called when the editor initializes the iframe with HTML contents. Override this method if you
      * want to change the initialization markup of the iframe (e.g. to add stylesheets).
      *
-     * Note: IE8-Standards has unwanted scroller behavior, so the default meta tag forces IE7 compatibility
+     * Note: IE8-Standards has unwanted scroller behavior, so the default meta tag forces IE7 compatibility.
+     * Also note that forcing IE7 mode works when the page is loaded normally, but if you are using IE's Web
+     * Developer Tools to manually set the document mode, that will take precedence and override what this
+     * code sets by default. This can be confusing when developing, but is not a user-facing issue.
      */
     getDocMarkup: function() {
         var me = this,
@@ -617,12 +631,17 @@ Ext.define('Ext.form.HtmlEditor', {
             this.relayCmd('createlink', url);
         }
     },
+    
+    clearInvalid: Ext.emptyFn,
 
     // docs inherit from Field
     setValue: function(value) {
         var me = this,
             textarea = me.textareaEl;
         me.mixins.field.setValue.call(me, value);
+        if (value === null || value === undefined) {
+            value = '';
+        }
         if (textarea) {
             textarea.dom.value = value;
         }

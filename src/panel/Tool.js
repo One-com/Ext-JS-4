@@ -1,6 +1,7 @@
 /**
  * @class Ext.panel.Tool
  * @extends Ext.Component
+ * 
  * @xtype tool
  */
 Ext.define('Ext.panel.Tool', {

@@ -72,14 +72,14 @@ Ext.define('Ext.layout.component.AbstractDock', {
             if ((height === undefined || height === null) && (width === undefined || width === null)) {
                 autoHeight = true;
                 autoWidth = true;
-                me.setTargetSize(null, null);
+                me.setTargetSize(null);
                 me.setBodyBox({width: null, height: null});
             }
             // Auto-height
             else if (height === undefined || height === null) {
                 autoHeight = true;
                 // Clear any sizing that we already set in a previous layout
-                me.setTargetSize(width, null);
+                me.setTargetSize(width);
                 me.setBodyBox({width: width - padding.left - border.left - padding.right - border.right - frameSize.left - frameSize.right, height: null});
             // Auto-width
             }
@@ -495,6 +495,45 @@ Ext.define('Ext.layout.component.AbstractDock', {
         }
         return result;
     },
+    
+    /**
+     * @protected
+     * Render the top and left docked items before any existing DOM nodes in our render target,
+     * and then render the right and bottom docked items after. This is important, for such things
+     * as tab stops and ARIA readers, that the DOM nodes are in a meaningful order.
+     * Our collection of docked items will already be ordered via Panel.getDockedItems().
+     */
+    renderItems: function(items, target) {
+        var ln = items.length,
+            domLn = target.dom.childNodes.length,
+            i = 0,
+            j = 0,
+            item;
+
+        for (; i < ln; i++, j++) {
+            item = items[i];
+            
+            // If we're now at the right/bottom docked item, we jump ahead in our
+            // DOM position, just past the existing DOM nodes.
+            //
+            // TODO: This is affected if users provide custom weight values to their
+            // docked items, which puts it out of (t,l,r,b) order. Avoiding a second
+            // sort operation here, for now, in the name of performance. getDockedItems()
+            // needs the sort operation not just for this layout-time rendering, but
+            // also for getRefItems() to return a logical ordering (FocusManager, CQ, et al).
+            if (i === j && (item.dock === 'right' || item.dock === 'bottom')) {
+                j += domLn;
+            }
+            
+            // Same logic as Layout.renderItems()
+            if (item && !item.rendered) {
+                this.renderItem(item, target, j);
+            }
+            else if (!this.isValidParent(item, target, j)) {
+                this.moveItem(item, target, j);
+            }
+        }
+    },
 
     /**
      * @protected
@@ -560,7 +599,6 @@ Ext.define('Ext.layout.component.AbstractDock', {
         if (dom) {
             dom.parentNode.removeChild(dom);
         }
-
         this.childrenChanged = true;
     }
 });

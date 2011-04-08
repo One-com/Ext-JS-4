@@ -52,7 +52,7 @@ Ext.onReady(function(){
         title: 'Users',
         store: store,
         iconCls: 'icon-user',
-        headers: [{
+        columns: [{
             text: 'ID',
             width: 40,
             sortable: true,

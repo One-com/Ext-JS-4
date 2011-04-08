@@ -926,7 +926,7 @@ Ext.define('Ext.draw.Draw', {
             }
         }
         // Sort by pct property
-        stopsArr.sort(me.sorter);
+        Ext.Array.sort(stopsArr, me.sorter);
         if (type == 'linear') {
             return {
                 id: gradient.id,

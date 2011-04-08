@@ -89,7 +89,7 @@ Ext.onReady(function() {
     Ext.create('Ext.ux.LiveSearchGridPanel', {
         store: store,
         columnLines: true,
-        headers: [
+        columns: [
             {
                 text     : 'Company',
                 flex     : 1,

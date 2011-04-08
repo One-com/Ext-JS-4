@@ -85,7 +85,7 @@
         .#{$prefix}nlg {
             .#{$prefix}#{$cls-ui}-mc {
                 @if $background-gradient != null {
-                    background-image: theme-image($theme-name, '#{$cls}/#{$cls-ui}-bg.png');
+                    background-image: theme-image($theme-name, '#{$cls}/#{$cls-ui}-bg.gif');
                 }
                 @if $background-color != null {
                     background-color: $background-color;
@@ -133,15 +133,19 @@
             .#{$prefix}#{$cls-ui}-br,
             .#{$prefix}#{$cls-ui}-tc,
             .#{$prefix}#{$cls-ui}-bc {
-                background-image: theme-image($theme-name, '#{$cls}/#{$cls-ui}-corners.png');
+                @if $background-color != transparent {
+                    background-image: theme-image($theme-name, '#{$cls}/#{$cls-ui}-corners.gif');
+                }
             }
 
             .#{$prefix}#{$cls-ui}-ml,
             .#{$prefix}#{$cls-ui}-mr {
-                background-image: theme-image($theme-name, '#{$cls}/#{$cls-ui}-sides.png');
-                background-position: 0 0;
-                @if $background-gradient == null {
-                    background-repeat: repeat-y;
+                @if $background-color != transparent {
+                    background-image: theme-image($theme-name, '#{$cls}/#{$cls-ui}-sides.gif');
+                    background-position: 0 0;
+                    @if $background-gradient == null {
+                        background-repeat: repeat-y;
+                    }
                 }
             }
 

@@ -17,7 +17,7 @@
  * @param {Object} config The configuration options
  */
 Ext.define('Ext.grid.RowNumberer', {
-    extend: 'Ext.grid.Header',
+    extend: 'Ext.grid.column.Column',
     alias: 'widget.rownumberer',
     /**
      * @cfg {String} text Any valid text or HTML fragment to display in the header cell for the row

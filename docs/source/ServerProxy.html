@@ -123,6 +123,16 @@ Ext.define(&#39;Ext.data.ServerProxy&#39;, {
         var me = this;
         
         config = config || {};
+        this.addEvents(
+            <a name="event-Ext.data.ServerProxy-exception"></a>/**
+             * @event exception
+             * Fires when the server returns an exception
+             * @param {Ext.data.Proxy} this
+             * @param {Object} response The response from the AJAX request
+             * @param {Ext.data.Operation} operation The operation that triggered request
+             */
+            &#39;exception&#39;
+        );
         me.callParent([config]);
         
         <a name="cfg-Ext.data.ServerProxy-extraParams"></a>/**
@@ -175,7 +185,8 @@ Ext.define(&#39;Ext.data.ServerProxy&#39;, {
             params   : params,
             action   : operation.action,
             records  : operation.records,
-            operation: operation
+            operation: operation,
+            url      : operation.url
         });
         
         request.url = this.buildUrl(request);
@@ -204,13 +215,12 @@ Ext.define(&#39;Ext.data.ServerProxy&#39;, {
             
         if (success === true) {
             reader = me.getReader();
-            result = reader.read(response);
+            result = reader.read(me.extractResponseData(response));
             records = result.records;
             length = records.length;
-            mc;
             
             if (result.success !== false) {
-                mc = Ext.create(&#39;Ext.util.MixedCollection&#39;, true, function(r) {return r.getId();})
+                mc = Ext.create(&#39;Ext.util.MixedCollection&#39;, true, function(r) {return r.getId();});
                 mc.addAll(operation.records);
                 for (i = 0; i &lt; length; i++) {
                     record = mc.get(records[i].getId());
@@ -235,10 +245,7 @@ Ext.define(&#39;Ext.data.ServerProxy&#39;, {
                 me.fireEvent(&#39;exception&#39;, this, response, operation);
             }
         } else {
-            operation.setException({
-                status: response.status,
-                statusText: response.statusText
-            }); 
+            me.setException(operation, response);
             me.fireEvent(&#39;exception&#39;, this, response, operation);              
         }
             
@@ -248,6 +255,29 @@ Ext.define(&#39;Ext.data.ServerProxy&#39;, {
         }
             
         me.afterRequest(request, success);
+    },
+    
+    /**
+     * Sets up an exception on the operation
+     * @private
+     * @param {Ext.data.Operation} operation The operation
+     * @param {Object} response The response
+     */
+    setException: function(operation, response){
+        operation.setException({
+            status: response.status,
+            statusText: response.statusText
+        });     
+    },
+    
+    /**
+     * Template method to allow subclasses to specify how to get the response for the reader.
+     * @private
+     * @param {Object} response The server response
+     * @return {Mixed} The response data to be used by the reader
+     */
+    extractResponseData: function(response){
+        return response; 
     },
     
     /**
@@ -319,6 +349,7 @@ Ext.define(&#39;Ext.data.ServerProxy&#39;, {
         params = params || {};
         
         var me             = this,
+            isDef          = Ext.isDefined,
             group          = operation.group,
             sorters        = operation.sorters,
             filters        = operation.filters,
@@ -336,15 +367,15 @@ Ext.define(&#39;Ext.data.ServerProxy&#39;, {
             filterParam    = me.filterParam,
             dirParam       = me.dirParam;
         
-        if (pageParam &amp;&amp; page) {
+        if (pageParam &amp;&amp; isDef(page)) {
             params[pageParam] = page;
         }
         
-        if (startParam &amp;&amp; start) {
+        if (startParam &amp;&amp; isDef(start)) {
             params[startParam] = start;
         }
         
-        if (limitParam &amp;&amp; limit) {
+        if (limitParam &amp;&amp; isDef(limit)) {
             params[limitParam] = limit;
         }
         

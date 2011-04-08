@@ -79,10 +79,90 @@ Ext.define(&#39;Ext.chart.Chart&#39;, {
     implOrder: [&#39;SVG&#39;, &#39;VML&#39;],
 
     <a name="cfg-Ext.chart.Chart-background"></a>/**
-     * @cfg {string} background (optional) Set the chart background. This can be a gradient name, image, or color.
+     * @cfg {Object|Boolean} background (optional) Set the chart background. This can be a gradient object, image, or color.
      * Defaults to false for no background.
-     */
+     *
+     * For example, if `background` were to be a color we could set the object as
+     *
+     <br><span style="display: none">**/</span>        background: {
+            //color string
+            fill: &#39;#ccc&#39;
+        }
+     <br><span style="display: none">/**</span>     
+     You can specify an image by using:
+     
+     <br><span style="display: none">**/</span>        background: {
+            image: &#39;http://path.to.image/&#39;
+        }
+     <br><span style="display: none">/**</span>     
+     Also you can specify a gradient by using the gradient object syntax:
+     
+     <br><span style="display: none">**/</span>        background: {
+            gradient: {
+                id: &#39;gradientId&#39;,
+                angle: 45,
+                stops: {
+                    0: {
+                        color: &#39;#555&#39;
+                    }
+                    100: {
+                        color: &#39;#ddd&#39;
+                    }
+                }
+            }
+        }
+     <br><span style="display: none">/**</span>     */
     background: false,
+
+    <a name="cfg-Ext.chart.Chart-gradients"></a>/**
+     * @cfg {Array} gradients (optional) Define a set of gradients that can be used as `fill` property in sprites.
+     * The gradients array is an array of objects with the following properties:
+     *
+     * &lt;ul&gt;
+     * &lt;li&gt;&lt;strong&gt;id&lt;/strong&gt; - string - The unique name of the gradient.&lt;/li&gt;
+     * &lt;li&gt;&lt;strong&gt;angle&lt;/strong&gt; - number, optional - The angle of the gradient in degrees.&lt;/li&gt;
+     * &lt;li&gt;&lt;strong&gt;stops&lt;/strong&gt; - object - An object with numbers as keys (from 0 to 100) and style objects
+     * as values&lt;/li&gt;
+     * &lt;/ul&gt;
+     * 
+     
+     For example:
+     
+     <br><span style="display: none">**/</span>        gradients: [{
+            id: &#39;gradientId&#39;,
+            angle: 45,
+            stops: {
+                0: {
+                    color: &#39;#555&#39;
+                },
+                100: {
+                    color: &#39;#ddd&#39;
+                }
+            }
+        },  {
+            id: &#39;gradientId2&#39;,
+            angle: 0,
+            stops: {
+                0: {
+                    color: &#39;#590&#39;
+                },
+                20: {
+                    color: &#39;#599&#39;
+                },
+                100: {
+                    color: &#39;#ddd&#39;
+                }
+            }
+        }]
+     <br><span style="display: none">/**</span>     
+     Then the sprites can use `gradientId` and `gradientId2` by setting the fill attributes to those ids, for example:
+     
+     <br><span style="display: none">**/</span>        sprite.setAttributes({
+            fill: &#39;url(#gradientId)&#39;
+        }, true);
+     <br><span style="display: none">/**</span>     
+     */
+
 
     constructor: function(config) {
         var me = this,
@@ -593,11 +673,11 @@ Ext.define(&#39;Ext.chart.Chart&#39;, {
             }
             config.seriesIdx = idx;
         }
-        if (!series.chart) {
-            Ext.applyIf(config, series);
-            series = me.series.replace(Ext.create(&#39;Ext.chart.series.&#39; + Ext.String.capitalize(series.type), config));
-        } else {
+        if (series instanceof Ext.chart.series.Series) {
             Ext.apply(series, config);
+        } else {
+            Ext.applyIf(config, series);
+            series = me.series.replace(Ext.createByAlias(&#39;series.&#39; + series.type, config));
         }
         if (series.initialize) {
             series.initialize();

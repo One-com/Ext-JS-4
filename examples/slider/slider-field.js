@@ -1,7 +1,7 @@
 Ext.require([
     'Ext.slider.*', 
     'Ext.form.*',
-    'Ext.window.MessageBoxWindow'
+    'Ext.window.MessageBox'
 ]);
 
 Ext.onReady(function(){

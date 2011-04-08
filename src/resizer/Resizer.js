@@ -50,7 +50,8 @@ Ext.define('Ext.resizer.Resizer', {
     wrapCls:   Ext.baseCSSPrefix + 'resizable-wrap',
 
     /**
-     * @cfg {Boolean} <p>Specify as true to update the {@link #target} (Element or {@link Ext.Component Component}) dynamically during dragging.
+     * @cfg {Boolean} dynamic 
+     * <p>Specify as true to update the {@link #target} (Element or {@link Ext.Component Component}) dynamically during dragging.
      * This is <code>true</code> by default, but the {@link Ext.Component Component} class passes <code>false</code> when it
      * is configured as {@link Ext.Component#resizable}.</p>
      * <p>If specified as <code>false</code>, a proxy element is displayed during the resize operation, and the {@link #target}

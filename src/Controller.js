@@ -1,6 +1,6 @@
 /**
- * @class Ext.Controller
  * @author Ed Spencer
+ * @class Ext.Controller
  *
  * <p>Controllers are the glue that binds applications together. In the MVC paradigm we have three main elements -
  * Models, Views and Controllers. Sencha frameworks have a strong {@link Ext.data.Model Model} layer which makes it

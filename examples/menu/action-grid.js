@@ -117,7 +117,7 @@ Ext.onReady(function() {
     var grid = new Ext.grid.GridPanel({
         store: store,
         columnLines: true,
-        headers: [
+        columns: [
             {
                 text     : 'Company',
                 flex     : 1,

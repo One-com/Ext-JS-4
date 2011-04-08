@@ -81,10 +81,100 @@ Ext.define('Ext.chart.Chart', {
     implOrder: ['SVG', 'VML'],
 
     /**
-     * @cfg {string} background (optional) Set the chart background. This can be a gradient name, image, or color.
+     * @cfg {Object|Boolean} background (optional) Set the chart background. This can be a gradient object, image, or color.
      * Defaults to false for no background.
+     *
+     * For example, if `background` were to be a color we could set the object as
+     *
+     <pre><code>
+        background: {
+            //color string
+            fill: '#ccc'
+        }
+     </code></pre>
+     
+     You can specify an image by using:
+     
+     <pre><code>
+        background: {
+            image: 'http://path.to.image/'
+        }
+     </code></pre>
+     
+     Also you can specify a gradient by using the gradient object syntax:
+     
+     <pre><code>
+        background: {
+            gradient: {
+                id: 'gradientId',
+                angle: 45,
+                stops: {
+                    0: {
+                        color: '#555'
+                    }
+                    100: {
+                        color: '#ddd'
+                    }
+                }
+            }
+        }
+     </code></pre>
      */
     background: false,
+
+    /**
+     * @cfg {Array} gradients (optional) Define a set of gradients that can be used as `fill` property in sprites.
+     * The gradients array is an array of objects with the following properties:
+     *
+     * <ul>
+     * <li><strong>id</strong> - string - The unique name of the gradient.</li>
+     * <li><strong>angle</strong> - number, optional - The angle of the gradient in degrees.</li>
+     * <li><strong>stops</strong> - object - An object with numbers as keys (from 0 to 100) and style objects
+     * as values</li>
+     * </ul>
+     * 
+     
+     For example:
+     
+     <pre><code>
+        gradients: [{
+            id: 'gradientId',
+            angle: 45,
+            stops: {
+                0: {
+                    color: '#555'
+                },
+                100: {
+                    color: '#ddd'
+                }
+            }
+        },  {
+            id: 'gradientId2',
+            angle: 0,
+            stops: {
+                0: {
+                    color: '#590'
+                },
+                20: {
+                    color: '#599'
+                },
+                100: {
+                    color: '#ddd'
+                }
+            }
+        }]
+     </code></pre>
+     
+     Then the sprites can use `gradientId` and `gradientId2` by setting the fill attributes to those ids, for example:
+     
+     <pre><code>
+        sprite.setAttributes({
+            fill: 'url(#gradientId)'
+        }, true);
+     </code></pre>
+     
+     */
+
 
     constructor: function(config) {
         var me = this,
@@ -595,11 +685,11 @@ Ext.define('Ext.chart.Chart', {
             }
             config.seriesIdx = idx;
         }
-        if (!series.chart) {
-            Ext.applyIf(config, series);
-            series = me.series.replace(Ext.create('Ext.chart.series.' + Ext.String.capitalize(series.type), config));
-        } else {
+        if (series instanceof Ext.chart.series.Series) {
             Ext.apply(series, config);
+        } else {
+            Ext.applyIf(config, series);
+            series = me.series.replace(Ext.createByAlias('series.' + series.type, config));
         }
         if (series.initialize) {
             series.initialize();

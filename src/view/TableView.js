@@ -19,13 +19,13 @@ Ext.define('Ext.view.TableView', {
         'Ext.util.MixedCollection'
     ],
 
-    cls: Ext.baseCSSPrefix + 'grid-view ' + Ext.baseCSSPrefix + 'unselectable',
-    
+    cls: Ext.baseCSSPrefix + 'grid-view',
+
     // row
     itemSelector: '.' + Ext.baseCSSPrefix + 'grid-row',
     // cell
     cellSelector: '.' + Ext.baseCSSPrefix + 'grid-cell',
-    
+
     selectedItemCls: Ext.baseCSSPrefix + 'grid-row-selected',
     selectedCellCls: Ext.baseCSSPrefix + 'grid-cell-selected',
     focusedItemCls: Ext.baseCSSPrefix + 'grid-row-focused',
@@ -33,7 +33,7 @@ Ext.define('Ext.view.TableView', {
     altRowCls:   Ext.baseCSSPrefix + 'grid-row-alt',
     rowClsRe: /(?:^|\s*)grid-row-(first|last|alt)(?:\s+|$)/g,
     cellRe: new RegExp('x-grid-cell-([^\\s]+) ', ''),
-    
+
     // cfg docs inherited
     trackOver: true,
 
@@ -85,7 +85,10 @@ viewConfig: {
         this.initFeatures();
         this.setNewTemplate();
         this.callParent();
-        this.store.on('load', this.onStoreLoad, this);
+        this.mon(this.store, {
+            load: this.onStoreLoad,
+            scope: this
+        });
 
         // this.addEvents(
         //     /**
@@ -110,22 +113,21 @@ viewConfig: {
                 this.scrollToTop();
             }
         }
-        
     },
 
     // scroll the view to the top
     scrollToTop: Ext.emptyFn,
-    
+
     /**
      * Get a reference to a feature
      * @param {String} id The id of the feature
-     * @return {Ext.grid.Feature} The feature. Undefined if not found
+     * @return {Ext.grid.feature.Feature} The feature. Undefined if not found
      */
     getFeature: function(id) {
         var features = this.featuresMC;
         if (features) {
             return features.get(id);
-        }    
+        }
     },
 
     /**
@@ -166,14 +168,17 @@ viewConfig: {
             }
         }
     },
-    
+
     afterRender: function() {
         this.callParent();
-        this.el.on('scroll', this.fireBodyScroll, this);
+        this.el.unselectable();
+        this.mon(this.el, {
+            scroll: this.fireBodyScroll,
+            scope: this
+        });
         this.attachEventsForFeatures();
     },
-    
-    
+
     fireBodyScroll: function(e, t) {
         this.fireEvent('bodyscroll', e, t);
     },
@@ -209,16 +214,17 @@ viewConfig: {
             fullWidth = headerCt.getFullWidth(),
             features  = this.features,
             ln = features.length,
-            i  = 0,
-            feature,
             o = {
                 rows: preppedRecords,
                 fullWidth: fullWidth
             },
+            i  = 0,
+            feature,
             j = 0,
-            jln = preppedRecords.length,
+            jln,
             rowParams;
-        
+
+        jln = preppedRecords.length;
         // process row classes, rowParams has been deprecated and has been moved
         // to the individual features that implement the behavior. 
         if (this.getRowClass) {
@@ -243,17 +249,15 @@ viewConfig: {
                 if (rowParams.cols) {
                     throw "GridView: getRowClass cols is no longer supported.";
                 }
-                
+
             }
         }
-        
-        
         // currently only one feature may implement collectData. This is to modify
-        // whats returned to the view before its renderered
+        // what's returned to the view before its rendered
         for (; i < ln; i++) {
             feature = features[i];
             if (feature.isFeature && feature.collectData && !feature.disabled) {
-                o = feature.collectData(records, startIndex, fullWidth, o);
+                o = feature.collectData(records, preppedRecords, startIndex, fullWidth, o);
                 break;
             }
         }
@@ -363,6 +367,7 @@ viewConfig: {
     // GridSelectionModel invokes onRowDeselect as selection changes
     onRowDeselect : function(rowIdx) {
         this.removeRowCls(rowIdx, this.selectedItemCls);
+        this.removeRowCls(rowIdx, this.focusedItemCls);
     },
     
     onCellSelect: function(position) {
@@ -403,12 +408,14 @@ viewConfig: {
 
     // GridSelectionModel invokes onRowFocus to 'highlight'
     // the last row focused
-    onRowFocus: function(rowIdx, highlight) {
+    onRowFocus: function(rowIdx, highlight, supressFocus) {
         var row = this.getNode(rowIdx);
 
         if (highlight) {
             this.addRowCls(rowIdx, this.focusedItemCls);
-            this.focusRow(rowIdx);
+            if (!supressFocus) {
+                this.focusRow(rowIdx);
+            }
             //this.el.dom.setAttribute('aria-activedescendant', row.id);
         } else {
             this.removeRowCls(rowIdx, this.focusedItemCls);
@@ -458,7 +465,7 @@ viewConfig: {
             panel       = this.ownerCt,
             cellRegion,
             record;
-        
+
         if (cell) {
             cellRegion = cell.getRegion();
             // cell is above
@@ -468,7 +475,7 @@ viewConfig: {
             } else if (cellRegion.bottom > elRegion.bottom) {
                 adjustmentY = cellRegion.bottom - elRegion.bottom;
             }
-            
+
             // cell is left
             if (cellRegion.left < elRegion.left) {
                 adjustmentX = cellRegion.left - elRegion.left;
@@ -476,7 +483,7 @@ viewConfig: {
             } else if (cellRegion.right > elRegion.right) {
                 adjustmentX = cellRegion.right - elRegion.right;
             }
-            
+
             if (adjustmentY) {
                 // scroll the grid itself, so that all gridview's update.
                 panel.scrollByDeltaY(adjustmentY);
@@ -513,7 +520,7 @@ viewConfig: {
     saveScrollState: function() {
         var dom = this.el.dom,
             state = this.scrollState;
-        
+
         state.left = dom.scrollLeft;
         state.top = dom.scrollTop;
     },
@@ -527,7 +534,7 @@ viewConfig: {
         var dom = this.el.dom,
             state = this.scrollState,
             headerEl = this.headerCt.el.dom;
-            
+
         headerEl.scrollLeft = dom.scrollLeft = state.left;
         dom.scrollTop = state.top;
     },
@@ -540,37 +547,46 @@ viewConfig: {
      */
     refresh: function(firstPass) {
         var me = this;
-        
+
         //this.saveScrollState();
         me.setNewTemplate();
         me.callParent(arguments);
-        
+
         //this.restoreScrollState();
         if (me.rendered && !firstPass) {
             // give focus back to gridview
             me.el.focus();
-        }        
+        }
     },
 
     processItemEvent: function(type, record, row, rowIndex, e) {
         var me = this,
             cell = e.getTarget(me.cellSelector, row),
             cellIndex = cell ? cell.cellIndex : -1,
-            map = this.statics().EventMap,
+            map = me.statics().EventMap,
+            selModel = me.getSelectionModel(),
             result;
-            
-        result = me.fireEvent('uievent', type, this, cell, rowIndex, cellIndex, e);
-        
 
-        if (result === false || this.callParent(arguments) === false) {
+        if (type == 'keydown' && !cell && selModel.getCurrentPosition) {
+            // CellModel, otherwise we can't tell which cell to invoke
+            cell = me.getCellByPosition(selModel.getCurrentPosition());
+            if (cell) {
+                cell = cell.dom;
+                cellIndex = cell.cellIndex;
+            }
+        }
+
+        result = me.fireEvent('uievent', type, me, cell, rowIndex, cellIndex, e);
+
+        if (result === false || me.callParent(arguments) === false) {
             return false;
         }
-        
+
         // Don't handle cellmouseenter and cellmouseleave events for now
         if (type == 'mouseover' || type == 'mouseout') {
             return true;
         }
-        
+
         return !(
             // We are adding cell and feature events  
             (me['onBeforeCell' + map[type]](cell, cellIndex, record, row, rowIndex, e) === false) ||
@@ -578,8 +594,8 @@ viewConfig: {
             (me['onCell' + map[type]](cell, cellIndex, record, row, rowIndex, e) === false) ||
             (me.fireEvent('cell' + type, me, cell, cellIndex, record, row, rowIndex, e) === false)
         );
-    },  
-    
+    },
+
     processSpecialEvent: function(e) {
         var me = this,
             map = this.statics().EventMap,
@@ -589,11 +605,11 @@ viewConfig: {
             i, feature, prefix, featureTarget;
 
         this.callParent(arguments);
-        
+
         if (type == 'mouseover' || type == 'mouseout') {
             return;
         }
-        
+
         for (i = 0; i < ln; i++) {
             feature = features[i];
             if (feature.hasFeatureEvent) {
@@ -609,20 +625,22 @@ viewConfig: {
                 }
             }
         }
-        return true; 
+        return true;
     },
-    
+
     onCellMouseDown: Ext.emptyFn,
     onCellMouseUp: Ext.emptyFn,
     onCellClick: Ext.emptyFn,
     onCellDblClick: Ext.emptyFn,
     onCellContextMenu: Ext.emptyFn,
+    onCellKeyDown: Ext.emptyFn,
     onBeforeCellMouseDown: Ext.emptyFn,
     onBeforeCellMouseUp: Ext.emptyFn,
     onBeforeCellClick: Ext.emptyFn,
     onBeforeCellDblClick: Ext.emptyFn,
     onBeforeCellContextMenu: Ext.emptyFn,
-    
+    onBeforeCellKeyDown: Ext.emptyFn,
+
     /**
      * Expand a particular header to fit the max content width.
      * This will ONLY expand, not contract.
@@ -655,16 +673,16 @@ viewConfig: {
         }
         return maxWidth;
     },
-    
+
     getPositionByEvent: function(e) {
         var cellNode = e.getTarget(this.cellSelector),
             rowNode  = e.getTarget(this.itemSelector),
             record   = this.getRecord(rowNode),
             header   = this.getHeaderByCell(cellNode);
-        
+
         return this.getPosition(record, header);
     },
-    
+
     getHeaderByCell: function(cell) {
         if (cell) {
             var m = cell.className.match(this.cellRe);
@@ -674,7 +692,7 @@ viewConfig: {
         }
         return false;
     },
-    
+
     /**
      * @param {Object} position The current row and column
      * @param {String} direction 'up', 'down', 'right' and 'left'
@@ -693,12 +711,12 @@ viewConfig: {
             lastCol  = this.getLastVisibleColumnIndex(),
             newPos   = {row: row, column: column},
             activeHeader = this.headerCt.getHeaderByIndex(column);
-        
+
         // no active header or its currently hidden
         if (!activeHeader || activeHeader.hidden) {
             return false;
         }
-        
+
         e = e || {};
         direction = direction.toLowerCase();
         switch (direction) {
@@ -723,7 +741,7 @@ viewConfig: {
                     }
                 }
                 break;
-            
+
             case 'left':
                 // has the potential to wrap
                 if (column === firstCol) {
@@ -745,7 +763,7 @@ viewConfig: {
                     }
                 }
                 break;
-            
+
             case 'up':
                 // if top row, deny up
                 if (row === 0) {
@@ -759,7 +777,7 @@ viewConfig: {
                     }
                 }
                 break;
-            
+
             case 'down':
                 // if bottom row, deny down
                 if (row === rowCount - 1) {
@@ -774,7 +792,7 @@ viewConfig: {
                 }
                 break;
         }
-        
+
         if (verifierFn && verifierFn.call(scope || window, newPos) !== true) {
             return false;
         } else {
@@ -783,35 +801,35 @@ viewConfig: {
     },
     getFirstVisibleColumnIndex: function() {
         var headerCt   = this.getHeaderCt(),
-            visHeaders = headerCt.query('gridheader:not(gridheader[hidden])'),
+            visHeaders = headerCt.query('gridcolumn:not(gridcolumn[hidden])'),
             lastHeader = visHeaders[0];
-        
+
         return headerCt.getIndexOfHeader(lastHeader);
     },
-    
+
     getLastVisibleColumnIndex: function() {
         var headerCt   = this.getHeaderCt(),
-            visHeaders = headerCt.query('gridheader:not(gridheader[hidden])'),
+            visHeaders = headerCt.query('gridcolumn:not(gridcolumn[hidden])'),
             lastHeader = visHeaders[visHeaders.length - 1];
-        
+
         return headerCt.getIndexOfHeader(lastHeader);
     },
-    
+
     getHeaderCt: function() {
         return this.headerCt;
     },
-    
+
     getPosition: function(record, header) {
         var me = this,
             store = me.store,
             gridCols = me.headerCt.getGridColumns();
-            
+
         return {
             row: store.indexOf(record),
             column: Ext.Array.indexOf(gridCols, header)
         };
     },
-    
+
     /**
      * Determines the 'gap' between the closest adjacent header to the right
      * that is not hidden.
@@ -823,7 +841,7 @@ viewConfig: {
             activeHeaderIdx = Ext.Array.indexOf(headers, activeHeader),
             i               = activeHeaderIdx + 1,
             nextIdx;
-        
+
         for (; i <= headers.length; i++) {
             if (!headers[i].hidden) {
                 nextIdx = i;
@@ -833,7 +851,7 @@ viewConfig: {
 
         return nextIdx - activeHeaderIdx;
     },
-    
+
     /**
      * Determines the 'gap' between the closest adjacent header to the left
      * that is not hidden.
@@ -845,7 +863,7 @@ viewConfig: {
             activeHeaderIdx = Ext.Array.indexOf(headers, activeHeader),
             i               = activeHeaderIdx - 1,
             prevIdx;
-        
+
         for (; i >= 0; i--) {
             if (!headers[i].hidden) {
                 prevIdx = i;

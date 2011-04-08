@@ -74,13 +74,10 @@ Ext.define('Ext.dd.DragZone', {
      * @type Object
      * @property dragData
      */
+     
     /**
      * @cfg {Boolean} containerScroll True to register this container with the Scrollmanager
      * for auto scrolling during drag operations.
-     */
-    /**
-     * @cfg {String} hlColor The color to use when visually highlighting the drag source in the afterRepair
-     * method after a failed drop (defaults to "c3daf9" - light blue)
      */
 
     /**
@@ -112,11 +109,11 @@ Ext.define('Ext.dd.DragZone', {
      * Called after a repair of an invalid drop. By default, highlights this.dragData.ddel 
      */
     afterRepair : function(){
-        if (Ext.enableFx){
-            // EAC Commented out: 1/20/11 while waiting for anim pkg
-            //Ext.fly(this.dragData.ddel).highlight(this.hlColor || "c3daf9");
+        var me = this;
+        if (Ext.enableFx) {
+            Ext.fly(me.dragData.ddel).highlight(me.repairHighlightColor);
         }
-        this.dragging = false;
+        me.dragging = false;
     },
 
     /**

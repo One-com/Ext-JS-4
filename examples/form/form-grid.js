@@ -116,7 +116,7 @@ Ext.onReady(function(){
             height: 400,
             title:'Company Data',
 
-            headers: [
+            columns: [
                 {
                     id       :'company',
                     text   : 'Company',

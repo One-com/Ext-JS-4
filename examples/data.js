@@ -37,6 +37,12 @@ Ext.samples.samplesCatalog = [
                 url : 'organizer/organizer.html',
                 icon: 'organizer.gif',
                 desc: 'DataView and TreePanel example that demonstrates dragging data items from a DataView into a TreePanel.'
+            },
+            {
+                text: 'Theme Viewer',
+                url : 'themes/index.html',
+                icon: 'themes.gif',
+                desc: 'View and test every Ext component against bundled Ext themes.'
             }
         ]
     },
@@ -197,6 +203,27 @@ Ext.samples.samplesCatalog = [
                 icon: 'writer-thumb.gif',
                 desc: "This Store uses Data's writer to automatically generate CRUD requests to the server through a standard HttpProxy.",
                 status: 'new'
+            },
+            {
+                text: 'Buffered Scrolling',
+                url: 'grid/buffer-grid.html',
+                icon: 'buffer-grid.gif',
+                desc: "The new grid uses a virtualized scrolling system to handle potentially infinite data sets without any impact on client side performance.",
+                status: 'new'
+            },
+            {
+                text: 'List View',
+                url: 'grid/list-view.html',
+                icon: 'list-view.gif',
+                desc: "Ext 4 replaces Ext.ListView with the default Ext.grid.GridPanel.",
+                status: 'new'
+            },
+            {
+                text: 'Progress Bar Pager',
+                url: 'grid/progress-bar-pager.html',
+                icon: 'progress-bar-pager.gif',
+                desc: "Progress Bar Pager Extension.",
+                status: 'updated'
             }
         ]
     },
@@ -335,6 +362,27 @@ Ext.samples.samplesCatalog = [
                 icon: 'live-animated.gif',
                 desc: 'Showing a line series with smooth transitions on data updating at regular intervals.',
                 status: 'new'
+            },
+            {
+                text: 'Gauge Chart',
+                url: 'charts/Gauge.html',
+                icon: 'gauge.gif',
+                desc: 'Display three custom gauge charts bound to different data stores with different configuration options and easings.',
+                status: 'new'
+            },
+            {
+                text: 'Grouped Bar',
+                url: 'charts/GroupedBar.html',
+                icon: 'grouped-bar.gif',
+                desc: 'Display 3 sets of random data in a grouped bar series.',
+                status: 'new'
+            },
+            {
+                text: 'Reload Chart',
+                url: 'charts/ReloadChart.html',
+                icon: 'reload-chart.gif',
+                desc: 'Display a Column Chart Sample that animates when refreshing the data set',
+                status: 'new'
             }
         ]
     },
@@ -359,6 +407,13 @@ Ext.samples.samplesCatalog = [
                icon: 'tabs-adv.gif',
                desc: 'Demonstrates the TabPanel overflow menu extension, which makes management of large numbers of tabs easier',
                status: 'new'
+            },
+            {
+               text: 'Grouped Tabs',
+               url : 'grouptabs/grouptabs.html',
+               icon: 'grouped-tab.gif',
+               desc: 'Demonstrate how to create a Grouped TabPanel.',
+               status: 'updated'
             }
         ]
     },
@@ -448,12 +503,6 @@ Ext.samples.samplesCatalog = [
                 icon: 'layout-accordion.gif',
                 desc: 'A basic accordion layout within a border layout.'
             },
-            // {
-            //     text: 'Absolute Layout (Form)',
-            //     url:  'layout/absolute.html',
-            //     icon: 'layout-absolute.gif',
-            //     desc: 'A simple example of form fields utilizing an absolute layout in a window for flexible form resizing.'
-            // },
             {
                 text: 'Anchor Layout (Form)',
                 url:  'form/anchoring.html',
@@ -489,6 +538,13 @@ Ext.samples.samplesCatalog = [
                 url:  'layout/vbox.html',
                 icon: 'layout-vbox.gif',
                 desc: 'Interactive layout illustrating the capabilities of the VBox Layout.'
+            },
+            {
+                text: 'Complex Layout',
+                url:  'layout/complex.html',
+                icon: 'complex-layout.gif',
+                desc: 'A complex layout example.',
+                status: 'new'
             }
         ]
     },
@@ -568,12 +624,12 @@ Ext.samples.samplesCatalog = [
                 desc: 'Toolbar and menus that contain various components like date pickers, color pickers, sub-menus and more.',
                 status: 'updated'
             },
-            // {
-            //     text: 'Toolbar Button Groups',
-            //     url:  'toolbar/toolbars.html',
-            //     icon: 'toolbar-button-groups.gif',
-            //     desc: 'Group buttons together in the toolbar.'
-            // },
+            {
+                text: 'Toolbar Button Groups',
+                url:  'toolbar/toolbars.html',
+                icon: 'toolbar-button-groups.gif',
+                desc: 'Group buttons together in the toolbar.'
+            },
             {
                text: 'Ext Actions',
                url:  'menu/action-grid.html',
@@ -585,27 +641,27 @@ Ext.samples.samplesCatalog = [
                 url:  'toolbar/reorderable.html',
                 icon: 'toolbar-reorderable.png',
                 desc: 'Items within a toolbar can be reordered using this plugin.'
+            },
+            {
+               text: 'Overflow Toolbar',
+               url:  'toolbar/overflow.html',
+               icon: 'toolbar-reorderable.png',
+               desc: 'Items within a toolbar will be placed into an overflow menu if the toolbar is too narrow.'
+            },
+            {
+                text: 'Status Bar',
+                url:  'statusbar/statusbar-demo.html',
+                icon: 'statusbar-demo.gif',
+                desc: 'A simple StatusBar that can be dropped into the bottom of any panel to display status text and icons.',
+                status: 'updated'
+            },
+            {
+                text: 'Status Bar (Advanced)',
+                url:  'statusbar/statusbar-advanced.html',
+                icon: 'statusbar-adv.gif',
+                desc: 'Customizing the StatusBar via a plugin to provide automatic form validation monitoring and error linking.',
+                status: 'updated'
             }
-            //{
-            //    text: 'Overflow Toolbar',
-            //    url:  'toolbar/overflow.html',
-            //    icon: 'toolbar-reorderable.png',
-            //    desc: 'Items within a toolbar will be placed into an overflow menu if the toolbar is too narrow.'
-            //}
-            // {
-            //     text: 'Status Bar',
-            //     url:  'statusbar/statusbar-demo.html',
-            //     icon: 'statusbar-demo.gif',
-            //     desc: 'A simple StatusBar that can be dropped into the bottom of any panel to display status text and icons.',
-            //     status: 'updated'
-            // },
-            // {
-            //     text: 'Status Bar (Advanced)',
-            //     url:  'statusbar/statusbar-advanced.html',
-            //     icon: 'statusbar-adv.gif',
-            //     desc: 'Customizing the StatusBar via a plugin to provide automatic form validation monitoring and error linking.',
-            //     status: 'updated'
-            // }
         ]
     },
     {
@@ -627,7 +683,13 @@ Ext.samples.samplesCatalog = [
     },
     {
         title: 'DataView',
-        samples: [
+        samples: [{
+                text  : 'DataView',
+                url   : 'view/data-view.html',
+                icon  : 'data-view.gif',
+                desc  : 'This example shows how to use an Ext.DataView',
+                status: 'updated'
+            },
             {
                 text  : 'Animated DataView',
                 url   : 'view/animated-dataview.html',
@@ -719,13 +781,13 @@ Ext.samples.samplesCatalog = [
                 desc: 'An example of the Number field, with and without a spinner.',
                 status: 'updated'
             },
-            // {
-            //     text: 'MultiSelect and ItemSelector',
-            //     url:  'multiselect/multiselect-demo.html',
-            //     icon: 'form-multiselect.gif',
-            //     desc: 'Example controls for selecting a list of items in forms.',
-            //     status: 'updated'
-            // },
+            {
+                text: 'MultiSelect and ItemSelector',
+                url:  'multiselect/multiselect-demo.html',
+                icon: 'form-multiselect.gif',
+                desc: 'Example controls for selecting a list of items in forms.',
+                status: 'updated'
+            },
             {
                 text: 'Registration Form',
                 url:  'form/registration.html',
@@ -767,6 +829,20 @@ Ext.samples.samplesCatalog = [
                  icon  : 'form-fieldcontainer.png',
                  desc  : 'Example usage of the FieldContainer to place several fields on a single form row.',
                  status: 'new'
+            },
+            {
+                text: 'Form with absolute layout',
+                url:  'form/absform.html',
+                icon: 'form-absolute.gif',
+                desc: 'A simple example of form fields utilizing an absolute layout in a window for flexible form resizing.',
+                status: 'new'
+            },
+            {
+                text: 'Custom form Field',
+                url:  'form/custom-form.html',
+                icon: 'form-custom.gif',
+                desc: 'A simple example that demonstrate how to create a custom form field.',
+                status: 'new'
             }
         ]
     },
@@ -790,14 +866,21 @@ Ext.samples.samplesCatalog = [
                 url:  'direct/direct-grid.html',
                 icon: 'direct.gif',
                 desc: 'Ext.Direct Remoting with a Grid'
+            },
+            {
+                text: 'Direct TreeLoader',
+                url:  'direct/direct-tree.html',
+                icon: 'direct.gif',
+                desc: 'Ext.Direct Remoting with a Tree',
+                status: 'new'
+            },
+            {
+                text: 'Direct Named Arguments',
+                url:  'direct/named-arguments.html',
+                icon: 'direct.gif',
+                desc: 'Ext.Direct Named Arguments',
+                status: 'new'
             }
-            // {
-            //     text: 'Direct TreeLoader',
-            //     url:  'direct/direct-tree.php',
-            //     icon: 'direct.gif',
-            //     desc: 'Ext.Direct Remoting with a Tree',
-            //     status: 'new'
-            // }
         ]
     },
     {
@@ -829,13 +912,13 @@ Ext.samples.samplesCatalog = [
                 desc: 'A slider component that supports vertical mode, snapping, tooltips, customized styles and multiple thumbs.',
                 status: 'updated'
             },
-            // {
-            //     text: 'QuickTips',
-            //     url: 'simple-widgets/qtips.html',
-            //     icon: 'qtips.gif',
-            //     desc: 'Various tooltip and quick tip configuration options including Ajax loading and mouse tracking.',
-            //     status: 'updated'
-            // },
+            {
+                text: 'QuickTips',
+                url: 'qtips/qtips.html',
+                icon: 'qtips.gif',
+                desc: 'Various tooltip and quick tip configuration options including Ajax loading and mouse tracking.',
+                status: 'updated'
+            },
             {
                 text: 'Progress Bar',
                 url: 'simple-widgets/progress-bar.html',
@@ -875,20 +958,13 @@ Ext.samples.samplesCatalog = [
                 desc: 'Shows a custom keyboard navigation using the KeyNav class',
                 status: 'new'
             },
-            //{
-            //    text: 'Component Loader',
-            //    url: 'component-loader/component-loader.html',
-            //    icon: 'panel.gif',
-            //    desc: 'Demonstrates loading various types of content into components and containers',
-            //    status: 'new'
-            //}
-            // {
-            //     text: 'Debugging Console',
-            //     url: 'debug/debug-console.html',
-            //     icon: 'debug-console.gif',
-            //     desc: '',
-            //     status: 'new'
-            // },
+            {
+               text: 'Component Loader',
+               url: 'component-loader/component-loader.html',
+               icon: 'panel.gif',
+               desc: 'Demonstrates loading various types of content into components and containers',
+               status: 'new'
+            },
             {
                 text: 'Localization (static)',
                 url: 'locale/dutch-form.html',
@@ -905,8 +981,21 @@ Ext.samples.samplesCatalog = [
                 text: 'Browser State Management',
                 url: 'state/state.html',
                 icon: 'keyboard.gif',
-                desc: "An example of storing your application's state",
+                desc: "An example of storing your application's state.",
                 status: 'new'
+            },
+            {
+                text: 'Nested Loading',
+                url: 'data/NestedLoading.html',
+                icon: 'direct.gif',
+                desc: "Load complex data and render it to a page.",
+                status: 'new'
+            },
+            {
+                text: 'Basic Templating',
+                url: 'platform/template.html',
+                icon: 'templates.gif',
+                desc: "A basic templating example."
             }
         ]
     }

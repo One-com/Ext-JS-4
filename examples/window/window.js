@@ -55,7 +55,9 @@ Ext.onReady(function(){
         closable: false,
         items: [floater = new Ext.Component({
             xtype: 'component',
-            floating: true,
+            floating: {
+                shadow: false
+            },
             height: 50,
             width: 50,
             x: 175,

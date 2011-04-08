@@ -67,12 +67,21 @@ Ext.onReady(function() {
         layout: 'fit',
         plain: true,
         bodyPadding: 5,
-        buttonAlign: 'center',
         items: form,
-        buttons: [{
-            text: 'Send'
-        },{
-            text: 'Cancel'
+        dockedItems: [{
+            xtype: 'toolbar',
+            dock: 'bottom',
+            ui: 'footer',
+            layout: {
+                pack: 'center'
+            },
+            items: [{
+                minWidth: 80,
+                text: 'Send'
+            },{
+                minWidth: 80,
+                text: 'Cancel'
+            }]
         }]
     });
     win.show();

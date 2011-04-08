@@ -7,10 +7,11 @@
  * of being configured with a {@link Ext.container.Container#layout layout}, and containing child Components.&lt;/p&gt;
  * &lt;p&gt;When either specifying child {@link Ext.Component#items items} of a Panel, or dynamically {@link Ext.container.Container#add adding} Components
  * to a Panel, remember to consider how you wish the Panel to arrange those child elements, and whether
- * those child elements need to be sized using one of Ext&#39;s built-in &lt;code&gt;&lt;b&gt;{@link Ext.container.Container#layout layout}&lt;/b&gt;&lt;/code&gt; schemes. By
+ * those child elements need to be sized using one of Ext&amp;#39;s built-in &lt;code&gt;&lt;b&gt;{@link Ext.container.Container#layout layout}&lt;/b&gt;&lt;/code&gt; schemes. By
  * default, Panels use the {@link Ext.layout.container.Auto Auto} scheme. This simply renders
  * child components, appending them one after the other inside the Container, and &lt;b&gt;does not apply any sizing&lt;/b&gt;
  * at all.&lt;/p&gt;
+ * {@img Ext.panel.Panel/panel.png Panel components}
  * &lt;p&gt;A Panel may also contain {@link #bbar bottom} and {@link #tbar top} toolbars, along with separate
  * {@link #header}, {@link #footer} and {@link #body} sections (see {@link #frame} for additional
  * information).&lt;/p&gt;
@@ -22,15 +23,15 @@
  * tool to simply &lt;i&gt;hide&lt;/i&gt; a Panel for later re-use, configure the Panel with &lt;b&gt;&lt;code&gt;{@link #closeAction closeAction: &#39;hide&#39;}&lt;/code&gt;&lt;/b&gt;.&lt;/p&gt;
  * &lt;p&gt;Usually, Panels are used as constituents within an application, in which case, they would be used as child items of Containers,
  * and would themselves use Ext.Components as child {@link #items}. However to illustrate simply rendering a Panel into the document,
- * here&#39;s how to do it:<br><span style="display: none">**/</span>Ext.create(&#39;Ext.panel.Panel&#39;, {
+ * here&amp;#39;s how to do it:<br><span style="display: none">**/</span>Ext.create(&#39;Ext.panel.Panel&#39;, {
     title: &#39;Hello&#39;,
     width: 200,
-    html: &#39;&lt;p&gt;World!&lt;/p&gt;&#39;,
+    html: &#39;&amp;lt;p&amp;gt;World!&amp;lt;/p&amp;gt;&#39;,
     renderTo: document.body
 });
 <br><span style="display: none">/**</span>&lt;/p&gt;
  * &lt;p&gt;A more realistic scenario is a Panel created to house input fields which will not be rendered, but used as a constituent part of a Container:<br><span style="display: none">**/</span>var filterPanel = Ext.create(&#39;Ext.panel.Panel&#39;, {
-    bodyPadding: 5,  // Don&#39;t want content to crunch against the borders
+    bodyPadding: 5,  // Don&amp;#39;t want content to crunch against the borders
     title: &#39;Filters&#39;,
     items: [{
         xtype: &#39;datefield&#39;,
@@ -52,26 +53,26 @@
     items: [{               // Results grid specified as a config object with an xtype of &#39;grid&#39;
         xtype: &#39;grid&#39;,
         border: false,
-        headers: [{header: &#39;World&#39;}]                  // One header just for show. There&#39;s no data,
+        headers: [{header: &#39;World&#39;}]                  // One header just for show. There&amp;#39;s no data,
         store: Ext.create(&#39;Ext.data.ArrayStore&#39;, {}), // A dummy empty data store
-        flex: 1                                       // Use 1/3 of Container&#39;s height (hint to Box layout)
+        flex: 1                                       // Use 1/3 of Container&amp;#39;s height (hint to Box layout)
     }, {
         xtype: &#39;splitter&#39;,       // A splitter between the two child items
         collapseTarget: &#39;prev&#39;   // It has a mini-collapse tool: collapse the grid
     }, {                    // Details Panel specified as a config object (no xtype defaults to &#39;panel&#39;).
         bodyPadding: 5,
         items: fieldsArray, // An array of form fields
-        flex: 2             // Use 2/3 of Container&#39;s height (hint to Box layout)
+        flex: 2             // Use 2/3 of Container&amp;#39;s height (hint to Box layout)
     }]
 });
 <br><span style="display: none">/**</span> * The example illustrates one possible method of displaying search results. The Panel contains a grid with the resulting data arranged
- * in rows. Each selected row may be displayed in detail in the Panel below. The {@link Ext.layout.container.Vbox vbox} layout is used
+ * in rows. Each selected row may be displayed in detail in the Panel below. The {@link Ext.layout.container.VBox vbox} layout is used
  * to arrange the two vertically. It is configured to stretch child items horizontally to full width. Child items may either be configured 
  * with a numeric height, or with a &lt;code&gt;flex&lt;/code&gt; value to distribute available space proportionately.&lt;/p&gt;
  * &lt;p&gt;This Panel itself may be a child item of, for exaple, a {@link Ext.tab.TabPanel} which will size its child items to fit within its
  * content area.&lt;/p&gt;
  * &lt;p&gt;Using these techniques, as long as the &lt;b&gt;layout&lt;/b&gt; is chosen and configured correctly, an application may have any level of
- * nested containment, all dynamically sized according to configuration, the user&#39;s preference and available browser size.&lt;/p&gt;
+ * nested containment, all dynamically sized according to configuration, the user&amp;#39;s preference and available browser size.&lt;/p&gt;
  * @constructor
  * @param {Object} config The config object
  * @xtype panel
@@ -91,7 +92,7 @@ Ext.define(&#39;Ext.panel.Panel&#39;, {
 
     <a name="cfg-Ext.panel.Panel-collapsedCls"></a>/**
      * @cfg {String} collapsedCls
-     * A CSS class to add to the panel&#39;s element after it has been collapsed (defaults to
+     * A CSS class to add to the panel&amp;#39;s element after it has been collapsed (defaults to
      * &lt;code&gt;&#39;x-panel-collapsed&#39;&lt;/code&gt;).
      */
 
@@ -108,7 +109,7 @@ Ext.define(&#39;Ext.panel.Panel&#39;, {
      * Minimum width of all footer toolbar buttons in pixels (defaults to &lt;tt&gt;undefined&lt;/tt&gt;). If set, this will
      * be used as the default value for the &lt;tt&gt;{@link Ext.button.Button#minWidth}&lt;/tt&gt; config of
      * each Button added to the &lt;b&gt;footer toolbar&lt;/b&gt;. Will be ignored for buttons that have this value configured some
-     * other way, e.g. in their own config object or via the {@link Ext.Container#config-defaults defaults} of
+     * other way, e.g. in their own config object or via the {@link Ext.container.Container#config-defaults defaults} of
      * their parent container.
      */
 
@@ -122,7 +123,7 @@ Ext.define(&#39;Ext.panel.Panel&#39;, {
     <a name="cfg-Ext.panel.Panel-collapseFirst"></a>/**
      * @cfg {Boolean} collapseFirst
      * &lt;code&gt;true&lt;/code&gt; to make sure the collapse/expand toggle button always renders first (to the left of)
-     * any other tools in the panel&#39;s title bar, &lt;code&gt;false&lt;/code&gt; to render it last (defaults to &lt;code&gt;true&lt;/code&gt;).
+     * any other tools in the panel&amp;#39;s title bar, &lt;code&gt;false&lt;/code&gt; to render it last (defaults to &lt;code&gt;true&lt;/code&gt;).
      */
     collapseFirst: true,
 
@@ -144,21 +145,21 @@ Ext.define(&#39;Ext.panel.Panel&#39;, {
     <a name="cfg-Ext.panel.Panel-collapseMode"></a>/**
      * @cfg {String} collapseMode
      * &lt;p&gt;&lt;b&gt;Important: this config is only effective for {@link #collapsible} Panels which are direct child items of a {@link Ext.layout.container.Border border layout}.&lt;/b&gt;&lt;/p&gt;
-     * &lt;p&gt;When &lt;i&gt;not&lt;/i&gt; a direct child item of a {@link Ext.layout.container.Border border layout}, then the Panel&#39;s header remains visible, and the body is collapsed to zero dimensions.
+     * &lt;p&gt;When &lt;i&gt;not&lt;/i&gt; a direct child item of a {@link Ext.layout.container.Border border layout}, then the Panel&amp;#39;s header remains visible, and the body is collapsed to zero dimensions.
      * If the Panel has no header, then a new header (orientated correctly depending on the {@link #collapseDirection}) will be inserted to show a the title and a re-expand tool.&lt;/p&gt;
      * &lt;p&gt;When a child item of a {@link Ext.layout.container.Border border layout}, this config has two options:
      * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
-     * &lt;li&gt;&lt;b&gt;&lt;code&gt;alt&lt;/code&gt;&lt;/b&gt; : &lt;b&gt;Default.&lt;/b&gt;&lt;div class=&quot;sub-desc&quot;&gt;When collapsed, a placeholder Container is injected into the layout to represent the Panel
+     * &lt;li&gt;&lt;b&gt;&lt;code&gt;undefined/omitted&lt;/code&gt;&lt;/b&gt;&lt;div class=&quot;sub-desc&quot;&gt;When collapsed, a placeholder {@link Ext.panel.Header Header} is injected into the layout to represent the Panel
      * and to provide a UI with a Tool to allow the user to re-expand the Panel.&lt;/div&gt;&lt;/li&gt;
-     * &lt;li&gt;&lt;b&gt;&lt;code&gt;header&lt;/code&gt;&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;The Panel collapses to leave a header visible as when not inside a {@link Ext.layout.container.Border border layout}.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;&lt;code&gt;header&lt;/code&gt;&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;The Panel collapses to leave its header visible as when not inside a {@link Ext.layout.container.Border border layout}.&lt;/div&gt;&lt;/li&gt;
      * &lt;/ul&gt;&lt;/div&gt;&lt;/p&gt;
      */
 
     <a name="cfg-Ext.panel.Panel-placeHolder"></a>/**
      * @cfg {Mixed} placeHolder
      * &lt;p&gt;&lt;b&gt;Important: This config is only effective for {@link #collapsible} Panels which are direct child items of a {@link Ext.layout.container.Border border layout}
-     * when using the default &lt;code&gt;&#39;alt&#39;&lt;/code&gt; {@link #collapseMode}.&lt;/b&gt;&lt;/p&gt;
-     * &lt;p&gt;b&gt;Optional.&lt;/b&gt; A Component (or config object for a Component) to show in place of this Panel when this Panel is collapsed by a
+     * when not using the &lt;code&gt;&#39;header&#39;&lt;/code&gt; {@link #collapseMode}.&lt;/b&gt;&lt;/p&gt;
+     * &lt;p&gt;&lt;b&gt;Optional.&lt;/b&gt; A Component (or config object for a Component) to show in place of this Panel when this Panel is collapsed by a
      * {@link Ext.layout.container.Border border layout}. Defaults to a generated {@link Ext.panel.Header Header}
      * containing a {@link Ext.panel.Tool Tool} to re-expand the Panel.&lt;/p&gt;
      */
@@ -166,7 +167,7 @@ Ext.define(&#39;Ext.panel.Panel&#39;, {
     <a name="cfg-Ext.panel.Panel-floatable"></a>/**
      * @cfg {Boolean} floatable
      * &lt;p&gt;&lt;b&gt;Important: This config is only effective for {@link #collapsible} Panels which are direct child items of a {@link Ext.layout.container.Border border layout}.&lt;/b&gt;&lt;/p&gt;
-     * &lt;tt&gt;true&lt;/tt&gt; to allow clicking a collapsed Panel&#39;s {@link #placeHolder} to display the Panel floated
+     * &lt;tt&gt;true&lt;/tt&gt; to allow clicking a collapsed Panel&amp;#39;s {@link #placeHolder} to display the Panel floated
      * above the layout, &lt;tt&gt;false&lt;/tt&gt; to force the user to fully expand a collapsed region by
      * clicking the expand button to see it again (defaults to &lt;tt&gt;true&lt;/tt&gt;).
      */
@@ -204,8 +205,8 @@ Ext.define(&#39;Ext.panel.Panel&#39;, {
      * @cfg {String} closeAction
      * &lt;p&gt;The action to take when the close header tool is clicked:
      * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
-     * &lt;li&gt;&lt;b&gt;&lt;code&gt;&#39;{@link #close}&#39;&lt;/code&gt;&lt;/b&gt; : &lt;b&gt;Default&lt;/b&gt;&lt;div class=&quot;sub-desc&quot;&gt;
-     * {@link #close remove} the window from the DOM and {@link Ext.Component#destroy destroy}
+     * &lt;li&gt;&lt;b&gt;&lt;code&gt;&#39;{@link #destroy}&#39;&lt;/code&gt;&lt;/b&gt; : &lt;b&gt;Default&lt;/b&gt;&lt;div class=&quot;sub-desc&quot;&gt;
+     * {@link #destroy remove} the window from the DOM and {@link Ext.Component#destroy destroy}
      * it and all descendant Components. The window will &lt;b&gt;not&lt;/b&gt; be available to be
      * redisplayed via the {@link #show} method.
      * &lt;/div&gt;&lt;/li&gt;
@@ -312,13 +313,14 @@ Ext.define(&#39;Ext.panel.Panel&#39;, {
 
     beforeDestroy: function() {
         Ext.destroy(
-            this.ghostPanel
+            this.ghostPanel,
+            this.dd
         );
         this.callParent();
     },
 
     initAria: function() {
-        Ext.panel.Panel.superclass.initAria.call(this);
+        this.callParent();
         this.initHeaderAria();
     },
 
@@ -332,7 +334,7 @@ Ext.define(&#39;Ext.panel.Panel&#39;, {
     },
 
     <a name="method-Ext.panel.Panel-setTitle"></a>/**
-     * Set a title for the panel&#39;s header. See {@link Ext.panel.Header#title}.
+     * Set a title for the panel&amp;#39;s header. See {@link Ext.panel.Header#title}.
      * @param {String} title
      */
     setTitle: function(title) {
@@ -350,7 +352,7 @@ Ext.define(&#39;Ext.panel.Panel&#39;, {
     },
 
     <a name="method-Ext.panel.Panel-setIconClass"></a>/**
-     * Set the iconCls for the panel&#39;s header. See {@link Ext.panel.Header#iconCls}.
+     * Set the iconCls for the panel&amp;#39;s header. See {@link Ext.panel.Header#iconCls}.
      * @param cls
      */
     setIconClass: function(cls) {
@@ -515,7 +517,8 @@ is equivalent to
             fbar = me.addDocked(fbar)[0];
             fbar.insert(0, {
                 flex: 1,
-                xtype: &#39;component&#39;
+                xtype: &#39;component&#39;,
+                focusable: false
             });
             me.fbar = null;
         }
@@ -613,7 +616,7 @@ is equivalent to
         me.callParent(arguments);
 
         // If initially collapsed, collapsed flag must indicate true current state at this point.
-        // Do collapse after the first time the Panel&#39;s structure has been laid out.
+        // Do collapse after the first time the Panel&amp;#39;s structure has been laid out.
         if (me.collapsed) {
             me.collapsed = false;
             topContainer = me.findLayoutController();
@@ -866,7 +869,7 @@ is equivalent to
                 ui: me.ui,
                 indicateDrag: me.draggable,
                 cls: me.baseCls + &#39;-collapsed-placeholder &#39; + me.collapsedHeaderCls,
-                renderTo: me.getTargetEl()
+                renderTo: me.el
             };
             reExpander[(reExpander.orientation == &#39;horizontal&#39;) ? &#39;tools&#39; : &#39;items&#39;] = [{
                 xtype: &#39;tool&#39;,
@@ -875,19 +878,10 @@ is equivalent to
                 scope: me
             }];
 
+            // Capture the size of the re-expander.
+            // For vertical headers in IE6 and IE7, this will be sized by a CSS rule in _panel.scss
             reExpander = me.reExpander = Ext.create(&#39;Ext.panel.Header&#39;, reExpander);
-
-            // Hack for IE6/7&#39;s inability to display an inline-block
-            // No, seriously, this has to be here. Check examples/panel/panel.html, and collapse the second Panel.
-            // Without this, it&#39;s broken.
-            if ((Ext.isIE6 || Ext.isIE7) &amp;&amp; (reExpanderOrientation == &#39;vertical&#39;)) {
-                newSize = 25;
-                reExpander.el.dom.style.display = &#39;block&#39;;
-                reExpander[setDimension](newSize);
-                reExpander.el.dom.style.display = &#39;&#39;;
-            } else {
-                newSize = reExpander[getDimension]();
-            }
+            newSize = reExpander[getDimension]();
             reExpander.hide();
 
             // Insert the new docked item
@@ -915,7 +909,7 @@ is equivalent to
         delete me.flex;
 
         if (animate) {
-            this.animate(anim);
+            me.animate(anim);
         } else {
             me.setSize(anim.to.width, anim.to.height);
             if (Ext.isDefined(anim.to.left) || Ext.isDefined(anim.to.top)) {
@@ -944,11 +938,7 @@ is equivalent to
         me.collapsed = true;
 
         if (!internal) {
-            if (me.ownerCt) {
-                me.ownerCt.doLayout();
-            } else {
-                me.doComponentLayout();
-            }
+            me.doComponentLayout();
         }
 
         // If me Panel was configured with a collapse tool in its header, flip it&#39;s type
@@ -992,7 +982,8 @@ is equivalent to
         // Show any docked items that we hid on collapse
         // And hide the injected reExpander Header
         for (; i &lt; l; i++) {
-            me.hiddenDocked[i].show();
+            me.hiddenDocked[i].hidden = false;
+            me.hiddenDocked[i].el.show();
         }
         if (me.reExpander) {
             if (me.reExpander.temporary) {
@@ -1172,15 +1163,18 @@ is equivalent to
         if (!me.ghostPanel) {
             me.ghostPanel = new Ext.panel.Panel({
                 renderTo: document.body,
-                floating: true,
-                frame: me.frame,
+                floating: {
+                    shadow: false
+                },
+                frame: Ext.supports.CSS3BorderRadius ? me.frame : false,
                 title: me.title,
                 overlapHeader: me.overlapHeader,
                 headerPosition: me.headerPosition,
                 width: me.getWidth(),
                 height: me.getHeight(),
+                iconCls: me.iconCls,
                 baseCls: me.baseCls,
-                tools: [{
+                tools: me.initialConfig.tools || [{
                     type: &#39;placeholder&#39;
                 }],
                 cls: me.baseCls + &#39;-ghost &#39; + (cls ||&#39;&#39;)

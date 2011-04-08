@@ -313,14 +313,9 @@ var Base = Ext.Base = function() {};
          * @private
          */
         ownMethod: function(name, fn) {
-            var originalFn, className;
+            var originalFn;
 
-            if (fn === Ext.emptyFn) {
-                this.prototype[name] = fn;
-                return;
-            }
-
-            if (fn.$isOwned) {
+            if (fn.$owner !== undefined &amp;&amp; fn !== Ext.emptyFn) {
                 originalFn = fn;
 
                 fn = function() {
@@ -329,6 +324,7 @@ var Base = Ext.Base = function() {};
             }
 
             //&lt;debug&gt;
+            var className;
             className = Ext.getClassName(this);
             if (className) {
                 fn.displayName = className + &#39;#&#39; + name;
@@ -336,7 +332,6 @@ var Base = Ext.Base = function() {};
             //&lt;/debug&gt;
             fn.$owner = this;
             fn.$name = name;
-            fn.$isOwned = true;
 
             this.prototype[name] = fn;
         },
@@ -345,7 +340,7 @@ var Base = Ext.Base = function() {};
          * @private
          */
         borrowMethod: function(name, fn) {
-            if (!fn.$isOwned) {
+            if (fn.$owner === undefined) {
                 this.ownMethod(name, fn);
             }
             else {
@@ -354,8 +349,7 @@ var Base = Ext.Base = function() {};
         },
 
         <a name="method-Ext.Base-Ext.Base.addStatics"></a>/**
-         * Add / override static properties of this class. This method is a {@link Ext.Function#flexSetter flexSetter}.
-         * It can either accept an object of key - value pairs or 2 arguments of name - value.
+         * Add / override static properties of this class.
 
     Ext.define(&#39;My.cool.Class&#39;, {
         ...
@@ -367,22 +361,24 @@ var Base = Ext.Base = function() {};
         method2: function() { ... }     // My.cool.Class.method2 = function() { ... };
     });
 
-    My.cool.Class.addStatics(&#39;method3&#39;, function(){ ... }); // My.cool.Class.method3 = function() { ... };
-
-         * @property extend
+         * @property addStatics
          * @static
          * @type Function
-         * @param {String/Object} name See {@link Ext.Function#flexSetter flexSetter}
-         * @param {Mixed} value See {@link Ext.Function#flexSetter flexSetter}
+         * @param {Object} members
          * @markdown
          */
-        addStatics: flexSetter(function(name, value) {
-            this[name] = value;
-        }),
+        addStatics: function(members) {
+            for (var name in members) {
+                if (members.hasOwnProperty(name)) {
+                    this[name] = members[name];
+                }
+            }
+
+            return this;
+        },
 
         <a name="method-Ext.Base-Ext.Base.extend"></a>/**
-         * Add / override prototype properties of this class. This method is a {@link Ext.Function#flexSetter flexSetter}.
-         * It can either accept an object of key - value pairs or 2 arguments of name - value.
+         * Add / override prototype properties of this class.
 
     Ext.define(&#39;My.cool.Class&#39;, {
         ...
@@ -400,28 +396,42 @@ var Base = Ext.Base = function() {};
     cool.method1();
     cool.method2();
 
-    // name - value arguments
-    My.cool.Class.extend(&#39;method3&#39;, function(){ ... });
-    cool.method3();
-
-         * @property implement
+         * @property extend
          * @static
          * @type Function
-         * @param {String/Object} name See {@link Ext.Function#flexSetter flexSetter}
-         * @param {Mixed} value See {@link Ext.Function#flexSetter flexSetter}
+         * @param {Object} members
          * @markdown
          */
-        extend: flexSetter(function(name, value) {
-            if (Ext.isObject(this.prototype[name]) &amp;&amp; Ext.isObject(value)) {
-                Ext.Object.merge(this.prototype[name], value);
+        extend: function(members) {
+            var name, i, member;
+
+            for (name in members) {
+                if (members.hasOwnProperty(name)) {
+                    member = members[name];
+
+                    if (member instanceof Function) {
+                        this.ownMethod(name, member);
+                    }
+                    else {
+                        this.prototype[name] = member;
+                    }
+                }
             }
-            else if (Ext.isFunction(value)) {
-                this.ownMethod(name, value);
+
+            if (Ext.enumerables) {
+                var enumerables = Ext.enumerables;
+
+                for (i = enumerables.length; i--;) {
+                    name = enumerables[i];
+
+                    if (members.hasOwnProperty(name)) {
+                        this.ownMethod(name, members[name]);
+                    }
+                }
             }
-            else {
-                this.prototype[name] = value;
-            }
-        }),
+
+            return this;
+        },
 
         //&lt;debug&gt;
         <a name="method-Ext.Base-implement"></a>/**

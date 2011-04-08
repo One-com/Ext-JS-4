@@ -119,10 +119,13 @@ var applyLinkCallbacks = function() {
             ['cfgs', 'properties', 'methods', 'events'].forEach(function(m) {
                 // If the number of inherited members is the same as the total number of members...
                 if (Ext.query('.m-'+m+' .member').length == Ext.query('.m-'+m+' .member.inherited').length) {
-                    if (el.checked) {
-                        Ext.get(Ext.query('.m-'+m)[0]).setStyle({display: 'none'});
-                    } else {
-                        Ext.get(Ext.query('.m-'+m)[0]).setStyle({display: 'block'});
+                    var first = Ext.query('.m-'+m)[0];
+                    if (first) {
+                        if (el.checked) {
+                            Ext.get(Ext.query('.m-'+m)[0]).setStyle({display: 'none'});
+                        } else {
+                            Ext.get(Ext.query('.m-'+m)[0]).setStyle({display: 'block'});
+                        }                        
                     }
                 }
                 var t = el.checked ? 'ni' : 'member';

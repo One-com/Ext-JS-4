@@ -68,7 +68,7 @@
     
     @if not $supports-gradients or $compile-all {
         .#{$prefix}nlg .#{$prefix}panel-header {
-            background-image: theme-image($theme-name, 'panel-header/panel-header-bg.png');
+            background-image: theme-image($theme-name, 'panel-header/panel-header-bg.gif');
         }        
     }
     
@@ -131,31 +131,36 @@
         }
     }
 
-    .#{$prefix}panel-header-horizontal, .#{$prefix}window-header-horizontal {
-        .#{$prefix}panel-header-body, .#{$prefix}window-header-body {
+    .#{$prefix}panel-header-horizontal, .#{$prefix}window-header-horizontal, .#{$prefix}btn-group-header-horizontal {
+        .#{$prefix}panel-header-body, .#{$prefix}window-header-body, .#{$prefix}btn-group-header-body {
             width: 100%;
         }
     }
 
-    .#{$prefix}panel-header-vertical, .#{$prefix}window-header-vertical {
-        .#{$prefix}panel-header-body, .#{$prefix}window-header-body {
+    .#{$prefix}panel-header-vertical, .#{$prefix}window-header-vertical, .#{$prefix}btn-group-header-vertical {
+        .#{$prefix}panel-header-body, .#{$prefix}window-header-body, .#{$prefix}btn-group-header-body {
             height: 100%;
         }
     }
 
     // Vertical headers must be inline blocks so that they acquire width from the content 
-    .#{$prefix}panel-header-vertical, .#{$prefix}panel-header-vertical .#{$prefix}panel-header-body {
+    .#{$prefix}panel-header-vertical, .#{$prefix}panel-header-vertical .#{$prefix}panel-header-body,
+    .#{$prefix}btn-group-header-vertical, .#{$prefix}btn-group-header-vertical .#{$prefix}btn-group-header-body,
+    .#{$prefix}window-header-vertical, .#{$prefix}window-header-vertical .#{$prefix}window-header-body {
         display: -moz-inline-stack;
         display: inline-block;
     }
-    
+
     @if $include-ie {
-        // Attempt to get inline-block for IE6. Does't work. We still hardcode the width to 22px on IE6!
-        .#{$prefix}ie6 .#{$prefix}panel-header-vertical, .#{$prefix}ie7 .#{$prefix}panel-header-vertical, 
-        .#{$prefix}ie6 .#{$prefix}panel-header-vertical .#{$prefix}panel-header-body, .#{$prefix}ie7 .#{$prefix}panel-header-vertical .#{$prefix}panel-header-body {
-            zoom: 1;
-            display: inline;
-        }        
+        // Hack to work round IE<8's inability to display inline-block.
+        // Panel and ButtonGroup vertical header widths are 22px.
+        .#{$prefix}ie6, .#{$prefix}ie7 {
+            .#{$prefix}panel-header-vertical, .#{$prefix}panel-header-vertical .#{$prefix}panel-header-body,
+            .#{$prefix}btn-group-header-vertical, .#{$prefix}btn-group-header-vertical .#{$prefix}btn-group-header-body {
+                width: 16px;
+                zoom: 1;
+            }
+        }
     }
 
     .#{$prefix}panel-header-text, .#{$prefix}window-header-text {
@@ -269,7 +274,7 @@
 
     @if not $supports-gradients or $compile-all {
         .#{$prefix}nlg .#{$prefix}panel-header-vertical {
-            background-image: theme-image($theme-name, 'panel-header/panel-header-vertical-bg.png');
+            background-image: theme-image($theme-name, 'panel-header/panel-header-vertical-bg.gif');
         }    
     }
 

@@ -29,12 +29,13 @@ Ext.define(&#39;Ext.util.Cookies&#39;, {
      * created with default options.
      */
     set : function(name, value){
-        var argv = arguments;
-        var argc = arguments.length;
-        var expires = (argc &gt; 2) ? argv[2] : null;
-        var path = (argc &gt; 3) ? argv[3] : &#39;/&#39;;
-        var domain = (argc &gt; 4) ? argv[4] : null;
-        var secure = (argc &gt; 5) ? argv[5] : false;
+        var argv = arguments,
+            argc = arguments.length,
+            expires = (argc &gt; 2) ? argv[2] : null,
+            path = (argc &gt; 3) ? argv[3] : &#39;/&#39;,
+            domain = (argc &gt; 4) ? argv[4] : null,
+            secure = (argc &gt; 5) ? argv[5] : false;
+            
         document.cookie = name + &quot;=&quot; + escape(value) + ((expires === null) ? &quot;&quot; : (&quot;; expires=&quot; + expires.toGMTString())) + ((path === null) ? &quot;&quot; : (&quot;; path=&quot; + path)) + ((domain === null) ? &quot;&quot; : (&quot;; domain=&quot; + domain)) + ((secure === true) ? &quot;; secure&quot; : &quot;&quot;);
     },
 
@@ -49,11 +50,12 @@ Ext.define(&#39;Ext.util.Cookies&#39;, {
      * null if the cookie name does not exist.
      */
     get : function(name){
-        var arg = name + &quot;=&quot;;
-        var alen = arg.length;
-        var clen = document.cookie.length;
-        var i = 0;
-        var j = 0;
+        var arg = name + &quot;=&quot;,
+            alen = arg.length,
+            clen = document.cookie.length,
+            i = 0,
+            j = 0;
+            
         while(i &lt; clen){
             j = i + alen;
             if(document.cookie.substring(i, j) == arg){
@@ -71,10 +73,12 @@ Ext.define(&#39;Ext.util.Cookies&#39;, {
      * Removes a cookie with the provided name from the browser
      * if found by setting its expiration date to sometime in the past. 
      * @param {String} name The name of the cookie to remove
+     * @param {String} path (optional) The path for the cookie. This must be included if you included a path while setting the cookie.
      */
-    clear : function(name){
+    clear : function(name, path){
         if(this.get(name)){
-            document.cookie = name + &quot;=&quot; + &quot;; expires=Thu, 01-Jan-70 00:00:01 GMT&quot;;
+            path = path || &#39;/&#39;;
+            document.cookie = name + &#39;=&#39; + &#39;; expires=Thu, 01-Jan-70 00:00:01 GMT; path=&#39; + path;
         }
     },
     

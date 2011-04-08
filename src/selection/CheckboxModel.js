@@ -10,7 +10,12 @@
  */
 Ext.define('Ext.selection.CheckboxModel', {
     extend: 'Ext.selection.RowModel',
-
+    
+    /**
+     * @cfg {String} mode
+     * Modes of selection.
+     * Valid values are SINGLE, SIMPLE, and MULTI. Defaults to 'MULTI'
+     */
     mode: 'MULTI',
 
     /**
@@ -34,11 +39,11 @@ Ext.define('Ext.selection.CheckboxModel', {
 
     bindComponent: function() {
         this.sortable = false;
-        Ext.selection.CheckboxModel.superclass.bindComponent.apply(this, arguments);
-        
+        this.callParent(arguments);
+
         var view     = this.views[0],
             headerCt = view.headerCt;
-            
+
         if (this.injectCheckbox !== false) {
             if (this.injectCheckbox == 'first') {
                 this.injectCheckbox = 0;
@@ -58,7 +63,7 @@ Ext.define('Ext.selection.CheckboxModel', {
     toggleUiHeader: function(isChecked) {
         var view     = this.views[0],
             headerCt = view.headerCt,
-            checkHd  = headerCt.child('gridheader[isCheckerHd]');
+            checkHd  = headerCt.child('gridcolumn[isCheckerHd]');
 
         if (checkHd) {
             if (isChecked) {

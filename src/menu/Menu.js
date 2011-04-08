@@ -306,20 +306,29 @@ Ext.define('Ext.menu.Menu', {
         this.callParent(arguments);
     },
     
-    /**
-     * TODO: THIS SHOULD PROBABLY BE CALLED SOMETHING ELSE, OR PREFIXED WITH GET? WHAT WAS 3.3?
-     * 
-     * Returns a menu item from an {@link Ext.EventObject event} object (using {@link Ext.EventObject#getTarget getTarget}).
-     * @return {Ext.menu.Item/Ext.Button}
-     */
-    itemFromEvent: function(e) {
+    // private
+    getItemFromEvent: function(e) {
         return this.getChildByElement(e.getTarget());
     },
+
+    lookupComponent: function(cmp) {
+        var me = this;
+        
+        if (Ext.isString(cmp)) {
+            cmp = me.lookupItemFromString(cmp);
+        } else if (Ext.isObject(cmp)) {
+            cmp = me.lookupItemFromObject(cmp);
+        }
+        
+        // Apply our minWidth to all of our child components so it's accounted
+        // for in our VBox layout
+        cmp.minWidth = cmp.minWidth || me.minWidth;
+        
+        return cmp;
+    },
     
-    /**
-     * Creates an item form an object? document and possibly rename
-     */
-    itemFromObject: function(cmp) {
+    // private
+    lookupItemFromObject: function(cmp) {
         var me = this,
             prefix = Ext.baseCSSPrefix;
 
@@ -364,10 +373,8 @@ Ext.define('Ext.menu.Menu', {
         return cmp;
     },
     
-    /**
-     * Creates a new item from a string? rename?... and document
-     */
-    itemFromString: function(cmp) {
+    // private
+    lookupItemFromString: function(cmp) {
         return (cmp == 'separator' || cmp == '-') ?
             Ext.createWidget('menuseparator')
             : Ext.createWidget('menuitem', {
@@ -378,21 +385,17 @@ Ext.define('Ext.menu.Menu', {
             });
     },
 
-    lookupComponent: function(cmp) {
-        if (Ext.isString(cmp)) {
-            cmp = this.itemFromString(cmp);
-        } else if (Ext.isObject(cmp)) {
-            cmp = this.itemFromObject(cmp);
-        }
-        return cmp;
-    },
-
     onClick: function(e) {
         var me = this,
             item;
+        
+        if (me.disabled) {
+            e.stopEvent();
+            return;
+        }
 
         if ((e.getTarget() == me.focusEl.dom) || e.within(me.layout.getRenderTarget())) {
-            item = me.itemFromEvent(e) || me.activeItem;
+            item = me.getItemFromEvent(e) || me.activeItem;
 
             // Regain focus
             me.focus();
@@ -425,17 +428,27 @@ Ext.define('Ext.menu.Menu', {
         var me = this;
 
         me.deactivateActiveItem();
+        
+        if (me.disabled) {
+            return;
+        }
+        
         me.fireEvent('mouseleave', me, e);
     },
 
     onMouseOver: function(e) {
         var me = this,
-            item = me.itemFromEvent(e);
+            item = me.getItemFromEvent(e);
 
         if (me.parentMenu) {
             me.parentMenu.setActiveItem(me.parentItem);
             me.parentMenu.mouseMonitor.mouseenter();
         }
+        
+        if (me.disabled) {
+            return;
+        }
+        
         if (item) {
             me.setActiveItem(item);
             if (item.activated && item.expandMenu) {
@@ -450,15 +463,17 @@ Ext.define('Ext.menu.Menu', {
 
         if (item && (item != me.activeItem && item != me.focusedItem)) {
             me.deactivateActiveItem();
-            if (item.activate) {
-                item.activate();
-                if (item.activated) {
-                    me.activeItem = item;
+            if (me.canActivateItem(item)) {
+                if (item.activate) {
+                    item.activate();
+                    if (item.activated) {
+                        me.activeItem = item;
+                        me.focusedItem = item;
+                    }
+                } else {
+                    item.focus();
                     me.focusedItem = item;
                 }
-            } else {
-                item.focus();
-                me.focusedItem = item;
             }
             item.el.scrollIntoView(me.layout.getRenderTarget());
         }

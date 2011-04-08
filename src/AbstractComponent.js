@@ -372,7 +372,7 @@ and a property `descEl` referencing the `div` Element which contains the descrip
 
     /**
      * @cfg {Boolean} draggable
-     * Allows the component to be dragged via the touch event.
+     * Allows the component to be dragged.
      */
 
     /**
@@ -844,7 +844,7 @@ and a property `descEl` referencing the `div` Element which contains the descrip
                 // If a floating Component is configured to be constrained, but has no configured
                 // constrainTo setting, set its constrainTo to be it's ownerCt before rendering.
                 if ((me.constrain || me.constrainHeader) && !me.constrainTo) {
-                    me.constrainTo = me.floatParent ? me.floatParent.getTargetEl() : Ext.getBody();
+                    me.constrainTo = me.floatParent ? me.floatParent.getTargetEl() : me.container;
                 }
                 if (me.zIndexParent) {
                     me.zIndexParent.registerFloatingItem(me);
@@ -861,9 +861,10 @@ and a property `descEl` referencing the `div` Element which contains the descrip
             // This means DISPLAY, VISIBILITY or OFFSETS.
             me.el.setVisibilityMode(Ext.core.Element[me.hideMode.toUpperCase()]);
 
-            if(me.overCls){
-                me.el.addClsOnOver(me.overCls);
+            if (me.overCls) {
+                me.el.hover(me.addOverCls, me.removeOverCls, me);
             }
+            
             me.fireEvent('render', me);
 
             me.initContent();
@@ -983,7 +984,7 @@ and a property `descEl` referencing the `div` Element which contains the descrip
                 pos = me.floatParent.getTargetEl().translatePoints(xy[0], xy[1]);
             } else {
                 xy = me.el.getAlignToXY(me.container, 'c-c');
-                pos = me.el.translatePoints(xy[0], xy[1]);
+                pos = me.container.translatePoints(xy[0], xy[1]);
             }
             me.x = me.x === undefined ? pos.left: me.x;
             me.y = me.y === undefined ? pos.top: me.y;
@@ -1278,15 +1279,16 @@ and a property `descEl` referencing the `div` Element which contains the descrip
 
         // Convert the padding, margin and border properties from a space seperated string
         // into a proper style string
-        if (me.padding != undefined) {
+        if (me.padding !== undefined) {
             style.padding = Element.unitizeBox((me.padding === true) ? 5 : me.padding);
         }
 
-        if (me.margin != undefined) {
+        if (me.margin !== undefined) {
             style.margin = Element.unitizeBox((me.margin === true) ? 5 : me.margin);
         }
 
-        if (me.border != undefined) {
+        // Border styles on a Panel are different. Panel (and subclass) borders are handled by the theming.
+        if (me.border !== undefined && me.border !== false && !(me instanceof Ext.panel.Panel)) {
             style.borderWidth = Element.unitizeBox((me.border === true) ? 1 : me.border);
         }
 
@@ -1337,12 +1339,11 @@ and a property `descEl` referencing the `div` Element which contains the descrip
             property, listeners;
         if (afterRenderEvents) {
             for (property in afterRenderEvents) {
-                if (!afterRenderEvents.hasOwnProperty(property)) {
-                    continue;
-                }
-                listeners = afterRenderEvents[property];
-                if (me[property] && me[property].on) {
-                    me.mon(me[property], listeners);
+                if (afterRenderEvents.hasOwnProperty(property)) {
+                    listeners = afterRenderEvents[property];
+                    if (me[property] && me[property].on) {
+                        me.mon(me[property], listeners);
+                    }
                 }
             }
         }
@@ -1358,13 +1359,17 @@ and a property `descEl` referencing the `div` Element which contains the descrip
             selector;
 
         for (selector in selectors) {
-            if (!selectors.hasOwnProperty(selector) || !selectors[selector]) {
-                continue;
+            if (selectors.hasOwnProperty(selector) && selectors[selector]) {
+                this[selector] = Ext.get(Ext.DomQuery.selectNode(selectors[selector], el));
             }
-            this[selector] = Ext.get(Ext.DomQuery.selectNode(selectors[selector], el));
         }
     },
 
+    /**
+     * Tests whether this Component matches the selector string.
+     * @param {String} selector The selector string to test against.
+     * @return {Boolean} True if this Component matches the selector.
+     */
     is: function(selector) {
         return Ext.ComponentQuery.is(this, selector);
     },
@@ -1373,10 +1378,10 @@ and a property `descEl` referencing the `div` Element which contains the descrip
      * <p>Walks up the <code>ownerCt</code> axis looking for an ancestor Container which matches
      * the passed simple selector.</p>
      * <p>Example:<pre><code>
-var owningTabContainer = grid.up('tabcontainer');
+var owningTabPanel = grid.up('tabpanel');
 </code></pre>
      * @param {String} selector Optional. The simple selector to test.
-     * @return {Ext.container.Container} The matching ancestor Container (or <code>undefined</code> if no match was found).
+     * @return {Container} The matching ancestor Container (or <code>undefined</code> if no match was found).
      */
     up: function(selector) {
         var result = this.ownerCt;
@@ -1393,9 +1398,9 @@ var owningTabContainer = grid.up('tabcontainer');
     /**
      * <p>Returns the next sibling of this Component.</p>
      * <p>Optionally selects the next sibling which matches the passed {@link Ext.ComponentQuery ComponentQuery} selector.</p>
-     * <p>May also be refered to as <code><b>prev()</b></code></p>
-     * <p>Note that this is limited to siblings, and if no siblings of the item match, <code>null</code> is returned. Contract with {@link #nextNode}</p>
-     * @param selector Optional. A {@link Ext.ComponentQuery ComponentQuery} selector to filter the following items.
+     * <p>May also be refered to as <code><b>next()</b></code></p>
+     * <p>Note that this is limited to siblings, and if no siblings of the item match, <code>null</code> is returned. Contrast with {@link #nextNode}</p>
+     * @param {String} selector Optional. A {@link Ext.ComponentQuery ComponentQuery} selector to filter the following items.
      * @returns The next sibling (or the next sibling which matches the selector). Returns null if there is no matching sibling.
      */
     nextSibling: function(selector) {
@@ -1424,8 +1429,8 @@ var owningTabContainer = grid.up('tabcontainer');
      * <p>Returns the previous sibling of this Component.</p>
      * <p>Optionally selects the previous sibling which matches the passed {@link Ext.ComponentQuery ComponentQuery} selector.</p>
      * <p>May also be refered to as <code><b>prev()</b></code></p>
-     * <p>Note that this is limited to siblings, and if no siblings of the item match, <code>null</code> is returned. Contract with {@link #previousNode}</p>
-     * @param selector Optional. A {@link Ext.ComponentQuery ComponentQuery} selector to filter the preceding items.
+     * <p>Note that this is limited to siblings, and if no siblings of the item match, <code>null</code> is returned. Contrast with {@link #previousNode}</p>
+     * @param {String} selector Optional. A {@link Ext.ComponentQuery ComponentQuery} selector to filter the preceding items.
      * @returns The previous sibling (or the previous sibling which matches the selector). Returns null if there is no matching sibling.
      */
     previousSibling: function(selector) {
@@ -1453,8 +1458,8 @@ var owningTabContainer = grid.up('tabcontainer');
     /**
      * <p>Returns the previous node in the Component tree in tree traversal order.</p>
      * <p>Note that this is not limited to siblings, and if invoked upon a node with no matching siblings, will
-     * walk the tree in reverse order to attempt to find a match. Contract with {@link #previousSibling}.</p>
-     * @param selector Optional. A {@link Ext.ComponentQuery ComponentQuery} selector to filter the preceding nodes.
+     * walk the tree in reverse order to attempt to find a match. Contrast with {@link #previousSibling}.</p>
+     * @param {String} selector Optional. A {@link Ext.ComponentQuery ComponentQuery} selector to filter the preceding nodes.
      * @returns The previous node (or the previous node which matches the selector). Returns null if there is no matching node.
      */
     previousNode: function(selector, includeSelf) {
@@ -1466,7 +1471,7 @@ var owningTabContainer = grid.up('tabcontainer');
         if (includeSelf && node.is(selector)) {
             return node;
         }
-        
+
         result = this.prev(selector);
         if (result) {
             return result;
@@ -1489,8 +1494,8 @@ var owningTabContainer = grid.up('tabcontainer');
     /**
      * <p>Returns the next node in the Component tree in tree traversal order.</p>
      * <p>Note that this is not limited to siblings, and if invoked upon a node with no matching siblings, will
-     * walk the tree in reverse order to attempt to find a match. Contract with {@link #previousSibling}.</p>
-     * @param selector Optional. A {@link Ext.ComponentQuery ComponentQuery} selector to filter the following nodes.
+     * walk the tree to attempt to find a match. Contrast with {@link #pnextSibling}.</p>
+     * @param {String} selector Optional. A {@link Ext.ComponentQuery ComponentQuery} selector to filter the following nodes.
      * @returns The next node (or the next node which matches the selector). Returns null if there is no matching node.
      */
     nextNode: function(selector, includeSelf) {
@@ -1629,7 +1634,7 @@ alert(t.getXTypes());  // alerts 'component/field/textfield'
      */
     update : function(htmlOrData, loadScripts, cb) {
         var me = this;
-        
+
         if (me.tpl && !Ext.isString(htmlOrData)) {
             me.data = htmlOrData;
             if (me.rendered) {
@@ -1703,7 +1708,7 @@ alert(t.getXTypes());  // alerts 'component/field/textfield'
      */
     enable : function(silent) {
         var me = this;
-        
+
         if (me.rendered) {
             me.el.removeCls(me.disabledCls);
             me.el.dom.disabled = false;
@@ -1726,7 +1731,7 @@ alert(t.getXTypes());  // alerts 'component/field/textfield'
      */
     disable : function(silent) {
         var me = this;
-        
+
         if (me.rendered) {
             me.el.addCls(me.disabledCls);
             me.el.dom.disabled = true;
@@ -1768,7 +1773,8 @@ alert(t.getXTypes());  // alerts 'component/field/textfield'
 
     /**
      * Adds a CSS class to the top level element representing this component.
-     * @returns {Ext.Component} Returns the Component to allow method chaining.
+     * @param {String} cls The CSS class name to add
+     * @return {Ext.Component} Returns the Component to allow method chaining.
      */
     addCls : function() {
         var me = this,
@@ -1810,11 +1816,22 @@ alert(t.getXTypes());  // alerts 'component/field/textfield'
     },
     //</debug>
 
+    addOverCls: function() {
+        var me = this;
+        if (!me.disabled) {
+            me.el.addCls(me.overCls);
+        }  
+    },
+
+    removeOverCls: function() {
+        this.el.removeCls(this.overCls);
+    },
+
     addListener : function(element, listeners, scope, options) {
         var me = this,
             fn,
             option;
-        
+
         if (Ext.isString(element) && (Ext.isObject(listeners) || options && options.element)) {
             if (options.element) {
                 fn = listeners;
@@ -1827,11 +1844,10 @@ alert(t.getXTypes());  // alerts 'component/field/textfield'
                 }
 
                 for (option in options) {
-                    if (!options.hasOwnProperty(option)) {
-                        continue;
-                    }
-                    if (me.eventOptionsRe.test(option)) {
-                        listeners[option] = options[option];
+                    if (options.hasOwnProperty(option)) {
+                        if (me.eventOptionsRe.test(option)) {
+                            listeners[option] = options[option];
+                        }
                     }
                 }
             }
@@ -1910,9 +1926,15 @@ alert(t.getXTypes());  // alerts 'component/field/textfield'
     },
 
     // @private
-    onEnable : Ext.emptyFn,
+    onEnable : function() {
+        delete this.resetDisable;
+    },
+    
     // @private
-    onDisable : Ext.emptyFn,
+    onDisable : function() {
+        this.resetDisable = false;
+    },
+    
     // @private
     beforeDestroy : Ext.emptyFn,
     // @private
@@ -2232,13 +2254,20 @@ alert(t.getXTypes());  // alerts 'component/field/textfield'
      */
     destroy : function() {
         var me = this;
-        
+
         if (!me.isDestroyed) {
             if (me.fireEvent('beforedestroy', me) !== false) {
                 me.destroying = true;
                 me.beforeDestroy();
 
-                if (me.ownerCt && me.ownerCt.remove) {
+                if (me.floating) {
+                    delete me.floatParent;
+                    // A zIndexManager is stamped into a *floating* Component when it is added to a Container.
+                    // If it has no zIndexManager at render time, it is assigned to the global Ext.WindowMgr instance.
+                    if (me.zIndexManager) {
+                        me.zIndexManager.unregister(me);
+                    }
+                } else if (me.ownerCt && me.ownerCt.remove) {
                     me.ownerCt.remove(me, false);
                 }
 
@@ -2248,9 +2277,12 @@ alert(t.getXTypes());  // alerts 'component/field/textfield'
 
                 me.onDestroy();
 
+                // Attempt to destroy all plugins
+                Ext.destroy(me.plugins);
+
                 Ext.ComponentMgr.unregister(me);
                 me.fireEvent('destroy', me);
-                
+
                 me.mixins.state.destroy.call(me);
 
                 me.clearListeners();

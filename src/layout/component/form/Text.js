@@ -49,7 +49,7 @@ Ext.define('Ext.layout.component.form.Text', {
         var me = this,
             owner = me.owner,
             inputEl, value, calcWidth,
-            result = [width, null]; // Don't set height of single-line text fields
+            result = [width, height];
 
         if (owner.grow) {
             inputEl = owner.inputEl;
@@ -59,7 +59,8 @@ Ext.define('Ext.layout.component.form.Text', {
             calcWidth = inputEl.getTextWidth(value) + inputEl.getBorderWidth("lr") + inputEl.getPadding("lr");
 
             // Constrain
-            result[0] = Ext.Number.constrain(calcWidth, owner.growMin, Math.max(owner.growMin, Math.min(owner.growMax, width)));
+            result[0] = Ext.Number.constrain(calcWidth, owner.growMin,
+                    Math.max(owner.growMin, Math.min(owner.growMax, Ext.isNumber(width) ? width : Infinity)));
         }
 
         return result;

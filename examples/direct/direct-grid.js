@@ -29,7 +29,7 @@ Ext.onReady(function() {
                 directFn: TestAction.getGrid
             }
         },
-        headers: [{
+        columns: [{
             dataIndex: 'name',
             flex: 1,
             text: 'Name'

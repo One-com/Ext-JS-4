@@ -46,7 +46,7 @@ Ext.onReady(function(){
         
                 if (params.lang) {
                     // check if there's really a language with that language code
-                    var record = store.findRecord('code', params.lang);
+                    var record = store.findRecord('code', params.lang, null, null, null, true);
                     // if language was found in store assign it as current value in combobox
                     if (record) {
                         combo.setValue(record.data.language);
@@ -54,7 +54,7 @@ Ext.onReady(function(){
                 }            
             
                 if (params.lang) {
-                    var url = Ext.util.Format.format("../../src/core/src/locale/ext-lang-{0}.js", params.lang);
+                    var url = Ext.util.Format.format("../../locale/ext-lang-{0}.js", params.lang);
                 
                     Ext.Ajax.request({
                         url: url,
@@ -134,7 +134,7 @@ Ext.onReady(function(){
                      width: 380,
                      height: 203,
                      title:'Month Browser',
-                     headers:[{
+                     columns:[{
                          text: 'Month of the year',
                          dataIndex: 'month',
                          width: 240 

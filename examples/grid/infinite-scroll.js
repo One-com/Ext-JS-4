@@ -71,7 +71,7 @@ Ext.onReady(function(){
             trackOver: false
         },
         // grid columns
-        headers:[{xtype: 'rownumberer',width: 40, sortable: false},{
+        columns:[{xtype: 'rownumberer',width: 40, sortable: false},{
             // id assigned so we can apply custom css (e.g. .x-grid-cell-topic b { color:#333 })
             // TODO: This poses an issue in subclasses of Grid now because Headers are now Components
             // therefore the id will be registered in the ComponentMgr and conflict. Need a way to

@@ -219,6 +219,7 @@ Example usage:
  * @constructor
  * @param {Object} config The configuration options
  * @xtype tabpanel
+ * @markdown
  */
 Ext.define('Ext.tab.TabPanel', {
     extend: 'Ext.panel.Panel',
@@ -266,9 +267,9 @@ Ext.define('Ext.tab.TabPanel', {
 
     /**
      * @cfg {Boolean} deferredRender
-     * <p><tt>true</tt> by default to defer the rendering of child <tt>{@link Ext.Container#items items}</tt>
+     * <p><tt>true</tt> by default to defer the rendering of child <tt>{@link Ext.container.Container#items items}</tt>
      * to the browsers DOM until a tab is activated. <tt>false</tt> will render all contained
-     * <tt>{@link Ext.Container#items items}</tt> as soon as the {@link Ext.layout.container.Card layout}
+     * <tt>{@link Ext.container.Container#items items}</tt> as soon as the {@link Ext.layout.container.Card layout}
      * is rendered. If there is a significant amount of content or a lot of heavy controls being
      * rendered into panels that are not displayed by default, setting this to <tt>true</tt> might
      * improve performance.</p>
@@ -402,6 +403,16 @@ Ext.define('Ext.tab.TabPanel', {
             disabled: item.disabled,
             closable: item.closable,
             tabBar: me.tabBar
+        });
+        
+        item.on({
+            scope : me,
+            enable: function() {
+                item.tab.enable();
+            },
+            disable: function() {
+                item.tab.disable();
+            }
         });
 
         if (item.isPanel) {

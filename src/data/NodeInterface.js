@@ -68,7 +68,13 @@ Ext.define('Ext.data.NodeInterface', {
                 if (!keys['allowDrop']) {
                     newFields.push(fields.add(Ext.create('data.field', {name: 'allowDrop', type: 'boolean', defaultValue: true})));
                 }
-                                                               
+                if (!keys['allowDrag']) {
+                    newFields.push(fields.add(Ext.create('data.field', {name: 'allowDrag', type: 'boolean', defaultValue: true})));
+                }
+                if (!keys['loaded']) {
+                    newFields.push(fields.add(Ext.create('data.field', {name: 'loaded', type: 'boolean', defaultValue: false})));
+                }  
+                                                                    
                 jln = newFields.length;
                 // Set default values to all instances already out there
                 for (i = 0; i < iln; i++) {
@@ -361,6 +367,11 @@ Ext.define('Ext.data.NodeInterface', {
 
                         node.updateInfo();
                         
+                        // As soon as we append a child to this node, we are loaded
+                        if (!me.isLoaded()) {
+                            me.set('loaded', true);                            
+                        }
+                        
                         if (suppressEvents !== true) {
                             me.fireEvent("append", me, node, index);
 
@@ -540,7 +551,10 @@ Ext.define('Ext.data.NodeInterface', {
                     }
                     
                     node.updateInfo();
-                    
+                    if (!me.isLoaded()) {
+                        me.set('loaded', true);                            
+                    }
+
                     if (suppressEvents !== true) {
                         me.fireEvent("insert", me, node, refNode);
 
@@ -763,7 +777,7 @@ Ext.define('Ext.data.NodeInterface', {
                         i, n;
                     
                     if (ln > 0) {
-                        cs.sort(sortFn);
+                        Ext.Array.sort(cs, sortFn);
                         for (i = 0; i < ln; i++) {
                             n = cs[i];
                             n.previousSibling = cs[i-1];
@@ -792,12 +806,27 @@ Ext.define('Ext.data.NodeInterface', {
                     return this.get('expanded');
                 },
                 
+                isLoaded: function() {
+                    return this.get('loaded');
+                },
+                
                 isRoot: function() {
                     return !this.parentNode;
                 },
                 
+                isVisible: function() {
+                    var parent = this.parentNode;
+                    while (parent) {
+                        if (!parent.isExpanded()) {
+                            return false;
+                        }
+                        parent = parent.parentNode;
+                    }
+                    return true;
+                },
+                
                 expand: function(callback, scope) {
-                    if (!this.isLeaf() && !this.expanding) {
+                    if (!this.isLeaf() && !this.expanding && !this.isExpanded()) {
                         this.expanding = true;
                         this.fireEvent('beforeexpand', this, function(records) {
                             delete this.expanding;
@@ -811,7 +840,7 @@ Ext.define('Ext.data.NodeInterface', {
                 },
 
                 collapse: function(callback, scope) {
-                    if (!this.isLeaf() && this.isExpanded()) {
+                    if (!this.isLeaf() && !this.collapsing && this.isExpanded()) {
                         this.collapsing = true;
                         this.fireEvent('beforecollapse', this, function(records) {
                             var ln = records.length,

@@ -563,8 +563,8 @@ Ext.define(&#39;Ext.button.Button&#39;, {
 
         me.disabledCls = me.disabledCls + &#39; &#39; + me.baseCls + &#39;-&#39; + me.ui + &#39;-disabled&#39;;
         me.overCls = me.baseCls + &#39;-&#39; + me.ui + &#39;-over&#39;;
-        me.pressedCls = me.baseCls + &#39;-&#39; + me.ui + &#39;-pressed&#39;;
         me.focusCls = me.baseCls + &#39;-&#39; + me.ui + &#39;-focus&#39;;
+        me.pressedCls = me.baseCls + &#39;-&#39; + me.ui + &#39;-pressed&#39;;
 
         // only add the icon class if the button has an icon
         if (me.iconCls || me.icon) {
@@ -1055,14 +1055,6 @@ Ext.define(&#39;Ext.button.Button&#39;, {
         }
     },
 
-    focus: function() {
-        this.btnEl.focus();
-    },
-
-    blur: function() {
-        this.btnEl.blur();
-    },
-
     // private
     onFocus: function(e) {
         var me = this;
@@ -1070,6 +1062,7 @@ Ext.define(&#39;Ext.button.Button&#39;, {
             me.el.addCls([me.baseCls + &#39;-focus&#39;, me.focusCls]);
         }
     },
+    
     // private
     onBlur: function(e) {
         var me = this;
@@ -1147,11 +1140,11 @@ Ext.define(&#39;Ext.button.Button&#39;, {
             if (!btn.toggleGroup) {
                 return;
             }
-            var g = groups[btn.toggleGroup];
-            if (!g) {
-                g = groups[btn.toggleGroup] = [];
+            var group = groups[btn.toggleGroup];
+            if (!group) {
+                group = groups[btn.toggleGroup] = [];
             }
-            g.push(btn);
+            group.push(btn);
             btn.on(&#39;toggle&#39;, toggleGroup);
         },
 
@@ -1159,9 +1152,9 @@ Ext.define(&#39;Ext.button.Button&#39;, {
             if (!btn.toggleGroup) {
                 return;
             }
-            var g = groups[btn.toggleGroup];
-            if (g) {
-                g.remove(btn);
+            var group = groups[btn.toggleGroup];
+            if (group) {
+                Ext.Array.remove(group, btn);
                 btn.un(&#39;toggle&#39;, toggleGroup);
             }
         },

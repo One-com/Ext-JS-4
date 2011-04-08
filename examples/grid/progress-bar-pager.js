@@ -95,7 +95,7 @@ Ext.onReady(function(){
     var grid = Ext.create('Ext.grid.GridPanel', {
         title:'Progress Bar Pager',
         store: store,
-        headers: [{
+        columns: [{
                 id:'company',
                 text: 'Company',
                 sortable: true,

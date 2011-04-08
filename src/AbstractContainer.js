@@ -328,11 +328,20 @@ items: [
             layout = me.getLayout();
 
         if (me.rendered && layout && !me.suspendLayout) {
-            if (!Ext.isNumber(me.width) || (!Ext.isNumber(me.height)) && me.componentLayout.layoutBusy !== true) {
-                me.doComponentLayout();
+            // If either dimension is being auto-set, then it requires a ComponentLayout to be run.
+            if (!Ext.isNumber(me.width) || !Ext.isNumber(me.height)) {
+                // Only run the ComponentLayout if it is not already in progress
+                if (me.componentLayout.layoutBusy !== true) {
+                    me.doComponentLayout();
+                    if (me.componentLayout.layoutCancelled === true) {
+                        layout.layout();
+                    }
+                }
             }
+            // Both dimensions defined, run a ContainerLayout
             else {
-                if (me.layout.layoutBusy !== true) {
+                // Only run the ContainerLayout if it is not already in progress
+                if (layout.layoutBusy !== true) {
                     layout.layout();
                 }
             }
@@ -677,7 +686,8 @@ for more details.
     //  followed by the results of that child's getRefItems call.
     //  Floating child items are appended after internal child items.
     getRefItems : function(deep) {
-        var items = this.items.items,
+        var me = this,
+            items = me.items.items,
             len = items.length,
             i = 0,
             item,
@@ -694,8 +704,8 @@ for more details.
 
         // Append floating items to the list.
         // These will only be present after they are rendered.
-        if (this.floatingItems) {
-            result.push.apply(result, this.floatingItems.accessList);
+        if (me.floatingItems && me.floatingItems.accessList) {
+            result.push.apply(result, me.floatingItems.accessList);
         }
 
         return result;
@@ -830,5 +840,27 @@ for more details.
             me.floatingItems
         );
         me.callParent();
+    },
+    //@private
+    // Enable all immediate children that was previously disabled
+    onEnable: function() {
+        Ext.Array.each(this.getRefItems(), function(item) {
+            if (item.resetDisable) {
+                item.enable();
+                
+            }
+        });
+        this.callParent();        
+    },
+    // @private
+    // Disable all immediate children that was previously disabled
+    onDisable: function() {
+        Ext.Array.each(this.getRefItems(), function(item) {
+            if (item.resetDisable !== false && !item.disabled) {
+                item.disable();
+                item.resetDisable = true;
+            }
+        });
+        this.callParent();
     }
 });

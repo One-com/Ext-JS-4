@@ -31,7 +31,7 @@ Ext.onReady(function(){
     });
 
     // Column Model shortcut array
-    var headers = [
+    var columns = [
         { id : 'name',      flex:  1,  header: "Record Name", sortable: true, dataIndex: 'name'},
         {header: "column1", width: 50, sortable: true, dataIndex: 'column1'},
         {header: "column2", width: 50, sortable: true, dataIndex: 'column2'}
@@ -42,12 +42,12 @@ Ext.onReady(function(){
         viewConfig: {
             plugins: {
                 ddGroup: 'GridExample',
-                ptype: 'gridviewdd',
-                acceptDrops: false
+                ptype: 'gridviewdragdrop',
+                enableDrop: false
             }
         },
         store            : gridStore,
-        headers          : headers,
+        columns          : columns,
         enableDragDrop   : true,
         stripeRows       : true,
         width            : 325,

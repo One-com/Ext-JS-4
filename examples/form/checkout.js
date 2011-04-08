@@ -1,7 +1,7 @@
 Ext.require([
     'Ext.form.*',
     'Ext.data.*',
-    'Ext.window.MessageBoxWindow'
+    'Ext.window.MessageBox'
 ]);
 
 Ext.onReady(function() {

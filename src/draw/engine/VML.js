@@ -770,7 +770,7 @@ Ext.define('Ext.draw.engine.VML', {
         }
 
         if (me.viewBoxShift) {
-            matrix.scale(me.viewBoxShift.scale, me.viewBoxShift.scale, 0, 0);
+            matrix.scale(me.viewBoxShift.scale, me.viewBoxShift.scale, -1, -1);
             matrix.add(1, 0, 0, 1, me.viewBoxShift.dx, me.viewBoxShift.dy);
         }
 

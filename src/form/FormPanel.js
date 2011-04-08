@@ -61,7 +61,7 @@ For more information on form validation see the following:
 __Form Submission__
 
 By default, Ext Forms are submitted through Ajax, using {@link Ext.form.action.Action}. See the documentation for
-{@link Ext.form.Basic} for deetails.
+{@link Ext.form.Basic} for details.
 
 __Example usage:__
 
@@ -139,7 +139,7 @@ Ext.define('Ext.form.FormPanel', {
      * Minimum width of all footer toolbar buttons in pixels (defaults to <tt>75</tt> for FormPanel). If set, this will
      * be used as the default value for the <tt>{@link Ext.button.Button#minWidth}</tt> config of
      * each Button added to the <b>footer toolbar</b>. Will be ignored for buttons that have this value configured some
-     * other way, e.g. in their own config object or via the {@link Ext.Container#config-defaults defaults} of
+     * other way, e.g. in their own config object or via the {@link Ext.container.Container#config-defaults defaults} of
      * their parent container.
      */
     minButtonWidth: 75,

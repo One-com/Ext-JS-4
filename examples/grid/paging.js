@@ -7,12 +7,15 @@ Ext.require([
     'Ext.util.*',
     'Ext.toolbar.PagingToolbar',
     'Ext.ux.PreviewPlugin',
-    'Ext.ModelMgr'
+    'Ext.ModelMgr',
+    'Ext.tip.QuickTips'
 ]);
 
 
 
 Ext.onReady(function(){
+    Ext.tip.QuickTips.init();
+
     Ext.regModel('ForumThread', {
         fields: [
             'title', 'forumtitle', 'forumid', 'author',
@@ -78,7 +81,7 @@ Ext.onReady(function(){
             }]
         },
         // grid columns
-        headers:[{
+        columns:[{
             // id assigned so we can apply custom css (e.g. .x-grid-cell-topic b { color:#333 })
             // TODO: This poses an issue in subclasses of Grid now because Headers are now Components
             // therefore the id will be registered in the ComponentMgr and conflict. Need a way to

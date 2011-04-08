@@ -209,7 +209,7 @@ Ext.define('Ext.form.Number', {
      */
     getErrors: function(value) {
         var me = this,
-            errors = Ext.form.Number.superclass.getErrors.apply(me, arguments),
+            errors = me.callParent(arguments),
             format = Ext.String.format,
             num;
         

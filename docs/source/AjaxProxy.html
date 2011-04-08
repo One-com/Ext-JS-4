@@ -230,21 +230,6 @@ Ext.define(&#39;Ext.data.AjaxProxy&#39;, {
      * @cfg {Object} headers Any headers to add to the Ajax request. Defaults to &lt;tt&gt;undefined&lt;/tt&gt;.
      */
     
-    constructor: function() {
-        this.addEvents(
-            <a name="event-Ext.data.AjaxProxy-exception"></a>/**
-             * @event exception
-             * Fires when the server returns an exception
-             * @param {Ext.data.Proxy} this
-             * @param {Object} response The response from the AJAX request
-             * @param {Ext.data.Operation} operation The operation that triggered request
-             */
-            &#39;exception&#39;
-        );
-        
-        Ext.data.AjaxProxy.superclass.constructor.apply(this, arguments);    
-    },
-    
     /**
      * @ignore
      */

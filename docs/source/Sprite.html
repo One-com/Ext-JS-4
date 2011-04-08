@@ -216,6 +216,25 @@ Ext.define(&#39;Ext.draw.Sprite&#39;, {
         return this;
     },
 
+    <a name="method-Ext.draw.Sprite-remove"></a>/**
+     * Remove the sprite.
+     */
+    remove: function() {
+        if (this.surface) {
+            this.surface.remove(this);
+            return true;
+        }
+        return false;
+    },
+    
+    <a name="method-Ext.draw.Sprite-destroy"></a>/**
+     * Removes the sprite and clears all listeners.
+     */
+    destroy: function() {
+        this.remove();
+        this.clearListeners();
+    },
+
     <a name="method-Ext.draw.Sprite-redraw"></a>/**
      * Redraw the sprite.
      * @return {Ext.draw.Sprite} this

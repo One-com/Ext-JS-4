@@ -54,6 +54,8 @@ Ext.Number = {
  * @param {Mixed} value Should be a number, but any type will be handled appropriately
  * @param {Number} defaultValue The value to return if the original value is non-numeric
  * @return {Number} Value, if numeric, else defaultValue
+ * @member Ext
+ * @method num
  */
 Ext.num = function(v, defaultValue) {
     v = Number(Ext.isEmpty(v) || Ext.isArray(v) || typeof v === 'boolean' || (typeof v === 'string' && Ext.String.trim(v).length === 0) ? NaN : v);

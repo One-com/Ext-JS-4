@@ -215,20 +215,6 @@ Ext.define('Ext.form.FieldContainer', {
         }
     },
 
-    //private
-    onDisable: function() {
-        Ext.Array.forEach(this.query('[isFormField]'), function(field) {
-            field.disable();
-        });
-    },
-
-    //private
-    onEnable: function() {
-        Ext.Array.forEach(this.query('[isFormField]'), function(field) {
-            field.enable();
-        });
-    },
-
 
     /**
      * @private Fired when the error message of any field within the container changes, and updates the
@@ -240,32 +226,36 @@ Ext.define('Ext.form.FieldContainer', {
             invalidFields = Ext.Array.filter(me.query('[isFormField]'), function(field) {
                 return field.hasActiveError();
             }),
-            newError = me.buildCombinedError(invalidFields);
+            newErrors = me.getCombinedErrors(invalidFields);
 
-        if (newError) {
-            me.setActiveError(newError);
+        if (newErrors) {
+            me.setActiveErrors(newErrors);
         } else {
             me.unsetActiveError();
         }
 
-        if (oldError !== newError) {
+        if (oldError !== me.getActiveError()) {
             me.doComponentLayout();
         }
     },
 
     /**
-     * Takes an Array of invalid {@link Ext.form.Field} objects and builds a combined error message
-     * string from them. Defaults to placing each error message on a new line, each one preceded by
-     * the field name and a colon. This can be overridden to provide custom combined error message
-     * handling, for instance changing the output markup format or sorting the array (it is sorted
-     * in order of appearance by default).
+     * Takes an Array of invalid {@link Ext.form.Field} objects and builds a combined list of error
+     * messages from them. Defaults to prepending each message by the field name and a colon. This
+     * can be overridden to provide custom combined error message handling, for instance changing
+     * the format of each message or sorting the array (it is sorted in order of appearance by default).
      * @param {Array} invalidFields An Array of the sub-fields which are currently invalid.
-     * @return {String} The combined error message
+     * @return {Array} The combined list of error messages
      */
-    buildCombinedError: function(invalidFields) {
-        return Ext.Array.map(invalidFields, function(field) {
-            return field.getFieldLabel() + ': ' + field.getActiveError();
-        }).join('<br>');
+    getCombinedErrors: function(invalidFields) {
+        var forEach = Ext.Array.forEach,
+            errors = [];
+        forEach(invalidFields, function(field) {
+            forEach(field.getActiveErrors(), function(error) {
+                errors.push(field.getFieldLabel() + ': ' + error);
+            });
+        });
+        return errors;
     },
 
     getTargetEl: function() {

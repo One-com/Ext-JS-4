@@ -161,7 +161,6 @@ Ext.define(&#39;Ext.data.XmlReader&#39;, {
 
     <a name="cfg-Ext.data.XmlReader-record"></a>/**
      * @cfg {String} record The DomQuery path to the repeated element which contains record information.
-     * &lt;b&gt;This is an alias for the {@link #root} config option.&lt;/b&gt;
      */
 
     createAccessor: function() {
@@ -249,6 +248,12 @@ Ext.define(&#39;Ext.data.XmlReader&#39;, {
      */
     extractData: function(root) {
         var recordName = this.record;
+        
+        //&lt;debug&gt;
+        if (!recordName) {
+            throw &#39;record is a required parameter.&#39;;
+        }
+        //&lt;/debug&gt;
         
         if (recordName != root.nodeName) {
             root = Ext.DomQuery.select(recordName, root);

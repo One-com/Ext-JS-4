@@ -40,6 +40,55 @@ Ext.define(&#39;Ext.draw.Component&#39;, {
      * Turn on autoSize support which will set the bounding div&#39;s size to the natural size of the contents. Defaults to false.
      */
     autoSize: false,
+    
+    <a name="cfg-Ext.draw.Component-gradients"></a>/**
+     * @cfg {Array} gradients (optional) Define a set of gradients that can be used as `fill` property in sprites.
+     * The gradients array is an array of objects with the following properties:
+     *
+     * &lt;ul&gt;
+     * &lt;li&gt;&lt;strong&gt;id&lt;/strong&gt; - string - The unique name of the gradient.&lt;/li&gt;
+     * &lt;li&gt;&lt;strong&gt;angle&lt;/strong&gt; - number, optional - The angle of the gradient in degrees.&lt;/li&gt;
+     * &lt;li&gt;&lt;strong&gt;stops&lt;/strong&gt; - object - An object with numbers as keys (from 0 to 100) and style objects
+     * as values&lt;/li&gt;
+     * &lt;/ul&gt;
+     * 
+     
+     For example:
+     
+     <br><span style="display: none">**/</span>        gradients: [{
+            id: &#39;gradientId&#39;,
+            angle: 45,
+            stops: {
+                0: {
+                    color: &#39;#555&#39;
+                },
+                100: {
+                    color: &#39;#ddd&#39;
+                }
+            }
+        },  {
+            id: &#39;gradientId2&#39;,
+            angle: 0,
+            stops: {
+                0: {
+                    color: &#39;#590&#39;
+                },
+                20: {
+                    color: &#39;#599&#39;
+                },
+                100: {
+                    color: &#39;#ddd&#39;
+                }
+            }
+        }]
+     <br><span style="display: none">/**</span>     
+     Then the sprites can use `gradientId` and `gradientId2` by setting the fill attributes to those ids, for example:
+     
+     <br><span style="display: none">**/</span>        sprite.setAttributes({
+            fill: &#39;url(#gradientId)&#39;
+        }, true);
+     <br><span style="display: none">/**</span>     
+     */
 
     initComponent: function() {
         this.callParent(arguments);

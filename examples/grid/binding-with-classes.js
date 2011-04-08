@@ -78,7 +78,7 @@ Ext.Loader.onReady(function() {
             // Pass in a column model definition
             // Note that the DetailPageURL was defined in the record definition but is not used
             // here. That is okay.
-            this.headers = [
+            this.columns = [
                 {text: "Author", width: 120, dataIndex: 'Author', sortable: true},
                 {text: "Title", flex: 1, dataIndex: 'Title', sortable: true},
                 {text: "Manufacturer", width: 115, dataIndex: 'Manufacturer', sortable: true},

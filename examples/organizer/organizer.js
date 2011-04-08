@@ -11,10 +11,10 @@ Ext.require([
 Ext.require([
     'Ext.data.TreeStore',
     'Ext.data.AjaxProxy',
-    'Ext.tree.TreeHeader',
+    'Ext.tree.TreeColumn',
     'Ext.tree.TreeView',
     'Ext.tree.SelectionModel',
-    'Ext.tree.TreeViewDDPlugin'
+    'Ext.tree.plugin.TreeViewDragDrop'
 ]);
 
 Ext.onReady(function() {

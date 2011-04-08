@@ -1,4 +1,7 @@
-Ext.require('Ext.chart.*');
+Ext.require([
+    'Ext.window.Window',
+    'Ext.chart.*'
+]);
 
 Ext.onReady(function () {
     var chart;
@@ -64,7 +67,6 @@ Ext.onReady(function () {
     Ext.create('Ext.Window', {
         width: 800,
         height: 600,
-        hidden: false,
         maximizable: true,
         title: 'Live Updated Chart',
         layout: 'fit',
@@ -147,7 +149,7 @@ Ext.onReady(function () {
                 }
             }]
         }]
-    });
+    }).show();
     chart = Ext.getCmp('chartCmp');
     var timeAxis = chart.axes.get(1);
 });

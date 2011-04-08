@@ -100,13 +100,22 @@ Ext.define('Ext.tree.TreeViewDropZone', {
             targetNode = view.getRecord(node),
             draggedRecords = data.records,
             dataLength = draggedRecords.length,
-            i;
+            ln = draggedRecords.length,
+            i, record;
 
         // No drop position, or dragged records: invalid drop point
         if (!(targetNode && position && dataLength)) {
             return false;
         }
 
+        // If the targetNode is within the folder we are dragging
+        for (i = 0; i < ln; i++) {
+            record = draggedRecords[i];
+            if (record.isNode && record.contains(targetNode)) {
+                return false;
+            }
+        }
+        
         // Respect the allowDrop field on Tree nodes
         if (position === 'append' && targetNode.get('allowDrop') == false) {
             return false;
@@ -183,9 +192,11 @@ Ext.define('Ext.tree.TreeViewDropZone', {
     },
 
     handleNodeDrop : function(data, targetNode, position) {
-        var view = this.view,
+        var me = this,
+            view = me.view,
             parentNode = targetNode.parentNode,
             store = view.getStore(),
+            recordDomNodes = [],
             records, i, len,
             insertionMethod, argList,
             needTargetExpand,
@@ -202,7 +213,7 @@ Ext.define('Ext.tree.TreeViewDropZone', {
         }
 
         // Cancel any pending expand operation
-        this.cancelExpand();
+        me.cancelExpand();
 
         // Grab a reference to the correct node insertion method.
         // Create an arg list array intended for the apply method of the
@@ -237,6 +248,18 @@ Ext.define('Ext.tree.TreeViewDropZone', {
             for (i = 0, len = data.records.length; i < len; i++) {
                 argList[0] = data.records[i];
                 insertionMethod.apply(targetNode, argList);
+                
+                if (Ext.enableFx && me.dropHighlight) {
+                    recordDomNodes.push(view.getNode(argList[0]));
+                }
+            }
+            
+            // Kick off highlights after everything's been inserted, so they are
+            // more in sync without insertion/render overhead.
+            if (Ext.enableFx && me.dropHighlight) {
+                Ext.Array.forEach(recordDomNodes, function(n) {
+                    Ext.fly(n.firstChild).highlight(me.dropHighlightColor);
+                });
             }
         };
 

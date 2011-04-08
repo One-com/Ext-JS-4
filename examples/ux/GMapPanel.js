@@ -8,7 +8,7 @@ Ext.define('Ext.ux.GMapPanel', {
     
     alias: 'widget.gmappanel',
     
-    requires: ['Ext.window.MessageBoxWindow'],
+    requires: ['Ext.window.MessageBox'],
     
     initComponent : function(){
         

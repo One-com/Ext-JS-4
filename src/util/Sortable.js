@@ -1,7 +1,7 @@
 /**
  * @class Ext.util.Sortable
 
-A mixin which allows a data component to be sorted. This is used by e.g. {@link Ext.data.Store} and {@link Ext.form.TreeStore}.
+A mixin which allows a data component to be sorted. This is used by e.g. {@link Ext.data.Store} and {@link Ext.data.TreeStore}.
 
 **NOTE**: This mixin is mainly for internal library use and most users should not need to use it directly. It
 is more likely you will want to use one of the component classes that import this mixin, such as

@@ -13,7 +13,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
     extend: &#39;Ext.container.Container&#39;,
     uses: [
         &#39;Ext.grid.ColumnLayout&#39;,
-        &#39;Ext.grid.Header&#39;,
+        &#39;Ext.grid.column.Column&#39;,
         &#39;Ext.menu.Menu&#39;,
         &#39;Ext.menu.CheckItem&#39;,
         &#39;Ext.menu.Separator&#39;,
@@ -32,7 +32,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
      * This is so that it has more priority over things like toolbars.
      */
     weight: 100,
-    defaultType: &#39;gridheader&#39;,
+    defaultType: &#39;gridcolumn&#39;,
     <a name="cfg-Ext.grid.HeaderContainer-defaultWidth"></a>/**
      * @cfg {Number} defaultWidth
      * Width of the header if no width or flex is specified. Defaults to 100.
@@ -55,7 +55,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
     // private; will probably be removed by 4.0
     triStateSort: false,
     
-    locked: false,
+    ddLock: false,
     
     dragging: false,
 
@@ -75,9 +75,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
     sortable: true,
 
     initComponent: function() {
-        var me = this,
-            resizer,
-            reorderer;
+        var me = this;
             
         me.headerCounter = 0;
         me.plugins = me.plugins || [];
@@ -88,9 +86,9 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
         // Only set up a Resizer and Reorderer for the topmost HeaderContainer.
         // Nested Group Headers are themselves HeaderContainers
         if (!me.isHeader) {
-            resizer   = new Ext.grid.HeaderResizer();
-            reorderer = new Ext.grid.HeaderReorderer();
-            me.plugins.push(reorderer, resizer);
+            me.resizer   = new Ext.grid.HeaderResizer();
+            me.reorderer = new Ext.grid.HeaderReorderer();
+            me.plugins.push(me.reorderer, me.resizer);
         }
 
         // Base headers do not need a box layout
@@ -115,7 +113,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
             <a name="event-Ext.grid.HeaderContainer-headerresize"></a>/**
              * @event headerresize
              * @param {Ext.grid.HeaderContainer} ct
-             * @param {Ext.grid.Header} header
+             * @param {Ext.grid.column.Column} header
              * @param {Number} width
              */
             &#39;headerresize&#39;,
@@ -123,7 +121,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
             <a name="event-Ext.grid.HeaderContainer-headerclick"></a>/**
              * @event headerclick
              * @param {Ext.grid.HeaderContainer} ct
-             * @param {Ext.grid.Header} header
+             * @param {Ext.grid.column.Column} header
              * @param {Ext.EventObject} e
              * @param {HTMLElement} t
              */
@@ -132,7 +130,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
             <a name="event-Ext.grid.HeaderContainer-headerclick"></a>/**
              * @event headerclick
              * @param {Ext.grid.HeaderContainer} ct
-             * @param {Ext.grid.Header} header
+             * @param {Ext.grid.column.Column} header
              * @param {Ext.EventObject} e
              * @param {HTMLElement} t
              */
@@ -141,7 +139,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
             <a name="event-Ext.grid.HeaderContainer-headermove"></a>/**
              * @event headermove
              * @param {Ext.grid.HeaderContainer} ct
-             * @param {Ext.grid.Header} header
+             * @param {Ext.grid.column.Column} header
              * @param {Number} fromIdx
              * @param {Number} toIdx
              */
@@ -149,23 +147,28 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
             <a name="event-Ext.grid.HeaderContainer-headerhide"></a>/**
              * @event headerhide
              * @param {Ext.grid.HeaderContainer} ct
-             * @param {Ext.grid.Header} header
+             * @param {Ext.grid.column.Column} header
              */
             &#39;headerhide&#39;,
             <a name="event-Ext.grid.HeaderContainer-headershow"></a>/**
              * @event headershow
              * @param {Ext.grid.HeaderContainer} ct
-             * @param {Ext.grid.Header} header
+             * @param {Ext.grid.column.Column} header
              */
             &#39;headershow&#39;,
             <a name="event-Ext.grid.HeaderContainer-sortchange"></a>/**
              * @event sortchange
              * @param {Ext.grid.HeaderContainer} ct
-             * @param {Ext.grid.Header} header
+             * @param {Ext.grid.column.Column} header
              * @param {String} direction
              */
             &#39;sortchange&#39;
         );
+    },
+
+    onDestroy: function() {
+        Ext.destroy(this.resizer, this.reorderer);
+        this.callParent();
     },
 
     // Invalidate column cache on add
@@ -197,7 +200,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
             hd;
 
         if (first) {
-            hd = this.down(&#39;gridheader[dataIndex=&#39; + first.property  +&#39;]&#39;);
+            hd = this.down(&#39;gridcolumn[dataIndex=&#39; + first.property  +&#39;]&#39;);
             if (hd) {
                 hd.setSortState(first.direction, false, true);
             }
@@ -207,7 +210,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
     afterLayout: function() {
         if (!this.isHeader) {
             var me = this,
-                topHeaders = me.query(&#39;&gt;gridheader:not([hidden])&#39;),
+                topHeaders = me.query(&#39;&gt;gridcolumn:not([hidden])&#39;),
                 viewEl;
 
             me.callParent(arguments);
@@ -347,16 +350,16 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
      * @private
      */
     tempLock: function() {
-        this.locked = true;
+        this.ddLock = true;
         Ext.Function.defer(function() {
-            this.locked = false;
+            this.ddLock = false;
         }, 200, this);
     },
 
-    onHeaderResize: function(header, w) {
+    onHeaderResize: function(header, w, suppressFocus) {
         this.tempLock();
         if (this.view &amp;&amp; this.view.rendered) {
-            this.view.onHeaderResize(header, w);
+            this.view.onHeaderResize(header, w, suppressFocus);
         }
         this.fireEvent(&#39;headerresize&#39;, this, header, w);
     },
@@ -394,7 +397,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
     },
 
     // remove the trigger open class when the menu is hidden
-    onMenuHide: function() {
+    onMenuDeactivate: function() {
         var menu = this.getMenu();
         // TODO: remove coupling to Header&#39;s titleContainer el
         menu.activeHeader.titleContainer.removeCls(this.headerOpenCls);
@@ -435,7 +438,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
             this.menu = new Ext.menu.Menu({
                 items: this.getMenuItems(),
                 listeners: {
-                    hide: this.onMenuHide,
+                    deactivate: this.onMenuDeactivate,
                     scope: this
                 }
             });
@@ -498,7 +501,7 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
         var menuItems = [],
             i = 0,
             item,
-            items = headerContainer.query(&#39;&gt;gridheader[hideable]&#39;),
+            items = headerContainer.query(&#39;&gt;gridcolumn[hideable]&#39;),
             itemsLn = items.length,
             menuItem;
 
@@ -513,6 +516,9 @@ Ext.define(&#39;Ext.grid.HeaderContainer&#39;, {
                 checkHandler: this.onColumnCheckChange,
                 scope: this
             });
+            if (itemsLn === 1) {
+                menuItem.disabled = true;
+            }
             menuItems.push(menuItem);
 
             // If the header is ever destroyed - for instance by dragging out the last remaining sub header,

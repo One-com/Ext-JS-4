@@ -20,7 +20,6 @@ Ext.onReady(function(){
         renderTo: Ext.getBody(),
         labelWidth: 75,
         width: 350,
-        buttonAlign: 'right',
         border: false,
         bodyPadding: 10,
         defaults: {
@@ -38,27 +37,32 @@ Ext.onReady(function(){
             fieldLabel: 'Birthdate',
             blankText: 'Birthdate is required'
         }],
-        buttons: [{
-            text: 'Save',
-            handler: function(){
-                if(fp.getForm().isValid()){
-                    var sb = Ext.getCmp('form-statusbar');
-                    sb.showBusy('Saving form...');
-                    fp.getEl().mask();
-                    fp.getForm().submit({
-                        url: 'fake.php',
-                        success: function(){
-                            sb.setStatus({
-                                text:'Form saved!',
-                                iconCls:'',
-                                clear: true
-                            });
-                            fp.getEl().unmask();
-                        }
-                    });
+        dockedItems: {
+            xtype: 'toolbar',
+            dock: 'bottom',
+            ui: 'footer',
+            items: ['->', {
+                text: 'Save',
+                handler: function(){
+                    if(fp.getForm().isValid()){
+                        var sb = Ext.getCmp('form-statusbar');
+                        sb.showBusy('Saving form...');
+                        fp.getEl().mask();
+                        fp.getForm().submit({
+                            url: 'fake.php',
+                            success: function(){
+                                sb.setStatus({
+                                    text:'Form saved!',
+                                    iconCls:'',
+                                    clear: true
+                                });
+                                fp.getEl().unmask();
+                            }
+                        });
+                    }
                 }
-            }
-        }]
+            }]
+        }
     });
 
     Ext.create('Ext.Panel', {

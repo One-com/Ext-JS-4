@@ -49,7 +49,7 @@ Ext.define(&#39;Ext.layout.container.AbstractCard&#39;, {
     beforeLayout: function() {
         var me = this;
         me.activeItem = me.getActiveItem();
-        if (me.deferredRender) {
+        if (me.activeItem &amp;&amp; me.deferredRender) {
             me.renderItems([me.activeItem], me.getRenderTarget());
             return true;
         }
@@ -79,6 +79,13 @@ Ext.define(&#39;Ext.layout.container.AbstractCard&#39;, {
         }
     },
 
+    isValidParent : function(item, target, position) {
+        // Note: Card layout does not care about order within the target because only one is ever visible.
+        // We only care whether the item is a direct child of the target.
+        var itemEl = item.el ? item.el.dom : Ext.getDom(item);
+        return (itemEl &amp;&amp; itemEl.parentNode === (target.dom || target)) || false;
+    },
+
     <a name="method-Ext.layout.container.AbstractCard-getActiveItem"></a>/**
      * Return the active (visible) component in the layout.
      * @returns {Ext.Component}
@@ -101,7 +108,7 @@ Ext.define(&#39;Ext.layout.container.AbstractCard&#39;, {
         if (item &amp;&amp; item.isComponent) {
             return item;
         }
-        else if (typeof item == &#39;number&#39; || item == undefined) {
+        else if (typeof item == &#39;number&#39; || item === undefined) {
             return this.getLayoutItems()[item || 0];
         }
         else {
@@ -123,7 +130,7 @@ Ext.define(&#39;Ext.layout.container.AbstractCard&#39;, {
     onRemove: function(component) {
         if (component === this.activeItem) {
             this.activeItem = null;
-            if (this.owner.items.getCount() == 0) {
+            if (this.owner.items.getCount() === 0) {
                 this.firstActivated = false;
             }
         }

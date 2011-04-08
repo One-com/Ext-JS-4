@@ -166,7 +166,6 @@ autoSize: {
 
         Ext.apply(field, {
             inEditor: true,
-            hideLabel: true,
             msgTarget: field.msgTarget == 'title' ? 'title' :  'qtip'
         });
         me.mon(field, {
@@ -249,6 +248,7 @@ autoSize: {
         me.callParent(arguments);
 
         field.render(me.el);
+        //field.hide();
         // Ensure the field doesn't get submitted as part of any form
         field.inputEl.dom.name = '';
         if (me.swallowKeys) {
@@ -308,12 +308,12 @@ autoSize: {
             me.startValue = value;
             me.show();
             field.reset();
-            field.show().focus(false, 10);
             field.setValue(value);
+            me.realign(rendered); // only force a layout after first time
+            field.show().focus(false, 10);
             if (field.autoSize) {
                 field.autoSize();
             }
-            me.realign(rendered); // only force a layout after first time
             me.editing = true;
         }
     },
@@ -434,7 +434,7 @@ autoSize: {
             field.collapse();
         }
         
-        me.el.hide();
+        field.hide();
         if (me.hideEl !== false) {
             me.boundEl.show();
         }

@@ -40,6 +40,59 @@ Ext.define('Ext.draw.Component', {
      * Turn on autoSize support which will set the bounding div's size to the natural size of the contents. Defaults to false.
      */
     autoSize: false,
+    
+    /**
+     * @cfg {Array} gradients (optional) Define a set of gradients that can be used as `fill` property in sprites.
+     * The gradients array is an array of objects with the following properties:
+     *
+     * <ul>
+     * <li><strong>id</strong> - string - The unique name of the gradient.</li>
+     * <li><strong>angle</strong> - number, optional - The angle of the gradient in degrees.</li>
+     * <li><strong>stops</strong> - object - An object with numbers as keys (from 0 to 100) and style objects
+     * as values</li>
+     * </ul>
+     * 
+     
+     For example:
+     
+     <pre><code>
+        gradients: [{
+            id: 'gradientId',
+            angle: 45,
+            stops: {
+                0: {
+                    color: '#555'
+                },
+                100: {
+                    color: '#ddd'
+                }
+            }
+        },  {
+            id: 'gradientId2',
+            angle: 0,
+            stops: {
+                0: {
+                    color: '#590'
+                },
+                20: {
+                    color: '#599'
+                },
+                100: {
+                    color: '#ddd'
+                }
+            }
+        }]
+     </code></pre>
+     
+     Then the sprites can use `gradientId` and `gradientId2` by setting the fill attributes to those ids, for example:
+     
+     <pre><code>
+        sprite.setAttributes({
+            fill: 'url(#gradientId)'
+        }, true);
+     </code></pre>
+     
+     */
 
     initComponent: function() {
         this.callParent(arguments);

@@ -20,7 +20,7 @@ Ext.define('Ext.layout.component.form.File', {
         if (!owner.buttonOnly) {
             // Decrease the field's width by the width of the button and the configured buttonMargin.
             // Both the text field and the button are floated left in CSS so they'll stack up side by side.
-            me.setElementSize(owner.inputEl, width - owner.button.getWidth() - owner.buttonMargin);
+            me.setElementSize(owner.inputEl, Ext.isNumber(width) ? width - owner.button.getWidth() - owner.buttonMargin : width);
         }
     }
 });

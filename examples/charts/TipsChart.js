@@ -64,7 +64,7 @@ Ext.onReady(function () {
     var grid = Ext.create('Ext.grid.GridPanel', {
         store: gridStore,
         height: 130,
-        headers: [
+        columns: [
             {
                 text   : 'name',
                 dataIndex: 'name'

@@ -10,7 +10,7 @@
  * @ptype tabclosemenu
  */
 Ext.define('Ext.tab.TabCloseMenu', {
-    alias: 'widget.tabclosemenu',
+    alias: 'plugin.tabclosemenu',
     alternateClassName: 'Ext.ux.TabCloseMenu',
     extend: 'Ext.util.Observable',
     /**
@@ -50,11 +50,12 @@ Ext.define('Ext.tab.TabCloseMenu', {
 
         this.mon(this.tabPanel, {
             scope: this,
-            afterrender: this.onAfterRender
+            afterlayout: this.onAfterLayout,
+            single: true
         });
     },
     
-    onAfterRender: function() {
+    onAfterLayout: function() {
         this.mon(this.tabBar.el, {
             scope: this,
             contextmenu: this.onContextMenu,

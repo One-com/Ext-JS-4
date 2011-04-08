@@ -6,7 +6,8 @@ Ext.require([
     'Ext.Viewport',
     'Ext.tip.QuickTips',
     'Ext.tab.TabPanel',
-    'Ext.ux.GroupTabPanel'
+    'Ext.ux.GroupTabPanel',
+    'Ext.grid.*'
 ]);
 
 Ext.onReady(function() {

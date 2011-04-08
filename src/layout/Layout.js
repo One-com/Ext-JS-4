@@ -32,7 +32,7 @@ Ext.define('Ext.layout.Layout', {
     },
 
     constructor : function(config) {
-        this.id = Ext.id(null, 'ext-layout-' + this.type + '-');
+        this.id = Ext.id(null, this.type + '-');
         Ext.apply(this, config);
     },
 
@@ -45,11 +45,17 @@ Ext.define('Ext.layout.Layout', {
         me.initLayout();
 
         if (me.beforeLayout.apply(me, arguments) !== false) {
+            me.layoutCancelled = false;
             me.onLayout.apply(me, arguments);
             me.owner.needsLayout = false;
+            me.layoutBusy = false;
+            me.afterLayout.apply(me, arguments);
+        }
+        else {
+            me.layoutCancelled = true;
         }
         me.layoutBusy = false;
-        me.afterLayout.apply(me, arguments);
+        me.doOwnerCtLayouts();
     },
 
     beforeLayout : function() {
@@ -158,6 +164,7 @@ Ext.define('Ext.layout.Layout', {
     afterLayout : Ext.emptyFn,
     onRemove : Ext.emptyFn,
     onDestroy : Ext.emptyFn,
+    doOwnerCtLayouts : Ext.emptyFn,
 
     /**
      * @private

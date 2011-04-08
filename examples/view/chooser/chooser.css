@@ -14,12 +14,13 @@
     color: #555555;
     display: block;
     margin-bottom: 4px;
+    margin-left: 5px;
 }
 
 #img-chooser-dlg .details-info span {
     display: block;
     margin-bottom: 5px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 #img-chooser-view {

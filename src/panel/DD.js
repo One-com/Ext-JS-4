@@ -2,7 +2,7 @@
 Ext.define('Ext.panel.DD', {
     extend: 'Ext.dd.DragSource',
     requires: ['Ext.panel.Proxy'],
-   
+
     constructor : function(panel, cfg){
         this.panel = panel;
         this.dragData = {panel: panel};

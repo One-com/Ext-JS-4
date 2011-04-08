@@ -268,7 +268,7 @@
          */
         getColor : function(attr, defaultValue, prefix){
             var v = this.getStyle(attr),
-                color = prefix === 'undefined' ? prefix : '#',
+                color = prefix || prefix === '' ? prefix : '#',
                 h;
 
             if(!v || (/transparent|inherit/.test(v))) {
@@ -326,22 +326,31 @@
          * the default animation (<tt>{duration: .35, easing: 'easeIn'}</tt>)
          * @return {Ext.core.Element} this
          */
-         setOpacity : function(opacity, animate){
+        setOpacity: function(opacity, animate) {
             var me = this,
-                s = me.dom.style,
-                val;
+                dom = me.dom,
+                val,
+                style;
 
-            if(!animate || !me.anim){
-                if(!Ext.supports.Opacity){
-                    opacity = opacity < 1 ? 'alpha(opacity=' + opacity * 100 + ')' : '';
-                    val = s.filter.replace(opacityRe, '').replace(trimRe, '');
+            if (!me.dom) {
+                return me;
+            }
 
-                    s.zoom = 1;
-                    s.filter = val + (val.length > 0 ? ' ' : '') + opacity;
-                }else{
-                    s.opacity = opacity;
+            style = me.dom.style;
+
+            if (!animate || !me.anim) {
+                if (!Ext.supports.Opacity) {
+                    opacity = opacity < 1 ? 'alpha(opacity=' + opacity * 100 + ')': '';
+                    val = style.filter.replace(opacityRe, '').replace(trimRe, '');
+
+                    style.zoom = 1;
+                    style.filter = val + (val.length > 0 ? ' ': '') + opacity;
                 }
-            }else{
+                else {
+                    style.opacity = opacity;
+                }
+            }
+            else {
                 if (!Ext.isObject(animate)) {
                     animate = {
                         duration: 350,
@@ -352,10 +361,12 @@
                     to: {
                         opacity: opacity
                     }
-                }, animate));
+                },
+                animate));
             }
             return me;
         },
+
 
         /**
          * Clears any opacity settings from this element. Required in some cases for IE.

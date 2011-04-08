@@ -63,6 +63,8 @@ Ext.define('Ext.chart.series.Line', {
     /* End Definitions */
 
     type: 'line',
+    
+    alias: 'series.line',
 
     /**
      * @cfg {Number} selectionTolerance

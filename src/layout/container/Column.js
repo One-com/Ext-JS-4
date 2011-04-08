@@ -3,7 +3,7 @@
  * @extends Ext.layout.container.Auto
  * <p>This is the layout style of choice for creating structural layouts in a multi-column format where the width of
  * each column can be specified as a percentage or fixed width, but the height is allowed to vary based on the content.
- * This class is intended to be extended or created via the layout:'column' {@link Ext.Container#layout} config,
+ * This class is intended to be extended or created via the layout:'column' {@link Ext.container.Container#layout} config,
  * and should generally not need to be created directly via the new keyword.</p>
  * <p>ColumnLayout does not have any direct config options (other than inherited ones), but it does support a
  * specific config property of <b><tt>columnWidth</tt></b> that can be included in the config of any panel added to it.  The

@@ -356,24 +356,6 @@ Ext.define('Ext.toolbar.Toolbar', {
     },
 
     // private
-    onDisable: function() {
-        this.items.each(function(item) {
-            if (item.disable) {
-                item.disable();
-            }
-        });
-    },
-
-    // private
-    onEnable: function() {
-        this.items.each(function(item) {
-            if (item.enable) {
-                item.enable();
-            }
-        });
-    },
-
-    // private
     onButtonTriggerOver: function(btn){
         if (this.activeMenuBtn && this.activeMenuBtn != btn) {
             this.activeMenuBtn.hideMenu();

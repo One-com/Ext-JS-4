@@ -34,7 +34,17 @@ Ext.define('Ext.grid.HeaderResizer', {
 
     init: function(headerCt) {
         this.headerCt = headerCt;
-        headerCt.on('render', this.afterHeaderRender, this);
+        headerCt.on('render', this.afterHeaderRender, this, {single: true});
+    },
+
+    /**
+     * @private
+     * AbstractComponent calls destroy on all its plugins at destroy time.
+     */
+    destroy: function() {
+        if (this.tracker) {
+            this.tracker.destroy();
+        }
     },
 
     afterHeaderRender: function() {
@@ -72,7 +82,7 @@ Ext.define('Ext.grid.HeaderResizer', {
 
                 // On left edge, we are resizing the previous non-hidden, base level column.
                 if (overHeader.isOnLeftEdge(e)) {
-                    resizeHeader = overHeader.previousNode('gridheader:not([hidden]):not([isGroupHeader])');
+                    resizeHeader = overHeader.previousNode('gridcolumn:not([hidden]):not([isGroupHeader])');
                 }
                 // Else, if on the right edge, we're resizing the column we are over
                 else if (overHeader.isOnRightEdge(e)) {
@@ -154,17 +164,18 @@ Ext.define('Ext.grid.HeaderResizer', {
         // setup marker proxies
         if (!me.dynamic) {
             var xy           = dragHdEl.getXY(),
-                gridSection  = headerCt.up(),
+                gridSection  = headerCt.up('[scrollerOwner]'),
+                dragHct      = me.dragHd.up(':not([isGroupHeader])'),
+                firstSection = dragHct.up(),
                 lhsMarker    = gridSection.getLhsMarker(),
                 rhsMarker    = gridSection.getRhsMarker(),
                 el           = rhsMarker.parent(),
                 offsetLeft   = el.getLeft(true),
                 topLeft      = el.translatePoints(xy),
-                top          = headerCt.el.getTop(true),
-                markerHeight = gridSection.body.getHeight() + headerCt.getHeight();
+                markerHeight = firstSection.body.getHeight() + headerCt.getHeight();
 
-            lhsMarker.setTop(top);
-            rhsMarker.setTop(top);
+            lhsMarker.setTop(topLeft.top);
+            rhsMarker.setTop(topLeft.top);
             lhsMarker.setHeight(markerHeight);
             rhsMarker.setHeight(markerHeight);
             lhsMarker.setLeft(topLeft.left - offsetLeft);
@@ -176,7 +187,7 @@ Ext.define('Ext.grid.HeaderResizer', {
     onDrag: function(e){
         if (!this.dynamic) {
             var xy          = this.tracker.getXY('point'),
-                gridSection = this.headerCt.up(),
+                gridSection = this.headerCt.up('[scrollerOwner]'),
                 rhsMarker   = gridSection.getRhsMarker(),
                 el          = rhsMarker.parent(),
                 topLeft     = el.translatePoints(xy),
@@ -194,7 +205,7 @@ Ext.define('Ext.grid.HeaderResizer', {
         if (this.dragHd) {
             if (!this.dynamic) {
                 var dragHd      = this.dragHd,
-                    gridSection = this.headerCt.up(),
+                    gridSection = this.headerCt.up('[scrollerOwner]'),
                     lhsMarker   = gridSection.getLhsMarker(),
                     rhsMarker   = gridSection.getRhsMarker(),
                     currWidth   = dragHd.getWidth(),

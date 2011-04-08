@@ -71,7 +71,7 @@ Ext.define('Ext.ux.RowExpander', {
             ftype: 'rowwrap'
         }];
 
-        grid.headers.unshift(this.getHeaderConfig());
+        grid.columns.unshift(this.getHeaderConfig());
         grid.on('afterlayout', this.onGridAfterLayout, this, {single: true});
     },
     
@@ -83,7 +83,7 @@ Ext.define('Ext.ux.RowExpander', {
     },
     
     getRowBodyFeatureData: function(data, idx, record, orig) {
-        var o = Ext.grid.RowBodyFeature.prototype.getAdditionalData.apply(this, arguments),
+        var o = Ext.grid.feature.RowBody.prototype.getAdditionalData.apply(this, arguments),
             id = this.columnId;
         o.rowBodyColspan = o.rowBodyColspan - 1;
         o.rowBody = this.getRowBodyContents(data);

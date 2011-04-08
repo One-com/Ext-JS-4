@@ -9,6 +9,9 @@ Ext.onReady(function() {
             type: 'ajax',
             url: 'check-nodes.json'
         },
+        root: {
+            expanded: true
+        },
         sorters: [{
             property: 'leaf',
             direction: 'ASC'

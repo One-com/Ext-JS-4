@@ -551,6 +551,12 @@ Ext.define('Ext.data.Model', {
      */
     defaultProxyType: 'ajax',
     
+    /**
+     * An array of the fields defined on this model
+     * @property fields
+     * @type {Array}
+     */
+    
     constructor: function(data, id) {
         data = data || {};
         
@@ -817,7 +823,7 @@ Ext.define('Ext.data.Model', {
      * @return {Object} The nested data set for the Model's loaded associations
      */
     getAssociatedData: function(){
-        return this.prepareAssociatedData(this, []);
+        return this.prepareAssociatedData(this, [], null);
     },
     
     /**
@@ -826,43 +832,61 @@ Ext.define('Ext.data.Model', {
      * all of that Model's *loaded* associations. See (@link #getAssociatedData}
      * @param {Ext.data.Model} record The Model instance
      * @param {Array} ids PRIVATE. The set of Model instance internalIds that have already been loaded
+     * @param {String} associationType (optional) The name of the type of association to limit to.
      * @return {Object} The nested data set for the Model's loaded associations
      */
-    prepareAssociatedData: function(record, ids) {
+    prepareAssociatedData: function(record, ids, associationType) {
         //we keep track of all of the internalIds of the models that we have loaded so far in here        
         var associations     = record.associations.items,
             associationCount = associations.length,
             associationData  = {},
             associatedStore, associatedName, associatedRecords, associatedRecord,
-            associatedRecordCount, association, id, i, j;
+            associatedRecordCount, association, id, i, j, type, allow;
         
         for (i = 0; i < associationCount; i++) {
             association = associations[i];
+            type = association.type;
+            allow = true;
+            if (associationType) {
+                allow = type == associationType;
+            }
+            if (allow && type == 'hasMany') {
             
-            //this is the hasMany store filled with the associated data
-            associatedStore = record[association.storeName];
-            
-            //we will use this to contain each associated record's data
-            associationData[association.name] = [];
-            
-            //if it's loaded, put it into the association data
-            if (associatedStore && associatedStore.data.length > 0) {
-                associatedRecords = associatedStore.data.items;
-                associatedRecordCount = associatedRecords.length;
-            
-                //now we're finally iterating over the records in the association. We do this recursively
-                for (j = 0; j < associatedRecordCount; j++) {
-                    associatedRecord = associatedRecords[j];
-                    // Use the id, since it is prefixed with the model name, guaranteed to be unique
-                    id = associatedRecord.id;
+                //this is the hasMany store filled with the associated data
+                associatedStore = record[association.storeName];
+                
+                //we will use this to contain each associated record's data
+                associationData[association.name] = [];
+                
+                //if it's loaded, put it into the association data
+                if (associatedStore && associatedStore.data.length > 0) {
+                    associatedRecords = associatedStore.data.items;
+                    associatedRecordCount = associatedRecords.length;
                     
-                    //when we load the associations for a specific model instance we add it to the set of loaded ids so that
-                    //we don't load it twice. If we don't do this, we can fall into endless recursive loading failures.
+                    //now we're finally iterating over the records in the association. We do this recursively
+                    for (j = 0; j < associatedRecordCount; j++) {
+                        associatedRecord = associatedRecords[j];
+                        // Use the id, since it is prefixed with the model name, guaranteed to be unique
+                        id = associatedRecord.id;
+                        
+                        //when we load the associations for a specific model instance we add it to the set of loaded ids so that
+                        //we don't load it twice. If we don't do this, we can fall into endless recursive loading failures.
+                        if (Ext.Array.indexOf(ids, id) == -1) {
+                            ids.push(id);
+                            
+                            associationData[association.name][j] = associatedRecord.data;
+                            Ext.apply(associationData[association.name][j], this.prepareAssociatedData(associatedRecord, ids, type));
+                        }
+                    }
+                }
+            } else if (allow && type == 'belongsTo') {
+                associatedRecord = record[association.instanceName];
+                if (associatedRecord !== undefined) {
+                    id = associatedRecord.id;
                     if (Ext.Array.indexOf(ids, id) == -1) {
                         ids.push(id);
-                        
-                        associationData[association.name][j] = associatedRecord.data;
-                        Ext.apply(associationData[association.name][j], this.prepareAssociatedData(associatedRecord, ids));
+                        associationData[association.name] = associatedRecord.data;
+                        Ext.apply(associationData[association.name], this.prepareAssociatedData(associatedRecord, ids, type));
                     }
                 }
             }

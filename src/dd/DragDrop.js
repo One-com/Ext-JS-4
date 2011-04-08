@@ -993,7 +993,7 @@ Ext.define('Ext.dd.DragDrop', {
             }
         }
 
-        this.xTicks.sort(this.DDMInstance.numericSort) ;
+        Ext.Array.sort(this.xTicks, this.DDMInstance.numericSort);
     },
 
     /**
@@ -1022,7 +1022,7 @@ Ext.define('Ext.dd.DragDrop', {
             }
         }
 
-        this.yTicks.sort(this.DDMInstance.numericSort) ;
+        Ext.Array.sort(this.yTicks, this.DDMInstance.numericSort);
     },
 
     /**

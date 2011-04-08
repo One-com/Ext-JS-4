@@ -856,7 +856,7 @@ these convenient shorthands:
         create: alias(Manager, 'instantiate'),
 
         /**
-         *
+         * @private
          * @param {Mixed} item
          * @param {String} namespace
          */

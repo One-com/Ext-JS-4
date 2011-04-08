@@ -40,7 +40,7 @@
      */
 
     /**
-     * The {@link Ext.DatePicker} instance for this DateMenu
+     * The {@link Ext.picker.Date} instance for this DateMenu
      * @property picker
      * @type Ext.picker.Date
      */

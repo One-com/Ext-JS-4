@@ -56,6 +56,9 @@ Ext.onReady(function(){
     };
      
     var store = Ext.create('Ext.data.TreeStore', {
+        root: {
+            expanded: true
+        },
         proxy: {
             type: 'ajax',
             url: 'tree-data.json'

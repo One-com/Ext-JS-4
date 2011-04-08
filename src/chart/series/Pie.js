@@ -46,6 +46,9 @@ Ext.define('Ext.chart.series.Pie', {
     /* End Definitions */
 
     type: "pie",
+    
+    alias: 'series.pie',
+
     rad: Math.PI / 180,
 
     /**

@@ -262,7 +262,10 @@ Ext.define(&#39;Ext.data.AbstractStore&#39;, {
         me.groupers.addAll(me.decodeGroupers(config.groupers));
         
         me.mixins.sortable.initSortable.call(me);
-        me.sort(me.groupers.items, &#39;prepend&#39;, false);
+        if (me.groupers.items.length) {
+            me.sort(me.groupers.items, &#39;prepend&#39;, false);
+        }
+        
         
         <a name="prop-Ext.data.AbstractStore-filters"></a>/**
          * The collection of {@link Ext.util.Filter Filters} currently applied to this Store

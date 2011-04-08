@@ -25,7 +25,7 @@ Ext.onReady(function(){
         height: 300,
         viewConfig: {
             plugins: {
-                ptype: 'treeviewdd',
+                ptype: 'treeviewdragdrop',
                 appendOnly: true
             }
         },
@@ -57,7 +57,7 @@ Ext.onReady(function(){
         store: store2,
         viewConfig: {
             plugins: {
-                ptype: 'treeviewdd',
+                ptype: 'treeviewdragdrop',
                 appendOnly: true
             }
         },

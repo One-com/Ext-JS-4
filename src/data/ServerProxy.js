@@ -127,6 +127,16 @@ api: {
         var me = this;
         
         config = config || {};
+        this.addEvents(
+            /**
+             * @event exception
+             * Fires when the server returns an exception
+             * @param {Ext.data.Proxy} this
+             * @param {Object} response The response from the AJAX request
+             * @param {Ext.data.Operation} operation The operation that triggered request
+             */
+            'exception'
+        );
         me.callParent([config]);
         
         /**
@@ -179,7 +189,8 @@ api: {
             params   : params,
             action   : operation.action,
             records  : operation.records,
-            operation: operation
+            operation: operation,
+            url      : operation.url
         });
         
         request.url = this.buildUrl(request);
@@ -208,13 +219,12 @@ api: {
             
         if (success === true) {
             reader = me.getReader();
-            result = reader.read(response);
+            result = reader.read(me.extractResponseData(response));
             records = result.records;
             length = records.length;
-            mc;
             
             if (result.success !== false) {
-                mc = Ext.create('Ext.util.MixedCollection', true, function(r) {return r.getId();})
+                mc = Ext.create('Ext.util.MixedCollection', true, function(r) {return r.getId();});
                 mc.addAll(operation.records);
                 for (i = 0; i < length; i++) {
                     record = mc.get(records[i].getId());
@@ -239,10 +249,7 @@ api: {
                 me.fireEvent('exception', this, response, operation);
             }
         } else {
-            operation.setException({
-                status: response.status,
-                statusText: response.statusText
-            }); 
+            me.setException(operation, response);
             me.fireEvent('exception', this, response, operation);              
         }
             
@@ -252,6 +259,29 @@ api: {
         }
             
         me.afterRequest(request, success);
+    },
+    
+    /**
+     * Sets up an exception on the operation
+     * @private
+     * @param {Ext.data.Operation} operation The operation
+     * @param {Object} response The response
+     */
+    setException: function(operation, response){
+        operation.setException({
+            status: response.status,
+            statusText: response.statusText
+        });     
+    },
+    
+    /**
+     * Template method to allow subclasses to specify how to get the response for the reader.
+     * @private
+     * @param {Object} response The server response
+     * @return {Mixed} The response data to be used by the reader
+     */
+    extractResponseData: function(response){
+        return response; 
     },
     
     /**
@@ -323,6 +353,7 @@ api: {
         params = params || {};
         
         var me             = this,
+            isDef          = Ext.isDefined,
             group          = operation.group,
             sorters        = operation.sorters,
             filters        = operation.filters,
@@ -340,15 +371,15 @@ api: {
             filterParam    = me.filterParam,
             dirParam       = me.dirParam;
         
-        if (pageParam && page) {
+        if (pageParam && isDef(page)) {
             params[pageParam] = page;
         }
         
-        if (startParam && start) {
+        if (startParam && isDef(start)) {
             params[startParam] = start;
         }
         
-        if (limitParam && limit) {
+        if (limitParam && isDef(limit)) {
             params[limitParam] = limit;
         }
         

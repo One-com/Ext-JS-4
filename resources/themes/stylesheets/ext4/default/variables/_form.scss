@@ -51,6 +51,17 @@ $form-label-font-family: $font-family !default;
 $form-label-font: $form-label-font-weight $form-label-font-size $form-label-font-family !default;
 
 /**
+ * @class Ext.form.CheckBox
+ */
+$form-checkbox-image: 'form/checkbox.gif' !default;
+$form-checkbox-size: 13px !default;
+
+/**
+ * @class Ext.form.Radio
+ */
+$form-radio-image: 'form/radio.gif' !default;
+
+/**
  * Error messages
  */
 //icons

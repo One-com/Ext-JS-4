@@ -372,8 +372,10 @@ describe("Ext.Class", function() {
             it("single with name - value arguments", function() {
                 var called = false;
 
-                subClass.addStatics('staticMethod', function(){
-                    called = true;
+                subClass.addStatics({
+                    staticMethod: function(){
+                        called = true;
+                    }
                 });
 
                 expect(subClass.staticMethod).toBeDefined();

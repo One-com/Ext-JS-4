@@ -60,7 +60,7 @@ store.load({
  * <p>If using {@link Ext.data.Store#autoLoad store's autoLoad} configuration:</p>
  * <pre><code>
 var myStore = new Ext.data.Store({
-    {@link Ext.data.Store#autoLoad autoLoad}: {params:{start: 0, limit: 25}},
+    {@link Ext.data.Store#autoLoad autoLoad}: {start: 0, limit: 25},
     ...
 });
  * </code></pre>
@@ -207,7 +207,6 @@ Ext.define('Ext.toolbar.PagingToolbar', {
             enableKeyEvents: true,
             selectOnFocus: true,
             submitValue: false,
-            hideLabel: true,
             height: 19,
             width: me.inputItemWidth,
             margins: '-1 2 3 2',

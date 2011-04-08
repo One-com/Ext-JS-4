@@ -63,7 +63,7 @@ Ext.onReady(function () {
             }],
             series: [{
                 type: 'area',
-                highlight: true,
+                highlight: false,
                 axis: 'left',
                 xField: 'name',
                 yField: ['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7'],

@@ -563,8 +563,8 @@ Ext.define('Ext.button.Button', {
 
         me.disabledCls = me.disabledCls + ' ' + me.baseCls + '-' + me.ui + '-disabled';
         me.overCls = me.baseCls + '-' + me.ui + '-over';
-        me.pressedCls = me.baseCls + '-' + me.ui + '-pressed';
         me.focusCls = me.baseCls + '-' + me.ui + '-focus';
+        me.pressedCls = me.baseCls + '-' + me.ui + '-pressed';
 
         // only add the icon class if the button has an icon
         if (me.iconCls || me.icon) {
@@ -1055,14 +1055,6 @@ Ext.define('Ext.button.Button', {
         }
     },
 
-    focus: function() {
-        this.btnEl.focus();
-    },
-
-    blur: function() {
-        this.btnEl.blur();
-    },
-
     // private
     onFocus: function(e) {
         var me = this;
@@ -1070,6 +1062,7 @@ Ext.define('Ext.button.Button', {
             me.el.addCls([me.baseCls + '-focus', me.focusCls]);
         }
     },
+    
     // private
     onBlur: function(e) {
         var me = this;
@@ -1147,11 +1140,11 @@ Ext.define('Ext.button.Button', {
             if (!btn.toggleGroup) {
                 return;
             }
-            var g = groups[btn.toggleGroup];
-            if (!g) {
-                g = groups[btn.toggleGroup] = [];
+            var group = groups[btn.toggleGroup];
+            if (!group) {
+                group = groups[btn.toggleGroup] = [];
             }
-            g.push(btn);
+            group.push(btn);
             btn.on('toggle', toggleGroup);
         },
 
@@ -1159,9 +1152,9 @@ Ext.define('Ext.button.Button', {
             if (!btn.toggleGroup) {
                 return;
             }
-            var g = groups[btn.toggleGroup];
-            if (g) {
-                g.remove(btn);
+            var group = groups[btn.toggleGroup];
+            if (group) {
+                Ext.Array.remove(group, btn);
                 btn.un('toggle', toggleGroup);
             }
         },

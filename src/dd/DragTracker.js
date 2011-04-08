@@ -209,14 +209,16 @@ Ext.define('Ext.dd.DragTracker', {
         this.disabled = false;
     },
 
-    destroy : function(){
+    destroy : function() {
+        this.clearListeners();
         delete this.el;
     },
 
     // When the pointer enters a tracking element, fire a mouseover if the mouse entered from outside.
     // This is mouseenter functionality, but we cannot use mouseenter because we are using "delegate" to filter mouse targets
     onMouseOver: function(e, target) {
-        if (Ext.EventManager.contains(e)) {
+        var isMouseEnter = Ext.EventManager.contains(e) || this.delegate;
+        if (isMouseEnter) {
             this.mouseIsOut = false;
             if (this.overCls) {
                 this.el.addCls(this.overCls);

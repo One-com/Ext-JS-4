@@ -14,7 +14,7 @@
 Ext.define('Ext.ux.PreviewPlugin', {
     extend: 'Ext.AbstractPlugin',
     alias: 'plugin.preview',
-    requires: ['Ext.grid.RowBodyFeature', 'Ext.grid.RowWrapFeature'],
+    requires: ['Ext.grid.feature.RowBody', 'Ext.grid.feature.RowWrap'],
     
     // private, css class to use to hide the body
     hideBodyCls: 'x-grid-row-body-hidden',
@@ -41,7 +41,7 @@ Ext.define('Ext.ux.PreviewPlugin', {
         section.features = [{
             ftype: 'rowbody',
             getAdditionalData: function(data, idx, record, orig, view) {
-                var o = Ext.grid.RowBodyFeature.prototype.getAdditionalData.apply(this, arguments);
+                var o = Ext.grid.feature.RowBody.prototype.getAdditionalData.apply(this, arguments);
                 Ext.apply(o, {
                     rowBody: data[bodyField],
                     rowBodyCls: section.previewExpanded ? '' : hideBodyCls

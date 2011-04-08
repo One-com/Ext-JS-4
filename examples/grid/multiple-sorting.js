@@ -136,7 +136,15 @@ Ext.onReady(function() {
          * Creates the new toolbar item from the drop event
          */
         createItem: function(data) {
-            var header = data.header;
+            var header = data.header,
+                headerCt = header.ownerCt,
+                reorderer = headerCt.reorderer;
+            
+            // Hide the drop indicators of the standard HeaderDropZone
+            // in case user had a pending valid drop in 
+            if (reorderer) {
+                reorderer.dropZone.invalidateDrop();
+            }
 
             return createSorterButtonConfig({
                 text: header.text,
@@ -157,10 +165,13 @@ Ext.onReady(function() {
             var sorters = getSorters(),
                 header  = data.header,
                 length = sorters.length,
+                entryIndex = this.calculateEntryIndex(event),
+                targetItem = this.toolbar.getComponent(entryIndex),
                 i;
 
-            // Group headers have no dataIndex and therefore cannot be sorted
-            if (!header.dataIndex) {
+            // Group columns have no dataIndex and therefore cannot be sorted
+            // If target isn't reorderable it could not be replaced
+            if (!header.dataIndex || (targetItem && targetItem.reorderable === false)) {
                 return false;
             }
 
@@ -205,7 +216,7 @@ Ext.onReady(function() {
     var grid = Ext.create('Ext.grid.GridPanel', {
         tbar : tbar,
         store: store,
-        headers: [
+        columns: [
             {
                 text: 'Name',
                 flex:1 ,
@@ -220,7 +231,9 @@ Ext.onReady(function() {
                 text: 'Salary',
                 width: 125,
                 sortable: false,
-                dataIndex: 'salary'
+                dataIndex: 'salary',
+                align: 'right',
+                renderer: Ext.util.Format.usMoney
             }
         ],
         stripeRows: true,

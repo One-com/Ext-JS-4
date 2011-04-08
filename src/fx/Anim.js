@@ -162,7 +162,7 @@ keyframes : {
      * Ext.fx.target will be used. For example:
 <pre><code>
 from : {
-    opactiy: 0,       // Transparent
+    opacity: 0,       // Transparent
     color: '#ffffff', // White
     left: 0
 }
@@ -174,7 +174,7 @@ from : {
      * An object containing property/value pairs for the end of the animation. For example:
  <pre><code>
  to : {
-     opactiy: 1,       // Opaque
+     opacity: 1,       // Opaque
      color: '#00ff00', // Green
      left: 500
  }

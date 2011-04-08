@@ -66,7 +66,7 @@ Ext.define(&#39;Ext.layout.container.Border&#39;, {
     extend: &#39;Ext.layout.Container&#39;,
     requires: [&#39;Ext.resizer.Splitter&#39;, &#39;Ext.container.Container&#39;, &#39;Ext.fx.Anim&#39;],
     alternateClassName: &#39;Ext.layout.BorderLayout&#39;,
-    
+
     targetCls: Ext.baseCSSPrefix + &#39;border-layout-ct&#39;,
 
     itemCls: Ext.baseCSSPrefix + &#39;border-item&#39;,
@@ -505,8 +505,8 @@ Ext.define(&#39;Ext.layout.container.Border&#39;, {
                         }
                     } : null
                 };
-                // Hack for IE6/7&#39;s inability to display an inline-block
-                if ((Ext.isIE6 || Ext.isIE7) &amp;&amp; !horiz) {
+                // Hack for IE6/7/IEQuirks&#39;s inability to display an inline-block
+                if ((Ext.isIE6 || Ext.isIE7 || (Ext.isIEQuirks)) &amp;&amp; !horiz) {
                     placeHolder.width = 25;
                 }
                 placeHolder[horiz ? &#39;tools&#39; : &#39;items&#39;] = [{
@@ -626,7 +626,7 @@ Ext.define(&#39;Ext.layout.container.Border&#39;, {
             comp.fireEvent(&#39;collapse&#39;, comp);
         }
 
-        <a name="prop-Ext.layout.container.Border-if"></a>/**
+        /*
          * Set everything to the new positions. Note that we
          * only want to animate the collapse if it wasn&#39;t configured
          * initially with collapsed: true
@@ -943,7 +943,11 @@ Ext.define(&#39;Ext.layout.container.Border&#39;, {
      * Can&#39;t do this in onDestroy because they may remove a Component and use it elsewhere.
      */
     onRegionDestroy: function(comp) {
-        Ext.destroy(comp.placeHolder);
+        var placeHolder = comp.placeHolder;
+        if (placeHolder) {
+            delete placeHolder.ownerCt;
+            placeHolder.destroy();
+        }
     },
 
     /*
@@ -958,9 +962,11 @@ Ext.define(&#39;Ext.layout.container.Border&#39;, {
 
         if (shadowContainer) {
             delete shadowContainer.ownerCt;
+            Ext.destroy(shadowContainer);
         }
 
         if (embeddedContainer) {
+            delete embeddedContainer.ownerCt;
             Ext.destroy(embeddedContainer);
         }
         delete me.regions;

@@ -205,7 +205,7 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
      * @return {Ext.Base} The newly created class
      */
     Ext.Class = function(newClass, classData, createdFn) {
-        if (Ext.isObject(newClass)) {
+        if (!(newClass instanceof Function)) {
             createdFn = classData;
             classData = newClass;
             newClass = function() {
@@ -214,7 +214,7 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
         }
 
         var self = this.constructor,
-            preprocessors = Ext.Array.from(classData.preprocessors || self.getDefaultPreprocessors()),
+            preprocessors = (classData.preprocessors || self.getDefaultPreprocessors()).slice(),
             staticProp, process;
 
         for (staticProp in Ext.Base) {
@@ -229,6 +229,11 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
             var name = preprocessors.shift();
 
             if (!name) {
+                if (data.config && cls.prototype.config) {
+                    Ext.Object.merge(cls.prototype.config, data.config);
+                    delete data.config;
+                }
+
                 cls.extend(data);
 
                 if (Ext.isFunction(createdFn)) {
@@ -365,40 +370,58 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
     });
 
     Ext.Class.registerPreprocessor({
+
+        /**
+         * @cfg {String} extend
+
+The name of the class to extend.
+
+    Ext.define('Developer', {
+         extend: 'Person'
+    });
+    
+         * @markdown
+         */
         extend: function(cls, data, fn) {
             var extend = data.extend,
                 base = Ext.Base,
+                basePrototype = base.prototype,
                 temp = function() {},
-                parent, i, k, ln, staticName, parentStatics;
+                parent, i, k, ln, staticName, parentStatics,
+                parentPrototype, clsPrototype;
 
-            if (typeof extend === 'function' && extend !== Object) {
+            if (extend !== undefined && extend !== Object) {
                 parent = extend;
             }
             else {
                 parent = base;
             }
 
-            temp.prototype = parent.prototype;
+            parentPrototype = parent.prototype;
+
+            temp.prototype = parentPrototype;
             cls.prototype = new temp();
 
+            clsPrototype = cls.prototype;
+
             if (!('$class' in parent)) {
-                for (i in base.prototype) {
-                    if (!parent.prototype[i]) {
-                        parent.prototype[i] = base.prototype[i];
+                for (i in basePrototype) {
+                    if (!parentPrototype[i]) {
+                        parentPrototype[i] = basePrototype[i];
                     }
                 }
             }
 
-            cls.prototype.self = cls;
+            clsPrototype.self = cls;
 
             if (data.hasOwnProperty('constructor')) {
-                cls.prototype.constructor = cls;
+                clsPrototype.constructor = cls;
             }
             else {
-                cls.prototype.constructor = parent.prototype.constructor;
+                clsPrototype.constructor = parentPrototype.constructor;
             }
 
-            cls.superclass = cls.prototype.superclass = parent.prototype;
+            cls.superclass = clsPrototype.superclass = parentPrototype;
 
             delete data.extend;
 
@@ -416,13 +439,34 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
             }
 
             // Merge the parent class' config object without referencing it
-            Ext.merge(cls.prototype.config, parent.prototype.config || {});
+            Ext.Object.merge(clsPrototype.config, parentPrototype.config || {});
 
             if (fn) {
                 fn.call(this, cls, data);
             }
         },
+        
+        /**
+         * @cfg {Object} mixins
 
+An object containing key-value pairs where the key serves as an refrence if you need to access the 
+mixin class directly. For example, say you want to write a method `sing` but you have already mixed
+in a class `CanSing` that also has a method `sing`, you can access it as follows:
+
+    Ext.define('CoolPerson', {
+
+         mixins: {
+             canSing: 'CanSing'
+         },
+
+         sing: function() {
+             alert("Ahem....");
+             this.mixins.canSing.sing.call(this);
+         }
+    });
+
+         * @markdown
+         */
         mixins: function(cls, data, fn) {
             var mixins = data.mixins;
 
@@ -437,6 +481,10 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
             }
         },
 
+        /**
+         * @cfg {Object} config
+         * Specifies the config options for a class and provides getters and setters for each option. See the intro docs for examples.
+         */
         config: function(cls, data, fn) {
             var config = data.config;
 
@@ -494,36 +542,37 @@ See {@link Ext.Base#callParent} for more details on calling superclass' methods
                 fn.call(this, cls, data);
             }
         },
-
+        
+        /**
+         * @cfg {Object} statics
+         * Static methods. See class introduction documentation for examples.
+         */
         statics: function(cls, data, fn) {
             var statics = data.statics,
                 inheritableStatics = data.inheritableStatics,
                 name;
 
-            if (Ext.isObject(statics) || Ext.isObject(inheritableStatics)) {
-
-                if (statics) {
-                    for (name in statics) {
-                        if (statics.hasOwnProperty(name)) {
-                            cls[name] = statics[name];
-                        }
+            if (statics !== undefined) {
+                for (name in statics) {
+                    if (statics.hasOwnProperty(name)) {
+                        cls[name] = statics[name];
                     }
-
-                    delete data.statics;
                 }
 
-                if (inheritableStatics) {
-                    cls.$inheritableStatics = [];
+                delete data.statics;
+            }
 
-                    for (name in inheritableStatics) {
-                        if (inheritableStatics.hasOwnProperty(name)) {
-                            cls[name] = inheritableStatics[name];
-                            cls.$inheritableStatics.push(name);
-                        }
+            if (inheritableStatics !== undefined) {
+                cls.$inheritableStatics = [];
+
+                for (name in inheritableStatics) {
+                    if (inheritableStatics.hasOwnProperty(name)) {
+                        cls[name] = inheritableStatics[name];
+                        cls.$inheritableStatics.push(name);
                     }
-
-                    delete data.inheritableStatics;
                 }
+
+                delete data.inheritableStatics;
             }
 
             if (fn) {

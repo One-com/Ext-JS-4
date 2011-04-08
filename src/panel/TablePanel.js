@@ -53,6 +53,12 @@ Ext.define('Ext.panel.TablePanel', {
     scroll: true,
 
     /**
+     * @cfg {Array} columns
+     * An array of {@link Ext.grid.column.Column column} definition objects which define all columns that appear in this grid. Each
+     * column definition provides the header text for the column, and a definition of where the data for that column comes from.
+     */
+
+    /**
      * @cfg {Boolean} hideHeaders
      * Configure to true to hide the headers.
      */
@@ -73,9 +79,9 @@ Ext.define('Ext.panel.TablePanel', {
     // private property used to determine where to go down to find views
     // this is here to support locking.
     scrollerOwner: true,
-    
+
     invalidateScrollerOnRefresh: true,
-    
+
     initComponent: function() {
         if (!this.viewType) {
             throw "No Viewtype defined.";
@@ -88,8 +94,8 @@ Ext.define('Ext.panel.TablePanel', {
             scroll     = me.scroll,
             vertical   = false,
             horizontal = false;
-        
-        me.store = Ext.StoreMgr.lookup(me.store);    
+
+        me.store = Ext.data.StoreMgr.lookup(me.store);
         me.addEvents(
             /**
              * @event scrollerhide
@@ -108,90 +114,104 @@ Ext.define('Ext.panel.TablePanel', {
         );
         me.bodyCls = me.bodyCls || '';
         me.bodyCls += (' ' + me.extraBodyCls);
-        
+
         // autoScroll is not a valid configuration
         delete me.autoScroll;
-        /**
-         * @property headerCt -> colModel?
-         */
-        var headerCtCfg = {
-            items: me.headers,
-            sortable: me.sortableHeaders
-        };
-        
-        if (me.hideHeaders) {
-            headerCtCfg.height = 0;
-            headerCtCfg.border = false;
-            // IE Quirks Mode fix
-            // If hidden configuration option was used, several layout calculations will be bypassed.
-            if (Ext.isIEQuirks) {
-                headerCtCfg.style = {
-                    display: 'none'
-                };
-            }
-        }
-        
-        // turn both on.
-        if (scroll === true || scroll === 'both') {
-            vertical = horizontal = true;
-        } else if (scroll === 'horizontal') {
-            horizontal = true;
-        } else if (scroll === 'vertical') {
-            vertical = true;
-        // All other values become 'none' or false.
-        } else {
-            headerCtCfg.availableSpaceOffset = 0;
-        }
-        
 
-        if (vertical) {
-            me.verticalScroller = Ext.ComponentMgr.create({
-                dock: me.verticalScrollDock,
-                xtype: me.verticalScrollerType,
-                store: me.store
+        // TODO: Remove when 4.0GA released. Only for user convenience during beta test.
+        if (me.headers) {
+            me.columns = me.headers;
+            throw "headers config is not supported. Please use columns";
+        }
+
+        if (!me.hasView) {
+            /**
+             * @property headerCt -> colModel?
+             */
+            var headerCtCfg = {
+                items: me.columns,
+                sortable: me.sortableHeaders
+            };
+    
+            if (me.hideHeaders) {
+                headerCtCfg.height = 0;
+                headerCtCfg.border = false;
+                // IE Quirks Mode fix
+                // If hidden configuration option was used, several layout calculations will be bypassed.
+                if (Ext.isIEQuirks) {
+                    headerCtCfg.style = {
+                        display: 'none'
+                    };
+                }
+            }
+    
+            // turn both on.
+            if (scroll === true || scroll === 'both') {
+                vertical = horizontal = true;
+            } else if (scroll === 'horizontal') {
+                horizontal = true;
+            } else if (scroll === 'vertical') {
+                vertical = true;
+            // All other values become 'none' or false.
+            } else {
+                headerCtCfg.availableSpaceOffset = 0;
+            }
+    
+            if (vertical) {
+                me.verticalScroller = me.verticalScroller || {};
+                Ext.applyIf(me.verticalScroller, {
+                    dock: me.verticalScrollDock,
+                    xtype: me.verticalScrollerType,
+                    store: me.store
+                });
+                me.verticalScroller = Ext.ComponentMgr.create(me.verticalScroller);
+                me.mon(me.verticalScroller, {
+                    bodyscroll: me.onVerticalScroll,
+                    scope: me
+                });
+            }
+    
+            if (horizontal) {
+                me.horizontalScroller = Ext.ComponentMgr.create({
+                    xtype: 'gridscroller',
+                    section: me,
+                    dock: 'bottom',
+                    store: me.store
+                });
+                me.mon(me.horizontalScroller, {
+                    bodyscroll: me.onHorizontalScroll,
+                    scope: me
+                });
+            }
+    
+            me.headerCt = new Ext.grid.HeaderContainer(headerCtCfg);
+            me.headerCt.on('headerresize', me.onHeaderResize, me);
+            me.relayEvents(me.headerCt, ['headerresize', 'headermove', 'headerhide', 'headershow', 'sortchange']);
+            me.features = me.features || [];
+            me.dockedItems = me.dockedItems || [];
+            me.dockedItems.unshift(me.headerCt);
+            me.viewConfig = me.viewConfig || {};
+            me.viewConfig.invalidateScrollerOnRefresh = me.invalidateScrollerOnRefresh;
+    
+            // AbstractDataView will look up a Store configured as an object
+            // getView converts viewConfig into a View instance
+            me.mon(me.getView().store, {
+                load: me.onStoreLoad,
+                scope: me
+            });
+    
+            me.mon(me.getView(), {
+                refresh: {
+                    fn: this.onViewRefresh,
+                    scope: me,
+                    buffer: 50
+                }
             });
         }
 
-        if (horizontal) {
-            me.horizontalScroller = Ext.ComponentMgr.create({
-                xtype: 'gridscroller',
-                section: me,
-                dock: 'bottom',
-                store: me.store
-            });
-        }
-        
-        me.headerCt = new Ext.grid.HeaderContainer(headerCtCfg);
-        me.headerCt.on('headerresize', me.onHeaderResize, me);
-        
-        me.relayEvents(me.headerCt, ['headerresize', 'headermove', 'headerhide', 'headershow', 'sortchange']);
-        
-        me.features = me.features || [];
-        me.dockedItems = me.dockedItems || [];
-        me.dockedItems.unshift(me.headerCt);
-        
-        me.viewConfig = me.viewConfig || {};
-        
-        me.viewConfig.invalidateScrollerOnRefresh = me.invalidateScrollerOnRefresh;
-
-        // AbstractDataView will look up a Store configured as an object
-        // getView converts viewConfig into a View instance
-        me.mon(me.getView().store, {
-            load: me.onStoreLoad,
-            scope: me
-        });
-        
-        me.mon(me.getView(), {
-            refresh: {
-                fn: this.onViewRefresh,
-                scope: me,
-                buffer: 50
-            }
-        });
-        
         me.callParent();
     },
-    
+
     // state management
     initStateEvents: function(){
         var events = this.stateEvents;
@@ -201,35 +221,35 @@ Ext.define('Ext.panel.TablePanel', {
                 events.push(event);
             }
         });
-        this.callParent();    
+        this.callParent();
     },
-    
+
     getState: function(){
         var state = {
-            headers: []    
-        }, sorter = this.store.sorters.first();
-        
+            columns: []
+        },
+        sorter = this.store.sorters.first();
+
         this.headerCt.items.each(function(header){
-            state.headers.push({
+            state.columns.push({
                 id: header.headerId,
                 width: header.flex ? undefined : header.width,
                 hidden: header.hidden,
                 sortable: header.sortable
             });
         });
-        
+
         if (sorter) {
             state.sort = {
                 property: sorter.property,
                 direction: sorter.direction
             };
         }
-        
         return state;
     },
-    
+
     applyState: function(state) {
-        var headers = state.headers,
+        var headers = state.columns,
             length = headers ? headers.length : 0,
             headerCt = this.headerCt,
             items = headerCt.items,
@@ -237,20 +257,22 @@ Ext.define('Ext.panel.TablePanel', {
             store = this.store,
             i = 0,
             index,
+            headerState,
             header;
 
         for (; i < length; ++i) {
-            header = headers[i];
-            header = headerCt.down('gridheader[headerId=' + header.id + ']');
+            headerState = headers[i];
+            header = headerCt.down('gridcolumn[headerId=' + headerState.id + ']');
             index = items.indexOf(header);
             if (i !== index) {
                 headerCt.moveHeader(index, i);
             }
-            header.sortable = header.sortable;
-            if (Ext.isDefined(header.width)) {
-                header.width = header.width;
+            header.sortable = headerState.sortable;
+            if (Ext.isDefined(headerState.width)) {
+                delete header.flex;
+                header.setWidth(headerState.width);
             }
-            header.hidden = header.hidden;
+            header.hidden = headerState.hidden;
         }
 
         if (sorter) {
@@ -266,6 +288,10 @@ Ext.define('Ext.panel.TablePanel', {
         }
     },
 
+    /**
+     * Gets the view for this panel.
+     * @return {Ext.view.TableView}
+     */
     getView: function() {
         var me = this,
             sm;
@@ -280,16 +306,14 @@ Ext.define('Ext.panel.TablePanel', {
                 features: me.features,
                 panel: me
             }));
-            me.view.on({
-                bodyscroll: me.onViewScroll,
+            me.mon(me.view, {
+                //bodyscroll: me.onViewScroll,
                 uievent: me.processEvent,
                 scope: me
             });
-            // Provide a new reference now that View might have initialized the store
             sm.view = me.view;
             me.headerCt.view = me.view;
             me.relayEvents(me.view, ['cellclick', 'celldblclick']);
-            me.store = me.view.store;
         }
         return me.view;
     },
@@ -304,7 +328,10 @@ Ext.define('Ext.panel.TablePanel', {
         if (!me.hasView) {
             me.hasView = true;
             me.add(me.view);
-            Ext.getBody().on('mousewheel', me.onMouseWheel, me);
+            me.mon(Ext.getBody(), {
+                mousewheel: me.onMouseWheel,
+                scope: me
+            });
         }
     },
 
@@ -350,14 +377,20 @@ Ext.define('Ext.panel.TablePanel', {
 
         if (me.view) {
             viewElDom = me.view.el.dom;
-            centerScrollWidth = viewElDom.scrollWidth;
+            //centerScrollWidth = viewElDom.scrollWidth;
+            centerScrollWidth = me.headerCt.getFullWidth();
             /**
              * clientWidth often returns 0 in IE resulting in an
              * infinity result, here we use offsetWidth bc there are
              * no possible scrollbars and we don't care about margins
              */
             centerClientWidth = viewElDom.offsetWidth;
-            scrollHeight = viewElDom.scrollHeight;
+            if (me.verticalScroller && me.verticalScroller.el) {
+                scrollHeight = me.verticalScroller.getSizeCalculation().height;
+            } else {
+                scrollHeight = viewElDom.scrollHeight;
+            }
+            
             clientHeight = viewElDom.clientHeight;
 
             if (scrollHeight > clientHeight) {
@@ -386,7 +419,7 @@ Ext.define('Ext.panel.TablePanel', {
      */
     hideHorizontalScroller: function() {
         var me = this;
-        
+
         if (me.horizontalScroller && me.horizontalScroller.ownerCt === me) {
             me.verticalScroller.offsets.bottom = 0;
             me.removeDocked(me.horizontalScroller, false);
@@ -401,7 +434,7 @@ Ext.define('Ext.panel.TablePanel', {
      */
     showHorizontalScroller: function() {
         var me = this;
-        
+
         if (me.verticalScroller) {
             me.verticalScroller.offsets.bottom = Ext.getScrollBarWidth() - 2;
         }
@@ -409,7 +442,7 @@ Ext.define('Ext.panel.TablePanel', {
             me.addDocked(me.horizontalScroller);
             me.addCls(me.horizontalScrollerPresentCls);
             me.fireEvent('scrollershow', me.horizontalScroller, 'horizontal');
-        }    
+        }
     },
 
     /**
@@ -457,8 +490,6 @@ Ext.define('Ext.panel.TablePanel', {
 
     // sync the headerCt with the view.
     onViewScroll: function(e, t) {
-        this.headerCt.el.dom.scrollLeft = t.scrollLeft;
-        
         if (this.invalidateScrollerOnRefresh) {
             // On programmatic or otherwise scroll of the view, synch any virtual scrollers
             if (this.verticalScroller) {
@@ -542,7 +573,10 @@ Ext.define('Ext.panel.TablePanel', {
         var rootCmp = this.getScrollerOwner(),
             scrollerRight;
         scrollerRight = rootCmp.down('gridscroller[dock=' + this.verticalScrollDock  + ']');
-        scrollerRight.setScrollTop(top);
+        if (scrollerRight) {
+            scrollerRight.setScrollTop(top);
+        }
+        
     },
     
     getScrollerOwner: function() {
@@ -643,11 +677,67 @@ Ext.define('Ext.panel.TablePanel', {
         }
         return this.selModel;
     },
+    
+    onVerticalScroll: function(event, target) {
+        var owner = this.scrollerOwner ? this : this.up('[scrollerOwner]'),
+            items = owner.query('tableview'),
+            i = 0,
+            len = items.length,
+            center,
+            centerEl,
+            centerScrollWidth,
+            centerClientWidth,
+            width;
+            
+        for (; i < len; i++) {
+            items[i].el.dom.scrollTop = target.scrollTop;
+        }
+    },
+    
+    onHorizontalScroll: function(event, target) {
+        var owner = this.scrollerOwner ? this : this.up('[scrollerOwner]'),
+            items = owner.query('tableview'),
+            i = 0,
+            len = items.length,
+            center,
+            centerEl,
+            centerScrollWidth,
+            centerClientWidth,
+            width;
+            
+        center = items[1] || items[0];
+        centerEl = center.el.dom;
+        centerScrollWidth = centerEl.scrollWidth;
+        centerClientWidth = centerEl.offsetWidth;    
+        width = this.horizontalScroller.getWidth();
+        
+        centerEl.scrollLeft = Math.ceil(target.scrollLeft/width * centerClientWidth);
+        this.headerCt.el.dom.scrollLeft = target.scrollLeft;
+    },
 
     // template method meant to be overriden
     onStoreLoad: Ext.emptyFn,
 
     getEditorParent: function() {
         return this.body;
+    },
+    
+    bindStore: function(store) {
+        var me = this;
+        me.store = store;
+        me.getView().bindStore(store);
+    },
+    
+    reconfigure: function(store, columns) {
+        var me = this;
+        if (columns) {
+            me.headerCt.removeAll();
+            me.headerCt.add(columns);
+        }
+        if (store) {
+            me.bindStore(store);
+        } else {
+            me.getView().refresh();
+        }
     }
 });

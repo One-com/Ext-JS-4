@@ -15,7 +15,7 @@ Ext.define('Ext.app.ChartPortlet', {
                 sp500: 1100
             }],
             i;
-        for (i = 1; i < 200; i++) {
+        for (i = 1; i < 50; i++) {
             data.push({
                 name: 'x',
                 sp500: data[i - 1].sp500 + ((Math.floor(Math.random() * 2) % 2) ? -1 : 1) * Math.floor(Math.random() * 7),
@@ -30,15 +30,18 @@ Ext.define('Ext.app.ChartPortlet', {
         Ext.apply(this, {
             layout: 'fit',
             width: 600,
-            height: 250,
+            height: 300,
             items: {
                 xtype: 'chart',
-                theme: 'Category1',
                 animate: false,
+                shadow: false,
                 store: new Ext.data.JsonStore({
                     fields: ['name', 'sp500', 'djia'],
                     data: this.generateData()
                 }),
+                legend: {
+                    position: 'bottom'
+                },
                 axes: [{
                     type: 'Numeric',
                     position: 'left',

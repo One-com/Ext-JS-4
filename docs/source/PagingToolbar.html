@@ -55,7 +55,7 @@ var grid = new Ext.grid.GridPanel({
  * <br><span style="display: none">/**</span> * 
  * &lt;p&gt;If using {@link Ext.data.Store#autoLoad store&#39;s autoLoad} configuration:&lt;/p&gt;
  * <br><span style="display: none">**/</span>var myStore = new Ext.data.Store({
-    {@link Ext.data.Store#autoLoad autoLoad}: {params:{start: 0, limit: 25}},
+    {@link Ext.data.Store#autoLoad autoLoad}: {start: 0, limit: 25},
     ...
 });
  * <br><span style="display: none">/**</span> * 
@@ -199,7 +199,6 @@ Ext.define(&#39;Ext.toolbar.PagingToolbar&#39;, {
             enableKeyEvents: true,
             selectOnFocus: true,
             submitValue: false,
-            hideLabel: true,
             height: 19,
             width: me.inputItemWidth,
             margins: &#39;-1 2 3 2&#39;,

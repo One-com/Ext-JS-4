@@ -35,11 +35,11 @@ Ext.define('Ext.layout.component.SliderField', {
         
         if (owner.vertical) {
             inputEl.setHeight(height);
-            innerEl.setHeight(height - inputEl.getPadding('t') - endEl.getPadding('b'));
+            innerEl.setHeight(Ext.isNumber(height) ? height - inputEl.getPadding('t') - endEl.getPadding('b') : height);
         }
         else {
             inputEl.setWidth(width);
-            innerEl.setWidth(width - inputEl.getPadding('l') - endEl.getPadding('r'));
+            innerEl.setWidth(Ext.isNumber(width) ? width - inputEl.getPadding('l') - endEl.getPadding('r') : width);
         }
         owner.syncThumbs();
     }

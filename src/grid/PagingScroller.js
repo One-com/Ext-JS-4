@@ -7,12 +7,12 @@
 Ext.define('Ext.grid.PagingScroller', {
     extend: 'Ext.grid.Scroller',
     alias: 'widget.paginggridscroller',
-    renderTpl: null,
-    tpl: [
-        '<tpl for="pages">',
-            '<div class="' + Ext.baseCSSPrefix + 'stretcher" style="width: {width}px;height: {height}px;"></div>',
-        '</tpl>'
-    ],
+    //renderTpl: null,
+    //tpl: [
+    //    '<tpl for="pages">',
+    //        '<div class="' + Ext.baseCSSPrefix + 'stretcher" style="width: {width}px;height: {height}px;"></div>',
+    //    '</tpl>'
+    //],
     /**
      * @cfg {Number} percentageFromEdge This is a number above 0 and less than 1 which specifies
      * at what percentage to begin fetching the next page. For example if the pageSize is 100
@@ -21,22 +21,17 @@ Ext.define('Ext.grid.PagingScroller', {
      */
     percentageFromEdge: 0.35,
     
+    activePrefetch: true,
+    
     chunkSize: 50,
     snapIncrement: 25,
     
     syncScroll: true,
     
     initComponent: function() {
-        
         var me = this,
             ds = me.store;
-        if (Ext.isWebKit) {
-            me.rowHeight = 21;
-        } else if (Ext.isIE) {
-            me.rowHeight = 20;
-        } else {
-            me.rowHeight = 22;
-        }
+
         ds.on('guaranteedrange', this.onGuaranteedRange, this);
         this.callParent(arguments);
     },
@@ -83,24 +78,25 @@ Ext.define('Ext.grid.PagingScroller', {
     
     // invalidate the scroller by creating a single stretcher for every page of data
     // that comes back
-    invalidate: function() {
-        if (this.el && this.el.dom) {
-            var pages = [],
-                pageCount = this.getPageData().pageCount,
-                elDom = this.el.dom,
-                size = this.getSizeCalculation(),
-                i = 0;
-                
-            for (; i < pageCount; i++) {
-                pages.push(size);
-            }
-            this.tpl.overwrite(this.getTargetEl(), {pages: pages});
-            
-            // BrowserBug: IE7
-            // This makes the scroller enabled, when initially rendering.
-            elDom.scrollTop = elDom.scrollTop;
-        }
-    },
+    //invalidate: function() {
+    //    debugger;
+    //    if (this.el && this.el.dom) {
+    //        var pages = [],
+    //            pageCount = this.getPageData().pageCount,
+    //            elDom = this.el.dom,
+    //            size = this.getSizeCalculation(),
+    //            i = 0;
+    //            
+    //        for (; i < pageCount; i++) {
+    //            pages.push(size);
+    //        }
+    //        this.tpl.overwrite(this.getTargetEl(), {pages: pages});
+    //        
+    //        // BrowserBug: IE7
+    //        // This makes the scroller enabled, when initially rendering.
+    //        elDom.scrollTop = elDom.scrollTop;
+    //    }
+    //},
     
     getPageData : function(){
         var panel = this.getPanel(),
@@ -137,14 +133,17 @@ Ext.define('Ext.grid.PagingScroller', {
             lastPage = Math.ceil(totalCount / store.pageSize),
             //requestStart = visibleStart,
             requestStart = Math.floor(visibleStart / me.snapIncrement) * me.snapIncrement,
-            requestEnd = requestStart + pageSize - 1;
+            requestEnd = requestStart + pageSize - 1,
+            activePrefetch = me.activePrefetch;
 
         me.visibleStart = visibleStart;
         me.visibleEnd = visibleEnd;
         
-        this.cancelLoad();        
+        
         me.syncScroll = true;
+        // end of request was past what the total is, grab from the end back a pageSize
         if (requestEnd > totalCount - 1) {
+            this.cancelLoad();
             if (store.rangeSatisfied(totalCount - pageSize, totalCount - 1)) {
                 me.syncScroll = true;
             }
@@ -152,6 +151,7 @@ Ext.define('Ext.grid.PagingScroller', {
         // Out of range, need to reset the current data set
         } else if (visibleStart < guaranteedStart || visibleEnd > guaranteedEnd) {
             if (store.rangeSatisfied(requestStart, requestEnd)) {
+                this.cancelLoad();
                 store.guaranteeRange(requestStart, requestEnd);
             } else {
                 store.mask();
@@ -159,10 +159,10 @@ Ext.define('Ext.grid.PagingScroller', {
             }
             // dont sync the scroll view immediately, sync after the range has been guaranteed
             me.syncScroll = false;
-        } else if (visibleStart < (guaranteedStart + numFromEdge) && prevPage > 0) {
+        } else if (activePrefetch && visibleStart < (guaranteedStart + numFromEdge) && prevPage > 0) {
             me.syncScroll = true;
             store.prefetchPage(prevPage);
-        } else if (visibleEnd > (guaranteedEnd - numFromEdge) && nextPage < lastPage) {
+        } else if (activePrefetch && visibleEnd > (guaranteedEnd - numFromEdge) && nextPage < lastPage) {
             me.syncScroll = true;
             store.prefetchPage(nextPage);
         }
@@ -171,6 +171,36 @@ Ext.define('Ext.grid.PagingScroller', {
         if (me.syncScroll) {
             me.syncTo();
         }
+    },
+    
+    getSizeCalculation: function() {
+        // Use the direct ownerCt here rather than the scrollerOwner
+        // because we are calculating widths/heights.
+        var owner = this.ownerCt,
+            view   = owner.getView(),
+            store  = this.store,
+            dock   = this.dock,
+            elDom  = this.el.dom,
+            width  = 1,
+            height = 1;
+        
+        if (!this.rowHeight) {
+            this.rowHeight = view.el.down(view.getItemSelector()).getHeight();
+        }
+        
+
+        height = store.getTotalCount() * this.rowHeight;
+
+        if (isNaN(width)) {
+            width = 1;
+        }
+        if (isNaN(height)) {
+            height = 1;
+        }
+        return {
+            width: width,
+            height: height
+        };
     },
     
     attemptLoad: function(start, end) {

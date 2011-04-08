@@ -64,8 +64,10 @@ Ext.define('Ext.data.TreeStore', {
         me.onBeforeSort();
                 
         root = me.root;
-        delete me.root;
-        me.setRootNode(root);
+        if (root) {
+            delete me.root;
+            me.setRootNode(root);            
+        }
 
         me.relayEvents(me.tree, [
             /**
@@ -183,6 +185,16 @@ Ext.define('Ext.data.TreeStore', {
              "sort"          
         ]);
         
+        me.addEvents([
+            /**
+             * @event rootchange
+             * Fires when the root node on this TreeStore is changed.
+             * @param {Ext.data.TreeStore} store This TreeStore
+             * @param {Node} The new root node.
+             */
+            'rootchange'
+        ]);
+        
         //<deprecated since=0.99>
         if (Ext.isDefined(me.nodeParameter)) {
             throw "Ext.data.TreeStore: nodeParameter has been renamed to nodeParam for consistency";
@@ -200,15 +212,25 @@ Ext.define('Ext.data.TreeStore', {
     },
     
     onBeforeNodeExpand: function(node, callback, scope) {
-        if (node.loaded) {
+        if (node.isLoaded()) {
             callback.call(scope || node, node.childNodes);
+        }
+        else if (node.loading) {
+            this.on('load', function() {
+                if (callback) {
+                    callback.call(scope || node, node.childNodes);
+                }
+            }, this, {single: true});
         }
         else {
             this.read({
                 node: node,
-                callback: callback,
-                scope: scope || node
-            });
+                callback: function() {
+                    if (callback) {
+                        callback.call(scope || node, node.childNodes);
+                    }
+                }
+            });            
         }
     },
     
@@ -227,7 +249,8 @@ Ext.define('Ext.data.TreeStore', {
             // create a default rootNode and create internal data struct.        
             Ext.applyIf(root, {
                 id: me.defaultRootId,
-                text: 'Root'
+                text: 'Root',
+                allowDrag: false
             });
             dataRoot = reader.getRoot(root);
             root = Ext.ModelMgr.create(root, me.model);
@@ -236,6 +259,8 @@ Ext.define('Ext.data.TreeStore', {
         // When we add the root to the tree, it will automaticaly get the NodeInterface
         me.tree.setRootNode(root);
 
+        me.fireEvent('rootchange', me, root);
+        
         // Because the tree might have decorated the model with new fields,
         // we need to build new extactor functions on the reader.
         me.getProxy().getReader().buildExtractors(true);
@@ -243,13 +268,17 @@ Ext.define('Ext.data.TreeStore', {
         // We want to load any children descending the root node        
         if (dataRoot) {
             children = reader.extractData(dataRoot);
-            this.fillNode(root, children);
+            me.fillNode(root, children);
         }
 
         // If the user has set expanded: true on the root, we want to call the expand function
-        if (root.isExpanded()) {
-            root.expand();
+        if (!root.isLoaded() && root.isExpanded()) {
+            me.load({
+                node: root
+            });
         }
+        
+        return root;
     },
     
     /**
@@ -278,8 +307,15 @@ Ext.define('Ext.data.TreeStore', {
         
         var me = this,
             node = options.node || me.tree.getRootNode(),
-            reader = this.proxy.reader,
             root;
+            
+        // If there is not a node it means the user hasnt defined a rootnode yet. In this case lets just
+        // create one for them and assume they want rootVisible false.
+        if (!node) {
+            // me.view.rootVisible = false;
+            node = me.setRootNode();
+            node.set('expanded', true);
+        }
         
         if (me.clearOnLoad) {
             node.removeAll();
@@ -289,6 +325,11 @@ Ext.define('Ext.data.TreeStore', {
             node: node
         });
         options.params[me.nodeParam] = node ? node.get('id') : 'root';
+        
+        if (node) {
+            node.loading = true;
+        }
+        
         return me.callParent([options]);
     },
         
@@ -312,10 +353,10 @@ Ext.define('Ext.data.TreeStore', {
             records = sortCollection.items;
         }
 
-        node.loaded = true;
+        node.set('loaded', true);
         for (; i < ln; i++) {
             record = records[i];
-            node.appendChild(record, true);
+            node.appendChild(record);
             
             // Since we are suppressing the event, we have to manually register the node with the tree
             me.tree.registerNode(record);
@@ -340,6 +381,7 @@ Ext.define('Ext.data.TreeStore', {
             node = operation.node,
             sortCollection;
 
+        delete node.loading;
         if (successful) {
             records = me.fillNode(node, records);
         }

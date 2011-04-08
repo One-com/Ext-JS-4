@@ -346,7 +346,15 @@ var combo = new Ext.form.ComboBox({
              * <li><code>cancel</code> : Boolean <div class="sub-desc">Set to true to cancel the query</div></li>
              * </ul>
              */
-            'beforequery'
+            'beforequery',
+            
+            /*
+             * @event select
+             * Fires when at least one list item is selected.
+             * @param {Ext.form.ComboBox} combo This combo box
+             * @param {Array} records The selected records
+             */            
+            'select'
         );
 
 
@@ -717,7 +725,9 @@ var combo = new Ext.form.ComboBox({
                 Ext.defer(me.collapse, 1, me);
             }
             me.setValue(selectedRecords, false);
-            me.fireEvent('select', me, selectedRecords);
+            if (selectedRecords.length > 0) {
+                me.fireEvent('select', me, selectedRecords);
+            }
             me.inputEl.focus();
         }
     },
@@ -729,14 +739,26 @@ var combo = new Ext.form.ComboBox({
     onExpand: function() {
         var me = this,
             keyNav = me.listKeyNav,
+            selectOnTab = me.selectOnTab,
             picker = me.getPicker();
 
         if (!keyNav) {
             keyNav = me.listKeyNav = new Ext.view.BoundListKeyNav(this.inputEl, {
                 boundList: picker,
-                selectOnTab: me.selectOnTab,
-                forceKeyDown: true
+                forceKeyDown: true,
+                tab: function(e) {
+                    if (selectOnTab) {
+                        this.selectHighlighted(e);
+                        me.triggerBlur();
+                    }
+                    // Tab key event is allowed to propagate to field
+                    return true;
+                }
             });
+            // stop tab monitoring from Ext.form.Trigger so it doesn't short-circuit selectOnTab
+            if (selectOnTab) {
+                me.ignoreMonitorTab = true;
+            }
         }
         Ext.defer(keyNav.enable, 1, keyNav); //wait a bit so it doesn't react to the down arrow opening the picker
 
@@ -748,9 +770,11 @@ var combo = new Ext.form.ComboBox({
      * Disables the key nav for the BoundList when it is collapsed.
      */
     onCollapse: function() {
-        var keyNav = this.listKeyNav;
+        var me = this,
+            keyNav = me.listKeyNav;
         if (keyNav) {
             keyNav.disable();
+            me.ignoreMonitorTab = false;
         }
     },
 

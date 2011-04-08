@@ -121,7 +121,12 @@ Everything should now load via asynchronous mode.
 
 # Deployment #
 
-It's important to note that dynamic loading should only be used during development on your local machines. During production, all dependencies should be combined into one single JavaScript file. Ext.Loader makes the whole process of transitioning from / to between development / maintenance and production as easy as possible. Internally {@link Ext.Loader.history} maintains the list of all dependencies your application needs in the exact loading sequence. It's as simple as concatenating all files in this array into one, then include it on top of your application.
+It's important to note that dynamic loading should only be used during development on your local machines.
+During production, all dependencies should be combined into one single JavaScript file. Ext.Loader makes
+the whole process of transitioning from / to between development / maintenance and production as easy as
+possible. Internally {@link Ext.Loader#history Ext.Loader.history} maintains the list of all dependencies your application
+needs in the exact loading sequence. It's as simple as concatenating all files in this array into one,
+then include it on top of your application.
 
 This process will be automated with Sencha Command, to be released and documented towards Ext JS 4 Final.
 
@@ -229,11 +234,18 @@ This process will be automated with Sencha Command, to be released and documente
             enableDeadlockDetection: true,
 
             /**
-             * @cfg {Boolean} enableCacheBuster
-             * Appends current date in integer format to script files to prevent caching
+             * @cfg {Boolean} disableCaching
+             * Appends current timestamp to script files to prevent caching
              * Defaults to true
              */
-            enableCacheBuster: true,
+            disableCaching: true,
+
+            /**
+             * @cfg {String} disableCachingParam
+             * The get parameter name for the cache buster's timestamp.
+             * Defaults to '_dc'
+             */
+            disableCachingParam: '_dc',
 
             /**
              * @cfg {Object} paths
@@ -275,7 +287,7 @@ This process will be automated with Sencha Command, to be released and documente
       });
     </script>
 
-         * Refer to {@link Ext.Loader#config} for the list of possible properties
+         * Refer to {@link Ext.Loader#configs} for the list of possible properties
          *
          * @param {Object} config The config object to override the default values in {@link Ext.Loader#config}
          * @return {Ext.Loader} this
@@ -283,10 +295,10 @@ This process will be automated with Sencha Command, to be released and documente
          */
         setConfig: function(name, value) {
             if (Ext.isObject(name) && arguments.length === 1) {
-                Ext.merge(this.config, name);
+                Ext.Object.merge(this.config, name);
             }
             else {
-                this.config[name] = (Ext.isObject(value)) ? Ext.merge(this.config[name], value) : value;
+                this.config[name] = (Ext.isObject(value)) ? Ext.Object.merge(this.config[name], value) : value;
             }
 
             return this;
@@ -367,7 +379,7 @@ This process will be automated with Sencha Command, to be released and documente
             }
 
             for (prefix in paths) {
-                if (paths.hasOwnProperty(prefix) && prefix === className.substring(0, prefix.length)) {
+                if (paths.hasOwnProperty(prefix) && prefix + '.' === className.substring(0, prefix.length + 1)) {
                     if (prefix.length > deepestPrefix.length) {
                         deepestPrefix = prefix;
                     }
@@ -482,7 +494,7 @@ This process will be automated with Sencha Command, to be released and documente
          */
         loadScriptFile: function(url, onLoad, onError, scope, synchronous) {
             var me = this,
-                noCacheUrl = url + (this.getConfig('enableCacheBuster') ? '?' + Ext.Date.now() : ''),
+                noCacheUrl = url + (this.getConfig('disableCaching') ? ('?' + this.getConfig('disableCachingParam') + '=' + Ext.Date.now()) : ''),
                 fileName = url.split('/').pop(),
                 xhr, status, onScriptError;
 
@@ -884,25 +896,32 @@ This process will be automated with Sencha Command, to be released and documente
     };
 
     /**
-     * Convenient shortcut to {@link Ext.Loader#require}
+     * Convenient shortcut to {@link Ext.Loader Ext.Loader.require}. Please see the introduction documentation for
+     * {@link Ext.Loader} for examples.
      * @member Ext
      * @method require
      */
-    Ext.require = Ext.Function.alias(Loader, 'require');
+    Ext.require = function() {
+        return Loader.require.apply(Loader, arguments);
+    };
 
     /**
      * Convenient shortcut to {@link Ext.Loader#requirePackages}
      * @member Ext
      * @method requirePackages
      */
-    Ext.requirePackages = Ext.Function.alias(Loader, 'requirePackages');
+    Ext.requirePackages = function() {
+        return Loader.requirePackages.apply(Loader, arguments);
+    };
 
     /**
      * Convenient shortcut to {@link Ext.Loader#exclude}
      * @member Ext
      * @method exclude
      */
-    Ext.exclude = Ext.Function.alias(Loader, 'exclude');
+    Ext.exclude = function() {
+        return Loader.exclude.apply(Loader, arguments);
+    };
 
     /**
      * @member Ext

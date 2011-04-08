@@ -83,7 +83,7 @@ Ext.define(&#39;Ext.data.NodeStore&#39;, {
                 scope: this
             });
             this.node = node;
-            if (node.isExpanded() &amp;&amp; node.loaded) {
+            if (node.isExpanded() &amp;&amp; node.isLoaded()) {
                 this.onNodeExpand(node, node.childNodes, true);
             }
         }
@@ -102,6 +102,10 @@ Ext.define(&#39;Ext.data.NodeStore&#39;, {
             i, record;
 
         if (!this.recursive &amp;&amp; parent !== this.node) {
+            return;
+        }
+        
+        if (!parent.isVisible()) {
             return;
         }
 
@@ -153,14 +157,17 @@ Ext.define(&#39;Ext.data.NodeStore&#39;, {
     onNodeAppend: function(parent, node, index) {
         var me = this,
             refNode, sibling;
-
-        if (parent.isExpanded()) {
+            
+        if (node.isVisible()) {
             if (index == 0) {
                 refNode = parent;
             }
             else {
                 sibling = node.previousSibling;
-                refNode = sibling.isExpanded() ? (sibling.lastChild || sibling) : sibling;
+                while (sibling.isExpanded()) {
+                    sibling = sibling.lastChild;
+                }
+                refNode = sibling;
             }
             me.insert(me.indexOf(refNode) + 1, node);
             if (!node.isLeaf() &amp;&amp; node.isExpanded()) {
@@ -173,7 +180,7 @@ Ext.define(&#39;Ext.data.NodeStore&#39;, {
         var me = this,
             index = this.indexOf(refNode);
             
-        if (index != -1 &amp;&amp; parent.isExpanded()) {
+        if (index != -1 &amp;&amp; node.isVisible()) {
             me.insert(index, node);
             if (!node.isLeaf() &amp;&amp; node.isExpanded()) {
                 me.onNodeExpand(node, node.childNodes, true);

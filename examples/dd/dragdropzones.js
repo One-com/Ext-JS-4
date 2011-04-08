@@ -132,7 +132,7 @@ Ext.onReady(function() {
                 helpWindow.show();
             }
         }],
-        headers: [{
+        columns: [{
             dataIndex: 'name',
             header: 'Name',
             width: 200
@@ -149,7 +149,7 @@ Ext.onReady(function() {
             ftype:'rowbody',
             rowBodyDivCls: 'hospital-target',
             getAdditionalData: function() {
-                return Ext.apply(Ext.grid.RowBodyFeature.prototype.getAdditionalData.apply(this, arguments), {
+                return Ext.apply(Ext.grid.feature.RowBody.prototype.getAdditionalData.apply(this, arguments), {
                     rowBody: 'Drop Patient Here'
                 });
             }

@@ -6,8 +6,8 @@
  * @param {Object} config
  */
 Ext.define(&#39;Ext.dd.StatusProxy&#39;, {
-    animRepair: true,
-    
+    animRepair: false,
+
     constructor: function(config){
         Ext.apply(this, config);
         this.id = this.id || Ext.id();
@@ -20,12 +20,12 @@ Ext.define(&#39;Ext.dd.StatusProxy&#39;, {
             shadow: !config || config.shadow !== false,
             renderTo: document.body
         });
-        
+
         this.el = this.proxy.el;
         this.el.show();
         this.el.setVisibilityMode(Ext.core.Element.VISIBILITY);
         this.el.hide();
-        
+
         this.ghost = Ext.get(this.el.dom.childNodes[1]);
         this.dropStatus = this.dropNotAllowed;
     },
@@ -173,8 +173,8 @@ Ext.define(&#39;Ext.dd.StatusProxy&#39;, {
         this.callback = null;
         this.scope = null;
     },
-    
+
     destroy: function(){
-        Ext.destroy(this.ghost, this.el);    
+        Ext.destroy(this.ghost, this.proxy, this.el);
     }
 });￿</pre></pre></body></html>

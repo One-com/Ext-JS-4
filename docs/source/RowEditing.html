@@ -6,7 +6,7 @@ Ext.define(&#39;Ext.grid.RowEditing&#39;, {
     // extend: &#39;Ext.grid.Editing&#39;,
     alias: &#39;plugin.rowediting&#39;,
     requires: [
-        &#39;Ext.grid.Header&#39;,
+        &#39;Ext.grid.column.Column&#39;,
         &#39;Ext.grid.RowEditor&#39;,
         &#39;Ext.util.KeyNav&#39;,
         &#39;Ext.XTemplate&#39;
@@ -14,70 +14,81 @@ Ext.define(&#39;Ext.grid.RowEditing&#39;, {
     mixins: {
         observable: &#39;Ext.util.Observable&#39;
     },
-    
+
     <a name="prop-Ext.grid.RowEditing-clicksToEdit"></a>/**********************************
      * Abstract properties &amp; methods
      **********************************/
     clicksToEdit: 2,
     editStyle: &#39;row&#39;,
-    
+
     constructor: function(config) {
         var me = this;
         Ext.apply(me, config);
         me.mixins.observable.constructor.call(me);
     },
-    
+
+    init: function(grid) {
+        var me = this;
+
+        me.grid = grid;
+        me.view = grid.view;
+        me.initEvents();
+        me.initFieldAccessors(grid.headerCt.getGridColumns());
+
+        me.addEvents(
+            &#39;beforeedit&#39;,
+            &#39;edit&#39;
+        );
+        grid.relayEvents(me, [&#39;beforeedit&#39;, &#39;edit&#39;]);
+    },
+
+    /**
+     * @private
+     * AbstractComponent calls destroy on all its plugins at destroy time.
+     */
     destroy: function() {
         var me = this,
             grid = me.grid,
             headerCt = grid.headerCt,
             events = grid.events;
-        
+
         Ext.destroy(
             me.editor,
             me.keyNav
         );
         me.removeFieldAccessors(grid.headerCt.getGridColumns());
-        
-        // Remove the events we added
-        if (events.beforeedit.isEvent) {
-            events.beforeedit.clearListeners();
-        }
-        if (events.edit.isEvent) {
-            events.edit.clearListeners();
-        }
-        delete events.beforeedit;
-        delete events.edit;
-        
+
+        // Clear all listeners from all our events, clear all managed listeners we added to other Observables
+        me.clearListeners();
+
         delete me.grid;
         delete me.view;
         delete me.editor;
         delete me.keyNav;
     },
-    
+
     getEditor: function() {
         var me = this;
-        
+
         if (!me.editor) {
             me.editor = me.initEditor();
         }
-        
         return me.editor;
     },
-    
+
     getEditStyle: function() {
         return this.editStyle;
     },
-    
+
     // initEditor: Ext.emptyFn,
-    
+
     initEvents: function() {
         var me = this,
             grid = me.grid,
             view = me.view,
             headerCt = grid.headerCt,
             clickEvent = me.clicksToEdit === 1 ? &#39;click&#39; : &#39;dblclick&#39;;
-        
+
         // Start editing
         me.mon(view, &#39;cell&#39; + clickEvent, me.onCellDblClick, me);
         view.on(&#39;render&#39;, function() {
@@ -86,7 +97,7 @@ Ext.define(&#39;Ext.grid.RowEditing&#39;, {
                 esc: me.onEscKey,
                 scope: me
             });
-        
+
             // Column events
             me.mon(headerCt, {
                 add: me.onColumnAdd,
@@ -98,11 +109,8 @@ Ext.define(&#39;Ext.grid.RowEditing&#39;, {
                 scope: me
             });
         }, me, { single: true });
-        
-        // Cleanup
-        me.mon(grid, &#39;beforedestroy&#39;, me.destroy, me);
     },
-    
+
     onCellDblClick: function(view, cell, colIdx, record, row, rowIdx, e) {
         var me = this,
             params = {
@@ -112,48 +120,47 @@ Ext.define(&#39;Ext.grid.RowEditing&#39;, {
                 rowIdx: rowIdx,
                 record: record
             };
-        
         me.startEdit(params);
     },
-    
+
     onColumnAdd: function(ct, column) {
         var me = this,
             editor = me.getEditor();
-        
+
         me.initFieldAccessors(column);
         if (editor &amp;&amp; editor.onColumnAdd) {
             editor.onColumnAdd(column);
         }
     },
-    
+
     onColumnRemove: function(ct, column) {
         var me = this,
             editor = me.getEditor();
-        
+
         if (editor &amp;&amp; editor.onColumnRemove) {
             editor.onColumnRemove(column);
         }
         me.removeFieldAccessors(column);
     },
-    
+
     onColumnResize: function(ct, column, width) {
         var me = this,
             editor = me.getEditor();
-        
+
         if (editor &amp;&amp; editor.onColumnResize) {
             editor.onColumnResize(column, width);
         }
     },
-    
+
     onColumnHide: function(ct, column) {
         var me = this,
             editor = me.getEditor();
-        
+
         if (editor &amp;&amp; editor.onColumnHide) {
             editor.onColumnHide(column);
         }
     },
-    
+
     onColumnShow: function(ct, column) {
         var me = this,
             editor = me.getEditor();
@@ -195,79 +202,78 @@ Ext.define(&#39;Ext.grid.RowEditing&#39;, {
         
         me.startEdit(params);
     },
-    
+
     onEscKey: function(e) {
         this.cancelEdit();
     },
-    
+
     initFieldAccessors: function(column) {
         var me = this;
-        
+
         if (Ext.isArray(column)) {
             Ext.Array.forEach(column, me.initFieldAccessors, me);
             return;
         }
-        
+
         // Augment the Header class to have a getField and setField method
         Ext.apply(column, {
             getField: function(defaultField) {
                 return me.getColumnField(this, defaultField);
             },
-            
+
             setField: function(field) {
                 me.setColumnField(this, field);
             }
         });
     },
-    
+
     removeFieldAccessors: function(column) {
         var me = this;
-        
+
         if (Ext.isArray(column)) {
             Ext.Array.forEach(column, me.removeFieldAccessors, me);
             return;
         }
-        
+
         delete column.getField;
         delete column.setField;
     },
-    
+
     getColumnField: function(column, defaultField) {
         var field = column.field;
-            
+
         if (!field &amp;&amp; column.editor) {
             field = column.editor;
             delete column.editor;
         }
-        
+
         if (!field &amp;&amp; defaultField) {
             field = defaultField;
         }
-        
+
         if (field) {
             if (Ext.isObject(field) &amp;&amp; !field.isFormField) {
                 field = Ext.ComponentMgr.create(field);
                 column.field = field;
             }
-            
+
             Ext.apply(field, {
-                name: column.dataIndex,
-                hideLabel: true
+                name: column.dataIndex
             });
-            
+
             return field;
         }
     },
-    
+
     // setColumnField: function(column, field) {
     //     if (Ext.isObject(field) &amp;&amp; !field.isFormField) {
     //         field = Ext.ComponentMgr.create(field);
     //     }
     //     column.field = field;
     // },
-    
+
     beforeEdit: Ext.emptyFn,
-    
+
     startEdit: function() {
         var me = this,
             args = Ext.Array.toArray(arguments),
@@ -277,7 +283,7 @@ Ext.define(&#39;Ext.grid.RowEditing&#39;, {
             store = view.store,
             headerCt = grid.headerCt,
             rowIdx, colIdx;
-        
+
         // Support simpler signature
         //   (rowIdx, [colIdx])
         if (!Ext.isObject(params)) {
@@ -291,91 +297,66 @@ Ext.define(&#39;Ext.grid.RowEditing&#39;, {
             rowIdx = params.rowIdx;
             colIdx = params.colIdx;
         }
-        
+
         if (Ext.isNumber(colIdx)) {
             if (!params.column) {
                 params.column = headerCt.getHeaderByIndex(colIdx);
             }
-            
+
             if (!params.cell) {
                 params.cell = view.getCellByPosition({ row: rowIdx, column: colIdx });
             }
         }
-        
+
         if (Ext.isNumber(rowIdx)) {
             if (!params.row) {
                 params.row = view.getNode(rowIdx);
             }
-            
+
             if (!params.record) {
                 params.record = store.getAt(rowIdx);
             }
         }
-        
+
         Ext.apply(params, {
             grid: grid,
             view: view,
             store: store
         });
-        
+
         if (me.beforeEdit() === false || me.fireEvent(&#39;beforeedit&#39;, params) === false) {
             return;
         }
-        
+
         me.params = params;
         me.editing = true;
-        
+
         // Fire off our editor
         me.getEditor().startEdit(params);
     },
-    
+
     cancelEdit: function() {
         var me = this;
-        
+
         if (me.editing) {
             me.getEditor().cancelEdit();
             me.editing = false;
         }
     },
-    
+
     completeEdit: function() {
         var me = this;
-        
+
         if (me.editing &amp;&amp; me.getEditor().completeEdit()) {
             me.editing = false;
             me.fireEvent(&#39;edit&#39;, me.params);
         }
     },
 
-
     <a name="prop-Ext.grid.RowEditing-errorSummary"></a>/**********************************
      * RowEditing specific
      **********************************/
     errorSummary: true,
-     
-    init: function(grid) {
-        var me = this;
-        
-        <a name="prop-Ext.grid.RowEditing-grid"></a>/**
-         * Abstract, place in parent
-         */
-        
-        me.grid = grid;
-        me.view = grid.view;
-        me.initEvents();
-        me.initFieldAccessors(grid.headerCt.getGridColumns());
-        
-        me.addEvents(
-            &#39;beforeedit&#39;,
-            
-            &#39;edit&#39;
-        );
-        grid.relayEvents(me, [&#39;beforeedit&#39;, &#39;edit&#39;]);
-        
-        <a name="method-Ext.grid.RowEditing-initEditor"></a>/**
-         * End of abstract
-         */
-    },
 
     initEditor: function() {
         var me = this,
@@ -388,16 +369,16 @@ Ext.define(&#39;Ext.grid.RowEditing&#39;, {
             fields: headerCt.getGridColumns(),
             floating: true,
             hidden: true,
-            
+
             // keep a reference..
             editingPlugin: me,
             renderTo: view.el
         });
     },
-    
+
     setColumnField: function(column, field) {
         var me = this;
-        
+
         // Abstract
         // me.callParent(arguments);
         if (Ext.isObject(field) &amp;&amp; !field.isFormField) {
@@ -405,7 +386,7 @@ Ext.define(&#39;Ext.grid.RowEditing&#39;, {
         }
         column.field = field;
         // End Abstract
-        
+
         me.getEditor().setField(field, column);
     }
 });￿</pre></pre></body></html>

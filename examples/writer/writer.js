@@ -166,7 +166,7 @@ Ext.define('Writer.Grid', {
                     handler: this.onSync
                 }]
             }],
-            headers: [{
+            columns: [{
                 text: 'ID',
                 width: 40,
                 sortable: true,
@@ -258,7 +258,7 @@ Ext.define('Writer.Person', {
 Ext.require([
     'Ext.data.*',
     'Ext.tip.QuickTips',
-    'Ext.window.MessageBoxWindow'
+    'Ext.window.MessageBox'
 ]);
 
 Ext.onReady(function(){

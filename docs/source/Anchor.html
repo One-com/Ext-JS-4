@@ -128,6 +128,11 @@ anchor: &#39;-50&#39;      // anchor value is assumed to be the right offset val
             anchorHeight = owner.initialConfig.height;
         }
 
+        // Work around WebKit RightMargin bug. We&#39;re going to inline-block all the children only ONCE and remove it when we&#39;re done
+        if (!Ext.supports.RightMargin) {
+            target.addCls(Ext.baseCSSPrefix + &#39;inline-children&#39;);
+        }
+
         for (i = 0; i &lt; len; i++) {
             component = components[i];
             el = component.el;
@@ -162,6 +167,11 @@ anchor: &#39;-50&#39;      // anchor value is assumed to be the right offset val
                     anchor: false
                 });
             }
+        }
+
+        // Work around WebKit RightMargin bug. We&#39;re going to inline-block all the children only ONCE and remove it when we&#39;re done
+        if (!Ext.supports.RightMargin) {
+            target.removeCls(Ext.baseCSSPrefix + &#39;inline-children&#39;);
         }
 
         for (i = 0; i &lt; len; i++) {

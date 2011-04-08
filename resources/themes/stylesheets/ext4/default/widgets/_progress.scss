@@ -19,7 +19,7 @@
         @include border-radius($progress-border-radius);
         border-right: 1px solid;
         border-right-color: $progress-border-color;
-        border-top: 1px solid #D1E4FD;
+        border-top: 1px solid lighten($progress-bar-color, 5);
         
         @if $supports-gradients or $compile-all {
             @include background-gradient($progress-bar-color, glossy);
@@ -54,7 +54,7 @@
     @if not $supports-gradients or $compile-all {
         .#{$prefix}nlg {
             .#{$prefix}progress-bar {
-                background: theme-image($theme-name, 'progress/progress-bg.png') repeat-x;
+                background: theme-image($theme-name, 'progress/progress-bg.gif') repeat-x;
             }
         }
     }

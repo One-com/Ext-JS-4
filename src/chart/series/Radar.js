@@ -67,7 +67,10 @@ Ext.define('Ext.chart.series.Radar', {
 
     /* End Definitions */
 
-    type: "pie",
+    type: "radar",
+    alias: 'series.radar',
+
+    
     rad: Math.PI / 180,
 
     showInLegend: false,
@@ -120,6 +123,8 @@ Ext.define('Ext.chart.series.Radar', {
             axis = chart.axes && chart.axes.get(0),
             aggregate = !(axis && axis.maximum);
         
+        me.setBBox();
+
         maxValue = aggregate? 0 : (axis.maximum || 0);
         
         Ext.apply(seriesStyle, me.style || {});
@@ -149,7 +154,8 @@ Ext.define('Ext.chart.series.Radar', {
                 }
             });
         }
-
+        //ensure non-zero value.
+        maxValue = maxValue || 1;
         //create path and items
         startPath = []; path = [];
         store.each(function(record, i) {
@@ -165,7 +171,8 @@ Ext.define('Ext.chart.series.Radar', {
             }
             items.push({
                 sprite: false, //TODO(nico): add markers
-                point: [centerX + x, centerY + y]
+                point: [centerX + x, centerY + y],
+                series: me
             });
         });
         path.push('Z');
@@ -262,6 +269,15 @@ Ext.define('Ext.chart.series.Radar', {
                 marker.setAttributes(Ext.apply(marker._to, endMarkerStyle || {}), true);
             }
         }
+    },
+    
+    isItemInPoint: function(x, y, item) {
+        var point,
+            tolerance = 10,
+            abs = Math.abs;
+        point = item.point;
+        return (abs(point[0] - x) <= tolerance &&
+                abs(point[1] - y) <= tolerance);
     },
 
     // @private callback for when creating a label sprite.

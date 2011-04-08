@@ -1,4 +1,13 @@
-Ext.require(['*']);
+Ext.require([
+    'Ext.grid.*',
+    'Ext.data.*',
+    'Ext.dd.*'
+]);
+
+Ext.define('DataObject', {
+    extend: 'Ext.data.Model',
+    fields: ['name', 'column1', 'column2']    
+});
 
 Ext.onReady(function(){
 
@@ -15,34 +24,25 @@ Ext.onReady(function(){
         { name : "Rec 9", column1 : "9", column2 : "9" }
     ];
 
-    // Generic fields array to use in both store defs.
-    Ext.regModel('DataObject', {
-        fields: [
-            {name: 'name', mapping : 'name'},
-            {name: 'column1', mapping : 'column1'},
-            {name: 'column2', mapping : 'column2'}
-        ]
-    });
-
     // create the data store
     var firstGridStore = new Ext.data.Store({
-        model  : 'DataObject',
-        data   : myData
+        model: 'DataObject',
+        data: myData
     });
 
 
     // Column Model shortcut array
-    var headers = [
-        { id : 'name', header: "Record Name", width: 160, sortable: true, dataIndex: 'name'},
-        {header: "column1", width: 50, sortable: true, dataIndex: 'column1'},
-        {header: "column2", width: 50, sortable: true, dataIndex: 'column2'}
+    var columns = [
+        {text: "Record Name", flex: 1, sortable: true, dataIndex: 'name'},
+        {text: "column1", width: 70, sortable: true, dataIndex: 'column1'},
+        {text: "column2", width: 70, sortable: true, dataIndex: 'column2'}
     ];
 
     // declare the source Grid
     var firstGrid = new Ext.grid.GridPanel({
         viewConfig: {
             plugins: {
-                ptype: 'gridviewdd',
+                ptype: 'gridviewdragdrop',
                 dragGroup: 'firstGridDDGroup',
                 dropGroup: 'secondGridDDGroup'
             },
@@ -54,23 +54,21 @@ Ext.onReady(function(){
             }
         },
         store            : firstGridStore,
-        headers          : headers,
-        enableDragDrop   : true,
+        columns          : columns,
         stripeRows       : true,
-        autoExpandColumn : 'name',
         title            : 'First Grid',
         margins          : '0 2 0 0'
     });
 
     var secondGridStore = new Ext.data.Store({
-        model  : 'DataObject'
+        model: 'DataObject'
     });
 
     // create the destination Grid
     var secondGrid = new Ext.grid.GridPanel({
         viewConfig: {
             plugins: {
-                ptype: 'gridviewdd',
+                ptype: 'gridviewdragdrop',
                 dragGroup: 'secondGridDDGroup',
                 dropGroup: 'firstGridDDGroup'
             },
@@ -82,10 +80,8 @@ Ext.onReady(function(){
             }
         },
         store            : secondGridStore,
-        headers          : headers,
-        enableDragDrop   : true,
+        columns          : columns,
         stripeRows       : true,
-        autoExpandColumn : 'name',
         title            : 'Second Grid',
         margins          : '0 0 0 3'
     });
@@ -105,18 +101,20 @@ Ext.onReady(function(){
             firstGrid,
             secondGrid
         ],
-        bbar    : [
-            '->', // Fill
+        dockedItems: {
+            xtype: 'toolbar',
+            dock: 'bottom',
+            items: ['->', // Fill
             {
-                text    : 'Reset both grids',
-                handler : function() {
+                text: 'Reset both grids',
+                handler: function(){
                     //refresh source grid
                     firstGridStore.loadData(myData);
-
+                    
                     //purge destination grid
                     secondGridStore.removeAll();
                 }
-            }
-        ]
+            }]
+        }
     });
 });

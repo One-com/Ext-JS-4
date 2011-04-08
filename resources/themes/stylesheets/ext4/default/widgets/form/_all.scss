@@ -59,5 +59,10 @@
         top: 0;
         
         background: transparent no-repeat 2px 3px;
+
+        ul {
+            /* prevent inner elements from interfering with QuickTip hovering */
+            display: none;
+        }
     }
 }

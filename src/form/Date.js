@@ -186,7 +186,11 @@ disabledDates: ["^03"]
     initTimeFormat: 'H',
 
     matchFieldWidth: false,
-
+    /**
+     * @cfg {Number} startDay
+     * Day index at which the week should begin, 0-based (defaults to 0, which is Sunday)
+     */
+    startDay: 0,
     
     initComponent : function(){
         var me = this,
@@ -203,6 +207,18 @@ disabledDates: ["^03"]
         }
         me.disabledDatesRE = null;
         me.initDisabledDays();
+
+        me.callParent();
+    },
+
+    initValue: function() {
+        var me = this,
+            value = me.value;
+
+        // If a String value was supplied, try to convert it to a proper Date
+        if (Ext.isString(value)) {
+            me.value = me.rawToValue(value);
+        }
 
         me.callParent();
     },
@@ -299,7 +315,7 @@ disabledDates: ["^03"]
         var me = this,
             format = Ext.String.format,
             clearTime = Ext.Date.clearTime,
-            errors = Ext.form.Date.superclass.getErrors.apply(me, arguments),
+            errors = me.callParent(arguments),
             disabledDays = me.disabledDays,
             disabledDatesRE = me.disabledDatesRE,
             minValue = me.minValue,
@@ -353,7 +369,7 @@ disabledDates: ["^03"]
     },
 
     rawToValue: function(rawValue) {
-        return this.parseDate(rawValue) || null;
+        return this.parseDate(rawValue) || rawValue || null;
     },
 
     valueToRaw: function(value) {
@@ -413,10 +429,9 @@ dateField.setValue('2006-05-04');
     getSubmitValue: function() {
         var me = this,
             format = me.submitFormat || me.format,
-            value = me.getValue(),
-            submitValue = value ? Ext.Date.format(value, format) : null;
+            value = me.getValue();
             
-        return (me.disabled || !me.submitValue) ? null : submitValue;
+        return value ? Ext.Date.format(value, format) : null;
     },
 
     /**
@@ -458,16 +473,17 @@ dateField.setValue('2006-05-04');
                 floating: true,
                 hidden: true,
                 focusOnShow: true,
-                minDate : me.minValue,
-                maxDate : me.maxValue,
-                disabledDatesRE : me.disabledDatesRE,
-                disabledDatesText : me.disabledDatesText,
-                disabledDays : me.disabledDays,
-                disabledDaysText : me.disabledDaysText,
-                format : me.format,
-                showToday : me.showToday,
-                minText : format(me.minText, me.formatDate(me.minValue)),
-                maxText : format(me.maxText, me.formatDate(me.maxValue)),
+                minDate: me.minValue,
+                maxDate: me.maxValue,
+                disabledDatesRE: me.disabledDatesRE,
+                disabledDatesText: me.disabledDatesText,
+                disabledDays: me.disabledDays,
+                disabledDaysText: me.disabledDaysText,
+                format: me.format,
+                showToday: me.showToday,
+                startDay: me.startDay,
+                minText: format(me.minText, me.formatDate(me.minValue)),
+                maxText: format(me.maxText, me.formatDate(me.maxValue)),
                 listeners: {
                     scope: me,
                     select: me.onSelect

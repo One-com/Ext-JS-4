@@ -21,7 +21,8 @@ Ext.define('Ext.chooser.IconBrowser', {
             '<tpl for=".">',
                 '<div class="thumb-wrap">',
                     '<div class="thumb">',
-                        '<img src="icons/{thumb}" />',
+                    (!Ext.isIE6? '<img src="icons/{thumb}" />' : 
+                    '<div style="width:74px;height:74px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'icons/{thumb}\')"></div>'),
                     '</div>',
                     '<span>{name}</span>',
                 '</div>',

@@ -154,7 +154,7 @@ Ext.define('Ext.resizer.Splitter', {
                 cmp.expand(cmp.animCollapse);
             // collapse
             } else {
-                cmp.collapse(null, cmp.animCollapse);
+                cmp.collapse(this.renderData.collapseDir, cmp.animCollapse);
             }
         }
     },

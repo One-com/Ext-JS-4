@@ -16,7 +16,7 @@ Ext.define('Ext.ux.BoxReorderer', {
      * <p>If truthy, child reordering is animated so that moved boxes slide smoothly into position.
      * If this option is numeric, it is used as the animation duration <b>in milliseconds</b>.</p>
      */
-    animate: 300,
+    animate: 100,
 
     constructor: function() {
         this.addEvents(
@@ -64,7 +64,6 @@ Ext.define('Ext.ux.BoxReorderer', {
     },
 
     init: function(container) {
-        var l = container.getLayout();
         this.container = container;
 
         // Initialize the DD on first layout, when the innerCt has been created.
@@ -105,7 +104,9 @@ Ext.define('Ext.ux.BoxReorderer', {
             startDrag: me.startDrag,
             onDrag: me.onDrag,
             endDrag: me.endDrag,
-            getNewIndex: me.getNewIndex
+            getNewIndex: me.getNewIndex,
+            doSwap: me.doSwap,
+            findReorderable: me.findReorderable
         });
 
         // Decide which dimension we are measuring, and which measurement metric defines
@@ -147,7 +148,7 @@ Ext.define('Ext.ux.BoxReorderer', {
             // Calculate constraints depending upon orientation
             // Calculate offset from mouse to dragEl position
             containerBox = container.el.getPageBox();
-            if (me.dim == 'width') {
+            if (me.dim === 'width') {
                 me.minX = containerBox.left;
                 me.maxX = containerBox.right - cmpBox.width;
                 me.minY = me.maxY = cmpBox.top;
@@ -181,23 +182,86 @@ Ext.define('Ext.ux.BoxReorderer', {
             me.dragCmp.suspendEvents();
             me.dragCmp.disabled = true;
             me.dragCmp.el.setStyle('zIndex', 100);
+            
+            
         } else {
             me.dragElId = null;
         }
     },
+    
+    /**
+     * @private
+     * Find next or previous reorderable component index.
+     * @param {Number} newIndex The initial drop index.
+     * @return {Number} The index of the reorderable component.
+     */
+    findReorderable: function(newIndex) {
+        var me = this,
+            items = me.container.items,
+            newItem;
+            
+        if (items.getAt(newIndex).reorderable === false) {
+            newItem = items.getAt(newIndex);
+            if (newIndex > me.startIndex) {
+                 while(newItem && newItem.reorderable === false) {
+                    newIndex++;
+                    newItem = items.getAt(newIndex);
+                }
+            } else {
+                while(newItem && newItem.reorderable === false) {
+                    newIndex--;
+                    newItem = items.getAt(newIndex);
+                }
+            }
+        }
+ 
+        newIndex = Math.min(Math.max(newIndex, 0), items.getCount() - 1);
 
+        if (items.getAt(newIndex).reorderable === false) {
+            return -1;
+        }
+        return newIndex;
+    },
+    
+    /**
+     * @private
+     * Swap 2 components.
+     * @param {Number} newIndex The initial drop index.
+     */
+    doSwap: function(newIndex) {
+        var me = this,
+            items = me.container.items,
+            orig, dest, tmpIndex;
+            
+        newIndex = me.findReorderable(newIndex);
+        
+        if (newIndex === -1) {
+            return;
+        }
+
+        me.reorderer.fireEvent('ChangeIndex', me, me.container, me.dragCmp, me.startIndex, newIndex);
+        orig = items.getAt(me.curIndex);
+        dest = items.getAt(newIndex);
+        items.remove(orig);
+        tmpIndex = Math.min(Math.max(newIndex, 0), items.getCount() - 1);
+        items.insert(tmpIndex, orig);
+        items.remove(dest);
+        items.insert(me.curIndex, dest);
+         
+        me.container.layout.layout();
+        me.curIndex = newIndex;
+    },
+    
     onDrag: function(e) {
         var me = this,
             newIndex;
-
-        me.reorderer.fireEvent('Drag', me, me.container, me.dragCmp, me.startIndex, me.curIndex);
+        
         newIndex = me.getNewIndex(e.getPoint());
-
-        if ((newIndex !== undefined) && (newIndex != me.curIndex) && me.container.items.getAt(newIndex).reorderable !== false) {
-            me.reorderer.fireEvent('ChangeIndex', me, me.container, me.dragCmp, me.startIndex, newIndex);
-            me.container.move(me.curIndex, newIndex);
-            me.curIndex = newIndex;
+        if ((newIndex !== undefined)) {
+            me.reorderer.fireEvent('Drag', me, me.container, me.dragCmp, me.startIndex, me.curIndex);
+            me.doSwap(newIndex);
         }
+
     },
 
     endDrag: function(e) {
@@ -246,7 +310,6 @@ Ext.define('Ext.ux.BoxReorderer', {
         var me = this,
             dragEl = me.getDragEl(),
             dragBox = Ext.fly(dragEl).getPageBox(),
-            dragMidpoint = dragBox[me.startAttr] + (dragBox[me.dim] >> 1),
             targetEl,
             targetBox,
             targetMidpoint,
@@ -256,7 +319,7 @@ Ext.define('Ext.ux.BoxReorderer', {
             lastPos = me.lastPos;
 
         me.lastPos = dragBox[me.startAttr];
-
+       
         for (; i < ln; i++) {
             targetEl = it[i].getEl();
 

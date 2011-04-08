@@ -17,7 +17,8 @@ Ext.define('Ext.chooser.InfoPanel', {
     tpl: [
         '<div class="details">',
             '<tpl for=".">',
-                '<img src="icons/{thumb}" />',
+                    (!Ext.isIE6? '<img src="icons/{thumb}" />' : 
+                    '<div style="width:74px;height:74px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'icons/{thumb}\')"></div>'),
                 '<div class="details-info">',
                     '<b>Example Name:</b>',
                     '<span>{name}</span>',

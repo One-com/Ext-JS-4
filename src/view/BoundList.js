@@ -29,7 +29,6 @@ Ext.define('Ext.view.BoundList', {
     listItemCls: '',
     shadow: false,
     trackOver: true,
-    floatingLoadingHeight: 50,
     refreshed: 0,
 
     ariaRole: 'listbox',
@@ -49,7 +48,6 @@ Ext.define('Ext.view.BoundList', {
 
         if (me.floating) {
             me.addCls(baseCls + '-floating');
-            me.loadingHeight = me.floatingLoadingHeight;
         }
 
         // should be setting aria-posinset based on entire set of data

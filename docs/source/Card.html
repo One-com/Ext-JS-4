@@ -115,7 +115,7 @@ Ext.define(&#39;Ext.layout.container.Card&#39;, {
                 me.setItemBox(newCard, me.getTargetBox());
             }
             else {
-                // onLayout calls setItemBox which sizes the active item via setCalculatedSize.
+                // onLayout calls setItemBox
                 me.onLayout();
             }
 
@@ -135,11 +135,9 @@ Ext.define(&#39;Ext.layout.container.Card&#39;, {
 
             me.layoutBusy = false;
 
-            // The conditional upward call to the owner&#39;s doComponentLayout from the newCard&#39;s layout&#39;s afterLayout will have been prevented by our layoutBusy flag
-            // Call it now.
             if (!me.sizeAllCards) {
-                if (!me.owner.componentLayout.layoutBusy) {
-                    me.owner.doComponentLayout();
+                if (!owner.componentLayout.layoutBusy) {
+                    me.onLayout();
                 }
             }
             return newCard;

@@ -448,11 +448,14 @@ Ext.override(Ext.core.Element, {
      * @return {Region} A Ext.util.Region containing "top, left, bottom, right" member data.
      */
     getViewRegion: function() {
-        var pos = this.getXY(),
-            top = pos[1] + this.getBorderWidth('t') + this.getPadding('t'),
-            left = pos[0] + this.getBorderWidth('l') + this.getPadding('l');
+        var isBody = this.dom === document.body,
+            pos = isBody ? [0, 0] : this.getXY(),
+            top = pos[1] + (isBody ?  0 : this.getBorderWidth('t') + this.getPadding('t')),
+            left = pos[0] + (isBody ? 0 : this.getBorderWidth('l') + this.getPadding('l')),
+            width = isBody ? Ext.core.Element.getViewportWidth() : this.getWidth(true),
+            height = isBody ? Ext.core.Element.getViewportHeight() : this.getHeight(true);
         
-        return new Ext.util.Region(top, left + this.getWidth(true), top + this.getHeight(true), left);
+        return new Ext.util.Region(top, left + width, top + height, left);
     },
 
     /**

@@ -223,7 +223,7 @@ Ext.onReady(function() {
         features: [{
             ftype: 'grouping'
         }],
-        headers: [{
+        columns: [{
             text: 'Name',
             flex: 1,
             dataIndex: 'name'

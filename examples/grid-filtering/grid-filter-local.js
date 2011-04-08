@@ -144,7 +144,7 @@ Ext.onReady(function(){
     var grid = Ext.create('Ext.grid.GridPanel', {
         border: false,
         store: store,
-        headers: createHeaders(4),
+        columns: createHeaders(4),
         loadMask: true,
         features: [filters],
         bbar: Ext.create('Ext.toolbar.PagingToolbar', {

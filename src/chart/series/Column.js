@@ -34,6 +34,8 @@ Ext.define('Ext.chart.series.Column', {
     /* End Definitions */
 
     type: 'column',
+    alias: 'series.column',
+
     column: true,
 
     /**

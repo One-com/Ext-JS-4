@@ -72,19 +72,18 @@ Ext.define(&#39;Ext.util.Stateful&#39;, {
          */
         if (arguments.length == 1 &amp;&amp; Ext.isObject(fieldName)) {
             for (key in fieldName) {
-                if (!fieldName.hasOwnProperty(key)) {
-                    continue;
+                if (fieldName.hasOwnProperty(key)) {
+                
+                    //here we check for the custom convert function. Note that if a field doesn&#39;t have a convert function,
+                    //we default it to its type&#39;s convert function, so we have to check that here. This feels rather dirty.
+                    field = fields.get(key);
+                    if (field &amp;&amp; field.convert !== field.type.convert) {
+                        convertFields.push(key);
+                        continue;
+                    }
+                    
+                    me.set(key, fieldName[key]);
                 }
-
-                //here we check for the custom convert function. Note that if a field doesn&#39;t have a convert function,
-                //we default it to its type&#39;s convert function, so we have to check that here. This feels rather dirty.
-                field = fields.get(key);
-                if (field &amp;&amp; field.convert !== field.type.convert) {
-                    convertFields.push(key);
-                    continue;
-                }
-
-                me.set(key, fieldName[key]);
             }
 
             for (i = 0; i &lt; convertFields.length; i++) {
@@ -102,7 +101,7 @@ Ext.define(&#39;Ext.util.Stateful&#39;, {
             }
             currentValue = me.get(fieldName);
             me[me.persistanceProperty][fieldName] = value;
-            if (currentValue !== value) {
+            if (!me.isEqual(currentValue, value)) {
                 me.dirty = true;
                 me.modified[fieldName] = currentValue;
             }
@@ -111,6 +110,21 @@ Ext.define(&#39;Ext.util.Stateful&#39;, {
                 me.afterEdit();
             }
         }
+    },
+    
+    /**
+     * Checks if two values are equal, taking into account certain
+     * special factors, for example dates.
+     * @private
+     * @param {Object} a The first value
+     * @param {Object} b The second value
+     * @return {Boolean} True if the values are equal
+     */
+    isEqual: function(a, b){
+        if (Ext.isDate(a) &amp;&amp; Ext.isDate(b)) {
+            return a.getTime() === b.getTime();
+        }
+        return a === b;
     },
     
     <a name="method-Ext.util.Stateful-beginEdit"></a>/**

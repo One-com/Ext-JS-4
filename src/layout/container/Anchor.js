@@ -133,6 +133,11 @@ anchor: '-50 75%'
             anchorHeight = owner.initialConfig.height;
         }
 
+        // Work around WebKit RightMargin bug. We're going to inline-block all the children only ONCE and remove it when we're done
+        if (!Ext.supports.RightMargin) {
+            target.addCls(Ext.baseCSSPrefix + 'inline-children');
+        }
+
         for (i = 0; i < len; i++) {
             component = components[i];
             el = component.el;
@@ -167,6 +172,11 @@ anchor: '-50 75%'
                     anchor: false
                 });
             }
+        }
+
+        // Work around WebKit RightMargin bug. We're going to inline-block all the children only ONCE and remove it when we're done
+        if (!Ext.supports.RightMargin) {
+            target.removeCls(Ext.baseCSSPrefix + 'inline-children');
         }
 
         for (i = 0; i < len; i++) {

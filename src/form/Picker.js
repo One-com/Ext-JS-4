@@ -112,11 +112,13 @@ Ext.define('Ext.form.Picker', {
      * Expand this field's picker dropdown.
      */
     expand: function() {
-        if (this.rendered && !this.isExpanded) {
-            var me = this,
-                bodyEl = me.bodyEl,
-                picker = me.getPicker(),
-                collapseIf = me.collapseIf;
+        var me = this,
+            bodyEl, picker, collapseIf;
+
+        if (me.rendered && !me.isExpanded && !me.isDestroyed) {
+            bodyEl = me.bodyEl;
+            picker = me.getPicker();
+            collapseIf = me.collapseIf;
 
             // show the picker and set isExpanded flag
             picker.show();
@@ -168,7 +170,7 @@ Ext.define('Ext.form.Picker', {
      * Collapse this field's picker dropdown.
      */
     collapse: function() {
-        if (this.isExpanded) {
+        if (this.isExpanded && !this.isDestroyed) {
             var me = this,
                 openCls = me.openCls,
                 picker = me.picker,

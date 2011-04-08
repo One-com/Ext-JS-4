@@ -1,7 +1,6 @@
 /**
  * @class Ext.fx.Animator
  * Animation instance
- * @ignore
  */
 Ext.define('Ext.fx.Animator', {
 
@@ -212,7 +211,7 @@ keyframes : {
             }
         }
         // Sort by pct property
-        attrs.sort(me.sorter);
+        Ext.Array.sort(attrs, me.sorter);
         // Only an end
         //if (attrs[0].pct) {
         //    attrs.unshift({pct: 0, attrs: element.attrs});

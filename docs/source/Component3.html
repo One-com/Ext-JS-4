@@ -81,7 +81,6 @@ Chart components
 ---------------------------------------
 chart            {@link Ext.chart.Chart}
 barchart         {@link Ext.chart.series.Bar}
-cartesianchart   {@link Ext.chart.series.Cartesian}
 columnchart      {@link Ext.chart.series.Column}
 linechart        {@link Ext.chart.series.Line}
 piechart         {@link Ext.chart.series.Pie}
@@ -186,9 +185,8 @@ Ext.define(&#39;Ext.Component&#39;, {
      * If no floating ancestor Container was found the {@link #floatParent} property will not be set.&lt;/p&gt;
      */
     floating: false,
-
-    <a name="prop-Ext.Component-{Ext.ZIndexManager}"></a>/**
-     * @property {Ext.ZIndexManager} zIndexManager
+    
+    <a name="prop-Ext.Component-zIndexManager"></a>/**
      * &lt;p&gt;Optional. Only present for {@link #floating} Components after they have been rendered.&lt;/p&gt;
      * &lt;p&gt;A reference to the ZIndexManager which is managing this Component&#39;s z-index.&lt;/p&gt;
      * &lt;p&gt;The {@link Ext.ZIndexManager ZIndexManager} maintains a stack of floating Component z-indices, and also provides a single modal
@@ -199,19 +197,22 @@ Ext.define(&#39;Ext.Component&#39;, {
      * &lt;p&gt;For {@link #floating} Components which are added to a Container, the ZIndexManager is acquired from the first ancestor Container found
      * which is floating, or if not found the global {@link Ext.WindowMgr ZIndexManager} is used.&lt;/p&gt;
      * &lt;p&gt;See {@link #floating} and {@link #floatParent}&lt;/p&gt;
+     * @property zIndexManager
+     * @type Ext.ZIndexManager
      */
-
-    <a name="prop-Ext.Component-{Ext.Container}"></a>/**
-     * @property {Ext.Container} floatParent
-     * &lt;p&gt;Optional. Only present for {@link #floating} Components which were inserted as descendant items of floating Containers.&lt;/p&gt;
-     * &lt;p&gt;Floating Components that are programatically {@link Ext.Component#render rendered} will not have a &lt;code&gt;floatParent&lt;/code&gt; property.&lt;/p&gt;
-     * &lt;p&gt;For {@link #floating} Components which are child items of a Container, the floatParent will be the floating ancestor Container which is
-     * responsible for the base z-index value of all its floating descendants. It provides a {@link Ext.ZIndexManager ZIndexManager} which provides
-     * z-indexing services for all its descendant floating Components.&lt;/p&gt;
-     * &lt;p&gt;For example, the dropdown {@link Ext.view.BoundList BoundList} of a ComboBox which is in a Window will have the Window as its
-     * &lt;code&gt;floatParent&lt;/code&gt;&lt;/p&gt;
-     * &lt;p&gt;See {@link #floating} and {@link #zIndexManager}&lt;/p&gt;
-     */
+     
+     <a name="prop-Ext.Component-floatParent"></a>/**
+      * &lt;p&gt;Optional. Only present for {@link #floating} Components which were inserted as descendant items of floating Containers.&lt;/p&gt;
+      * &lt;p&gt;Floating Components that are programatically {@link Ext.Component#render rendered} will not have a &lt;code&gt;floatParent&lt;/code&gt; property.&lt;/p&gt;
+      * &lt;p&gt;For {@link #floating} Components which are child items of a Container, the floatParent will be the floating ancestor Container which is
+      * responsible for the base z-index value of all its floating descendants. It provides a {@link Ext.ZIndexManager ZIndexManager} which provides
+      * z-indexing services for all its descendant floating Components.&lt;/p&gt;
+      * &lt;p&gt;For example, the dropdown {@link Ext.view.BoundList BoundList} of a ComboBox which is in a Window will have the Window as its
+      * &lt;code&gt;floatParent&lt;/code&gt;&lt;/p&gt;
+      * &lt;p&gt;See {@link #floating} and {@link #zIndexManager}&lt;/p&gt;
+      * @property floatParent
+      * @type Ext.Container
+      */
 
     <a name="cfg-Ext.Component-draggable"></a>/**
      * @cfg {Mixed} draggable
@@ -227,7 +228,7 @@ new Ext.Component({
         backgroundColor: &#39;#fff&#39;,
         border: &#39;1px solid black&#39;
     },
-    html: &#39;&lt;h1 style=&quot;cursor:move&quot;&gt;The title&lt;/h1&gt;&lt;p&gt;The content&lt;/p&gt;&#39;,
+    html: &#39;&amp;lt;h1 style=&quot;cursor:move&quot;&amp;gt;The title&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;The content&amp;lt;/p&amp;gt;&#39;,
     draggable: {
         delegate: &#39;h1&#39;
     }
@@ -600,20 +601,18 @@ new Ext.Component({
         return this.id || (this.id = (this.getXType() || &#39;ext-comp&#39;) + &#39;-&#39; + this.getAutoId());
     },
 
-    // overriden
     onEnable: function() {
         var actionEl = this.getActionEl();
-        actionEl.removeCls(this.disabledCls);
         actionEl.dom.removeAttribute(&#39;aria-disabled&#39;);
         actionEl.dom.disabled = false;
+        this.callParent();
     },
 
-    // overriden
     onDisable: function() {
         var actionEl = this.getActionEl();
-        actionEl.addCls(this.disabledCls);
         actionEl.dom.setAttribute(&#39;aria-disabled&#39;, true);
         actionEl.dom.disabled = true;
+        this.callParent();
     },
 
     <a name="method-Ext.Component-show"></a>/**
@@ -678,10 +677,10 @@ new Ext.Component({
         if (!me.ghost) {
             animateTarget = null;
         }
-        // If we&#39;re animating, kick of an animation of the ghost from the target to the current box
+        // If we&#39;re animating, kick of an animation of the ghost from the target to the *Element* current box
         if (animateTarget) {
             animateTarget = animateTarget.el ? animateTarget.el : Ext.get(animateTarget);
-            toBox = me.getBox();
+            toBox = me.el.getBox();
             fromBox = animateTarget.getBox();
             fromBox.width += &#39;px&#39;;
             fromBox.height += &#39;px&#39;;
@@ -689,6 +688,7 @@ new Ext.Component({
             toBox.height += &#39;px&#39;;
             me.el.addCls(Ext.baseCSSPrefix + &#39;hide-offsets&#39;);
             ghostPanel = me.ghost();
+
             ghostPanel.el.animate({
                 from: fromBox,
                 to: toBox,
@@ -697,6 +697,9 @@ new Ext.Component({
                         delete ghostPanel.componentLayout.lastComponentSize;
                         me.unghost();
                         me.el.removeCls(Ext.baseCSSPrefix + &#39;hide-offsets&#39;);
+                        if (me.floating) {
+                            me.toFront();
+                        }
                         if (cb &amp;&amp; cb.call) {
                             cb.call(scope||me);
                         }
@@ -704,11 +707,13 @@ new Ext.Component({
                 }
             });
         }
-        if (this.floating) {
-            this.toFront();
-        }
-        if (!animateTarget &amp;&amp; cb &amp;&amp; cb.call) {
-            cb.call(scope||me);
+        else {
+            if (me.floating) {
+                me.toFront();
+            }
+            if (cb &amp;&amp; cb.call) {
+                cb.call(scope||me);
+            }
         }
         this.fireEvent(&#39;show&#39;, this);
     },
@@ -783,49 +788,25 @@ new Ext.Component({
         this.fireEvent(&#39;hide&#39;, this);
     },
 
-    destroy: function() {
+    /**
+     * @private
+     * Template method to contribute functionality at destroy time.
+     */
+    onDestroy: function() {
         var me = this;
-        if (!me.isDestroyed) {
-            if (me.fireEvent(&#39;beforedestroy&#39;, me) !== false) {
-                me.destroying = true;
-                me.beforeDestroy();
 
-                if (me.floating) {
-                    delete me.floatParent;
-                    // A zIndexManager is stamped into a *floating* Component when it is added to a Container.
-                    // If it has no zIndexManager at render time, it is assigned to the global Ext.WindowMgr instance.
-                    if (me.zIndexManager) {
-                        me.zIndexManager.unregister(me);
-                    }
-                } else {
-                    if (me.ownerCt &amp;&amp; me.ownerCt.remove) {
-                        me.ownerCt.remove(me, false);
-                    }
-                }
-
-                // Ensure that any ancillary components are destroyed.
-                if (me.rendered) {
-                    Ext.destroy(
-                        me.proxy,
-                        me.resizer
-                    );
-                    me.el.remove();
-                    // Different from AbstractComponent
-                    if (me.actionMode == &#39;container&#39; || me.removeMode == &#39;container&#39;) {
-                        me.container.remove();
-                    }
-                }
-
-                me.onDestroy();
-
-                Ext.ComponentMgr.unregister(me);
-                me.fireEvent(&#39;destroy&#39;, me);
-
-                me.clearListeners();
-                me.destroying = false;
-                me.isDestroyed = true;
+        // Ensure that any ancillary components are destroyed.
+        if (me.rendered) {
+            Ext.destroy(
+                me.proxy,
+                me.resizer
+            );
+            // Different from AbstractComponent
+            if (me.actionMode == &#39;container&#39; || me.removeMode == &#39;container&#39;) {
+                me.container.remove();
             }
         }
+        me.callParent();
     },
 
     deleteMembers: function() {

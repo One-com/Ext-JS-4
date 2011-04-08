@@ -32,15 +32,14 @@ Ext.onReady(function(){
         viewConfig: {
             emptyText: 'No images to display'
         },
-        
-        
-        headers: [{
+
+        columns: [{
             text: 'File',
             flex: 50,
             dataIndex: 'name'
         },{
             text: 'Last Modified',
-            xtype: 'dateheader',
+            xtype: 'datecolumn',
             format: 'm-d h:i a',
             flex: 35, 
             dataIndex: 'lastmod'

@@ -239,6 +239,10 @@ Ext.define('Ext.data.Store', {
      */
 
     /**
+     * @cfg {String} model The {@link Ext.data.Model} associated with this store
+     */
+
+    /**
      * The (optional) field by which to group data in the store. Internally, grouping is very similar to sorting - the
      * groupField and {@link #groupDir} are injected as the first sorter (see {@link #sort}). Stores support a single
      * level of grouping, and groups can be fetched via the {@link #getGroups} method.
@@ -805,10 +809,12 @@ store.load(function(records, operation, success) {
     onCreateRecords: function(records, operation, success) {
         if (success) {
             var i = 0,
+                data = this.data,
                 length = records.length,
                 originalRecords = operation.records,
                 record,
-                original;
+                original,
+                index;
                 
             /**
              * Loop over each record returned from the server. Assume they are
@@ -819,7 +825,10 @@ store.load(function(records, operation, success) {
                 record = records[i];
                 original = originalRecords[i];
                 if (original) {
-                    this.data.replace(original.internalId, record);
+                    data.replace(original.internalId, record);
+                    // index = this.data.indexOf(original);
+                    // data.removeAt(index);
+                    // data.insert(index, record);
                     record.phantom = false;
                     record.join(this);
                 }

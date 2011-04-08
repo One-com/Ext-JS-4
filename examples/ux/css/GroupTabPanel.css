@@ -84,9 +84,13 @@
     background: url('images/border.gif') repeat-y top right;
 }
 
-.x-ie7 .x-grouptabbar, .x-ie6 .x-grouptabbar {
+.x-grouptabbar {
     top: 0 !important;
     margin-top: -1px !important;
+}
+
+.x-strict .x-ie7 .x-grouptabbar, .x-strict .x-ie6 .x-grouptabbar {
+    margin-top: -2px !important;
 }
 
 .x-grouptabbar .x-grid-view {

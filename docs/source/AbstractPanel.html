@@ -229,10 +229,11 @@ bodyCls: [&#39;foo&#39;, &#39;bar&#39;]
      */
     addDocked : function(items, pos) {
         var me = this,
-            items = me.prepareItems(items),
             i = 0,
-            length = items.length,
-            item;
+            item, length;
+
+        items = me.prepareItems(items);
+        length = items.length;
 
         for (; i &lt; length; i++) {
             item = items[i];
@@ -320,6 +321,9 @@ bodyCls: [&#39;foo&#39;, &#39;bar&#39;]
      */
     getDockedItems : function(cqSelector) {
         var me = this,
+            // Start with a weight of 1, so users can provide &lt;= 0 to come before top items
+            // Odd numbers, so users can provide a weight to come in between if desired
+            defaultWeight = { top: 1, left: 3, right: 5, bottom: 7 },
             dockedItems,
             i, len;
 
@@ -332,14 +336,17 @@ bodyCls: [&#39;foo&#39;, &#39;bar&#39;]
                 dockedItems = me.dockedItems.items.slice();
             }
 
-            dockedItems.sort(function(a, b) {
-                var aw = a.weight || 0,
-                    bw = b.weight || 0;
+            Ext.Array.sort(dockedItems, function(a, b) {
+                // Docked items are ordered by their visual representation by default (t,l,r,b)
+                // TODO: Enforce position ordering, and have weights be sub-ordering within positions?
+                var aw = a.weight || defaultWeight[a.dock],
+                    bw = b.weight || defaultWeight[b.dock];
                 if (Ext.isNumber(aw) &amp;&amp; Ext.isNumber(bw)) {
                     return aw - bw;
                 }
                 return 0;
             });
+            
             return dockedItems;
         }
         return [];
@@ -351,8 +358,25 @@ bodyCls: [&#39;foo&#39;, &#39;bar&#39;]
     },
 
     getRefItems: function(deep) {
-        // deep fetches all docked items, and their descendants using &#39;*&#39; selector and then &#39;* *&#39;
-        return this.callParent(arguments).concat(this.getDockedItems(deep ? &#39;*,* *&#39; : undefined));
+        var items = this.callParent(arguments),
+            // deep fetches all docked items, and their descendants using &#39;*&#39; selector and then &#39;* *&#39;
+            dockedItems = this.getDockedItems(deep ? &#39;*,* *&#39; : undefined),
+            ln = dockedItems.length,
+            i = 0,
+            item;
+        
+        // Find the index where we go from top/left docked items to right/bottom docked items
+        for (; i &lt; ln; i++) {
+            item = dockedItems[i];
+            if (item.dock === &#39;right&#39; || item.dock === &#39;bottom&#39;) {
+                break;
+            }
+        }
+        
+        // Return docked items in the top/left position before our container items, and
+        // return right/bottom positioned items after our container items.
+        // See AbstractDock.renderItems() for more information.
+        return dockedItems.splice(0, i).concat(items).concat(dockedItems);
     },
 
     beforeDestroy: function(){

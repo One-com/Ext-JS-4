@@ -1,13 +1,14 @@
 /**
+ * @author Ed Spencer
  * @class Ext.ControllerManager
  * @extends Ext.AbstractManager
- * @author Ed Spencer
- * @private
- * @singleton
  * 
  * <p>Keeps track of all of the registered controllers. This should very rarely need to be used by developers. This 
  * is simply an {@link Ext.AbstractManager AbstractManager} with a custom {@link #register} function which sets up
  * the controller and its linked {@link Ext.Application application}.</p>
+ *
+ * @private
+ * @singleton
  */
 Ext.define('Ext.ControllerManager', {
     extend: 'Ext.AbstractManager',

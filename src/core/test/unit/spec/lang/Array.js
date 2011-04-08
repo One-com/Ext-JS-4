@@ -884,4 +884,53 @@ describe("Ext.Array", function() {
             expect(difference([1], ['1'])).toEqual([1]);
         });
     });
+    
+    describe("sort", function() {
+       var arraySort, sarray, narray;
+       beforeEach(function() {
+          arraySort = Ext.supports.ArraySort;
+          Ext.supports.ArraySort = false;
+          sarray = ['bbb', 'addda', 'erere', 'fff', 'de3'];
+          narray = [1,3,2,4,6,7];
+           
+       });
+       
+       describe("with strings", function() {
+           it("should be able to sort an array without sortFn", function() {
+                Ext.Array.sort(sarray);
+                expect(sarray).toEqual(['addda', 'bbb', 'de3', 'erere', 'fff']);
+           });
+       
+           it("should be able to use a sortFn that returns a boolean", function() {
+                Ext.Array.sort(sarray, function(a,b){return a > b;});
+                expect(sarray).toEqual(['addda', 'bbb', 'de3', 'erere', 'fff']);
+           });
+       
+           it("should be able to use a sortFn that returns a Number", function() {
+                Ext.Array.sort(sarray, function(a,b){return  a > b ? 1: -1;});
+                expect(sarray).toEqual(['addda', 'bbb', 'de3', 'erere', 'fff']);
+           });
+       });
+       
+       describe("with numbers", function() {
+           it("should be able to sort an array without sortFn", function() {
+                Ext.Array.sort(narray);
+                expect(narray).toEqual([1,2,3,4,6,7]);
+           });
+       
+           it("should be able to use a sortFn that returns a boolean", function() {
+                Ext.Array.sort(narray, function(a,b){return a > b;});
+                expect(narray).toEqual([1,2,3,4,6,7]);
+           });
+       
+           it("should be able to use a sortFn that returns a Number", function() {
+                Ext.Array.sort(narray, function(a,b){return a - b;});
+                expect(narray).toEqual([1,2,3,4,6,7]);
+           });
+       });
+       
+       afterEach(function() {
+           Ext.supports.ArraySort = arraySort;
+       });
+    });
 });

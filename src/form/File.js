@@ -1,5 +1,5 @@
 /**
- * @class Ext.ux.form.FileUploadField
+ * @class Ext.form.File
  * @extends Ext.form.Text
 
 A file upload field which has custom styling and allows control over the button text and other

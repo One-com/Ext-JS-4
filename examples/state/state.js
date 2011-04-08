@@ -7,23 +7,27 @@ Ext.require([
     'Ext.data.*'
 ]);
 
-Ext.define('Person', {
-    extend: 'Ext.data.Model',
-    fields: ['first', 'last', 'review', {
-        name: 'age',
-        type: 'int'
-    }]    
-});
-
 Ext.onReady(function(){
-    
+
+    Ext.define('Person', {
+        extend: 'Ext.data.Model',
+        fields: ['first', 'last', 'review', {
+            name: 'age',
+            type: 'int'
+        }]
+    });
+
     // setup the state provider, all state information will be saved to a cookie
     Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
-    
+
     Ext.create('Ext.container.Viewport', {
-        layout: 'border',
+        layout: {
+            type: 'border',
+            padding: 5
+        },
         items: [{
             region: 'north',
+            margins: '0 0 5 0',
             styleHtmlContent: true,
             height: 150,
             bodyPadding: 5,
@@ -39,36 +43,48 @@ Ext.onReady(function(){
             dockedItems: [{
                 xtype: 'toolbar',
                 items: [{
+                    itemId: 'show-window',
                     text: 'Show window',
-                    handler: function(btn){
-                        Ext.create('Ext.window.Window', {
-                            width: 300,
-                            height: 300,
-                            x: 5,
-                            y: 5,
-                            title: 'State Window',
-                            maximizable: true,
-                            stateId: 'stateWindowExample',
-                            styleHtmlContent: true,
-                            bodyPadding: 5,
-                            html: [
-                                'Between refreshes, this window will remember:',
-                                '<ul>',
-                                    '<li>The width and height</li>',
-                                    '<li>The x and y position</li>',
-                                    '<li>The maximized and restore states</li>',
-                                '</ul>'
-                            ].join(''),
-                            listeners: {
-                                destroy: function(){
-                                    btn.enable();
-                                }
-                            }
-                        }).show();
-                        btn.disable();
+                    enableToggle: true,
+                    toggleHandler: function(btn, state) {
+                        var win = Ext.ComponentQuery.query('window#state-window')[0];
+                        win.toggleButton = this;
+                        if (state) {
+                            win.show(this);
+                        } else {
+                            win.hide(this);
+                        }
                     }
-                }]    
-            }]
+                }]
+            }],
+            items: {
+                xtype: 'window',
+                constrain: false,
+                closeAction: 'hide',
+                itemId: 'state-window',
+                width: 300,
+                height: 300,
+                x: 5,
+                y: 5,
+                title: 'State Window',
+                maximizable: true,
+                stateId: 'stateWindowExample',
+                styleHtmlContent: true,
+                bodyPadding: 5,
+                html: [
+                    'Between refreshes, this window will remember:',
+                    '<ul>',
+                        '<li>The width and height</li>',
+                        '<li>The x and y position</li>',
+                        '<li>The maximized and restore states</li>',
+                    '</ul>'
+                ].join(''),
+                listeners: {
+                    hide: function() {
+                        this.toggleButton.toggle(false);
+                    }
+                }
+            }
         }, {
             bodyPadding: 5,
             region: 'west',
@@ -117,7 +133,7 @@ Ext.onReady(function(){
                     review: 'Only a junior, but showing a lot of promise. Coded a Javascript parser in Assembler, very neat.'
                 }]
             }),
-            headers: [{
+            columns: [{
                 text: 'First Name',
                 dataIndex: 'first'
             }, {

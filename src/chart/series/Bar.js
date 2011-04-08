@@ -48,6 +48,7 @@ Ext.define('Ext.chart.series.Bar', {
 
     type: 'bar',
 
+    alias: 'series.bar',
     /**
      * @cfg {Boolean} column
      * Whether to set the visualization as column chart or horizontal bar chart.
@@ -168,7 +169,8 @@ Ext.define('Ext.chart.series.Bar', {
             math = Math,
             mmax = math.max,
             mabs = math.abs,
-            groupBarWidth, bbox, minY, maxY, axis, scale, zero, total, rec, j, plus, minus;
+            groupBarWidth, bbox, minY, maxY, axis, out,
+            scale, zero, total, rec, j, plus, minus;
 
         me.setBBox(true);
         bbox = me.bbox;
@@ -185,30 +187,32 @@ Ext.define('Ext.chart.series.Bar', {
         if (me.axis) {
             axis = chart.axes.get(me.axis);
             if (axis) {
-                axis = axis.calcEnds();
-                minY = axis.from;
-                maxY = mmax(axis.to, 0);
+                out = axis.calcEnds();
+                minY = out.from || axis.prevMin;
+                maxY = mmax(out.to || axis.prevMax, 0);
             }
         }
+        
         if (me.yField && !Ext.isNumber(minY)) {
             axis = new Ext.chart.axis.Axis({
                 chart: chart,
                 fields: [].concat(me.yField)
-            }).calcEnds();
-            minY = axis.from;
-            maxY = mmax(axis.to, 0);
+            });
+            out = axis.calcEnds();
+            minY = out.from || axis.prevMin;
+            maxY = mmax(out.to || axis.prevMax, 0);
         }
+        
         if (!Ext.isNumber(minY)) {
             minY = 0;
         }
         if (!Ext.isNumber(maxY)) {
             maxY = 0;
         }
-
         scale = (column ? bbox.height - ypadding * 2 : bbox.width - xpadding * 2) / (maxY - minY);
         groupBarWidth = barWidth / ((stacked ? 1 : groupBarsLen) * (groupGutter + 1) - groupGutter);
         zero = (column) ? bbox.y + bbox.height - ypadding : bbox.x + xpadding;
-
+        
         if (stacked) {
             total = [[], []];
             store.each(function(record, i) {
@@ -224,7 +228,7 @@ Ext.define('Ext.chart.series.Bar', {
             });
             plus = mmax.apply(math, total[0]);
             minus = mmax.apply(math, total[1]);
-            scale = (column ? bbox.height - ypadding * 2 : bbox.width - xpadding * 2) / mmax(plus + minus, maxY - minY);
+            scale = (column ? bbox.height - ypadding * 2 : bbox.width - xpadding * 2) / mmax(plus + minus, (maxY - minY) || 1);
             zero = zero + plus * scale * (column ? -1 : 1);
         }
         else if (minY / maxY < 0) {

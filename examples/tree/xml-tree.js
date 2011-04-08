@@ -39,7 +39,7 @@ Ext.onReady(function() {
         rootVisible: true,
         viewConfig: {
             plugins: [{
-                ptype: 'treeviewdd'
+                ptype: 'treeviewdragdrop'
             }]
         },
         height: 350,

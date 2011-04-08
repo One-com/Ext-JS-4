@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.ux.form.FileUploadField"></a>/**
- * @class Ext.ux.form.FileUploadField
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.form.File"></a>/**
+ * @class Ext.form.File
  * @extends Ext.form.Text
 
 A file upload field which has custom styling and allows control over the button text and other
@@ -62,30 +62,30 @@ Ext.define(&quot;Ext.form.File&quot;, {
     alternateClassName: [&#39;Ext.form.FileUploadField&#39;, &#39;Ext.ux.form.FileUploadField&#39;],
     uses: [&#39;Ext.button.Button&#39;, &#39;Ext.layout.component.form.File&#39;],
 
-    <a name="cfg-Ext.ux.form.FileUploadField-buttonText"></a>/**
+    <a name="cfg-Ext.form.File-buttonText"></a>/**
      * @cfg {String} buttonText The button text to display on the upload button (defaults to
      * &#39;Browse...&#39;).  Note that if you supply a value for {@link #buttonCfg}, the buttonCfg.text
      * value will be used instead if available.
      */
     buttonText: &#39;Browse...&#39;,
 
-    <a name="cfg-Ext.ux.form.FileUploadField-buttonOnly"></a>/**
+    <a name="cfg-Ext.form.File-buttonOnly"></a>/**
      * @cfg {Boolean} buttonOnly True to display the file upload field as a button with no visible
      * text field (defaults to false).  If true, all inherited Text members will still be available.
      */
     buttonOnly: false,
 
-    <a name="cfg-Ext.ux.form.FileUploadField-buttonMargin"></a>/**
+    <a name="cfg-Ext.form.File-buttonMargin"></a>/**
      * @cfg {Number} buttonMargin The number of pixels of space reserved between the button and the text field
      * (defaults to 3).  Note that this only applies if {@link #buttonOnly} = false.
      */
     buttonMargin: 3,
 
-    <a name="cfg-Ext.ux.form.FileUploadField-buttonCfg"></a>/**
+    <a name="cfg-Ext.form.File-buttonCfg"></a>/**
      * @cfg {Object} buttonCfg A standard {@link Ext.button.Button} config object.
      */
 
-    <a name="event-Ext.ux.form.FileUploadField-change"></a>/**
+    <a name="event-Ext.form.File-change"></a>/**
      * @event change
      * Fires when the underlying file input field&#39;s value has changed from the user
      * selecting a new file from the system file selection dialog.
@@ -93,21 +93,21 @@ Ext.define(&quot;Ext.form.File&quot;, {
      * @param {String} value The file value returned by the underlying file input field
      */
 
-    <a name="prop-Ext.ux.form.FileUploadField-fileInputEl"></a>/**
+    <a name="prop-Ext.form.File-fileInputEl"></a>/**
      * @property fileInputEl
      * @type {Ext.core.Element}
      * A reference to the invisible file input element created for this upload field. Only
      * populated after this component is rendered.
      */
 
-    <a name="prop-Ext.ux.form.FileUploadField-button"></a>/**
+    <a name="prop-Ext.form.File-button"></a>/**
      * @property button
      * @type {Ext.button.Button}
      * A reference to the trigger Button component created for this upload field. Only
      * populated after this component is rendered.
      */
 
-    <a name="cfg-Ext.ux.form.FileUploadField-fieldBodyCls"></a>/**
+    <a name="cfg-Ext.form.File-fieldBodyCls"></a>/**
      * @cfg {String} fieldBodyCls
      * An extra CSS class to be applied to the body content element in addition to {@link #fieldBodyCls}.
      * Defaults to &#39;x-form-file-wrap&#39; for file upload field.
@@ -178,7 +178,7 @@ Ext.define(&quot;Ext.form.File&quot;, {
         Ext.form.File.superclass.setValue.call(me, me.fileInputEl.dom.value);
     },
 
-    <a name="prop-Ext.ux.form.FileUploadField-setValue"></a>/**
+    <a name="prop-Ext.form.File-setValue"></a>/**
      * Overridden to do nothing
      * @hide
      */
