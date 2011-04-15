@@ -20,6 +20,7 @@ Ext.onReady(function () {
         }],
         items: {
             xtype: 'chart',
+            style: 'background:#fff',
             animate: true,
             store: store1,
             shadow: true,
@@ -33,6 +34,7 @@ Ext.onReady(function () {
                 position: 'left',
                 fields: ['data1', 'data2', 'data3'],
                 title: 'Number of Hits',
+                minorTickSteps: 1,
                 grid: {
                     odd: {
                         opacity: 1,
@@ -56,7 +58,7 @@ Ext.onReady(function () {
                 axis: 'left',
                 xField: 'name',
                 yField: 'data1',
-                markerCfg: {
+                markerConfig: {
                     type: 'cross',
                     size: 4,
                     radius: 4,
@@ -72,7 +74,7 @@ Ext.onReady(function () {
                 smooth: true,
                 xField: 'name',
                 yField: 'data2',
-                markerCfg: {
+                markerConfig: {
                     type: 'circle',
                     size: 4,
                     radius: 4,
@@ -89,7 +91,7 @@ Ext.onReady(function () {
                 fill: true,
                 xField: 'name',
                 yField: 'data3',
-                markerCfg: {
+                markerConfig: {
                     type: 'circle',
                     size: 4,
                     radius: 4,

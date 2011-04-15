@@ -11,7 +11,8 @@ Ext.require([
 ]);
 
 Ext.onReady(function(){
-    Ext.regModel('Company', {
+    Ext.define('Company', {
+        extend: 'Ext.data.Model',
         fields: [
             {name: 'company'},
             {name: 'price', type: 'float'},
@@ -55,7 +56,7 @@ Ext.onReady(function(){
         ['Wal-Mart Stores, Inc.',45.45,0.73,1.63,'9/1 12:00am', 'Retail'],
         ['Walt Disney Company (The) (Holding Company)',29.89,0.24,0.81,'9/1 12:00am', 'Services']
     ];
-    
+
     // add in some dummy descriptions
     for(var i = 0; i < Ext.grid.dummyData.length; i++){
         Ext.grid.dummyData[i].push('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed metus nibh, sodales a, porta at, vulputate eget, dui. Pellentesque ut nisl. ');
@@ -65,7 +66,7 @@ Ext.onReady(function(){
     Ext.QuickTips.init();
 
     var getLocalStore = function() {
-        return new Ext.data.ArrayStore({
+        return Ext.create('Ext.data.ArrayStore', {
             model: 'Company',
             data: Ext.grid.dummyData
         });
@@ -77,7 +78,7 @@ Ext.onReady(function(){
     ////////////////////////////////////////////////////////////////////////////////////////
     // row expander
 
-    var grid1 = new Ext.grid.GridPanel({
+    var grid1 = Ext.create('Ext.grid.Panel', {
         store: getLocalStore(),
         columns: [
             {text: "Company", flex: 1, dataIndex: 'company'},
@@ -105,8 +106,8 @@ Ext.onReady(function(){
     ////////////////////////////////////////////////////////////////////////////////////////
     // Grid 2
     ////////////////////////////////////////////////////////////////////////////////////////
-    var sm = new Ext.selection.CheckboxModel();
-    var grid2 = new Ext.grid.GridPanel({
+    var sm = Ext.create('Ext.selection.CheckboxModel');
+    var grid2 = Ext.create('Ext.grid.Panel', {
         store: getLocalStore(),
         selModel: sm,
         columns: [
@@ -128,10 +129,10 @@ Ext.onReady(function(){
     ////////////////////////////////////////////////////////////////////////////////////////
     // Grid 3
     ////////////////////////////////////////////////////////////////////////////////////////
-    var grid3 = new Ext.grid.GridPanel({
+    var grid3 = Ext.create('Ext.grid.Panel', {
         store: getLocalStore(),
         columns: [
-            new Ext.grid.RowNumberer(),
+            Ext.create('Ext.grid.RowNumberer'),
             {text: "Company", flex: 1, sortable: true, dataIndex: 'company'},
             {text: "Price", width: 120, sortable: true, renderer: Ext.util.Format.usMoney, dataIndex: 'price'},
             {text: "Change", width: 120, sortable: true, dataIndex: 'change'},
@@ -149,7 +150,7 @@ Ext.onReady(function(){
     ////////////////////////////////////////////////////////////////////////////////////////
     // Grid 4
     ////////////////////////////////////////////////////////////////////////////////////////
-    var grid4 = new Ext.grid.GridPanel({
+    var grid4 = Ext.create('Ext.grid.Panel', {
         id:'button-grid',
         store: getLocalStore(),
         columns: [

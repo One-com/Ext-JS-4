@@ -13,16 +13,16 @@ Ext.onReady(function(){
        Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-       Ext.grid.GridPanel.prototype.ddText = "{0} righe selezionate";
+    if(Ext.grid.Panel){
+       Ext.grid.Panel.prototype.ddText = "{0} righe selezionate";
     }
 
     if(Ext.TabPanelItem){
        Ext.TabPanelItem.prototype.closeText = "Chiudi pannello";
     }
 
-    if(Ext.form.BaseField){
-       Ext.form.BaseField.prototype.invalidText = "Valore non valido";
+    if(Ext.form.field.Base){
+       Ext.form.field.Base.prototype.invalidText = "Valore non valido";
     }
 
     if(Ext.LoadMask){
@@ -126,7 +126,7 @@ Ext.onReady(function(){
       });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
        Ext.apply(Ext.PagingToolbar.prototype, {
           beforePageText : "Pagina",
           afterPageText  : "di {0}",
@@ -140,8 +140,8 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.Text){
-       Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+       Ext.apply(Ext.form.field.Text.prototype, {
           minLengthText : "La lunghezza minima \u00E8 {0}",
           maxLengthText : "La lunghezza massima \u00E8 {0}",
           blankText     : "Campo obbligatorio",
@@ -150,16 +150,16 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.Number){
-       Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+       Ext.apply(Ext.form.field.Number.prototype, {
           minText : "Il valore minimo \u00E8 {0}",
           maxText : "Il valore massimo \u00E8 {0}",
           nanText : "{0} non \u00E8 un valore numerico corretto"
        });
     }
 
-    if(Ext.form.Date){
-       Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+       Ext.apply(Ext.form.field.Date.prototype, {
           disabledDaysText  : "Disabilitato",
           disabledDatesText : "Disabilitato",
           minText           : "La data deve essere successiva al {0}",
@@ -170,15 +170,15 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.ComboBox){
-       Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+       Ext.apply(Ext.form.field.ComboBox.prototype, {
           loadingText       : "Caricamento in corso...",
           valueNotFoundText : undefined
        });
     }
 
-    if(Ext.form.VTypes){
-       Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+       Ext.apply(Ext.form.field.VTypes, {
           emailText    : 'Il campo deve essere un indirizzo e-mail nel formato "user@example.com"',
           urlText      : 'Il campo deve essere un indirizzo web nel formato "http:/'+'/www.example.com"',
           alphaText    : 'Il campo deve contenere solo lettere e _',
@@ -186,8 +186,8 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.HtmlEditor){
-      Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : 'Inserire un URL per il link:',
         buttonTips : {
           bold : {
@@ -264,8 +264,8 @@ Ext.onReady(function(){
       });
     }
 
-    if(Ext.grid.HeaderContainer){
-       Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+       Ext.apply(Ext.grid.header.Container.prototype, {
           sortAscText  : "Ordinamento crescente",
           sortDescText : "Ordinamento decrescente",
           lockText     : "Blocca colonna",

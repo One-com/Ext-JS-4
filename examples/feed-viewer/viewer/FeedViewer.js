@@ -14,11 +14,13 @@ Ext.define('FeedViewer.App', {
     
     initComponent: function(){
         
-        Ext.regModel('Feed', {
+        Ext.define('Feed', {
+            extend: 'Ext.data.Model',
             fields: ['title', 'url']
         });
 
-        Ext.regModel('FeedItem', {
+        Ext.define('FeedItem', {
+            extend: 'Ext.data.Model',
             fields: ['title', 'author', {
                 name: 'pubDate',
                 type: 'date'

@@ -1,59 +1,63 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.layout.container.Box"></a>/**
  * @class Ext.layout.container.Box
  * @extends Ext.layout.Container
- * &lt;p&gt;Base Class for HBoxLayout and VBoxLayout Classes. Generally it should not need to be used directly.&lt;/p&gt;
+ * <p>Base Class for HBoxLayout and VBoxLayout Classes. Generally it should not need to be used directly.</p>
  */
 
-Ext.define(&#39;Ext.layout.container.Box&#39;, {
+Ext.define('Ext.layout.container.Box', {
 
     /* Begin Definitions */
 
-    alias: [&#39;layout.box&#39;],
-    extend: &#39;Ext.layout.Container&#39;,
-    alternateClassName: &#39;Ext.layout.BoxLayout&#39;,
+    alias: ['layout.box'],
+    extend: 'Ext.layout.Container',
+    alternateClassName: 'Ext.layout.BoxLayout',
     
     requires: [
-        &#39;Ext.layout.container.boxOverflow.None&#39;,
-        &#39;Ext.layout.container.boxOverflow.Menu&#39;,
-        &#39;Ext.layout.container.boxOverflow.Scroller&#39;,
-        &#39;Ext.util.Format&#39;,
-        &#39;Ext.dd.DragDropMgr&#39;
+        'Ext.layout.container.boxOverflow.None',
+        'Ext.layout.container.boxOverflow.Menu',
+        'Ext.layout.container.boxOverflow.Scroller',
+        'Ext.util.Format',
+        'Ext.dd.DragDropManager'
     ],
 
     /* End Definitions */
 
     <a name="cfg-Ext.layout.container.Box-animate"></a>/**
      * @cfg {Mixed} animate
-     * &lt;p&gt;If truthy, child Component are &lt;i&gt;animated&lt;/i&gt; into position whenever the Container
-     * is layed out. If this option is numeric, it is used as the animation duration in milliseconds.&lt;/p&gt;
-     * &lt;p&gt;May be set as a property at any time.&lt;/p&gt;
+     * <p>If truthy, child Component are <i>animated</i> into position whenever the Container
+     * is layed out. If this option is numeric, it is used as the animation duration in milliseconds.</p>
+     * <p>May be set as a property at any time.</p>
      */
 
     <a name="cfg-Ext.layout.container.Box-defaultMargins"></a>/**
      * @cfg {Object} defaultMargins
-     * &lt;p&gt;If the individual contained items do not have a &lt;tt&gt;margins&lt;/tt&gt;
+     * <p>If the individual contained items do not have a <tt>margins</tt>
      * property specified or margin specified via CSS, the default margins from this property will be
-     * applied to each item.&lt;/p&gt;
-     * &lt;br&gt;&lt;p&gt;This property may be specified as an object containing margins
-     * to apply in the format:&lt;/p&gt;<br><span style="display: none">**/</span>{
+     * applied to each item.</p>
+     * <br><p>This property may be specified as an object containing margins
+     * to apply in the format:</p><pre><code>
+{
     top: (top margin),
     right: (right margin),
     bottom: (bottom margin),
     left: (left margin)
-}<br><span style="display: none">/**</span>     * &lt;p&gt;This property may also be specified as a string containing
+}</code></pre>
+     * <p>This property may also be specified as a string containing
      * space-separated, numeric margin values. The order of the sides associated
-     * with each value matches the way CSS processes margin values:&lt;/p&gt;
-     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
-     * &lt;li&gt;If there is only one value, it applies to all sides.&lt;/li&gt;
-     * &lt;li&gt;If there are two values, the top and bottom borders are set to the
-     * first value and the right and left are set to the second.&lt;/li&gt;
-     * &lt;li&gt;If there are three values, the top is set to the first value, the left
-     * and right are set to the second, and the bottom is set to the third.&lt;/li&gt;
-     * &lt;li&gt;If there are four values, they apply to the top, right, bottom, and
-     * left, respectively.&lt;/li&gt;
-     * &lt;/ul&gt;&lt;/div&gt;
-     * &lt;p&gt;Defaults to:&lt;/p&gt;<br><span style="display: none">**/</span>     * {top:0, right:0, bottom:0, left:0}
-     * <br><span style="display: none">/**</span>     */
+     * with each value matches the way CSS processes margin values:</p>
+     * <div class="mdetail-params"><ul>
+     * <li>If there is only one value, it applies to all sides.</li>
+     * <li>If there are two values, the top and bottom borders are set to the
+     * first value and the right and left are set to the second.</li>
+     * <li>If there are three values, the top is set to the first value, the left
+     * and right are set to the second, and the bottom is set to the third.</li>
+     * <li>If there are four values, they apply to the top, right, bottom, and
+     * left, respectively.</li>
+     * </ul></div>
+     * <p>Defaults to:</p><pre><code>
+     * {top:0, right:0, bottom:0, left:0}
+     * </code></pre>
+     */
     defaultMargins: {
         top: 0,
         right: 0,
@@ -63,58 +67,63 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
 
     <a name="cfg-Ext.layout.container.Box-padding"></a>/**
      * @cfg {String} padding
-     * &lt;p&gt;Sets the padding to be applied to all child items managed by this layout.&lt;/p&gt;
-     * &lt;p&gt;This property must be specified as a string containing
+     * <p>Sets the padding to be applied to all child items managed by this layout.</p>
+     * <p>This property must be specified as a string containing
      * space-separated, numeric padding values. The order of the sides associated
-     * with each value matches the way CSS processes padding values:&lt;/p&gt;
-     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
-     * &lt;li&gt;If there is only one value, it applies to all sides.&lt;/li&gt;
-     * &lt;li&gt;If there are two values, the top and bottom borders are set to the
-     * first value and the right and left are set to the second.&lt;/li&gt;
-     * &lt;li&gt;If there are three values, the top is set to the first value, the left
-     * and right are set to the second, and the bottom is set to the third.&lt;/li&gt;
-     * &lt;li&gt;If there are four values, they apply to the top, right, bottom, and
-     * left, respectively.&lt;/li&gt;
-     * &lt;/ul&gt;&lt;/div&gt;
-     * &lt;p&gt;Defaults to: &lt;code&gt;&quot;0&quot;&lt;/code&gt;&lt;/p&gt;
+     * with each value matches the way CSS processes padding values:</p>
+     * <div class="mdetail-params"><ul>
+     * <li>If there is only one value, it applies to all sides.</li>
+     * <li>If there are two values, the top and bottom borders are set to the
+     * first value and the right and left are set to the second.</li>
+     * <li>If there are three values, the top is set to the first value, the left
+     * and right are set to the second, and the bottom is set to the third.</li>
+     * <li>If there are four values, they apply to the top, right, bottom, and
+     * left, respectively.</li>
+     * </ul></div>
+     * <p>Defaults to: <code>"0"</code></p>
      */
-    padding: &#39;0&#39;,
+    padding: '0',
     // documented in subclasses
-    pack: &#39;start&#39;,
+    pack: 'start',
 
     <a name="cfg-Ext.layout.container.Box-pack"></a>/**
      * @cfg {String} pack
      * Controls how the child items of the container are packed together. Acceptable configuration values
      * for this property are:
-     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
-     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;start&lt;/tt&gt;&lt;/b&gt; : &lt;b&gt;Default&lt;/b&gt;&lt;div class=&quot;sub-desc&quot;&gt;child items are packed together at
-     * &lt;b&gt;left&lt;/b&gt; side of container&lt;/div&gt;&lt;/li&gt;
-     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;center&lt;/tt&gt;&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;child items are packed together at
-     * &lt;b&gt;mid-width&lt;/b&gt; of container&lt;/div&gt;&lt;/li&gt;
-     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;end&lt;/tt&gt;&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;child items are packed together at &lt;b&gt;right&lt;/b&gt;
-     * side of container&lt;/div&gt;&lt;/li&gt;
-     * &lt;/ul&gt;&lt;/div&gt;
+     * <div class="mdetail-params"><ul>
+     * <li><b><tt>start</tt></b> : <b>Default</b><div class="sub-desc">child items are packed together at
+     * <b>left</b> side of container</div></li>
+     * <li><b><tt>center</tt></b> : <div class="sub-desc">child items are packed together at
+     * <b>mid-width</b> of container</div></li>
+     * <li><b><tt>end</tt></b> : <div class="sub-desc">child items are packed together at <b>right</b>
+     * side of container</div></li>
+     * </ul></div>
      */
     <a name="cfg-Ext.layout.container.Box-flex"></a>/**
      * @cfg {Number} flex
-     * This configuration option is to be applied to &lt;b&gt;child &lt;tt&gt;items&lt;/tt&gt;&lt;/b&gt; of the container managed
-     * by this layout. Each child item with a &lt;tt&gt;flex&lt;/tt&gt; property will be flexed &lt;b&gt;horizontally&lt;/b&gt;
-     * according to each item&#39;s &lt;b&gt;relative&lt;/b&gt; &lt;tt&gt;flex&lt;/tt&gt; value compared to the sum of all items with
-     * a &lt;tt&gt;flex&lt;/tt&gt; value specified.  Any child items that have either a &lt;tt&gt;flex = 0&lt;/tt&gt; or
-     * &lt;tt&gt;flex = undefined&lt;/tt&gt; will not be &#39;flexed&#39; (the initial size will not be changed).
+     * This configuration option is to be applied to <b>child <tt>items</tt></b> of the container managed
+     * by this layout. Each child item with a <tt>flex</tt> property will be flexed <b>horizontally</b>
+     * according to each item's <b>relative</b> <tt>flex</tt> value compared to the sum of all items with
+     * a <tt>flex</tt> value specified.  Any child items that have either a <tt>flex = 0</tt> or
+     * <tt>flex = undefined</tt> will not be 'flexed' (the initial size will not be changed).
      */
 
-    type: &#39;box&#39;,
+    type: 'box',
     scrollOffset: 0,
-    itemCls: Ext.baseCSSPrefix + &#39;box-item&#39;,
-    targetCls: Ext.baseCSSPrefix + &#39;box-layout-ct&#39;,
-    innerCls: Ext.baseCSSPrefix + &#39;box-inner&#39;,
+    itemCls: Ext.baseCSSPrefix + 'box-item',
+    targetCls: Ext.baseCSSPrefix + 'box-layout-ct',
+    innerCls: Ext.baseCSSPrefix + 'box-inner',
 
     bindToOwnerCtContainer: true,
 
     fixedLayout: false,
     
+    // availableSpaceOffset is used to adjust the availableWidth, typically used
+    // to reserve space for a scrollbar
     availableSpaceOffset: 0,
+    
+    // whether or not to reserve the availableSpaceOffset in layout calculations
+    reserveOffset: true,
     
     <a name="cfg-Ext.layout.container.Box-clearInnerCtOnLayout"></a>/**
      * @cfg {Boolean} clearInnerCtOnLayout
@@ -122,12 +131,12 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
     clearInnerCtOnLayout: false,
 
     flexSortFn: function (a, b) {
-        var maxParallelPrefix = &#39;max&#39; + this.parallelPrefixCap,
+        var maxParallelPrefix = 'max' + this.parallelPrefixCap,
             infiniteValue = Infinity;
         a = a.component[maxParallelPrefix] || infiniteValue;
         b = b.component[maxParallelPrefix] || infiniteValue;
-        // IE 6/7 Don&#39;t like Infinity - Infinity...
-        if (!isFinite(a) &amp;&amp; !isFinite(b)) {
+        // IE 6/7 Don't like Infinity - Infinity...
+        if (!isFinite(a) && !isFinite(b)) {
             return false;
         }
         return a - b;
@@ -178,7 +187,7 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             i = 0;
 
         child = me.owner.getComponent(child);
-        for (; i &lt; ln; i++) {
+        for (; i < ln; i++) {
             if (boxes[i].component === child) {
                 return boxes[i];
             }
@@ -205,9 +214,9 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             parallelPrefixCap = me.parallelPrefixCap,
             perpendicularPrefix = me.perpendicularPrefix,
             perpendicularPrefixCap = me.perpendicularPrefixCap,
-            parallelMinString = &#39;min&#39; + parallelPrefixCap,
-            perpendicularMinString = &#39;min&#39; + perpendicularPrefixCap,
-            perpendicularMaxString = &#39;max&#39; + perpendicularPrefixCap,
+            parallelMinString = 'min' + parallelPrefixCap,
+            perpendicularMinString = 'min' + perpendicularPrefixCap,
+            perpendicularMaxString = 'max' + perpendicularPrefixCap,
 
             parallelSize = targetSize[parallelPrefix] - me.scrollOffset,
             perpendicularSize = targetSize[perpendicularPrefix],
@@ -218,9 +227,9 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             paddingPerpendicular =  perpendicularOffset + padding[me.perpendicularRightBottom],
             availPerpendicularSize = mmax(0, perpendicularSize - paddingPerpendicular),
 
-            isStart = me.pack == &#39;start&#39;,
-            isCenter = me.pack == &#39;center&#39;,
-            isEnd = me.pack == &#39;end&#39;,
+            isStart = me.pack == 'start',
+            isCenter = me.pack == 'center',
+            isEnd = me.pack == 'end',
 
             constrain = Ext.Number.constrain,
             visibleCount = visibleItems.length,
@@ -238,79 +247,80 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             perpendicularMargins, stretchSize;
 
         //gather the total flex of all flexed items and the width taken up by fixed width items
-        for (i = 0; i &lt; visibleCount; i++) {
+        for (i = 0; i < visibleCount; i++) {
             child = visibleItems[i];
             childPerpendicular = child[perpendicularPrefix];
             me.layoutItem(child);
+            childMargins = child.margins;
+            parallelMargins = childMargins[me.parallelBefore] + childMargins[me.parallelAfter];
 
-            // flex and not &#39;auto&#39; width
+            // Create the box description object for this child item.
+            tmpObj = {
+                component: child,
+                margins: childMargins
+            };
+
+            // flex and not 'auto' width
             if (child.flex) {
                 totalFlex += child.flex;
                 childParallel = undefinedValue;
             }
-            // Not flexed or &#39;auto&#39; width or undefined width
+            // Not flexed or 'auto' width or undefined width
             else {
-                if (!(child[parallelPrefix] &amp;&amp; childPerpendicular)) {
+                if (!(child[parallelPrefix] && childPerpendicular)) {
                     childSize = child.getSize();
                 }
                 childParallel = child[parallelPrefix] || childSize[parallelPrefix];
                 childPerpendicular = childPerpendicular || childSize[perpendicularPrefix];
             }
 
-            childMargins = child.margins;
-
-            parallelMargins = childMargins[me.parallelBefore] + childMargins[me.parallelAfter];
-
             nonFlexSize += parallelMargins + (childParallel || 0);
             desiredSize += parallelMargins + (child.flex ? child[parallelMinString] || 0 : childParallel);
             minimumSize += parallelMargins + (child[parallelMinString] || childParallel || 0);
 
             // Max height for align - force layout of non-laid out subcontainers without a numeric height
-            if (typeof childPerpendicular != &#39;number&#39;) {
+            if (typeof childPerpendicular != 'number') {
                 // Clear any static sizing and revert to flow so we can get a proper measurement
-                // child[&#39;set&#39; + perpendicularPrefixCap](null);
-                childPerpendicular = child[&#39;get&#39; + perpendicularPrefixCap]();
+                // child['set' + perpendicularPrefixCap](null);
+                childPerpendicular = child['get' + perpendicularPrefixCap]();
             }
 
+            // Track the maximum perpendicular size for use by the stretch and stretchmax align config values.
             maxSize = mmax(maxSize, childPerpendicular + childMargins[me.perpendicularLeftTop] + childMargins[me.perpendicularRightBottom]);
 
-            //cache the size of each child component. Don&#39;t set to 0, keep undefined instead
-            tmpObj = {
-                component: child,
-                margins: childMargins
-            };
             tmpObj[parallelPrefix] = childParallel || undefinedValue;
             tmpObj[perpendicularPrefix] = childPerpendicular || undefinedValue;
             boxes.push(tmpObj);
         }
         shortfall = desiredSize - parallelSize;
-        tooNarrow = minimumSize &gt; parallelSize;
+        tooNarrow = minimumSize > parallelSize;
 
         //the space available to the flexed items
-        availableSpace = mmax(0, parallelSize - nonFlexSize - paddingParallel - me.availableSpaceOffset);
+        availableSpace = mmax(0, parallelSize - nonFlexSize - paddingParallel - (me.reserveOffset ? me.availableSpaceOffset : 0));
 
         if (tooNarrow) {
-            for (i = 0; i &lt; visibleCount; i++) {
+            for (i = 0; i < visibleCount; i++) {
                 box = boxes[i];
+                minSize = visibleItems[i][parallelMinString] || visibleItems[i][parallelPrefix] || box[parallelPrefix];
                 box.dirtySize = box.dirtySize || box[parallelPrefix] != minSize;
-                box[parallelPrefix] = visibleItems[i][parallelMinString] || visibleItems[i][parallelPrefix] || box[parallelPrefix];
+                box[parallelPrefix] = minSize;
             }
         }
         else {
             //all flexed items should be sized to their minimum size, other items should be shrunk down until
             //the shortfall has been accounted for
-            if (shortfall &gt; 0) {
+            if (shortfall > 0) {
                 /*
                  * When we have a shortfall but are not tooNarrow, we need to shrink the width of each non-flexed item.
                  * Flexed items are immediately reduced to their minWidth and anything already at minWidth is ignored.
                  * The remaining items are collected into the minWidths array, which is later used to distribute the shortfall.
                  */
-                for (i = 0; i &lt; visibleCount; i++) {
+                for (i = 0; i < visibleCount; i++) {
                     item = visibleItems[i];
                     minSize = item[parallelMinString] || 0;
 
                     //shrink each non-flex tab by an equal amount to make them all fit. Flexed items are all
-                    //shrunk to their minSize because they&#39;re flexible and should be the first to lose size
+                    //shrunk to their minSize because they're flexible and should be the first to lose size
                     if (item.flex) {
                         box = boxes[i];
                         box.dirtySize = box.dirtySize || box[parallelPrefix] != minSize;
@@ -334,7 +344,7 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
                  * smallest difference between their size and minSize first, so that if reducing the size by the average
                  * amount would make that item less than its minSize, we carry the remainder over to the next item.
                  */
-                for (i = 0, length = minSizes.length; i &lt; length; i++) {
+                for (i = 0, length = minSizes.length; i < length; i++) {
                     itemIndex = minSizes[i].index;
 
                     if (itemIndex == undefinedValue) {
@@ -359,9 +369,9 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
                 flexedBoxes = [];
 
                 // Create an array containing *just the flexed boxes* for allocation of remainingSpace
-                for (i = 0; i &lt; visibleCount; i++) {
+                for (i = 0; i < visibleCount; i++) {
                     child = visibleItems[i];
-                    if (isStart &amp;&amp; child.flex) {
+                    if (isStart && child.flex) {
                         flexedBoxes.push(boxes[Ext.Array.indexOf(visibleItems, child)]);
                     }
                 }
@@ -371,14 +381,15 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
                 Ext.Array.sort(flexedBoxes, me.flexSortFn);
 
                 // Calculate the size of each flexed item, and attempt to set it.
-                for (i = 0; i &lt; flexedBoxes.length; i++) {
+                for (i = 0; i < flexedBoxes.length; i++) {
                     calcs = flexedBoxes[i];
                     child = calcs.component;
                     childMargins = calcs.margins;
 
                     flexedSize = math.ceil((child.flex / remainingFlex) * remainingSpace);
-                    // Implement maxSize check
-                    flexedSize = math.min(child[&#39;max&#39; + parallelPrefixCap] || infiniteValue, flexedSize);
+
+                    // Implement maxSize and minSize check
+                    flexedSize = Math.max(child['min' + parallelPrefixCap] || 0, math.min(child['max' + parallelPrefixCap] || infiniteValue, flexedSize));
 
                     // Remaining space has already had all parallel margins subtracted from it, so just subtract consumed size
                     remainingSpace -= flexedSize;
@@ -397,8 +408,24 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             parallelOffset += availableSpace;
         }
 
+        // Fix for left and right docked Components in a dock component layout.
+        // Older Microsoft browsers do not size a position:absolute element's width to match its content.
+        // So in this case we adjust the size of the owning Container's element explicitly based upon
+        // the discovered max width.
+        // Also, in this case, align:'stretch' is meaningless - that basically means stretchmax
+        if (me.owner.dock && (Ext.ieIE6 || Ext.isIE7 || Ext.isIEQuirks) && !me.owner.width && me.direction == 'vertical') {
+
+            // The available width must be allocated now according to discovered max width
+            availPerpendicularSize = targetSize.width = maxSize + padding.left + padding.right;
+            me.owner.el.setWidth(maxSize + me.owner.el.getPadding('lr') + me.owner.el.getBorderWidth('lr'));
+
+            if (me.align == 'stretch') {
+                me.align == 'stretchmax';
+            }
+        }
+
         //finally, calculate the left and top position of each item
-        for (i = 0; i &lt; visibleCount; i++) {
+        for (i = 0; i < visibleCount; i++) {
             child = visibleItems[i];
             calcs = boxes[i];
 
@@ -406,18 +433,18 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
 
             perpendicularMargins = childMargins[me.perpendicularLeftTop] + childMargins[me.perpendicularRightBottom];
 
-            // Advance past the &quot;before&quot; margin
+            // Advance past the "before" margin
             parallelOffset += childMargins[me.parallelBefore];
 
             calcs[me.parallelBefore] = parallelOffset;
             calcs[me.perpendicularLeftTop] = perpendicularOffset + childMargins[me.perpendicularLeftTop];
 
-            if (me.align == &#39;stretch&#39;) {
+            if (me.align == 'stretch') {
                 stretchSize = constrain(availPerpendicularSize - perpendicularMargins, child[perpendicularMinString] || 0, child[perpendicularMaxString] || infiniteValue);
                 calcs.dirtySize = calcs.dirtySize || calcs[perpendicularPrefix] != stretchSize;
                 calcs[perpendicularPrefix] = stretchSize;
             }
-            else if (me.align == &#39;stretchmax&#39;) {
+            else if (me.align == 'stretchmax') {
                 stretchSize = constrain(maxSize - perpendicularMargins, child[perpendicularMinString] || 0, child[perpendicularMaxString] || infiniteValue);
                 calcs.dirtySize = calcs.dirtySize || calcs[perpendicularPrefix] != stretchSize;
                 calcs[perpendicularPrefix] = stretchSize;
@@ -427,12 +454,12 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
                 // the size to yield the space available to center within.
                 // The updateInnerCtSize method explicitly adds the border widths to the set size of the innerCt.
                 diff = mmax(availPerpendicularSize, maxSize) - me.innerCt.getBorderWidth(me.perpendicularLT + me.perpendicularRB) - calcs[perpendicularPrefix];
-                if (diff &gt; 0) {
+                if (diff > 0) {
                     calcs[me.perpendicularLeftTop] = perpendicularOffset + (diff / 2);
                 }
             }
 
-            // Advance past the box size and the &quot;after&quot; margin
+            // Advance past the box size and the "after" margin
             parallelOffset += (calcs[parallelPrefix] || 0) + childMargins[me.parallelAfter];
         }
 
@@ -455,14 +482,14 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
     initOverflowHandler: function() {
         var handler = this.overflowHandler;
 
-        if (typeof handler == &#39;string&#39;) {
+        if (typeof handler == 'string') {
             handler = {
                 type: handler
             };
         }
 
-        var handlerType = &#39;None&#39;;
-        if (handler &amp;&amp; handler.type != undefined) {
+        var handlerType = 'None';
+        if (handler && handler.type != undefined) {
             handlerType = handler.type;
         }
 
@@ -471,7 +498,7 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             constructor = constructor[this.type];
         }
 
-        this.overflowHandler = Ext.create(&#39;Ext.layout.container.boxOverflow.&#39; + handlerType, this, handler);
+        this.overflowHandler = Ext.create('Ext.layout.container.boxOverflow.' + handlerType, this, handler);
     },
 
     /**
@@ -481,8 +508,8 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
      */
     onLayout: function() {
         this.callParent();
-        // Clear the innerCt size so it doesn&#39;t influence the child items.
-        if (this.clearInnerCtOnLayout === true &amp;&amp; this.adjustmentPass !== true) {
+        // Clear the innerCt size so it doesn't influence the child items.
+        if (this.clearInnerCtOnLayout === true && this.adjustmentPass !== true) {
             this.innerCt.setSize(null, null);
         }
 
@@ -494,14 +521,14 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             meta = calcs.meta,
             handler, method, results;
 
-        if (me.autoSize &amp;&amp; calcs.meta.desiredSize) {
+        if (me.autoSize && calcs.meta.desiredSize) {
             targetSize[me.parallelPrefix] = calcs.meta.desiredSize;
         }
 
         //invoke the overflow handler, if one is configured
-        if (meta.shortfall &gt; 0) {
+        if (meta.shortfall > 0) {
             handler = me.overflowHandler;
-            method = meta.tooNarrow ? &#39;handleOverflow&#39;: &#39;clearOverflow&#39;;
+            method = meta.tooNarrow ? 'handleOverflow': 'clearOverflow';
 
             results = handler[method](calcs, targetSize);
 
@@ -552,16 +579,16 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             i = 0,
             length = boxes.length,
             animQueue = [],
-            dd = Ext.dd.DDM.getDDById(me.innerCt.id), // Any DD active on this layout&#39;s element (The BoxReorderer plugin does this.)
+            dd = Ext.dd.DDM.getDDById(me.innerCt.id), // Any DD active on this layout's element (The BoxReorderer plugin does this.)
             oldBox, newBox, changed, comp, boxAnim, animCallback;
 
-        for (; i &lt; length; i++) {
+        for (; i < length; i++) {
             newBox = boxes[i];
             comp = newBox.component;
 
             // If a Component is being drag/dropped, skip positioning it.
             // Accomodate the BoxReorderer plugin: Its current dragEl must not be positioned by the layout
-            if (dd &amp;&amp; (dd.getDragEl() === comp.el.dom)) {
+            if (dd && (dd.getDragEl() === comp.el.dom)) {
                 continue;
             }
 
@@ -582,26 +609,26 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
                     to: {},
                     listeners: {}
                 };
-                // Only set from and to properties when there&#39;s a change.
+                // Only set from and to properties when there's a change.
                 // Perform as few Component setter methods as possible.
                 // Temporarily set the property values that we are not animating
                 // so that doComponentLayout does not auto-size them.
-                if (!isNaN(newBox.width) &amp;&amp; (newBox.width != oldBox.width)) {
+                if (!isNaN(newBox.width) && (newBox.width != oldBox.width)) {
                     changed = true;
                     // boxAnim.from.width = oldBox.width;
                     boxAnim.to.width = newBox.width;
                 }
-                if (!isNaN(newBox.height) &amp;&amp; (newBox.height != oldBox.height)) {
+                if (!isNaN(newBox.height) && (newBox.height != oldBox.height)) {
                     changed = true;
                     // boxAnim.from.height = oldBox.height;
                     boxAnim.to.height = newBox.height;
                 }
-                if (!isNaN(newBox.left) &amp;&amp; (newBox.left != oldBox.left)) {
+                if (!isNaN(newBox.left) && (newBox.left != oldBox.left)) {
                     changed = true;
                     // boxAnim.from.left = oldBox.left;
                     boxAnim.to.left = newBox.left;
                 }
-                if (!isNaN(newBox.top) &amp;&amp; (newBox.top != oldBox.top)) {
+                if (!isNaN(newBox.top) && (newBox.top != oldBox.top)) {
                     changed = true;
                     // boxAnim.from.top = oldBox.top;
                     boxAnim.to.top = newBox.top;
@@ -615,7 +642,7 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
                         me.setItemSize(comp, newBox.width, newBox.height);
                     }
                 }
-                // Don&#39;t set positions to NaN
+                // Don't set positions to NaN
                 if (isNaN(newBox.left) || isNaN(newBox.top)) {
                     continue;
                 }
@@ -627,10 +654,10 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
         length = animQueue.length;
         if (length) {
 
-            // A function which cleans up when a Component&#39;s animation is done.
+            // A function which cleans up when a Component's animation is done.
             // The last one to finish calls the callback.
             var afterAnimate = function(anim) {
-                // When we&#39;ve animated all changed boxes into position, clear our busy flag and call the callback.
+                // When we've animated all changed boxes into position, clear our busy flag and call the callback.
                 length -= 1;
                 if (!length) {
                     me.layoutBusy = false;
@@ -645,7 +672,7 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             };
 
             // Start each box animation off
-            for (i = 0, length = animQueue.length; i &lt; length; i++) {
+            for (i = 0, length = animQueue.length; i < length; i++) {
                 boxAnim = animQueue[i];
 
                 // Clean up the Component after. Clean up the *layout* after the last animation finishes
@@ -661,7 +688,7 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
                 comp = boxAnim.target;
                 delete boxAnim.target;
                 // Stop any currently running animation
-                comp.stopFx();
+                comp.stopAnimation();
                 comp.animate(boxAnim);
             }
         }
@@ -688,24 +715,24 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             innerCtWidth,
             innerCtHeight;
 
-        if (me.direction == &#39;horizontal&#39;) {
+        if (me.direction == 'horizontal') {
             innerCtWidth = width;
-            innerCtHeight = meta.maxSize + padding.top + padding.bottom + me.innerCt.getBorderWidth(&#39;tb&#39;);
+            innerCtHeight = meta.maxSize + padding.top + padding.bottom + me.innerCt.getBorderWidth('tb');
 
-            if (align == &#39;stretch&#39;) {
+            if (align == 'stretch') {
                 innerCtHeight = height;
             }
-            else if (align == &#39;middle&#39;) {
+            else if (align == 'middle') {
                 innerCtHeight = mmax(height, innerCtHeight);
             }
         } else {
             innerCtHeight = height;
-            innerCtWidth = meta.maxSize + padding.left + padding.right + me.innerCt.getBorderWidth(&#39;lr&#39;);
+            innerCtWidth = meta.maxSize + padding.left + padding.right + me.innerCt.getBorderWidth('lr');
 
-            if (align == &#39;stretch&#39;) {
+            if (align == 'stretch') {
                 innerCtWidth = width;
             }
-            else if (align == &#39;center&#39;) {
+            else if (align == 'center') {
                 innerCtWidth = mmax(width, innerCtWidth);
             }
         }
@@ -717,7 +744,7 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
 
     /**
      * @private
-     * This should be called after onLayout of any BoxLayout subclass. If the target&#39;s overflow is not set to &#39;hidden&#39;,
+     * This should be called after onLayout of any BoxLayout subclass. If the target's overflow is not set to 'hidden',
      * we need to lay out a second time because the scrollbars may have modified the height and width of the layout
      * target. Having a Box layout inside such a target is therefore not recommended.
      * @param {Object} previousTargetSize The size and height of the layout target before we just laid out
@@ -727,10 +754,10 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
      */
     handleTargetOverflow: function(previousTargetSize) {
         var target = this.getTarget(),
-            overflow = target.getStyle(&#39;overflow&#39;),
+            overflow = target.getStyle('overflow'),
             newTargetSize;
 
-        if (overflow &amp;&amp; overflow != &#39;hidden&#39; &amp;&amp; !this.adjustmentPass) {
+        if (overflow && overflow != 'hidden' && !this.adjustmentPass) {
             newTargetSize = this.getLayoutTargetSize();
             if (newTargetSize.width != previousTargetSize.width || newTargetSize.height != previousTargetSize.height) {
                 this.adjustmentPass = true;
@@ -744,20 +771,20 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
 
     // private
     isValidParent : function(item, target, position) {
-        // Note: Box layouts do not care about order within the innerCt element because it&#39;s an absolutely positioning layout
+        // Note: Box layouts do not care about order within the innerCt element because it's an absolutely positioning layout
         // We only care whether the item is a direct child of the innerCt element.
         var itemEl = item.el ? item.el.dom : Ext.getDom(item);
-        return (itemEl &amp;&amp; this.innerCt &amp;&amp; itemEl.parentNode === this.innerCt.dom) || false;
+        return (itemEl && this.innerCt && itemEl.parentNode === this.innerCt.dom) || false;
     },
 
     // Overridden method from AbstractContainer.
-    // Used in the base AnstractLayout.beforeLayout method to render all items into.
+    // Used in the base AbstractLayout.beforeLayout method to render all items into.
     getRenderTarget: function() {
         if (!this.innerCt) {
             // the innerCt prevents wrapping and shuffling while the container is resizing
             this.innerCt = this.getTarget().createChild({
                 cls: this.innerCls,
-                role: &#39;presentation&#39;
+                role: 'presentation'
             });
             this.padding = Ext.util.Format.parseBox(this.padding);
         }
@@ -772,7 +799,7 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
             style = itemEl.dom.style,
             margins = item.margins || item.margin;
 
-        // Parse the item&#39;s margin/margins specification
+        // Parse the item's margin/margins specification
         if (margins) {
             if (Ext.isString(margins) || Ext.isNumber(margins)) {
                 margins = Ext.util.Format.parseBox(margins);
@@ -784,11 +811,11 @@ Ext.define(&#39;Ext.layout.container.Box&#39;, {
         }
 
         // Add any before/after CSS margins to the configured margins, and zero the CSS margins
-        margins.top    += itemEl.getMargin(&#39;t&#39;);
-        margins.right  += itemEl.getMargin(&#39;r&#39;);
-        margins.bottom += itemEl.getMargin(&#39;b&#39;);
-        margins.left   += itemEl.getMargin(&#39;l&#39;);
-        style.marginTop = style.marginRight = style.marginBottom = style.marginLeft = &#39;0&#39;;
+        margins.top    += itemEl.getMargin('t');
+        margins.right  += itemEl.getMargin('r');
+        margins.bottom += itemEl.getMargin('b');
+        margins.left   += itemEl.getMargin('l');
+        style.marginTop = style.marginRight = style.marginBottom = style.marginLeft = '0';
 
         // Item must reference calculated margins.
         item.margins = margins;

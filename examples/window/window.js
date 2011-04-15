@@ -51,9 +51,11 @@ Ext.onReady(function(){
         width: 400,
         x: 450,
         y: 450,
-        title: 'Constraining Window',
+        title: 'Constraining Window, plain: true',
         closable: false,
-        items: [floater = new Ext.Component({
+        plain: true,
+        layout: 'fit',
+        items: [floater = Ext.create('Ext.Component', {
             xtype: 'component',
             floating: {
                 shadow: false
@@ -62,51 +64,75 @@ Ext.onReady(function(){
             width: 50,
             x: 175,
             y: 75
-        }), constrainedWin = new Ext.Window({
+        }), constrainedWin = Ext.create('Ext.Window', {
             title: 'Constrained Window',
             width: 100,
             height: 100,
             x: 20,
             y: 20,
-            constrain: true
-        }), constrainedWin2 = new Ext.Window({
+            constrain: true,
+            layout: 'fit',
+            items: {
+                border: false
+            }
+        }), constrainedWin2 = Ext.create('Ext.Window', {
             title: 'Header-Constrained Win',
             width: 100,
             height: 100,
             x: 120,
             y: 120,
-            constrainHeader: true
-        })]
+            constrainHeader: true,
+            layout: 'fit',
+            items: {
+                border: false
+            }
+        }),{
+            border: false
+        }]
     });
     win2.show();
     floater.show();
     constrainedWin.show();
     constrainedWin2.show();
-    
-    new Ext.Window({
-        title: 'Left Header',
+
+    Ext.create('Ext.Window', {
+        title: 'Left Header, plain: true',
         width: 400,
         height: 200,
         x: 10,
         y: 200,
-        headerPosition: 'left'
+        plain: true,
+        headerPosition: 'left',
+        layout: 'fit',
+        items: {
+            border: false
+        }
     }).show();
 
-    new Ext.Window({
-        title: 'Right Header',
+    Ext.create('Ext.Window', {
+        title: 'Right Header, plain: true',
         width: 400,
         height: 200,
         x: 450,
         y: 200,
-        headerPosition: 'right'
+        headerPosition: 'right',
+        layout: 'fit',
+        items: {
+            border: false
+        }
     }).show();
 
-    new Ext.Window({
-        title: 'Bottom Header',
+    Ext.create('Ext.Window', {
+        title: 'Bottom Header, plain: true',
         width: 400,
         height: 200,
         x: 10,
         y: 450,
-        headerPosition: 'bottom'
+        plain: true,
+        headerPosition: 'bottom',
+        layout: 'fit',
+        items: {
+            border: false
+        }
     }).show();
 });

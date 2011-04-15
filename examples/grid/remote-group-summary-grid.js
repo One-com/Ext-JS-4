@@ -34,7 +34,7 @@ Ext.onReady(function(){
         groupField: 'project'
     });
     
-    var grid = Ext.create('Ext.grid.GridPanel', {
+    var grid = Ext.create('Ext.grid.Panel', {
         width: 800,
         height: 450,
         title: 'Sponsored Projects',
@@ -60,7 +60,7 @@ Ext.onReady(function(){
         features: [{
             id: 'group',
             ftype: 'groupingsummary',
-            groupHdTpl: '{name}',
+            groupHeaderTpl: '{name}',
             hideGroupedHeader: true,
             remoteRoot: 'summaryData'
         }],

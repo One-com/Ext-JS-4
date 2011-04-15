@@ -12,8 +12,8 @@ Ext.define('Ext.chooser.Window', {
     extend: 'Ext.window.Window',
     uses: [
         'Ext.layout.container.Border',
-        'Ext.form.Text',
-        'Ext.form.ComboBox',
+        'Ext.form.field.Text',
+        'Ext.form.field.ComboBox',
         'Ext.toolbar.TextItem'
     ],
     

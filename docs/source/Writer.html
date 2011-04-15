@@ -1,69 +1,71 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.Writer"></a>/**
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.writer.Writer"></a>/**
  * @author Ed Spencer
- * @class Ext.data.Writer
+ * @class Ext.data.writer.Writer
  * @extends Object
  * 
- * &lt;p&gt;Base Writer class used by most subclasses of {@link Ext.data.ServerProxy}. This class is
+ * <p>Base Writer class used by most subclasses of {@link Ext.data.proxy.Server}. This class is
  * responsible for taking a set of {@link Ext.data.Operation} objects and a {@link Ext.data.Request}
- * object and modifying that request based on the Operations.&lt;/p&gt;
+ * object and modifying that request based on the Operations.</p>
  * 
- * &lt;p&gt;For example a Ext.data.JsonWriter would format the Operations and their {@link Ext.data.Model} 
- * instances based on the config options passed to the JsonWriter&#39;s constructor.&lt;/p&gt;
+ * <p>For example a Ext.data.writer.Json would format the Operations and their {@link Ext.data.Model} 
+ * instances based on the config options passed to the JsonWriter's constructor.</p>
  * 
- * &lt;p&gt;Writers are not needed for any kind of local storage - whether via a
- * {@link Ext.data.WebStorageProxy Web Storage proxy} (see {@link Ext.data.LocalStorageProxy localStorage}
- * and {@link Ext.data.SessionStorageProxy sessionStorage}) or just in memory via a
- * {@link Ext.data.MemoryProxy MemoryProxy}.&lt;/p&gt;
+ * <p>Writers are not needed for any kind of local storage - whether via a
+ * {@link Ext.data.proxy.WebStorage Web Storage proxy} (see {@link Ext.data.proxy.LocalStorage localStorage}
+ * and {@link Ext.data.proxy.SessionStorage sessionStorage}) or just in memory via a
+ * {@link Ext.data.proxy.Memory MemoryProxy}.</p>
  * 
  * @constructor
  * @param {Object} config Optional config object
  */
-Ext.define(&#39;Ext.data.Writer&#39;, {
-    alias: &#39;writer.base&#39;,
-    alternateClassName: &#39;Ext.data.DataWriter&#39;,
+Ext.define('Ext.data.writer.Writer', {
+    alias: 'writer.base',
+    alternateClassName: ['Ext.data.DataWriter', 'Ext.data.Writer'],
     
-    <a name="cfg-Ext.data.Writer-writeAllFields"></a>/**
+    <a name="cfg-Ext.data.writer.Writer-writeAllFields"></a>/**
      * @cfg {Boolean} writeAllFields True to write all fields from the record to the server. If set to false it
-     * will only send the fields that were modified. Defaults to &lt;tt&gt;true&lt;/tt&gt;.
+     * will only send the fields that were modified. Defaults to <tt>true</tt>.
      */
     writeAllFields: true,
     
-    <a name="cfg-Ext.data.Writer-nameProperty"></a>/**
+    <a name="cfg-Ext.data.writer.Writer-nameProperty"></a>/**
      * @cfg {String} nameProperty This property is used to read the key for each value that will be sent to the server.
      * For example:
-     * <br><span style="display: none">**/</span>Ext.regModel(&#39;Person&#39;, {
+     * <pre><code>
+Ext.regModel('Person', {
     fields: [{
-        name: &#39;first&#39;,
-        mapping: &#39;firstName&#39;
+        name: 'first',
+        mapping: 'firstName'
     }, {
-        name: &#39;last&#39;,
-        mapping: &#39;lastName&#39;
+        name: 'last',
+        mapping: 'lastName'
     }, {
-        name: &#39;age&#39;
+        name: 'age'
     }]
 });
-new Ext.data.Writer({
+new Ext.data.writer.Writer({
     writeAllFields: true,
-    nameProperty: &#39;mapping&#39;
+    nameProperty: 'mapping'
 });
 
 // This will be sent to the server
 {
-    firstName: &#39;first name value&#39;,
-    lastName: &#39;last name value&#39;,
+    firstName: 'first name value',
+    lastName: 'last name value',
     age: 1
 }
 
-     * <br><span style="display: none">/**</span>     * Defaults to &lt;tt&gt;name&lt;/tt&gt;. If the value is not present, the field name will always be used.
+     * </code></pre>
+     * Defaults to <tt>name</tt>. If the value is not present, the field name will always be used.
      */
-    nameProperty: &#39;name&#39;,
+    nameProperty: 'name',
 
     constructor: function(config) {
         Ext.apply(this, config);
     },
 
-    <a name="method-Ext.data.Writer-write"></a>/**
-     * Prepares a Proxy&#39;s Ext.data.Request object
+    <a name="method-Ext.data.writer.Writer-write"></a>/**
+     * Prepares a Proxy's Ext.data.Request object
      * @param {Ext.data.Request} request The request object
      * @return {Ext.data.Request} The modified request object
      */
@@ -74,13 +76,13 @@ new Ext.data.Writer({
             i         = 0,
             data      = [];
 
-        for (; i &lt; len; i++) {
+        for (; i < len; i++) {
             data.push(this.getRecordData(records[i]));
         }
         return this.writeRecords(request, data);
     },
 
-    <a name="method-Ext.data.Writer-getRecordData"></a>/**
+    <a name="method-Ext.data.writer.Writer-getRecordData"></a>/**
      * Formats the data for each record before sending it to the server. This
      * method should be overridden to format the data in a way that differs from the default.
      * @param {Object} record The record that we are writing to the server.

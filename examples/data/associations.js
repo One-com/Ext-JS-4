@@ -2,7 +2,7 @@ Ext.require([
     'Ext.data.*',
     'Ext.panel.Panel',
     'Ext.layout.container.Card',
-    'Ext.tip.QuickTips'
+    'Ext.tip.QuickTipManager'
 ]);
 
 Ext.define('Customer', {
@@ -70,7 +70,7 @@ Ext.define('OrderItem', {
 });
 
 Ext.define('CustomerGrid', {
-    extend: 'Ext.grid.GridPanel',
+    extend: 'Ext.grid.Panel',
     alias: 'widget.customergrid',
     
     title: 'Customers',
@@ -142,7 +142,7 @@ Ext.define('CustomerGrid', {
 });
 
 Ext.define('OrderGrid', {
-    extend: 'Ext.grid.GridPanel',
+    extend: 'Ext.grid.Panel',
     alias: 'widget.ordergrid',
     
     initComponent: function(){
@@ -209,7 +209,7 @@ Ext.define('OrderGrid', {
 });
 
 Ext.define('OrderItemGrid', {
-    extend: 'Ext.grid.GridPanel',
+    extend: 'Ext.grid.Panel',
     alias: 'widget.orderitemgrid',
     
     initComponent: function(){

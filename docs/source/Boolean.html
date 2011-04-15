@@ -1,32 +1,32 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.grid.column.Boolean"></a>/**
  * @class Ext.grid.column.Boolean
  * @extends Ext.grid.column.Column
- * &lt;p&gt;A Column definition class which renders boolean data fields.  See the {@link Ext.grid.column.Column#xtype xtype}
- * config option of {@link Ext.grid.Column} for more details.&lt;/p&gt;
+ * <p>A Column definition class which renders boolean data fields.  See the {@link Ext.grid.column.Column#xtype xtype}
+ * config option of {@link Ext.grid.Column} for more details.</p>
  */
-Ext.define(&#39;Ext.grid.column.Boolean&#39;, {
-    extend: &#39;Ext.grid.column.Column&#39;,
-    alias: [&#39;widget.booleancolumn&#39;],
-    alternateClassName: &#39;Ext.grid.BooleanColumn&#39;,
+Ext.define('Ext.grid.column.Boolean', {
+    extend: 'Ext.grid.column.Column',
+    alias: ['widget.booleancolumn'],
+    alternateClassName: 'Ext.grid.BooleanColumn',
 
     <a name="cfg-Ext.grid.column.Boolean-trueText"></a>/**
      * @cfg {String} trueText
-     * The string returned by the renderer when the column value is not falsey (defaults to &lt;tt&gt;&#39;true&#39;&lt;/tt&gt;).
+     * The string returned by the renderer when the column value is not falsey (defaults to <tt>'true'</tt>).
      */
-    trueText: &#39;true&#39;,
+    trueText: 'true',
 
     <a name="cfg-Ext.grid.column.Boolean-falseText"></a>/**
      * @cfg {String} falseText
      * The string returned by the renderer when the column value is falsey (but not undefined) (defaults to
-     * &lt;tt&gt;&#39;false&#39;&lt;/tt&gt;).
+     * <tt>'false'</tt>).
      */
-    falseText: &#39;false&#39;,
+    falseText: 'false',
 
     <a name="cfg-Ext.grid.column.Boolean-undefinedText"></a>/**
      * @cfg {String} undefinedText
-     * The string returned by the renderer when the column value is undefined (defaults to &lt;tt&gt;&#39;&amp;#160;&#39;&lt;/tt&gt;).
+     * The string returned by the renderer when the column value is undefined (defaults to <tt>'&#160;'</tt>).
      */
-    undefinedText: &#39;&amp;#160;&#39;,
+    undefinedText: '&#160;',
 
     constructor: function(cfg){
         this.callParent(arguments);
@@ -38,7 +38,7 @@ Ext.define(&#39;Ext.grid.column.Boolean&#39;, {
             if(value === undefined){
                 return undefinedText;
             }
-            if(!value || value === &#39;false&#39;){
+            if(!value || value === 'false'){
                 return falseText;
             }
             return trueText;

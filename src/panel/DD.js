@@ -6,9 +6,9 @@ Ext.define('Ext.panel.DD', {
     constructor : function(panel, cfg){
         this.panel = panel;
         this.dragData = {panel: panel};
-        this.proxy = new Ext.panel.Proxy(panel, cfg);
+        this.proxy = Ext.create('Ext.panel.Proxy', panel, cfg);
 
-        Ext.panel.DD.superclass.constructor.call(this, panel.el, cfg);
+        this.callParent([panel.el, cfg]);
 
         Ext.defer(function() {
             var header = panel.header,

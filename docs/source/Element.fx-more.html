@@ -3,12 +3,12 @@
  */
 Ext.core.Element.addMethods(
     function() {
-        var VISIBILITY      = &quot;visibility&quot;,
-            DISPLAY         = &quot;display&quot;,
-            HIDDEN          = &quot;hidden&quot;,
-            NONE            = &quot;none&quot;,
-            XMASKED         = Ext.baseCSSPrefix + &quot;masked&quot;,
-            XMASKEDRELATIVE = Ext.baseCSSPrefix + &quot;masked-relative&quot;,
+        var VISIBILITY      = "visibility",
+            DISPLAY         = "display",
+            HIDDEN          = "hidden",
+            NONE            = "none",
+            XMASKED         = Ext.baseCSSPrefix + "masked",
+            XMASKEDRELATIVE = Ext.baseCSSPrefix + "masked-relative",
             data            = Ext.core.Element.data;
 
         return {
@@ -18,15 +18,15 @@ Ext.core.Element.addMethods(
              * @return {Boolean} True if the element is currently visible, else false
              */
             isVisible : function(deep) {
-                var vis = !this.isStyle(VISIBILITY, HIDDEN) &amp;&amp; !this.isStyle(DISPLAY, NONE),
+                var vis = !this.isStyle(VISIBILITY, HIDDEN) && !this.isStyle(DISPLAY, NONE),
                     p   = this.dom.parentNode;
                 
                 if (deep !== true || !vis) {
                     return vis;
                 }
                 
-                while (p &amp;&amp; !(/^body/i.test(p.tagName))) {
-                    if (!Ext.fly(p, &#39;_isVisible&#39;).isVisible()) {
+                while (p && !(/^body/i.test(p.tagName))) {
+                    if (!Ext.fly(p, '_isVisible').isVisible()) {
                         return false;
                     }
                     p = p.parentNode;
@@ -35,7 +35,7 @@ Ext.core.Element.addMethods(
             },
 
             <a name="method-Ext.core.Element-isDisplayed"></a>/**
-             * Returns true if display is not &quot;none&quot;
+             * Returns true if display is not "none"
              * @return {Boolean}
              */
             isDisplayed : function() {
@@ -51,7 +51,7 @@ Ext.core.Element.addMethods(
                 this.setVisibilityMode(Ext.core.Element.DISPLAY);
                 
                 if (!Ext.isEmpty(display)) {
-                    data(this.dom, &#39;originalDisplay&#39;, display);
+                    data(this.dom, 'originalDisplay', display);
                 }
                 
                 return this;
@@ -68,30 +68,30 @@ Ext.core.Element.addMethods(
                 var me  = this,
                     dom = me.dom,
                     dh  = Ext.core.DomHelper,
-                    EXTELMASKMSG = Ext.baseCSSPrefix + &quot;mask-msg&quot;,
+                    EXTELMASKMSG = Ext.baseCSSPrefix + "mask-msg",
                     el,
                     mask;
 
-                if (!(/^body/i.test(dom.tagName) &amp;&amp; me.getStyle(&#39;position&#39;) == &#39;static&#39;)) {
+                if (!(/^body/i.test(dom.tagName) && me.getStyle('position') == 'static')) {
                     me.addCls(XMASKEDRELATIVE);
                 }
-                if (el = data(dom, &#39;maskMsg&#39;)) {
+                if (el = data(dom, 'maskMsg')) {
                     el.remove();
                 }
-                if (el = data(dom, &#39;mask&#39;)) {
+                if (el = data(dom, 'mask')) {
                     el.remove();
                 }
 
-                mask = dh.append(dom, {cls : Ext.baseCSSPrefix + &quot;mask&quot;}, true);
-                data(dom, &#39;mask&#39;, mask);
+                mask = dh.append(dom, {cls : Ext.baseCSSPrefix + "mask"}, true);
+                data(dom, 'mask', mask);
 
                 me.addCls(XMASKED);
                 mask.setDisplayed(true);
                 
-                if (typeof msg == &#39;string&#39;) {
-                    var mm = dh.append(dom, {cls : EXTELMASKMSG, cn:{tag:&#39;div&#39;}}, true);
-                    data(dom, &#39;maskMsg&#39;, mm);
-                    mm.dom.className = msgCls ? EXTELMASKMSG + &quot; &quot; + msgCls : EXTELMASKMSG;
+                if (typeof msg == 'string') {
+                    var mm = dh.append(dom, {cls : EXTELMASKMSG, cn:{tag:'div'}}, true);
+                    data(dom, 'maskMsg', mm);
+                    mm.dom.className = msgCls ? EXTELMASKMSG + " " + msgCls : EXTELMASKMSG;
                     mm.dom.firstChild.innerHTML = msg;
                     mm.setDisplayed(true);
                     mm.center(me);
@@ -102,7 +102,7 @@ Ext.core.Element.addMethods(
                 }
                 
                 // ie will not expand full height automatically
-                if (Ext.isIE &amp;&amp; !(Ext.isIE7 &amp;&amp; Ext.isStrict) &amp;&amp; me.getStyle(&#39;height&#39;) == &#39;auto&#39;) {
+                if (Ext.isIE && !(Ext.isIE7 && Ext.isStrict) && me.getStyle('height') == 'auto') {
                     mask.setSize(undefined, me.getHeight());
                 }
                 
@@ -115,17 +115,17 @@ Ext.core.Element.addMethods(
             unmask : function() {
                 var me      = this,
                     dom     = me.dom,
-                    mask    = data(dom, &#39;mask&#39;),
-                    maskMsg = data(dom, &#39;maskMsg&#39;);
+                    mask    = data(dom, 'mask'),
+                    maskMsg = data(dom, 'maskMsg');
 
                 if (mask) {
                     if (maskMsg) {
                         maskMsg.remove();
-                        data(dom, &#39;maskMsg&#39;, undefined);
+                        data(dom, 'maskMsg', undefined);
                     }
                     
                     mask.remove();
-                    data(dom, &#39;mask&#39;, undefined);
+                    data(dom, 'mask', undefined);
                     me.removeCls([XMASKED, XMASKEDRELATIVE]);
                 }
             },
@@ -135,10 +135,10 @@ Ext.core.Element.addMethods(
              */
             isMasked : function() {
                 var me = this,
-                    mask = data(me.dom, &#39;mask&#39;),
-                    maskMsg = data(me.dom, &#39;maskMsg&#39;);
+                    mask = data(me.dom, 'mask'),
+                    maskMsg = data(me.dom, 'maskMsg');
 
-                if (mask &amp;&amp; mask.isVisible()) {
+                if (mask && mask.isVisible()) {
                     if (maskMsg) {
                         maskMsg.center(me);
                     }
@@ -153,11 +153,11 @@ Ext.core.Element.addMethods(
              * @return {Ext.core.Element} The new shim element
              */
             createShim : function() {
-                var el = document.createElement(&#39;iframe&#39;),
+                var el = document.createElement('iframe'),
                     shim;
                 
-                el.frameBorder = &#39;0&#39;;
-                el.className = &#39;ext-shim&#39;;
+                el.frameBorder = '0';
+                el.className = 'ext-shim';
                 el.src = Ext.SSL_SECURE_URL;
                 shim = Ext.get(this.dom.parentNode.insertBefore(el, this.dom));
                 shim.autoBoxAdjust = false;

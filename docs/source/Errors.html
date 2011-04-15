@@ -3,23 +3,25 @@
  * @class Ext.data.Errors
  * @extends Ext.util.MixedCollection
  * 
- * &lt;p&gt;Wraps a collection of validation error responses and provides convenient functions for
- * accessing and errors for specific fields.&lt;/p&gt;
+ * <p>Wraps a collection of validation error responses and provides convenient functions for
+ * accessing and errors for specific fields.</p>
  * 
- * &lt;p&gt;Usually this class does not need to be instantiated directly - instances are instead created
- * automatically when {@link Ext.data.Model#validate validate} on a model instance:&lt;/p&gt;
+ * <p>Usually this class does not need to be instantiated directly - instances are instead created
+ * automatically when {@link Ext.data.Model#validate validate} on a model instance:</p>
  * 
-<br><span style="display: none">**/</span>//validate some existing model instance - in this case it returned 2 failures messages
+<pre><code>
+//validate some existing model instance - in this case it returned 2 failures messages
 var errors = myModel.validate();
 
 errors.isValid(); //false
 
 errors.length; //2
-errors.getByField(&#39;name&#39;);  // [{field: &#39;name&#39;,  error: &#39;must be present&#39;}]
-errors.getByField(&#39;title&#39;); // [{field: &#39;title&#39;, error: &#39;is too short&#39;}]
-<br><span style="display: none">/**</span> */
-Ext.define(&#39;Ext.data.Errors&#39;, {
-    extend: &#39;Ext.util.MixedCollection&#39;,
+errors.getByField('name');  // [{field: 'name',  error: 'must be present'}]
+errors.getByField('title'); // [{field: 'title', error: 'is too short'}]
+</code></pre>
+ */
+Ext.define('Ext.data.Errors', {
+    extend: 'Ext.util.MixedCollection',
     
     <a name="method-Ext.data.Errors-isValid"></a>/**
      * Returns true if there are no errors in the collection
@@ -38,7 +40,7 @@ Ext.define(&#39;Ext.data.Errors&#39;, {
         var errors = [],
             error, field, i;
             
-        for (i = 0; i &lt; this.length; i++) {
+        for (i = 0; i < this.length; i++) {
             error = this.items[i];
             
             if (error.field == fieldName) {

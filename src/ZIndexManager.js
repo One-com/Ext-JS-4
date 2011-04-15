@@ -3,7 +3,7 @@
  * <p>A class that manages a group of {@link Ext.Component#floating} Components and provides z-order management,
  * and Component activation behavior, including masking below the active (topmost) Component.</p>
  * <p>{@link Ext.Component#floating Floating} Components which are rendered directly into the document (Such as {@link Ext.window.Window Window}s which are
- * {@link Ext.Component#show show}n are managed by a {@link Ext.WindowMgr global instance}.</p>
+ * {@link Ext.Component#show show}n are managed by a {@link Ext.WindowManager global instance}.</p>
  * <p>{@link Ext.Component#floating Floating} Components which are descendants of {@link Ext.Component#floating floating} <i>Containers</i>
  * (For example a {Ext.view.BoundList BoundList} within an {@link Ext.window.Window Window}, or a {@link Ext.menu.Menu Menu}),
  * are managed by a ZIndexManager owned by that floating Container. So ComboBox dropdowns within Windows will have managed z-indices
@@ -30,7 +30,7 @@ Ext.define('Ext.ZIndexManager', {
             // This is the ZIndexManager for an Ext.container.Container, base its zseed on the zIndex of the Container's element
             if (container.isContainer) {
                 container.on('resize', me._onContainerResize, me);
-                me.zseed = Ext.num(container.getEl().getStyle('zIndex'), me.getNextZSeed());
+                me.zseed = Ext.Number.from(container.getEl().getStyle('zIndex'), me.getNextZSeed());
                 // The containing element we will be dealing with (eg masking) is the content target
                 me.targetEl = container.getTargetEl();
                 me.container = container;
@@ -42,7 +42,7 @@ Ext.define('Ext.ZIndexManager', {
                 me.targetEl = Ext.get(container);
             }
         }
-        // No container passed means we are the global WindowMgr. Our target is the doc body.
+        // No container passed means we are the global WindowManager. Our target is the doc body.
         // DOM must be ready to collect that ref.
         else {
             Ext.EventManager.onWindowResize(me._onContainerResize, me);
@@ -361,7 +361,7 @@ MyDesktop.getDesktop().getManager().register(Ext.MessageBox);
     }
 }, function() {
     /**
-     * @class Ext.WindowMgr
+     * @class Ext.WindowManager
      * @extends Ext.ZIndexManager
      * <p>The default global floating Component group that is available automatically.</p>
      * <p>This manages instances of floating Components which were rendered programatically without
@@ -370,5 +370,5 @@ MyDesktop.getDesktop().getManager().register(Ext.MessageBox);
      * there are managed by that ZIndexManager.</p>
      * @singleton
      */
-    Ext.WindowMgr = new this();
+    Ext.WindowManager = Ext.WindowMgr = new this();
 });

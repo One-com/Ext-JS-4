@@ -3,30 +3,38 @@
  * @extends Ext.toolbar.Item
  * A simple class that renders text directly into a toolbar.
  * Example usage:
- * <br><span style="display: none">**/</span>new Ext.panel.Panel({
-    tbar : [
-        {xtype: &#39;tbtext&#39;, text: &#39;Item 1&#39;} // or simply &#39;Item 1&#39;
-    ]
+ * {@img Ext.toolbar.TextItem/Ext.toolbar.TextItem.png TextItem component}
+ * <pre><code>
+    Ext.create('Ext.panel.Panel', {
+        title: 'Panel with TextItem',
+        width: 300,
+        height: 200,
+        tbar: [
+            {xtype: 'tbtext', text: 'Sample TextItem'}
+        ],
+        renderTo: Ext.getBody()
+    });
 });
-<br><span style="display: none">/**</span> * @constructor
+</code></pre>
+ * @constructor
  * Creates a new TextItem
- * @param {Object} text A text string, or a config object containing a &lt;tt&gt;text&lt;/tt&gt; property
+ * @param {Object} text A text string, or a config object containing a <tt>text</tt> property
  * @xtype tbtext
  */
-Ext.define(&#39;Ext.toolbar.TextItem&#39;, {
-    extend: &#39;Ext.toolbar.Item&#39;,
-    requires: [&#39;Ext.XTemplate&#39;],
-    alias: &#39;widget.tbtext&#39;,
-    alternateClassName: &#39;Ext.Toolbar.TextItem&#39;,
+Ext.define('Ext.toolbar.TextItem', {
+    extend: 'Ext.toolbar.Item',
+    requires: ['Ext.XTemplate'],
+    alias: 'widget.tbtext',
+    alternateClassName: 'Ext.Toolbar.TextItem',
     
     <a name="cfg-Ext.toolbar.TextItem-text"></a>/**
      * @cfg {String} text The text to be used as innerHTML (html tags are accepted)
      */
-    text: &#39;&#39;,
+    text: '',
     
-    renderTpl: &#39;{text}&#39;,
+    renderTpl: '{text}',
     //
-    baseCls: Ext.baseCSSPrefix + &#39;toolbar-text&#39;,
+    baseCls: Ext.baseCSSPrefix + 'toolbar-text',
     
     onRender : function() {
         Ext.apply(this.renderData, {
@@ -36,7 +44,7 @@ Ext.define(&#39;Ext.toolbar.TextItem&#39;, {
     },
 
     <a name="method-Ext.toolbar.TextItem-setText"></a>/**
-     * Updates this item&#39;s text, setting the text to be used as innerHTML.
+     * Updates this item's text, setting the text to be used as innerHTML.
      * @param {String} t The text to display (html accepted).
      */
     setText : function(t) {

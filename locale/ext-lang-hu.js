@@ -15,16 +15,16 @@ Ext.onReady(function() {
       Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-      Ext.grid.GridPanel.prototype.ddText = "{0} kiválasztott sor";
+    if(Ext.grid.Panel){
+      Ext.grid.Panel.prototype.ddText = "{0} kiválasztott sor";
     }
 
     if(Ext.TabPanelItem){
       Ext.TabPanelItem.prototype.closeText = "Fül bezárása";
     }
 
-    if(Ext.form.BaseField){
-      Ext.form.BaseField.prototype.invalidText = "Hibás érték!";
+    if(Ext.form.field.Base){
+      Ext.form.field.Base.prototype.invalidText = "Hibás érték!";
     }
 
     if(Ext.LoadMask){
@@ -128,7 +128,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
       Ext.apply(Ext.PagingToolbar.prototype, {
         beforePageText : "Oldal",
         afterPageText  : "a {0}-ból/ből",
@@ -142,8 +142,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Text){
-      Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+      Ext.apply(Ext.form.field.Text.prototype, {
         minLengthText : "A mező tartalma legalább {0} hosszú kell legyen",
         maxLengthText : "A mező tartalma legfeljebb {0} hosszú lehet",
         blankText     : "Kötelezően kitöltendő mező",
@@ -152,16 +152,16 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Number){
-      Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+      Ext.apply(Ext.form.field.Number.prototype, {
         minText : "A mező tartalma nem lehet kissebb, mint {0}",
         maxText : "A mező tartalma nem lehet nagyobb, mint {0}",
         nanText : "{0} nem szám"
       });
     }
 
-    if(Ext.form.Date){
-      Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+      Ext.apply(Ext.form.field.Date.prototype, {
         disabledDaysText  : "Nem választható",
         disabledDatesText : "Nem választható",
         minText           : "A dátum nem lehet korábbi, mint {0}",
@@ -172,15 +172,15 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.ComboBox){
-      Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+      Ext.apply(Ext.form.field.ComboBox.prototype, {
         loadingText       : "Betöltés...",
         valueNotFoundText : undefined
       });
     }
 
-    if(Ext.form.VTypes){
-      Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+      Ext.apply(Ext.form.field.VTypes, {
         emailText    : 'A mező email címet tartalmazhat, melynek formátuma "felhasználó@szolgáltató.hu"',
         urlText      : 'A mező webcímet tartalmazhat, melynek formátuma "http:/'+'/www.weboldal.hu"',
         alphaText    : 'A mező csak betűket és aláhúzást (_) tartalmazhat',
@@ -188,8 +188,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.HtmlEditor){
-      Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : 'Add meg a webcímet:',
         buttonTips : {
           bold : {
@@ -266,8 +266,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.grid.HeaderContainer){
-      Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+      Ext.apply(Ext.grid.header.Container.prototype, {
         sortAscText  : "Növekvő rendezés",
         sortDescText : "Csökkenő rendezés",
         lockText     : "Oszlop zárolás",

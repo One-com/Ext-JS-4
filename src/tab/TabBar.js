@@ -27,8 +27,8 @@ Ext.define('Ext.tab.TabBar', {
 
     // @private
     renderTpl: [
-        '<div class="{baseCls}-body<tpl if="ui"> {baseCls}-body-{ui}</tpl>"<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>></div>',
-        '<div class="{baseCls}-strip<tpl if="ui"> {baseCls}-strip-{ui}</tpl>"></div>'
+        '<div class="{baseCls}-body<tpl if="ui"><tpl for="ui"> {parent.baseCls}-body-{.}</tpl></tpl>"<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>></div>',
+        '<div class="{baseCls}-strip<tpl if="ui"><tpl for="ui"> {parent.baseCls}-strip-{.}</tpl></tpl>"></div>'
     ],
 
     /**
@@ -47,7 +47,7 @@ Ext.define('Ext.tab.TabBar', {
             keys;
 
         if (me.plain) {
-            me.ui = 'plain';
+            me.ui = [me.ui, me.ui + '-plain'];
         }
 
         me.addEvents(
@@ -113,21 +113,6 @@ Ext.define('Ext.tab.TabBar', {
     afterComponentLayout : function() {
         var me = this;
         
-        //this is a dirty hack for gecko3. for some reason the left value does not get applied to the first
-        //tab, and removing the float:left and re applying it fixes it. #507 on jira
-        if (Ext.isGecko3) {
-            var tabBodyEl = me.body.child('.x-horizontal-box-overflow-body');
-            
-            if (tabBodyEl) {
-                var oldValue = tabBodyEl.dom.style.cssFloat;
-
-                tabBodyEl.dom.style.cssFloat = "none";
-                Ext.defer(function() {
-                    tabBodyEl.dom.style.cssFloat = oldValue;
-                }, 1);
-            }
-        }
-        
         me.callParent(arguments);
         me.strip.setWidth(me.el.getWidth());
     },
@@ -191,12 +176,12 @@ Ext.define('Ext.tab.TabBar', {
             return;
         }
         var me = this;
-
+        if (me.activeTab) {
+            me.activeTab.deactivate();
+        }
+        tab.activate();
+        
         if (me.rendered) {
-            if (me.activeTab) {
-                me.activeTab.deactivate();
-            }
-            tab.activate();
             me.layout.layout();
             tab.el.scrollIntoView(me.layout.getRenderTarget());
         }

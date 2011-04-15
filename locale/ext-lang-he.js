@@ -10,16 +10,16 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "שורות נבחרות {0}";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "שורות נבחרות {0}";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "סגור לשונית";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "הערך בשדה זה שגוי";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "הערך בשדה זה שגוי";
     }
 
     if(Ext.LoadMask){
@@ -123,7 +123,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "עמוד",
             afterPageText  : "{0} מתוך",
@@ -137,8 +137,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "{0} האורך המינימאלי לשדה זה הוא",
             maxLengthText : "{0} האורך המירבי לשדה זה הוא",
             blankText     : "שדה זה הכרחי",
@@ -147,16 +147,16 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "{0} הערך המינימאלי לשדה זה הוא",
             maxText : "{0} הערך המירבי לשדה זה הוא",
             nanText : "הוא לא מספר {0}"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "מנוטרל",
             disabledDatesText : "מנוטרל",
             minText           : "{0} התאריך בשדה זה חייב להיות לאחר",
@@ -167,15 +167,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "...טוען",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : '"user@example.com" שדה זה צריך להיות כתובת דואר אלקטרוני בפורמט',
             urlText      : '"http:/'+'/www.example.com" שדה זה צריך להיות כתובת אינטרנט בפורמט',
             alphaText    : '_שדה זה יכול להכיל רק אותיות ו',
@@ -183,8 +183,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : ':אנא הקלד את כתובת האינטרנט עבור הקישור',
             buttonTips : {
                 bold : {
@@ -261,8 +261,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "מיין בסדר עולה",
             sortDescText : "מיין בסדר יורד",
             lockText     : "נעל עמודה",

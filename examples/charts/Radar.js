@@ -29,6 +29,7 @@ Ext.onReady(function () {
         items: {
             id: 'chartCmp',
             xtype: 'chart',
+            style: 'background:#fff',
             theme: 'Category2',
             animate: true,
             store: store1,
@@ -49,7 +50,7 @@ Ext.onReady(function () {
                 yField: 'data1',
                 showInLegend: true,
                 showMarkers: true,
-                markerCfg: {
+                markerConfig: {
                     radius: 5,
                     size: 5
                 },
@@ -63,7 +64,7 @@ Ext.onReady(function () {
                 yField: 'data2',
                 showInLegend: true,
                 showMarkers: true,
-                markerCfg: {
+                markerConfig: {
                     radius: 5,
                     size: 5
                 },
@@ -77,7 +78,7 @@ Ext.onReady(function () {
                 yField: 'data3',
                 showMarkers: true,
                 showInLegend: true,
-                markerCfg: {
+                markerConfig: {
                     radius: 5,
                     size: 5
                 },

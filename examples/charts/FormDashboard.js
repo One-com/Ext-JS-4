@@ -2,7 +2,7 @@ Ext.require([
     'Ext.form.*',
     'Ext.data.*',
     'Ext.chart.*',
-    'Ext.grid.GridPanel',
+    'Ext.grid.Panel',
     'Ext.layout.container.Column'
 ]);
 
@@ -167,7 +167,7 @@ Ext.onReady(function(){
             yField: 'Data',
             showInLegend: false,
             showMarkers: true,
-            markerCfg: {
+            markerConfig: {
                 radius: 2,
                 size: 2
             },
@@ -184,7 +184,7 @@ Ext.onReady(function(){
     });
     
     //create a grid that will list the dataset items.
-    var gridPanel = Ext.create('Ext.grid.GridPanel', {
+    var gridPanel = Ext.create('Ext.grid.Panel', {
         id: 'company-form',
         flex: 0.60,
         store: ds,
@@ -297,6 +297,17 @@ Ext.onReady(function(){
                 orientation: 'vertical',
                 'text-anchor': 'middle'
             },
+            listeners: {
+                'itemmouseup': function(item) {
+                     var series = barChart.series.get(0),
+                         index = Ext.Array.indexOf(series.items, item),
+                         selectionModel = gridPanel.getSelectionModel();
+                     
+                     selectedStoreItem = item.storeItem;
+                     selectionModel.select(index);
+                     selectItem(selectedStoreItem);
+                }
+            },
             xField: 'name',
             yField: ['price %']
         }]        
@@ -318,23 +329,10 @@ Ext.onReady(function(){
         };
     })());
     
-    //trigger an item selection when clicking on a bar from series.
-    barChart.on({
-        'itemmouseup': function(item) {
-             var series = barChart.series.get(0),
-                 index = Ext.Array.indexOf(series.items, item),
-                 selectionModel = gridPanel.getSelectionModel();
-             
-             selectedStoreItem = item.storeItem;
-             selectionModel.select(index);
-             selectItem(selectedStoreItem);
-        }    
-    });
-
     /*
      * Here is where we create the Form
      */
-    var gridForm = Ext.create('Ext.form.FormPanel', {
+    var gridForm = Ext.create('Ext.form.Panel', {
         title: 'Company data',
         frame: true,
         bodyPadding: 5,

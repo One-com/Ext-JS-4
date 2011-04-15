@@ -6,7 +6,7 @@
  */
 Ext.define('Ext.panel.Tool', {
     extend: 'Ext.Component',
-    requires: ['Ext.tip.QuickTips'],
+    requires: ['Ext.tip.QuickTipManager'],
     alias: 'widget.tool',
 
     baseCls: Ext.baseCSSPrefix + 'tool',
@@ -36,7 +36,7 @@ Ext.define('Ext.panel.Tool', {
         me.callParent(arguments);
         if (me.qtip) {
             if (Ext.isObject(me.qtip)) {
-                Ext.tip.QuickTips.register(Ext.apply({
+                Ext.tip.QuickTipManager.register(Ext.apply({
                     target: me.id
                 }, me.qtip));
             }

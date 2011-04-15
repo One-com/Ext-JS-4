@@ -73,8 +73,25 @@ pre,code,kbd,samp,tt{font-family:"Menlo","Courier New",Courier,monospace}
 #api-overview{overflow:auto;position:absolute;bottom:0;top:30px;left:0;right:0;line-height:1.4em;}
 #api-overview h1{padding-top:.5em;font-size:2em}
 #api-overview h3{font-size:1.2em;padding:1em 0 .4em 0}
+#api-overview .guides{width:650px !important;line-height:1.7em;}
+#api-overview .guides .lft{float:left;width:220px}
+#api-overview .guides .mid{float:left;width:180px;margin-left:20px}
+#api-overview .guides .right{margin-left:410px}
+#api-overview .guides a{display:block;height:32px;margin:10px 0;padding-left:40px}
+#api-overview .guides .getting_started{background:url("guides.png") no-repeat 0 0}
+#api-overview .guides .drawing_and_charting{background:url("guides.png") no-repeat 0 -288px}
+#api-overview .guides .layouts_and_containers{background:url("guides.png") no-repeat 0 -130px}
+#api-overview .guides .application_architecture{background:url("guides.png") no-repeat 0 -98px}
+#api-overview .guides .class_system{background:url("guides.png") no-repeat 0 -31px}
+#api-overview .guides .data{background:url("guides.png") no-repeat 0 -66px}
+#api-overview .guides .grid{background:url("guides.png") no-repeat 0 -193px}
+#api-overview .guides .tree{background:url("guides.png") no-repeat 0 -228px}
+#api-overview .guides .components{background:url("guides.png") no-repeat 0 -160px}
+#api-overview .guides .theming{background:url("guides.png") no-repeat 0 -320px}
+#api-overview .guides .direct{background:url("guides.png") no-repeat 0 -387px}
+#api-overview .guides .accessibility{background:url("guides.png") no-repeat 0 -453px}
 #api-overview .category{clear:both;background-color:#f9f9f9;padding:10px 10px 20px 20px;margin:0 20px 20px 0;border-radius:10px;-moz-border-radius:10px}
-#api-overview .lft{float:left;width:320px;margin-left:20px}
+#api-overview .lft{float:left;width:270px;margin-left:20px}
 #api-overview .mid{float:left;width:320px}
 #api-overview .rgt{float:left}
 #api-overview .links{margin-left:1.5em;}
@@ -156,6 +173,7 @@ pre,code,kbd,samp,tt{font-family:"Menlo","Courier New",Courier,monospace}
 .doc-tab .members h3.p.evt{background:url("events.png") no-repeat 0 11px}
 .doc-tab .members ul ul{list-style:circle;margin-top:1em}
 .doc-tab .members .sub-desc{margin:.5em 0 1em}
+.doc-tab .members .description .short p{margin:0}
 .doc-tab .members a{text-decoration:none}
 .doc-tab .members .member.f{border-width:1px}
 .doc-tab .members .member{position:relative;min-height:2.5em;border-style:solid;border-color:#d0d0d0;border-width:0 1px 1px 1px;padding:5px 22px;}
@@ -177,6 +195,7 @@ pre,code,kbd,samp,tt{font-family:"Menlo","Courier New",Courier,monospace}
 .doc-tab .members .member .cls{font-weight:bold}
 .doc-tab .members .member .title{padding-bottom:3px}
 #doc-overview{top:106px;}
+#doc-overview img.screenshot{display:block;padding:10px 0}
 #doc-overview .subclasses{border-radius:5px;-moz-border-radius:5px;background-color:#f7f7f7;border:1px solid #ebebeb;padding:0 15px 15px 10px;float:right;margin:0 0 20px 20px;font-size:12px;}
 #doc-overview .subclasses h4{font-family:HelveticaNeue,Helvetica,Arial,sans-serif;font-size:90%;padding:11px 0 5px 0;text-transform:uppercase;color:#999}
 #doc-overview .subclasses .mixin{padding:0 0 0 12px;margin-top:3px}

@@ -1,7 +1,7 @@
 Ext.require([
     'Ext.form.*',
     'Ext.data.*',
-    'Ext.grid.GridPanel',
+    'Ext.grid.Panel',
     'Ext.layout.container.Column'
 ]);
 
@@ -96,7 +96,7 @@ Ext.onReady(function(){
     /*
      * Here is where we create the Form
      */
-    var gridForm = Ext.create('Ext.form.FormPanel', {
+    var gridForm = Ext.create('Ext.form.Panel', {
         id: 'company-form',
         frame: true,
         title: 'Company data',

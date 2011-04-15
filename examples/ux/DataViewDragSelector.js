@@ -3,37 +3,37 @@
  * @extends Object
  */
 Ext.define('Ext.ux.DataViewDragSelector', {
-    
+
     extend: 'Ext.util.Observable',
-    
+
     requires: [
         'Ext.dd.DragTracker',
         'Ext.util.Region'
     ],
-    
+
 
     // plugin initialization
     init: function(dataView) {
         this.view = dataView;
         this.mon(this.view, 'render', this.onRender, this);
     },
-    
-    // initialize the dragtracker 
+
+    // initialize the dragtracker
     onRender: function(view) {
-        this.tracker = new Ext.dd.DragTracker({
+        this.tracker = Ext.create('Ext.dd.DragTracker', {
             onBeforeStart: Ext.Function.bind(this.onBeforeStart, this),
             onStart: Ext.Function.bind(this.onStart, this),
             onDrag: Ext.Function.bind(this.onDrag, this),
             onEnd: Ext.Function.bind(this.onEnd, this)
         });
-        
+
         this.tracker.initEl(view.el);
     },
-    
+
     // get region for all view items
     fillRegions: function() {
         var regions = this.regions = [];
-        
+
         this.view.all.each(function(el){
             regions.push(el.getRegion());
         });
@@ -53,7 +53,7 @@ Ext.define('Ext.ux.DataViewDragSelector', {
         this.proxy.setDisplayed('block');
         this.fillRegions();
     },
-    
+
     // set the size of drag selector element
     onDrag: function(e){
         var startXY = this.tracker.startXY,
@@ -62,7 +62,7 @@ Ext.define('Ext.ux.DataViewDragSelector', {
             y = Math.min(startXY[1], xy[1]),
             w = Math.abs(startXY[0] - xy[0]),
             h = Math.abs(startXY[1] - xy[1]),
-            dragRegion = new Ext.util.Region(y, x + w, y + h, x),
+            dragRegion = Ext.create('Ext.util.Region', y, x + w, y + h, x),
             regions = this.regions,
             view = this.view,
             region, intersection, length, i;
@@ -84,7 +84,7 @@ Ext.define('Ext.ux.DataViewDragSelector', {
         }
     },
     // hide the drag selector element
-    onEnd: function(e){    
+    onEnd: function(e){
         if(this.proxy){
             this.proxy.setDisplayed(false);
         }

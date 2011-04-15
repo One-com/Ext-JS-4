@@ -2,17 +2,17 @@
  * @class Ext.form.Labelable
 
 A mixin which allows a component to be configured and decorated with a label and/or error message as is
-common for form fields. This is used by e.g. {@link Ext.form.BaseField} and {@link Ext.form.FieldContainer}
+common for form fields. This is used by e.g. {@link Ext.form.field.Base} and {@link Ext.form.FieldContainer}
 to let them be managed by the Field layout.
 
 **NOTE**: This mixin is mainly for internal library use and most users should not need to use it directly. It
 is more likely you will want to use one of the component classes that import this mixin, such as
-{@link Ext.form.BaseField} or {@link Ext.form.FieldContainer}.
+{@link Ext.form.field.Base} or {@link Ext.form.FieldContainer}.
 
 Use of this mixin does not make a component a field in the logical sense, meaning it does not provide any
-logic or state related to values or validation; that is handled by the related {@link Ext.form.Field}
+logic or state related to values or validation; that is handled by the related {@link Ext.form.field.Field}
 mixin. These two mixins may be used separately (for example {@link Ext.form.FieldContainer} is Labelable but not a
-Field), or in combination (for example {@link Ext.form.BaseField} implements both and has logic for connecting the
+Field), or in combination (for example {@link Ext.form.field.Base} implements both and has logic for connecting the
 two.)
 
 Component classes which use this mixin should use the Field layout
@@ -25,6 +25,38 @@ set up correctly.
  */
 Ext.define("Ext.form.Labelable", {
     requires: ['Ext.XTemplate'],
+
+    /**
+     * @cfg {Array/String/Ext.XTemplate} labelableRenderTpl
+     * The rendering template for the field decorations. Component classes using this mixin should include
+     * logic to use this as their {@link Ext.AbstractComponent#renderTpl renderTpl}, and implement the
+     * {@link #getSubTplMarkup} method to generate the field body content.
+     */
+    labelableRenderTpl: [
+        '<tpl if="!hideLabel && !(!fieldLabel && hideEmptyLabel)">',
+            '<label<tpl if="inputId"> for="{inputId}"</tpl> class="{labelCls}"<tpl if="labelStyle"> style="{labelStyle}"</tpl>>',
+                '<tpl if="fieldLabel">{fieldLabel}{labelSeparator}</tpl>',
+            '</label>',
+        '</tpl>',
+        '<div class="{baseBodyCls} {fieldBodyCls}"<tpl if="inputId"> id="{baseBodyCls}-{inputId}"</tpl> role="presentation">{subTplMarkup}</div>',
+        '<div class="{errorMsgCls}" style="display:none"></div>',
+        '<div class="{clearCls}" role="presentation"><!-- --></div>',
+        {
+            compiled: true,
+            disableFormats: true
+        }
+    ],
+
+    /**
+     * @cfg {Ext.XTemplate} activeErrorsTpl
+     * The template used to format the Array of error messages passed to {@link #setActiveErrors}
+     * into a single HTML string. By default this renders each message as an item in an unordered list.
+     */
+    activeErrorsTpl: [
+        '<tpl if="errors && errors.length">',
+            '<ul><tpl for="errors"><li<tpl if="xindex == xcount"> class="last"</tpl>>{.}</li></tpl></ul>',
+        '</tpl>'
+    ],
 
     /**
      * @property isFieldLabelable
@@ -161,7 +193,7 @@ Ext.define("Ext.form.Labelable", {
      * Must be one of the following values:</p>
      * <div class="mdetail-params"><ul>
      * <li><code>qtip</code> Display a quick tip containing the message when the user hovers over the field. This is the default.
-     * <div class="subdesc"><b>{@link Ext.tip.QuickTips#init Ext.tip.QuickTips.init} must have been called for this setting to work.</b></div></li>
+     * <div class="subdesc"><b>{@link Ext.tip.QuickTipManager#init Ext.tip.QuickTipManager.init} must have been called for this setting to work.</b></div></li>
      * <li><code>title</code> Display the message in a default browser title attribute popup.</li>
      * <li><code>under</code> Add a block div beneath the field containing the error message.</li>
      * <li><code>side</code> Add an error icon to the right of the field, displaying the message in a popup on hover.</li>
@@ -199,7 +231,7 @@ Ext.define("Ext.form.Labelable", {
 
     /**
      * Returns the label for the field. Defaults to simply returning the {@link #fieldLabel} config. Can be
-     * overridden to provide 
+     * overridden to provide
      * @return {String} The configured field label, or empty string if not defined
      */
     getFieldLabel: function() {
@@ -338,7 +370,7 @@ Ext.define("Ext.form.Labelable", {
      */
     setActiveErrors: function(errors) {
         this.activeErrors = errors;
-        this.activeError = this.activeErrorsTpl.apply({errors: errors});
+        this.activeError = this.getTpl('activeErrorsTpl').apply({errors: errors});
         this.renderActiveError();
     },
 
@@ -384,47 +416,22 @@ Ext.define("Ext.form.Labelable", {
      * then it's inheriting a default value from its prototype and we should apply the default value.
      * @param {Object} defaults The defaults to apply to the object.
      */
-    applyFieldDefaults: function(defaults) {
+    setFieldDefaults: function(defaults) {
         var me = this;
         Ext.iterate(defaults, function(key, val) {
             if (!me.hasOwnProperty(key)) {
                 me[key] = val;
             }
         });
+    },
+
+    /**
+     * @protected Calculate and return the natural width of the bodyEl. Override to provide custom logic.
+     * Note for implementors: if at all possible this method should be overridden with a custom implementation
+     * that can avoid anything that would cause the browser to reflow, e.g. querying offsetWidth.
+     */
+    getBodyNaturalWidth: function() {
+        return this.bodyEl.getWidth();
     }
-
-}, function() {
-
-    /**
-     * @cfg {Array/String/Ext.XTemplate} labelableRenderTpl
-     * The rendering template for the field decorations. Component classes using this mixin should include
-     * logic to use this as their {@link Ext.AbstractComponent#renderTpl renderTpl}, and implement the
-     * {@link #getSubTplMarkup} method to generate the field body content.
-     */
-    this.prototype.labelableRenderTpl = new Ext.XTemplate(
-        '<tpl if="!hideLabel && !(!fieldLabel && hideEmptyLabel)">',
-            '<label<tpl if="inputId"> for="{inputId}"</tpl> class="{labelCls}"<tpl if="labelStyle"> style="{labelStyle}"</tpl>>',
-                '<tpl if="fieldLabel">{fieldLabel}{labelSeparator}</tpl>',
-            '</label>',
-        '</tpl>',
-        '<div class="{baseBodyCls} {fieldBodyCls}"<tpl if="inputId"> id="{baseBodyCls}-{inputId}"</tpl> role="presentation">{subTplMarkup}</div>',
-        '<div class="{errorMsgCls}" style="display:none"></div>',
-        '<div class="{clearCls}" role="presentation"></div>',
-        {
-            compiled: true,
-            disableFormats: true
-        }
-    );
-
-    /**
-     * @cfg {Ext.XTemplate} activeErrorsTpl
-     * The template used to format the Array of error messages passed to {@link #setActiveErrors}
-     * into a single HTML string. By default this renders each message as an item in an unordered list.
-     */
-    this.prototype.activeErrorsTpl = new Ext.XTemplate(
-        '<tpl if="errors && errors.length">',
-            '<ul><tpl for="errors"><li<tpl if="xindex == xcount"> class="last"</tpl>>{.}</li></tpl></ul>',
-        '</tpl>'
-    );
 
 });

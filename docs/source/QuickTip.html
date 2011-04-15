@@ -8,32 +8,32 @@
  * @param {Object} config The configuration options
  * @xtype quicktip
  */
-Ext.define(&#39;Ext.tip.QuickTip&#39;, {
-    extend: &#39;Ext.tip.ToolTip&#39;,
-    alias: &#39;widget.quicktip&#39;,
-    alternateClassName: &#39;Ext.QuickTip&#39;,
+Ext.define('Ext.tip.QuickTip', {
+    extend: 'Ext.tip.ToolTip',
+    alias: 'widget.quicktip',
+    alternateClassName: 'Ext.QuickTip',
     <a name="cfg-Ext.tip.QuickTip-target"></a>/**
      * @cfg {Mixed} target The target HTMLElement, Ext.core.Element or id to associate with this Quicktip (defaults to the document).
      */
     <a name="cfg-Ext.tip.QuickTip-interceptTitles"></a>/**
-     * @cfg {Boolean} interceptTitles True to automatically use the element&#39;s DOM title value if available (defaults to false).
+     * @cfg {Boolean} interceptTitles True to automatically use the element's DOM title value if available (defaults to false).
      */
     interceptTitles : false,
 
     // Force creation of header Component
-    title: &#39;&amp;#160;&#39;,
+    title: '&#160;',
 
     // private
     tagConfig : {
-        namespace : &quot;ext&quot;,
-        attribute : &quot;qtip&quot;,
-        width : &quot;qwidth&quot;,
-        target : &quot;target&quot;,
-        title : &quot;qtitle&quot;,
-        hide : &quot;hide&quot;,
-        cls : &quot;qclass&quot;,
-        align : &quot;qalign&quot;,
-        anchor : &quot;anchor&quot;
+        namespace : "ext",
+        attribute : "qtip",
+        width : "qwidth",
+        target : "target",
+        title : "qtitle",
+        hide : "hide",
+        cls : "qclass",
+        align : "qalign",
+        anchor : "anchor"
     },
 
     // private
@@ -48,14 +48,14 @@ Ext.define(&#39;Ext.tip.QuickTip&#39;, {
     <a name="method-Ext.tip.QuickTip-register"></a>/**
      * Configures a new quick tip instance and assigns it to a target element.  The following config values are
      * supported (for example usage, see the {@link Ext.tip.QuickTips} class header):
-     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
-     * &lt;li&gt;autoHide&lt;/li&gt;
-     * &lt;li&gt;cls&lt;/li&gt;
-     * &lt;li&gt;dismissDelay (overrides the singleton value)&lt;/li&gt;
-     * &lt;li&gt;target (required)&lt;/li&gt;
-     * &lt;li&gt;text (required)&lt;/li&gt;
-     * &lt;li&gt;title&lt;/li&gt;
-     * &lt;li&gt;width&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+     * <div class="mdetail-params"><ul>
+     * <li>autoHide</li>
+     * <li>cls</li>
+     * <li>dismissDelay (overrides the singleton value)</li>
+     * <li>target (required)</li>
+     * <li>text (required)</li>
+     * <li>title</li>
+     * <li>width</li></ul></div>
      * @param {Object} config The config object
      */
     register : function(config){
@@ -64,12 +64,12 @@ Ext.define(&#39;Ext.tip.QuickTip&#39;, {
             len = configs.length,
             target, j, targetLen;
             
-        for (; i &lt; len; i++) {
+        for (; i < len; i++) {
             config = configs[i];
             target = config.target;
             if (target) {
                 if (Ext.isArray(target)) {
-                    for (j = 0, targetLen = target.length; j &lt; targetLen; j++) {
+                    for (j = 0, targetLen = target.length; j < targetLen; j++) {
                         this.targets[Ext.id(target[j])] = config;
                     }
                 } else{
@@ -97,11 +97,11 @@ Ext.define(&#39;Ext.tip.QuickTip&#39;, {
             
         el = Ext.get(el).dom;
         if (me.isVisible()) {
-            if (activeTarget &amp;&amp; activeTarget.el == el) {
+            if (activeTarget && activeTarget.el == el) {
                 me.hide();
             }
-        } else if (activeTarget &amp;&amp; activeTarget.el == el) {
-            me.clearTimer(&#39;show&#39;);
+        } else if (activeTarget && activeTarget.el == el) {
+            me.clearTimer('show');
         }
     },
     
@@ -110,10 +110,10 @@ Ext.define(&#39;Ext.tip.QuickTip&#39;, {
             ttp, 
             cfg;
             
-        if(this.interceptTitles &amp;&amp; t.title &amp;&amp; Ext.isString(t.title)){
+        if(this.interceptTitles && t.title && Ext.isString(t.title)){
             ttp = t.title;
             t.qtip = ttp;
-            t.removeAttribute(&quot;title&quot;);
+            t.removeAttribute("title");
             e.preventDefault();
         }else{
             cfg = this.tagConfig;
@@ -141,13 +141,13 @@ Ext.define(&#39;Ext.tip.QuickTip&#39;, {
             return;
         }
         
-        if (me.activeTarget &amp;&amp; ((target == me.activeTarget.el) || Ext.fly(me.activeTarget.el).contains(target))) {
-            me.clearTimer(&#39;hide&#39;);
+        if (me.activeTarget && ((target == me.activeTarget.el) || Ext.fly(me.activeTarget.el).contains(target))) {
+            me.clearTimer('hide');
             me.show();
             return;
         }
 
-        if (target &amp;&amp; me.targets[target.id]) {
+        if (target && me.targets[target.id]) {
             me.activeTarget = me.targets[target.id];
             me.activeTarget.el = target;
             me.anchor = me.activeTarget.anchor;
@@ -169,7 +169,7 @@ Ext.define(&#39;Ext.tip.QuickTip&#39;, {
                 el: target,
                 text: ttp,
                 width: +elTarget.getAttribute(cfg.width, ns) || null,
-                autoHide: autoHide != &quot;user&quot; &amp;&amp; autoHide !== &#39;false&#39;,
+                autoHide: autoHide != "user" && autoHide !== 'false',
                 title: elTarget.getAttribute(cfg.title, ns),
                 cls: elTarget.getAttribute(cfg.cls, ns),
                 align: elTarget.getAttribute(cfg.align, ns)
@@ -188,11 +188,11 @@ Ext.define(&#39;Ext.tip.QuickTip&#39;, {
         var me = this;
         
         // If moving within the current target, and it does not have a new tip, ignore the mouseout
-        if (me.activeTarget &amp;&amp; e.within(me.activeTarget.el) &amp;&amp; !me.getTipCfg(e)) {
+        if (me.activeTarget && e.within(me.activeTarget.el) && !me.getTipCfg(e)) {
             return;
         }
 
-        me.clearTimer(&#39;show&#39;);
+        me.clearTimer('show');
         if (me.autoHide !== false) {
             me.delayHide();
         }
@@ -209,7 +209,7 @@ Ext.define(&#39;Ext.tip.QuickTip&#39;, {
                 me.activeTarget = target;
             }
             if (target.title) {
-                me.setTitle(target.title || &#39;&#39;);
+                me.setTitle(target.title || '');
                 me.header.show();
             } else {
                 me.header.hide();
@@ -230,7 +230,7 @@ Ext.define(&#39;Ext.tip.QuickTip&#39;, {
             
             if (me.anchor) {
                 me.constrainPosition = false;
-            } else if (target.align) { // TODO: this doesn&#39;t seem to work consistently
+            } else if (target.align) { // TODO: this doesn't seem to work consistently
                 xy = me.el.getAlignToXY(target.el, target.align);
                 me.constrainPosition = false;
             }else{

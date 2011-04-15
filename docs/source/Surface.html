@@ -2,16 +2,16 @@
  * @class Ext.draw.Surface
  * @extends Object
  */
-Ext.define(&#39;Ext.draw.Surface&#39;, {
+Ext.define('Ext.draw.Surface', {
 
     /* Begin Definitions */
 
     mixins: {
-        observable: &#39;Ext.util.Observable&#39;
+        observable: 'Ext.util.Observable'
     },
 
-    requires: [&#39;Ext.draw.SpriteGroup&#39;],
-    uses: [&#39;Ext.draw.engine.SVG&#39;, &#39;Ext.draw.engine.VML&#39;],
+    requires: ['Ext.draw.SpriteGroup'],
+    uses: ['Ext.draw.engine.SVG', 'Ext.draw.engine.VML'],
 
     separatorRe: /[, ]+/,
 
@@ -21,16 +21,16 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
          * @param {Object} config Initial configuration for the Surface instance
          * @param {Array} implOrder Optional order of implementations to use; the first one that is
          *                available in the current environment will be used. Defaults to
-         *                &lt;code&gt;[&#39;SVG&#39;, &#39;VML&#39;]&lt;/code&gt;.
+         *                <code>['SVG', 'VML']</code>.
          */
         newInstance: function(config, implOrder) {
-            implOrder = implOrder || [&#39;SVG&#39;, &#39;VML&#39;];
+            implOrder = implOrder || ['SVG', 'VML'];
 
             var i = 0,
                 len = implOrder.length,
                 surfaceClass;
 
-            for (; i &lt; len; i++) {
+            for (; i < len; i++) {
                 if (Ext.supports[implOrder[i]]) {
                     surfaceClass = Ext.draw.engine[implOrder[i]];
                     if (surfaceClass) {
@@ -46,40 +46,40 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
 
     availableAttrs: {
         blur: 0,
-        &quot;clip-rect&quot;: &quot;0 0 1e9 1e9&quot;,
-        cursor: &quot;default&quot;,
+        "clip-rect": "0 0 1e9 1e9",
+        cursor: "default",
         cx: 0,
         cy: 0,
-        &#39;dominant-baseline&#39;: &#39;auto&#39;,
-        fill: &quot;none&quot;,
-        &quot;fill-opacity&quot;: 1,
-        font: &#39;10px &quot;Arial&quot;&#39;,
-        &quot;font-family&quot;: &#39;&quot;Arial&quot;&#39;,
-        &quot;font-size&quot;: &quot;10&quot;,
-        &quot;font-style&quot;: &quot;normal&quot;,
-        &quot;font-weight&quot;: 400,
-        gradient: &quot;&quot;,
+        'dominant-baseline': 'auto',
+        fill: "none",
+        "fill-opacity": 1,
+        font: '10px "Arial"',
+        "font-family": '"Arial"',
+        "font-size": "10",
+        "font-style": "normal",
+        "font-weight": 400,
+        gradient: "",
         height: 0,
         hidden: false,
-        href: &quot;http://sencha.com/&quot;,
+        href: "http://sencha.com/",
         opacity: 1,
-        path: &quot;M0,0&quot;,
+        path: "M0,0",
         radius: 0,
         rx: 0,
         ry: 0,
-        scale: &quot;1 1&quot;,
-        src: &quot;&quot;,
-        stroke: &quot;#000&quot;,
-        &quot;stroke-dasharray&quot;: &quot;&quot;,
-        &quot;stroke-linecap&quot;: &quot;butt&quot;,
-        &quot;stroke-linejoin&quot;: &quot;butt&quot;,
-        &quot;stroke-miterlimit&quot;: 0,
-        &quot;stroke-opacity&quot;: 1,
-        &quot;stroke-width&quot;: 1,
-        target: &quot;_blank&quot;,
-        text: &quot;&quot;,
-        &quot;text-anchor&quot;: &quot;middle&quot;,
-        title: &quot;Ext Draw&quot;,
+        scale: "1 1",
+        src: "",
+        stroke: "#000",
+        "stroke-dasharray": "",
+        "stroke-linecap": "butt",
+        "stroke-linejoin": "butt",
+        "stroke-miterlimit": 0,
+        "stroke-opacity": 1,
+        "stroke-width": 1,
+        target: "_blank",
+        text: "",
+        "text-anchor": "middle",
+        title: "Ext Draw",
         width: 0,
         x: 0,
         y: 0,
@@ -89,12 +89,12 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
  <a name="cfg-Ext.draw.Surface-height"></a>/**
   * @cfg {Number} height
   * The height of this component in pixels (defaults to auto).
-  * &lt;b&gt;Note&lt;/b&gt; to express this dimension as a percentage or offset see {@link Ext.Component#anchor}.
+  * <b>Note</b> to express this dimension as a percentage or offset see {@link Ext.Component#anchor}.
   */
  <a name="cfg-Ext.draw.Surface-width"></a>/**
   * @cfg {Number} width
   * The width of this component in pixels (defaults to auto).
-  * &lt;b&gt;Note&lt;/b&gt; to express this dimension as a percentage or offset see {@link Ext.Component#anchor}.
+  * <b>Note</b> to express this dimension as a percentage or offset see {@link Ext.Component#anchor}.
   */
     container: undefined,
     height: 352,
@@ -111,14 +111,14 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
         me.customAttributes = {};
 
         me.addEvents(
-            &#39;mousedown&#39;,
-            &#39;mouseup&#39;,
-            &#39;mouseover&#39;,
-            &#39;mouseout&#39;,
-            &#39;mousemove&#39;,
-            &#39;mouseenter&#39;,
-            &#39;mouseleave&#39;,
-            &#39;click&#39;
+            'mousedown',
+            'mouseup',
+            'mouseover',
+            'mouseout',
+            'mousemove',
+            'mouseenter',
+            'mouseleave',
+            'click'
         );
 
         me.mixins.observable.constructor.call(me);
@@ -168,8 +168,8 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
 
     initItems: function() {
         var items = this.items;
-        this.items = new Ext.draw.SpriteGroup();
-        this.groups = new Ext.draw.SpriteGroup();
+        this.items = Ext.create('Ext.draw.SpriteGroup');
+        this.groups = Ext.create('Ext.draw.SpriteGroup');
         if (items) {
             this.add(items);
         }
@@ -187,16 +187,16 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
                 gradientId = gradient.id;
                 this.addGradient(gradient);
                 this.background = this.add({
-                    type: &#39;rect&#39;,
+                    type: 'rect',
                     x: 0,
                     y: 0,
                     width: width,
                     height: height,
-                    fill: &#39;url(#&#39; + gradientId + &#39;)&#39;
+                    fill: 'url(#' + gradientId + ')'
                 });
             } else if (config.fill) {
                 this.background = this.add({
-                    type: &#39;rect&#39;,
+                    type: 'rect',
                     x: 0,
                     y: 0,
                     width: width,
@@ -205,7 +205,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
                 });
             } else if (config.image) {
                 this.background = this.add({
-                    type: &#39;image&#39;,
+                    type: 'image',
                     x: 0,
                     y: 0,
                     width: width,
@@ -238,7 +238,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
                 attrs[this.translateAttrs[i]] = sattr[i];
                 exclude[this.translateAttrs[i]] = true;
             }
-            else if (this.availableAttrs.hasOwnProperty(i) &amp;&amp; !exclude[i]) {
+            else if (this.availableAttrs.hasOwnProperty(i) && !exclude[i]) {
                 // Passtrhough attr
                 attrs[i] = sattr[i];
             }
@@ -248,32 +248,32 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
 
     // private
     onClick: function(e) {
-        this.processEvent(&#39;click&#39;, e);
+        this.processEvent('click', e);
     },
 
     // private
     onMouseUp: function(e) {
-        this.processEvent(&#39;mouseup&#39;, e);
+        this.processEvent('mouseup', e);
     },
 
     // private
     onMouseDown: function(e) {
-        this.processEvent(&#39;mousedown&#39;, e);
+        this.processEvent('mousedown', e);
     },
 
     // private
     onMouseOver: function(e) {
-        this.processEvent(&#39;mouseover&#39;, e);
+        this.processEvent('mouseover', e);
     },
 
     // private
     onMouseOut: function(e) {
-        this.processEvent(&#39;mouseout&#39;, e);
+        this.processEvent('mouseout', e);
     },
 
     // private
     onMouseMove: function(e) {
-        this.fireEvent(&#39;mousemove&#39;, e);
+        this.fireEvent('mousemove', e);
     },
 
     // private
@@ -287,7 +287,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
      * a gradient via this method will not take effect if the surface has already been rendered.
      * Therefore, it is preferred to pass the gradients as an item to the surface config, rather
      * than calling this method, especially if the surface is rendered immediately (e.g. due to
-     * &#39;renderTo&#39; in its config).
+     * 'renderTo' in its config).
      */
     addGradient: Ext.emptyFn,
 
@@ -296,13 +296,13 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
             sprite,
             index;
 
-        var hasMultipleArgs = args.length &gt; 1;
+        var hasMultipleArgs = args.length > 1;
         if (hasMultipleArgs || Ext.isArray(args[0])) {
             var items = hasMultipleArgs ? args : args[0],
                 results = [],
                 i, ln, item;
 
-            for (i = 0, ln = items.length; i &lt; ln; i++) {
+            for (i = 0, ln = items.length; i < ln; i++) {
                 item = items[i];
                 item = this.add(item);
                 results.push(item);
@@ -324,20 +324,20 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
      * This ordering can be used by subclasses to assist in rendering the sprites in
      * the correct order for proper z-index stacking.
      * @param {Ext.draw.Sprite} sprite
-     * @return {Number} the sprite&#39;s new index in the list
+     * @return {Number} the sprite's new index in the list
      */
     positionSpriteInList: function(sprite) {
         var items = this.items,
             zIndex = sprite.attr.zIndex,
             idx = items.indexOf(sprite);
 
-        if (idx &lt; 0 || (idx &gt; 0 &amp;&amp; items.getAt(idx - 1).attr.zIndex &gt; zIndex) ||
-                (idx &lt; items.length - 1 &amp;&amp; items.getAt(idx + 1).attr.zIndex &lt; zIndex)) {
+        if (idx < 0 || (idx > 0 && items.getAt(idx - 1).attr.zIndex > zIndex) ||
+                (idx < items.length - 1 && items.getAt(idx + 1).attr.zIndex < zIndex)) {
             items.removeAt(idx);
             idx = items.findIndexBy(function(otherSprite) {
-                return otherSprite.attr.zIndex &gt; zIndex;
+                return otherSprite.attr.zIndex > zIndex;
             });
-            if (idx &lt; 0) {
+            if (idx < 0) {
                 idx = items.length;
             }
             items.insert(idx, sprite);
@@ -351,7 +351,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
         if (group) {
             groups = [].concat(group);
             ln = groups.length;
-            for (i = 0; i &lt; ln; i++) {
+            for (i = 0; i < ln; i++) {
                 group = groups[i];
                 this.getGroup(group).add(sprite);
             }
@@ -373,7 +373,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
         var items = this.items.items,
             ln = items.length,
             i;
-        for (i = ln; i &gt; -1; i--) {
+        for (i = ln; i > -1; i--) {
             this.remove(items[i]);
         }
     },
@@ -412,14 +412,13 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
             deg = sprite.attr.rotation.degrees,
             centerX = sprite.attr.rotation.x,
             centerY = sprite.attr.rotation.y;
-
         if (!Ext.isNumber(centerX) || !Ext.isNumber(centerY)) {
             bbox = this.getBBox(sprite);
             centerX = !Ext.isNumber(centerX) ? bbox.x + bbox.width / 2 : centerX;
             centerY = !Ext.isNumber(centerY) ? bbox.y + bbox.height / 2 : centerY;
         }
         sprite.transformations.push({
-            type: &quot;rotate&quot;,
+            type: "rotate",
             degrees: deg,
             x: centerX,
             y: centerY
@@ -430,7 +429,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
         var x = sprite.attr.translation.x || 0,
             y = sprite.attr.translation.y || 0;
         sprite.transformations.push({
-            type: &quot;translate&quot;,
+            type: "translate",
             x: x,
             y: y
         });
@@ -449,7 +448,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
             centerY = !Ext.isNumber(centerY) ? bbox.y + bbox.height / 2 : centerY;
         }
         sprite.transformations.push({
-            type: &quot;scale&quot;,
+            type: "scale",
             x: x,
             y: y,
             centerX: centerX,
@@ -459,16 +458,16 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
 
     rectPath: function (x, y, w, h, r) {
         if (r) {
-            return [[&quot;M&quot;, x + r, y], [&quot;l&quot;, w - r * 2, 0], [&quot;a&quot;, r, r, 0, 0, 1, r, r], [&quot;l&quot;, 0, h - r * 2], [&quot;a&quot;, r, r, 0, 0, 1, -r, r], [&quot;l&quot;, r * 2 - w, 0], [&quot;a&quot;, r, r, 0, 0, 1, -r, -r], [&quot;l&quot;, 0, r * 2 - h], [&quot;a&quot;, r, r, 0, 0, 1, r, -r], [&quot;z&quot;]];
+            return [["M", x + r, y], ["l", w - r * 2, 0], ["a", r, r, 0, 0, 1, r, r], ["l", 0, h - r * 2], ["a", r, r, 0, 0, 1, -r, r], ["l", r * 2 - w, 0], ["a", r, r, 0, 0, 1, -r, -r], ["l", 0, r * 2 - h], ["a", r, r, 0, 0, 1, r, -r], ["z"]];
         }
-        return [[&quot;M&quot;, x, y], [&quot;l&quot;, w, 0], [&quot;l&quot;, 0, h], [&quot;l&quot;, -w, 0], [&quot;z&quot;]];
+        return [["M", x, y], ["l", w, 0], ["l", 0, h], ["l", -w, 0], ["z"]];
     },
 
     ellipsePath: function (x, y, rx, ry) {
         if (ry == null) {
             ry = rx;
         }
-        return [[&quot;M&quot;, x, y], [&quot;m&quot;, 0, -ry], [&quot;a&quot;, rx, ry, 0, 1, 1, 0, 2 * ry], [&quot;a&quot;, rx, ry, 0, 1, 1, 0, -2 * ry], [&quot;z&quot;]];
+        return [["M", x, y], ["m", 0, -ry], ["a", rx, ry, 0, 1, 1, 0, 2 * ry], ["a", rx, ry, 0, 1, 1, 0, -2 * ry], ["z"]];
     },
 
     getPathpath: function (el) {
@@ -492,7 +491,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
 
     getPathimage: function (el) {
         var a = el.attr;
-        return this.rectPath(a.x, a.y, a.width, a.height);
+        return this.rectPath(a.x || 0, a.y || 0, a.width, a.height);
     },
 
     getPathtext: function (el) {
@@ -503,10 +502,10 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
     createGroup: function(id) {
         var group = this.groups.get(id);
         if (!group) {
-            group = new Ext.draw.SpriteGroup({
+            group = Ext.create('Ext.draw.SpriteGroup', {
                 surface: this
             });
-            group.id = id || Ext.id(null, &#39;ext-surface-group-&#39;);
+            group.id = id || Ext.id(null, 'ext-surface-group-');
             this.groups.add(group);
         }
         return group;
@@ -514,7 +513,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
 
     // Returns the group mixed collection with the given id
     getGroup: function(id) {
-        if (typeof id == &quot;string&quot;) {
+        if (typeof id == "string") {
             var group = this.groups.get(id);
             if (!group) {
                 group = this.createGroup(id);
@@ -529,7 +528,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
         items = [].concat(items);
         // Make sure defaults are applied and item is initialized
         var item, i, ln;
-        for (i = 0, ln = items.length; i &lt; ln; i++) {
+        for (i = 0, ln = items.length; i < ln; i++) {
             item = items[i];
             if (!(item instanceof Ext.draw.Sprite)) {
                 // Temporary, just take in configs...
@@ -549,7 +548,7 @@ Ext.define(&#39;Ext.draw.Surface&#39;, {
      * Will autogenerate an id if one has not already been set.
      */
     getId: function() {
-        return this.id || (this.id = Ext.id(null, &#39;ext-surface-&#39;));
+        return this.id || (this.id = Ext.id(null, 'ext-surface-'));
     },
 
     destroy: function() {

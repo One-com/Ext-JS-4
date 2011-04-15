@@ -15,16 +15,16 @@ Ext.onReady(function(){
     if(Ext.DataView){
         Ext.DataView.prototype.emptyText = "";
     }
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} pažymėtų eilučių";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} pažymėtų eilučių";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "Uždaryti šią užsklandą";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "Šio lauko reikšmė neteisinga";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "Šio lauko reikšmė neteisinga";
     }
 
     if(Ext.LoadMask){
@@ -138,7 +138,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Puslapis",
             afterPageText  : "iš {0}",
@@ -152,8 +152,8 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Minimalus šio lauko ilgis yra {0}",
             maxLengthText : "Maksimalus šio lauko ilgis yra {0}",
             blankText     : "Šis laukas yra privalomas",
@@ -162,16 +162,16 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Minimalus šio lauko ilgis yra {0}",
             maxText : "Maksimalus šio lauko ilgis yra {0}",
             nanText : "{0} yra neleistina reikšmė"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Neprieinama",
             disabledDatesText : "Neprieinama",
             minText           : "Šiame lauke data turi būti didesnė už {0}",
@@ -182,15 +182,15 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "Kraunasi...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Šiame lauke turi būti el.pašto adresas formatu "user@example.com"',
             urlText      : 'Šiame lauke turi būti nuoroda (URL) formatu "http:/'+'/www.example.com"',
             alphaText    : 'Šiame lauke gali būti tik raidės ir ženklas "_"',
@@ -198,8 +198,8 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'Įveskite URL šiai nuorodai:',
             buttonTips : {
                 bold : {
@@ -280,8 +280,8 @@ Ext.onReady(function(){
         Ext.form.Basic.prototype.waitTitle = "Palaukite...";
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Rūšiuoti didėjančia tvarka",
             sortDescText : "Rūšiuoti mažėjančia tvarka",
             lockText     : "Užfiksuoti stulpelį",
@@ -313,8 +313,8 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.Time){
-        Ext.apply(Ext.form.Time.prototype, {
+    if(Ext.form.field.Time){
+        Ext.apply(Ext.form.field.Time.prototype, {
             minText : "Laikas turi buti lygus arba vėlesnis už {0}",
             maxText : "Laikas turi būti lygus arba ankstesnis už {0}",
             invalidText : "{0} yra neteisingas laikas",

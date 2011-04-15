@@ -1,6 +1,6 @@
 /**
 * @class Ext.ux.ProgressBarPager
-* @extends Object 
+* @extends Object
 * Plugin for displaying a progressbar inside of a paging toolbar instead of plain text
 * @constructor
 * Create a new ItemSelector
@@ -8,7 +8,7 @@
 */
 Ext.define('Ext.ux.ProgressBarPager', {
     extend: 'Object',
-    
+
     requires: ['Ext.ProgressBar'],
     /**
      * @cfg {Integer} width
@@ -21,9 +21,9 @@ Ext.define('Ext.ux.ProgressBarPager', {
      */
     defaultText    : 'Loading...',
     /**
-     * @cfg {Object} defaultAnimCfg 
+     * @cfg {Object} defaultAnimCfg
      * <p>A {@link Ext.fx.Anim Ext.fx.Anim} configuration object.</p>
-     */                                         
+     */
     constructor : function(config) {
         if (config) {
             Ext.apply(this, config);
@@ -39,19 +39,19 @@ Ext.define('Ext.ux.ProgressBarPager', {
             if (displayItem) {
                 parent.remove(displayItem, true);
             }
-            
-            this.progressBar = new Ext.ProgressBar({
+
+            this.progressBar = Ext.create('Ext.ProgressBar', {
                 text    : this.defaultText,
                 width   : this.width,
                 animate : this.defaultAnimCfg
             });
-           
+
             parent.displayItem = this.progressBar;
-            
-            parent.add(parent.displayItem);    
+
+            parent.add(parent.displayItem);
             parent.doLayout();
-            Ext.apply(parent, this.parentOverrides);        
-            
+            Ext.apply(parent, this.parentOverrides);
+
             this.progressBar.on('render', function(pb) {
                 pb.mon(pb.getEl().applyStyles('cursor:pointer'), 'click', this.handleProgressBarClick, this);
             }, this, {single: true});
@@ -67,10 +67,10 @@ Ext.define('Ext.ux.ProgressBarPager', {
             position = xy[0]- box.x,
             pages = Math.ceil(parent.store.getTotalCount()/parent.pageSize),
             newpage = Math.ceil(position/(displayItem.width/pages));
-            
+
         parent.store.loadPage(newpage);
     },
-    
+
     // private, overriddes
     parentOverrides  : {
         // private

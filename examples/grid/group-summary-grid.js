@@ -1,8 +1,8 @@
 Ext.require([
     'Ext.grid.*',
     'Ext.data.*',
-    'Ext.form.Number',
-    'Ext.form.Date'
+    'Ext.form.field.Number',
+    'Ext.form.field.Date'
 ]);
 
 Ext.define('Task', {
@@ -17,7 +17,7 @@ Ext.define('Task', {
         {name: 'rate', type: 'float'},
         {name: 'cost', type: 'float'},
         {name: 'due', type: 'date', dateFormat:'m/d/Y'}
-    ]    
+    ]
 });
 
 var data = [
@@ -46,8 +46,8 @@ Ext.onReady(function(){
         sorters: {property: 'due', direction: 'ASC'},
         groupField: 'project'
     });
-    
-    var cellEditing = new Ext.grid.CellEditing({
+
+    var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
         clicksToEdit: 1,
         listeners: {
             afteredit: function(){
@@ -56,8 +56,8 @@ Ext.onReady(function(){
             }
         }
     });
-    
-    var grid = Ext.create('Ext.grid.GridPanel', {
+
+    var grid = Ext.create('Ext.grid.Panel', {
         width: 800,
         height: 450,
         frame: true,
@@ -82,17 +82,22 @@ Ext.onReady(function(){
         features: [{
             id: 'group',
             ftype: 'groupingsummary',
-            groupHdTpl: '{name}',
+            groupHeaderTpl: '{name}',
             hideGroupedHeader: true
         }],
         columns: [{
             text: 'Task',
             flex: 1,
+            tdCls: 'task',
             sortable: true,
             dataIndex: 'description',
             hideable: false,
             summaryType: 'count',
-            summaryRenderer: function(v, params, data){
+            renderer: function(v, params) {
+                params.tdCls = "task";
+                return v;
+            },
+            summaryRenderer: function(v, params, data) {
                 return ((v === 0 || v > 1) ? '(' + v + ' Tasks)' : '(1 Task)');
             }
         }, {
@@ -147,12 +152,12 @@ Ext.onReady(function(){
                     length = records.length,
                     total = 0,
                     record;
-                    
+
                 for (; i < length; ++i) {
                     record = records[i];
                     total += record.get('estimate') * record.get('rate');
                 }
-                return total;  
+                return total;
             },
             summaryRenderer: Ext.util.Format.usMoney
         }]

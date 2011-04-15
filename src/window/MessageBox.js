@@ -8,6 +8,9 @@ browser execution), showing a MessageBox will not cause the code to stop.  For t
 that should only run *after* some user feedback from the MessageBox, you must use a callback function
 (see the `function` parameter for {@link #show} for more details).
 
+{@img Ext.window.MessageBox/messagebox1.png alert MessageBox}
+{@img Ext.window.MessageBox/messagebox2.png prompt MessageBox}
+{@img Ext.window.MessageBox/messagebox3.png show MessageBox}
 #Example usage:#
 
     // Basic alert:
@@ -39,13 +42,15 @@ Ext.define('Ext.window.MessageBox', {
 
     requires: [
         'Ext.toolbar.Toolbar',
-        'Ext.form.Text',
-        'Ext.form.TextArea',
+        'Ext.form.field.Text',
+        'Ext.form.field.TextArea',
         'Ext.button.Button',
         'Ext.layout.container.Anchor',
         'Ext.layout.container.HBox',
         'Ext.ProgressBar'
     ],
+    
+    alternateClassName: 'Ext.MessageBox',
 
     alias: 'widget.messagebox',
 
@@ -171,7 +176,7 @@ Ext.define('Ext.window.MessageBox', {
         var btnId = this.buttonIds[btnIdx];
         return Ext.create('Ext.button.Button', {
             handler: this.btnCallback,
-            name: btnId,
+            itemId: btnId,
             scope: this,
             text: this.buttonText[btnId],
             minWidth: 75
@@ -196,7 +201,7 @@ Ext.define('Ext.window.MessageBox', {
         // Important not to have focus remain in the hidden Window; Interferes with DnD.
         btn.blur();
         me.hide();
-        me.userCallback(btn.name, value, me.cfg);
+        me.userCallback(btn.itemId, value, me.cfg);
     },
 
     hide: function() {
@@ -209,18 +214,18 @@ Ext.define('Ext.window.MessageBox', {
 
     initComponent: function() {
         var me = this,
-            i;
+            i, button;
 
         me.title = '&#160;';
 
-        me.topContainer = new Ext.container.Container({
+        me.topContainer = Ext.create('Ext.container.Container', {
             anchor: '100%',
             style: {
                 padding: '10px',
                 overflow: 'hidden'
             },
             items: [
-                me.iconComponent = new Ext.Component({
+                me.iconComponent = Ext.create('Ext.Component', {
                     cls: 'ext-mb-icon',
                     width: 50,
                     height: 35,
@@ -228,19 +233,24 @@ Ext.define('Ext.window.MessageBox', {
                         'float': 'left'
                     }
                 }),
-                me.promptContainer = new Ext.container.Container({
+                me.promptContainer = Ext.create('Ext.container.Container', {
                     layout: {
                         type: 'anchor'
                     },
                     items: [
-                        me.msg = new Ext.Component({
+                        me.msg = Ext.create('Ext.Component', {
                             autoEl: { tag: 'span' },
                             cls: 'ext-mb-text'
                         }),
-                        me.textField = new Ext.form.Text({
-                            anchor: '100%'
+                        me.textField = Ext.create('Ext.form.field.Text', {
+                            anchor: '100%',
+                            enableKeyEvents: true,
+                            listeners: {
+                                keydown: me.onPromptKey,
+                                scope: me
+                            }
                         }),
-                        me.textArea = new Ext.form.TextArea({
+                        me.textArea = Ext.create('Ext.form.field.TextArea', {
                             anchor: '100%',
                             height: 75
                         })
@@ -248,7 +258,7 @@ Ext.define('Ext.window.MessageBox', {
                 })
             ]
         });
-        me.progressBar = new Ext.ProgressBar({
+        me.progressBar = Ext.create('Ext.ProgressBar', {
             anchor: '-10',
             style: 'margin-left:10px'
         });
@@ -258,9 +268,11 @@ Ext.define('Ext.window.MessageBox', {
         // Create the buttons based upon passed bitwise config
         me.msgButtons = [];
         for (i = 0; i < 4; i++) {
-            me.msgButtons.push(me.makeButton(i));
+            button = me.makeButton(i);
+            me.msgButtons[button.itemId] = button;
+            me.msgButtons.push(button);
         }
-        me.bottomTb = new Ext.toolbar.Toolbar({
+        me.bottomTb = Ext.create('Ext.toolbar.Toolbar', {
             ui: 'footer',
             dock: 'bottom',
             items: [
@@ -275,6 +287,18 @@ Ext.define('Ext.window.MessageBox', {
         me.dockedItems = [me.bottomTb];
 
         me.callParent();
+    },
+
+    onPromptKey: function(textField, e) {
+        var me = this;
+        if (e.keyCode === Ext.EventObject.RETURN || e.keyCode === 10) {
+            if (me.msgButtons.ok.isVisible()) {
+                me.msgButtons.ok.handler.call(me, me.msgButtons.ok);
+            }
+            else if (me.msgButtons.yes.isVisible()) {
+                me.msgButtons.yes.handler.call(me, me.msgButtons.yes);
+            }
+        }
     },
 
     reconfigure: function(cfg) {

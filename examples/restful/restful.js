@@ -24,7 +24,7 @@ Ext.define('Person', {
 
 Ext.onReady(function(){
 
-    var store = new Ext.data.Store({
+    var store = Ext.create('Ext.data.Store', {
         autoLoad: true,
         autoSync: true,
         model: 'Person',
@@ -40,10 +40,10 @@ Ext.onReady(function(){
             }
         }
     });
-    
-    var rowEditing = new Ext.grid.RowEditing();
-    
-    var grid = Ext.create('Ext.grid.GridPanel', {
+
+    var rowEditing = Ext.create('Ext.grid.plugin.RowEditing');
+
+    var grid = Ext.create('Ext.grid.Panel', {
         renderTo: document.body,
         plugins: [rowEditing],
         width: 400,

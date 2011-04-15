@@ -1,28 +1,30 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.LoadMask"></a>/**
  * @class Ext.LoadMask
  * A simple utility class for generically masking elements while loading data.  If the {@link #store}
- * config option is specified, the masking will be automatically synchronized with the store&#39;s loading
+ * config option is specified, the masking will be automatically synchronized with the store's loading
  * process and the mask element will be cached for reuse.
- * &lt;p&gt;Example usage:&lt;/p&gt;
- * <br><span style="display: none">**/</span>// Basic mask:
-var myMask = new Ext.LoadMask(Ext.getBody(), {msg:&quot;Please wait...&quot;});
+ * <p>Example usage:</p>
+ * <pre><code>
+// Basic mask:
+var myMask = new Ext.LoadMask(Ext.getBody(), {msg:"Please wait..."});
 myMask.show();
-<br><span style="display: none">/**</span>
+</code></pre>
+
  * @constructor
  * Create a new LoadMask
- * @param {Mixed} el The element, element ID, or DOM node you wish to mask. Also, may be a Component who&#39;s element you wish to mask.
+ * @param {Mixed} el The element, element ID, or DOM node you wish to mask. Also, may be a Component who's element you wish to mask.
  * @param {Object} config The config object
  */
 
-Ext.define(&#39;Ext.LoadMask&#39;, {
+Ext.define('Ext.LoadMask', {
 
     /* Begin Definitions */
 
     mixins: {
-        observable: &#39;Ext.util.Observable&#39;
+        observable: 'Ext.util.Observable'
     },
 
-    requires: [&#39;Ext.data.StoreMgr&#39;],
+    requires: ['Ext.data.StoreManager'],
 
     /* End Definitions */
 
@@ -34,14 +36,20 @@ Ext.define(&#39;Ext.LoadMask&#39;, {
 
     <a name="cfg-Ext.LoadMask-msg"></a>/**
      * @cfg {String} msg
-     * The text to display in a centered loading message box (defaults to &#39;Loading...&#39;)
+     * The text to display in a centered loading message box (defaults to 'Loading...')
      */
-    msg : &#39;Loading...&#39;,
+    msg : 'Loading...',
     <a name="cfg-Ext.LoadMask-msgCls"></a>/**
      * @cfg {String} msgCls
-     * The CSS class to apply to the loading message element (defaults to &quot;x-mask-loading&quot;)
+     * The CSS class to apply to the loading message element (defaults to "x-mask-loading")
      */
-    msgCls : Ext.baseCSSPrefix + &#39;mask-loading&#39;,
+    msgCls : Ext.baseCSSPrefix + 'mask-loading',
+    
+    <a name="cfg-Ext.LoadMask-useMsg"></a>/**
+     * @cfg {Boolean} useMsg
+     * Whether or not to use a loading message class or simply mask the bound element.
+     */
+    useMsg: true,
 
     <a name="prop-Ext.LoadMask-disabled"></a>/**
      * Read-only. True if the mask is currently disabled so that it will not be displayed (defaults to false)
@@ -59,7 +67,7 @@ Ext.define(&#39;Ext.LoadMask&#39;, {
         }
         Ext.apply(me, config);
 
-        me.addEvents(&#39;beforeshow&#39;, &#39;show&#39;, &#39;hide&#39;);
+        me.addEvents('beforeshow', 'show', 'hide');
         if (me.store) {
             me.bindStore(me.store, true);
         }
@@ -95,7 +103,7 @@ Ext.define(&#39;Ext.LoadMask&#39;, {
 
     /**
      * @private
-     * Called when this LoadMask&#39;s Component is resized. The isMasked method also re-centers any displayed message.
+     * Called when this LoadMask's Component is resized. The isMasked method also re-centers any displayed message.
      */
     onComponentResize: function(comp, w, h) {
         this.el.isMasked();
@@ -108,7 +116,7 @@ Ext.define(&#39;Ext.LoadMask&#39;, {
     bindStore : function(store, initial) {
         var me = this;
 
-        if (!initial &amp;&amp; me.store) {
+        if (!initial && me.store) {
             me.mun(me.store, {
                 scope: me,
                 beforeload: me.onBeforeLoad,
@@ -120,7 +128,7 @@ Ext.define(&#39;Ext.LoadMask&#39;, {
             }
         }
         if (store) {
-            store = Ext.data.StoreMgr.lookup(store);
+            store = Ext.data.StoreManager.lookup(store);
             me.mon(store, {
                 scope: me,
                 beforeload: me.onBeforeLoad,
@@ -130,7 +138,7 @@ Ext.define(&#39;Ext.LoadMask&#39;, {
 
         }
         me.store = store;
-        if (store &amp;&amp; store.isLoading()) {
+        if (store && store.isLoading()) {
             me.onBeforeLoad();
         }
     },
@@ -168,16 +176,21 @@ Ext.define(&#39;Ext.LoadMask&#39;, {
 
         me.loading = false;
         me.el.unmask();
-        me.fireEvent(&#39;hide&#39;, me, me.el, me.store);
+        me.fireEvent('hide', me, me.el, me.store);
     },
 
     // private
     onBeforeLoad : function() {
         var me = this;
 
-        if (!me.disabled &amp;&amp; !me.loading &amp;&amp; me.fireEvent(&#39;beforeshow&#39;, me, me.el, me.store) !== false) {
-            me.el.mask(me.msg, me.msgCls, false);
-            me.fireEvent(&#39;show&#39;, me, me.el, me.store);
+        if (!me.disabled && !me.loading && me.fireEvent('beforeshow', me, me.el, me.store) !== false) {
+            if (me.useMsg) {
+                me.el.mask(me.msg, me.msgCls, false);
+            } else {
+                me.el.mask();
+            }
+            
+            me.fireEvent('show', me, me.el, me.store);
             me.loading = true;
         }
     },

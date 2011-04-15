@@ -1,3 +1,6 @@
+/**
+ * @class Ext.core.Element
+ */
 Ext.applyIf(Ext.core.Element.prototype, {
     // @private override base Ext.util.Animate mixin for animate for backwards compatibility
     animate: function(config) {
@@ -23,8 +26,8 @@ Ext.applyIf(Ext.core.Element.prototype, {
             easing = config.easing || 'ease',
             animConfig;
 
-        if (config.stopFx) {
-            me.stopFx();
+        if (config.stopAnimation) {
+            me.stopAnimation();
         }
 
         Ext.applyIf(config, Ext.fx.Manager.getFxDefaults(me.id));
@@ -70,7 +73,7 @@ Ext.applyIf(Ext.core.Element.prototype, {
         delete animConfig.to.easing;
         delete animConfig.to.concurrent;
         delete animConfig.to.block;
-        delete animConfig.to.stopFx;
+        delete animConfig.to.stopAnimation;
         delete animConfig.to.delay;
         return animConfig;
     },
@@ -90,7 +93,7 @@ el.slideIn('r', { duration: 2 });
 // common config options shown with default values
 el.slideIn('t', {
     easing: 'easeOut',
-    duration: .5
+    duration: 500
 });
 </code></pre>
      * @param {String} anchor (optional) One of the valid Fx anchor positions (defaults to top: 't')
@@ -275,7 +278,11 @@ el.slideIn('t', {
             wrapAnim.on('afteranimate', function() {
                 if (slideOut) {
                     me.setPositioning(position);
-                    obj.useDisplay ? me.setDisplayed(false) : me.hide();
+                    if (obj.useDisplay) {
+                        me.setDisplayed(false);
+                    } else {
+                        me.hide();   
+                    }
                 }
                 else {
                     me.clearPositioning();
@@ -330,7 +337,7 @@ el.slideOut('r', { duration: 2 });
 // common config options shown with default values
 el.slideOut('t', {
     easing: 'easeOut',
-    duration: .5,
+    duration: 500,
     remove: false,
     useDisplay: false
 });
@@ -354,7 +361,7 @@ el.puff();
 // common config options shown with default values
 el.puff({
     easing: 'easeOut',
-    duration: .5,
+    duration: 500,
     useDisplay: false
 });
 </code></pre>
@@ -388,7 +395,11 @@ el.puff({
             };
             this.on('afteranimate',function() {
                 if (me.dom) {
-                    obj.useDisplay ? me.setDisplayed(false) : me.hide();
+                    if (obj.useDisplay) {
+                        me.setDisplayed(false);
+                    } else {
+                        me.hide();
+                    }
                     me.clearOpacity();  
                     me.setPositioning(position);
                     me.setStyle({fontSize: fontSize});
@@ -467,7 +478,11 @@ el.switchOff({
                 }
             });
             keyframe.on('afteranimate', function() {
-                obj.useDisplay ? me.setDisplayed(false) : me.hide();  
+                if (obj.useDisplay) {
+                    me.setDisplayed(false);
+                } else {
+                    me.hide();
+                }  
                 me.clearOpacity();
                 me.setPositioning(position);
                 me.setSize(size);
@@ -579,7 +594,7 @@ el.ghost('r', { duration: 2 });
 // common config options shown with default values
 el.ghost('b', {
     easing: 'easeOut',
-    duration: .5
+    duration: 500
 });
 </code></pre>
      * @param {String} anchor (optional) One of the valid Fx anchor positions (defaults to bottom: 'b')
@@ -727,5 +742,145 @@ el.highlight("ffff9c", {
             to: to
         }));
         return me;
+    },
+
+   /**
+    * @deprecated 4.0
+    * Creates a pause before any subsequent queued effects begin.  If there are
+    * no effects queued after the pause it will have no effect.
+    * Usage:
+<pre><code>
+el.pause(1);
+</code></pre>
+    * @param {Number} seconds The length of time to pause (in seconds)
+    * @return {Ext.Element} The Element
+    */
+    pause: function(ms) {
+        var me = this;
+        Ext.fx.Manager.setFxDefaults(me.id, {
+            delay: ms
+        });
+        return me;
+    },
+
+   /**
+    * Fade an element in (from transparent to opaque).  The ending opacity can be specified
+    * using the <tt>{@link #endOpacity}</tt> config option.
+    * Usage:
+<pre><code>
+// default: fade in from opacity 0 to 100%
+el.fadeIn();
+
+// custom: fade in from opacity 0 to 75% over 2 seconds
+el.fadeIn({ endOpacity: .75, duration: 2});
+
+// common config options shown with default values
+el.fadeIn({
+    endOpacity: 1, //can be any value between 0 and 1 (e.g. .5)
+    easing: 'easeOut',
+    duration: 500
+});
+</code></pre>
+    * @param {Object} options (optional) Object literal with any of the Fx config options
+    * @return {Ext.Element} The Element
+    */
+    fadeIn: function(o) {
+        this.animate(Ext.apply({}, o, {
+            opacity: 1
+        }));
+        return this;
+    },
+
+   /**
+    * Fade an element out (from opaque to transparent).  The ending opacity can be specified
+    * using the <tt>{@link #endOpacity}</tt> config option.  Note that IE may require
+    * <tt>{@link #useDisplay}:true</tt> in order to redisplay correctly.
+    * Usage:
+<pre><code>
+// default: fade out from the element's current opacity to 0
+el.fadeOut();
+
+// custom: fade out from the element's current opacity to 25% over 2 seconds
+el.fadeOut({ endOpacity: .25, duration: 2});
+
+// common config options shown with default values
+el.fadeOut({
+    endOpacity: 0, //can be any value between 0 and 1 (e.g. .5)
+    easing: 'easeOut',
+    duration: 500,
+    remove: false,
+    useDisplay: false
+});
+</code></pre>
+    * @param {Object} options (optional) Object literal with any of the Fx config options
+    * @return {Ext.Element} The Element
+    */
+    fadeOut: function(o) {
+        this.animate(Ext.apply({}, o, {
+            opacity: 0
+        }));
+        return this;
+    },
+
+   /**
+    * @deprecated 4.0
+    * Animates the transition of an element's dimensions from a starting height/width
+    * to an ending height/width.  This method is a convenience implementation of {@link shift}.
+    * Usage:
+<pre><code>
+// change height and width to 100x100 pixels
+el.scale(100, 100);
+
+// common config options shown with default values.  The height and width will default to
+// the element&#39;s existing values if passed as null.
+el.scale(
+    [element&#39;s width],
+    [element&#39;s height], {
+        easing: 'easeOut',
+        duration: .35
+    }
+);
+</code></pre>
+    * @param {Number} width  The new width (pass undefined to keep the original width)
+    * @param {Number} height  The new height (pass undefined to keep the original height)
+    * @param {Object} options (optional) Object literal with any of the Fx config options
+    * @return {Ext.Element} The Element
+    */
+    scale: function(w, h, o) {
+        this.animate(Ext.apply({}, o, {
+            width: w,
+            height: h
+        }));
+        return this;
+    },
+
+   /**
+    * @deprecated 4.0
+    * Animates the transition of any combination of an element's dimensions, xy position and/or opacity.
+    * Any of these properties not specified in the config object will not be changed.  This effect 
+    * requires that at least one new dimension, position or opacity setting must be passed in on
+    * the config object in order for the function to have any effect.
+    * Usage:
+<pre><code>
+// slide the element horizontally to x position 200 while changing the height and opacity
+el.shift({ x: 200, height: 50, opacity: .8 });
+
+// common config options shown with default values.
+el.shift({
+    width: [element&#39;s width],
+    height: [element&#39;s height],
+    x: [element&#39;s x position],
+    y: [element&#39;s y position],
+    opacity: [element&#39;s opacity],
+    easing: 'easeOut',
+    duration: .35
+});
+</code></pre>
+    * @param {Object} options  Object literal with any of the Fx config options
+    * @return {Ext.Element} The Element
+    */
+    shift: function(config) {
+        this.animate(config);
+        return this;
     }
 });

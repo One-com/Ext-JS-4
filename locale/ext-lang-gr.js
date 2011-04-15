@@ -11,16 +11,16 @@ Ext.onReady(function(){
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} åðéëåãìÝíç(åò) ãñáììÞ(Ýò)";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} åðéëåãìÝíç(åò) ãñáììÞ(Ýò)";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "Êëåßóôå áõôÞ ôçí êáñôÝëá";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "Ç ôéìÞ óôï ðåäßï äåí åßíáé Ýãêõñç";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "Ç ôéìÞ óôï ðåäßï äåí åßíáé Ýãêõñç";
     }
 
     if(Ext.LoadMask){
@@ -89,7 +89,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Óåëßäá",
             afterPageText  : "áðü {0}",
@@ -103,8 +103,8 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Ôï åëÜ÷éóôï ìÝãåèïò ãéá áõôü ôï ðåäßï åßíáé {0}",
             maxLengthText : "Ôï ìÝãéóôï ìÝãåèïò ãéá áõôü ôï ðåäßï åßíáé {0}",
             blankText     : "Ôï ðåäßï áõôü åßíáé õðï÷ñåùôïêü",
@@ -113,16 +113,16 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Ç åëÜ÷éóôç ôéìÞ ãéá áõôü ôï ðåäßï åßíáé {0}",
             maxText : "Ç ìÝãéóôç ôéìÞ ãéá áõôü ôï ðåäßï åßíáé {0}",
             nanText : "{0} äåí åßíáé Ýãêõñïò áñéèìüò"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "ÁðåíåñãïðïéçìÝíï",
             disabledDatesText : "ÁðåíåñãïðïéçìÝíï",
             minText           : "Ç çìåñïìçíßá ó' áõôü ôï ðåäßï ðñÝðåé íá åßíáé ìåôÜ áðü {0}",
@@ -132,15 +132,15 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "Öüñôùóç...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Áõôü ôï ðåäßï ðñÝðåé íá åßíáé e-mail address ôçò ìïñöÞò "user@example.com"',
             urlText      : 'Áõôü ôï ðåäßï ðñÝðåé íá åßíáé ìéá äéåýèõíóç URL ôçò ìïñöÞò "http:/'+'/www.example.com"',
             alphaText    : 'Áõôü ôï ðåäßï ðñÝðåé íá ðåñéÝ÷åé ãñÜììáôá êáé _',
@@ -148,8 +148,8 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Áýîïõóá Ôáîéíüìçóç",
             sortDescText : "Öèßíïõóá Ôáîéíüìçóç",
             lockText     : "Êëåßäùìá óôÞëçò",

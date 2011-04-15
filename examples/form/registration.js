@@ -1,11 +1,11 @@
 Ext.require([
     'Ext.form.*',
-    'Ext.ImageComponent',
-    'Ext.tip.QuickTips'
+    'Ext.Img',
+    'Ext.tip.QuickTipManager'
 ]);
 
 Ext.onReady(function() {
-    Ext.tip.QuickTips.init();
+    Ext.tip.QuickTipManager.init();
 
     var formPanel = Ext.widget('form', {
         renderTo: Ext.getBody(),
@@ -162,7 +162,7 @@ Ext.onReady(function() {
                 flex: 1,
                 validText: 'Form is valid',
                 invalidText: 'Form has errors',
-                tipTpl: new Ext.XTemplate('<ul><tpl for="."><li><span class="field-name">{name}</span>: <span class="error">{error}</span></li></tpl></ul>'),
+                tipTpl: Ext.create('Ext.XTemplate', '<ul><tpl for="."><li><span class="field-name">{name}</span>: <span class="error">{error}</span></li></tpl></ul>'),
 
                 getTip: function() {
                     var tip = this.tip;

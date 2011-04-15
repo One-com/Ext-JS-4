@@ -1,5 +1,5 @@
 Ext.define('Ext.org.AlbumTree', {
-    extend: 'Ext.tree.TreePanel',
+    extend: 'Ext.tree.Panel',
     alias : 'widget.albumtree',
     
     title: 'My Albums',

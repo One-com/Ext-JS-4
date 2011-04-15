@@ -1,11 +1,12 @@
 Ext.require('Ext.data.*');
 Ext.onReady(function() {
     // wrapped in closure to prevent global vars.
-    Ext.regModel('Restaurant', {
+    Ext.define('Restaurant', {
+        extend: 'Ext.data.Model',
         fields: ['name', 'cuisine']
     });
-    
-    var Restaurants = new Ext.data.Store({
+
+    var Restaurants = Ext.create('Ext.data.Store', {
         storeId: 'restaraunts',
         model: 'Restaurant',
         sorters: ['cuisine','name'],

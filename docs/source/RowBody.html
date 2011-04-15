@@ -2,38 +2,38 @@
  * @class Ext.grid.feature.RowBody
  * @extends Ext.grid.feature.Feature
  *
- * The rowbody feature enhances the grid&#39;s markup to have an additional
- * tr -&gt; td -&gt; div which spans the entire width of the original row.
+ * The rowbody feature enhances the grid's markup to have an additional
+ * tr -> td -> div which spans the entire width of the original row.
  *
  * This is useful to to associate additional information with a particular
  * record in a grid.
  *
  * Rowbodies are initially hidden unless you override getAdditionalData.
  *
- * Will expose additional events on the gridview with the prefix of &#39;rowbody&#39;.
- * For example: &#39;rowbodyclick&#39;, &#39;rowbodydblclick&#39;, &#39;rowbodycontextmenu&#39;.
+ * Will expose additional events on the gridview with the prefix of 'rowbody'.
+ * For example: 'rowbodyclick', 'rowbodydblclick', 'rowbodycontextmenu'.
  *
  * @ftype rowbody
  */
-Ext.define(&#39;Ext.grid.feature.RowBody&#39;, {
-    extend: &#39;Ext.grid.feature.Feature&#39;,
-    alias: &#39;feature.rowbody&#39;,
-    rowBodyHiddenCls: Ext.baseCSSPrefix + &#39;grid-row-body-hidden&#39;,
-    rowBodyTrCls: Ext.baseCSSPrefix + &#39;grid-rowbody-tr&#39;,
-    rowBodyTdCls: Ext.baseCSSPrefix + &#39;grid-cell-rowbody&#39;,
-    rowBodyDivCls: Ext.baseCSSPrefix + &#39;grid-rowbody&#39;,
+Ext.define('Ext.grid.feature.RowBody', {
+    extend: 'Ext.grid.feature.Feature',
+    alias: 'feature.rowbody',
+    rowBodyHiddenCls: Ext.baseCSSPrefix + 'grid-row-body-hidden',
+    rowBodyTrCls: Ext.baseCSSPrefix + 'grid-rowbody-tr',
+    rowBodyTdCls: Ext.baseCSSPrefix + 'grid-cell-rowbody',
+    rowBodyDivCls: Ext.baseCSSPrefix + 'grid-rowbody',
 
-    eventPrefix: &#39;rowbody&#39;,
-    eventSelector: &#39;.&#39; + Ext.baseCSSPrefix + &#39;grid-rowbody-tr&#39;,
+    eventPrefix: 'rowbody',
+    eventSelector: '.' + Ext.baseCSSPrefix + 'grid-rowbody-tr',
     
     getRowBody: function(values) {
         return [
-            &#39;&lt;tr class=&quot;&#39; + this.rowBodyTrCls + &#39; {rowBodyCls}&quot;&gt;&#39;,
-                &#39;&lt;td class=&quot;&#39; + this.rowBodyTdCls + &#39;&quot; colspan=&quot;{rowBodyColspan}&quot;&gt;&#39;,
-                    &#39;&lt;div class=&quot;&#39; + this.rowBodyDivCls + &#39;&quot;&gt;{rowBody}&lt;/div&gt;&#39;,
-                &#39;&lt;/td&gt;&#39;,
-            &#39;&lt;/tr&gt;&#39;
-        ].join(&#39;&#39;);
+            '<tr class="' + this.rowBodyTrCls + ' {rowBodyCls}">',
+                '<td class="' + this.rowBodyTdCls + '" colspan="{rowBodyColspan}">',
+                    '<div class="' + this.rowBodyDivCls + '">{rowBody}</div>',
+                '</td>',
+            '</tr>'
+        ].join('');
     },
     
     // injects getRowBody into the metaRowTpl.
@@ -47,12 +47,12 @@ Ext.define(&#39;Ext.grid.feature.RowBody&#39;, {
     },
 
     mutateMetaRowTpl: function(metaRowTpl) {
-        metaRowTpl.push(&#39;{[this.getRowBody(values)]}&#39;);
+        metaRowTpl.push('{[this.getRowBody(values)]}');
     },
 
     <a name="method-Ext.grid.feature.RowBody-getAdditionalData"></a>/**
      * Provide additional data to the prepareData call within the grid view.
-     * The rowbody feature adds 3 additional variables into the grid view&#39;s template.
+     * The rowbody feature adds 3 additional variables into the grid view's template.
      * These are rowBodyCls, rowBodyColspan, and rowBody.
      * @param {Object} data The data for this particular record.
      * @param {Number} idx The row index for this record.
@@ -64,7 +64,7 @@ Ext.define(&#39;Ext.grid.feature.RowBody&#39;, {
             colspan  = headerCt.getColumnCount();
 
         return {
-            rowBody: &quot;&quot;,
+            rowBody: "",
             rowBodyCls: this.rowBodyCls,
             rowBodyColspan: colspan
         };

@@ -15,8 +15,8 @@ Ext.onReady(function() {
       Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-      Ext.grid.GridPanel.prototype.ddText = "{0} 行選択";
+    if(Ext.grid.Panel){
+      Ext.grid.Panel.prototype.ddText = "{0} 行選択";
     }
 
     if(Ext.LoadMask){
@@ -124,7 +124,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
       Ext.apply(Ext.PagingToolbar.prototype, {
         beforePageText : "ページ",
         afterPageText  : "/ {0}",
@@ -138,12 +138,12 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.BaseField){
-      Ext.form.BaseField.prototype.invalidText = "フィールドの値が不正です。";
+    if(Ext.form.field.Base){
+      Ext.form.field.Base.prototype.invalidText = "フィールドの値が不正です。";
     }
 
-    if(Ext.form.Text){
-      Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+      Ext.apply(Ext.form.field.Text.prototype, {
         minLengthText : "このフィールドの最小値は {0} です。",
         maxLengthText : "このフィールドの最大値は {0} です。",
         blankText     : "必須項目です。",
@@ -152,8 +152,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Number){
-      Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+      Ext.apply(Ext.form.field.Number.prototype, {
         decimalSeparator : ".",
         decimalPrecision : 2,
         minText : "このフィールドの最小値は {0} です。",
@@ -162,8 +162,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Date){
-      Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+      Ext.apply(Ext.form.field.Date.prototype, {
         disabledDaysText  : "無効",
         disabledDatesText : "無効",
         minText           : "このフィールドの日付は、 {0} 以降の日付に設定してください。",
@@ -174,15 +174,15 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.ComboBox){
-      Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+      Ext.apply(Ext.form.field.ComboBox.prototype, {
         loadingText       : "読み込み中...",
         valueNotFoundText : undefined
       });
     }
 
-    if(Ext.form.VTypes){
-      Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+      Ext.apply(Ext.form.field.VTypes, {
         emailText    : 'メールアドレスを"user@example.com"の形式で入力してください。',
         urlText      : 'URLを"http:/'+'/www.example.com"の形式で入力してください。',
         alphaText    : '半角英字と"_"のみです。',
@@ -190,8 +190,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.HtmlEditor){
-      Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : 'リンクのURLを入力してください:',
         buttonTips : {
           bold : {
@@ -268,8 +268,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.grid.HeaderContainer){
-      Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+      Ext.apply(Ext.grid.header.Container.prototype, {
         sortAscText  : "昇順",
         sortDescText : "降順",
         columnsText  : "カラム"
@@ -299,8 +299,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Time){
-      Ext.apply(Ext.form.Time.prototype, {
+    if(Ext.form.field.Time){
+      Ext.apply(Ext.form.field.Time.prototype, {
         minText : "このフィールドの時刻は、 {0} 以降の時刻に設定してください。",
         maxText : "このフィールドの時刻は、 {0} 以前の時刻に設定してください。",
         invalidText : "{0} は間違った時刻入力です。",

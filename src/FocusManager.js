@@ -32,7 +32,7 @@ Ext.define('Ext.FocusManager', {
     },
     
     requires: [
-        'Ext.ComponentMgr',
+        'Ext.ComponentManager',
         'Ext.ComponentQuery',
         'Ext.util.HashMap',
         'Ext.util.KeyNav'
@@ -67,7 +67,7 @@ Ext.define('Ext.FocusManager', {
      * 6. Down
      * 
      * The FocusManager will not attempt to navigate when a component is an xtype (or descendents thereof)
-     * that belongs to this whitelist. E.g., an {@link Ext.form.Text} should allow
+     * that belongs to this whitelist. E.g., an {@link Ext.form.field.Text} should allow
      * the user to move the input cursor left and right, and to delete characters, etc.
      * 
      * This whitelist currently defaults to `['textfield']`.
@@ -135,7 +135,7 @@ Ext.define('Ext.FocusManager', {
         
         // Setup KeyNav that's bound to document to catch all
         // unhandled/bubbled key events for navigation
-        me.keyNav = new Ext.util.KeyNav(Ext.getDoc(), {
+        me.keyNav = Ext.create('Ext.util.KeyNav', Ext.getDoc(), {
             disabled: true,
             scope: me,
             
@@ -196,8 +196,8 @@ Ext.define('Ext.FocusManager', {
                     c = cmps[i];
                     if (CQ.is(c, ':focusable')) {
                         return [c];
-                    } else if (c.placeHolder && CQ.is(c.placeHolder, ':focusable')) {
-                        return [c.placeHolder];
+                    } else if (c.placeholder && CQ.is(c.placeholder, ':focusable')) {
+                        return [c.placeholder];
                     }
                 }
                 
@@ -230,11 +230,11 @@ Ext.define('Ext.FocusManager', {
      * Adds the specified xtype to the {@link #whitelist}.
      * @param {String/Array} xtype Adds the xtype(s) to the {@link #whitelist}.
      */
-    addWhitelistXType: function(xtype) {
+    addXTypeToWhitelist: function(xtype) {
         var me = this;
         
         if (Ext.isArray(xtype)) {
-            Ext.Array.forEach(xtype, me.addWhitelistXType, me);
+            Ext.Array.forEach(xtype, me.addXTypeToWhitelist, me);
             return;
         }
         
@@ -263,7 +263,7 @@ Ext.define('Ext.FocusManager', {
         delete me.options;
         me.enabled = false;
         
-        Ext.ComponentMgr.all.un('add', me.onComponentCreated, me);
+        Ext.ComponentManager.all.un('add', me.onComponentCreated, me);
         
         me.removeDOM();
         
@@ -296,7 +296,7 @@ Ext.define('Ext.FocusManager', {
         }
         
         // Handle components that are newly added after we are enabled
-        Ext.ComponentMgr.all.on('add', me.onComponentCreated, me);
+        Ext.ComponentManager.all.on('add', me.onComponentCreated, me);
         
         me.initDOM(options);
         
@@ -434,7 +434,7 @@ Ext.define('Ext.FocusManager', {
             goBack = e.shiftKey || key == EO.LEFT || key == EO.UP,
             checkWhitelist = key == EO.LEFT || key == EO.RIGHT || key == EO.UP || key == EO.DOWN,
             nextSelector = goBack ? 'prev' : 'next',
-            idx, next;
+            idx, next, focusedCmp;
         
         focusedCmp = (src.focusedCmp && src.focusedCmp.comp) || src.focusedCmp;
         if (!focusedCmp && !parent) {
@@ -596,11 +596,11 @@ Ext.define('Ext.FocusManager', {
      * Removes the specified xtype from the {@link #whitelist}.
      * @param {String/Array} xtype Removes the xtype(s) from the {@link #whitelist}.
      */
-    removeWhitelistXType: function(xtype) {
+    removeXTypeFromWhitelist: function(xtype) {
         var me = this;
         
         if (Ext.isArray(xtype)) {
-            Ext.Array.forEach(xtype, me.removeWhitelistXType, me);
+            Ext.Array.forEach(xtype, me.removeXTypeFromWhitelist, me);
             return;
         }
         
@@ -674,7 +674,7 @@ Ext.define('Ext.FocusManager', {
     
     setFocusAll: function(focusable, options) {
         var me = this,
-            cmps = Ext.ComponentMgr.all.getArray(),
+            cmps = Ext.ComponentManager.all.getArray(),
             len = cmps.length,
             cmp,
             i = 0;
@@ -847,7 +847,7 @@ Ext.define('Ext.FocusManager', {
         data = subs.get(container.id);
         data.keyNav.destroy();
         container.un('beforedestroy', me.unsubscribe, me);
-        subs.removeByKey(container.id);
+        subs.removeAtKey(container.id);
         safeSetFocus(container);
         me.removeDOM();
     }

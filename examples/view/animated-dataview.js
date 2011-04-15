@@ -36,8 +36,9 @@ Ext.onReady(function() {
         [true,  false, 19, "BlackBerry Curve 8900 BlackBerry", 349, "480 x 360 pixels", "3.2 Megapixel", "", "Candy bar", 21, 2.440000],
         [true,  false, 20, "Samsung SGH U600 Ultra Edition 10.9", 135, "240 x 320 pixels", "3.2 Megapixel", "", "Slider", 169, 2.200000]
     ];
-    
-    Ext.regModel('Mobile', {
+
+    Ext.define('Mobile', {
+        extend: 'Ext.data.Model',
         fields: [
             {name: 'hasEmail', type: 'bool'},
             {name: 'hasCamera', type: 'bool'},
@@ -52,7 +53,7 @@ Ext.onReady(function() {
             {name: 'screen-size', type: 'int'}
         ]
     });
-    
+
     var store = Ext.create('Ext.data.ArrayStore', {
         model: 'Mobile',
         sortInfo: {
@@ -61,20 +62,20 @@ Ext.onReady(function() {
         },
         data: data
     });
-    
-    var dataview = new Ext.DataView({
+
+    var dataview = Ext.create('Ext.DataView', {
         store: store,
-        tpl  : new Ext.XTemplate(
+        tpl  : Ext.create('Ext.XTemplate',
             '<tpl for=".">',
                 '<div class="phone">',
-                    (!Ext.isIE6? '<img width="64" height="64" src="images/phones/{[values.name.replace(/ /g, "-")]}.png" />' : 
+                    (!Ext.isIE6? '<img width="64" height="64" src="images/phones/{[values.name.replace(/ /g, "-")]}.png" />' :
                      '<div style="width:74px;height:74px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'images/phones/{[values.name.replace(/ /g, "-")]}.png\',sizingMethod=\'scale\')"></div>'),
                     '<strong>{name}</strong>',
                     '<span>{price:usMoney} ({reviews} Review{[values.reviews == 1 ? "" : "s"]})</span>',
                 '</div>',
             '</tpl>'
         ),
-        
+
         plugins : [
             Ext.create('Ext.ux.DataView.Animated', {
                 duration  : 550,
@@ -82,20 +83,20 @@ Ext.onReady(function() {
             })
         ],
         id: 'phones',
-        
+
         itemSelector: 'div.phone',
         overItemCls : 'phone-hover',
         multiSelect : true,
         autoScroll  : true
     });
-    
+
     var phoneSlider = Ext.create('Ext.slider.Multi', {
         hideLabel: true,
         width    : 300,
         minValue : 0,
         maxValue : 500,
         values   : [80, 320],
-        
+
         listeners: {
             change: {
                 buffer: 70,
@@ -103,7 +104,7 @@ Ext.onReady(function() {
             }
         }
     });
-    
+
     Ext.create('Ext.panel.Panel', {
         title: 'Animated DataView',
         layout: 'fit',
@@ -117,13 +118,13 @@ Ext.onReady(function() {
         ],
         renderTo: 'docbody'
     });
-    
+
     //filters the store based on the current slider values
     function filterData(slider) {
         var values  = slider.getValues();
-        
+
         var test = [];
-        
+
         //TODO: the suspend/resume hack can be removed once Filtering has been updated
         store.suspendEvents();
         store.clearFilter();
@@ -133,10 +134,10 @@ Ext.onReady(function() {
                 return record.get('price') >= values[0] && record.get('price') <= values[1];
             }
         }]);
-        
+
         store.sort('name', 'ASC');
     }
-    
+
     //perform initial filter
     filterData(phoneSlider);
 });

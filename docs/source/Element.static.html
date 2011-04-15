@@ -4,17 +4,17 @@
     opacityRe: /alpha\(opacity=(.*)\)/i,
     cssRe: /([a-z0-9-]+)\s*:\s*([^;\s]+(?:\s*[^;\s]+)*);?/gi,
     propertyCache: {},
-    defaultUnit : &quot;px&quot;,
-    borders: {l: &#39;border-left-width&#39;, r: &#39;border-right-width&#39;, t: &#39;border-top-width&#39;, b: &#39;border-bottom-width&#39;},
-    paddings: {l: &#39;padding-left&#39;, r: &#39;padding-right&#39;, t: &#39;padding-top&#39;, b: &#39;padding-bottom&#39;},
-    margins: {l: &#39;margin-left&#39;, r: &#39;margin-right&#39;, t: &#39;margin-top&#39;, b: &#39;margin-bottom&#39;},
+    defaultUnit : "px",
+    borders: {l: 'border-left-width', r: 'border-right-width', t: 'border-top-width', b: 'border-bottom-width'},
+    paddings: {l: 'padding-left', r: 'padding-right', t: 'padding-top', b: 'padding-bottom'},
+    margins: {l: 'margin-left', r: 'margin-right', t: 'margin-top', b: 'margin-bottom'},
 
-    // Reference the prototype&#39;s version of the method. Signatures are identical.
+    // Reference the prototype's version of the method. Signatures are identical.
     addUnits : Ext.core.Element.prototype.addUnits,
 
     <a name="method-Ext.core.Element-Ext.core.Element.parseBox"></a>/**
      * Parses a number or string representing margin sizes into an object. Supports CSS-style margin declarations
-     * (e.g. 10, &quot;10&quot;, &quot;10 10&quot;, &quot;10 10 10&quot; and &quot;10 10 10 10&quot; are all valid options and would return the same result)
+     * (e.g. 10, "10", "10 10", "10 10 10" and "10 10 10 10" are all valid options and would return the same result)
      * @static
      * @param {Number|String} box The encoded margins
      * @return {Object} An object with margin sizes for top, right, bottom and left
@@ -28,10 +28,10 @@
                 left: box.left || 0
             };
         } else {
-            if (typeof box != &#39;string&#39;) {
+            if (typeof box != 'string') {
                 box = box.toString();
             }
-            var parts  = box.split(&#39; &#39;),
+            var parts  = box.split(' '),
                 ln = parts.length;
     
             if (ln == 1) {
@@ -57,7 +57,7 @@
     
     <a name="method-Ext.core.Element-Ext.core.Element.unitizeBox"></a>/**
      * Parses a number or string representing margin sizes into an object. Supports CSS-style margin declarations
-     * (e.g. 10, &quot;10&quot;, &quot;10 10&quot;, &quot;10 10 10&quot; and &quot;10 10 10 10&quot; are all valid options and would return the same result)
+     * (e.g. 10, "10", "10 10", "10 10 10" and "10 10 10 10" are all valid options and would return the same result)
      * @static
      * @param {Number|String} box The encoded margins
      * @param {String} units The type of units to add
@@ -67,9 +67,9 @@
         var A = this.addUnits,
             B = this.parseBox(box);
             
-        return A(B.top, units) + &#39; &#39; +
-               A(B.right, units) + &#39; &#39; +
-               A(B.bottom, units) + &#39; &#39; +
+        return A(B.top, units) + ' ' +
+               A(B.right, units) + ' ' +
+               A(B.bottom, units) + ' ' +
                A(B.left, units);
         
     },
@@ -82,17 +82,17 @@
     <a name="method-Ext.core.Element-Ext.core.Element.normalize"></a>/**
      * Normalizes CSS property keys from dash delimited to camel case JavaScript Syntax.
      * For example:
-     * &lt;ul&gt;
-     *  &lt;li&gt;border-width -&gt; borderWidth&lt;/li&gt;
-     *  &lt;li&gt;padding-top -&gt; paddingTop&lt;/li&gt;
-     * &lt;/ul&gt;
+     * <ul>
+     *  <li>border-width -> borderWidth</li>
+     *  <li>padding-top -> paddingTop</li>
+     * </ul>
      * @static
      * @param {String} prop The property to normalize
      * @return {String} The normalized string
      */
     normalize : function(prop) {
-        if (prop == &#39;float&#39;) {
-            prop = Ext.supports.Float ? &#39;cssFloat&#39; : &#39;styleFloat&#39;;
+        if (prop == 'float') {
+            prop = Ext.supports.Float ? 'cssFloat' : 'styleFloat';
         }
         return this.propertyCache[prop] || (this.propertyCache[prop] = prop.replace(this.camelRe, this.camelReplaceFn));
     },
@@ -149,14 +149,14 @@
      * Retrieves the current orientation of the window. This is calculated by
      * determing if the height is greater than the width.
      * @static
-     * @return {String} Orientation of window: &#39;portrait&#39; or &#39;landscape&#39;
+     * @return {String} Orientation of window: 'portrait' or 'landscape'
      */
     getOrientation : function() {
         if (Ext.supports.OrientationChange) {
-            return (window.orientation == 0) ? &#39;portrait&#39; : &#39;landscape&#39;;
+            return (window.orientation == 0) ? 'portrait' : 'landscape';
         }
         
-        return (window.innerHeight &gt; window.innerWidth) ? &#39;portrait&#39; : &#39;landscape&#39;;
+        return (window.innerHeight > window.innerWidth) ? 'portrait' : 'landscape';
     },
 
     <a name="method-Ext.core.Element-Ext.core.Element.fromPoint"></a>/** 
@@ -172,12 +172,14 @@
     
     <a name="method-Ext.core.Element-Ext.core.Element.parseStyles"></a>/**
      * Converts a CSS string into an object with a property for each style.
-     * &lt;p&gt;
+     * <p>
      * The sample code below would return an object with 2 properties, one
-     * for background-color and one for color.&lt;/p&gt;
-     * <br><span style="display: none">**/</span>var css = &#39;background-color: red;color: blue; &#39;;
+     * for background-color and one for color.</p>
+     * <pre><code>
+var css = 'background-color: red;color: blue; ';
 console.log(Ext.core.Element.parseStyles(css));
-     * <br><span style="display: none">/**</span>     * @static
+     * </code></pre>
+     * @static
      * @param {String} styles A CSS string
      * @return {Object} styles
      */
@@ -188,7 +190,7 @@ console.log(Ext.core.Element.parseStyles(css));
             
         if (styles) {
             <a name="prop-Ext.core.Element-lastIndex"></a>/**
-             * Since we&#39;re using the g flag on the regex, we need to set the lastIndex.
+             * Since we're using the g flag on the regex, we need to set the lastIndex.
              * This automatically happens on some implementations, but not others, see:
              * http://stackoverflow.com/questions/2645273/javascript-regular-expression-literal-persists-between-function-calls
              * http://blog.stevenlevithan.com/archives/fixing-javascript-regexp

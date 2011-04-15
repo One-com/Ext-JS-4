@@ -7,18 +7,18 @@ Ext.define('Ext.view.BoundList', {
     extend: 'Ext.DataView',
     alias: 'widget.boundlist',
     alternateClassName: 'Ext.BoundList',
-    requires: ['Ext.layout.component.BoundList', 'Ext.toolbar.PagingToolbar'],
+    requires: ['Ext.layout.component.BoundList', 'Ext.toolbar.Paging'],
 
     /**
-     * @cfg {Number} pageSize If greater than <tt>0</tt>, a {@link Ext.toolbar.PagingToolbar} is displayed at the
+     * @cfg {Number} pageSize If greater than <tt>0</tt>, a {@link Ext.toolbar.Paging} is displayed at the
      * bottom of the list and store queries will execute with page start and
-     * {@link Ext.toolbar.PagingToolbar#pageSize limit} parameters.
+     * {@link Ext.toolbar.Paging#pageSize limit} parameters.
      */
     pageSize: 0,
 
     /**
      * @property pagingToolbar
-     * @type {Ext.toolbar.PagingToolbar}
+     * @type {Ext.toolbar.Paging}
      * A reference to the PagingToolbar instance in this view. Only populated if {@link #pageSize} is greater
      * than zero and the BoundList has been rendered.
      */
@@ -52,7 +52,7 @@ Ext.define('Ext.view.BoundList', {
 
         // should be setting aria-posinset based on entire set of data
         // not filtered set
-        me.tpl = new Ext.XTemplate(
+        me.tpl = Ext.create('Ext.XTemplate', 
             '<ul><tpl for=".">',
                 '<li role="option" class="' + itemCls + '">' + me.getInnerTpl(me.displayField) + '</li>',
             '</tpl></ul>'

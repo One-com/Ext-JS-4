@@ -40,18 +40,19 @@ Ext.onReady(function(){
         }
         return data;
     }
-    
-    Ext.regModel('Employee', {
+
+    Ext.define('Employee', {
+        extend: 'Ext.data.Model',
         fields: [
            {name: 'rating', type: 'int'},
            {name: 'salary', type: 'float'},
            {name: 'name'}
         ]
     });
-    
+
 
     // create the Data Store
-    var store = new Ext.data.BufferStore({
+    var store = Ext.create('Ext.data.BufferStore', {
         id: 'store',
         pageSize: 50,
         // never purge any data, we prefetch all up front
@@ -61,10 +62,10 @@ Ext.onReady(function(){
             type: 'memory'
         }
     });
-    
 
 
-    var grid = new Ext.grid.GridPanel({
+
+    var grid = Ext.create('Ext.grid.Panel', {
         width: 700,
         height: 500,
         title: 'Bufffered Grid of 5,000 random records',
@@ -104,16 +105,16 @@ Ext.onReady(function(){
         }],
         renderTo: Ext.getBody()
     });
-    
+
     var data = createFakeData(5000),
         ln = data.length,
         records = [],
         i = 0;
     for (; i < ln; i++) {
-        records.push(Ext.ModelMgr.create(data[i], 'Employee'));
+        records.push(Ext.ModelManager.create(data[i], 'Employee'));
     }
     store.cacheRecords(records);
-    
+
     store.guaranteeRange(0, 49);
 });
 

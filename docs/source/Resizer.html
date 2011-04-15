@@ -1,68 +1,70 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.resizer.Resizer"></a>/**
  * @class Ext.resizer.Resizer
- * &lt;p&gt;Applies drag handles to an element or component to make it resizable. The
- * drag handles are inserted into the element (or component&#39;s element) and
- * positioned absolute.&lt;/p&gt;
+ * <p>Applies drag handles to an element or component to make it resizable. The
+ * drag handles are inserted into the element (or component's element) and
+ * positioned absolute.</p>
  *
- * &lt;p&gt;Textarea and img elements will be wrapped with an additional div because
+ * <p>Textarea and img elements will be wrapped with an additional div because
  * these elements do not support child nodes. The original element can be accessed
- * through the originalTarget property.&lt;/p&gt;
+ * through the originalTarget property.</p>
  *
- * &lt;p&gt;Here is the list of valid resize handles:&lt;/p&gt;
- * &lt;pre&gt;
+ * <p>Here is the list of valid resize handles:</p>
+ * <pre>
 Value   Description
 ------  -------------------
- &#39;n&#39;     north
- &#39;s&#39;     south
- &#39;e&#39;     east
- &#39;w&#39;     west
- &#39;nw&#39;    northwest
- &#39;sw&#39;    southwest
- &#39;se&#39;    southeast
- &#39;ne&#39;    northeast
- &#39;all&#39;   all
-&lt;/pre&gt;
- * &lt;p&gt;Here&#39;s an example showing the creation of a typical Resizer:&lt;/p&gt;
- * <br><span style="display: none">**/</span>var resizer = new Ext.resizer.Resizer({
-    el: &#39;elToResize&#39;,
-    handles: &#39;all&#39;,
+ 'n'     north
+ 's'     south
+ 'e'     east
+ 'w'     west
+ 'nw'    northwest
+ 'sw'    southwest
+ 'se'    southeast
+ 'ne'    northeast
+ 'all'   all
+</pre>
+ * <p>Here's an example showing the creation of a typical Resizer:</p>
+ * <pre><code>
+var resizer = new Ext.resizer.Resizer({
+    el: 'elToResize',
+    handles: 'all',
     minWidth: 200,
     minHeight: 100,
     maxWidth: 500,
     maxHeight: 400,
     pinned: true
 });
-<br><span style="display: none">/**</span>  */
-Ext.define(&#39;Ext.resizer.Resizer&#39;, {
+</code></pre>
+  */
+Ext.define('Ext.resizer.Resizer', {
     mixins: {
-        observable: &#39;Ext.util.Observable&#39;
+        observable: 'Ext.util.Observable'
     },
-    uses: [&#39;Ext.resizer.ResizeTracker&#39;, &#39;Ext.Component&#39;],
+    uses: ['Ext.resizer.ResizeTracker', 'Ext.Component'],
 
-    alternateClassName: &#39;Ext.Resizable&#39;,
+    alternateClassName: 'Ext.Resizable',
 
-    handleCls: Ext.baseCSSPrefix + &#39;resizable-handle&#39;,
-    pinnedCls: Ext.baseCSSPrefix + &#39;resizable-pinned&#39;,
-    overCls:   Ext.baseCSSPrefix + &#39;resizable-over&#39;,
-    proxyCls:  Ext.baseCSSPrefix + &#39;resizable-proxy&#39;,
-    wrapCls:   Ext.baseCSSPrefix + &#39;resizable-wrap&#39;,
+    handleCls: Ext.baseCSSPrefix + 'resizable-handle',
+    pinnedCls: Ext.baseCSSPrefix + 'resizable-pinned',
+    overCls:   Ext.baseCSSPrefix + 'resizable-over',
+    proxyCls:  Ext.baseCSSPrefix + 'resizable-proxy',
+    wrapCls:   Ext.baseCSSPrefix + 'resizable-wrap',
 
     <a name="cfg-Ext.resizer.Resizer-dynamic"></a>/**
      * @cfg {Boolean} dynamic 
-     * &lt;p&gt;Specify as true to update the {@link #target} (Element or {@link Ext.Component Component}) dynamically during dragging.
-     * This is &lt;code&gt;true&lt;/code&gt; by default, but the {@link Ext.Component Component} class passes &lt;code&gt;false&lt;/code&gt; when it
-     * is configured as {@link Ext.Component#resizable}.&lt;/p&gt;
-     * &lt;p&gt;If specified as &lt;code&gt;false&lt;/code&gt;, a proxy element is displayed during the resize operation, and the {@link #target}
-     * is updated on mouseup.&lt;/p&gt;
+     * <p>Specify as true to update the {@link #target} (Element or {@link Ext.Component Component}) dynamically during dragging.
+     * This is <code>true</code> by default, but the {@link Ext.Component Component} class passes <code>false</code> when it
+     * is configured as {@link Ext.Component#resizable}.</p>
+     * <p>If specified as <code>false</code>, a proxy element is displayed during the resize operation, and the {@link #target}
+     * is updated on mouseup.</p>
      */
     dynamic: true,
 
     <a name="cfg-Ext.resizer.Resizer-handles"></a>/**
-     * @cfg {String} handles String consisting of the resize handles to display. Defaults to &#39;s e se&#39; for
+     * @cfg {String} handles String consisting of the resize handles to display. Defaults to 's e se' for
      * Elements and fixed position Components. Defaults to 8 point resizing for floating Components (such as Windows).
-     * Specify either &lt;code&gt;&#39;all&#39;&lt;/code&gt; or any of &lt;code&gt;&#39;n s e w ne nw se sw&#39;&lt;/code&gt;.
+     * Specify either <code>'all'</code> or any of <code>'n s e w ne nw se sw'</code>.
      */
-    handles: &#39;s e se&#39;,
+    handles: 's e se',
 
     <a name="cfg-Ext.resizer.Resizer-height"></a>/**
      * @cfg {Number} height Optional. The height to set target to in pixels (defaults to null)
@@ -117,14 +119,14 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
      */
 
     possiblePositions: {
-        n:  &#39;north&#39;,
-        s:  &#39;south&#39;,
-        e:  &#39;east&#39;,
-        w:  &#39;west&#39;,
-        se: &#39;southeast&#39;,
-        sw: &#39;southwest&#39;,
-        nw: &#39;northwest&#39;,
-        ne: &#39;northeast&#39;
+        n:  'north',
+        s:  'south',
+        e:  'east',
+        w:  'west',
+        se: 'southeast',
+        sw: 'southwest',
+        nw: 'northwest',
+        ne: 'northeast'
     },
 
     <a name="cfg-Ext.resizer.Resizer-target"></a>/**
@@ -157,7 +159,7 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
              * @param {Number} height The start height
              * @param {Ext.EventObject} e The mousedown event
              */
-            &#39;beforeresize&#39;,
+            'beforeresize',
             <a name="event-Ext.resizer.Resizer-resizedrag"></a>/**
              * @event resizedrag
              * Fires during resizing. Return false to cancel resize.
@@ -166,7 +168,7 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
              * @param {Number} height The new height
              * @param {Ext.EventObject} e The mousedown event
              */
-            &#39;resizedrag&#39;,
+            'resizedrag',
             <a name="event-Ext.resizer.Resizer-resize"></a>/**
              * @event resize
              * Fired after a resize.
@@ -175,7 +177,7 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
              * @param {Number} height The new height
              * @param {Ext.EventObject} e The mouseup event
              */
-            &#39;resize&#39;
+            'resize'
         );
 
         if (Ext.isString(config) || Ext.isElement(config) || config.dom) {
@@ -205,15 +207,15 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
                     me.maxHeight = target.maxHeight;
                 }
                 if (target.floating) {
-                    if (!this.hasOwnProperty(&#39;handles&#39;)) {
-                        this.handles = &#39;n ne e se s sw w nw&#39;;
+                    if (!this.hasOwnProperty('handles')) {
+                        this.handles = 'n ne e se s sw w nw';
                     }
                 }
             } else {
                 me.el = me.target = Ext.get(target);
             }
         }
-        // Backwards compatibility with Ext3.x&#39;s Resizable which used el as a config.
+        // Backwards compatibility with Ext3.x's Resizable which used el as a config.
         else {
             me.target = me.el = Ext.get(me.el);
         }
@@ -222,7 +224,7 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
         // have children and therefore must
         // be wrapped
         tag = me.el.dom.tagName;
-        if (tag == &#39;TEXTAREA&#39; || tag == &#39;IMG&#39;) {
+        if (tag == 'TEXTAREA' || tag == 'IMG') {
             <a name="prop-Ext.resizer.Resizer-originalTarget"></a>/**
              * Reference to the original resize target if the element of the original
              * resize target was an IMG or a TEXTAREA which must be wrapped in a DIV.
@@ -232,10 +234,10 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
             me.originalTarget = me.target;
             me.target = me.el = me.el.wrap({
                 cls: me.wrapCls,
-                id: me.el.id + &#39;-rzwrap&#39;
+                id: me.el.id + '-rzwrap'
             });
 
-            // Transfer originalTarget&#39;s positioning/sizing
+            // Transfer originalTarget's positioning/sizing
             me.el.setPositioning(me.originalTarget.getPositioning());
             me.originalTarget.clearPositioning();
             var box = me.originalTarget.getBox();
@@ -253,13 +255,13 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
          * @type Ext.resizer.ResizeTracker
          * @property resizeTracker
          */
-        me.resizeTracker = Ext.create(&#39;Ext.resizer.ResizeTracker&#39;, {
+        me.resizeTracker = Ext.create('Ext.resizer.ResizeTracker', {
             target: me.target,
             constrainTo: me.constrainTo,
             overCls: me.overCls,
             throttle: me.throttle,
             originalTarget: me.originalTarget,
-            delegate: &#39;.&#39; + me.handleCls,
+            delegate: '.' + me.handleCls,
             dynamic: me.dynamic,
             preserveRatio: me.preserveRatio,
             minHeight: me.minHeight,
@@ -268,27 +270,27 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
             maxWidth: me.maxWidth
         });
 
-        // Relay the ResizeTracker&#39;s superclass events as our own resize events
-        me.resizeTracker.on(&#39;mousedown&#39;, me.onBeforeResize, me);
-        me.resizeTracker.on(&#39;drag&#39;, me.onResize, me);
-        me.resizeTracker.on(&#39;dragend&#39;, me.onResizeEnd, me);
+        // Relay the ResizeTracker's superclass events as our own resize events
+        me.resizeTracker.on('mousedown', me.onBeforeResize, me);
+        me.resizeTracker.on('drag', me.onResize, me);
+        me.resizeTracker.on('dragend', me.onResizeEnd, me);
 
-        if (me.handles == &#39;all&#39;) {
-            me.handles = &#39;n s e w ne nw se sw&#39;;
+        if (me.handles == 'all') {
+            me.handles = 'n s e w ne nw se sw';
         }
 
         handles = me.handles = me.handles.split(/ |\s*?[,;]\s*?/);
         possibles = me.possiblePositions;
         len = handles.length;
-        handleCls = me.handleCls + &#39; &#39; + (this.target.isComponent ? (me.target.baseCls + &#39;-handle &#39;) : &#39;&#39;) + me.handleCls + &#39;-&#39;;
+        handleCls = me.handleCls + ' ' + (this.target.isComponent ? (me.target.baseCls + '-handle ') : '') + me.handleCls + '-';
 
-        for(; i &lt; len; i++){
+        for(; i < len; i++){
             // if specified and possible, create
-            if (handles[i] &amp;&amp; possibles[handles[i]]) {
+            if (handles[i] && possibles[handles[i]]) {
                 pos = possibles[handles[i]];
                 // store a reference in this.east, this.west, etc
 
-                me[pos] = Ext.create(&#39;Ext.Component&#39;, {
+                me[pos] = Ext.create('Ext.Component', {
                     owner: this,
                     region: pos,
                     cls: handleCls + pos,
@@ -330,17 +332,17 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
     },
 
     /**
-     * @private Relay the Tracker&#39;s mousedown event as beforeresize
+     * @private Relay the Tracker's mousedown event as beforeresize
      * @param tracker The Resizer
      * @param e The Event
      */
     onBeforeResize: function(tracker, e) {
         var b = this.target.getBox();
-        return this.fireEvent(&#39;beforeresize&#39;, this, b.width, b.height, e);
+        return this.fireEvent('beforeresize', this, b.width, b.height, e);
     },
 
     /**
-     * @private Relay the Tracker&#39;s drag event as resizedrag
+     * @private Relay the Tracker's drag event as resizedrag
      * @param tracker The Resizer
      * @param e The Event
      */
@@ -348,11 +350,11 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
         var me = this,
             b = me.target.getBox();
         me.forceHandlesHeight();
-        return me.fireEvent(&#39;resizedrag&#39;, me, b.width, b.height, e);
+        return me.fireEvent('resizedrag', me, b.width, b.height, e);
     },
 
     /**
-     * @private Relay the Tracker&#39;s dragend event as resize
+     * @private Relay the Tracker's dragend event as resize
      * @param tracker The Resizer
      * @param e The Event
      */
@@ -360,26 +362,26 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
         var me = this,
             b = me.target.getBox();
         me.forceHandlesHeight();
-        return me.fireEvent(&#39;resize&#39;, me, b.width, b.height, e);
+        return me.fireEvent('resize', me, b.width, b.height, e);
     },
 
     <a name="method-Ext.resizer.Resizer-resizeTo"></a>/**
-     * Perform a manual resize and fires the &#39;resize&#39; event.
+     * Perform a manual resize and fires the 'resize' event.
      * @param {Number} width
      * @param {Number} height
      */
     resizeTo : function(width, height){
         this.target.setSize(width, height);
-        this.fireEvent(&#39;resize&#39;, this, width, height, null);
+        this.fireEvent('resize', this, width, height, null);
     },
 
     <a name="method-Ext.resizer.Resizer-getEl"></a>/**
-     * &lt;p&gt;Returns the element that was configured with the el or target config property.  
+     * <p>Returns the element that was configured with the el or target config property.  
      * If a component was configured with the target property then this will return the 
-     * element of this component.&lt;p&gt;
-     * &lt;p&gt;Textarea and img elements will be wrapped with an additional div because
+     * element of this component.<p>
+     * <p>Textarea and img elements will be wrapped with an additional div because
       * these elements do not support child nodes. The original element can be accessed
-     * through the originalTarget property.&lt;/p&gt;
+     * through the originalTarget property.</p>
      * @return {Element} element
      */
     getEl : function() {
@@ -387,10 +389,10 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
     },
 
     <a name="method-Ext.resizer.Resizer-getTarget"></a>/**
-     * &lt;p&gt;Returns the element or component that was configured with the target config property.&lt;p&gt;
-     * &lt;p&gt;Textarea and img elements will be wrapped with an additional div because
+     * <p>Returns the element or component that was configured with the target config property.<p>
+     * <p>Textarea and img elements will be wrapped with an additional div because
       * these elements do not support child nodes. The original element can be accessed
-     * through the originalTarget property.&lt;/p&gt;
+     * through the originalTarget property.</p>
      * @return {Element/Component}
      */
     getTarget: function() {
@@ -399,7 +401,7 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
 
     destroy: function() {
         var h;
-        for (var i = 0, l = this.handles.length; i &lt; l; i++) {
+        for (var i = 0, l = this.handles.length; i < l; i++) {
             h = this[this.possiblePositions[this.handles[i]]];
             delete h.owner;
             Ext.destroy(h);
@@ -414,7 +416,7 @@ Ext.define(&#39;Ext.resizer.Resizer&#39;, {
         var me = this,
             handle;
         if (Ext.isIE6) {
-            handle = me[&#39;east&#39;] || me[&#39;west&#39;];
+            handle = me['east'] || me['west'];
             if (handle) {
                 handle.setHeight(me.el.getHeight());
             }

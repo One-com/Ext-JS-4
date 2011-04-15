@@ -5,15 +5,15 @@
  * @abstract
  */
 
-Ext.define(&#39;Ext.direct.JsonProvider&#39;, {
+Ext.define('Ext.direct.JsonProvider', {
     
     /* Begin Definitions */
     
-    extend: &#39;Ext.direct.Provider&#39;,
+    extend: 'Ext.direct.Provider',
     
-    alias: &#39;direct.jsonprovider&#39;,
+    alias: 'direct.jsonprovider',
     
-    uses: [&#39;Ext.direct.ExceptionEvent&#39;],
+    uses: ['Ext.direct.ExceptionEvent'],
     
     /* End Definitions */
    
@@ -49,17 +49,17 @@ Ext.define(&#39;Ext.direct.JsonProvider&#39;, {
         try{
             data = this.parseResponse(response);
         } catch(e) {
-            event = Ext.create(&#39;Ext.direct.ExceptionEvent&#39;, {
+            event = Ext.create('Ext.direct.ExceptionEvent', {
                 data: e,
                 xhr: response,
                 code: Ext.direct.Manager.self.exceptions.PARSE,
-                message: &#39;Error parsing json response: \n\n &#39; + data
+                message: 'Error parsing json response: \n\n ' + data
             });
             return [event];
         }
         
         if (Ext.isArray(data)) {
-            for (len = data.length; i &lt; len; ++i) {
+            for (len = data.length; i < len; ++i) {
                 events.push(this.createEvent(data[i]));
             }
         } else {
@@ -74,6 +74,6 @@ Ext.define(&#39;Ext.direct.JsonProvider&#39;, {
      * @return {Ext.direct.Event} The event
      */
     createEvent: function(response){
-        return Ext.create(&#39;direct.&#39; + response.type, response);
+        return Ext.create('direct.' + response.type, response);
     }
 });￿</pre></pre></body></html>

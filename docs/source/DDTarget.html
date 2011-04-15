@@ -22,8 +22,8 @@
  *                 DragDrop:
  *                    none
  */
-Ext.define(&#39;Ext.dd.DDTarget&#39;, {
-    extend: &#39;Ext.dd.DragDrop&#39;,
+Ext.define('Ext.dd.DDTarget', {
+    extend: 'Ext.dd.DragDrop',
     constructor: function(id, sGroup, config) {
         if (id) {
             this.initTarget(id, sGroup, config);
@@ -194,6 +194,6 @@ Ext.define(&#39;Ext.dd.DDTarget&#39;, {
     removeInvalidHandleType: Ext.emptyFn,
 
     toString: function() {
-        return (&quot;DDTarget &quot; + this.id);
+        return ("DDTarget " + this.id);
     }
 });￿</pre></pre></body></html>

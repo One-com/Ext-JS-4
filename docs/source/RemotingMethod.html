@@ -2,7 +2,7 @@
  * Small utility class used internally to represent a Direct method.
  * @class Ext.direct.RemotingMethod
  */
-Ext.define(&#39;Ext.direct.RemotingMethod&#39;, {
+Ext.define('Ext.direct.RemotingMethod', {
     
     constructor: function(config){
         var me = this,
@@ -33,7 +33,7 @@ Ext.define(&#39;Ext.direct.RemotingMethod&#39;, {
      * Takes the arguments for the Direct function and splits the arguments
      * from the scope and the callback.
      * @param {Array} args The arguments passed to the direct call
-     * @return {Object} An object with 3 properties, args, callback &amp; scope.
+     * @return {Object} An object with 3 properties, args, callback & scope.
      */
     getCallData: function(args){
         var me = this,

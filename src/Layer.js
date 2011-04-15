@@ -85,7 +85,7 @@ Ext.define('Ext.Layer', {
         me.position('absolute');
         if (config.shadow) {
             me.shadowOffset = config.shadowOffset || 4;
-            me.shadow = new Ext.Shadow({
+            me.shadow = Ext.create('Ext.Shadow', {
                 offset : me.shadowOffset,
                 mode : config.shadow
             });
@@ -215,7 +215,7 @@ Ext.define('Ext.Layer', {
 
     remove : function() {
         this.hideUnders();
-        Ext.Layer.superclass.remove.call(this);
+        this.callParent();
     },
 
     // private
@@ -299,7 +299,7 @@ Ext.define('Ext.Layer', {
         if (!visible) {
             this.hideUnders(true);
         }
-        Ext.Layer.superclass.setVisible.call(this, visible, animate, duration, callback, easing);
+        this.callParent([visible, animate, duration, callback, easing]);
         if (!animate) {
             cb();
         }
@@ -309,12 +309,12 @@ Ext.define('Ext.Layer', {
     // private
     beforeFx : function() {
         this.beforeAction();
-        return Ext.Layer.superclass.beforeFx.apply(this, arguments);
+        return this.callParent(arguments);
     },
 
     // private
     afterFx : function() {
-        Ext.Layer.superclass.afterFx.apply(this, arguments);
+        this.callParent(arguments);
         this.sync(this.isVisible());
     },
 
@@ -327,17 +327,17 @@ Ext.define('Ext.Layer', {
 
     // overridden Element method
     setLeft : function(left){
-        Ext.Layer.superclass.setLeft.apply(this, arguments);
+        this.callParent(arguments);
         return this.sync();
     },
 
     setTop : function(top){
-        Ext.Layer.superclass.setTop.apply(this, arguments);
+        this.callParent(arguments);
         return this.sync();
     },
 
     setLeftTop : function(left, top){
-        Ext.Layer.superclass.setLeftTop.apply(this, arguments);
+        this.callParent(arguments);
         return this.sync();
     },
 
@@ -348,7 +348,7 @@ Ext.define('Ext.Layer', {
 
         this.fixDisplay();
         this.beforeAction();
-        Ext.Layer.superclass.setXY.call(this, xy, animate, duration, callback, easing);
+        this.callParent([xy, animate, duration, callback, easing]);
         if (!animate) {
             callback();
         }
@@ -387,7 +387,7 @@ Ext.define('Ext.Layer', {
         callback = this.createCB(callback);
 
         this.beforeAction();
-        Ext.Layer.superclass.setSize.call(this, w, h, animate, duration, callback, easing);
+        this.callParent([w, h, animate, duration, callback, easing]);
         if (!animate) {
             callback();
         }
@@ -400,7 +400,7 @@ Ext.define('Ext.Layer', {
         callback = this.createCB(callback);
 
         this.beforeAction();
-        Ext.Layer.superclass.setWidth.call(this, w, animate, duration, callback, easing);
+        this.callParent([w, animate, duration, callback, easing]);
         if (!animate) {
             callback();
         }
@@ -413,7 +413,7 @@ Ext.define('Ext.Layer', {
         callback = this.createCB(callback);
 
         this.beforeAction();
-        Ext.Layer.superclass.setHeight.call(this, h, animate, duration, callback, easing);
+        this.callParent([h, animate, duration, callback, easing]);
         if (!animate) {
             callback();
         }
@@ -431,7 +431,7 @@ Ext.define('Ext.Layer', {
             Ext.Layer.superclass.setSize.call(this, width, height);
             callback();
         } else {
-            Ext.Layer.superclass.setBounds.call(this, x, y, width, height, animate, duration, callback, easing);
+            this.callParent([x, y, width, height, animate, duration, callback, easing]);
         }
         return this;
     },

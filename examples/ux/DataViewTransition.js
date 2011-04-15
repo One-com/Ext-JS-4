@@ -177,7 +177,7 @@ Ext.ux.DataViewTransition = Ext.extend(Object, {
                         });
                     }
                     
-                    Ext.TaskMgr.stop(task);
+                    Ext.TaskManager.stop(task);
                 } else {
                     //move each item
                     for (var id in newPositions) {
@@ -208,7 +208,7 @@ Ext.ux.DataViewTransition = Ext.extend(Object, {
                 scope   : this
             };
             
-            Ext.TaskMgr.start(task);
+            Ext.TaskManager.start(task);
             
             //<debug>
             var count = 0;

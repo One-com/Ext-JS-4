@@ -13,7 +13,7 @@
             xField: 'name',
             yField: 'data1',
             showMarkers: true,
-            markerCfg: {
+            markerConfig: {
                 radius: 5,
                 size: 5
             },
@@ -26,7 +26,7 @@
             xField: 'name',
             yField: 'data2',
             showMarkers: true,
-            markerCfg: {
+            markerConfig: {
                 radius: 5,
                 size: 5
             },
@@ -39,7 +39,7 @@
             xField: 'name',
             yField: 'data3',
             showMarkers: true,
-            markerCfg: {
+            markerConfig: {
                 radius: 5,
                 size: 5
             },
@@ -52,7 +52,7 @@
  * 
  * In this configuration we add three series to the chart. Each of these series is bound to the same categories field, `name` but bound to different properties for each category,
  * `data1`, `data2` and `data3` respectively. All series display markers by having `showMarkers` enabled. The configuration for the markers of each series can be set by adding properties onto 
- * the markerCfg object. Finally we override some theme styling properties by adding properties to the `style` object.
+ * the markerConfig object. Finally we override some theme styling properties by adding properties to the `style` object.
  * 
  * @xtype radar
  * 
@@ -63,7 +63,7 @@ Ext.define('Ext.chart.series.Radar', {
 
     extend: 'Ext.chart.series.Series',
 
-    requires: ['Ext.chart.Shapes', 'Ext.fx.Anim'],
+    requires: ['Ext.chart.Shape', 'Ext.fx.Anim'],
 
     /* End Definitions */
 
@@ -216,7 +216,7 @@ Ext.define('Ext.chart.series.Radar', {
             chart = me.chart,
             surface = chart.surface,
             markerStyle = Ext.apply({}, me.markerStyle || {}),
-            endMarkerStyle = Ext.apply(markerStyle, me.markerCfg),
+            endMarkerStyle = Ext.apply(markerStyle, me.markerConfig),
             items = me.items, 
             type = endMarkerStyle.type,
             markerGroup = me.markerGroup,
@@ -230,7 +230,7 @@ Ext.define('Ext.chart.series.Radar', {
             item = items[i];
             marker = markerGroup.getAt(i);
             if (!marker) {
-                marker = Ext.chart.Shapes[type](surface, Ext.apply({
+                marker = Ext.chart.Shape[type](surface, Ext.apply({
                     group: markerGroup,
                     x: 0,
                     y: 0,

@@ -18,16 +18,16 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} Επιλεγμένες σειρές";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} Επιλεγμένες σειρές";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "Κλείστε το tab";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "Το περιεχόμενο του πεδίου δεν είναι αποδεκτό";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "Το περιεχόμενο του πεδίου δεν είναι αποδεκτό";
     }
 
     if(Ext.LoadMask){
@@ -135,7 +135,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Σελίδα",
             afterPageText  : "από {0}",
@@ -149,8 +149,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Το μικρότερο αποδεκτό μήκος για το πεδίο είναι {0}",
             maxLengthText : "Το μεγαλύτερο αποδεκτό μήκος για το πεδίο είναι {0}",
             blankText     : "Το πεδίο είναι υποχρεωτικό",
@@ -159,16 +159,16 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Η μικρότερη τιμή του πεδίου είναι {0}",
             maxText : "Η μεγαλύτερη τιμή του πεδίου είναι {0}",
             nanText : "{0} δεν είναι αποδεκτός αριθμός"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Ανενεργό",
             disabledDatesText : "Ανενεργό",
             minText           : "Η ημερομηνία αυτού του πεδίου πρέπει να είναι μετά την {0}",
@@ -178,15 +178,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "Μεταφόρτωση δεδομένων...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Το πεδίο δέχεται μόνο διευθύνσεις Email σε μορφή "user@example.com"',
             urlText      : 'Το πεδίο δέχεται μόνο URL σε μορφή "http:/'+'/www.example.com"',
             alphaText    : 'Το πεδίο δέχεται μόνο χαρακτήρες και _',
@@ -194,8 +194,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'Δώστε τη διεύθυνση (URL) για το σύνδεσμο (link):',
             buttonTips : {
                 bold : {
@@ -273,8 +273,8 @@ Ext.onReady(function() {
     }
 
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Αύξουσα ταξινόμηση",
             sortDescText : "Φθίνουσα ταξινόμηση",
             lockText     : "Κλείδωμα στήλης",

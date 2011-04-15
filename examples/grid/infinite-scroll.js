@@ -10,7 +10,8 @@ Ext.require([
 ]);
 
 Ext.onReady(function(){
-    Ext.regModel('ForumThread', {
+    Ext.define('ForumThread', {
+        extend: 'Ext.data.Model',
         fields: [
             'title', 'forumtitle', 'forumid', 'author',
             {name: 'replycount', type: 'int'},
@@ -21,7 +22,7 @@ Ext.onReady(function(){
     });
 
     // create the Data Store
-    var store = new Ext.data.BufferStore({
+    var store = Ext.create('Ext.data.BufferStore', {
         id: 'store',
         pageSize: 200,
         model: 'ForumThread',
@@ -29,7 +30,7 @@ Ext.onReady(function(){
         proxy: {
             // load using script tags for cross domain, if the data in on the same domain as
             // this page, an HttpProxy would be better
-            type: 'scripttag',
+            type: 'jsonp',
             url: 'http://www.sencha.com/forum/remote_topics/index.php',
             extraParams: {
                 total: 50000
@@ -58,7 +59,7 @@ Ext.onReady(function(){
     }
 
 
-    var grid = new Ext.grid.GridPanel({
+    var grid = Ext.create('Ext.grid.Panel', {
         width: 700,
         height: 500,
         title: 'ExtJS.com - Browse Forums',
@@ -74,9 +75,9 @@ Ext.onReady(function(){
         columns:[{xtype: 'rownumberer',width: 40, sortable: false},{
             // id assigned so we can apply custom css (e.g. .x-grid-cell-topic b { color:#333 })
             // TODO: This poses an issue in subclasses of Grid now because Headers are now Components
-            // therefore the id will be registered in the ComponentMgr and conflict. Need a way to
+            // therefore the id will be registered in the ComponentManager and conflict. Need a way to
             // add additional CSS classes to the rendered cells.
-            id: 'topic', 
+            id: 'topic',
             text: "Topic",
             dataIndex: 'title',
             flex: 1,
@@ -104,7 +105,7 @@ Ext.onReady(function(){
         }],
         renderTo: Ext.getBody()
     });
-    
+
     // trigger the data store load
     store.guaranteeRange(0, 199);
 });

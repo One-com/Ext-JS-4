@@ -15,14 +15,17 @@
     right: 0;
     top: 0;
 }
-#app-portal .x-panel-body {
-    overflow-x: hidden !important;
-}
 .x-panel-ghost {
     z-index: 1;
 }
 .x-border-layout-ct {
     background: #DFE8F6;
+}
+.x-portal-body {
+    padding: 8px 0 0 8px;
+}
+.x-portal .x-portal-column {
+    padding: 0 8px 0 0;
 }
 .x-portal .x-panel-dd-spacer {
     border: 2px dashed #99bbe8;

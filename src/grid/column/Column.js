@@ -1,6 +1,6 @@
 /**
  * @class Ext.grid.column.Column
- * @extends Ext.grid.HeaderContainer
+ * @extends Ext.grid.header.Container
  *
  * Clicking on a header will toggle sort by the bound dataIndex if the Column is configured {@link #sortable}.
  *
@@ -11,7 +11,7 @@
  * @xtype gridcolumn
  */
 Ext.define('Ext.grid.column.Column', {
-    extend: 'Ext.grid.HeaderContainer',
+    extend: 'Ext.grid.header.Container',
     alias: 'widget.gridcolumn',
     requires: ['Ext.util.KeyNav'],
     alternateClassName: 'Ext.grid.Column',
@@ -113,48 +113,75 @@ Ext.define('Ext.grid.column.Column', {
     isHeader: true,
 
     initComponent: function() {
-        if (Ext.isDefined(this.header)) {
-            this.text = this.header;
-            delete this.header;
+        var me = this,
+            i,
+            len;
+        
+        if (Ext.isDefined(me.header)) {
+            me.text = me.header;
+            delete me.header;
         }
 
-        if (!this.triStateSort) {
-            this.possibleSortStates.length = 2;
+        // Flexed Headers need to have a minWidth defined so that they can never be squeezed out of existence by the
+        // HeaderContainer's specialized Box layout, the ColumnLayout. The ColumnLayout's overridden calculateChildboxes
+        // method extends the available layout space to accommodate the "desiredWidth" of all the columns.
+        if (me.flex) {
+            me.minWidth = me.minWidth || Ext.grid.plugin.HeaderResizer.prototype.minColWidth;
+        }
+        // Non-flexed Headers may never be squeezed in the event of a shortfall so
+        // always set their minWidth to their current width.
+        else {
+            me.minWidth = me.width;
+        }
+
+        if (!me.triStateSort) {
+            me.possibleSortStates.length = 2;
         }
 
         // A group header; It contains items which are themselves Headers
-        if (Ext.isDefined(this.columns)) {
-            this.isGroupHeader = true;
+        if (Ext.isDefined(me.columns)) {
+            me.isGroupHeader = true;
 
-            if (this.dataIndex) {
-                throw 'Group header may not accept a dataIndex';
+            //<debug>
+            if (me.dataIndex) {
+                Ext.Error.raise('Ext.grid.column.Column: Group header may not accept a dataIndex');
             }
+            if ((me.width && me.width !== Ext.grid.header.Container.prototype.defaultWidth) || me.flex) {
+                Ext.Error.raise('Ext.grid.column.Column: Group header does not support setting explicit widths or flexs. The group header width is calculated by the sum of its children.');
+            }
+            //</debug>
 
             // The headers become child items
-            this.items = this.columns;
-            delete this.columns;
-            delete this.flex;
-            this.width = 0;
+            me.items = me.columns;
+            delete me.columns;
+            delete me.flex;
+            me.width = 0;
 
             // Acquire initial width from sub headers
-            for (var i = 0, len = this.items.length; i < len; i++) {
-                this.width += this.items[i].width;
+            for (i = 0, len = me.items.length; i < len; i++) {
+                me.width += me.items[i].width || Ext.grid.header.Container.prototype.defaultWidth;
+                //<debug>
+                if (me.items[i].flex) {
+                    Ext.Error.raise('Ext.grid.column.Column: items of a grouped header do not support flexed values. Each item must explicitly define its width.');
+                }
+                //</debug>
             }
+            me.minWidth = me.width;
 
-            this.cls = (this.cls||'') + ' ' + Ext.baseCSSPrefix + 'group-header';
-            this.sortable = false;
-            this.fixed = true;
-            this.align = 'center';
+            me.cls = (me.cls||'') + ' ' + Ext.baseCSSPrefix + 'group-header';
+            me.sortable = false;
+            me.fixed = true;
+            me.align = 'center';
         }
 
-        Ext.applyIf(this.renderSelectors, {
+        Ext.applyIf(me.renderSelectors, {
             titleContainer: '.' + Ext.baseCSSPrefix + 'column-header-inner',
             triggerEl: '.' + Ext.baseCSSPrefix + 'column-header-trigger',
             textEl: '.' + Ext.baseCSSPrefix + 'column-header-text'
         });
 
         // Initialize as a HeaderContainer
-        this.callParent(arguments);
+        me.callParent(arguments);
     },
 
     onAdd: function(childHeader) {
@@ -168,11 +195,13 @@ Ext.define('Ext.grid.column.Column', {
     },
 
     initRenderData: function() {
-        Ext.applyIf(this.renderData, {
-            text: this.text,
-            menuDisabled: this.menuDisabled
+        var me = this;
+        
+        Ext.applyIf(me.renderData, {
+            text: me.text,
+            menuDisabled: me.menuDisabled
         });
-        return this.callParent(arguments);
+        return me.callParent(arguments);
     },
 
     // note that this should invalidate the menu cache
@@ -186,7 +215,7 @@ Ext.define('Ext.grid.column.Column', {
     // Find the topmost HeaderContainer: An ancestor which is NOT a Header.
     // Group Headers are themselves HeaderContainers
     getOwnerHeaderCt: function() {
-        return this.up(':not(gridheader)');
+        return this.up(':not([isHeader])');
     },
 
     afterRender: function() {
@@ -225,28 +254,31 @@ Ext.define('Ext.grid.column.Column', {
     setSize: function(width, height) {
         var me = this,
             headerCt = me.ownerCt,
+            ownerHeaderCt = me.getOwnerHeaderCt(),
             siblings,
             len, i,
-            oldWidth = me.width,
+            oldWidth = me.getWidth(),
             newWidth = 0;
 
-        this.callParent(arguments);
-
-        if (this.width !== oldWidth) {
+        if (width !== oldWidth) {
 
             // Bubble size changes upwards to group headers
             if (headerCt.isGroupHeader) {
+
                 siblings = headerCt.items.items;
                 len = siblings.length;
 
                 // Size the owning group to the size of its sub headers 
                 if (siblings[len - 1].rendered) {
+
                     for (i = 0; i < len; i++) {
-                        newWidth += siblings[i].getWidth();
+                        newWidth += (siblings[i] === me) ? width : siblings[i].getWidth();
                     }
+                    headerCt.minWidth = newWidth;
                     headerCt.setWidth(newWidth);
                 }
             }
+            me.callParent(arguments);
         }
     },
 
@@ -322,26 +354,28 @@ Ext.define('Ext.grid.column.Column', {
      * @param t
      */
     onElDblClick: function(e, t) {
-        var ownerCt = this.ownerCt;
-        if (ownerCt && Ext.Array.indexOf(ownerCt.items, this) !== 0 && this.isOnLeftEdge(e) ) {
-            ownerCt.expandToFit(this.previousSibling('gridheader'));
+        var me = this,
+            ownerCt = me.ownerCt;
+        if (ownerCt && Ext.Array.indexOf(ownerCt.items, me) !== 0 && me.isOnLeftEdge(e) ) {
+            ownerCt.expandToFit(me.previousSibling('gridcolumn'));
         }
     },
 
     onElClick: function(e, t) {
 
         // The grid's docked HeaderContainer.
-        var ownerHeaderCt = this.getOwnerHeaderCt();
+        var me = this,
+            ownerHeaderCt = me.getOwnerHeaderCt();
 
         if (ownerHeaderCt && !ownerHeaderCt.ddLock) {
             // Firefox doesn't check the current target in a within check.
             // Therefore we check the target directly and then within (ancestors)
-            if (this.triggerEl && (e.target === this.triggerEl.dom || t === this.triggerEl.dom || e.within(this.triggerEl))) {
-                ownerHeaderCt.onHeaderTriggerClick(this, e, t);
+            if (me.triggerEl && (e.target === me.triggerEl.dom || t === me.triggerEl.dom || e.within(me.triggerEl))) {
+                ownerHeaderCt.onHeaderTriggerClick(me, e, t);
             // if its not on the left hand edge, sort
-            } else if (e.getKey() || (!this.isOnLeftEdge(e) && !this.isOnRightEdge(e))) {
-                this.toggleSortState();
-                ownerHeaderCt.onHeaderClick(this, e, t);
+            } else if (e.getKey() || (!me.isOnLeftEdge(e) && !me.isOnRightEdge(e))) {
+                me.toggleSortState();
+                ownerHeaderCt.onHeaderClick(me, e, t);
             }
         }
     },
@@ -361,12 +395,15 @@ Ext.define('Ext.grid.column.Column', {
     },
 
     toggleSortState: function() {
-        if (this.sortable) {
-            var idx = Ext.Array.indexOf(this.possibleSortStates, this.sortState),
-                nextIdx;
+        var me = this,
+            idx,
+            nextIdx;
+            
+        if (me.sortable) {
+            idx = Ext.Array.indexOf(me.possibleSortStates, me.sortState);
 
-            nextIdx = (idx + 1) % this.possibleSortStates.length;
-            this.setSortState(this.possibleSortStates[nextIdx]);
+            nextIdx = (idx + 1) % me.possibleSortStates.length;
+            me.setSortState(me.possibleSortStates[nextIdx]);
         }
     },
 
@@ -389,126 +426,130 @@ Ext.define('Ext.grid.column.Column', {
     //setSortState: function(state, updateUI) {
     //setSortState: function(state, doSort) {
     setSortState: function(state, skipClear, initial) {
-        var colSortClsPrefix = Ext.baseCSSPrefix + 'column-header-sort-',
+        var me = this,
+            colSortClsPrefix = Ext.baseCSSPrefix + 'column-header-sort-',
             ascCls = colSortClsPrefix + 'ASC',
             descCls = colSortClsPrefix + 'DESC',
             nullCls = colSortClsPrefix + 'null',
-            ownerHeaderCt = this.getOwnerHeaderCt(),
-            oldSortState = this.sortState;
+            ownerHeaderCt = me.getOwnerHeaderCt(),
+            oldSortState = me.sortState;
 
-        if (oldSortState !== state) {
-            this.addCls(colSortClsPrefix + state);
+        if (oldSortState !== state && me.getSortParam()) {
+            me.addCls(colSortClsPrefix + state);
             // don't trigger a sort on the first time, we just want to update the UI
             if (state && !initial) {
-                this.doSort(state);
+                me.doSort(state);
             }
             switch (state) {
                 case 'DESC':
-                    this.removeCls(ascCls, nullCls);
+                    me.removeCls([ascCls, nullCls]);
                     break;
                 case 'ASC':
-                    this.removeCls(descCls, nullCls);
+                    me.removeCls([descCls, nullCls]);
                     break;
                 case null:
-                    this.removeCls(ascCls, descCls);
+                    me.removeCls([ascCls, descCls]);
                     break;
             }
-    
-            if (ownerHeaderCt && !this.triStateSort && !skipClear) {
-                ownerHeaderCt.clearOtherSortStates(this);
+            if (ownerHeaderCt && !me.triStateSort && !skipClear) {
+                ownerHeaderCt.clearOtherSortStates(me);
             }
-            this.sortState = state;
-            ownerHeaderCt.fireEvent('sortchange', ownerHeaderCt, this, state);
+            me.sortState = state;
+            ownerHeaderCt.fireEvent('sortchange', ownerHeaderCt, me, state);
         }
     },
 
     hide: function() {
-        var items,
+        var me = this,
+            items,
             len, i,
             lb,
             newWidth = 0,
-            ownerCt = this.getOwnerHeaderCt();
+            ownerHeaderCt = me.getOwnerHeaderCt();
 
         // Hiding means setting to zero width, so cache the width
-        this.oldWidth = this.getWidth();
+        me.oldWidth = me.getWidth();
 
         // Hiding a group header hides itself, and then informs the HeaderContainer about its sub headers (Suppressing header layout)
-        if (this.isGroupHeader) {
-            items = this.items.items;
-            this.callParent(arguments);
-            ownerCt.onHeaderHide(this);
+        if (me.isGroupHeader) {
+            items = me.items.items;
+            me.callParent(arguments);
+            ownerHeaderCt.onHeaderHide(me);
             for (i = 0, len = items.length; i < len; i++) {
                 items[i].hidden = true;
-                ownerCt.onHeaderHide(items[i], true);
+                ownerHeaderCt.onHeaderHide(items[i], true);
             }
             return;
         }
 
         // TODO: Work with Jamie to produce a scheme where we can show/hide/resize without triggering a layout cascade
-        lb = this.ownerCt.componentLayout.layoutBusy;
-        this.ownerCt.componentLayout.layoutBusy = true;
-        this.callParent(arguments);
-        this.ownerCt.componentLayout.layoutBusy = lb;
+        lb = me.ownerCt.componentLayout.layoutBusy;
+        me.ownerCt.componentLayout.layoutBusy = true;
+        me.callParent(arguments);
+        me.ownerCt.componentLayout.layoutBusy = lb;
 
         // Notify owning HeaderContainer
-        ownerCt.onHeaderHide(this);
+        ownerHeaderCt.onHeaderHide(me);
 
-        if (this.ownerCt.isGroupHeader) {
+        if (me.ownerCt.isGroupHeader) {
             // If we've just hidden the last header in a group, then hide the group
-            items = this.ownerCt.query('>:not([hidden])');
+            items = me.ownerCt.query('>:not([hidden])');
             if (!items.length) {
-                this.ownerCt.hide();
+                me.ownerCt.hide();
             }
             // Size the group down to accommodate fewer sub headers
             else {
                 for (i = 0, len = items.length; i < len; i++) {
                     newWidth += items[i].getWidth();
                 }
-                this.ownerCt.setWidth(newWidth);
+                me.ownerCt.minWidth = newWidth;
+                me.ownerCt.setWidth(newWidth);
             }
         }
     },
 
     show: function() {
-        var ownerCt = this.getOwnerHeaderCt(),
+        var me = this,
+            ownerCt = me.getOwnerHeaderCt(),
             lb,
             items,
             len, i,
             newWidth = 0;
 
         // TODO: Work with Jamie to produce a scheme where we can show/hide/resize without triggering a layout cascade
-        lb = this.ownerCt.componentLayout.layoutBusy;
-        this.ownerCt.componentLayout.layoutBusy = true;
-        this.callParent(arguments);
-        this.ownerCt.componentLayout.layoutBusy = lb;
+        lb = me.ownerCt.componentLayout.layoutBusy;
+        me.ownerCt.componentLayout.layoutBusy = true;
+        me.callParent(arguments);
+        me.ownerCt.componentLayout.layoutBusy = lb;
 
         // If a sub header, ensure that the group header is visible
-        if (this.isSubHeader) {
-            if (!this.ownerCt.isVisible()) {
-                this.ownerCt.show();
+        if (me.isSubHeader) {
+            if (!me.ownerCt.isVisible()) {
+                me.ownerCt.show();
             }
         }
 
         // If we've just shown a group with all its sub headers hidden, then show all its sub headers
-        if (this.isGroupHeader && !this.query(':not([hidden])').length) {
-            items = this.query('>*');
+        if (me.isGroupHeader && !me.query(':not([hidden])').length) {
+            items = me.query('>*');
             for (i = 0, len = items.length; i < len; i++) {
                 items[i].show();
             }
         }
 
         // Resize the owning group to accommodate
-        if (this.ownerCt.isGroupHeader) {
-            items = this.ownerCt.query('>:not([hidden])');
+        if (me.ownerCt.isGroupHeader) {
+            items = me.ownerCt.query('>:not([hidden])');
             for (i = 0, len = items.length; i < len; i++) {
                 newWidth += items[i].getWidth();
             }
-            this.ownerCt.setWidth(newWidth);
+            me.ownerCt.minWidth = newWidth;
+            me.ownerCt.setWidth(newWidth);
         }
 
         // Notify owning HeaderContainer
         if (ownerCt) {
-            ownerCt.onHeaderShow(this);
+            ownerCt.onHeaderShow(me);
         }
     },
 
@@ -555,9 +596,10 @@ Ext.define('Ext.grid.column.Column', {
      * Retrieves the editing field for editing associated with this header. Returns false if there
      * is no field associated with the Header the method will return false. If the
      * field has not been instantiated it will be created.
-     * @returns {Ext.form.Field} field
+     * @param record The {@link Ext.data.Model Model} instance being edited.
+     * @returns {Ext.form.field.Field} field
      */
-    getEditingField: function() {
+    getEditingField: function(record) {
         var field = this.field;
         if (!field) {
             return false;
@@ -566,7 +608,7 @@ Ext.define('Ext.grid.column.Column', {
             if (field.events) {
                 return field;
             } else {
-                return Ext.ComponentMgr.create(field, 'textfield');
+                return Ext.ComponentManager.create(field, 'textfield');
             }
         }
     },

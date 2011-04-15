@@ -16,7 +16,7 @@ required layout is simpler, a different layout should be chosen.
 
 For example, to simply make a single child item occupy all available space, use {@link Ext.layout.container.Fit fit layout}.
 
-To display one &quot;active&quot; item at full size from a choice of several child items, use {@link Ext.layout.container.Card card layout}.
+To display one "active" item at full size from a choice of several child items, use {@link Ext.layout.container.Card card layout}.
 
 Inner layouts are available by virtue of the fact that all {@link Ext.panel.Panel Panel}s
 added to the Viewport, either through its {@link #items}, or through the items, or the {@link #add}
@@ -28,44 +28,44 @@ for scrolling if needed using the {@link #autoScroll} config.
 An example showing a classic application border layout:
 
     new Ext.container.Viewport({
-        layout: &#39;border&#39;,
+        layout: 'border',
         items: [{
-            region: &#39;north&#39;,
-            html: &#39;&amp;lt;h1 class=&quot;x-panel-header&quot;&gt;Page Title&amp;lt;/h1&gt;&#39;,
+            region: 'north',
+            html: '&lt;h1 class="x-panel-header">Page Title&lt;/h1>',
             autoHeight: true,
             border: false,
-            margins: &#39;0 0 5 0&#39;
+            margins: '0 0 5 0'
         }, {
-            region: &#39;west&#39;,
+            region: 'west',
             collapsible: true,
-            title: &#39;Navigation&#39;,
+            title: 'Navigation',
             width: 200
             // the west region might typically utilize a {@link Ext.tree.TreePanel TreePanel} or a Panel with {@link Ext.layout.container.Accordion Accordion layout}
         }, {
-            region: &#39;south&#39;,
-            title: &#39;Title for Panel&#39;,
+            region: 'south',
+            title: 'Title for Panel',
             collapsible: true,
-            html: &#39;Information goes here&#39;,
+            html: 'Information goes here',
             split: true,
             height: 100,
             minHeight: 100
         }, {
-            region: &#39;east&#39;,
-            title: &#39;Title for the Grid Panel&#39;,
+            region: 'east',
+            title: 'Title for the Grid Panel',
             collapsible: true,
             split: true,
             width: 200,
-            xtype: &#39;grid&#39;,
+            xtype: 'grid',
             // remaining grid configuration not shown ...
             // notice that the GridPanel is added directly as the region
-            // it is not &quot;overnested&quot; inside another Panel
+            // it is not "overnested" inside another Panel
         }, {
-            region: &#39;center&#39;,
-            xtype: &#39;tabpanel&#39;, // TabPanel itself has no title
+            region: 'center',
+            xtype: 'tabpanel', // TabPanel itself has no title
             activeTab: 0,      // First tab active by default
             items: {
-                title: &#39;Default Tab&#39;,
-                html: &#39;The first tab\&#39;s content. Others may be added dynamically&#39;
+                title: 'Default Tab',
+                html: 'The first tab\'s content. Others may be added dynamically'
             }
         }]
     });
@@ -76,11 +76,11 @@ An example showing a classic application border layout:
  * @markdown
  * @xtype viewport
  */
-Ext.define(&#39;Ext.container.Viewport&#39;, {
-    extend: &#39;Ext.container.Container&#39;,
-    alias: &#39;widget.viewport&#39;,
-    requires: [&#39;Ext.EventManager&#39;],
-    alternateClassName: &#39;Ext.Viewport&#39;,
+Ext.define('Ext.container.Viewport', {
+    extend: 'Ext.container.Container',
+    alias: 'widget.viewport',
+    requires: ['Ext.EventManager'],
+    alternateClassName: 'Ext.Viewport',
     
     /*
      * Privatize config options which, if used, would interfere with the
@@ -123,17 +123,17 @@ Ext.define(&#39;Ext.container.Viewport&#39;, {
 
     isViewPort: true,
 
-    ariaRole: &#39;application&#39;,
+    ariaRole: 'application',
     initComponent : function() {
         var me = this,
             el;
         me.callParent(arguments);
-        Ext.fly(document.getElementsByTagName(&#39;html&#39;)[0]).addCls(Ext.baseCSSPrefix + &#39;viewport&#39;);
+        Ext.fly(document.getElementsByTagName('html')[0]).addCls(Ext.baseCSSPrefix + 'viewport');
         me.el = el = Ext.getBody();
         el.setHeight = Ext.emptyFn;
         el.setWidth = Ext.emptyFn;
         el.setSize = Ext.emptyFn;
-        el.dom.scroll = &#39;no&#39;;
+        el.dom.scroll = 'no';
         me.allowDomMove = false;
         //this.autoWidth = true;
         //this.autoHeight = true;
@@ -144,7 +144,7 @@ Ext.define(&#39;Ext.container.Viewport&#39;, {
     fireResize : function(w, h){
         // setSize is the single entry point to layouts
         this.setSize(w, h);
-        //this.fireEvent(&#39;resize&#39;, this, w, h, w, h);
+        //this.fireEvent('resize', this, w, h, w, h);
     }
 });
 ￿</pre></pre></body></html>

@@ -215,7 +215,7 @@ Ext.samples.samplesCatalog = [
                 text: 'List View',
                 url: 'grid/list-view.html',
                 icon: 'list-view.gif',
-                desc: "Ext 4 replaces Ext.ListView with the default Ext.grid.GridPanel.",
+                desc: "Ext 4 replaces Ext.ListView with the default Ext.grid.Panel.",
                 status: 'new'
             },
             {
@@ -224,6 +224,18 @@ Ext.samples.samplesCatalog = [
                 icon: 'progress-bar-pager.gif',
                 desc: "Progress Bar Pager Extension.",
                 status: 'updated'
+            },{
+                text: 'Property Grid',
+                url: 'grid/property.html',
+                icon: 'grid-property.gif',
+                desc: "Ccreate a property grid from an object.",
+                status: 'new'                
+            },{
+                text: 'Grid From Markup',
+                url: 'grid/transform-dom.html',
+                icon: 'grid-transform.gif',
+                desc: "Create a grid with from an existing, unformatted HTML table.",
+                status: 'new'                  
             }
         ]
     },
@@ -884,6 +896,32 @@ Ext.samples.samplesCatalog = [
         ]
     },
     {
+        title: 'MVC',
+        samples: [
+           {
+                text: 'Simple MVC',
+                url:  'app/simple/simple.html',
+                icon: 'app-simple.gif',
+                desc: 'A basic MVC  example.',
+                status: 'new'
+            },
+            {
+                text: 'Feed Viewer',
+                url:  'app/feed-viewer/feed-viewer.html',
+                icon: 'feeds.gif',
+                desc: 'MVC RSS feed reader example.',
+                status: 'new'
+            },
+            {
+                text: 'Nested Loading',
+                url:  'app/nested-loading/nested-loading.html',
+                icon: 'nested-loading.gif',
+                desc: 'MVC with Nested Loading.',
+                status: 'new'
+            }
+        ]
+    },
+    {
         title: 'Miscellaneous',
         samples: [
             {
@@ -985,17 +1023,17 @@ Ext.samples.samplesCatalog = [
                 status: 'new'
             },
             {
-                text: 'Nested Loading',
-                url: 'data/NestedLoading.html',
-                icon: 'direct.gif',
-                desc: "Load complex data and render it to a page.",
-                status: 'new'
-            },
-            {
                 text: 'Basic Templating',
-                url: 'platform/template.html',
+                url: 'platform/templates.html',
                 icon: 'templates.gif',
                 desc: "A basic templating example."
+            },
+            {
+                text: 'Lazy Loading Data Associations',
+                url: 'data/associations.html',
+                icon: 'data-associations.gif',
+                desc: "Demonstrates the ability to lazy load associative data.",
+                status: 'new'
             }
         ]
     }

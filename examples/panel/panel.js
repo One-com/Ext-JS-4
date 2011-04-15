@@ -33,6 +33,13 @@ Ext.onReady(function() {
     },{
         width: 150,
         height: 150,
+        unstyled: true,
+        title: 'Panel with unstyled:true',
+        bodyPadding: 0,
+        html: 'Some content'
+    },{
+        width: 150,
+        height: 150,
         border: false,
         title: 'Panel with border:false',
         html: 'Some content'
@@ -114,7 +121,7 @@ Ext.onReady(function() {
     Ext.each(configs, function(config) {
         var element = Ext.getBody().createChild({cls: 'panel-container'});
         
-        Ext.createWidget('panel', Ext.apply(config, {
+        Ext.createWidget('panel', Ext.applyIf(config, {
             renderTo: element,
             bodyPadding: 7
         }));

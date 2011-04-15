@@ -1,41 +1,37 @@
 /**
- * @class Ext.chart.series.Pie
+ * @class Ext.chart.series.Gauge
  * @extends Ext.chart.series.Series
  * 
- * Creates a Pie Chart. A Pie Chart is a useful visualization technique to display quantitative information for different 
- * categories that also have a meaning as a whole.
- * As with all other series, the Pie Series must be appended in the *series* Chart array configuration. See the Chart 
- * documentation for more information. A typical configuration object for the pie series could be:
- * 
-  <pre><code>
-    series: [{
-        type: 'pie',
-        field: 'data1',
-        showInLegend: true,
-        highlight: {
-          segment: {
-            margin: 20
-          }
-        },
-        label: {
-            field: 'name',
-            display: 'rotate',
-            contrast: true,
-            font: '18px Arial'
-        }
-    }]
-   </code></pre>
- 
- * 
- * In this configuration we set `pie` as the type for the series, set an object with specific style properties for highlighting options 
- * (triggered when hovering elements). We also set true to `showInLegend` so all the pie slices can be represented by a legend item. 
- * We set `data1` as the value of the field to determine the angle span for each pie slice. We also set a label configuration object 
- * where we set the field name of the store field to be renderer as text for the label. The labels will also be displayed rotated. 
- * We set `contrast` to `true` to flip the color of the label if it is to similar to the background color. Finally, we set the font family 
- * and size through the `font` parameter. 
- * 
- * @xtype pie
+ * Creates a Gauge Chart. Gauge Charts are used to show progress in a certain variable. There are two ways of using the Gauge chart.
+ * One is setting a store element into the Gauge and selecting the field to be used from that store. Another one is instanciating the
+ * visualization and using the `setValue` method to adjust the value you want.
  *
+ * A chart/series configuration for the Gauge visualization could look like this:
+ * 
+ *     {
+ *         xtype: 'chart',
+ *         store: store,
+ *         axes: [{
+ *             type: 'gauge',
+ *             position: 'gauge',
+ *             minimum: 0,
+ *             maximum: 100,
+ *             steps: 10,
+ *             margin: -10
+ *         }],
+ *         series: [{
+ *             type: 'gauge',
+ *             field: 'data1',
+ *             donut: false,
+ *             colorSet: ['#F49D10', '#ddd']
+ *         }]
+ *     }
+ * 
+ * In this configuration we create a special Gauge axis to be used with the gauge visualization (describing half-circle markers), and also we're
+ * setting a maximum, minimum and steps configuration options into the axis. The Gauge series configuration contains the store field to be bound to
+ * the visual display and the color set to be used with the visualization.
+ * 
+ * @xtype gauge
  */
 Ext.define('Ext.chart.series.Gauge', {
 
@@ -411,6 +407,9 @@ Ext.define('Ext.chart.series.Gauge', {
         delete me.value;
     },
     
+    /**
+     * Sets the Gauge chart to the current specified value.
+    */
     setValue: function (value) {
         this.value = value;
         this.drawSeries();

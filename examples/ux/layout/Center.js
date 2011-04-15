@@ -10,7 +10,7 @@
  * Example usage:</p>
  * <pre><code>
 // The content panel is centered in the container
-var p = new Ext.Panel({
+var p = Ext.create('Ext.Panel', {
     title: 'Center Layout',
     layout: 'ux.center',
     items: [{
@@ -23,7 +23,7 @@ var p = new Ext.Panel({
 // If you leave the title blank and specify no border
 // you'll create a non-visual, structural panel just
 // for centering the contents in the main container.
-var p = new Ext.Panel({
+var p = Ext.create('Ext.Panel', {
     layout: 'ux.center',
     border: false,
     items: [{
@@ -35,7 +35,7 @@ var p = new Ext.Panel({
 });
 </code></pre>
  */
-Ext.define('Ext.ux.layout.Center', { 
+Ext.define('Ext.ux.layout.Center', {
     extend: 'Ext.layout.container.Fit',
     alias: 'layout.ux.center',
 	// private
@@ -48,9 +48,9 @@ Ext.define('Ext.ux.layout.Center', {
                 if (Ext.isNumber(item.widthRatio)) {
                     width = Math.round(this.owner.el.getWidth() * item.widthRatio);
                 }
-            } 
+            }
             item.setSize(width, height);
         }
-        
+
     }
 });

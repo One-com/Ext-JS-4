@@ -1,15 +1,16 @@
 Ext.require([
-    'Ext.form.ComboBox',
+    'Ext.form.field.ComboBox',
     'Ext.form.FieldSet',
-    'Ext.tip.QuickTips',
+    'Ext.tip.QuickTipManager',
     'Ext.data.*'
 ]);
 
 Ext.onReady(function() {
-    Ext.tip.QuickTips.init();
+    Ext.tip.QuickTipManager.init();
 
     // Define the model for a State
-    Ext.regModel('State', {
+    Ext.define('State', {
+        extend: 'Ext.data.Model',
         fields: [
             {type: 'string', name: 'abbr'},
             {type: 'string', name: 'name'},
@@ -73,13 +74,13 @@ Ext.onReady(function() {
     ];
 
     // The data store holding the states; shared by each of the ComboBox examples below
-    var store = new Ext.data.Store({
+    var store = Ext.create('Ext.data.Store', {
         model: 'State',
         data: states
     });
 
     // Simple ComboBox using the data store
-    var simpleCombo = new Ext.form.ComboBox({
+    var simpleCombo = Ext.create('Ext.form.field.ComboBox', {
         fieldLabel: 'Select a single state',
         renderTo: 'simpleCombo',
         displayField: 'name',
@@ -91,7 +92,7 @@ Ext.onReady(function() {
     });
 
     // ComboBox with a custom item template
-    var customTplCombo = new Ext.form.ComboBox({
+    var customTplCombo = Ext.create('Ext.form.field.ComboBox', {
         fieldLabel: 'Select a single state',
         renderTo: 'customTplCombo',
         displayField: 'name',
@@ -102,13 +103,13 @@ Ext.onReady(function() {
 
         listConfig: {
             getInnerTpl: function() {
-                return '<div ext:qtip="{name}. {slogan}">{name} ({abbr})</div>';
+                return '<div data-qtip="{name}. {slogan}">{name} ({abbr})</div>';
             }
         }
     });
 
     // ComboBox with multiple selection enabled
-    var multiCombo = new Ext.form.ComboBox({
+    var multiCombo = Ext.create('Ext.form.field.ComboBox', {
         fieldLabel: 'Select multiple states',
         renderTo: 'multiSelectCombo',
         multiSelect: true,
@@ -124,7 +125,7 @@ Ext.onReady(function() {
     ////// Collapsible code panels; ignore: /////
 
     Ext.select('pre.code').each(function(pre) {
-        new Ext.form.FieldSet({
+        Ext.create('Ext.form.FieldSet', {
             contentEl: pre,
             renderTo: pre.parent(),
             title: 'View code for this example',

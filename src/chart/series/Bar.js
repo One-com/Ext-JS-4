@@ -42,6 +42,8 @@ Ext.define('Ext.chart.series.Bar', {
 
     extend: 'Ext.chart.series.Cartesian',
 
+    alternateClassName: ['Ext.chart.BarSeries', 'Ext.chart.BarChart', 'Ext.chart.StackedBarChart'],
+
     requires: ['Ext.chart.axis.Axis', 'Ext.fx.Anim'],
 
     /* End Definitions */
@@ -74,16 +76,16 @@ Ext.define('Ext.chart.series.Bar', {
     groupGutter: 38.2,
 
     /**
-     * @cfg {Number} xpadding
+     * @cfg {Number} xPadding
      * Padding between the left/right axes and the bars
      */
-    xpadding: 0,
+    xPadding: 0,
 
     /**
-     * @cfg {Number} ypadding
+     * @cfg {Number} yPadding
      * Padding between the top/bottom axes and the bars
      */
-    ypadding: 10,
+    yPadding: 10,
 
     constructor: function(config) {
         this.callParent(arguments);
@@ -141,14 +143,14 @@ Ext.define('Ext.chart.series.Bar', {
             ln = store.getCount(),
             gutter = me.gutter / 100;
         
-        return (me.chart.chartBBox[column ? 'width' : 'height'] - me[column ? 'xpadding' : 'ypadding'] * 2) / (ln * (gutter + 1) - gutter);
+        return (me.chart.chartBBox[column ? 'width' : 'height'] - me[column ? 'xPadding' : 'yPadding'] * 2) / (ln * (gutter + 1) - gutter);
     },
 
     // @private returns the gutters.
     getGutters: function() {
         var me = this,
             column = me.column,
-            gutter = Math.ceil(me[column ? 'xpadding' : 'ypadding'] + me.getBarGirth() / 2);
+            gutter = Math.ceil(me[column ? 'xPadding' : 'yPadding'] + me.getBarGirth() / 2);
         return me.column ? [gutter, 0] : [0, gutter];
     },
 
@@ -162,8 +164,8 @@ Ext.define('Ext.chart.series.Bar', {
             groupBarsLen = barsLen,
             groupGutter = me.groupGutter / 100,
             column = me.column,
-            xpadding = me.xpadding,
-            ypadding = me.ypadding,
+            xPadding = me.xPadding,
+            yPadding = me.yPadding,
             stacked = me.stacked,
             barWidth = me.getBarGirth(),
             math = Math,
@@ -192,9 +194,9 @@ Ext.define('Ext.chart.series.Bar', {
                 maxY = mmax(out.to || axis.prevMax, 0);
             }
         }
-        
+
         if (me.yField && !Ext.isNumber(minY)) {
-            axis = new Ext.chart.axis.Axis({
+            axis = Ext.create('Ext.chart.axis.Axis', {
                 chart: chart,
                 fields: [].concat(me.yField)
             });
@@ -202,17 +204,17 @@ Ext.define('Ext.chart.series.Bar', {
             minY = out.from || axis.prevMin;
             maxY = mmax(out.to || axis.prevMax, 0);
         }
-        
+
         if (!Ext.isNumber(minY)) {
             minY = 0;
         }
         if (!Ext.isNumber(maxY)) {
             maxY = 0;
         }
-        scale = (column ? bbox.height - ypadding * 2 : bbox.width - xpadding * 2) / (maxY - minY);
+        scale = (column ? bbox.height - yPadding * 2 : bbox.width - xPadding * 2) / (maxY - minY);
         groupBarWidth = barWidth / ((stacked ? 1 : groupBarsLen) * (groupGutter + 1) - groupGutter);
-        zero = (column) ? bbox.y + bbox.height - ypadding : bbox.x + xpadding;
-        
+        zero = (column) ? bbox.y + bbox.height - yPadding : bbox.x + xPadding;
+
         if (stacked) {
             total = [[], []];
             store.each(function(record, i) {
@@ -226,10 +228,12 @@ Ext.define('Ext.chart.series.Bar', {
                     total[+(rec > 0)][i] += mabs(rec);
                 }
             });
-            plus = mmax.apply(math, total[0]);
-            minus = mmax.apply(math, total[1]);
-            scale = (column ? bbox.height - ypadding * 2 : bbox.width - xpadding * 2) / mmax(plus + minus, (maxY - minY) || 1);
-            zero = zero + plus * scale * (column ? -1 : 1);
+            total[+(maxY > 0)].push(mabs(maxY));
+            total[+(minY > 0)].push(mabs(minY));
+            minus = mmax.apply(math, total[0]);
+            plus = mmax.apply(math, total[1]);
+            scale = (column ? bbox.height - yPadding * 2 : bbox.width - xPadding * 2) / (plus + minus);
+            zero = zero + minus * scale * (column ? -1 : 1);
         }
         else if (minY / maxY < 0) {
             zero = zero - minY * scale * (column ? -1 : 1);
@@ -243,8 +247,8 @@ Ext.define('Ext.chart.series.Bar', {
             groupBarWidth: groupBarWidth,
             scale: scale,
             zero: zero,
-            xpadding: xpadding,
-            ypadding: ypadding,
+            xPadding: xPadding,
+            yPadding: yPadding,
             signed: minY / maxY < 0,
             minY: minY,
             maxY: maxY
@@ -268,8 +272,8 @@ Ext.define('Ext.chart.series.Bar', {
             shadowAttributes = me.shadowAttributes,
             shadowGroupsLn = shadowGroups.length,
             bbox = bounds.bbox,
-            xpadding = me.xpadding,
-            ypadding = me.ypadding,
+            xPadding = me.xPadding,
+            yPadding = me.yPadding,
             stacked = me.stacked,
             barsLen = bounds.barsLen,
             colors = me.colorArrayStyle,
@@ -301,7 +305,7 @@ Ext.define('Ext.chart.series.Bar', {
                     Ext.apply(barAttr, {
                         height: height,
                         width: mmax(bounds.groupBarWidth, 0),
-                        x: (bbox.x + xpadding + i * bounds.barWidth * (1 + gutter) + counter * bounds.groupBarWidth * (1 + groupGutter) * !stacked),
+                        x: (bbox.x + xPadding + i * bounds.barWidth * (1 + gutter) + counter * bounds.groupBarWidth * (1 + groupGutter) * !stacked),
                         y: bottom - height
                     });
                 }
@@ -312,7 +316,7 @@ Ext.define('Ext.chart.series.Bar', {
                         height: mmax(bounds.groupBarWidth, 0),
                         width: height + (bottom == bounds.zero),
                         x: bottom + (bottom != bounds.zero),
-                        y: (bbox.y + ypadding + offset * bounds.barWidth * (1 + gutter) + counter * bounds.groupBarWidth * (1 + groupGutter) * !stacked + 1)
+                        y: (bbox.y + yPadding + offset * bounds.barWidth * (1 + gutter) + counter * bounds.groupBarWidth * (1 + groupGutter) * !stacked + 1)
                     });
                 }
                 if (height < 0) {

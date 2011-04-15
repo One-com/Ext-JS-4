@@ -26,30 +26,30 @@ Ext.core.Element.OFFSETS = 3;
 Ext.core.Element.ASCLASS = 4;
 
 <a name="prop-Ext.core.Element-Ext.core.Element.visibilityCls"></a>/**
- * Defaults to &#39;x-hide-nosize&#39;
+ * Defaults to 'x-hide-nosize'
  * @static
  * @type String
  */
-Ext.core.Element.visibilityCls = Ext.baseCSSPrefix + &#39;hide-nosize&#39;;
+Ext.core.Element.visibilityCls = Ext.baseCSSPrefix + 'hide-nosize';
 
 Ext.core.Element.addMethods(function(){
     var El = Ext.core.Element,
-        OPACITY = &quot;opacity&quot;,
-        VISIBILITY = &quot;visibility&quot;,
-        DISPLAY = &quot;display&quot;,
-        HIDDEN = &quot;hidden&quot;,
-        OFFSETS = &quot;offsets&quot;,
-        ASCLASS = &quot;asclass&quot;,
-        NONE = &quot;none&quot;,
-        NOSIZE = &#39;nosize&#39;,
-        ORIGINALDISPLAY = &#39;originalDisplay&#39;,
-        VISMODE = &#39;visibilityMode&#39;,
-        ISVISIBLE = &#39;isVisible&#39;,
+        OPACITY = "opacity",
+        VISIBILITY = "visibility",
+        DISPLAY = "display",
+        HIDDEN = "hidden",
+        OFFSETS = "offsets",
+        ASCLASS = "asclass",
+        NONE = "none",
+        NOSIZE = 'nosize',
+        ORIGINALDISPLAY = 'originalDisplay',
+        VISMODE = 'visibilityMode',
+        ISVISIBLE = 'isVisible',
         data = El.data,
         getDisplay = function(dom){
             var d = data(dom, ORIGINALDISPLAY);
             if(d === undefined){
-                data(dom, ORIGINALDISPLAY, d = &#39;&#39;);
+                data(dom, ORIGINALDISPLAY, d = '');
             }
             return d;
         },
@@ -63,14 +63,14 @@ Ext.core.Element.addMethods(function(){
 
     return {
         <a name="prop-Ext.core.Element-originalDisplay"></a>/**
-         * The element&#39;s default display mode  (defaults to &quot;&quot;)
+         * The element's default display mode  (defaults to "")
          * @type String
          */
-        originalDisplay : &quot;&quot;,
+        originalDisplay : "",
         visibilityMode : 1,
 
         <a name="method-Ext.core.Element-setVisibilityMode"></a>/**
-         * Sets the element&#39;s visibility mode. When setVisible() is called it
+         * Sets the element's visibility mode. When setVisible() is called it
          * will use this to determine whether to set the visibility or the display property.
          * @param {Number} visMode Ext.core.Element.VISIBILITY or Ext.core.Element.DISPLAY
          * @return {Ext.core.Element} this
@@ -89,13 +89,13 @@ Ext.core.Element.addMethods(function(){
                 dom = me.dom,
                 visible = data(dom, ISVISIBLE);
 
-            if(typeof visible == &#39;boolean&#39;){ //return the cached value if registered
+            if(typeof visible == 'boolean'){ //return the cached value if registered
                 return visible;
             }
             //Determine the current state based on display states
-            visible = !me.isStyle(VISIBILITY, HIDDEN) &amp;&amp;
-                      !me.isStyle(DISPLAY, NONE) &amp;&amp;
-                      !((getVisMode(dom) == El.ASCLASS) &amp;&amp; me.hasCls(me.visibilityCls || El.visibilityCls));
+            visible = !me.isStyle(VISIBILITY, HIDDEN) &&
+                      !me.isStyle(DISPLAY, NONE) &&
+                      !((getVisMode(dom) == El.ASCLASS) && me.hasCls(me.visibilityCls || El.visibilityCls));
 
             data(dom, ISVISIBLE, visible);
             return visible;
@@ -115,7 +115,7 @@ Ext.core.Element.addMethods(function(){
 
 
             // hideMode string override
-            if (typeof animate == &#39;string&#39;){
+            if (typeof animate == 'string'){
                 switch (animate) {
                     case DISPLAY:
                         visMode = El.DISPLAY;
@@ -138,7 +138,7 @@ Ext.core.Element.addMethods(function(){
             if (!animate || !me.anim) {
                 if(visMode == El.ASCLASS ){
 
-                    me[visible?&#39;removeCls&#39;:&#39;addCls&#39;](me.visibilityCls || El.visibilityCls);
+                    me[visible?'removeCls':'addCls'](me.visibilityCls || El.visibilityCls);
 
                 } else if (visMode == El.DISPLAY){
 
@@ -148,24 +148,24 @@ Ext.core.Element.addMethods(function(){
 
                     if (!visible){
                         me.hideModeStyles = {
-                            position: me.getStyle(&#39;position&#39;),
-                            top: me.getStyle(&#39;top&#39;),
-                            left: me.getStyle(&#39;left&#39;)
+                            position: me.getStyle('position'),
+                            top: me.getStyle('top'),
+                            left: me.getStyle('left')
                         };
-                        me.applyStyles({position: &#39;absolute&#39;, top: &#39;-10000px&#39;, left: &#39;-10000px&#39;});
+                        me.applyStyles({position: 'absolute', top: '-10000px', left: '-10000px'});
                     }
 
-                    // Only &quot;restore&quot; as position if we have actually been hidden using offsets.
+                    // Only "restore" as position if we have actually been hidden using offsets.
                     // Calling setVisible(true) on a positioned element should not reposition it.
                     else if (me.hideModeStyles) {
-                        me.applyStyles(me.hideModeStyles || {position: &#39;&#39;, top: &#39;&#39;, left: &#39;&#39;});
+                        me.applyStyles(me.hideModeStyles || {position: '', top: '', left: ''});
                         delete me.hideModeStyles;
                     }
 
                 }else{
                     me.fixDisplay();
-                    // Show by clearing visibility style. Explicitly setting to &quot;visible&quot; overrides parent visibility setting.
-                    dom.style.visibility = visible ? &#39;&#39; : HIDDEN;
+                    // Show by clearing visibility style. Explicitly setting to "visible" overrides parent visibility setting.
+                    dom.style.visibility = visible ? '' : HIDDEN;
                 }
             }else{
                 // closure for composites
@@ -176,7 +176,7 @@ Ext.core.Element.addMethods(function(){
                 if (!Ext.isObject(animate)) {
                     animate = {
                         duration: 350,
-                        easing: &#39;ease-in&#39;
+                        easing: 'ease-in'
                     };
                 }
                 me.animate(Ext.applyIf({
@@ -204,7 +204,7 @@ Ext.core.Element.addMethods(function(){
         },
 
         <a name="method-Ext.core.Element-toggle"></a>/**
-         * Toggles the element&#39;s visibility or display, depending on visibility mode.
+         * Toggles the element's visibility or display, depending on visibility mode.
          * @param {Boolean/Object} animate (optional) True for the default animation, or a standard Element animation config object
          * @return {Ext.core.Element} this
          */
@@ -220,7 +220,7 @@ Ext.core.Element.addMethods(function(){
          * @return {Ext.core.Element} this
          */
         setDisplayed : function(value) {
-            if(typeof value == &quot;boolean&quot;){
+            if(typeof value == "boolean"){
                value = value ? getDisplay(this.dom) : NONE;
             }
             this.setStyle(DISPLAY, value);
@@ -234,19 +234,19 @@ Ext.core.Element.addMethods(function(){
                 me.setStyle(VISIBILITY, HIDDEN);
                 me.setStyle(DISPLAY, getDisplay(this.dom)); // first try reverting to default
                 if (me.isStyle(DISPLAY, NONE)) { // if that fails, default to block
-                    me.setStyle(DISPLAY, &quot;block&quot;);
+                    me.setStyle(DISPLAY, "block");
                 }
             }
         },
 
         <a name="method-Ext.core.Element-hide"></a>/**
-         * Hide this element - Uses display mode to determine whether to use &quot;display&quot; or &quot;visibility&quot;. See {@link #setVisible}.
+         * Hide this element - Uses display mode to determine whether to use "display" or "visibility". See {@link #setVisible}.
          * @param {Boolean/Object} animate (optional) true for the default animation or a standard Element animation config object
          * @return {Ext.core.Element} this
          */
         hide : function(animate){
             // hideMode override
-            if (typeof animate == &#39;string&#39;){
+            if (typeof animate == 'string'){
                 this.setVisible(false, animate);
                 return this;
             }
@@ -255,13 +255,13 @@ Ext.core.Element.addMethods(function(){
         },
 
         <a name="method-Ext.core.Element-show"></a>/**
-        * Show this element - Uses display mode to determine whether to use &quot;display&quot; or &quot;visibility&quot;. See {@link #setVisible}.
+        * Show this element - Uses display mode to determine whether to use "display" or "visibility". See {@link #setVisible}.
         * @param {Boolean/Object} animate (optional) true for the default animation or a standard Element animation config object
          * @return {Ext.core.Element} this
          */
         show : function(animate){
             // hideMode override
-            if (typeof animate == &#39;string&#39;){
+            if (typeof animate == 'string'){
                 this.setVisible(true, animate);
                 return this;
             }

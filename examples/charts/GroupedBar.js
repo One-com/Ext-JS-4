@@ -27,6 +27,7 @@ Ext.onReady(function () {
         items: {
             id: 'chartCmp',
             xtype: 'chart',
+            style: 'background:#fff',
             animate: true,
             shadow: true,
             store: store1,

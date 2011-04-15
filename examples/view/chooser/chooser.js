@@ -13,7 +13,7 @@ Ext.Loader.setPath('Ext.ux', '../../ux');
 
 Ext.require([
     'Ext.button.Button',
-    'Ext.data.AjaxProxy',
+    'Ext.data.proxy.Ajax',
     'Ext.chooser.InfoPanel',
     'Ext.chooser.IconBrowser',
     'Ext.chooser.Window',

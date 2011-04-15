@@ -1,10 +1,10 @@
 /**
  * @class Ext.ux.TabCloseMenu
- * @extends Object 
+ * @extends Object
  * Plugin (ptype = 'tabclosemenu') for adding a close context menu to tabs. Note that the menu respects
  * the closable configuration on the tab. As such, commands like remove others and remove all will not
  * remove items that are not closable.
- * 
+ *
  * @constructor
  * @param {Object} config The configuration options
  * @ptype tabclosemenu
@@ -18,31 +18,31 @@ Ext.define('Ext.tab.TabCloseMenu', {
      * The text for closing the current tab. Defaults to <tt>'Close Tab'</tt>.
      */
     closeTabText: 'Close Tab',
-    
+
     /**
      * @cfg {Boolean} showCloseOthers
-     * Indicates whether to show the 'Close Others' option. Defaults to <tt>true</tt>. 
+     * Indicates whether to show the 'Close Others' option. Defaults to <tt>true</tt>.
      */
     showCloseOthers: true,
-    
+
     /**
      * @cfg {String} closeOtherTabsText
      * The text for closing all tabs except the current one. Defaults to <tt>'Close Other Tabs'</tt>.
      */
     closeOthersTabsText: 'Close Other Tabs',
-    
+
     /**
      * @cfg {Boolean} showCloseAll
-     * Indicates whether to show the 'Close All' option. Defaults to <tt>true</tt>. 
+     * Indicates whether to show the 'Close All' option. Defaults to <tt>true</tt>.
      */
     showCloseAll: true,
-    
+
     /**
      * @cfg {String} closeAllTabsText
      * <p>The text for closing all tabs. Defaults to <tt>'Close All Tabs'</tt>.
      */
     closeAllTabsText: 'Close All Tabs',
-    
+
     //public
     init : function(tabpanel){
         this.tabPanel = tabpanel;
@@ -54,7 +54,7 @@ Ext.define('Ext.tab.TabCloseMenu', {
             single: true
         });
     },
-    
+
     onAfterLayout: function() {
         this.mon(this.tabBar.el, {
             scope: this,
@@ -62,7 +62,7 @@ Ext.define('Ext.tab.TabCloseMenu', {
             delegate: 'div.x-tab'
         });
     },
-    
+
     onBeforeDestroy : function(){
         Ext.destroy(this.menu);
         this.callParent(arguments);
@@ -77,10 +77,10 @@ Ext.define('Ext.tab.TabCloseMenu', {
             closeAll = menu.child('*[text="' + me.closeAllTabsText + '"]'),
             tab = me.tabBar.getChildByElement(target),
             index = me.tabBar.items.indexOf(tab);
-        
+
         me.item = me.tabPanel.getComponent(index);
         menu.child('*[text="' + me.closeTabText + '"]').setDisabled(!me.item.closable);
-        
+
         me.tabPanel.items.each(function(item){
             if (item.closable) {
                 disableAll = false;
@@ -90,16 +90,16 @@ Ext.define('Ext.tab.TabCloseMenu', {
                 }
             }
         });
-        
+
         menu.child('*[text="' + me.closeOthersTabsText + '"]').setDisabled(disableOthers);
         if(closeAll){
             closeAll.setDisabled(disableAll);
         }
-        
+
         event.preventDefault();
         menu.showAt(event.getXY());
     },
-    
+
     createMenu : function(){
         if(!this.menu){
             var items = [{
@@ -124,28 +124,28 @@ Ext.define('Ext.tab.TabCloseMenu', {
                     handler: this.onCloseAll
                 });
             }
-            this.menu = new Ext.menu.Menu({
+            this.menu = Ext.create('Ext.menu.Menu', {
                 items: items
             });
         }
         return this.menu;
     },
-    
+
     onClose : function(){
         this.tabPanel.remove(this.item);
     },
-    
+
     onCloseOthers : function(){
         this.doClose(true);
     },
-    
+
     onCloseAll : function(){
         this.doClose(false);
     },
-    
+
     doClose : function(excludeActive){
         var items = [];
-        
+
         this.tabPanel.items.each(function(item){
             if(item.closable){
                 if(!excludeActive || item != this.item){
@@ -153,7 +153,7 @@ Ext.define('Ext.tab.TabCloseMenu', {
                 }
             }
         }, this);
-        
+
         Ext.each(items, function(item){
             this.tabPanel.remove(item);
         }, this);

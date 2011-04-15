@@ -99,7 +99,7 @@ $tab-base-color-over: lighten(#616f8c, 5);
 $tab-base-color-active: $orange;
 
 $tabbar-body-height: 31px;
-$tab-height: 26px;
+$tab-height: 27px;
 
 $tab-color: #fff;
 $tab-color-active: $tab-color;
@@ -163,10 +163,27 @@ $datepicker-th-background-color: #3a4051;
 $datepicker-th-color: #fff;
 $datepicker-th-border-bottom-color: #535b5c;
 
+$datepicker-td-height: 21px;
+
 $datepicker-item-color: #fff;
 $datepicker-item-hover-background-color: #7e5530;
 $datepicker-selected-item-border-color: #864900;
 $datepicker-selected-item-background-color: #e5872c;
+
+$datepicker-monthpicker-height: 172px;
+
+$datepicker-monthpicker-item-color: #fff;
+$datepicker-monthpicker-item-border: 0 none;
+$datepicker-monthpicker-item-selected-background-color: $datepicker-selected-item-background-color;
+
+// boundlist
+$boundlist-background-color: #404551;
+$boundlist-border-color: #222732;
+$boundlist-border-width: 2px;
+
+$boundlist-item-border-width: 0;
+$boundlist-item-over-background-color: #e5872c;
+$boundlist-item-selected-background-color: #e5872c; 
 
 @import 'compass';
 @import 'ext4/default/all';

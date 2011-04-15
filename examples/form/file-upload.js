@@ -1,6 +1,6 @@
 Ext.require([
-    'Ext.form.File',
-    'Ext.form.FormPanel',
+    'Ext.form.field.File',
+    'Ext.form.Panel',
     'Ext.window.MessageBox'
 ]);
 
@@ -17,7 +17,7 @@ Ext.onReady(function(){
         });
     };
 
-    var fibasic = Ext.create('Ext.form.File', {
+    var fibasic = Ext.create('Ext.form.field.File', {
         renderTo: 'fi-basic',
         width: 400,
         hideLabel: true
@@ -32,7 +32,7 @@ Ext.onReady(function(){
         }
     });
 
-    Ext.create('Ext.form.File', {
+    Ext.create('Ext.form.field.File', {
         renderTo: 'fi-button',
         buttonOnly: true,
         hideLabel: true,
@@ -58,7 +58,7 @@ Ext.onReady(function(){
         }
     });
 
-    Ext.create('Ext.form.FormPanel', {
+    Ext.create('Ext.form.Panel', {
         renderTo: 'fi-form',
         width: 500,
         frame: true,
@@ -82,7 +82,7 @@ Ext.onReady(function(){
             fieldLabel: 'Photo',
             name: 'photo-path',
             buttonText: '',
-            buttonCfg: {
+            buttonConfig: {
                 iconCls: 'upload-icon'
             }
         }],

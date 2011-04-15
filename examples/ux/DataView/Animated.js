@@ -196,7 +196,7 @@ Ext.define('Ext.ux.DataView.Animated', {
                         });
                     }
                     
-                    Ext.TaskMgr.stop(task);
+                    Ext.TaskManager.stop(task);
                 } else {
                     //move each item
                     for (id in newPositions) {
@@ -229,7 +229,7 @@ Ext.define('Ext.ux.DataView.Animated', {
                 scope   : this
             };
             
-            Ext.TaskMgr.start(task);
+            Ext.TaskManager.start(task);
             
             //show new items
             Ext.iterate(added, function(id, item) {

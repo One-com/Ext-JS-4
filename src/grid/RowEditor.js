@@ -8,10 +8,15 @@
 
 /**
  * @class Ext.grid.RowEditor
- * @extends Ext.form.FormPanel
+ * @extends Ext.form.Panel
+ * 
+ * Internal utility class used to provide row editing functionality. For developers, they should use
+ * the RowEditing plugin to use this functionality with a grid.
+ * 
+ * @ignore
  */
 Ext.define('Ext.grid.RowEditor', {
-    extend: 'Ext.form.FormPanel',
+    extend: 'Ext.form.Panel',
     requires: [
         'Ext.tip.ToolTip',
         'Ext.util.HashMap',
@@ -128,7 +133,7 @@ Ext.define('Ext.grid.RowEditor', {
             params.row = view.getNode(idx);
             me.reposition();
             if (me.tooltip && me.tooltip.isVisible()) {
-                me.tooltip.initTarget(params.row);
+                me.tooltip.setTarget(params.row);
             }
         } else {
             me.editingPlugin.cancelEdit();
@@ -191,7 +196,7 @@ Ext.define('Ext.grid.RowEditor', {
     
     onFieldAdd: function(hm, fieldId, column) {
         var me = this,
-            colIdx = me.editingPlugin.grid.headerCt.getIndexOfHeader(column),
+            colIdx = me.editingPlugin.grid.headerCt.getHeaderIndex(column),
             field = column.getField({ xtype: 'displayfield' });
         
         me.insert(colIdx, field);
@@ -214,7 +219,7 @@ Ext.define('Ext.grid.RowEditor', {
         var me = this,
             hm = me.columns;
         hm.each(function(fieldId) {
-            hm.removeByKey(fieldId);
+            hm.removeAtKey(fieldId);
         });
     },
 
@@ -226,7 +231,7 @@ Ext.define('Ext.grid.RowEditor', {
             btns;
         
         if (!me.floatingButtons) {
-            btns = me.floatingButtons = new Ext.Container({
+            btns = me.floatingButtons = Ext.create('Ext.Container', {
                 renderTpl: [
                     '<div class="{baseCls}-ml"></div>',
                     '<div class="{baseCls}-mr"></div>',
@@ -288,8 +293,7 @@ Ext.define('Ext.grid.RowEditor', {
             scrollLeft = grid.view.el.dom.scrollLeft,
             btnWidth = btns.getWidth(),
             left = (width - btnWidth) / 2 + scrollLeft,
-            
-            top, rowH, newHeight,
+            y, rowH, newHeight,
             
             invalidateScroller = function() {
                 // Bring our row into view if necessary, so a row editor that's already
@@ -307,7 +311,10 @@ Ext.define('Ext.grid.RowEditor', {
 
         // need to set both top/left
         if (row && Ext.isElement(row.dom)) {
-            top = row.dom.offsetTop - 5;
+            // Get the y position of the row relative to its top-most static parent.
+            // offsetTop will be relative to the table, and is incorrect
+            // when mixed with certain grid features (e.g., grouping).
+            y = row.getXY()[1] - 5;
             rowH = row.getHeight();
             newHeight = rowH + 10;
             
@@ -328,7 +335,7 @@ Ext.define('Ext.grid.RowEditor', {
             if (animate) {
                 var animObj = {
                     to: {
-                        top: top
+                        y: y
                     },
                     listeners: {
                         afteranimate: invalidateScroller
@@ -336,7 +343,7 @@ Ext.define('Ext.grid.RowEditor', {
                 };
                 me.animate(animObj);
             } else {
-                me.el.setTop(top);
+                me.el.setY(y);
                 invalidateScroller();
             }
         }
@@ -428,7 +435,7 @@ Ext.define('Ext.grid.RowEditor', {
         if (column.renderer) {
             var metaData = { tdCls: '', style: '' },
                 rowIdx = store.indexOf(record),
-                colIdx = headerCt.getIndexOfHeader(column);
+                colIdx = headerCt.getHeaderIndex(column);
             
             value = column.renderer.call(
                 column.scope || headerCt.ownerCt,
@@ -555,8 +562,8 @@ Ext.define('Ext.grid.RowEditor', {
             row = Ext.get(params.row),
             viewEl = params.grid.view.el;
         
-        tip.initTarget(row);
-        tip.showAt(-10000, -10000);
+        tip.setTarget(row);
+        tip.showAt([-10000, -10000]);
         tip.body.update(me.getErrors());
         tip.mouseOffset = [viewEl.getWidth() - row.getWidth() + me.lastScrollLeft + 15, 0];
         me.repositionTip();

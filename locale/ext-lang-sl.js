@@ -11,16 +11,16 @@ Ext.onReady(function() {
        Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-       Ext.grid.GridPanel.prototype.ddText = "{0} izbranih vrstic";
+    if(Ext.grid.Panel){
+       Ext.grid.Panel.prototype.ddText = "{0} izbranih vrstic";
     }
 
     if(Ext.TabPanelItem){
        Ext.TabPanelItem.prototype.closeText = "Zapri zavihek";
     }
 
-    if(Ext.form.BaseField){
-       Ext.form.BaseField.prototype.invalidText = "Neveljavna vrednost";
+    if(Ext.form.field.Base){
+       Ext.form.field.Base.prototype.invalidText = "Neveljavna vrednost";
     }
 
     if(Ext.LoadMask){
@@ -89,7 +89,7 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
        Ext.apply(Ext.PagingToolbar.prototype, {
           beforePageText : "Stran",
           afterPageText  : "od {0}",
@@ -103,8 +103,8 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.form.Text){
-       Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+       Ext.apply(Ext.form.field.Text.prototype, {
           minLengthText : "Minimalna dolžina tega polja je {0}",
           maxLengthText : "Maksimalna dolžina tega polja je {0}",
           blankText     : "To polje je obvezno",
@@ -113,16 +113,16 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.form.Number){
-       Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+       Ext.apply(Ext.form.field.Number.prototype, {
           minText : "Minimalna vrednost tega polja je {0}",
           maxText : "Maksimalna vrednost tega polja je {0}",
           nanText : "{0} ni veljavna številka"
        });
     }
 
-    if(Ext.form.Date){
-       Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+       Ext.apply(Ext.form.field.Date.prototype, {
           disabledDaysText  : "Onemogočen",
           disabledDatesText : "Onemogočen",
           minText           : "Datum mora biti po {0}",
@@ -132,15 +132,15 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.form.ComboBox){
-       Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+       Ext.apply(Ext.form.field.ComboBox.prototype, {
           loadingText       : "Nalagam...",
           valueNotFoundText : undefined
        });
     }
 
-    if(Ext.form.VTypes){
-       Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+       Ext.apply(Ext.form.field.VTypes, {
           emailText    : 'To polje je e-mail naslov formata "ime@domena.si"',
           urlText      : 'To polje je URL naslov formata "http:/'+'/www.domena.si"',
           alphaText    : 'To polje lahko vsebuje samo črke in _',
@@ -148,8 +148,8 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.grid.HeaderContainer){
-       Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+       Ext.apply(Ext.grid.header.Container.prototype, {
           sortAscText  : "Sortiraj naraščajoče",
           sortDescText : "Sortiraj padajoče",
           lockText     : "Zakleni stolpec",

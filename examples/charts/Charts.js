@@ -59,7 +59,7 @@ Ext.onReady(function() {
                     stroke: '#38B8BF',
                     'stroke-width': 3
                 },
-                markerCfg: {
+                markerConfig: {
                     type: 'circle',
                     size: 4,
                     radius: 4,
@@ -123,7 +123,7 @@ Ext.onReady(function() {
                     stroke: '#38B8BF',
                     'stroke-width': 3
                 },
-                markerCfg: {
+                markerConfig: {
                     type: 'circle',
                     size: 4,
                     radius: 4,
@@ -195,7 +195,7 @@ Ext.onReady(function() {
                     fill: 'url(#bar-gradient)',
                     'stroke-width': 3
                 },
-                markerCfg: {
+                markerConfig: {
                     type: 'circle',
                     size: 4,
                     radius: 4,
@@ -221,7 +221,7 @@ Ext.onReady(function() {
                     stroke: '#18428E',
                     'stroke-width': 3
                 },
-                markerCfg: {
+                markerConfig: {
                     type: 'circle',
                     size: 4,
                     radius: 4,

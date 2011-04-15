@@ -12,16 +12,16 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} выбранных строк";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} выбранных строк";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "Закрыть эту вкладку";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "Значение в этом поле неверное";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "Значение в этом поле неверное";
     }
 
     if(Ext.LoadMask){
@@ -139,7 +139,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Страница",
             afterPageText  : "из {0}",
@@ -153,8 +153,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Минимальная длина этого поля {0}",
             maxLengthText : "Максимальная длина этого поля {0}",
             blankText     : "Это поле обязательно для заполнения",
@@ -163,16 +163,16 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Значение этого поля не может быть меньше {0}",
             maxText : "Значение этого поля не может быть больше {0}",
             nanText : "{0} не является числом"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Не доступно",
             disabledDatesText : "Не доступно",
             minText           : "Дата в этом поле должна быть позде {0}",
@@ -183,15 +183,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "Загрузка...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText     : 'Это поле должно содержать адрес электронной почты в формате "user@example.com"',
             urlText       : 'Это поле должно содержать URL в формате "http:/'+'/www.example.com"',
             alphaText     : 'Это поле должно содержать только латинские буквы и символ подчеркивания "_"',
@@ -199,8 +199,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'Пожалуйста введите адрес:',
             buttonTips : {
                 bold : {
@@ -281,8 +281,8 @@ Ext.onReady(function() {
         Ext.form.Basic.prototype.waitTitle = "Пожалуйста подождите...";
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Сортировать по возрастанию",
             sortDescText : "Сортировать по убыванию",
             lockText     : "Закрепить столбец",

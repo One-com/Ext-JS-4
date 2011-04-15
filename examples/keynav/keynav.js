@@ -6,14 +6,14 @@ Ext.require([
 
 Ext.define('Board', {
     constructor: function(size, activeCls){
-        this.size = size;   
+        this.size = size;
         this.activeCls = activeCls;
-    },    
-    
+    },
+
     render: function(el){
         el = Ext.get(el);
-        
-        var tpl = new Ext.XTemplate(
+
+        var tpl = Ext.create('Ext.XTemplate',
             '<tpl for=".">',
                 '<div class="square">{.}</div>',
                 '<tpl if="xindex % ' + this.size + ' === 0"><div class="x-clear"></div></tpl>',
@@ -21,42 +21,42 @@ Ext.define('Board', {
             data = [],
             i = 0,
             max = this.size * this.size;
-        
+
         for (; i < max; ++i) {
             data.push(i + 1);
         }
         tpl.append(el, data);
         this.cells = el.select('.square');
     },
-    
+
     getIndex: function(xy){
-        return this.size * xy[0] + xy[1];    
+        return this.size * xy[0] + xy[1];
     },
-    
+
     constrain: function(x, y) {
         x = Ext.Number.constrain(x, 0, this.size - 1);
         y = Ext.Number.constrain(y, 0, this.size - 1);
         return [x, y];
     },
-    
+
     setActive: function(x, y) {
         var xy = this.constrain(x, y),
             cell = this.cells.item(this.getIndex(xy));
-            
+
         cell.radioCls(this.activeCls);
         this.active = xy;
     },
-    
+
     setActiveCls: function(activeCls){
         this.cells.removeCls(this.activeCls);
         this.activeCls = activeCls;
         var active = this.active;
-        this.setActive(active[0], active[1]);   
+        this.setActive(active[0], active[1]);
     },
-    
+
     highlightActive: function(){
         var cell = this.cells.item(this.getIndex(this.active));
-        new Ext.fx.Anim({
+        Ext.create('Ext.fx.Anim', {
             target: cell,
             duration: 1000,
             alternate: true,
@@ -67,38 +67,38 @@ Ext.define('Board', {
             callback: function(){
                 cell.setStyle('background-color', '');
             }
-        });  
+        });
     },
-    
+
     moveUp: function(){
-        var active = this.active;   
+        var active = this.active;
         this.setActive(active[0] - 1, active[1]);
     },
-    
+
     moveDown: function(){
-        var active = this.active;   
+        var active = this.active;
         this.setActive(active[0] + 1, active[1]);
     },
-    
+
     moveLeft: function(){
-        var active = this.active;   
+        var active = this.active;
         this.setActive(active[0], active[1] - 1);
     },
-    
+
     moveRight: function(){
-        var active = this.active;   
+        var active = this.active;
         this.setActive(active[0], active[1] + 1);
     }
 });
 
 Ext.onReady(function(){
-    
+
     var cls = 'active-green';
     var board = new Board(4, cls);
     board.render('board');
     board.setActive(0, 0);
-    
-    var nav = new Ext.util.KeyNav(Ext.getDoc(), {
+
+    var nav = Ext.create('Ext.util.KeyNav', Ext.getDoc(), {
         scope: board,
         left: board.moveLeft,
         up: board.moveUp,
@@ -110,5 +110,5 @@ Ext.onReady(function(){
             board.setActiveCls(cls);
         }
     });
-        
+
 });

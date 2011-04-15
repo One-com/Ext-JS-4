@@ -20,15 +20,15 @@
  *                    scroll
  */
 
-Ext.define(&#39;Ext.dd.DD&#39;, {
-    extend: &#39;Ext.dd.DragDrop&#39;,
-    requires: [&#39;Ext.dd.DragDropMgr&#39;],
+Ext.define('Ext.dd.DD', {
+    extend: 'Ext.dd.DragDrop',
+    requires: ['Ext.dd.DragDropManager'],
     constructor: function(id, sGroup, config) {
         if (id) {
             this.init(id, sGroup, config);
         }
     },
-    
+
     <a name="prop-Ext.dd.DD-scroll"></a>/**
      * When set to true, the utility automatically tries to scroll the browser
      * window when a drag and drop element is dragged near the viewport boundary.
@@ -39,7 +39,7 @@ Ext.define(&#39;Ext.dd.DD&#39;, {
     scroll: true,
 
     <a name="method-Ext.dd.DD-autoOffset"></a>/**
-     * Sets the pointer offset to the distance between the linked element&#39;s top
+     * Sets the pointer offset to the distance between the linked element's top
      * left corner and the location the element was clicked
      * @method autoOffset
      * @param {int} iPageX the X coordinate of the click
@@ -93,7 +93,7 @@ Ext.define(&#39;Ext.dd.DD&#39;, {
      */
     alignElWithMouse: function(el, iPageX, iPageY) {
         var oCoord = this.getTargetCoord(iPageX, iPageY);
-        var fly = el.dom ? el : Ext.fly(el, &#39;_dd&#39;);
+        var fly = el.dom ? el : Ext.fly(el, '_dd');
         if (!this.deltaSetXY) {
             var aCoord = [oCoord.x, oCoord.y];
             fly.setXY(aCoord);
@@ -115,9 +115,9 @@ Ext.define(&#39;Ext.dd.DD&#39;, {
      * number of pixels the element is offset from its original position.
      * @method cachePosition
      * @param iPageX the current x position (optional, this just makes it so we
-     * don&#39;t have to look it up again)
+     * don't have to look it up again)
      * @param iPageY the current y position (optional, this just makes it so we
-     * don&#39;t have to look it up again)
+     * don't have to look it up again)
      */
     cachePosition: function(iPageX, iPageY) {
         if (iPageX) {
@@ -134,8 +134,8 @@ Ext.define(&#39;Ext.dd.DD&#39;, {
      * Auto-scroll the window if the dragged object has been moved beyond the
      * visible window boundary.
      * @method autoScroll
-     * @param {int} x the drag element&#39;s x position
-     * @param {int} y the drag element&#39;s y position
+     * @param {int} x the drag element's x position
+     * @param {int} y the drag element's y position
      * @param {int} h the height of the drag element
      * @param {int} w the width of the drag element
      * @private
@@ -162,7 +162,7 @@ Ext.define(&#39;Ext.dd.DD&#39;, {
             var right = w + x;
 
             // The distance from the cursor to the bottom of the visible area,
-            // adjusted so that we don&#39;t scroll if the cursor is beyond the
+            // adjusted so that we don't scroll if the cursor is beyond the
             // element drag constraints
             var toBot = (clientH + st - y - this.deltaY);
 
@@ -181,25 +181,25 @@ Ext.define(&#39;Ext.dd.DD&#39;, {
 
             // Scroll down if we are near the bottom of the visible page and the
             // obj extends below the crease
-            if ( bot &gt; clientH &amp;&amp; toBot &lt; thresh ) {
+            if ( bot > clientH && toBot < thresh ) {
                 window.scrollTo(sl, st + scrAmt);
             }
 
             // Scroll up if the window is scrolled down and the top of the object
             // goes above the top border
-            if ( y &lt; st &amp;&amp; st &gt; 0 &amp;&amp; y - st &lt; thresh ) {
+            if ( y < st && st > 0 && y - st < thresh ) {
                 window.scrollTo(sl, st - scrAmt);
             }
 
             // Scroll right if the obj is beyond the right border and the cursor is
             // near the border.
-            if ( right &gt; clientW &amp;&amp; toRight &lt; thresh ) {
+            if ( right > clientW && toRight < thresh ) {
                 window.scrollTo(sl + scrAmt, st);
             }
 
             // Scroll left if the window has been scrolled to the right and the obj
             // extends past the left border
-            if ( x &lt; sl &amp;&amp; sl &gt; 0 &amp;&amp; x - sl &lt; thresh ) {
+            if ( x < sl && sl > 0 && x - sl < thresh ) {
                 window.scrollTo(sl - scrAmt, st);
             }
         }
@@ -219,19 +219,19 @@ Ext.define(&#39;Ext.dd.DD&#39;, {
         var y = iPageY - this.deltaY;
 
         if (this.constrainX) {
-            if (x &lt; this.minX) {
+            if (x < this.minX) {
                 x = this.minX;
             }
-            if (x &gt; this.maxX) {
+            if (x > this.maxX) {
                 x = this.maxX;
             }
         }
 
         if (this.constrainY) {
-            if (y &lt; this.minY) {
+            if (y < this.minY) {
                 y = this.minY;
             }
-            if (y &gt; this.maxY) {
+            if (y > this.maxY) {
                 y = this.maxY;
             }
         }
@@ -249,7 +249,7 @@ Ext.define(&#39;Ext.dd.DD&#39;, {
      * inheritance chain are called
      */
     applyConfig: function() {
-        Ext.dd.DD.superclass.applyConfig.call(this);
+        this.callParent();
         this.scroll = (this.config.scroll !== false);
     },
 
@@ -271,7 +271,7 @@ Ext.define(&#39;Ext.dd.DD&#39;, {
     },
 
     toString: function() {
-        return (&quot;DD &quot; + this.id);
+        return ("DD " + this.id);
     }
 
     //////////////////////////////////////////////////////////////////////////

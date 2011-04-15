@@ -30,7 +30,7 @@ Ext.define('Ext.AbstractPlugin', {
      * The destroy method is invoked by the owning Component at the time the Component is being destroyed.
      * Use this method to clean up an resources.
      */
-    init: Ext.emptyFn,
+    destroy: Ext.emptyFn,
 
     /**
      * Enable the plugin and set the disabled flag to false.

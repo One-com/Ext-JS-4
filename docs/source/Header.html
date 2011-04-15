@@ -4,16 +4,16 @@
  * Simple header class which is used for on {@link Ext.panel.Panel} and {@link Ext.window.Window}
  * @xtype header
  */
-Ext.define(&#39;Ext.panel.Header&#39;, {
-    extend: &#39;Ext.container.Container&#39;,
-    uses: [&#39;Ext.panel.Tool&#39;, &#39;Ext.draw.Component&#39;, &#39;Ext.util.CSS&#39;],
-    alias: &#39;widget.header&#39;,
+Ext.define('Ext.panel.Header', {
+    extend: 'Ext.container.Container',
+    uses: ['Ext.panel.Tool', 'Ext.draw.Component', 'Ext.util.CSS'],
+    alias: 'widget.header',
 
     isHeader       : true,
-    defaultType    : &#39;tool&#39;,
+    defaultType    : 'tool',
     indicateDrag   : false,
 
-    renderTpl: [&#39;&lt;div class=&quot;{baseCls}-body&lt;tpl if=&quot;ui&quot;&gt; {baseCls}-body-{ui}&lt;/tpl&gt;&quot;&lt;tpl if=&quot;bodyStyle&quot;&gt; style=&quot;{bodyStyle}&quot;&lt;/tpl&gt;&gt;&lt;/div&gt;&#39;],
+    renderTpl: ['<div class="{baseCls}-body<tpl if="ui"><tpl for="ui"> {parent.baseCls}-body-{.}</tpl></tpl>"<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>></div>'],
 
     initComponent: function() {
         var me = this,
@@ -21,22 +21,18 @@ Ext.define(&#39;Ext.panel.Header&#39;, {
             style,
             titleTextEl;
 
-        me.indicateDragCls = me.baseCls + &#39;-draggable&#39;;
-        me.title = me.title || &#39;&amp;#160;&#39;;
+        me.indicateDragCls = me.baseCls + '-draggable';
+        me.title = me.title || '&#160;';
         me.tools = me.tools || [];
         me.items = me.items || [];
-        me.orientation = me.orientation||&#39;horizontal&#39;;
-        me.addCls(me.baseCls + &#39;-&#39; + me.orientation);
-        me.addCls(me.baseCls + &#39;-&#39; + me.dock);
+        me.orientation = me.orientation||'horizontal';
+        me.addCls(me.getClsWithUIs(me.orientation));
+        me.addCls(me.getClsWithUIs(me.dock));
 
         Ext.applyIf(me.renderSelectors, {
-            body: &#39;.&#39; + me.baseCls + &#39;-body&#39;
+            body: '.' + me.baseCls + '-body'
         });
 
-        if (me.frame) {
-            me.ui = &#39;framed&#39;;
-        }
-        
         // Add Icon
         if (!Ext.isEmpty(me.iconCls)) {
             me.initIconCmp();
@@ -44,86 +40,88 @@ Ext.define(&#39;Ext.panel.Header&#39;, {
         }
 
         // Add Title
-        if (me.orientation == &#39;vertical&#39;) {
-            // Hack for IE6/7&#39;s inability to display an inline-block
+        if (me.orientation == 'vertical') {
+            // Hack for IE6/7's inability to display an inline-block
             // if (Ext.isIE6||Ext.isIE7) {
             //     me.width = me.width||22;
             // }
             me.layout = {
-                type : &#39;vbox&#39;,
-                align: &#39;center&#39;,
+                type : 'vbox',
+                align: 'center',
                 clearInnerCtOnLayout: true,
                 bindToOwnerCtContainer: false
             };
             me.textConfig = {
-                cls: me.baseCls + &#39;-text&#39;,
-                type: &#39;text&#39;,
+                cls: me.baseCls + '-text',
+                type: 'text',
                 text: me.title,
                 rotate: {
                     degrees: 90
                 }
             };
-            rule = Ext.util.CSS.getRule(&#39;.&#39; + me.baseCls + &#39;-text&#39;);
+            rule = Ext.util.CSS.getRule('.' + me.baseCls + '-text');
             if (rule) {
                 style = rule.style;
             }
             if (style) {
                 Ext.apply(me.textConfig, {
-                    &#39;font-family&#39;: style.fontFamily,
-                    &#39;font-weight&#39;: style.fontWeight,
-                    &#39;font-size&#39;: style.fontSize,
+                    'font-family': style.fontFamily,
+                    'font-weight': style.fontWeight,
+                    'font-size': style.fontSize,
                     fill: style.color
                 });
             }
-            me.titleCmp = new Ext.draw.Component({
-                ariaRole  : &#39;heading&#39;,
+            me.titleCmp = Ext.create('Ext.draw.Component', {
+                ariaRole  : 'heading',
+                focusable: false,
                 viewBox: false,
                 autoSize: true,
-                margins: &#39;5 0 0 0&#39;,
+                margins: '5 0 0 0',
                 items: [ me.textConfig ],
                 renderSelectors: {
-                    textEl: &#39;.&#39; + me.baseCls + &#39;-text&#39;
+                    textEl: '.' + me.baseCls + '-text'
                 }
             });
         } else {
             me.layout = {
-                type : &#39;hbox&#39;,
-                align: &#39;middle&#39;,
+                type : 'hbox',
+                align: 'middle',
                 clearInnerCtOnLayout: true,
                 bindToOwnerCtContainer: false
             };
-            me.titleCmp = new Ext.Component({
-                xtype     : &#39;component&#39;,
-                ariaRole  : &#39;heading&#39;,
+            me.titleCmp = Ext.create('Ext.Component', {
+                xtype     : 'component',
+                ariaRole  : 'heading',
                 focusable: false,
-                renderTpl : [&#39;&lt;span class=&quot;{cls}-text&quot;&gt;{title}&lt;/span&gt;&#39;],
+                renderTpl : ['<span class="{cls}-text">{title}</span>'],
                 renderData: {
                     title: me.title,
                     cls  : me.baseCls
                 },
                 renderSelectors: {
-                    textEl: &#39;.&#39; + me.baseCls + &#39;-text&#39;
+                    textEl: '.' + me.baseCls + '-text'
                 }
             });
         }
         me.items.push(me.titleCmp);
 
-        // Spacer -&gt;
+        // Spacer ->
         me.items.push({
-            xtype: &#39;component&#39;,
-            html : &#39;&amp;nbsp;&#39;,
+            xtype: 'component',
+            html : '&nbsp;',
             flex : 1,
             focusable: false
         });
 
         // Add Tools
         me.items = me.items.concat(me.tools);
-        Ext.panel.Header.superclass.initComponent.call(me);
+        this.callParent();
     },
 
     initIconCmp: function() {
-        this.iconCmp = new Ext.Component({
-            renderTpl : [&#39;&lt;img alt=&quot;&quot; src=&quot;{blank}&quot; class=&quot;{cls}-icon {iconCls}&quot;/&gt;&#39;],
+        this.iconCmp = Ext.create('Ext.Component', {
+            focusable: false,
+            renderTpl : ['<img alt="" src="http://localhost:3000/new/ext-js/4-0/source/{blank}" class="{cls}-icon {iconCls}"/>'],
             renderData: {
                 blank  : Ext.BLANK_IMAGE_URL,
                 cls    : this.baseCls,
@@ -131,7 +129,7 @@ Ext.define(&#39;Ext.panel.Header&#39;, {
                 orientation: this.orientation
             },
             renderSelectors: {
-                iconEl: &#39;.&#39; + this.baseCls + &#39;-icon&#39;
+                iconEl: '.' + this.baseCls + '-icon'
             },
             iconCls: this.iconCls
         });
@@ -152,8 +150,8 @@ Ext.define(&#39;Ext.panel.Header&#39;, {
     },
 
     onClick: function(e) {
-        if (!e.getTarget(Ext.baseCSSPrefix + &#39;tool&#39;)) {
-            this.fireEvent(&#39;click&#39;, e);
+        if (!e.getTarget(Ext.baseCSSPrefix + 'tool')) {
+            this.fireEvent('click', e);
         }
     },
 
@@ -168,24 +166,33 @@ Ext.define(&#39;Ext.panel.Header&#39;, {
     setTitle: function(title) {
         var me = this;
         if (me.rendered) {
-            if (me.titleCmp.surface) {
-                me.title = title || &#39;&#39;;
-                var sprite = me.titleCmp.surface.items.items[0],
-                    surface = me.titleCmp.surface;
-                
-                surface.remove(sprite);
-                me.textConfig.type = &#39;text&#39;;
-                me.textConfig.text = title;
-                sprite = surface.add(me.textConfig);
-                sprite.setAttributes({
-                    rotate: {
-                        degrees: 90
-                    }    
-                }, true);
-                me.titleCmp.autoSizeSurface();
+            if (me.titleCmp.rendered) {
+                if (me.titleCmp.surface) {
+                    me.title = title || '';
+                    var sprite = me.titleCmp.surface.items.items[0],
+                        surface = me.titleCmp.surface;
+
+                    surface.remove(sprite);
+                    me.textConfig.type = 'text';
+                    me.textConfig.text = title;
+                    sprite = surface.add(me.textConfig);
+                    sprite.setAttributes({
+                        rotate: {
+                            degrees: 90
+                        }
+                    }, true);
+                    me.titleCmp.autoSizeSurface();
+                } else {
+                    me.title = title || '&#160;';
+                    me.titleCmp.textEl.update(me.title);
+                }
             } else {
-                me.title = title || &#39;&amp;#160;&#39;;
-                me.titleCmp.textEl.update(me.title);
+                me.titleCmp.on({
+                    render: function() {
+                        me.setTitle(title);
+                    },
+                    single: true
+                });
             }
         } else {
             me.on({
@@ -198,12 +205,12 @@ Ext.define(&#39;Ext.panel.Header&#39;, {
         }
     },
 
-    <a name="method-Ext.panel.Header-setIconClass"></a>/**
+    <a name="method-Ext.panel.Header-setIconCls"></a>/**
      * Sets the CSS class that provides the icon image for this panel.  This method will replace any existing
      * icon class if one has already been set and fire the {@link #iconchange} event after completion.
      * @param {String} cls The new CSS class name
      */
-    setIconClass: function(cls) {
+    setIconCls: function(cls) {
         this.iconCls = cls;
         if (!this.iconCmp) {
             this.initIconCmp();
@@ -234,7 +241,7 @@ Ext.define(&#39;Ext.panel.Header&#39;, {
 
     /**
      * @private
-     * Set up the tools.&amp;lt;tool type&gt; link in the owning Panel.
+     * Set up the tools.&lt;tool type> link in the owning Panel.
      * Bind the tool to its owning Panel.
      * @param component
      * @param index

@@ -1,8 +1,8 @@
 /**
- * @class Ext.tree.TreeViewDDPlugin
+ * @class Ext.tree.ViewDDPlugin
  * @extends Ext.AbstractPlugin
  * <p>This plugin provides drag and/or drop functionality for a TreeView.</p>
- * <p>It creates a specialized instance of {@link Ext.dd.DragZone DragZone} which knows how to drag out of a {@link Ext.tree.TreeView TreeView}
+ * <p>It creates a specialized instance of {@link Ext.dd.DragZone DragZone} which knows how to drag out of a {@link Ext.tree.View TreeView}
  * and loads the data object which is passed to a cooperating {@link Ext.dd.DragZone DragZone}'s methods with the following properties:<ul>
  * <li>copy : Boolean
  *  <div class="sub-desc">The value of the TreeView's <code>copy</code> property, or <code>true</code> if the TreeView was configured
@@ -26,8 +26,8 @@ Ext.define('Ext.tree.plugin.TreeViewDragDrop', {
     alias: 'plugin.treeviewdragdrop',
 
     uses: [
-        'Ext.tree.TreeViewDragZone',
-        'Ext.tree.TreeViewDropZone'
+        'Ext.tree.ViewDragZone',
+        'Ext.tree.ViewDropZone'
     ],
 
     /**
@@ -183,7 +183,6 @@ Ext.define('Ext.tree.plugin.TreeViewDragDrop', {
      * AbstractComponent calls destroy on all its plugins at destroy time.
      */
     destroy: function() {
-        this.clearListeners();
         Ext.destroy(this.dragZone, this.dropZone);
     },
 
@@ -191,7 +190,7 @@ Ext.define('Ext.tree.plugin.TreeViewDragDrop', {
         var me = this;
 
         if (me.enableDrag) {
-            me.dragZone = Ext.create('Ext.tree.TreeViewDragZone', {
+            me.dragZone = Ext.create('Ext.tree.ViewDragZone', {
                 view: view,
                 ddGroup: me.dragGroup || me.ddGroup,
                 dragText: me.dragText,
@@ -201,7 +200,7 @@ Ext.define('Ext.tree.plugin.TreeViewDragDrop', {
         }
 
         if (me.enableDrop) {
-            me.dropZone = Ext.create('Ext.tree.TreeViewDropZone', {
+            me.dropZone = Ext.create('Ext.tree.ViewDropZone', {
                 view: view,
                 ddGroup: me.dropGroup || me.ddGroup,
                 allowContainerDrops: me.allowContainerDrops,

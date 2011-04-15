@@ -47,7 +47,7 @@ Ext.define('Ext.grid.feature.Summary', {
      * @private
      * @return {Object} The fragments
      */
-    getTplFragments: function() {
+    getFragmentTpl: function() {
         // this gets called before render, so we'll setup the data here.
         this.summaryData = this.generateSummaryData(); 
         return this.getSummaryFragments();

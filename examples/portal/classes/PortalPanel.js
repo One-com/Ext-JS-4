@@ -1,26 +1,28 @@
 /**
- * @class Ext.ux.PortalPanel
+ * @class Ext.app.PortalPanel
  * @extends Ext.Panel
  * A {@link Ext.Panel Panel} class used for providing drag-drop-enabled portal layouts.
  */
-Ext.define('Ext.ux.PortalPanel', {
+Ext.define('Ext.app.PortalPanel', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.portalpanel',
-    autoScroll : true,
     cls: 'x-portal',
+    bodyCls: 'x-portal-body',
     defaultType: 'portalcolumn',
-    defaults: {
-        margins: '0 8 0 0'
-    },
+    autoScroll: true,
 
-    initComponent : function(){
+    initComponent : function() {
+        var me = this;
+
+        // Implement a Container beforeLayout call from the layout to this Container
         this.layout = {
-            type : 'hbox',
-            clearInnerCtOnLayout: true,
-            afterLayout: Ext.bind(this.adjustInnerSize, this),
-            padding: '8 0 0 8'
+            beforeLayout: function() {
+                me.beforeLayout();
+                Ext.layout.container.Column.prototype.beforeLayout.apply(this, arguments);
+            },
+            type : 'column'
         };
-        Ext.ux.PortalPanel.superclass.initComponent.call(this);
+        this.callParent();
 
         this.addEvents({
             validatedrop: true,
@@ -29,39 +31,36 @@ Ext.define('Ext.ux.PortalPanel', {
             beforedrop: true,
             drop: true
         });
-        
-        this.on('drop', Ext.isIE ? this.doLayout : this.adjustInnerSize, this);
+        this.on('drop', this.doLayout, this);
     },
-    
-    adjustInnerSize: function() {
-        var layout = this.getLayout(),
-            innerHeight = layout.getLayoutTargetSize().height,
-            newHeight = innerHeight,
-            items = layout.getVisibleItems(),
+
+    // Set columnWidth, and set first and last column classes to allow exact CSS targeting.
+    beforeLayout: function() {
+        var items = this.layout.getLayoutItems(),
             len = items.length,
-            i = 0, h = 0;
+            i = 0,
+            item;
 
         for (; i < len; i++) {
-            h = items[i].getHeight();
-            newHeight = Math.max(newHeight, h);
+            item = items[i];
+            item.columnWidth = 1 / len;
+            item.removeCls(['x-portal-column-first', 'x-portal-column-last']);
         }
-        if(newHeight > innerHeight){
-            newHeight += 15; // we're going to scroll so pad the bottom a little
-        }
-        layout.innerCt.setHeight(newHeight);
+        items[0].addCls('x-portal-column-first');
+        items[len - 1].addCls('x-portal-column-last');
     },
-    
+
     // private
     initEvents : function(){
-        Ext.ux.PortalPanel.superclass.initEvents.call(this);
-        this.dd = new Ext.ux.PortalDropZone(this, this.dropConfig);
+        this.callParent();
+        this.dd = Ext.create('Ext.app.PortalDropZone', this, this.dropConfig);
     },
 
     // private
     beforeDestroy : function() {
-        if(this.dd){
+        if (this.dd) {
             this.dd.unreg();
         }
-        Ext.ux.PortalPanel.superclass.beforeDestroy.call(this);
+        Ext.app.PortalPanel.superclass.beforeDestroy.call(this);
     }
 });

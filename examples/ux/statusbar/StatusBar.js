@@ -194,7 +194,7 @@ sb.setStatus({
 
         var right = this.statusAlign === 'right';
         this.currIconCls = this.iconCls || this.defaultIconCls;
-        this.statusEl = new Ext.toolbar.TextItem({
+        this.statusEl = Ext.create('Ext.toolbar.TextItem', {
             cls: 'x-status-text ' + (this.currIconCls || ''),
             text: this.text || this.defaultText || ''
         });

@@ -22,6 +22,7 @@ Ext.onReady(function () {
         },
         items: [{
             xtype: 'chart',
+            style: 'background:#fff',
             animate: {
                 easing: 'elasticIn',
                 duration: 1000
@@ -30,7 +31,7 @@ Ext.onReady(function () {
             insetPadding: 25,
             flex: 1,
             axes: [{
-                type: 'Gauge',
+                type: 'gauge',
                 position: 'gauge',
                 minimum: 0,
                 maximum: 100,
@@ -45,12 +46,13 @@ Ext.onReady(function () {
             }]
         }, {
             xtype: 'chart',
+            style: 'background:#fff',
             animate: true,
             store: store3,
             insetPadding: 25,
             flex: 1,
             axes: [{
-                type: 'Gauge',
+                type: 'gauge',
                 position: 'gauge',
                 minimum: 0,
                 maximum: 100,
@@ -65,6 +67,7 @@ Ext.onReady(function () {
             }]
         }, {
             xtype: 'chart',
+            style: 'background:#fff',
             animate: {
                 easing: 'bounceOut',
                 duration: 500
@@ -73,7 +76,7 @@ Ext.onReady(function () {
             insetPadding: 25,
             flex: 1,
             axes: [{
-                type: 'Gauge',
+                type: 'gauge',
                 position: 'gauge',
                 minimum: 0,
                 maximum: 100,

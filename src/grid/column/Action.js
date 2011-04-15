@@ -4,7 +4,7 @@
  * <p>A Grid header type which renders an icon, or a series of icons in a grid cell, and offers a scoped click
  * handler for each icon. Example usage:</p>
 <pre><code>
-new Ext.grid.GridPanel({
+new Ext.grid.Panel({
     store: myStore,
     columns: [
         {
@@ -73,7 +73,7 @@ Ext.define('Ext.grid.column.Action', {
      * and <code>{@link #getClass}</code> fuctions are executed. Defaults to this Column.
      */
     /**
-     * @cfg {String} tooltip A tooltip message to be displayed on hover. {@link Ext.tip.QuickTips#init Ext.tip.QuickTips} must have 
+     * @cfg {String} tooltip A tooltip message to be displayed on hover. {@link Ext.tip.QuickTipManager#init Ext.tip.QuickTipManager} must have 
      * been initialized.
      */
     /**
@@ -119,7 +119,7 @@ Ext.define('Ext.grid.column.Action', {
      * <code>handler</code> and <code>getClass</code> functions are executed. Fallback defaults are this Column's
      * configured scope, then this Column.</div></li>
      * <li><code>tooltip</code> : String<div class="sub-desc">A tooltip message to be displayed on hover. 
-     * {@link Ext.tip.QuickTips#init Ext.tip.QuickTips} must have been initialized.</div></li>
+     * {@link Ext.tip.QuickTipManager#init Ext.tip.QuickTipManager} must have been initialized.</div></li>
      * </ul></div>
      */
     header: '&#160;',
@@ -130,6 +130,8 @@ Ext.define('Ext.grid.column.Action', {
      * @cfg {String} altText The alt text to use for the image element. Defaults to <tt>''</tt>.
      */
     altText: '',
+    
+    sortable: false,
 
     constructor: function(config) {
         var me = this,
@@ -158,7 +160,7 @@ Ext.define('Ext.grid.column.Action', {
                 v += '<img alt="' + me.altText + '" src="' + (item.icon || Ext.BLANK_IMAGE_URL) +
                     '" class="' + Ext.baseCSSPrefix + 'action-col-icon ' + Ext.baseCSSPrefix + 'action-col-' + String(i) + ' ' + (item.iconCls || '') +
                     ' ' + (Ext.isFunction(item.getClass) ? item.getClass.apply(item.scope||me.scope||me, arguments) : '') + '"' +
-                    ((item.tooltip) ? ' ext:qtip="' + item.tooltip + '"' : '') + ' />';
+                    ((item.tooltip) ? ' data-qtip="' + item.tooltip + '"' : '') + ' />';
             }
             return v;
         };

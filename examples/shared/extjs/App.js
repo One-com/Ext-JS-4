@@ -68,7 +68,7 @@ Ext.define('Ext.App', {
         }
 
         // register provider with state manager.
-        Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
+        Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider', {
             path: '/',
             expires: exptime,
             domain: null,

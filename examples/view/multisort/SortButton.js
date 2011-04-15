@@ -39,7 +39,7 @@ Ext.define('Ext.multisort.SortButton', {
      */
     applyDirection: function(direction) {
         this._direction = direction;
-        this.setIconClass('direction-' + direction.toLowerCase());
+        this.setIconCls('direction-' + direction.toLowerCase());
         
         this.fireEvent('changeDirection', direction);
         

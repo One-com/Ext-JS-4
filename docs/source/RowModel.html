@@ -6,10 +6,10 @@
  *
  * Must synchronize across grid sections
  */
-Ext.define(&#39;Ext.selection.RowModel&#39;, {
-    extend: &#39;Ext.selection.Model&#39;,
-    alias: &#39;selection.rowmodel&#39;,
-    requires: [&#39;Ext.util.KeyNav&#39;],
+Ext.define('Ext.selection.RowModel', {
+    extend: 'Ext.selection.Model',
+    alias: 'selection.rowmodel',
+    requires: ['Ext.util.KeyNav'],
     
     /**
      * @private
@@ -34,7 +34,7 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
              * @param {Ext.data.Model} record The deselected record
              * @param {Number} index The row index deselected
              */
-            &#39;deselect&#39;,
+            'deselect',
             
             <a name="event-Ext.selection.RowModel-select"></a>/**
              * @event select
@@ -43,7 +43,7 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
              * @param {Ext.data.Model} record The selected record
              * @param {Number} index The row index selected
              */
-            &#39;select&#39;
+            'select'
         );
         this.callParent(arguments);    
     },
@@ -69,7 +69,7 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
         var me = this;
         
         if (!view.rendered) {
-            view.on(&#39;render&#39;, Ext.Function.bind(me.initKeyNav, me, [view], 0), me, {single: true});
+            view.on('render', Ext.Function.bind(me.initKeyNav, me, [view], 0), me, {single: true});
             return;
         }
 
@@ -157,13 +157,13 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
         if (rowsVisible) {
             selIdx = me.lastFocused ? me.store.indexOf(me.lastFocused) : 0;
             prevIdx = selIdx - rowsVisible;
-            if (prevIdx &lt; 0) {
+            if (prevIdx < 0) {
                 prevIdx = 0;
             }
             prevRecord = me.store.getAt(prevIdx);
             if (e.shiftKey) {
                 currRec = me.store.getAt(selIdx);
-                me.selectRange(prevRecord, currRec, e.ctrlKey, &#39;up&#39;);
+                me.selectRange(prevRecord, currRec, e.ctrlKey, 'up');
                 me.setLastFocused(prevRecord);
             } else if (e.ctrlKey) {
                 e.preventDefault();
@@ -187,13 +187,13 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
         if (rowsVisible) {
             selIdx = me.lastFocused ? me.store.indexOf(me.lastFocused) : 0;
             nextIdx = selIdx + rowsVisible;
-            if (nextIdx &gt;= me.store.getCount()) {
+            if (nextIdx >= me.store.getCount()) {
                 nextIdx = me.store.getCount() - 1;
             }
             nextRecord = me.store.getAt(nextIdx);
             if (e.shiftKey) {
                 currRec = me.store.getAt(selIdx);
-                me.selectRange(nextRecord, currRec, e.ctrlKey, &#39;down&#39;);
+                me.selectRange(nextRecord, currRec, e.ctrlKey, 'down');
                 me.setLastFocused(nextRecord);
             } else if (e.ctrlKey) {
                 // some browsers, this means go thru browser tabs
@@ -233,12 +233,12 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
             idx  = me.store.indexOf(me.lastFocused),
             record;
             
-        if (idx &gt; 0) {
+        if (idx > 0) {
             // needs to be the filtered count as thats what
             // will be visible.
             record = me.store.getAt(idx - 1);
-            if (e.shiftKey &amp;&amp; me.lastFocused) {
-                if (me.isSelected(me.lastFocused) &amp;&amp; me.isSelected(record)) {
+            if (e.shiftKey && me.lastFocused) {
+                if (me.isSelected(me.lastFocused) && me.isSelected(record)) {
                     me.doDeselect(me.lastFocused, true);
                     me.setLastFocused(record);
                 } else if (!me.isSelected(me.lastFocused)) {
@@ -274,13 +274,13 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
             
         // needs to be the filtered count as thats what
         // will be visible.
-        if (idx + 1 &lt; me.store.getCount()) {
+        if (idx + 1 < me.store.getCount()) {
             record = me.store.getAt(idx + 1);
             if (me.selected.getCount() == 0) {
                 me.doSelect(record);
                 //view.focusRow(idx + 1);
-            } else if (e.shiftKey &amp;&amp; me.lastFocused) {
-                if (me.isSelected(me.lastFocused) &amp;&amp; me.isSelected(record)) {
+            } else if (e.shiftKey && me.lastFocused) {
+                if (me.isSelected(me.lastFocused) && me.isSelected(record)) {
                     me.doDeselect(me.lastFocused, true);
                     me.setLastFocused(record);
                 } else if (!me.isSelected(me.lastFocused)) {
@@ -333,16 +333,16 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
             rowIdx  = store.indexOf(record),
             i = 0;
             
-        for (; i &lt; viewsLn; i++) {
+        for (; i < viewsLn; i++) {
             if (isSelected) {
                 views[i].onRowSelect(rowIdx, suppressEvent);
                 if (!suppressEvent) {
-                    me.fireEvent(&#39;select&#39;, me, record, rowIdx);
+                    me.fireEvent('select', me, record, rowIdx);
                 }
             } else {
                 views[i].onRowDeselect(rowIdx, suppressEvent);
                 if (!suppressEvent) {
-                    me.fireEvent(&#39;deselect&#39;, me, record, rowIdx);
+                    me.fireEvent('deselect', me, record, rowIdx);
                 }
             }
         }
@@ -360,7 +360,7 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
         if (oldFocused) {
             rowIdx = store.indexOf(oldFocused);
             if (rowIdx != -1) {
-                for (; i &lt; viewsLn; i++) {
+                for (; i < viewsLn; i++) {
                     views[i].onRowFocus(rowIdx, false);
                 }
             }
@@ -369,7 +369,7 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
         if (newFocused) {
             rowIdx = store.indexOf(newFocused);
             if (rowIdx != -1) {
-                for (i = 0; i &lt; viewsLn; i++) {
+                for (i = 0; i < viewsLn; i++) {
                     views[i].onRowFocus(rowIdx, true, supressFocus);
                 }
             }
@@ -382,7 +382,7 @@ Ext.define(&#39;Ext.selection.RowModel&#39;, {
             record = editingPlugin.getActiveRecord(),
             header = editingPlugin.getActiveHeader(),
             position = view.getPosition(record, header),
-            direction = e.shiftKey ? &#39;left&#39; : &#39;right&#39;,
+            direction = e.shiftKey ? 'left' : 'right',
             newPosition  = view.walkCells(position, direction, e, this.preventWrap);
             
         if (newPosition) {

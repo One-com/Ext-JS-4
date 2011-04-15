@@ -3,7 +3,7 @@ Ext.Loader.setConfig({enabled: true});
 Ext.Loader.setPath('Ext.ux', '../ux/');
 
 Ext.require([
-    'Ext.tip.QuickTips',
+    'Ext.tip.QuickTipManager',
     'Ext.window.Window',
     'Ext.tab.TabPanel',
     'Ext.ux.TabScrollerMenu'
@@ -11,7 +11,7 @@ Ext.require([
 
 Ext.onReady(function() {
     // enable the tabTip config below
-    Ext.tip.QuickTips.init();
+    Ext.tip.QuickTipManager.init();
 
     var win = Ext.createWidget('window', {
         height: 400,

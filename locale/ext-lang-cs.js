@@ -12,16 +12,16 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} vybraných řádků";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} vybraných řádků";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "Zavřít záložku";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "Hodnota v tomto poli je neplatná";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "Hodnota v tomto poli je neplatná";
     }
 
     if(Ext.LoadMask){
@@ -141,7 +141,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Strana",
             afterPageText  : "z {0}",
@@ -155,8 +155,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Pole nesmí mít méně {0} znaků",
             maxLengthText : "Pole nesmí být delší než {0} znaků",
             blankText     : "This field is required",
@@ -165,16 +165,16 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Hodnota v tomto poli nesmí být menší než {0}",
             maxText : "Hodnota v tomto poli nesmí být větší než {0}",
             nanText : "{0} není platné číslo"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Neaktivní",
             disabledDatesText : "Neaktivní",
             minText           : "Datum v tomto poli nesmí být starší než {0}",
@@ -185,15 +185,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "Prosím čekejte...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'V tomto poli může být vyplněna pouze emailová adresa ve formátu "uživatel@doména.cz"',
             urlText      : 'V tomto poli může být vyplněna pouze URL (adresa internetové stránky) ve formátu "http:/'+'/www.doména.cz"',
             alphaText    : 'Toto pole může obsahovat pouze písmena abecedy a znak _',
@@ -201,8 +201,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'Zadejte URL adresu odkazu:',
             buttonTips : {
                 bold : {
@@ -279,8 +279,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Řadit vzestupně",
             sortDescText : "Řadit sestupně",
             lockText     : "Ukotvit sloupec",

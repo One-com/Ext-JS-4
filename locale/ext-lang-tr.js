@@ -26,8 +26,8 @@ Ext.onReady(function() {
       Ext.TabPanelItem.prototype.closeText = "Sekmeyi kapat";
     }
 
-    if(Ext.form.BaseField){
-      Ext.form.BaseField.prototype.invalidText = "Bu alandaki deðer geçersiz";
+    if(Ext.form.field.Base){
+      Ext.form.field.Base.prototype.invalidText = "Bu alandaki deðer geçersiz";
     }
 
     if(Ext.LoadMask){
@@ -142,7 +142,7 @@ Ext.onReady(function() {
     }
 
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
       Ext.apply(Ext.PagingToolbar.prototype, {
         beforePageText : "Sayfa",
         afterPageText  : " / {0}",
@@ -156,8 +156,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Text){
-      Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+      Ext.apply(Ext.form.field.Text.prototype, {
         minLengthText : "Girilen verinin uzunluðu en az {0} olabilir",
         maxLengthText : "Girilen verinin uzunluðu en fazla {0} olabilir",
         blankText     : "Bu alan boþŸ býrakýlamaz",
@@ -166,16 +166,16 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Number){
-      Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+      Ext.apply(Ext.form.field.Number.prototype, {
         minText : "En az {0} girilebilir",
         maxText : "En çok {0} girilebilir",
         nanText : "{0} geçersiz bir sayýdýr"
       });
     }
 
-    if(Ext.form.Date){
-      Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+      Ext.apply(Ext.form.field.Date.prototype, {
         disabledDaysText  : "Disabled",
         disabledDatesText : "Disabled",
         minText           : "Bu tarih, {0} tarihinden daha sonra olmalýdýr", 
@@ -186,22 +186,22 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.ComboBox){
-      Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+      Ext.apply(Ext.form.field.ComboBox.prototype, {
         loadingText       : "Yükleniyor ...",
         valueNotFoundText : undefined
       });
     }
 
-    if(Ext.form.VTypes){
-    	Ext.form.VTypes["emailText"]='Bu alan "user@example.com" þŸeklinde elektronik posta formatýnda olmalýdýr';
-    	Ext.form.VTypes["urlText"]='Bu alan "http://www.example.com" þŸeklinde URL adres formatýnda olmalýdýr';
-    	Ext.form.VTypes["alphaText"]='Bu alan sadece harf ve _ içermeli';
-    	Ext.form.VTypes["alphanumText"]='Bu alan sadece harf, sayý ve _ içermeli';
+    if(Ext.form.field.VTypes){
+    	Ext.form.field.VTypes["emailText"]='Bu alan "user@example.com" þŸeklinde elektronik posta formatýnda olmalýdýr';
+    	Ext.form.field.VTypes["urlText"]='Bu alan "http://www.example.com" þŸeklinde URL adres formatýnda olmalýdýr';
+    	Ext.form.field.VTypes["alphaText"]='Bu alan sadece harf ve _ içermeli';
+    	Ext.form.field.VTypes["alphanumText"]='Bu alan sadece harf, sayý ve _ içermeli';
     }
 
-    if(Ext.form.HtmlEditor){
-      Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : 'Lütfen bu baðlantý için gerekli URL adresini giriniz:',
         buttonTips : {
           bold : {
@@ -278,8 +278,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.grid.HeaderContainer){
-      Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+      Ext.apply(Ext.grid.header.Container.prototype, {
         sortAscText  : "Artan sýrada sýrala",
         sortDescText : "Azalan sýrada sýrala",
         lockText     : "Kolonu kilitle",

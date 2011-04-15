@@ -4,16 +4,17 @@
  * A split button that provides a built-in dropdown arrow that can fire an event separately from the default
  * click event of the button.  Typically this would be used to display a dropdown menu that provides additional
  * options to the primary button action, but any custom handler can provide the arrowclick implementation.  Example usage:
- * <br><span style="display: none">**/</span>// display a dropdown menu:
+ * <pre><code>
+// display a dropdown menu:
 new Ext.button.Split({
-    renderTo: &#39;button-ct&#39;, // the container id
-    text: &#39;Options&#39;,
+    renderTo: 'button-ct', // the container id
+    text: 'Options',
     handler: optionsHandler, // handle a click on the button itself
     menu: new Ext.menu.Menu({
     items: [
             // these items will render as dropdown menu items when the arrow is clicked:
-            {text: &#39;Item 1&#39;, handler: item1Handler},
-            {text: &#39;Item 2&#39;, handler: item2Handler}
+            {text: 'Item 1', handler: item1Handler},
+            {text: 'Item 2', handler: item2Handler}
     ]
     })
 });
@@ -21,12 +22,13 @@ new Ext.button.Split({
 // Instead of showing a menu, you provide any type of custom
 // functionality you want when the dropdown arrow is clicked:
 new Ext.button.Split({
-    renderTo: &#39;button-ct&#39;,
-    text: &#39;Options&#39;,
+    renderTo: 'button-ct',
+    text: 'Options',
     handler: optionsHandler,
     arrowHandler: myCustomHandler
 });
-<br><span style="display: none">/**</span> * @cfg {Function} arrowHandler A function called when the arrow button is clicked (can be used instead of click event)
+</code></pre>
+ * @cfg {Function} arrowHandler A function called when the arrow button is clicked (can be used instead of click event)
  * @cfg {String} arrowTooltip The title attribute of the arrow
  * @constructor
  * Create a new menu button
@@ -34,17 +36,17 @@ new Ext.button.Split({
  * @xtype splitbutton
  */
 
-Ext.define(&#39;Ext.button.Split&#39;, {
+Ext.define('Ext.button.Split', {
 
     /* Begin Definitions */
 
-    alias: &#39;widget.splitbutton&#39;,
+    alias: 'widget.splitbutton',
 
-    extend: &#39;Ext.button.Button&#39;,
-    alternateClassName: &#39;Ext.SplitButton&#39;,
+    extend: 'Ext.button.Button',
+    alternateClassName: 'Ext.SplitButton',
 
     // private
-    arrowCls      : &#39;split&#39;,
+    arrowCls      : 'split',
     split         : true,
 
     // private
@@ -52,15 +54,15 @@ Ext.define(&#39;Ext.button.Split&#39;, {
         this.callParent();
         /**
          * @event arrowclick
-         * Fires when this button&#39;s arrow is clicked
+         * Fires when this button's arrow is clicked
          * @param {MenuButton} this
          * @param {EventObject} e The click event
          */
-        this.addEvents(&quot;arrowclick&quot;);
+        this.addEvents("arrowclick");
     },
 
      /**
-     * Sets this button&#39;s arrow click handler.
+     * Sets this button's arrow click handler.
      * @param {Function} handler The function to call when the arrow is clicked
      * @param {Object} scope (optional) Scope for the function passed above
      */
@@ -76,10 +78,10 @@ Ext.define(&#39;Ext.button.Split&#39;, {
         e.preventDefault();
         if (!me.disabled) {
             if (me.overMenuTrigger) {
-                if (me.menu &amp;&amp; !me.menu.isVisible() &amp;&amp; !me.ignoreNextClick) {
+                if (me.menu && !me.menu.isVisible() && !me.ignoreNextClick) {
                     me.showMenu();
                 }
-                me.fireEvent(&quot;arrowclick&quot;, me, e);
+                me.fireEvent("arrowclick", me, e);
                 if (me.arrowHandler) {
                     me.arrowHandler.call(me.scope || me, me, e);
                 }
@@ -87,7 +89,7 @@ Ext.define(&#39;Ext.button.Split&#39;, {
                 if (me.enableToggle) {
                     me.toggle();
                 }
-                me.fireEvent(&quot;click&quot;, me, e);
+                me.fireEvent("click", me, e);
                 if (me.handler) {
                     me.handler.call(me.scope || me, me, e);
                 }

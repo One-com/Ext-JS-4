@@ -1,6 +1,6 @@
 Ext.define('ForumBrowser.ForumList', {
 
-    extend: 'Ext.tree.TreePanel',
+    extend: 'Ext.tree.Panel',
     
     alias: 'widget.forumlist',
     
@@ -23,7 +23,7 @@ Ext.define('ForumBrowser.ForumList', {
                     expanded: true
                 },
                 proxy: {
-                    type: 'scripttag',
+                    type: 'jsonp',
                     url: 'http://sencha.com/forum/forums-remote.php',
                     reader: {
                         type: 'json',

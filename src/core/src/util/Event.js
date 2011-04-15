@@ -42,7 +42,11 @@ Ext.require('Ext.util.DelayedTask', function() {
 
                 //<debug error>
                 if (!fn) {
-                    throw new Error("["+Ext.getClassName(this.observable)+"#addListener -> Ext.util.Event#addListener] Invalid callback function: " + fn);
+                    Ext.Error.raise({
+                        sourceClass: Ext.getClassName(this.observable),
+                        sourceMethod: "addListener",
+                        msg: "The specified callback function is undefined"
+                    });
                 }
                 //</debug>
 

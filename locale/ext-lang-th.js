@@ -13,16 +13,16 @@ if(Ext.DataView){
   Ext.DataView.prototype.emptyText = "";
 }
 
-if(Ext.grid.GridPanel){
-  Ext.grid.GridPanel.prototype.ddText = "{0} àÅ×Í¡áÅéÇ·Ñé§ËÁŽá¶Ç";
+if(Ext.grid.Panel){
+  Ext.grid.Panel.prototype.ddText = "{0} àÅ×Í¡áÅéÇ·Ñé§ËÁŽá¶Ç";
 }
 
 if(Ext.TabPanelItem){
   Ext.TabPanelItem.prototype.closeText = "»ÔŽá·çº¹Õé";
 }
 
-if(Ext.form.BaseField){
-  Ext.form.BaseField.prototype.invalidText = "€èÒ¢Í§ªèÍ§¹ÕéäÁè¶Ù¡µéÍ§";
+if(Ext.form.field.Base){
+  Ext.form.field.Base.prototype.invalidText = "€èÒ¢Í§ªèÍ§¹ÕéäÁè¶Ù¡µéÍ§";
 }
 
 if(Ext.LoadMask){
@@ -125,7 +125,7 @@ if(Ext.picker.Month) {
   });
 }
 
-if(Ext.toolbar.PagingToolbar){
+if(Ext.toolbar.Paging){
   Ext.apply(Ext.PagingToolbar.prototype, {
     beforePageText : "Ë¹éÒ",
     afterPageText  : "of {0}",
@@ -139,8 +139,8 @@ if(Ext.toolbar.PagingToolbar){
   });
 }
 
-if(Ext.form.Text){
-  Ext.apply(Ext.form.Text.prototype, {
+if(Ext.form.field.Text){
+  Ext.apply(Ext.form.field.Text.prototype, {
     minLengthText : "The minimum length for this field is {0}",
     maxLengthText : "The maximum length for this field is {0}",
     blankText     : "This field is required",
@@ -149,16 +149,16 @@ if(Ext.form.Text){
   });
 }
 
-if(Ext.form.Number){
-  Ext.apply(Ext.form.Number.prototype, {
+if(Ext.form.field.Number){
+  Ext.apply(Ext.form.field.Number.prototype, {
     minText : "The minimum value for this field is {0}",
     maxText : "The maximum value for this field is {0}",
     nanText : "{0} is not a valid number"
   });
 }
 
-if(Ext.form.Date){
-  Ext.apply(Ext.form.Date.prototype, {
+if(Ext.form.field.Date){
+  Ext.apply(Ext.form.field.Date.prototype, {
     disabledDaysText  : "»ÔŽ",
     disabledDatesText : "»ÔŽ",
     minText           : "The date in this field must be after {0}",
@@ -169,15 +169,15 @@ if(Ext.form.Date){
   });
 }
 
-if(Ext.form.ComboBox){
-  Ext.apply(Ext.form.ComboBox.prototype, {
+if(Ext.form.field.ComboBox){
+  Ext.apply(Ext.form.field.ComboBox.prototype, {
     loadingText       : "¡ÓÅÑ§âËÅŽ...",
     valueNotFoundText : undefined
   });
 }
 
-if(Ext.form.VTypes){
-  Ext.apply(Ext.form.VTypes, {
+if(Ext.form.field.VTypes){
+  Ext.apply(Ext.form.field.VTypes, {
     emailText    : 'This field should be an e-mail address in the format "user@example.com"',
     urlText      : 'This field should be a URL in the format "http:/'+'/www.example.com"',
     alphaText    : 'This field should only contain letters and _',
@@ -185,8 +185,8 @@ if(Ext.form.VTypes){
   });
 }
 
-if(Ext.form.HtmlEditor){
-  Ext.apply(Ext.form.HtmlEditor.prototype, {
+if(Ext.form.field.HtmlEditor){
+  Ext.apply(Ext.form.field.HtmlEditor.prototype, {
     createLinkText : 'Please enter the URL for the link:',
     buttonTips : {
       bold : {
@@ -263,8 +263,8 @@ if(Ext.form.HtmlEditor){
   });
 }
 
-if(Ext.grid.HeaderContainer){
-  Ext.apply(Ext.grid.HeaderContainer.prototype, {
+if(Ext.grid.header.Container){
+  Ext.apply(Ext.grid.header.Container.prototype, {
     sortAscText  : "Sort Ascending",
     sortDescText : "Sort Descending",
     lockText     : "Lock Column",

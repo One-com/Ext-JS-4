@@ -16,7 +16,7 @@
 Ext.define('Ext.selection.Model', {
     extend: 'Ext.util.Observable',
     alternateClassName: 'Ext.AbstractStoreSelectionModel',
-    requires: ['Ext.data.StoreMgr'],
+    requires: ['Ext.data.StoreManager'],
     // lastSelected
 
     /**
@@ -42,7 +42,7 @@ Ext.define('Ext.selection.Model', {
     /**
      * Prune records when they are removed from the store from the selection.
      * This is a private flag. For an example of its usage, take a look at
-     * Ext.tree.SelectionModel.
+     * Ext.selection.TreeModel.
      * @private
      */
     pruneRemoved: true,
@@ -73,7 +73,7 @@ Ext.define('Ext.selection.Model', {
         me.setSelectionMode(cfg.mode || me.mode);
 
         // maintains the currently selected records.
-        me.selected = new Ext.util.MixedCollection();
+        me.selected = Ext.create('Ext.util.MixedCollection');
         
         me.callParent(arguments);
     },
@@ -93,7 +93,7 @@ Ext.define('Ext.selection.Model', {
             }
         }
         if(store){
-            store = Ext.data.StoreMgr.lookup(store);
+            store = Ext.data.StoreManager.lookup(store);
             store.on({
                 add: me.onStoreAdd,
                 clear: me.onStoreClear,
@@ -180,7 +180,8 @@ Ext.define('Ext.selection.Model', {
             selectedCount = 0,
             i,
             tmp,
-            dontDeselect;
+            dontDeselect,
+            records = [];
         
         if (me.isLocked()){
             return;
@@ -215,16 +216,17 @@ Ext.define('Ext.selection.Model', {
         } else {
             dontDeselect = (dir == 'up') ? startRow : endRow;
         }
+        
         for (i = startRow; i <= endRow; i++){
             if (selectedCount == (endRow - startRow + 1)) {
                 if (i != dontDeselect) {
                     me.doDeselect(i, true);
                 }
             } else {
-                me.doSelect(i, true);
+                records.push(store.getAt(i));
             }
-
         }
+        me.doMultiSelect(records, true);
     },
     
     /**
@@ -291,12 +293,10 @@ Ext.define('Ext.selection.Model', {
             change = true;
             me.lastSelected = record;
             selected.add(record);
-            if (!suppressEvent) {
-                me.setLastFocused(record);
-            }
 
             me.onSelectChange(record, true, suppressEvent);
         }
+        me.setLastFocused(record, suppressEvent);
         // fire selchange if there was a change and there is no suppressEvent flag
         me.maybeFireSelectionChange(change && !suppressEvent);
     },

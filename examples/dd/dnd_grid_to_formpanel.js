@@ -16,7 +16,8 @@ Ext.onReady(function(){
     ];
 
     // Generic fields array to use in both store defs.
-    Ext.regModel('DataObject', {
+    Ext.define('DataObject', {
+        extend: 'Ext.data.Model',
         fields: [
             {name: 'name', mapping : 'name'},
             {name: 'column1', mapping : 'column1'},
@@ -25,7 +26,7 @@ Ext.onReady(function(){
     });
 
     // create the data store
-    var gridStore = new Ext.data.Store({
+    var gridStore = Ext.create('Ext.data.Store', {
         model  : 'DataObject',
         data   : myData
     });
@@ -38,7 +39,7 @@ Ext.onReady(function(){
     ];
 
     // declare the source Grid
-    var grid = new Ext.grid.GridPanel({
+    var grid = Ext.create('Ext.grid.Panel', {
         viewConfig: {
             plugins: {
                 ddGroup: 'GridExample',
@@ -54,28 +55,28 @@ Ext.onReady(function(){
         margins          : '0 2 0 0',
         region           : 'west',
         title            : 'Data Grid',
-        selModel         : new Ext.selection.RowModel({singleSelect : true})
+        selModel         : Ext.create('Ext.selection.RowModel', {singleSelect : true})
     });
 
     // Declare the text fields.  This could have been done inline, is easier to read
     // for folks learning :)
-    var textField1 = new Ext.form.TextField({
+    var textField1 = Ext.create('Ext.form.field.Text', {
         fieldLabel : 'Record Name',
         name       : 'name'
     });
 
-    var textField2 = new Ext.form.TextField({
+    var textField2 = Ext.create('Ext.form.field.Text', {
         fieldLabel : 'Column 1',
         name       : 'column1'
     });
 
-    var textField3 = new Ext.form.TextField({
+    var textField3 = Ext.create('Ext.form.field.Text', {
         fieldLabel : 'Column 2',
         name       : 'column2'
     });
 
     // Setup the form panel
-    var formPanel = new Ext.form.FormPanel({
+    var formPanel = Ext.create('Ext.form.Panel', {
         region     : 'center',
         title      : 'Generic Form Panel',
         bodyStyle  : 'padding: 10px; background-color: #DFE8F6',
@@ -90,7 +91,7 @@ Ext.onReady(function(){
     });
 
     //Simple 'border layout' panel to house both grids
-    var displayPanel = new Ext.Panel({
+    var displayPanel = Ext.create('Ext.Panel', {
         width    : 650,
         height   : 300,
         layout   : 'border',
@@ -120,12 +121,12 @@ Ext.onReady(function(){
     // This will make sure we only drop to the view container
     var formPanelDropTargetEl =  formPanel.body.dom;
 
-    var formPanelDropTarget = new Ext.dd.DropTarget(formPanelDropTargetEl, {
+    var formPanelDropTarget = Ext.create('Ext.dd.DropTarget', formPanelDropTargetEl, {
         ddGroup: 'GridExample',
         notifyEnter: function(ddSource, e, data) {
 
             //Add some flare to invite drop.
-            formPanel.body.stopFx();
+            formPanel.body.stopAnimation();
             formPanel.body.highlight();
         },
         notifyDrop  : function(ddSource, e, data){

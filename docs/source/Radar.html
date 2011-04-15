@@ -7,47 +7,49 @@
  * As with all other series, the Radar series must be appended in the *series* Chart array configuration. See the Chart 
  * documentation for more information. A typical configuration object for the radar series could be:
  * 
-  <br><span style="display: none">**/</span>        series: [{
-            type: &#39;radar&#39;,
-            xField: &#39;name&#39;,
-            yField: &#39;data1&#39;,
+  <pre><code>
+        series: [{
+            type: 'radar',
+            xField: 'name',
+            yField: 'data1',
             showMarkers: true,
             markerCfg: {
                 radius: 5,
                 size: 5
             },
             style: {
-                &#39;stroke-width&#39;: 2,
-                fill: &#39;none&#39;
+                'stroke-width': 2,
+                fill: 'none'
             }
         },{
-            type: &#39;radar&#39;,
-            xField: &#39;name&#39;,
-            yField: &#39;data2&#39;,
+            type: 'radar',
+            xField: 'name',
+            yField: 'data2',
             showMarkers: true,
             markerCfg: {
                 radius: 5,
                 size: 5
             },
             style: {
-                &#39;stroke-width&#39;: 2,
-                fill: &#39;none&#39;
+                'stroke-width': 2,
+                fill: 'none'
             }
         },{
-            type: &#39;radar&#39;,
-            xField: &#39;name&#39;,
-            yField: &#39;data3&#39;,
+            type: 'radar',
+            xField: 'name',
+            yField: 'data3',
             showMarkers: true,
             markerCfg: {
                 radius: 5,
                 size: 5
             },
             style: {
-                &#39;stroke-width&#39;: 2,
-                fill: &#39;none&#39;
+                'stroke-width': 2,
+                fill: 'none'
             }
         }]
-   <br><span style="display: none">/**</span> * 
+   </code></pre>
+ * 
  * In this configuration we add three series to the chart. Each of these series is bound to the same categories field, `name` but bound to different properties for each category,
  * `data1`, `data2` and `data3` respectively. All series display markers by having `showMarkers` enabled. The configuration for the markers of each series can be set by adding properties onto 
  * the markerCfg object. Finally we override some theme styling properties by adding properties to the `style` object.
@@ -55,18 +57,18 @@
  * @xtype radar
  * 
  */
-Ext.define(&#39;Ext.chart.series.Radar&#39;, {
+Ext.define('Ext.chart.series.Radar', {
 
     /* Begin Definitions */
 
-    extend: &#39;Ext.chart.series.Series&#39;,
+    extend: 'Ext.chart.series.Series',
 
-    requires: [&#39;Ext.chart.Shapes&#39;, &#39;Ext.fx.Anim&#39;],
+    requires: ['Ext.chart.Shapes', 'Ext.fx.Anim'],
 
     /* End Definitions */
 
-    type: &quot;radar&quot;,
-    alias: &#39;series.radar&#39;,
+    type: "radar",
+    alias: 'series.radar',
 
     
     rad: Math.PI / 180,
@@ -85,7 +87,7 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
             surface = me.chart.surface, i, l;
         me.group = surface.getGroup(me.seriesId);
         if (me.showMarkers) {
-            me.markerGroup = surface.getGroup(me.seriesId + &#39;-markers&#39;);
+            me.markerGroup = surface.getGroup(me.seriesId + '-markers');
         }
     },
 
@@ -118,8 +120,8 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
             seriesStyle = me.seriesStyle,
             seriesLabelStyle = me.seriesLabelStyle,
             first = chart.resizing || !me.radar,
-            axis = chart.axes &amp;&amp; chart.axes.get(0),
-            aggregate = !(axis &amp;&amp; axis.maximum);
+            axis = chart.axes && chart.axes.get(0),
+            aggregate = !(axis && axis.maximum);
         
         me.setBBox();
 
@@ -127,7 +129,7 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
         
         Ext.apply(seriesStyle, me.style || {});
         
-        //if the store is empty then there&#39;s nothing to draw
+        //if the store is empty then there's nothing to draw
         if (!store || !store.getCount()) {
             return;
         }
@@ -147,7 +149,7 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
             });
             //get maxValue to interpolate
             store.each(function(record, i) {
-                for (i = 0, nfields = fields.length; i &lt; nfields; i++) {
+                for (i = 0, nfields = fields.length; i < nfields; i++) {
                     maxValue = max(+record.get(fields[i]), maxValue);
                 }
             });
@@ -161,11 +163,11 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
             x = rho * cos(i / l * pi2);
             y = rho * sin(i / l * pi2);
             if (i == 0) {
-                path.push(&#39;M&#39;, x + centerX, y + centerY);
-                startPath.push(&#39;M&#39;, 0.01 * x + centerX, 0.01 * y + centerY);
+                path.push('M', x + centerX, y + centerY);
+                startPath.push('M', 0.01 * x + centerX, 0.01 * y + centerY);
             } else {
-                path.push(&#39;L&#39;, x + centerX, y + centerY);
-                startPath.push(&#39;L&#39;, 0.01 * x + centerX, 0.01 * y + centerY);
+                path.push('L', x + centerX, y + centerY);
+                startPath.push('L', 0.01 * x + centerX, 0.01 * y + centerY);
             }
             items.push({
                 sprite: false, //TODO(nico): add markers
@@ -173,11 +175,11 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
                 series: me
             });
         });
-        path.push(&#39;Z&#39;);
+        path.push('Z');
         //create path sprite
         if (!me.radar) {
             me.radar = surface.add(Ext.apply({
-                type: &#39;path&#39;,
+                type: 'path',
                 group: group,
                 path: startPath
             }, seriesStyle || {}));
@@ -224,7 +226,7 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
         
         delete endMarkerStyle.type;
         
-        for (i = 0, l = items.length; i &lt; l; i++) {
+        for (i = 0, l = items.length; i < l; i++) {
             item = items[i];
             marker = markerGroup.getAt(i);
             if (!marker) {
@@ -274,8 +276,8 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
             tolerance = 10,
             abs = Math.abs;
         point = item.point;
-        return (abs(point[0] - x) &lt;= tolerance &amp;&amp;
-                abs(point[1] - y) &lt;= tolerance);
+        return (abs(point[0] - x) <= tolerance &&
+                abs(point[1] - y) <= tolerance);
     },
 
     // @private callback for when creating a label sprite.
@@ -289,11 +291,11 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
             endLabelStyle = Ext.apply(me.seriesLabelStyle || {}, config);
         
         return me.chart.surface.add(Ext.apply({
-            &#39;type&#39;: &#39;text&#39;,
-            &#39;text-anchor&#39;: &#39;middle&#39;,
-            &#39;group&#39;: group,
-            &#39;x&#39;: centerX,
-            &#39;y&#39;: centerY
+            'type': 'text',
+            'text-anchor': 'middle',
+            'group': group,
+            'x': centerX,
+            'y': centerY
         }, config || {}));
     },
 
@@ -354,7 +356,7 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
             }, true);
             //hide shadows too
             if (me.radar.shadows) {
-                for (i = 0, shadows = me.radar.shadows, ln = shadows.length; i &lt; ln; i++) {
+                for (i = 0, shadows = me.radar.shadows, ln = shadows.length; i < ln; i++) {
                     shadow = shadows[i];
                     shadow.setAttributes({
                         hidden: !show
@@ -378,9 +380,9 @@ Ext.define(&#39;Ext.chart.series.Radar&#39;, {
     // @private hide all markers that belong to `markerGroup`
     hideMarkers: function(index) {
         var me = this,
-            count = me.markerGroup &amp;&amp; me.markerGroup.getCount() || 0,
+            count = me.markerGroup && me.markerGroup.getCount() || 0,
             i = index || 0;
-        for (; i &lt; count; i++) {
+        for (; i < count; i++) {
             me.markerGroup.getAt(i).hide(true);
         }
     }

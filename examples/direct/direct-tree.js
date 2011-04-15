@@ -5,10 +5,10 @@ Ext.require([
     'Ext.grid.Scroller'
 ]);
 
-Ext.onReady(function() {    
+Ext.onReady(function() {
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
 
-    var store = new Ext.data.TreeStore({
+    var store = Ext.create('Ext.data.TreeStore', {
         root: {
             expanded: true
         },
@@ -18,10 +18,10 @@ Ext.onReady(function() {
             paramOrder: ['node']
         }
     });
-    
-    
+
+
     // create the Tree
-    var tree = new Ext.tree.TreePanel({
+    var tree = Ext.create('Ext.tree.Panel', {
         store: store,
         height: 350,
         width: 600,

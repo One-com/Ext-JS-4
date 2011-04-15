@@ -4,11 +4,12 @@ Ext.require([
     'Ext.panel.*'
 ]);
 Ext.onReady(function(){
-    Ext.regModel('Image_', { // window.Image is protected in ie6 !!!
+    Ext.define('ImageModel', {
+        extend: 'Ext.data.Model',
         fields: ['name', 'url', {name:'size', type: 'float'}, {name:'lastmod', type:'date', dateFormat:'timestamp'}]
-    });    
-    var store = new Ext.data.JsonStore({
-        model: 'Image_',
+    });
+    var store = Ext.create('Ext.data.JsonStore', {
+        model: 'ImageModel',
         proxy: {
             type: 'ajax',
             url: 'get-images.php',
@@ -20,7 +21,7 @@ Ext.onReady(function(){
     });
     store.load();
 
-    var listView = new Ext.grid.GridPanel({
+    var listView = Ext.create('Ext.grid.Panel', {
         width:425,
         height:250,
         collapsible:true,
@@ -41,7 +42,7 @@ Ext.onReady(function(){
             text: 'Last Modified',
             xtype: 'datecolumn',
             format: 'm-d h:i a',
-            flex: 35, 
+            flex: 35,
             dataIndex: 'lastmod'
         },{
             text: 'Size',
@@ -52,7 +53,7 @@ Ext.onReady(function(){
             cls: 'listview-filesize'
         }]
     });
-    
+
     // little bit of feedback
     listView.on('selectionchange', function(view, nodes){
         var l = nodes.length;

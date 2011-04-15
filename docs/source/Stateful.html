@@ -3,75 +3,77 @@
  * A mixin for being able to save the state of an object to an underlying 
  * {@link Ext.state.Provider}.
  */
-Ext.define(&#39;Ext.state.Stateful&#39;, {
+Ext.define('Ext.state.Stateful', {
     
     /* Begin Definitions */
    
    mixins: {
-        observable: &#39;Ext.util.Observable&#39;
+        observable: 'Ext.util.Observable'
     },
     
-    requires: [&#39;Ext.state.Manager&#39;],
+    requires: ['Ext.state.Manager'],
     
     /* End Definitions */
     
     <a name="cfg-Ext.state.Stateful-stateful"></a>/**
      * @cfg {Boolean} stateful
-     * &lt;p&gt;A flag which causes the object to attempt to restore the state of
+     * <p>A flag which causes the object to attempt to restore the state of
      * internal properties from a saved state on startup. The object must have
-     * a &lt;code&gt;{@link #stateId}&lt;/code&gt; for state to be managed. 
+     * a <code>{@link #stateId}</code> for state to be managed. 
      * Auto-generated ids are not guaranteed to be stable across page loads and 
-     * cannot be relied upon to save and restore the same state for a object.&lt;p&gt;
-     * &lt;p&gt;For state saving to work, the state manager&#39;s provider must have been
+     * cannot be relied upon to save and restore the same state for a object.<p>
+     * <p>For state saving to work, the state manager's provider must have been
      * set to an implementation of {@link Ext.state.Provider} which overrides the
      * {@link Ext.state.Provider#set set} and {@link Ext.state.Provider#get get}
      * methods to save and recall name/value pairs. A built-in implementation,
-     * {@link Ext.state.CookieProvider} is available.&lt;/p&gt;
-     * &lt;p&gt;To set the state provider for the current page:&lt;/p&gt;
-     * <br><span style="display: none">**/</span>Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
+     * {@link Ext.state.CookieProvider} is available.</p>
+     * <p>To set the state provider for the current page:</p>
+     * <pre><code>
+Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
     expires: new Date(new Date().getTime()+(1000*60*60*24*7)), //7 days from now
 }));
-     * <br><span style="display: none">/**</span>     * &lt;p&gt;A stateful object attempts to save state when one of the events
-     * listed in the &lt;code&gt;{@link #stateEvents}&lt;/code&gt; configuration fires.&lt;/p&gt;
-     * &lt;p&gt;To save state, a stateful object first serializes its state by
-     * calling &lt;b&gt;&lt;code&gt;{@link #getState}&lt;/code&gt;&lt;/b&gt;. By default, this function does
+     * </code></pre>
+     * <p>A stateful object attempts to save state when one of the events
+     * listed in the <code>{@link #stateEvents}</code> configuration fires.</p>
+     * <p>To save state, a stateful object first serializes its state by
+     * calling <b><code>{@link #getState}</code></b>. By default, this function does
      * nothing. The developer must provide an implementation which returns an
-     * object hash which represents the restorable state of the object.&lt;/p&gt;
-     * &lt;p&gt;The value yielded by getState is passed to {@link Ext.state.Manager#set}
+     * object hash which represents the restorable state of the object.</p>
+     * <p>The value yielded by getState is passed to {@link Ext.state.Manager#set}
      * which uses the configured {@link Ext.state.Provider} to save the object
-     * keyed by the &lt;code&gt;{@link stateId}&lt;/code&gt;&lt;/p&gt;.
-     * &lt;p&gt;During construction, a stateful object attempts to &lt;i&gt;restore&lt;/i&gt;
+     * keyed by the <code>{@link stateId}</code></p>.
+     * <p>During construction, a stateful object attempts to <i>restore</i>
      * its state by calling {@link Ext.state.Manager#get} passing the
-     * &lt;code&gt;{@link #stateId}&lt;/code&gt;&lt;/p&gt;
-     * &lt;p&gt;The resulting object is passed to &lt;b&gt;&lt;code&gt;{@link #applyState}&lt;/code&gt;&lt;/b&gt;.
-     * The default implementation of &lt;code&gt;{@link #applyState}&lt;/code&gt; simply copies
+     * <code>{@link #stateId}</code></p>
+     * <p>The resulting object is passed to <b><code>{@link #applyState}</code></b>.
+     * The default implementation of <code>{@link #applyState}</code> simply copies
      * properties into the object, but a developer may override this to support
-     * more behaviour.&lt;/p&gt;
-     * &lt;p&gt;You can perform extra processing on state save and restore by attaching
+     * more behaviour.</p>
+     * <p>You can perform extra processing on state save and restore by attaching
      * handlers to the {@link #beforestaterestore}, {@link #staterestore},
-     * {@link #beforestatesave} and {@link #statesave} events.&lt;/p&gt;
+     * {@link #beforestatesave} and {@link #statesave} events.</p>
      */
     stateful: true,
     
     <a name="cfg-Ext.state.Stateful-stateId"></a>/**
      * @cfg {String} stateId
      * The unique id for this object to use for state management purposes.
-     * &lt;p&gt;See {@link #stateful} for an explanation of saving and restoring state.&lt;/p&gt;
+     * <p>See {@link #stateful} for an explanation of saving and restoring state.</p>
      */
     
     <a name="cfg-Ext.state.Stateful-stateEvents"></a>/**
      * @cfg {Array} stateEvents
-     * &lt;p&gt;An array of events that, when fired, should trigger this object to
-     * save its state (defaults to none). &lt;code&gt;stateEvents&lt;/code&gt; may be any type
+     * <p>An array of events that, when fired, should trigger this object to
+     * save its state (defaults to none). <code>stateEvents</code> may be any type
      * of event supported by this object, including browser or custom events
-     * (e.g., &lt;tt&gt;[&#39;click&#39;, &#39;customerchange&#39;]&lt;/tt&gt;).&lt;/p&gt;
-     * &lt;p&gt;See &lt;code&gt;{@link #stateful}&lt;/code&gt; for an explanation of saving and
-     * restoring object state.&lt;/p&gt;
+     * (e.g., <tt>['click', 'customerchange']</tt>).</p>
+     * <p>See <code>{@link #stateful}</code> for an explanation of saving and
+     * restoring object state.</p>
      */
     
     <a name="prop-Ext.state.Stateful-saveDelay"></a>/**
      * {@cfg} {Number} saveBuffer A buffer to be applied if many state events are fired within
-     * a short period. Defaults to &lt;tt&gt;100&lt;/tt&gt;.
+     * a short period. Defaults to <tt>100</tt>.
      */
     saveDelay: 100,
     
@@ -101,43 +103,43 @@ Ext.define(&#39;Ext.state.Stateful&#39;, {
              * Fires before the state of the object is restored. Return false from an event handler to stop the restore.
              * @param {Ext.state.Stateful} this
              * @param {Object} state The hash of state values returned from the StateProvider. If this
-             * event is not vetoed, then the state object is passed to &lt;b&gt;&lt;tt&gt;applyState&lt;/tt&gt;&lt;/b&gt;. By default,
+             * event is not vetoed, then the state object is passed to <b><tt>applyState</tt></b>. By default,
              * that simply copies property values into this object. The method maybe overriden to
              * provide custom state restoration.
              */
-            &#39;beforestaterestore&#39;,
+            'beforestaterestore',
             
             <a name="event-Ext.state.Stateful-staterestore"></a>/**
              * @event staterestore
              * Fires after the state of the object is restored.
              * @param {Ext.state.Stateful} this
              * @param {Object} state The hash of state values returned from the StateProvider. This is passed
-             * to &lt;b&gt;&lt;tt&gt;applyState&lt;/tt&gt;&lt;/b&gt;. By default, that simply copies property values into this
+             * to <b><tt>applyState</tt></b>. By default, that simply copies property values into this
              * object. The method maybe overriden to provide custom state restoration.
              */
-            &#39;staterestore&#39;,
+            'staterestore',
             
             <a name="event-Ext.state.Stateful-beforestatesave"></a>/**
              * @event beforestatesave
              * Fires before the state of the object is saved to the configured state provider. Return false to stop the save.
              * @param {Ext.state.Stateful} this
              * @param {Object} state The hash of state values. This is determined by calling
-             * &lt;b&gt;&lt;tt&gt;getState()&lt;/tt&gt;&lt;/b&gt; on the object. This method must be provided by the
+             * <b><tt>getState()</tt></b> on the object. This method must be provided by the
              * developer to return whetever representation of state is required, by default, Ext.state.Stateful
              * has a null implementation.
              */
-            &#39;beforestatesave&#39;,
+            'beforestatesave',
             
             <a name="event-Ext.state.Stateful-statesave"></a>/**
              * @event statesave
              * Fires after the state of the object is saved to the configured state provider.
              * @param {Ext.state.Stateful} this
              * @param {Object} state The hash of state values. This is determined by calling
-             * &lt;b&gt;&lt;tt&gt;getState()&lt;/tt&gt;&lt;/b&gt; on the object. This method must be provided by the
+             * <b><tt>getState()</tt></b> on the object. This method must be provided by the
              * developer to return whetever representation of state is required, by default, Ext.state.Stateful
              * has a null implementation.
              */
-            &#39;statesave&#39;
+            'statesave'
         );
         me.mixins.observable.constructor.call(me);
         if (me.stateful !== false) {
@@ -167,7 +169,7 @@ Ext.define(&#39;Ext.state.Stateful&#39;, {
             i = 0,
             len = events.length;
             
-        for (; i &lt; len; ++i) {
+        for (; i < len; ++i) {
             me.on(events[i], me.onStateChange, me);
         }
     },
@@ -180,9 +182,9 @@ Ext.define(&#39;Ext.state.Stateful&#39;, {
         var me = this,
             delay = me.saveDelay;
         
-        if (delay &gt; 0) {
+        if (delay > 0) {
             if (!me.stateTask) {
-                me.stateTask = new Ext.util.DelayedTask(me.saveState, me);
+                me.stateTask = Ext.create('Ext.util.DelayedTask', me.saveState, me);
             }
             me.stateTask.delay(me.saveDelay);
         } else {
@@ -203,9 +205,9 @@ Ext.define(&#39;Ext.state.Stateful&#39;, {
             id = me.getStateId();
             if (id) {
                 state = me.getState();
-                if (me.fireEvent(&#39;beforestatesave&#39;, me, state) !== false) {
+                if (me.fireEvent('beforestatesave', me, state) !== false) {
                     Ext.state.Manager.set(id, state);
-                    me.fireEvent(&#39;statesave&#39;, me, state);
+                    me.fireEvent('statesave', me, state);
                 }
             }
         }
@@ -260,9 +262,9 @@ Ext.define(&#39;Ext.state.Stateful&#39;, {
                 state = Ext.state.Manager.get(id);
                 if (state) {
                     state = Ext.apply({}, state);
-                    if (me.fireEvent(&#39;beforestaterestore&#39;, me, state) !== false) {
+                    if (me.fireEvent('beforestaterestore', me, state) !== false) {
                         me.applyState(state);
-                        me.fireEvent(&#39;staterestore&#39;, me, state);
+                        me.fireEvent('staterestore', me, state);
                     }
                 }
             }

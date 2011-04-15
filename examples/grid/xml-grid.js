@@ -4,7 +4,8 @@ Ext.require([
 ]);
 
 Ext.onReady(function(){
-    Ext.regModel('Book',{
+    Ext.define('Book',{
+        extend: 'Ext.data.Model',
         fields: [
             // set up the fields mapping into the xml doc
             // The first needs mapping, the others are very basic
@@ -33,7 +34,7 @@ Ext.onReady(function(){
     });
 
     // create the grid
-    var grid = new Ext.grid.GridPanel({
+    var grid = Ext.create('Ext.grid.Panel', {
         store: store,
         columns: [
             {text: "Author", flex: 1, dataIndex: 'Author', sortable: true},

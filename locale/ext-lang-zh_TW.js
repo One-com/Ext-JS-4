@@ -12,16 +12,16 @@ Ext.onReady(function(){
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "選擇了 {0} 行";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "選擇了 {0} 行";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "關閉此標籤";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "數值不符合欄位規定";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "數值不符合欄位規定";
     }
 
     if(Ext.LoadMask){
@@ -97,7 +97,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "第",
             afterPageText  : "頁，共{0}頁",
@@ -111,8 +111,8 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "此欄位最少要輸入 {0} 個字",
             maxLengthText : "此欄位最多輸入 {0} 個字",
             blankText     : "此欄位為必填",
@@ -121,16 +121,16 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "此欄位之數值必須大於 {0}",
             maxText : "此欄位之數值必須小於 {0}",
             nanText : "{0} 不是合法的數字"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "無法使用",
             disabledDatesText : "無法使用",
             minText           : "此欄位之日期必須在 {0} 之後",
@@ -140,15 +140,15 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "讀取中 ...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : '此欄位必須輸入像 "user@example.com" 之E-Mail格式',
             urlText      : '此欄位必須輸入像 "http:/'+'/www.example.com" 之網址格式',
             alphaText    : '此欄位僅能輸入半形英文字母及底線( _ )符號',
@@ -156,8 +156,8 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "正向排序",
             sortDescText : "反向排序",
             lockText     : "鎖定欄位",

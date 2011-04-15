@@ -4,10 +4,10 @@ Ext.Loader.setPath('Ext.ux', '../ux/');
 
 Ext.require([
     'Ext.data.*',
-    'Ext.tip.QuickTips',
+    'Ext.tip.QuickTipManager',
     'Ext.form.*',
     'Ext.ux.data.PagingMemoryProxy',
-    'Ext.grid.GridPanel'
+    'Ext.grid.Panel'
 ]);
 
 Ext.onReady(function(){
@@ -18,7 +18,7 @@ Ext.onReady(function(){
                 
         return {
             init: function() {
-                Ext.tip.QuickTips.init();
+                Ext.tip.QuickTipManager.init();
             
                 /* Language chooser combobox  */
                 var store = Ext.create('Ext.data.ArrayStore', {
@@ -26,7 +26,7 @@ Ext.onReady(function(){
                     data : Ext.exampledata.languages // from languages.js
                 });
                 
-                var combo = Ext.create('Ext.form.ComboBox', {
+                var combo = Ext.create('Ext.form.field.ComboBox', {
                     renderTo: 'languages',
                     store: store,
                     displayField:'language',
@@ -129,7 +129,7 @@ Ext.onReady(function(){
                      }
                  });
                              
-                 Ext.create('Ext.grid.GridPanel', {
+                 Ext.create('Ext.grid.Panel', {
                      renderTo: 'grid',
                      width: 380,
                      height: 203,
@@ -140,7 +140,7 @@ Ext.onReady(function(){
                          width: 240 
                      }],
                      store: ds,            
-                     bbar: Ext.create('Ext.toolbar.PagingToolbar', {
+                     bbar: Ext.create('Ext.toolbar.Paging', {
                              pageSize: 6,
                              store: ds,
                              displayInfo: true

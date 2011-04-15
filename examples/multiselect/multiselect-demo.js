@@ -1,7 +1,7 @@
 Ext.Loader.setConfig({enabled: true});
 Ext.Loader.setPath('Ext.ux', '../ux');
 Ext.require([
-    'Ext.form.FormPanel',
+    'Ext.form.Panel',
     'Ext.ux.form.MultiSelect',
     'Ext.ux.form.ItemSelector'
 ]);

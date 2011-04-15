@@ -1,7 +1,7 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.DelayedTask"></a>/**
  * @class Ext.util.DelayedTask
 
-The DelayedTask class provides a convenient way to &quot;buffer&quot; the execution of a method,
+The DelayedTask class provides a convenient way to "buffer" the execution of a method,
 performing setTimeout where a new timeout cancels the old timeout. When called, the
 task will wait the specified time period before executing. If durng that time period,
 the task is called again, the original call will be cancelled. This continues so that
@@ -15,12 +15,12 @@ perform only if they stop for that amount of time.
 **Usage:**
 
     var task = new Ext.util.DelayedTask(function(){
-        alert(Ext.getDom(&#39;myInputField&#39;).value.length);
+        alert(Ext.getDom('myInputField').value.length);
     });
     
     // Wait 500ms before calling our function. If the user presses another key
-    // during that 500ms, it will be cancelled and we&#39;ll wait another 500ms.
-    Ext.get(&#39;myInputField&#39;).on(&#39;keypress&#39;, function(){
+    // during that 500ms, it will be cancelled and we'll wait another 500ms.
+    Ext.get('myInputField').on('keypress', function(){
         task.{@link #delay}(500);
     });
 
@@ -30,8 +30,8 @@ also setup a delayed task for you to buffer events.
 
  * @constructor The parameters to this constructor serve as defaults and are not required.
  * @param {Function} fn (optional) The default function to call.
- * @param {Object} scope The default scope (The &lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which the
- * function is called. If not specified, &lt;code&gt;this&lt;/code&gt; will refer to the browser window.
+ * @param {Object} scope The default scope (The <code><b>this</b></code> reference) in which the
+ * function is called. If not specified, <code>this</code> will refer to the browser window.
  * @param {Array} args (optional) The default Array of arguments.
  * @markdown
  */
@@ -50,7 +50,7 @@ Ext.util.DelayedTask = function(fn, scope, args) {
      * @param {Number} delay The milliseconds to delay
      * @param {Function} newFn (optional) Overrides function passed to constructor
      * @param {Object} newScope (optional) Overrides scope passed to constructor. Remember that if no scope
-     * is specified, &lt;code&gt;this&lt;/code&gt; will refer to the browser window.
+     * is specified, <code>this</code> will refer to the browser window.
      * @param {Array} newArgs (optional) Overrides args passed to constructor
      */
     this.delay = function(delay, newFn, newScope, newArgs) {

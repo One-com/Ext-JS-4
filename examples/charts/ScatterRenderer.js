@@ -4,7 +4,7 @@ Ext.require(['Ext.Window', 'Ext.fx.target.Sprite', 'Ext.layout.container.Fit']);
 var Renderers = {};
 
 (function() {
-     var ColorMgr = {
+     var ColorManager = {
        rgbToHsv: function(rgb) {
            var r = rgb[0] / 255,
                g = rgb[1] / 255,
@@ -15,9 +15,9 @@ var Renderers = {};
                delta = maxVal - minVal,
                h = 0, s = 0, v = 0,
                deltaRgb;
-     
+
            v = maxVal;
-        
+
            if (delta == 0) {
              return [0, 0, v];
            } else {
@@ -27,35 +27,35 @@ var Renderers = {};
                  g: (((maxVal - g) / 6) + (delta / 2)) / delta,
                  b: (((maxVal - b) / 6) + (delta / 2)) / delta
              };
-             if (r == maxVal) { 
-                 h = deltaRgb.b - deltaRgb.g; 
-             } else if (g == maxVal) { 
-                 h = (1 / 3) + deltaRgb.r - deltaRgb.b; 
-             } else if (b == maxVal) { 
-                 h = (2 / 3) + deltaRgb.g - deltaRgb.r; 
+             if (r == maxVal) {
+                 h = deltaRgb.b - deltaRgb.g;
+             } else if (g == maxVal) {
+                 h = (1 / 3) + deltaRgb.r - deltaRgb.b;
+             } else if (b == maxVal) {
+                 h = (2 / 3) + deltaRgb.g - deltaRgb.r;
              }
-             //handle edge cases for hue       
-             if (h < 0) { 
-                 h += 1; 
+             //handle edge cases for hue
+             if (h < 0) {
+                 h += 1;
              }
-             if (h > 1) { 
-                 h -= 1; 
+             if (h > 1) {
+                 h -= 1;
              }
            }
-        
+
            h = rd(h * 360);
            s = rd(s * 100);
            v = rd(v * 100);
-        
+
            return [h, s, v];
        },
-     
+
        hsvToRgb : function(hsv) {
            var h = hsv[0] / 360,
                s = hsv[1] / 100,
                v = hsv[2] / 100,
                r, g, b, rd = Math.round;
-        
+
            if (s == 0) {
              v *= 255;
              return [v, v, v];
@@ -65,10 +65,10 @@ var Renderers = {};
                  v1 = v * (1 - s),
                  v2 = v * (1 - s * (vh - vi)),
                  v3 = v * (1 - s * (1 - (vh - vi)));
-     
+
              switch(vi) {
                  case 0:
-                     r = v; g = v3; b = v1; 
+                     r = v; g = v3; b = v1;
                      break;
                  case 1:
                      r = v2; g = v; b = v1;
@@ -94,24 +94,24 @@ var Renderers = {};
     //Generic number interpolator
     var delta = function(x, y, a, b, theta) {
             return a + (b - a) * (y - theta) / (y - x);
-    };        
+    };
     //Add renderer methods.
     Ext.apply(Renderers, {
         color: function(fieldName, minColor, maxColor, minValue, maxValue) {
             var re = /rgb\s*\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)\s*/,
                 minColorMatch = minColor.match(re),
                 maxColorMatch = maxColor.match(re),
-                interpolate = function(theta) { 
+                interpolate = function(theta) {
                     return [ delta(minValue, maxValue, minColor[0], maxColor[0], theta),
                              delta(minValue, maxValue, minColor[1], maxColor[1], theta),
-                             delta(minValue, maxValue, minColor[2], maxColor[2], theta) ]; 
+                             delta(minValue, maxValue, minColor[2], maxColor[2], theta) ];
                 };
-            minColor = ColorMgr.rgbToHsv([ +minColorMatch[1], +minColorMatch[2], +minColorMatch[3] ]);
-            maxColor = ColorMgr.rgbToHsv([ +maxColorMatch[1], +maxColorMatch[2], +maxColorMatch[3] ]);
+            minColor = ColorManager.rgbToHsv([ +minColorMatch[1], +minColorMatch[2], +minColorMatch[3] ]);
+            maxColor = ColorManager.rgbToHsv([ +maxColorMatch[1], +maxColorMatch[2], +maxColorMatch[3] ]);
             //Return the renderer
             return function(sprite, record, attr, index, store) {
                 var value = +record.get(fieldName),
-                    rgb = ColorMgr.hsvToRgb(interpolate(value)),
+                    rgb = ColorManager.hsvToRgb(interpolate(value)),
                     rgbString = 'rgb(' + rgb[0] + ', ' + rgb[1] + ', ' + rgb[2] + ')';
                 return Ext.apply(attr, {
                     fill: rgbString
@@ -123,7 +123,7 @@ var Renderers = {};
             var re = /rgb\s*\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)\s*/,
             minColorMatch = minColor.match(re),
             maxColorMatch = maxColor.match(re),
-            interpolate = function(theta) { 
+            interpolate = function(theta) {
                 var ans = delta(minValue, maxValue, +minColorMatch[1], +maxColorMatch[1], theta) >> 0;
                 return [ ans, ans, ans ];
             };
@@ -141,7 +141,7 @@ var Renderers = {};
         },
 
         radius: function(fieldName, minRadius, maxRadius, minValue, maxValue) {
-            var interpolate = function(theta) { 
+            var interpolate = function(theta) {
                 return delta(minValue, maxValue, minRadius, maxRadius, theta);
             };
             //Return the renderer
@@ -256,54 +256,54 @@ Ext.onReady(function () {
         refresh();
     };
 
-    var xAxisMenu = new Ext.menu.Menu({
+    var xAxisMenu = Ext.create('Ext.menu.Menu', {
         id: 'xAxisMenu',
-        items: [ { 
+        items: [ {
              text: 'data1',
              handler: xAxisHandler,
              checked: true,
              group: 'x'
-           }, 
-           { 
-             text: 'data2', 
+           },
+           {
+             text: 'data2',
              handler: xAxisHandler,
                checked: false,
                group: 'x'
-           }, 
-           { 
-             text: 'data3', 
-             handler: xAxisHandler, 
+           },
+           {
+             text: 'data3',
+             handler: xAxisHandler,
              checked: false,
              group: 'x'
            } ]
     });
 
-    var yAxisMenu = new Ext.menu.Menu({
+    var yAxisMenu = Ext.create('Ext.menu.Menu', {
         id: 'yAxisMenu',
-        items: [ { 
+        items: [ {
             text: 'data1',
             handler: yAxisHandler,
             checked: false,
             group: 'y'
-          }, 
-          { 
-        text: 'data2', 
+          },
+          {
+        text: 'data2',
             handler: yAxisHandler,
             checked: true,
             group: 'y'
-          }, 
-          { 
-            text: 'data3', 
-            handler: yAxisHandler, 
+          },
+          {
+            text: 'data3',
+            handler: yAxisHandler,
             checked: false,
             group: 'y'
           } ]
     });
 
-    var colorMenu = new Ext.menu.Menu({
+    var colorMenu = Ext.create('Ext.menu.Menu', {
         id: 'colorMenu',
-        items: [ { text: 'data1', handler: colorVariableHandler, checked: false, group: 'color' }, 
-                 { text: 'data2', handler: colorVariableHandler, checked: false, group: 'color' }, 
+        items: [ { text: 'data1', handler: colorVariableHandler, checked: false, group: 'color' },
+                 { text: 'data2', handler: colorVariableHandler, checked: false, group: 'color' },
                  { text: 'data3', handler: colorVariableHandler, checked: false, group: 'color' },
                  { text: 'Color From',
                    menu: {
@@ -316,7 +316,7 @@ Ext.onReady(function () {
                              { text: 'rgb(146, 6, 157)', handler: colorFromHandler, checked: false, group: 'colorrange' },
                              { text: 'rgb(49, 149, 0)', handler: colorFromHandler, checked: false, group: 'colorrange' },
                              { text: 'rgb(249, 153, 0)', handler: colorFromHandler, checked: false, group: 'colorrange' }]
-                   } 
+                   }
                  },
                  { text: 'Color To',
                      menu: {
@@ -329,15 +329,15 @@ Ext.onReady(function () {
                                { text: 'rgb(146, 6, 157)' , handler: colorToHandler, checked: false, group: 'tocolorrange' },
                                { text: 'rgb(49, 149, 0)', handler: colorToHandler, checked: false, group: 'tocolorrange' },
                                { text: 'rgb(249, 153, 0)', handler: colorToHandler, checked: false, group: 'tocolorrange' }]
-                     } 
+                     }
                    }
                ]
     });
 
-    var grayscaleMenu = new Ext.menu.Menu({
+    var grayscaleMenu = Ext.create('Ext.menu.Menu', {
         id: 'grayscaleMenu',
-        items: [ { text: 'data1', handler: grayscaleVariableHandler, checked: false, group: 'gs' }, 
-                 { text: 'data2', handler: grayscaleVariableHandler, checked: false, group: 'gs' }, 
+        items: [ { text: 'data1', handler: grayscaleVariableHandler, checked: false, group: 'gs' },
+                 { text: 'data2', handler: grayscaleVariableHandler, checked: false, group: 'gs' },
                  { text: 'data3', handler: grayscaleVariableHandler, checked: false, group: 'gs' },
                  { text: 'Scale From',
                    menu: {
@@ -347,7 +347,7 @@ Ext.onReady(function () {
                              { text: 'rgb(180, 180, 180)', handler: scaleFromHandler, checked: false, group: 'gsrange' },
                              { text: 'rgb(220, 220, 220)', handler: scaleFromHandler, checked: false, group: 'gsrange' },
                              { text: 'rgb(250, 250, 250)', handler: scaleFromHandler, checked: false, group: 'gsrange' }]
-                   } 
+                   }
                  },
                  { text: 'Scale To',
                      menu: {
@@ -357,18 +357,18 @@ Ext.onReady(function () {
                              { text: 'rgb(180, 180, 180)', handler: scaleToHandler, checked: false, group: 'togsrange' },
                              { text: 'rgb(220, 220, 220)', handler: scaleToHandler, checked: true, group: 'togsrange' },
                              { text: 'rgb(250, 250, 250)', handler: scaleToHandler, checked: false, group: 'togsrange' }]
-                     } 
+                     }
                    }
                ]
     });
 
-    var radiusMenu = new Ext.menu.Menu({
+    var radiusMenu = Ext.create('Ext.menu.Menu', {
         id: 'yAxisMenu',
         style: {
             overflow: 'visible'     // For the Combo popup
         },
-        items: [ { text: 'data1', handler: radiusHandler, checked: false, group: 'radius' }, 
-                 { text: 'data2', handler: radiusHandler, checked: false, group: 'radius' }, 
+        items: [ { text: 'data1', handler: radiusHandler, checked: false, group: 'radius' },
+                 { text: 'data2', handler: radiusHandler, checked: false, group: 'radius' },
                  { text: 'data3', handler: radiusHandler, checked: false, group: 'radius' },
                  { text: 'Max Radius',
                    menu: {
@@ -377,7 +377,7 @@ Ext.onReady(function () {
                              { text: '40', handler: radiusSizeHandler, checked: false, group: 'sradius' },
                              { text: '50', handler: radiusSizeHandler, checked: true, group: 'sradius' },
                              { text: '60', handler: radiusSizeHandler, checked: false, group: 'sradius' }]
-                   } 
+                   }
                  }
                ]
     });
@@ -396,11 +396,11 @@ Ext.onReady(function () {
             handler: function() {
                 store1.loadData(generateData());
             }
-        }, 
+        },
         {
             text: 'Select X Axis',
             menu: xAxisMenu
-        }, 
+        },
         {
             text: 'Select Y Axis',
             menu: yAxisMenu
@@ -422,6 +422,7 @@ Ext.onReady(function () {
         items: {
             id: 'chartCmp',
             xtype: 'chart',
+            style: 'background:#fff',
             animate: true,
             store: store1,
             axes: false,
@@ -432,7 +433,7 @@ Ext.onReady(function () {
                 xField: 'data1',
                 yField: 'data2',
                 color: '#ccc',
-                markerCfg: {
+                markerConfig: {
                     type: 'circle',
                     radius: 20,
                     size: 20

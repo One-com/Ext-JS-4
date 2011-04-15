@@ -1,8 +1,8 @@
 Ext.define('FeedViewer.FeedGrid', {
-    extend: 'Ext.grid.GridPanel',
-    
+    extend: 'Ext.grid.Panel',
+
     alias: 'widget.feedgrid',
-    
+
     initComponent: function(){
         this.addEvents(
             /**
@@ -11,7 +11,7 @@ Ext.define('FeedViewer.FeedGrid', {
              * @param {FeedViewer.FeedGrid} this
              * @param {Ext.data.Model} model
              */
-            'rowdblclick',     
+            'rowdblclick',
             /**
              * @event select
              * Fires when a grid row is selected
@@ -20,10 +20,10 @@ Ext.define('FeedViewer.FeedGrid', {
              */
             'select'
         );
-        
+
         Ext.apply(this, {
             cls: 'feed-grid',
-            store: new Ext.data.Store({
+            store: Ext.create('Ext.data.Store', {
                 model: 'FeedItem',
                 sortInfo: {
                     property: 'pubDate',
@@ -42,7 +42,7 @@ Ext.define('FeedViewer.FeedGrid', {
                     scope: this
                 }
             }),
-            
+
             columns: [{
                 text: 'Title',
                 dataIndex: 'title',
@@ -53,14 +53,14 @@ Ext.define('FeedViewer.FeedGrid', {
                 dataIndex: 'author',
                 hidden: true,
                 width: 200
-            
+
             }, {
                 text: 'Date',
                 dataIndex: 'pubDate',
                 renderer: this.formatDate,
                 width: 200
             }],
-            
+
             viewConfig: {
                 itemId: 'view',
                 plugins: [{
@@ -79,7 +79,7 @@ Ext.define('FeedViewer.FeedGrid', {
         this.callParent(arguments);
         this.on('selectionchange', this.onSelect, this);
     },
-    
+
     // private
     onViewRender: function() {
         var me = this;
@@ -88,22 +88,22 @@ Ext.define('FeedViewer.FeedGrid', {
             scope: me
         });
     },
-    
+
     onDestroy: function() {
         var me = this;
         Ext.destroy(me.keyNav);
         delete me.keyNav;
         me.callParent(arguments);
     },
-    
+
     onEnterKey: function(e) {
         var me = this,
             view = me.view,
             idx = view.indexOf(view.getSelectedNodes()[0]);
-        
+
         me.onRowDblClick(view, idx);
     },
-    
+
     /**
      * Reacts to a double click
      * @private
@@ -114,7 +114,7 @@ Ext.define('FeedViewer.FeedGrid', {
         this.fireEvent('rowdblclick', this, this.store.getAt(index));
     },
 
-    
+
     /**
      * React to a grid item being selected
      * @private
@@ -127,7 +127,7 @@ Ext.define('FeedViewer.FeedGrid', {
             this.fireEvent('select', this, selected);
         }
     },
-    
+
     /**
      * Listens for the store loading
      * @private
@@ -135,7 +135,7 @@ Ext.define('FeedViewer.FeedGrid', {
     onLoad: function(){
         this.getSelectionModel().select(0);
     },
-    
+
     /**
      * Instructs the grid to load a new feed
      * @param {String} url The url to load
@@ -145,7 +145,7 @@ Ext.define('FeedViewer.FeedGrid', {
         store.getProxy().extraParams.feed = url;
         store.load();
     },
-    
+
     /**
      * Title renderer
      * @private
@@ -153,7 +153,7 @@ Ext.define('FeedViewer.FeedGrid', {
     formatTitle: function(value, p, record){
         return Ext.String.format('<div class="topic"><b>{0}</b><span class="author">{1}</span></div>', value, record.get('author'));
     },
-    
+
     /**
      * Date renderer
      * @private
@@ -162,13 +162,13 @@ Ext.define('FeedViewer.FeedGrid', {
         if (!date) {
             return '';
         }
-        
+
         var now = new Date(), d = Ext.Date.clearTime(now, true), notime = Ext.Date.clearTime(date, true).getTime();
-        
+
         if (notime === d.getTime()) {
             return 'Today ' + Ext.Date.format(date, 'g:i a');
         }
-        
+
         d = Ext.Date.add(d, 'd', -6);
         if (d.getTime() <= notime) {
             return Ext.Date.format(date, 'D g:i a');

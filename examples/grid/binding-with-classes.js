@@ -5,7 +5,8 @@ Ext.require([
     'Ext.layout.container.Border'
 ]);
 Ext.Loader.onReady(function() {
-    Ext.regModel('Book',{
+    Ext.define('Book',{
+        extend: 'Ext.data.Model',
         fields: [
             // set up the fields mapping into the xml doc
             // The first needs mapping, the others are very basic
@@ -16,8 +17,8 @@ Ext.Loader.onReady(function() {
             'DetailPageURL'
         ]
     });
-    
-    
+
+
     /**
      * App.BookStore
      * @extends Ext.data.Store
@@ -34,28 +35,28 @@ Ext.Loader.onReady(function() {
         extend: 'Ext.data.Store',
         constructor: function(config) {
             config = config || {};
-    
+
             config.model = 'Book';
             config.proxy = {
                 type: 'ajax',
                 url: 'sheldon.xml',
-                reader: new Ext.data.XmlReader({
+                reader: Ext.create('Ext.data.reader.Xml', {
                     // records will have an "Item" tag
                     record: 'Item',
                     id: 'ASIN',
                     totalRecords: '@total'
                 })
             };
-    
+
             // call the superclass's constructor
             App.BookStore.superclass.constructor.call(this, config);
         }
     });
-    
-    
+
+
     /**
      * App.BookGrid
-     * @extends Ext.grid.GridPanel
+     * @extends Ext.grid.Panel
      * This is a custom grid which will display book information. It is tied to
      * a specific record definition by the dataIndex properties.
      *
@@ -67,12 +68,12 @@ Ext.Loader.onReady(function() {
      * facilities provided in Ext's Component Model.
      */
     Ext.define('App.BookGrid', {
-        extend: 'Ext.grid.GridPanel',
+        extend: 'Ext.grid.Panel',
         // This will associate an string representation of a class
         // (called an xtype) with the Component Manager
         // It allows you to support lazy instantiation of your components
         alias: 'widget.bookgrid',
-        
+
         // override
         initComponent : function() {
             // Pass in a column model definition
@@ -85,7 +86,7 @@ Ext.Loader.onReady(function() {
                 {text: "Product Group", width: 100, dataIndex: 'ProductGroup', sortable: true}
             ];
             // Note the use of a storeId, this will register thisStore
-            // with the StoreMgr and allow us to retrieve it very easily.
+            // with the StoreManager and allow us to retrieve it very easily.
             this.store = new App.BookStore({
                 storeId: 'gridBookStore',
                 url: 'sheldon.xml'
@@ -94,8 +95,8 @@ Ext.Loader.onReady(function() {
             App.BookGrid.superclass.initComponent.call(this);
         }
     });
-    
-    
+
+
     /**
      * App.BookDetail
      * @extends Ext.Panel
@@ -121,15 +122,15 @@ Ext.Loader.onReady(function() {
         ],
         // startingMarup as a new property
         startingMarkup: 'Please select a book to see additional details',
-        
+
         bodyPadding: 7,
         // override initComponent to create and compile the template
         // apply styles to the body of the panel and initialize
         // html to startingMarkup
         initComponent: function() {
-            this.tpl = new Ext.Template(this.tplMarkup);
+            this.tpl = Ext.create('Ext.Template', this.tplMarkup);
             this.html = this.startingMarkup;
-            
+
             this.bodyStyle = {
                 background: '#ffffff'
             };
@@ -141,8 +142,8 @@ Ext.Loader.onReady(function() {
             this.tpl.overwrite(this.body, data);
         }
     });
-    
-    
+
+
     /**
      * App.BookMasterDetail
      * @extends Ext.Panel
@@ -156,13 +157,13 @@ Ext.Loader.onReady(function() {
     Ext.define('App.BookMasterDetail', {
         extend: 'Ext.Panel',
         alias: 'widget.bookmasterdetail',
-        
+
         frame: true,
         title: 'Book List',
         width: 540,
         height: 400,
         layout: 'border',
-        
+
         // override initComponent
         initComponent: function() {
             this.items = [{
@@ -183,7 +184,7 @@ Ext.Loader.onReady(function() {
         initEvents: function() {
             // call the superclass's initEvents implementation
             App.BookMasterDetail.superclass.initEvents.call(this);
-    
+
             // now add application specific events
             // notice we use the selectionmodel's rowselect event rather
             // than a click event from the grid to provide key navigation
@@ -203,12 +204,12 @@ Ext.Loader.onReady(function() {
         onRowSelect: function(sm, rs) {
             // getComponent will retrieve itemId's or id's. Note that itemId's
             // are scoped locally to this instance of a component to avoid
-            // conflicts with the ComponentMgr
+            // conflicts with the ComponentManager
             if (rs.length) {
                 var detailPanel = this.getComponent('detailPanel');
                 detailPanel.updateDetail(rs[0].data);
             }
-            
+
         }
     });
 // do NOT wait until the DOM is ready to run this
@@ -226,6 +227,6 @@ Ext.onReady(function() {
         renderTo: 'binding-example'
     });
     // We can retrieve a reference to the data store
-    // via the StoreMgr by its storeId
-    Ext.data.StoreMgr.get('gridBookStore').load();
+    // via the StoreManager by its storeId
+    Ext.data.StoreManager.get('gridBookStore').load();
 });

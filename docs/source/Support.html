@@ -13,7 +13,7 @@ Ext.is = {
 
         navigator = navigator || window.navigator;
 
-        for (i = 0; i &lt; ln; i++) {
+        for (i = 0; i < ln; i++) {
             platform = platforms[i];
             this[platform.identity] = platform.regex.test(navigator[platform.property]);
         }
@@ -22,7 +22,7 @@ Ext.is = {
          * @property Desktop True if the browser is running on a desktop machine
          * @type {Boolean}
          */
-        this.Desktop = this.Mac || this.Windows || (this.Linux &amp;&amp; !this.Android);
+        this.Desktop = this.Mac || this.Windows || (this.Linux && !this.Android);
         <a name="prop-Ext.is-Tablet"></a>/**
          * @property Tablet True if the browser is running on a tablet (iPad)
          */
@@ -31,7 +31,7 @@ Ext.is = {
          * @property Phone True if the browser is running on a phone.
          * @type {Boolean}
          */
-        this.Phone = !this.Desktop &amp;&amp; !this.Tablet;
+        this.Phone = !this.Desktop && !this.Tablet;
         <a name="prop-Ext.is-iOS"></a>/**
          * @property iOS True if the browser is running on iOS
          * @type {Boolean}
@@ -50,9 +50,9 @@ Ext.is = {
      * @type {Boolean}
      */
     platforms: [{
-        property: &#39;platform&#39;,
+        property: 'platform',
         regex: /iPhone/i,
-        identity: &#39;iPhone&#39;
+        identity: 'iPhone'
     },
     
     <a name="prop-Ext.is-iPod"></a>/**
@@ -60,9 +60,9 @@ Ext.is = {
      * @type {Boolean}
      */
     {
-        property: &#39;platform&#39;,
+        property: 'platform',
         regex: /iPod/i,
-        identity: &#39;iPod&#39;
+        identity: 'iPod'
     },
     
     <a name="prop-Ext.is-iPad"></a>/**
@@ -70,9 +70,9 @@ Ext.is = {
      * @type {Boolean}
      */
     {
-        property: &#39;userAgent&#39;,
+        property: 'userAgent',
         regex: /iPad/i,
-        identity: &#39;iPad&#39;
+        identity: 'iPad'
     },
     
     <a name="prop-Ext.is-Blackberry"></a>/**
@@ -80,9 +80,9 @@ Ext.is = {
      * @type {Boolean}
      */
     {
-        property: &#39;userAgent&#39;,
+        property: 'userAgent',
         regex: /Blackberry/i,
-        identity: &#39;Blackberry&#39;
+        identity: 'Blackberry'
     },
     
     <a name="prop-Ext.is-Android"></a>/**
@@ -90,9 +90,9 @@ Ext.is = {
      * @type {Boolean}
      */
     {
-        property: &#39;userAgent&#39;,
+        property: 'userAgent',
         regex: /Android/i,
-        identity: &#39;Android&#39;
+        identity: 'Android'
     },
     
     <a name="prop-Ext.is-Mac"></a>/**
@@ -100,9 +100,9 @@ Ext.is = {
      * @type {Boolean}
      */
     {
-        property: &#39;platform&#39;,
+        property: 'platform',
         regex: /Mac/i,
-        identity: &#39;Mac&#39;
+        identity: 'Mac'
     },
     
     <a name="prop-Ext.is-Windows"></a>/**
@@ -110,9 +110,9 @@ Ext.is = {
      * @type {Boolean}
      */
     {
-        property: &#39;platform&#39;,
+        property: 'platform',
         regex: /Win/i,
-        identity: &#39;Windows&#39;
+        identity: 'Windows'
     },
     
     <a name="prop-Ext.is-Linux"></a>/**
@@ -120,9 +120,9 @@ Ext.is = {
      * @type {Boolean}
      */
     {
-        property: &#39;platform&#39;,
+        property: 'platform',
         regex: /Linux/i,
-        identity: &#39;Linux&#39;
+        identity: 'Linux'
     }]
 };
 
@@ -138,24 +138,24 @@ Ext.is.init();
 Ext.supports = {
     init : function() {
         var doc = document,
-            div = doc.createElement(&#39;div&#39;),
+            div = doc.createElement('div'),
             tests = this.tests,
             ln = tests.length,
             i, test;
 
         div.innerHTML = [
-            &#39;&lt;div style=&quot;height:30px;width:50px;&quot;&gt;&#39;,
-                &#39;&lt;div style=&quot;height:20px;width:20px;&quot;&gt;&lt;/div&gt;&#39;,
-            &#39;&lt;/div&gt;&#39;,
-            &#39;&lt;div style=&quot;width: 200px; height: 200px; position: relative; padding: 5px;&quot;&gt;&#39;,
-                &#39;&lt;div style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;&#39;,
-            &#39;&lt;/div&gt;&#39;,
-            &#39;&lt;div style=&quot;float:left; background-color:transparent;&quot;&gt;&lt;/div&gt;&#39;
-        ].join(&#39;&#39;);
+            '<div style="height:30px;width:50px;">',
+                '<div style="height:20px;width:20px;"></div>',
+            '</div>',
+            '<div style="width: 200px; height: 200px; position: relative; padding: 5px;">',
+                '<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>',
+            '</div>',
+            '<div style="float:left; background-color:transparent;"></div>'
+        ].join('');
 
         doc.body.appendChild(div);
 
-        for (i = 0; i &lt; ln; i++) {
+        for (i = 0; i < ln; i++) {
             test = tests[i];
             this[test.identity] = test.fn.call(this, doc, div);
         }
@@ -179,21 +179,21 @@ Ext.supports = {
      * @property OrientationChange True if the device supports orientation change
      * @type {Boolean}
      */
-    OrientationChange: ((typeof window.orientation != &#39;undefined&#39;) &amp;&amp; (&#39;onorientationchange&#39; in window)),
+    OrientationChange: ((typeof window.orientation != 'undefined') && ('onorientationchange' in window)),
     
     <a name="prop-Ext.supports-DeviceMotion"></a>/**
      * @property DeviceMotion True if the device supports device motion (acceleration and rotation rate)
      * @type {Boolean}
      */
-    DeviceMotion: (&#39;ondevicemotion&#39; in window),
+    DeviceMotion: ('ondevicemotion' in window),
     
     <a name="prop-Ext.supports-Touch"></a>/**
      * @property Touch True if the device supports touch
      * @type {Boolean}
      */
     // is.Desktop is needed due to the bug in Chrome 5.0.375, Safari 3.1.2
-    // and Safari 4.0 (they all have &#39;ontouchstart&#39; in the window object).
-    Touch: (&#39;ontouchstart&#39; in window) &amp;&amp; (!Ext.is.Desktop),
+    // and Safari 4.0 (they all have 'ontouchstart' in the window object).
+    Touch: ('ontouchstart' in window) && (!Ext.is.Desktop),
 
     tests: [
         <a name="prop-Ext.supports-Transitions"></a>/**
@@ -201,19 +201,19 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;Transitions&#39;,
+            identity: 'Transitions',
             fn: function(doc, div) {
                 var prefix = [
-                        &#39;webkit&#39;,
-                        &#39;Moz&#39;,
-                        &#39;o&#39;,
-                        &#39;ms&#39;,
-                        &#39;khtml&#39;
+                        'webkit',
+                        'Moz',
+                        'o',
+                        'ms',
+                        'khtml'
                     ],
-                    TE = &#39;TransitionEnd&#39;,
+                    TE = 'TransitionEnd',
                     transitionEndName = [
                         prefix[0] + TE,
-                        &#39;transitionend&#39;, //Moz bucks the prefixing convention
+                        'transitionend', //Moz bucks the prefixing convention
                         prefix[2] + TE,
                         prefix[3] + TE,
                         prefix[4] + TE
@@ -222,8 +222,8 @@ Ext.supports = {
                     i = 0,
                     out = false;
                 div = Ext.get(div);
-                for (; i &lt; ln; i++) {
-                    if (div.getStyle(prefix[i] + &quot;TransitionProperty&quot;)) {
+                for (; i < ln; i++) {
+                    if (div.getStyle(prefix[i] + "TransitionProperty")) {
                         Ext.supports.CSS3Prefix = prefix[i];
                         Ext.supports.CSS3TransitionEnd = transitionEndName[i];
                         out = true;
@@ -240,10 +240,10 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;RightMargin&#39;,
+            identity: 'RightMargin',
             fn: function(doc, div, view) {
                 view = doc.defaultView;
-                return !(view &amp;&amp; view.getComputedStyle(div.firstChild.firstChild, null).marginRight != &#39;0px&#39;);
+                return !(view && view.getComputedStyle(div.firstChild.firstChild, null).marginRight != '0px');
             }
         },
         
@@ -252,10 +252,10 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;TransparentColor&#39;,
+            identity: 'TransparentColor',
             fn: function(doc, div, view) {
                 view = doc.defaultView;
-                return !(view &amp;&amp; view.getComputedStyle(div.lastChild, null).backgroundColor != &#39;transparent&#39;);
+                return !(view && view.getComputedStyle(div.lastChild, null).backgroundColor != 'transparent');
             }
         },
 
@@ -264,10 +264,10 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;ComputedStyle&#39;,
+            identity: 'ComputedStyle',
             fn: function(doc, div, view) {
                 view = doc.defaultView;
-                return view &amp;&amp; view.getComputedStyle;
+                return view && view.getComputedStyle;
             }
         },
         
@@ -276,9 +276,9 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;SVG&#39;,
+            identity: 'SVG',
             fn: function(doc) {
-                return !!doc.createElementNS &amp;&amp; !!doc.createElementNS( &quot;http:/&quot; + &quot;/www.w3.org/2000/svg&quot;, &quot;svg&quot;).createSVGRect;
+                return !!doc.createElementNS && !!doc.createElementNS( "http:/" + "/www.w3.org/2000/svg", "svg").createSVGRect;
             }
         },
     
@@ -287,9 +287,9 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;Canvas&#39;,
+            identity: 'Canvas',
             fn: function(doc) {
-                return !!doc.createElement(&#39;canvas&#39;).getContext;
+                return !!doc.createElement('canvas').getContext;
             }
         },
         
@@ -298,10 +298,10 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;VML&#39;,
+            identity: 'VML',
             fn: function(doc) {
-                var d = doc.createElement(&quot;div&quot;);
-                d.innerHTML = &quot;&lt;!--[if vml]&gt;&lt;br&gt;&lt;br&gt;&lt;![endif]--&gt;&quot;;
+                var d = doc.createElement("div");
+                d.innerHTML = "<!--[if vml]><br><br><![endif]-->";
                 return (d.childNodes.length == 2);
             }
         },
@@ -311,7 +311,7 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;Float&#39;,
+            identity: 'Float',
             fn: function(doc, div) {
                 return !!div.lastChild.style.cssFloat;
             }
@@ -322,9 +322,9 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;AudioTag&#39;,
+            identity: 'AudioTag',
             fn: function(doc) {
-                return !!doc.createElement(&#39;audio&#39;).canPlayType;
+                return !!doc.createElement('audio').canPlayType;
             }
         },
         
@@ -333,9 +333,9 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;History&#39;,
+            identity: 'History',
             fn: function() {
-                return !!(window.history &amp;&amp; history.pushState);
+                return !!(window.history && history.pushState);
             }
         },
         
@@ -344,9 +344,9 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;CSS3DTransform&#39;,
+            identity: 'CSS3DTransform',
             fn: function() {
-                return (typeof WebKitCSSMatrix != &#39;undefined&#39; &amp;&amp; new WebKitCSSMatrix().hasOwnProperty(&#39;m41&#39;));
+                return (typeof WebKitCSSMatrix != 'undefined' && new WebKitCSSMatrix().hasOwnProperty('m41'));
             }
         },
 
@@ -355,17 +355,17 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;CSS3LinearGradient&#39;,
+            identity: 'CSS3LinearGradient',
             fn: function(doc, div) {
-                var property = &#39;background-image:&#39;,
-                    webkit   = &#39;-webkit-gradient(linear, left top, right bottom, from(black), to(white))&#39;,
-                    w3c      = &#39;linear-gradient(left top, black, white)&#39;,
-                    moz      = &#39;-moz-&#39; + w3c,
+                var property = 'background-image:',
+                    webkit   = '-webkit-gradient(linear, left top, right bottom, from(black), to(white))',
+                    w3c      = 'linear-gradient(left top, black, white)',
+                    moz      = '-moz-' + w3c,
                     options  = [property + webkit, property + w3c, property + moz];
                 
-                div.style.cssText = options.join(&#39;;&#39;);
+                div.style.cssText = options.join(';');
                 
-                return (&quot;&quot; + div.style.backgroundImage).indexOf(&#39;gradient&#39;) !== -1;
+                return ("" + div.style.backgroundImage).indexOf('gradient') !== -1;
             }
         },
         
@@ -374,12 +374,12 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;CSS3BorderRadius&#39;,
+            identity: 'CSS3BorderRadius',
             fn: function(doc, div) {
-                var domPrefixes = [&#39;borderRadius&#39;, &#39;BorderRadius&#39;, &#39;MozBorderRadius&#39;, &#39;WebkitBorderRadius&#39;, &#39;OBorderRadius&#39;, &#39;KhtmlBorderRadius&#39;],
+                var domPrefixes = ['borderRadius', 'BorderRadius', 'MozBorderRadius', 'WebkitBorderRadius', 'OBorderRadius', 'KhtmlBorderRadius'],
                     pass = false,
                     i;
-                for (i = 0; i &lt; domPrefixes.length; i++) {
+                for (i = 0; i < domPrefixes.length; i++) {
                     if (document.body.style[domPrefixes[i]] !== undefined) {
                         return true;
                     }
@@ -393,9 +393,9 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;GeoLocation&#39;,
+            identity: 'GeoLocation',
             fn: function() {
-                return (typeof navigator != &#39;undefined&#39; &amp;&amp; typeof navigator.geolocation != &#39;undefined&#39;) || (typeof google != &#39;undefined&#39; &amp;&amp; typeof google.gears != &#39;undefined&#39;);
+                return (typeof navigator != 'undefined' && typeof navigator.geolocation != 'undefined') || (typeof google != 'undefined' && typeof google.gears != 'undefined');
             }
         },
         <a name="prop-Ext.supports-MouseEnterLeave"></a>/**
@@ -403,9 +403,9 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;MouseEnterLeave&#39;,
+            identity: 'MouseEnterLeave',
             fn: function(doc, div){
-                return (&#39;onmouseenter&#39; in div &amp;&amp; &#39;onmouseleave&#39; in div);
+                return ('onmouseenter' in div && 'onmouseleave' in div);
             }
         },
         <a name="prop-Ext.supports-MouseWheel"></a>/**
@@ -413,9 +413,9 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;MouseWheel&#39;,
+            identity: 'MouseWheel',
             fn: function(doc, div) {
-                return (&#39;onmousewheel&#39; in div);
+                return ('onmousewheel' in div);
             }
         },
         <a name="prop-Ext.supports-Opacity"></a>/**
@@ -423,14 +423,14 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;Opacity&#39;,
+            identity: 'Opacity',
             fn: function(doc, div){
                 // Not a strict equal comparison in case opacity can be converted to a number.
                 if (Ext.isIE6 || Ext.isIE7 || Ext.isIE8) {
                     return false;
                 }
-                div.firstChild.style.cssText = &#39;opacity:0.73&#39;;
-                return div.firstChild.style.opacity == &#39;0.73&#39;;
+                div.firstChild.style.cssText = 'opacity:0.73';
+                return div.firstChild.style.opacity == '0.73';
             }
         },
         <a name="prop-Ext.supports-Placeholder"></a>/**
@@ -438,9 +438,21 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;Placeholder&#39;,
+            identity: 'Placeholder',
             fn: function(doc) {
-                return &#39;placeholder&#39; in doc.createElement(&#39;input&#39;);
+                return 'placeholder' in doc.createElement('input');
+            }
+        },
+        
+        <a name="prop-Ext.supports-Direct2DBug"></a>/**
+         * @property Direct2DBug True if when asking for an element's dimension via offsetWidth or offsetHeight, 
+         * getBoundingClientRect, etc. the browser returns the subpixel width rounded to the nearest pixel.
+         * @type {Boolean}
+         */
+        {
+            identity: 'Direct2DBug',
+            fn: function() {
+                return Ext.isString(document.body.style.msTransformOrigin);
             }
         },
         <a name="prop-Ext.supports-BoundingClientRect"></a>/**
@@ -448,13 +460,13 @@ Ext.supports = {
          * @type {Boolean}
          */
         {
-            identity: &#39;BoundingClientRect&#39;,
+            identity: 'BoundingClientRect',
             fn: function(doc, div) {
                 return Ext.isFunction(div.getBoundingClientRect);
             }
         },
         {
-            identity: &#39;IncludePaddingInWidthCalculation&#39;,
+            identity: 'IncludePaddingInWidthCalculation',
             fn: function(doc, div){
                 var el = Ext.get(div.childNodes[1].firstChild);
                 return el.getWidth() == 210;
@@ -462,15 +474,38 @@ Ext.supports = {
         },
         
         <a name="prop-Ext.supports-ArraySort"></a>/**
-         * @property ArraySort True if the Array sort native method isn&#39;t bugged.
+         * @property ArraySort True if the Array sort native method isn't bugged.
          * @type {Boolean}
          */
         {
-            identity: &#39;ArraySort&#39;,
+            identity: 'ArraySort',
             fn: function() {
-                return [1, 3].sort(function(a,b) { return b &lt; a; })[0] === 1;
+                return [2, 1, 3].sort(function(a,b) { return b < a; })[1] === 2;
+            }
+        },
+        <a name="prop-Ext.supports-Range"></a>/**
+         * @property Range True if browser support document.createRange native method.
+         * @type {Boolean}
+         */
+        {
+            identity: 'Range',
+            fn: function() {
+                return !!document.createRange;
+            }
+        },
+        <a name="prop-Ext.supports-CreateContextualFragment"></a>/**
+         * @property CreateContextualFragment True if browser support CreateContextualFragment range native methods.
+         * @type {Boolean}
+         */
+        {
+            identity: 'CreateContextualFragment',
+            fn: function() {
+                var range = Ext.supports.Range ? document.createRange() : false;
+                
+                return range && !!range.createContextualFragment;
             }
         }
+        
     ]
 };
 ￿</pre></pre></body></html>

@@ -11,7 +11,7 @@ Ext.ns('Ext.samples');
         itemSelector : 'dl',
         overItemCls  : 'over',
         trackOver    : true,
-        tpl          : new Ext.XTemplate(
+        tpl          : Ext.create('Ext.XTemplate',
             '<div id="sample-ct">',
                 '<tpl for=".">',
                 '<div><a name="{id}"></a><h2><div>{title}</div></h2>',
@@ -44,8 +44,8 @@ Ext.ns('Ext.samples');
                  return status == 'updated';
              }
         }),
-    
-    
+
+
         onItemClick : function(record, item, index, e){
             var group = e.getTarget('h2', 3, true);
             if(group){
@@ -66,7 +66,7 @@ Ext.onReady(function() {
 
     (Ext.defer(function() {
         // Instantiate Ext.App instance
-        var App = new Ext.App({});
+        var App = Ext.create('Ext.App', {});
 
         var catalog = Ext.samples.samplesCatalog;
 
@@ -74,23 +74,23 @@ Ext.onReady(function() {
             c.id = 'sample-' + i;
         }
 
-        var store = new Ext.data.JsonStore({
+        var store = Ext.create('Ext.data.JsonStore', {
             idProperty : 'id',
             fields     : ['id', 'title', 'samples'],
             data       : catalog
         });
 
-        var panel = new Ext.Panel({
+        var panel = Ext.create('Ext.Panel', {
             frame      : false,
             renderTo   : Ext.get('all-demos'),
             height     : 300,
             autoScroll : true,
-            items      : new Ext.samples.SamplePanel({
+            items      : Ext.create('Ext.samples.SamplePanel', {
                 store : store
             })
         });
 
-        var tpl = new Ext.XTemplate(
+        var tpl = Ext.create('Ext.XTemplate',
             '<tpl for="."><li><a href="#{id}">{title:stripTags}</a></li></tpl>'
         );
         tpl.overwrite('sample-menu', catalog);
@@ -123,10 +123,10 @@ Ext.onReady(function() {
         Ext.EventManager.onWindowResize(doResize);
 
         var firebugWarning = function () {
-            var cp = new Ext.state.CookieProvider();
+            var cp = Ext.create('Ext.state.CookieProvider');
 
             if(window.console && window.console.firebug && ! cp.get('hideFBWarning')){
-                var tpl = new Ext.Template(
+                var tpl = Ext.create('Ext.Template',
                     '<div id="fb" style="border: 1px solid #FF0000; background-color:#FFAAAA; display:none; padding:15px; color:#000000;"><b>Warning: </b> Firebug is known to cause performance issues with Ext JS. <a href="#" id="hideWarning">[ Hide ]</a></div>'
                 );
                 var newEl = tpl.insertFirst('all-demos');

@@ -1,6 +1,6 @@
 /**
  * @class Ext.ux.form.MultiSelect
- * @extends Ext.form.BaseField
+ * @extends Ext.form.field.Base
  * A control that allows selection and form submission of multiple list items.
  *
  *  @history
@@ -13,7 +13,7 @@
  * @xtype multiselect
  */
 Ext.define('Ext.ux.form.MultiSelect', {
-    extend: 'Ext.form.BaseField',
+    extend: 'Ext.form.field.Base',
     alternateClassName: 'Ext.ux.Multiselect',
     alias: ['widget.multiselect', 'widget.multiselectfield'],
     uses: [
@@ -152,7 +152,7 @@ Ext.define('Ext.ux.form.MultiSelect', {
             oldStore.destroy();
         }
 
-        me.store = store ? Ext.data.StoreMgr.lookup(store) : null;
+        me.store = store ? Ext.data.StoreManager.lookup(store) : null;
         if (boundList) {
             boundList.bindStore(store || null);
         }
@@ -209,14 +209,14 @@ Ext.define('Ext.ux.form.MultiSelect', {
         }
 
         if (me.draggable || me.dragGroup){
-            me.dragZone = new Ext.view.DragZone({
+            me.dragZone = Ext.create('Ext.view.DragZone', {
                 view: me.boundList,
                 ddGroup: me.dragGroup,
                 dragText: '{0} Item{1}'
             });
         }
         if (me.droppable || me.dropGroup){
-            me.dropZone = new Ext.view.DropZone({
+            me.dropZone = Ext.create('Ext.view.DropZone', {
                 view: me.boundList,
                 ddGroup: me.dropGroup,
                 handleNodeDrop: function(data, dropRecord, position) {
@@ -304,7 +304,7 @@ Ext.define('Ext.ux.form.MultiSelect', {
     },
 
     // compare array values
-    areValuesEqual: function(v1, v2) {
+    isEqual: function(v1, v2) {
         var fromArray = Ext.Array.from,
             i, len;
 

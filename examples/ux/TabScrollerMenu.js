@@ -1,9 +1,9 @@
 Ext.ns('Ext.ux');
 /**
  * @class Ext.ux.TabScrollerMenu
- * @extends Object 
+ * @extends Object
  * Plugin (ptype = 'tabscrollermenu') for adding a tab menu to a TabBar is the Tabs overflow.
- * @constructor 
+ * @constructor
  * @param {Object} config Configuration options
  * @ptype tabscrollermenu
  */
@@ -48,7 +48,7 @@ Ext.define('Ext.ux.TabScrollerMenu', {
 
     showButton: function() {
         var me = this,
-            result = me.layout.overflowHandler.constructor.prototype.handleOverflow.apply(me.layout.overflowHandler, arguments);
+            result = Ext.getClass(me.layout.overflowHandler).prototype.handleOverflow.apply(me.layout.overflowHandler, arguments);
 
         if (!me.menuButton) {
             me.menuButton = me.tabBar.body.createChild({
@@ -142,7 +142,7 @@ Ext.define('Ext.ux.TabScrollerMenu', {
             pageSize = me.getPageSize(),
             numSubMenus = Math.floor(totalItems / pageSize),
             remainder = totalItems % pageSize,
-            i, curPage, menuItems, x, item, start;
+            i, curPage, menuItems, x, item, start, index;
 
         if (totalItems > pageSize) {
 

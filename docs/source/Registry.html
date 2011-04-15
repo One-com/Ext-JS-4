@@ -4,7 +4,7 @@
  * directly by DOM node id, or by passing in the drag drop event that occurred and looking up the event target.
  * @singleton
  */
-Ext.define(&#39;Ext.dd.Registry&#39;, {
+Ext.define('Ext.dd.Registry', {
     singleton: true,
     constructor: function() {
         this.elements = {}; 
@@ -13,12 +13,12 @@ Ext.define(&#39;Ext.dd.Registry&#39;, {
     },
     
     getId: function(el, autogen){
-        if(typeof el == &quot;string&quot;){
+        if(typeof el == "string"){
             return el;
         }
         var id = el.id;
-        if(!id &amp;&amp; autogen !== false){
-            id = &quot;extdd-&quot; + (++this.autoIdSeed);
+        if(!id && autogen !== false){
+            id = "extdd-" + (++this.autoIdSeed);
             el.id = id;
         }
         return id;
@@ -31,18 +31,18 @@ Ext.define(&#39;Ext.dd.Registry&#39;, {
      * in drag drop operations.  You can populate this object with any arbitrary properties that your own code
      * knows how to interpret, plus there are some specific properties known to the Registry that should be
      * populated in the data object (if applicable):
-     * &lt;pre&gt;
-Value      Description&lt;br /&gt;
----------  ------------------------------------------&lt;br /&gt;
-handles    Array of DOM nodes that trigger dragging&lt;br /&gt;
-           for the element being registered&lt;br /&gt;
-isHandle   True if the element passed in triggers&lt;br /&gt;
+     * <pre>
+Value      Description<br />
+---------  ------------------------------------------<br />
+handles    Array of DOM nodes that trigger dragging<br />
+           for the element being registered<br />
+isHandle   True if the element passed in triggers<br />
            dragging itself, else false
-&lt;/pre&gt;
+</pre>
      */
     register : function(el, data){
         data = data || {};
-        if (typeof el == &quot;string&quot;) {
+        if (typeof el == "string") {
             el = document.getElementById(el);
         }
         data.ddel = el;
@@ -52,7 +52,7 @@ isHandle   True if the element passed in triggers&lt;br /&gt;
         }
         if (data.handles) {
             var hs = data.handles;
-            for (var i = 0, len = hs.length; i &lt; len; i++) {
+            for (var i = 0, len = hs.length; i < len; i++) {
                 this.handles[getId(hs[i])] = data;
             }
         }
@@ -69,7 +69,7 @@ isHandle   True if the element passed in triggers&lt;br /&gt;
             delete this.elements[id];
             if(data.handles){
                 var hs = data.handles;
-                for (var i = 0, len = hs.length; i &lt; len; i++) {
+                for (var i = 0, len = hs.length; i < len; i++) {
                     delete this.handles[getId(hs[i], false)];
                 }
             }
@@ -82,7 +82,7 @@ isHandle   True if the element passed in triggers&lt;br /&gt;
      * @return {Object} handle The custom handle data
      */
     getHandle : function(id){
-        if(typeof id != &quot;string&quot;){ // must be element?
+        if(typeof id != "string"){ // must be element?
             id = id.id;
         }
         return this.handles[id];
@@ -104,7 +104,7 @@ isHandle   True if the element passed in triggers&lt;br /&gt;
      * @return {Object} data The custom data
      */
     getTarget : function(id){
-        if(typeof id != &quot;string&quot;){ // must be element?
+        if(typeof id != "string"){ // must be element?
             id = id.id;
         }
         return this.elements[id];

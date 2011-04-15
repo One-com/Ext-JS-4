@@ -5,9 +5,10 @@ Ext.require([
 
 Ext.onReady(function(){
 
-    Ext.regModel("Post", {
+    Ext.define("Post", {
+        extend: 'Ext.data.Model',
         proxy: {
-            type: 'scripttag',
+            type: 'jsonp',
             url : 'http://www.sencha.com/forum/topics-remote.php',
             reader: {
                 type: 'json',

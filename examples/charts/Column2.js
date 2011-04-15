@@ -12,9 +12,11 @@ Ext.onReady(function () {
     
     var baseColor = '#eee';
     
-    Ext.chart.theme.Fancy = Ext.extend(Ext.chart.theme.Base, {
+    Ext.define('Ext.chart.theme.Fancy', {
+        extend: 'Ext.chart.theme.Base',
+        
         constructor: function(config) {
-            Ext.chart.theme.Base.prototype.constructor.call(this, Ext.apply({
+            this.callParent([Ext.apply({
                 axis: {
                     fill: baseColor,
                     stroke: baseColor
@@ -32,10 +34,10 @@ Ext.onReady(function () {
                     fill: baseColor
                 },
                 colors: colors
-            }, config));
+            }, config)]);
         }
-    }); 
-    
+    });
+ 
     var win = Ext.create('Ext.Window', {
         width: 800,
         height: 600,

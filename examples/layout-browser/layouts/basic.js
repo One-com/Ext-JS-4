@@ -2,7 +2,7 @@
 // Note that these are all defined as panel configs, rather than instantiated
 // as panel objects.  You could just as easily do this instead:
 //
-// var absolute = new Ext.Panel({ ... });
+// var absolute = Ext.create('Ext.Panel', { ... });
 //
 // However, by passing configs into the main container instead of objects, we can defer
 // layout AND object instantiation until absolutely needed.  Since most of these panels
@@ -273,7 +273,7 @@ function getBasicLayouts() {
             bodyStyle: 'padding:15px',
             width: 350,
             labelPad: 20,
-            
+
             defaults: {
                 width: 230,
                 labelSeparator: '',

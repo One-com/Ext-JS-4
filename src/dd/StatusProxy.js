@@ -155,7 +155,7 @@ Ext.define('Ext.dd.StatusProxy', {
                     x: xy[0],
                     y: xy[1]
                 },
-                stopFx: true,
+                stopAnimation: true,
                 callback: this.afterRepair,
                 scope: this
             });

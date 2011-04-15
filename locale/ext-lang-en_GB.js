@@ -13,8 +13,8 @@ if(Ext.DataView){
   Ext.DataView.prototype.emptyText = "";
 }
 
-if(Ext.grid.GridPanel){
-  Ext.grid.GridPanel.prototype.ddText = "{0} selected row{1}";
+if(Ext.grid.Panel){
+  Ext.grid.Panel.prototype.ddText = "{0} selected row{1}";
 }
 
 if(Ext.LoadMask){
@@ -120,7 +120,7 @@ if(Ext.picker.Month) {
   });
 }
 
-if(Ext.toolbar.PagingToolbar){
+if(Ext.toolbar.Paging){
   Ext.apply(Ext.PagingToolbar.prototype, {
     beforePageText : "Page",
     afterPageText  : "of {0}",
@@ -138,12 +138,12 @@ if(Ext.form.Basic){
     Ext.form.Basic.prototype.waitTitle = "Please Wait...";
 }
 
-if(Ext.form.BaseField){
-  Ext.form.BaseField.prototype.invalidText = "The value in this field is invalid";
+if(Ext.form.field.Base){
+  Ext.form.field.Base.prototype.invalidText = "The value in this field is invalid";
 }
 
-if(Ext.form.Text){
-  Ext.apply(Ext.form.Text.prototype, {
+if(Ext.form.field.Text){
+  Ext.apply(Ext.form.field.Text.prototype, {
     minLengthText : "The minimum length for this field is {0}",
     maxLengthText : "The maximum length for this field is {0}",
     blankText     : "This field is required",
@@ -152,8 +152,8 @@ if(Ext.form.Text){
   });
 }
 
-if(Ext.form.Number){
-  Ext.apply(Ext.form.Number.prototype, {
+if(Ext.form.field.Number){
+  Ext.apply(Ext.form.field.Number.prototype, {
     decimalSeparator : ".",
     decimalPrecision : 2,
     minText : "The minimum value for this field is {0}",
@@ -162,8 +162,8 @@ if(Ext.form.Number){
   });
 }
 
-if(Ext.form.Date){
-  Ext.apply(Ext.form.Date.prototype, {
+if(Ext.form.field.Date){
+  Ext.apply(Ext.form.field.Date.prototype, {
     disabledDaysText  : "Disabled",
     disabledDatesText : "Disabled",
     minText           : "The date in this field must be after {0}",
@@ -174,15 +174,15 @@ if(Ext.form.Date){
   });
 }
 
-if(Ext.form.ComboBox){
-  Ext.apply(Ext.form.ComboBox.prototype, {
+if(Ext.form.field.ComboBox){
+  Ext.apply(Ext.form.field.ComboBox.prototype, {
     loadingText       : "Loading...",
     valueNotFoundText : undefined
   });
 }
 
-if(Ext.form.VTypes){
-  Ext.apply(Ext.form.VTypes, {
+if(Ext.form.field.VTypes){
+  Ext.apply(Ext.form.field.VTypes, {
     emailText    : 'This field should be an e-mail address in the format "user@example.com"',
     urlText      : 'This field should be a URL in the format "http:/'+'/www.example.com"',
     alphaText    : 'This field should only contain letters and _',
@@ -190,8 +190,8 @@ if(Ext.form.VTypes){
   });
 }
 
-if(Ext.form.HtmlEditor){
-  Ext.apply(Ext.form.HtmlEditor.prototype, {
+if(Ext.form.field.HtmlEditor){
+  Ext.apply(Ext.form.field.HtmlEditor.prototype, {
     createLinkText : 'Please enter the URL for the link:',
     buttonTips : {
       bold : {
@@ -268,8 +268,8 @@ if(Ext.form.HtmlEditor){
   });
 }
 
-if(Ext.grid.HeaderContainer){
-  Ext.apply(Ext.grid.HeaderContainer.prototype, {
+if(Ext.grid.header.Container){
+  Ext.apply(Ext.grid.header.Container.prototype, {
     sortAscText  : "Sort Ascending",
     sortDescText : "Sort Descending",
     columnsText  : "Columns"
@@ -301,8 +301,8 @@ if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
   });
 }
 
-if(Ext.form.Time){
-  Ext.apply(Ext.form.Time.prototype, {
+if(Ext.form.field.Time){
+  Ext.apply(Ext.form.field.Time.prototype, {
     minText : "The time in this field must be equal to or after {0}",
     maxText : "The time in this field must be equal to or before {0}",
     invalidText : "{0} is not a valid time",

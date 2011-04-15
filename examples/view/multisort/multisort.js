@@ -4,7 +4,7 @@ Ext.Loader.setPath('Ext.ux', '../../ux/');
 
 Ext.require([
     'Ext.data.Store',
-    'Ext.data.AjaxProxy',
+    'Ext.data.proxy.Ajax',
     'Ext.multisort.Panel',
     'Ext.multisort.SortButton',
     'Ext.ux.BoxReorderer',

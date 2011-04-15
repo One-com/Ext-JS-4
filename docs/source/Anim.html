@@ -3,15 +3,15 @@
  * Animation instance...
  */
 
-Ext.define(&#39;Ext.fx.Anim&#39;, {
+Ext.define('Ext.fx.Anim', {
 
     /* Begin Definitions */
 
     mixins: {
-        observable: &#39;Ext.util.Observable&#39;
+        observable: 'Ext.util.Observable'
     },
 
-    requires: [&#39;Ext.fx.Manager&#39;, &#39;Ext.fx.Animator&#39;, &#39;Ext.fx.Easing&#39;, &#39;Ext.fx.CubicBezier&#39;, &#39;Ext.fx.PropHandler&#39;],
+    requires: ['Ext.fx.Manager', 'Ext.fx.Animator', 'Ext.fx.Easing', 'Ext.fx.CubicBezier', 'Ext.fx.PropHandler'],
 
     /* End Definitions */
 
@@ -33,7 +33,7 @@ Ext.define(&#39;Ext.fx.Anim&#39;, {
 
     <a name="cfg-Ext.fx.Anim-dynamic"></a>/**
      * @cfg {Boolean} dynamic
-     * Currently only for Component Animation: Only set a component&#39;s outer element size bypassing layouts.  Set to true to do full layouts for every frame of the animation.  Defaults to false.
+     * Currently only for Component Animation: Only set a component's outer element size bypassing layouts.  Set to true to do full layouts for every frame of the animation.  Defaults to false.
      */
     dynamic: false,
 
@@ -58,30 +58,32 @@ Note that cubic-bezier will create a custom easing curve following the CSS3 tran
 as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is invalid.
      * @markdown
      */
-    easing: &#39;ease&#39;,
+    easing: 'ease',
 
      <a name="cfg-Ext.fx.Anim-keyframes"></a>/**
       * @cfg {Object} keyframes
-      * Animation keyframes follow the CSS3 Animation configuration pattern. &#39;from&#39; is always considered &#39;0%&#39; and &#39;to&#39;
-      * is considered &#39;100%&#39;.&lt;b&gt;Every keyframe declaration must have a keyframe rule for 0% and 100%, possibly defined using
-      * &quot;from&quot; or &quot;to&quot;&lt;/b&gt;.  A keyframe declaration without these keyframe selectors is invalid and will not be available for
+      * Animation keyframes follow the CSS3 Animation configuration pattern. 'from' is always considered '0%' and 'to'
+      * is considered '100%'.<b>Every keyframe declaration must have a keyframe rule for 0% and 100%, possibly defined using
+      * "from" or "to"</b>.  A keyframe declaration without these keyframe selectors is invalid and will not be available for
       * animation.  The keyframe declaration for a keyframe rule consists of properties and values. Properties that are unable to
-      * be animated are ignored in these rules, with the exception of &#39;easing&#39; which can be changed at each keyframe. For example:
- <br><span style="display: none">**/</span>keyframes : {
-    &#39;0%&#39;: {
+      * be animated are ignored in these rules, with the exception of 'easing' which can be changed at each keyframe. For example:
+ <pre><code>
+keyframes : {
+    '0%': {
         left: 100
     },
-    &#39;40%&#39;: {
+    '40%': {
         left: 150
     },
-    &#39;60%&#39;: {
+    '60%': {
         left: 75
     },
-    &#39;100%&#39;: {
+    '100%': {
         left: 100
     }
 }
- <br><span style="display: none">/**</span>      */
+ </code></pre>
+      */
 
     /**
      * @private
@@ -158,22 +160,26 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
      * @cfg {Object} from
      * An object containing property/value pairs for the beginning of the animation.  If not specified, the current state of the
      * Ext.fx.target will be used. For example:
-<br><span style="display: none">**/</span>from : {
+<pre><code>
+from : {
     opacity: 0,       // Transparent
-    color: &#39;#ffffff&#39;, // White
+    color: '#ffffff', // White
     left: 0
 }
-<br><span style="display: none">/**</span>     */
+</code></pre>
+     */
 
     <a name="cfg-Ext.fx.Anim-to"></a>/**
      * @cfg {Object} to
      * An object containing property/value pairs for the end of the animation. For example:
- <br><span style="display: none">**/</span> to : {
+ <pre><code>
+ to : {
      opacity: 1,       // Opaque
-     color: &#39;#00ff00&#39;, // Green
+     color: '#00ff00', // Green
      left: 500
  }
- <br><span style="display: none">/**</span>     */
+ </code></pre>
+     */
 
     // @private
     constructor: function(config) {
@@ -181,7 +187,7 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
         config = config || {};
         // If keyframes are passed, they really want an Animator instead.
         if (config.keyframes) {
-            return new Ext.fx.Animator(config);
+            return Ext.create('Ext.fx.Animator', config);
         }
         config = Ext.apply(me, config);
         if (me.from == undefined) {
@@ -196,12 +202,12 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
         // If not a pre-defined curve, try a cubic-bezier
         if (!me.easingFn) {
             me.easingFn = String(me.easing).match(me.bezierRE);
-            if (me.easingFn &amp;&amp; me.easingFn.length == 5) {
+            if (me.easingFn && me.easingFn.length == 5) {
                 var curve = me.easingFn;
                 me.easingFn = Ext.fx.cubicBezier(+curve[1], +curve[2], +curve[3], +curve[4]);
             }
         }
-        me.id = Ext.id(null, &#39;ext-anim-&#39;);
+        me.id = Ext.id(null, 'ext-anim-');
         Ext.fx.Manager.addAnim(me);
         me.addEvents(
             <a name="event-Ext.fx.Anim-beforeanimate"></a>/**
@@ -209,25 +215,25 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
              * Fires before the animation starts. A handler can return false to cancel the animation.
              * @param {Ext.fx.Anim} this
              */
-            &#39;beforeanimate&#39;,
+            'beforeanimate',
              <a name="event-Ext.fx.Anim-afteranimate"></a>/**
               * @event afteranimate
               * Fires when the animation is complete.
               * @param {Ext.fx.Anim} this
               * @param {Date} startTime
               */
-            &#39;afteranimate&#39;,
+            'afteranimate',
              <a name="event-Ext.fx.Anim-lastframe"></a>/**
               * @event lastframe
-              * Fires when the animation&#39;s last frame has been set.
+              * Fires when the animation's last frame has been set.
               * @param {Ext.fx.Anim} this
               * @param {Date} startTime
               */
-            &#39;lastframe&#39;
+            'lastframe'
         );
         me.mixins.observable.constructor.call(me, config);
         if (config.callback) {
-            me.on(&#39;afteranimate&#39;, config.callback, config.scope);
+            me.on('afteranimate', config.callback, config.scope);
         }
         return me;
     },
@@ -268,7 +274,7 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
                 else {
                     propHandler = me.propHandlers[attr] = Ext.fx.PropHandler[attr];
                 }
-                out[attr] = propHandler.get(start, end, me.damper, initialFrom[attr]);
+                out[attr] = propHandler.get(start, end, me.damper, initialFrom[attr], attr);
             }
         }
         me.currentAttrs = out;
@@ -290,7 +296,7 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
             }
             else {
                 delayDelta = startTime - delayStart;
-                if (delayDelta &lt; delay) {
+                if (delayDelta < delay) {
                     return;
                 }
                 else {
@@ -299,9 +305,9 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
                 }
             }
         }
-        if (me.fireEvent(&#39;beforeanimate&#39;, me) !== false) {
+        if (me.fireEvent('beforeanimate', me) !== false) {
             me.startTime = startTime;
-            if (!me.paused &amp;&amp; !me.currentAttrs) {
+            if (!me.paused && !me.currentAttrs) {
                 me.initAttrs();
             }
             me.running = true;
@@ -322,7 +328,7 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
             ret = {},
             easing, values, attr, lastFrame;
 
-        if (elapsedTime &gt;= duration) {
+        if (elapsedTime >= duration) {
             elapsedTime = duration;
             lastFrame = true;
         }
@@ -351,7 +357,7 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
             iterCount = me.currentIteration;
 
         iterCount++;
-        if (iterCount &lt; iter) {
+        if (iterCount < iter) {
             if (me.alternate) {
                 me.reverse = !me.reverse;
             }
@@ -363,7 +369,7 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
         else {
             me.currentIteration = 0;
             me.end();
-            me.fireEvent(&#39;lastframe&#39;, me, me.startTime);
+            me.fireEvent('lastframe', me, me.startTime);
         }
     },
 
@@ -378,7 +384,7 @@ as (x1, y1, x2, y2). All values must be in the range [0, 1] or the definition is
         me.paused = false;
         me.running = false;
         Ext.fx.Manager.removeAnim(me);
-        me.fireEvent(&#39;afteranimate&#39;, me, me.startTime);
+        me.fireEvent('afteranimate', me, me.startTime);
     }
 });
 // Set flag to indicate that Fx is available. Class might not be available immediately.

@@ -5,16 +5,16 @@ Ext.Loader.setConfig({
 Ext.Loader.setPath('Ext.ux', '../ux/');
 
 Ext.require([
-  'Ext.form.FormPanel',
-  'Ext.form.Date',
-  'Ext.tip.QuickTips',
+  'Ext.form.Panel',
+  'Ext.form.field.Date',
+  'Ext.tip.QuickTipManager',
   'Ext.ux.statusbar.StatusBar',
   'Ext.ux.statusbar.ValidationStatus'
 ]);
 
 
 Ext.onReady(function(){
-    Ext.tip.QuickTips.init();
+    Ext.tip.QuickTipManager.init();
     var fp = Ext.create('Ext.FormPanel', {
         id: 'status-form',
         renderTo: Ext.getBody(),

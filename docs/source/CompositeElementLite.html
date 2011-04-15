@@ -1,34 +1,36 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre>/**
  * @class Ext.CompositeElementLite
- * &lt;p&gt;This class encapsulates a &lt;i&gt;collection&lt;/i&gt; of DOM elements, providing methods to filter
- * members, or to perform collective actions upon the whole set.&lt;/p&gt;
- * &lt;p&gt;Although they are not listed, this class supports all of the methods of {@link Ext.core.Element} and
- * {@link Ext.fx.Anim}. The methods from these classes will be performed on all the elements in this collection.&lt;/p&gt;
- * Example:<br><span style="display: none">**/</span>var els = Ext.select(&quot;#some-el div.some-class&quot;);
+ * <p>This class encapsulates a <i>collection</i> of DOM elements, providing methods to filter
+ * members, or to perform collective actions upon the whole set.</p>
+ * <p>Although they are not listed, this class supports all of the methods of {@link Ext.core.Element} and
+ * {@link Ext.fx.Anim}. The methods from these classes will be performed on all the elements in this collection.</p>
+ * Example:<pre><code>
+var els = Ext.select("#some-el div.some-class");
 // or select directly from an existing element
-var el = Ext.get(&#39;some-el&#39;);
-el.select(&#39;div.some-class&#39;);
+var el = Ext.get('some-el');
+el.select('div.some-class');
 
 els.setWidth(100); // all elements become 100 width
 els.hide(true); // all elements fade out and hide
 // or
 els.setWidth(100).hide(true);
-<br><span style="display: none">/**</span> */
+</code></pre>
+ */
 Ext.CompositeElementLite = function(els, root){
     <a name="prop-Ext.CompositeElementLite-elements"></a>/**
-     * &lt;p&gt;The Array of DOM elements which this CompositeElement encapsulates. Read-only.&lt;/p&gt;
-     * &lt;p&gt;This will not &lt;i&gt;usually&lt;/i&gt; be accessed in developers&#39; code, but developers wishing
+     * <p>The Array of DOM elements which this CompositeElement encapsulates. Read-only.</p>
+     * <p>This will not <i>usually</i> be accessed in developers' code, but developers wishing
      * to augment the capabilities of the CompositeElementLite class may use it when adding
-     * methods to the class.&lt;/p&gt;
-     * &lt;p&gt;For example to add the &lt;code&gt;nextAll&lt;/code&gt; method to the class to &lt;b&gt;add&lt;/b&gt; all
-     * following siblings of selected elements, the code would be&lt;/p&gt;&lt;code&gt;&lt;pre&gt;
+     * methods to the class.</p>
+     * <p>For example to add the <code>nextAll</code> method to the class to <b>add</b> all
+     * following siblings of selected elements, the code would be</p><code><pre>
 Ext.override(Ext.CompositeElementLite, {
     nextAll: function() {
         var els = this.elements, i, l = els.length, n, r = [], ri = -1;
 
 //      Loop through all elements in this Composite, accumulating
 //      an Array of all siblings.
-        for (i = 0; i &lt; l; i++) {
+        for (i = 0; i < l; i++) {
             for (n = els[i].nextSibling; n; n = n.nextSibling) {
                 r[++ri] = n;
             }
@@ -37,7 +39,7 @@ Ext.override(Ext.CompositeElementLite, {
 //      Add all found siblings to this Composite
         return this.add(r);
     }
-});&lt;/pre&gt;&lt;/code&gt;
+});</pre></code>
      * @type Array
      * @property elements
      */
@@ -72,7 +74,7 @@ Ext.CompositeElementLite.prototype = {
     },
     <a name="method-Ext.CompositeElementLite-add"></a>/**
      * Adds elements to this Composite object.
-     * @param {Mixed} els Either an Array of DOM elements to add, or another Composite object who&#39;s elements should be added.
+     * @param {Mixed} els Either an Array of DOM elements to add, or another Composite object who's elements should be added.
      * @return {CompositeElement} This Composite object.
      */
     add : function(els, root){
@@ -81,7 +83,7 @@ Ext.CompositeElementLite.prototype = {
         if(!els){
             return this;
         }
-        if(typeof els == &quot;string&quot;){
+        if(typeof els == "string"){
             els = Ext.core.Element.selectorFunction(els, root);
         }else if(els.isComposite){
             els = els.elements;
@@ -89,7 +91,7 @@ Ext.CompositeElementLite.prototype = {
             els = [els];
         }
 
-        for(var i = 0, len = els.length; i &lt; len; ++i){
+        for(var i = 0, len = els.length; i < len; ++i){
             elements.push(me.transformElement(els[i]));
         }
         return me;
@@ -102,7 +104,7 @@ Ext.CompositeElementLite.prototype = {
             e,
             i;
 
-        for(i = 0; i &lt; len; i++) {
+        for(i = 0; i < len; i++) {
             e = els[i];
             if(e){
                 Ext.core.Element.prototype[fn].apply(me.getElement(e), args);
@@ -132,7 +134,7 @@ Ext.CompositeElementLite.prototype = {
             len = els.length,
             i, e;
 
-        for(i = 0; i&lt;len; i++) {
+        for(i = 0; i<len; i++) {
             e = els[i];
             if(e) {
                 Ext.EventManager.on(e, eventName, handler, scope || e, opt);
@@ -141,15 +143,15 @@ Ext.CompositeElementLite.prototype = {
         return this;
     },
     <a name="method-Ext.CompositeElementLite-each"></a>/**
-     * &lt;p&gt;Calls the passed function for each element in this composite.&lt;/p&gt;
-     * @param {Function} fn The function to call. The function is passed the following parameters:&lt;ul&gt;
-     * &lt;li&gt;&lt;b&gt;el&lt;/b&gt; : Element&lt;div class=&quot;sub-desc&quot;&gt;The current Element in the iteration.
-     * &lt;b&gt;This is the flyweight (shared) Ext.core.Element instance, so if you require a
-     * a reference to the dom node, use el.dom.&lt;/b&gt;&lt;/div&gt;&lt;/li&gt;
-     * &lt;li&gt;&lt;b&gt;c&lt;/b&gt; : Composite&lt;div class=&quot;sub-desc&quot;&gt;This Composite object.&lt;/div&gt;&lt;/li&gt;
-     * &lt;li&gt;&lt;b&gt;idx&lt;/b&gt; : Number&lt;div class=&quot;sub-desc&quot;&gt;The zero-based index in the iteration.&lt;/div&gt;&lt;/li&gt;
-     * &lt;/ul&gt;
-     * @param {Object} scope (optional) The scope (&lt;i&gt;this&lt;/i&gt; reference) in which the function is executed. (defaults to the Element)
+     * <p>Calls the passed function for each element in this composite.</p>
+     * @param {Function} fn The function to call. The function is passed the following parameters:<ul>
+     * <li><b>el</b> : Element<div class="sub-desc">The current Element in the iteration.
+     * <b>This is the flyweight (shared) Ext.core.Element instance, so if you require a
+     * a reference to the dom node, use el.dom.</b></div></li>
+     * <li><b>c</b> : Composite<div class="sub-desc">This Composite object.</div></li>
+     * <li><b>idx</b> : Number<div class="sub-desc">The zero-based index in the iteration.</div></li>
+     * </ul>
+     * @param {Object} scope (optional) The scope (<i>this</i> reference) in which the function is executed. (defaults to the Element)
      * @return {CompositeElement} this
      */
     each : function(fn, scope){
@@ -158,7 +160,7 @@ Ext.CompositeElementLite.prototype = {
             len = els.length,
             i, e;
 
-        for(i = 0; i&lt;len; i++) {
+        for(i = 0; i<len; i++) {
             e = els[i];
             if(e){
                 e = this.getElement(e);
@@ -185,10 +187,10 @@ Ext.CompositeElementLite.prototype = {
     <a name="method-Ext.CompositeElementLite-filter"></a>/**
      * Filters this composite to only elements that match the passed selector.
      * @param {String/Function} selector A string CSS selector or a comparison function.
-     * The comparison function will be called with the following arguments:&lt;ul&gt;
-     * &lt;li&gt;&lt;code&gt;el&lt;/code&gt; : Ext.core.Element&lt;div class=&quot;sub-desc&quot;&gt;The current DOM element.&lt;/div&gt;&lt;/li&gt;
-     * &lt;li&gt;&lt;code&gt;index&lt;/code&gt; : Number&lt;div class=&quot;sub-desc&quot;&gt;The current index within the collection.&lt;/div&gt;&lt;/li&gt;
-     * &lt;/ul&gt;
+     * The comparison function will be called with the following arguments:<ul>
+     * <li><code>el</code> : Ext.core.Element<div class="sub-desc">The current DOM element.</div></li>
+     * <li><code>index</code> : Number<div class="sub-desc">The current index within the collection.</div></li>
+     * </ul>
      * @return {CompositeElement} this
      */
     filter : function(selector){
@@ -229,7 +231,7 @@ Ext.CompositeElementLite.prototype = {
     replaceElement : function(el, replacement, domReplace){
         var index = !isNaN(el) ? el : this.indexOf(el),
             d;
-        if(index &gt; -1){
+        if(index > -1){
             replacement = Ext.getDom(replacement);
             if(domReplace){
                 d = this.elements[index];
@@ -253,7 +255,7 @@ Ext.CompositeElementLite.prototype.on = Ext.CompositeElementLite.prototype.addLi
 
 /**
  * @private
- * Copies all of the functions from Ext.core.Element&#39;s prototype onto CompositeElementLite&#39;s prototype.
+ * Copies all of the functions from Ext.core.Element's prototype onto CompositeElementLite's prototype.
  * This is called twice - once immediately below, and once again after additional Ext.core.Element
  * are added in Ext JS
  */
@@ -263,7 +265,7 @@ Ext.CompositeElementLite.importElementMethods = function() {
         CelProto = Ext.CompositeElementLite.prototype;
 
     for (fnName in ElProto) {
-        if (typeof ElProto[fnName] == &#39;function&#39;){
+        if (typeof ElProto[fnName] == 'function'){
             (function(fnName) {
                 CelProto[fnName] = CelProto[fnName] || function() {
                     return this.invoke(fnName, arguments);
@@ -292,12 +294,20 @@ if(Ext.DomQuery){
  */
 Ext.core.Element.select = function(selector, root){
     var els;
-    if(typeof selector == &quot;string&quot;){
+    if(typeof selector == "string"){
         els = Ext.core.Element.selectorFunction(selector, root);
     }else if(selector.length !== undefined){
         els = selector;
     }else{
-        throw &quot;Invalid selector&quot;;
+        //<debug>
+        Ext.Error.raise({
+            sourceClass: "Ext.core.Element",
+            sourceMethod: "select",
+            selector: selector,
+            root: root,
+            msg: "Invalid selector specified: " + selector
+        });
+        //</debug>
     }
     return new Ext.CompositeElementLite(els);
 };

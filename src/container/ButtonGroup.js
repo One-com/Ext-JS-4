@@ -121,7 +121,7 @@ Ext.define('Ext.container.ButtonGroup', {
     // private
     onBeforeAdd: function(component) {
         if (component.is('button')) {
-            component.ui = 'toolbar';
+            component.ui = component.ui + '-toolbar';
         }
         this.callParent(arguments);
     },

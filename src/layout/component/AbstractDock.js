@@ -1,6 +1,6 @@
 /**
  * @class Ext.layout.component.AbstractDock
- * @extends Ext.layout.Component
+ * @extends Ext.layout.component.Component
  * @private
  * This ComponentLayout handles docking for Panels. It takes care of panels that are
  * part of a ContainerLayout that sets this Panel's size and Panels that are part of
@@ -12,7 +12,7 @@ Ext.define('Ext.layout.component.AbstractDock', {
 
     /* Begin Definitions */
 
-    extend: 'Ext.layout.Component',
+    extend: 'Ext.layout.component.Component',
 
     /* End Definitions */
 
@@ -61,6 +61,16 @@ Ext.define('Ext.layout.component.AbstractDock', {
         };
         
         Ext.applyIf(info, me.getTargetInfo());
+
+        // We need to bind to the ownerCt whenever we do not have a user set height or width.
+        if (owner && owner.ownerCt && owner.ownerCt.layout && owner.ownerCt.layout.isLayout) {
+            if (!Ext.isNumber(owner.height) || !Ext.isNumber(owner.width)) {
+                owner.ownerCt.layout.bindToOwnerCtComponent = true;
+            }
+            else {
+                owner.ownerCt.layout.bindToOwnerCtComponent = false;
+            }
+        }
 
         // Determine if we have an autoHeight or autoWidth.
         if (height === undefined || height === null || width === undefined || width === null) {
@@ -330,16 +340,18 @@ Ext.define('Ext.layout.component.AbstractDock', {
             bodyBox = info.bodyBox,
             size = info.size,
             boxes = info.boxes,
+            boxesLn = boxes.length,
             pos = box.type,
             frameSize = this.frameSize,
             padding = info.padding,
             border = info.border,
             autoSizedCtLayout = info.autoSizedCtLayout,
+            ln = (boxesLn < index) ? boxesLn : index,
             i, adjustBox;
 
         if (pos == 'top' || pos == 'bottom') {
             // This can affect the previously set left and right and bottom docked items
-            for (i = 0; i < index; i++) {
+            for (i = 0; i < ln; i++) {
                 adjustBox = boxes[i];
                 if (adjustBox.stretched && adjustBox.type == 'left' || adjustBox.type == 'right') {
                     adjustBox.height += box.height;
@@ -504,13 +516,29 @@ Ext.define('Ext.layout.component.AbstractDock', {
      * Our collection of docked items will already be ordered via Panel.getDockedItems().
      */
     renderItems: function(items, target) {
-        var ln = items.length,
-            domLn = target.dom.childNodes.length,
-            i = 0,
-            j = 0,
-            item;
+        var cns = target.dom.childNodes,
+            cnsLn = cns.length,
+            ln = items.length,
+            domLn = 0,
+            i, j, cn, item;
+        
+        // Calculate the number of DOM nodes in our target that are not our docked items
+        for (i = 0; i < cnsLn; i++) {
+            cn = Ext.get(cns[i]);
+            for (j = 0; j < ln; j++) {
+                item = items[j];
+                if (item.rendered && (cn.id == item.el.id || cn.down('#' + item.el.id))) {
+                    break;
+                }
+            }
+            
+            if (j === ln) {
+                domLn++;
+            }
+        }
 
-        for (; i < ln; i++, j++) {
+        // Now we go through our docked items and render/move them
+        for (i = 0, j = 0; i < ln; i++, j++) {
             item = items[i];
             
             // If we're now at the right/bottom docked item, we jump ahead in our

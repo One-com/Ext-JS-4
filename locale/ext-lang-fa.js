@@ -12,16 +12,16 @@ if(Ext.DataView){
    Ext.DataView.prototype.emptyText = "";
 }
 
-if(Ext.grid.GridPanel){
-   Ext.grid.GridPanel.prototype.ddText = "{0} رکورد انتخاب شده";
+if(Ext.grid.Panel){
+   Ext.grid.Panel.prototype.ddText = "{0} رکورد انتخاب شده";
 }
 
 if(Ext.TabPanelItem){
    Ext.TabPanelItem.prototype.closeText = "بستن";
 }
 
-if(Ext.form.BaseField){
-   Ext.form.BaseField.prototype.invalidText = "مقدار فیلد صحیح نیست";
+if(Ext.form.field.Base){
+   Ext.form.field.Base.prototype.invalidText = "مقدار فیلد صحیح نیست";
 }
 
 if(Ext.LoadMask){
@@ -113,7 +113,7 @@ if(Ext.picker.Month) {
   });
 }
 
-if(Ext.toolbar.PagingToolbar){
+if(Ext.toolbar.Paging){
    Ext.apply(Ext.PagingToolbar.prototype, {
       beforePageText : "صفحه",
       afterPageText  : "از {0}",
@@ -127,8 +127,8 @@ if(Ext.toolbar.PagingToolbar){
    });
 }
 
-if(Ext.form.Text){
-   Ext.apply(Ext.form.Text.prototype, {
+if(Ext.form.field.Text){
+   Ext.apply(Ext.form.field.Text.prototype, {
       minLengthText : "حداقل طول این فیلد برابر است با {0}",
       maxLengthText : "حداکثر طول این فیلد برابر است با {0}",
       blankText     : "این فیلد باید مقداری داشته باشد",
@@ -137,16 +137,16 @@ if(Ext.form.Text){
    });
 }
 
-if(Ext.form.Number){
-   Ext.apply(Ext.form.Number.prototype, {
+if(Ext.form.field.Number){
+   Ext.apply(Ext.form.field.Number.prototype, {
       minText : "حداقل مقدار این فیلد برابر است با {0}",
       maxText : "حداکثر مقدار این فیلد برابر است با {0}",
       nanText : "{0} یک عدد نیست"
    });
 }
 
-if(Ext.form.Date){
-   Ext.apply(Ext.form.Date.prototype, {
+if(Ext.form.field.Date){
+   Ext.apply(Ext.form.field.Date.prototype, {
       disabledDaysText  : "غیرفعال",
       disabledDatesText : "غیرفعال",
       minText           : "تاریخ باید پس از {0} باشد",
@@ -156,15 +156,15 @@ if(Ext.form.Date){
    });
 }
 
-if(Ext.form.ComboBox){
-   Ext.apply(Ext.form.ComboBox.prototype, {
+if(Ext.form.field.ComboBox){
+   Ext.apply(Ext.form.field.ComboBox.prototype, {
       loadingText       : "در حال بارگذاری ...",
       valueNotFoundText : undefined
    });
 }
 
-if(Ext.form.VTypes){
-   Ext.apply(Ext.form.VTypes, {
+if(Ext.form.field.VTypes){
+   Ext.apply(Ext.form.field.VTypes, {
       emailText    : 'مقدار این فیلد باید یک ایمیل با این فرمت باشد "user@example.com"',
       urlText      : 'مقدار این آدرس باید یک آدرس سایت با این فرمت باشد "http:/'+'/www.example.com"',
       alphaText    : 'مقدار این فیلد باید فقط از حروف الفبا و _ تشکیل شده باشد ',
@@ -172,8 +172,8 @@ if(Ext.form.VTypes){
    });
 }
 
-if(Ext.form.HtmlEditor){
-  Ext.apply(Ext.form.HtmlEditor.prototype, {
+if(Ext.form.field.HtmlEditor){
+  Ext.apply(Ext.form.field.HtmlEditor.prototype, {
     createLinkText : 'لطفا آدرس لینک را وارد کنید:',
     buttonTips : {
       bold : {
@@ -250,8 +250,8 @@ if(Ext.form.HtmlEditor){
   });
 }
 
-if(Ext.grid.HeaderContainer){
-   Ext.apply(Ext.grid.HeaderContainer.prototype, {
+if(Ext.grid.header.Container){
+   Ext.apply(Ext.grid.header.Container.prototype, {
       sortAscText  : "مرتب سازی افزایشی",
       sortDescText : "مرتب سازی کاهشی",
       lockText     : "قفل ستون ها",

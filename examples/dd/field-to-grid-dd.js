@@ -236,7 +236,7 @@ Ext.onReady(function(){
     }
 
     // create the data store
-    var store = new Ext.data.ArrayStore({
+    var store = Ext.create('Ext.data.ArrayStore', {
         fields: [
            {name: 'company'},
            {name: 'price', type: 'float'},
@@ -247,7 +247,7 @@ Ext.onReady(function(){
         data: myData
     });
 
-    var helpWindow = new Ext.Window({
+    var helpWindow = Ext.create('Ext.Window', {
         title: 'Source code',
         width: 920,
         height: 500,
@@ -271,7 +271,7 @@ Ext.onReady(function(){
     });
 
     // create the Grid
-    var grid = new Ext.grid.GridPanel({
+    var grid = Ext.create('Ext.grid.Panel', {
         store: store,
         columns: [
             {id:'company',header: "Company", width: 160, sortable: true, dataIndex: 'company'},
@@ -280,7 +280,7 @@ Ext.onReady(function(){
             {header: "% Change", width: 75, sortable: true, renderer: pctChange, dataIndex: 'pctChange'},
             {header: "Last Updated", width: 85, sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/Y'), dataIndex: 'lastChange'}
         ],
-        plugins: new Ext.ux.CellFieldDropZone(),
+        plugins: Ext.create('Ext.ux.CellFieldDropZone'),
         stripeRows: true,
         autoExpandColumn: 'company',
         height:350,
@@ -300,13 +300,10 @@ Ext.onReady(function(){
 
     grid.render('grid-example');
 
-    var f = new Ext.Panel({
+    var f = Ext.create('Ext.Panel', {
         frame: true,
         width: 600,
-        plugins: new Ext.ux.PanelFieldDragZone(),
-        style: {
-            'margin-top': '10px'
-        },
+        plugins: Ext.create('Ext.ux.PanelFieldDragZone'),
         labelWidth: 150,
         items: [{
             xtype: 'textfield',

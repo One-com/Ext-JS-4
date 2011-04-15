@@ -33,7 +33,7 @@ Ext.regModel('User', {
  * 
 <pre><code>
 //first, we load up a User with id of 1
-var user = Ext.ModelMgr.create({id: 1, name: 'Ed'}, 'User');
+var user = Ext.ModelManager.create({id: 1, name: 'Ed'}, 'User');
 
 //the user.products function was created automatically by the association and returns a {@link Ext.data.Store Store}
 //the created store is automatically scoped to the set of Products for the User with id of 1
@@ -208,7 +208,7 @@ Ext.define('Ext.data.HasManyAssociation', {
      * Read associated data
      * @private
      * @param {Ext.data.Model} record The record we're writing to
-     * @param {Ext.data.Reader} reader The reader for the associated model
+     * @param {Ext.data.reader.Reader} reader The reader for the associated model
      * @param {Object} associationData The raw associated data
      */
     read: function(record, reader, associationData){

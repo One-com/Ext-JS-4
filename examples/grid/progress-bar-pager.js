@@ -65,7 +65,8 @@ Ext.onReady(function(){
     }
 
     // register model
-    Ext.regModel('Company', {
+    Ext.define('Company', {
+        extend: 'Ext.data.Model',
         idProperty: 'company',
         fields: [
            {name: 'company'},
@@ -92,7 +93,7 @@ Ext.onReady(function(){
     });
     
     // create the Grid
-    var grid = Ext.create('Ext.grid.GridPanel', {
+    var grid = Ext.create('Ext.grid.Panel', {
         title:'Progress Bar Pager',
         store: store,
         columns: [{

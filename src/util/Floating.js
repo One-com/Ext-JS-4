@@ -23,7 +23,7 @@ Ext.define('Ext.util.Floating', {
 
     constructor: function(config) {
         this.floating = true;
-        this.el = new Ext.Layer(Ext.apply({}, config, {
+        this.el = Ext.create('Ext.Layer', Ext.apply({}, config, {
             hideMode: this.hideMode,
             hidden: this.hidden,
             shadow: Ext.isDefined(this.shadow) ? this.shadow : 'sides',
@@ -163,7 +163,10 @@ Ext.define('Ext.util.Floating', {
 
     // private
     fitContainer: function() {
-        var vs = this.container.getViewSize(false);
-        this.setSize(vs);
+        var parent = this.floatParent,
+            container = parent ? parent.getTargetEl() : this.container,
+            size = container.getViewSize(false);
+            
+        this.setSize(size);
     }
 });

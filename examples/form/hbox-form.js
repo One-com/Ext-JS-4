@@ -1,10 +1,10 @@
 Ext.require([
-    'Ext.form.FormPanel',
+    'Ext.form.Panel',
     'Ext.layout.container.Anchor'
 ]);
 
 Ext.onReady(function() {
-    Ext.create('Ext.form.FormPanel', {
+    Ext.create('Ext.form.Panel', {
         renderTo: Ext.getBody(),
         title: 'Form Panel',
         bodyStyle: 'padding:5px 5px 0',

@@ -1,10 +1,11 @@
 $button-arrow-size: 15px !default;
-$button-split-size: 18px !default;
+$button-split-size: 15px !default;
 $button-icon-spacing: 4px !default;
 
 $button-small-border-radius: 3px !default;
 $button-small-border-width: 1px !default;
 $button-small-padding: 2px !default;
+$button-small-text-padding: 4px;
 $button-small-font-size: ceil($font-size * .9) !default; //11px
 $button-small-font-size-over: $button-small-font-size !default;
 $button-small-font-size-focus: $button-small-font-size-over;
@@ -25,6 +26,7 @@ $button-small-icon-size: 16px !default;
 $button-medium-border-radius: 3px !default;
 $button-medium-border-width: 1px !default;
 $button-medium-padding: 3px !default;
+$button-medium-text-padding: 3px;
 $button-medium-font-size: ceil($font-size * .9) !default; //11px
 $button-medium-font-size-over: $button-medium-font-size !default;
 $button-medium-font-size-focus: $button-medium-font-size-over;
@@ -45,6 +47,7 @@ $button-medium-icon-size: 24px !default;
 $button-large-border-radius: 3px !default;
 $button-large-border-width: 1px !default;
 $button-large-padding: 3px !default;
+$button-large-text-padding: 3px;
 $button-large-font-size: ceil($font-size * .9) !default; //11px
 $button-large-font-size-over: $button-large-font-size !default;
 $button-large-font-size-focus: $button-large-font-size-over;
@@ -108,19 +111,19 @@ $button-toolbar-border-color: transparent !default;
 $button-toolbar-border-color-over: adjust-color($base-color, $hue: 0.084deg, $saturation: -9.891%, $lightness: -18.039%) !default;
 $button-toolbar-border-color-focus: $button-toolbar-border-color-over;
 $button-toolbar-border-color-pressed: adjust-color($base-color, $hue: 0.721deg, $saturation: -17.014%, $lightness: -21.765%) !default;
-$button-toolbar-border-color-disabled: adjust-color($base-color, $hue: 0.721deg, $saturation: -17.014%, $lightness: -21.765%) !default;
+$button-toolbar-border-color-disabled: transparent !default;
 
 $button-toolbar-background-color: transparent !default;
 $button-toolbar-background-color-over: adjust-color($base-color, $hue: -5deg, $saturation: 44.444%, $lightness: 8.824%) !default;
 $button-toolbar-background-color-focus: $button-toolbar-background-color-over;
 $button-toolbar-background-color-pressed: adjust-color($base-color, $hue: -1.138deg, $saturation: -11.47%, $lightness: -2.353%) !default;
-$button-toolbar-background-color-disabled: adjust-color($base-color, $hue: -1.138deg, $saturation: -11.47%, $lightness: -2.353%) !default;
+$button-toolbar-background-color-disabled: transparent !default;
 
 $button-toolbar-background-gradient: null !default;
 $button-toolbar-background-gradient-over: 'glossy-button-over' !default;
 $button-toolbar-background-gradient-focus: $button-toolbar-background-gradient-over;
 $button-toolbar-background-gradient-pressed: 'glossy-button-pressed' !default;
-$button-toolbar-background-gradient-disabled: 'glossy-button-disabled' !default;
+$button-toolbar-background-gradient-disabled: null !default;
 
 $button-toolbar-background-gradient-color-stops: null !default;
 $button-toolbar-background-gradient-color-stops-over: null !default;

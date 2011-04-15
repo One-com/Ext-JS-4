@@ -1,35 +1,35 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.ComponentDragger"></a>/**
  * @class Ext.util.ComponentDragger
  * @extends Ext.dd.DragTracker
- * &lt;p&gt;A subclass of Ext.dd.DragTracker which handles dragging any Component.&lt;/p&gt;
- * &lt;p&gt;This is configured with a Component to be made draggable, and a config object for the
- * {@link Ext.dd.DragTracker} class.&lt;/p&gt;
- * &lt;p&gt;A {@link #} delegate may be provided which may be either the element to use as the mousedown target
- * or a {@link Ext.DomQuery} selector to activate multiple mousedown targets.&lt;/p&gt;
+ * <p>A subclass of Ext.dd.DragTracker which handles dragging any Component.</p>
+ * <p>This is configured with a Component to be made draggable, and a config object for the
+ * {@link Ext.dd.DragTracker} class.</p>
+ * <p>A {@link #} delegate may be provided which may be either the element to use as the mousedown target
+ * or a {@link Ext.DomQuery} selector to activate multiple mousedown targets.</p>
  * @constructor Create a new ComponentTracker
  * @param {object} comp The Component to provide dragging for.
  * @param {object} config The config object
  */
-Ext.define(&#39;Ext.util.ComponentDragger&#39;, {
+Ext.define('Ext.util.ComponentDragger', {
 
     <a name="cfg-Ext.util.ComponentDragger-constrain"></a>/**
      * @cfg {Boolean} constrain
-     * Specify as &lt;code&gt;true&lt;/code&gt; to constrain the Component to within the bounds of the {@link #constrainTo} region.
+     * Specify as <code>true</code> to constrain the Component to within the bounds of the {@link #constrainTo} region.
      */
 
     <a name="cfg-Ext.util.ComponentDragger-delegate"></a>/**
      * @cfg {String/Element} delegate
-     * Optional. &lt;p&gt;A {@link Ext.DomQuery DomQuery} selector which identifies child elements within the Component&#39;s encapsulating
-     * Element which are the drag handles. This limits dragging to only begin when the matching elements are mousedowned.&lt;/p&gt;
-     * &lt;p&gt;This may also be a specific child element within the Component&#39;s encapsulating element to use as the drag handle.&lt;/p&gt;
+     * Optional. <p>A {@link Ext.DomQuery DomQuery} selector which identifies child elements within the Component's encapsulating
+     * Element which are the drag handles. This limits dragging to only begin when the matching elements are mousedowned.</p>
+     * <p>This may also be a specific child element within the Component's encapsulating element to use as the drag handle.</p>
      */
 
     <a name="cfg-Ext.util.ComponentDragger-constrainDelegate"></a>/**
      * @cfg {Boolean} constrainDelegate
-     * Specify as &lt;code&gt;true&lt;/code&gt; to constrain the drag handles within the {@link constrainTo} region.
+     * Specify as <code>true</code> to constrain the drag handles within the {@link constrainTo} region.
      */
 
-    extend: &#39;Ext.dd.DragTracker&#39;,
+    extend: 'Ext.dd.DragTracker',
 
     autoStart: 500,
 
@@ -48,7 +48,7 @@ Ext.define(&#39;Ext.util.ComponentDragger&#39;, {
 
         // If client Component has a ghost method to show a lightweight version of itself
         // then use that as a drag proxy unless configured to liveDrag.
-        if (comp.ghost &amp;&amp; !comp.liveDrag) {
+        if (comp.ghost && !comp.liveDrag) {
              me.proxy = comp.ghost();
              me.dragTarget = me.proxy.header.el;
         }
@@ -97,14 +97,14 @@ Ext.define(&#39;Ext.util.ComponentDragger&#39;, {
     // Move either the ghost Component or the target Component to its new position on drag
     onDrag: function(e) {
         var me = this,
-            comp = (me.proxy &amp;&amp; !me.comp.liveDrag) ? me.proxy : me.comp,
-            offset = me.getOffset(me.constrain || me.constrainDelegate ? &#39;dragTarget&#39; : null);
+            comp = (me.proxy && !me.comp.liveDrag) ? me.proxy : me.comp,
+            offset = me.getOffset(me.constrain || me.constrainDelegate ? 'dragTarget' : null);
 
         comp.setPosition.apply(comp, [me.startPosition[0] + offset[0], me.startPosition[1] + offset[1]]);
     },
 
     onEnd: function(e) {
-        if (this.proxy &amp;&amp; !this.comp.liveDrag) {
+        if (this.proxy && !this.comp.liveDrag) {
             this.comp.unghost();
         }
     }

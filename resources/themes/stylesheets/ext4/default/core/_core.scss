@@ -40,6 +40,11 @@ body {
     width: 0!important;
 }
 
+.#{$prefix}masked-relative {
+    position: relative;
+}
+
+
 // Styles for the three schemes for showing shadows under an element: CSS3, IE blur transform, or 9 point framing with images.
 .#{$prefix}css-shadow {
     position: absolute;

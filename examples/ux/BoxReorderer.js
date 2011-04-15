@@ -93,7 +93,7 @@ Ext.define('Ext.ux.BoxReorderer', {
         // TODO: Ext5's DD classes should not use init internally because it collides with use as a plugin
         // TODO: Ext5's DD classes should be Observable.
         // TODO: When all the above are trus, this plugin should extend the DD class.
-        me.dd = new Ext.dd.DD(l.innerCt, me.container.id + '-reorderer');
+        me.dd = Ext.create('Ext.dd.DD', l.innerCt, me.container.id + '-reorderer');
         Ext.apply(me.dd, {
             animate: me.animate,
             reorderer: me,
@@ -160,7 +160,7 @@ Ext.define('Ext.ux.BoxReorderer', {
                 me.deltaY = e.getPageY() - cmpBox.top;
             }
             me.constrainY = me.constrainX = true;
-        } 
+        }
     },
 
     startDrag: function() {
@@ -182,13 +182,13 @@ Ext.define('Ext.ux.BoxReorderer', {
             me.dragCmp.suspendEvents();
             me.dragCmp.disabled = true;
             me.dragCmp.el.setStyle('zIndex', 100);
-            
-            
+
+
         } else {
             me.dragElId = null;
         }
     },
-    
+
     /**
      * @private
      * Find next or previous reorderable component index.
@@ -199,7 +199,7 @@ Ext.define('Ext.ux.BoxReorderer', {
         var me = this,
             items = me.container.items,
             newItem;
-            
+
         if (items.getAt(newIndex).reorderable === false) {
             newItem = items.getAt(newIndex);
             if (newIndex > me.startIndex) {
@@ -214,7 +214,7 @@ Ext.define('Ext.ux.BoxReorderer', {
                 }
             }
         }
- 
+
         newIndex = Math.min(Math.max(newIndex, 0), items.getCount() - 1);
 
         if (items.getAt(newIndex).reorderable === false) {
@@ -222,7 +222,7 @@ Ext.define('Ext.ux.BoxReorderer', {
         }
         return newIndex;
     },
-    
+
     /**
      * @private
      * Swap 2 components.
@@ -232,9 +232,9 @@ Ext.define('Ext.ux.BoxReorderer', {
         var me = this,
             items = me.container.items,
             orig, dest, tmpIndex;
-            
+
         newIndex = me.findReorderable(newIndex);
-        
+
         if (newIndex === -1) {
             return;
         }
@@ -247,15 +247,15 @@ Ext.define('Ext.ux.BoxReorderer', {
         items.insert(tmpIndex, orig);
         items.remove(dest);
         items.insert(me.curIndex, dest);
-         
+
         me.container.layout.layout();
         me.curIndex = newIndex;
     },
-    
+
     onDrag: function(e) {
         var me = this,
             newIndex;
-        
+
         newIndex = me.getNewIndex(e.getPoint());
         if ((newIndex !== undefined)) {
             me.reorderer.fireEvent('Drag', me, me.container, me.dragCmp, me.startIndex, me.curIndex);
@@ -319,7 +319,7 @@ Ext.define('Ext.ux.BoxReorderer', {
             lastPos = me.lastPos;
 
         me.lastPos = dragBox[me.startAttr];
-       
+
         for (; i < ln; i++) {
             targetEl = it[i].getEl();
 

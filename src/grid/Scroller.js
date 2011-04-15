@@ -21,11 +21,7 @@ Ext.define('Ext.grid.Scroller', {
             dock     = me.dock,
             cls      = Ext.baseCSSPrefix + 'scroller-vertical',
             sizeProp = 'width',
-            // TODO: Determine why +2 in getScrollBarWidth
-            // BrowserBug: IE8 dictates that there must be at least 1px of viewable
-            // area before it will allow you to scroll when clicking on the open
-            // area. This adds a 1px visual artificat in IE8.
-            scrollbarWidth = Ext.getScrollBarWidth() - (Ext.isIE ? 0 : 1);
+            scrollbarWidth = Ext.getScrollBarWidth();
 
         me.offsets = {bottom: 0};
 
@@ -109,55 +105,54 @@ Ext.define('Ext.grid.Scroller', {
     },
 
     onOwnerAfterLayout: function(owner, layout) {
-        if (Ext.isIE) {
-            Ext.Function.defer(this.invalidate, 1, this);
-        } else {
-            this.invalidate();
-        }
+        this.invalidate();
     },
 
     /**
      * Sets the scrollTop and constrains the value between 0 and max.
      * @param {Number} scrollTop
+     * @return {Number} The resulting scrollTop value after being constrained
      */
     setScrollTop: function(scrollTop) {
-        if (!this.scrollInProgress && this.el) {
+        if (this.el) {
             var elDom = this.el.dom;
-            elDom.scrollTop = Ext.Number.constrain(scrollTop, 0, elDom.scrollHeight - elDom.clientHeight);
+            return elDom.scrollTop = Ext.Number.constrain(scrollTop, 0, elDom.scrollHeight - elDom.clientHeight);
         }
-        
     },
 
     /**
      * Sets the scrollLeft and constrains the value between 0 and max.
-     * @param {Number} scrollTop
+     * @param {Number} scrollLeft
+     * @return {Number} The resulting scrollLeft value after being constrained
      */
     setScrollLeft: function(scrollLeft) {
-        if (!this.scrollInProgress && this.el) {
+        if (this.el) {
             var elDom = this.el.dom;
-            elDom.scrollLeft = Ext.Number.constrain(scrollLeft, 0, elDom.scrollWidth - elDom.clientWidth);
+            return elDom.scrollLeft = Ext.Number.constrain(scrollLeft, 0, elDom.scrollWidth - elDom.clientWidth);
         }
     },
 
     /**
      * Scroll by deltaY
      * @param {Number} delta
+     * @return {Number} The resulting scrollTop value
      */
     scrollByDeltaY: function(delta) {
         if (this.el) {
             var elDom = this.el.dom;
-            this.setScrollTop(elDom.scrollTop + delta);    
+            return this.setScrollTop(elDom.scrollTop + delta);
         }
     },
 
     /**
      * Scroll by deltaX
      * @param {Number} delta
+     * @return {Number} The resulting scrollLeft value
      */
     scrollByDeltaX: function(delta) {
         if (this.el) {
             var elDom = this.el.dom;
-            this.setScrollLeft(elDom.scrollLeft + delta);
+            return this.setScrollLeft(elDom.scrollLeft + delta);
         }
     },
     
@@ -171,18 +166,8 @@ Ext.define('Ext.grid.Scroller', {
     
     // synchronize the scroller with the bound gridviews
     onElScroll: function(event, target) {
-        // Set a flag so we refuse to respond to outside control while we are scrolling the client.
-        this.scrollInProgress = true;
-
         this.fireEvent('bodyscroll', event, target);
-
-        // Clear barrier flag in 100 miliseconds (Unless this is called again, ie: they are dragging the bar)
-        this.clearScrollInProgress();
     },
-
-    clearScrollInProgress: Ext.Function.createBuffered(function() {
-        this.scrollInProgress = false;
-    }, 10),
 
     getPanel: function() {
         var me = this;

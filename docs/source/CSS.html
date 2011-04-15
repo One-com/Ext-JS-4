@@ -3,7 +3,7 @@
  * Utility class for manipulating CSS rules
  * @singleton
  */
-Ext.define(&#39;Ext.util.CSS&#39;, function() {
+Ext.define('Ext.util.CSS', function() {
     var rules = null;
     var doc = document;
 
@@ -28,12 +28,12 @@ Ext.define(&#39;Ext.util.CSS&#39;, function() {
          */
         createStyleSheet : function(cssText, id) {
             var ss,
-                head = doc.getElementsByTagName(&quot;head&quot;)[0],
-                styleEl = doc.createElement(&quot;style&quot;);
+                head = doc.getElementsByTagName("head")[0],
+                styleEl = doc.createElement("style");
 
-            styleEl.setAttribute(&quot;type&quot;, &quot;text/css&quot;);
+            styleEl.setAttribute("type", "text/css");
             if (id) {
-               styleEl.setAttribute(&quot;id&quot;, id);
+               styleEl.setAttribute("id", id);
             }
 
             if (Ext.isIE) {
@@ -72,12 +72,12 @@ Ext.define(&#39;Ext.util.CSS&#39;, function() {
         swapStyleSheet : function(id, url) {
             var doc = document;
             this.removeStyleSheet(id);
-            var ss = doc.createElement(&quot;link&quot;);
-            ss.setAttribute(&quot;rel&quot;, &quot;stylesheet&quot;);
-            ss.setAttribute(&quot;type&quot;, &quot;text/css&quot;);
-            ss.setAttribute(&quot;id&quot;, id);
-            ss.setAttribute(&quot;href&quot;, url);
-            doc.getElementsByTagName(&quot;head&quot;)[0].appendChild(ss);
+            var ss = doc.createElement("link");
+            ss.setAttribute("rel", "stylesheet");
+            ss.setAttribute("type", "text/css");
+            ss.setAttribute("id", id);
+            ss.setAttribute("href", url);
+            doc.getElementsByTagName("head")[0].appendChild(ss);
         },
 
         <a name="method-Ext.util.CSS-refreshCache"></a>/**
@@ -100,14 +100,14 @@ Ext.define(&#39;Ext.util.CSS&#39;, function() {
                     j,
                     selectors;
 
-                for (; i &gt;= 0; --i) {
+                for (; i >= 0; --i) {
                     selectorText = ssRules[i].selectorText;
                     if (selectorText) {
  
                         // Split in case there are multiple, comma-delimited selectors
-                        selectorText = selectorText.split(&#39;,&#39;);
+                        selectorText = selectorText.split(',');
                         selectors = selectorText.length;
-                        for (j = 0; j &lt; selectors; j++) {
+                        for (j = 0; j < selectors; j++) {
                             rules[Ext.String.trim(selectorText[j]).toLowerCase()] = ssRules[i];
                         }
                     }
@@ -127,7 +127,7 @@ Ext.define(&#39;Ext.util.CSS&#39;, function() {
                     i = 0,
                     len = ds.length;
 
-                for (; i &lt; len; i++) {
+                for (; i < len; i++) {
                     try {
                         this.cacheStyleSheet(ds[i]);
                     } catch(e) {} 
@@ -147,7 +147,7 @@ Ext.define(&#39;Ext.util.CSS&#39;, function() {
             if (!Ext.isArray(selector)) {
                 return rs[selector.toLowerCase()];
             }
-            for (var i = 0; i &lt; selector.length; i++) {
+            for (var i = 0; i < selector.length; i++) {
                 if (rs[selector[i]]) {
                     return rs[selector[i].toLowerCase()];
                 }
@@ -157,7 +157,7 @@ Ext.define(&#39;Ext.util.CSS&#39;, function() {
 
         <a name="method-Ext.util.CSS-updateRule"></a>/**
          * Updates a rule property
-         * @param {String/Array} selector If it&#39;s an array it tries each selector until it finds one. Stops immediately once one is found.
+         * @param {String/Array} selector If it's an array it tries each selector until it finds one. Stops immediately once one is found.
          * @param {String} property The css property
          * @param {String} value The new value for the property
          * @return {Boolean} true If a rule was found and updated
@@ -170,7 +170,7 @@ Ext.define(&#39;Ext.util.CSS&#39;, function() {
                     return true;
                 }
             } else {
-                for (var i = 0; i &lt; selector.length; i++) {
+                for (var i = 0; i < selector.length; i++) {
                     if (this.updateRule(selector[i], property, value)) {
                         return true;
                     }

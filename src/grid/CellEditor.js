@@ -1,3 +1,9 @@
+/**
+ * @class Ext.grid.CellEditor
+ * @extends Ext.Editor
+ * Internal utility class that provides default configuration for cell editing.
+ * @ignore
+ */
 Ext.define('Ext.grid.CellEditor', {
     extend: 'Ext.Editor',
     constructor: function(config) {

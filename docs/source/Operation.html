@@ -3,16 +3,16 @@
  * @class Ext.data.Operation
  * @extends Object
  * 
- * &lt;p&gt;Represents a single read or write operation performed by a {@link Ext.data.Proxy Proxy}.
+ * <p>Represents a single read or write operation performed by a {@link Ext.data.Proxy Proxy}.
  * Operation objects are used to enable communication between Stores and Proxies. Application
- * developers should rarely need to interact with Operation objects directly.&lt;/p&gt;
+ * developers should rarely need to interact with Operation objects directly.</p>
  * 
- * &lt;p&gt;Several Operations can be batched together in a {@link Ext.data.Batch batch}.&lt;/p&gt;
+ * <p>Several Operations can be batched together in a {@link Ext.data.Batch batch}.</p>
  * 
  * @constructor
  * @param {Object} config Optional config object
  */
-Ext.define(&#39;Ext.data.Operation&#39;, {
+Ext.define('Ext.data.Operation', {
     <a name="cfg-Ext.data.Operation-synchronous"></a>/**
      * @cfg {Boolean} synchronous True if this Operation is to be executed synchronously (defaults to true). This
      * property is inspected by a {@link Ext.data.Batch Batch} to see if a series of Operations can be executed in
@@ -21,32 +21,32 @@ Ext.define(&#39;Ext.data.Operation&#39;, {
     synchronous: true,
     
     <a name="cfg-Ext.data.Operation-action"></a>/**
-     * @cfg {String} action The action being performed by this Operation. Should be one of &#39;create&#39;, &#39;read&#39;, &#39;update&#39; or &#39;destroy&#39;
+     * @cfg {String} action The action being performed by this Operation. Should be one of 'create', 'read', 'update' or 'destroy'
      */
     action: undefined,
     
     <a name="cfg-Ext.data.Operation-filters"></a>/**
-     * @cfg {Array} filters Optional array of filter objects. Only applies to &#39;read&#39; actions.
+     * @cfg {Array} filters Optional array of filter objects. Only applies to 'read' actions.
      */
     filters: undefined,
     
     <a name="cfg-Ext.data.Operation-sorters"></a>/**
-     * @cfg {Array} sorters Optional array of sorter objects. Only applies to &#39;read&#39; actions.
+     * @cfg {Array} sorters Optional array of sorter objects. Only applies to 'read' actions.
      */
     sorters: undefined,
     
     <a name="cfg-Ext.data.Operation-group"></a>/**
-     * @cfg {Object} group Optional grouping configuration. Only applies to &#39;read&#39; actions where grouping is desired.
+     * @cfg {Object} group Optional grouping configuration. Only applies to 'read' actions where grouping is desired.
      */
     group: undefined,
     
     <a name="cfg-Ext.data.Operation-start"></a>/**
-     * @cfg {Number} start The start index (offset), used in paging when running a &#39;read&#39; action.
+     * @cfg {Number} start The start index (offset), used in paging when running a 'read' action.
      */
     start: undefined,
     
     <a name="cfg-Ext.data.Operation-limit"></a>/**
-     * @cfg {Number} limit The number of records to load. Used on &#39;read&#39; actions when paging is being used.
+     * @cfg {Number} limit The number of records to load. Used on 'read' actions when paging is being used.
      */
     limit: undefined,
     
@@ -208,7 +208,7 @@ Ext.define(&#39;Ext.data.Operation&#39;, {
      * @return {Boolean} True if successful
      */
     wasSuccessful: function() {
-        return this.isComplete() &amp;&amp; this.success === true;
+        return this.isComplete() && this.success === true;
     },
     
     /**
@@ -225,6 +225,6 @@ Ext.define(&#39;Ext.data.Operation&#39;, {
      * @return {Boolean} Whether the operation should cause a write to occur.
      */
     allowWrite: function() {
-        return this.action != &#39;read&#39;;
+        return this.action != 'read';
     }
 });￿</pre></pre></body></html>

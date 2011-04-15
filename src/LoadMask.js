@@ -24,7 +24,7 @@ Ext.define('Ext.LoadMask', {
         observable: 'Ext.util.Observable'
     },
 
-    requires: ['Ext.data.StoreMgr'],
+    requires: ['Ext.data.StoreManager'],
 
     /* End Definitions */
 
@@ -44,6 +44,12 @@ Ext.define('Ext.LoadMask', {
      * The CSS class to apply to the loading message element (defaults to "x-mask-loading")
      */
     msgCls : Ext.baseCSSPrefix + 'mask-loading',
+    
+    /**
+     * @cfg {Boolean} useMsg
+     * Whether or not to use a loading message class or simply mask the bound element.
+     */
+    useMsg: true,
 
     /**
      * Read-only. True if the mask is currently disabled so that it will not be displayed (defaults to false)
@@ -122,7 +128,7 @@ Ext.define('Ext.LoadMask', {
             }
         }
         if (store) {
-            store = Ext.data.StoreMgr.lookup(store);
+            store = Ext.data.StoreManager.lookup(store);
             me.mon(store, {
                 scope: me,
                 beforeload: me.onBeforeLoad,
@@ -178,7 +184,12 @@ Ext.define('Ext.LoadMask', {
         var me = this;
 
         if (!me.disabled && !me.loading && me.fireEvent('beforeshow', me, me.el, me.store) !== false) {
-            me.el.mask(me.msg, me.msgCls, false);
+            if (me.useMsg) {
+                me.el.mask(me.msg, me.msgCls, false);
+            } else {
+                me.el.mask();
+            }
+            
             me.fireEvent('show', me, me.el, me.store);
             me.loading = true;
         }

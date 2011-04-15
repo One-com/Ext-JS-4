@@ -1,9 +1,9 @@
 Ext.define('Writer.Form', {
-    extend: 'Ext.form.FormPanel',
+    extend: 'Ext.form.Panel',
     alias: 'widget.writerform',
-    
-    requires: ['Ext.form.TextField'],
-    
+
+    requires: ['Ext.form.field.Text'],
+
     initComponent: function(){
         this.addEvents('create');
         Ext.apply(this, {
@@ -15,7 +15,7 @@ Ext.define('Writer.Form', {
             bodyPadding: 5,
             fieldDefaults: {
                 anchor: '100%',
-                labelAlign: 'right'    
+                labelAlign: 'right'
             },
             items: [{
                 fieldLabel: 'Email',
@@ -55,16 +55,16 @@ Ext.define('Writer.Form', {
         });
         this.callParent();
     },
-    
+
     setActiveRecord: function(record){
         this.activeRecord = record;
         this.getForm().loadRecord(record);
     },
-    
+
     onSave: function(){
         var active = this.activeRecord,
             form = this.getForm();
-            
+
         if (!active) {
             return;
         }
@@ -72,36 +72,36 @@ Ext.define('Writer.Form', {
             form.updateRecord(active);
         }
     },
-    
+
     onCreate: function(){
         var form = this.getForm();
-        
+
         if (form.isValid()) {
             this.fireEvent('create', this, form.getValues());
             form.reset();
         }
-        
+
     },
-    
+
     onReset: function(){
         this.getForm().reset();
     }
 });
 
 Ext.define('Writer.Grid', {
-    extend: 'Ext.grid.GridPanel',
+    extend: 'Ext.grid.Panel',
     alias: 'widget.writergrid',
-    
+
     requires: [
-        'Ext.grid.CellEditing',
-        'Ext.form.TextField',
+        'Ext.grid.plugin.CellEditing',
+        'Ext.form.field.Text',
         'Ext.toolbar.TextItem'
     ],
-    
+
     initComponent: function(){
-        
-        this.editing = new Ext.grid.CellEditing();
-        
+
+        this.editing = Ext.create('Ext.grid.plugin.CellEditing');
+
         Ext.apply(this, {
             iconCls: 'icon-grid',
             frame: true,
@@ -205,25 +205,25 @@ Ext.define('Writer.Grid', {
         });
         this.callParent();
     },
-    
+
     onSync: function(){
         this.store.sync();
     },
-    
+
     onDeleteClick: function(){
         var selection = this.getView().getSelectionModel().getSelection()[0];
         if (selection) {
             this.store.remove(selection);
         }
     },
-    
+
     onAddClick: function(){
         var rec = new Writer.Person({
             first: '',
             last: '',
             email: ''
         }), edit = this.editing;
-        
+
         edit.cancelEdit();
         this.store.insert(0, rec);
         edit.startEditByPosition({
@@ -257,12 +257,12 @@ Ext.define('Writer.Person', {
 
 Ext.require([
     'Ext.data.*',
-    'Ext.tip.QuickTips',
+    'Ext.tip.QuickTipManager',
     'Ext.window.MessageBox'
 ]);
 
 Ext.onReady(function(){
-    Ext.tip.QuickTips.init();
+    Ext.tip.QuickTipManager.init();
     var store = Ext.create('Ext.data.Store', {
         model: 'Writer.Person',
         autoLoad: true,
@@ -303,7 +303,7 @@ Ext.onReady(function(){
             }
         }
     });
-    
+
     var main = Ext.create('Ext.container.Container', {
         padding: '0 0 0 20',
         width: 500,

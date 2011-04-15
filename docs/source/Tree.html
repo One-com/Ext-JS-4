@@ -5,11 +5,11 @@
  * @constructor
  * @param {Node} root (optional) The root node
  */
-Ext.define(&#39;Ext.data.Tree&#39;, {
-    alias: &#39;data.tree&#39;,
+Ext.define('Ext.data.Tree', {
+    alias: 'data.tree',
     
     mixins: {
-        observable: &quot;Ext.util.Observable&quot;
+        observable: "Ext.util.Observable"
     },
 
     <a name="prop-Ext.data.Tree-root"></a>/**
@@ -30,9 +30,9 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
     
     <a name="cfg-Ext.data.Tree-pathSeparator"></a>/**
      * @cfg {String} pathSeparator
-     * The token used to separate paths in node ids (defaults to &#39;/&#39;).
+     * The token used to separate paths in node ids (defaults to '/').
      */
-    pathSeparator: &quot;/&quot;,
+    pathSeparator: "/",
 
     <a name="method-Ext.data.Tree-getRootNode"></a>/**
      * Returns the root node for this tree.
@@ -48,12 +48,14 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
      * @return {Node}
      */
     setRootNode : function(node) {
-        this.root = node;
-        node.set(&#39;root&#39;, true);
+        var me = this;
+        
+        me.root = node;
+        node.set('root', true);
         Ext.data.NodeInterface.decorate(node);
         node.updateInfo();
                 
-        this.relayEvents(node, [
+        me.relayEvents(node, [
             <a name="event-Ext.data.Tree-append"></a>/**
              * @event append
              * Fires when a new child node is appended to a node in this tree.
@@ -62,7 +64,7 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
              * @param {Node} node The newly appended node
              * @param {Number} index The index of the newly appended node
              */
-            &quot;append&quot;,
+            "append",
             
             <a name="event-Ext.data.Tree-remove"></a>/**
              * @event remove
@@ -71,7 +73,7 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
              * @param {Node} parent The parent node
              * @param {Node} node The child node removed
              */
-            &quot;remove&quot;,
+            "remove",
             
             <a name="event-Ext.data.Tree-move"></a>/**
              * @event move
@@ -82,7 +84,7 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
              * @param {Node} newParent The new parent of this node
              * @param {Number} index The index it was moved to
              */
-            &quot;move&quot;,
+            "move",
             
             <a name="event-Ext.data.Tree-insert"></a>/**
              * @event insert
@@ -92,7 +94,7 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
              * @param {Node} node The child node inserted
              * @param {Node} refNode The child node the node was inserted before
              */
-            &quot;insert&quot;,
+            "insert",
             
             <a name="event-Ext.data.Tree-beforeappend"></a>/**
              * @event beforeappend
@@ -101,7 +103,7 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
              * @param {Node} parent The parent node
              * @param {Node} node The child node to be appended
              */
-            &quot;beforeappend&quot;,
+            "beforeappend",
             
             <a name="event-Ext.data.Tree-beforeremove"></a>/**
              * @event beforeremove
@@ -110,7 +112,7 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
              * @param {Node} parent The parent node
              * @param {Node} node The child node to be removed
              */
-            &quot;beforeremove&quot;,
+            "beforeremove",
             
             <a name="event-Ext.data.Tree-beforemove"></a>/**
              * @event beforemove
@@ -121,7 +123,7 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
              * @param {Node} newParent The new parent the node is moving to
              * @param {Number} index The index it is being moved to
              */
-            &quot;beforemove&quot;,
+            "beforemove",
             
             <a name="event-Ext.data.Tree-beforeinsert"></a>/**
              * @event beforeinsert
@@ -131,43 +133,45 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
              * @param {Node} node The child node to be inserted
              * @param {Node} refNode The child node the node is being inserted before
              */
-            &quot;beforeinsert&quot;,
+            "beforeinsert",
              
              <a name="event-Ext.data.Tree-expand"></a>/**
               * @event expand
               * Fires when this node is expanded.
               * @param {Node} this The expanding node
               */
-             &quot;expand&quot;,
+             "expand",
              
              <a name="event-Ext.data.Tree-collapse"></a>/**
               * @event collapse
               * Fires when this node is collapsed.
               * @param {Node} this The collapsing node
               */
-             &quot;collapse&quot;,
+             "collapse",
              
              <a name="event-Ext.data.Tree-beforeexpand"></a>/**
               * @event beforeexpand
               * Fires before this node is expanded.
               * @param {Node} this The expanding node
               */
-             &quot;beforeexpand&quot;,
+             "beforeexpand",
              
              <a name="event-Ext.data.Tree-beforecollapse"></a>/**
               * @event beforecollapse
               * Fires before this node is collapsed.
               * @param {Node} this The collapsing node
               */
-             &quot;beforecollapse&quot;
+             "beforecollapse"
         ]);
         
         node.on({
-            insert: this.onNodeInsert,
-            append: this.onNodeAppend,
-            remove: this.onNodeRemove,
-            scope: this
+            insert: me.onNodeInsert,
+            append: me.onNodeAppend,
+            remove: me.onNodeRemove,
+            scope: me
         });
+        
+        this.registerNode(node);
         
         return node;
     },
@@ -195,16 +199,16 @@ Ext.define(&#39;Ext.data.Tree&#39;, {
 
     // private
     registerNode : function(node) {
-        this.nodeHash[node.get(&#39;id&#39;) || node.interalId] = node;
+        this.nodeHash[node.getId() || node.internalId] = node;
     },
 
     // private
     unregisterNode : function(node) {
-        delete this.nodeHash[node.get(&#39;id&#39;) || node.interalId];
+        delete this.nodeHash[node.getId() || node.internalId];
     },
 
     toString : function() {
-        return &quot;[Tree&quot;+(this.id?&quot; &quot;+this.id:&quot;&quot;)+&quot;]&quot;;
+        return "[Tree"+(this.id?" "+this.id:"")+"]";
     },
     
     sort: function(sorterFn, recursive) {

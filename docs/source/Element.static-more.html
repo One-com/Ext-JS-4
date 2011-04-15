@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre>(function(){
     var doc = document,
-        isCSS1 = doc.compatMode == &quot;CSS1Compat&quot;,
+        isCSS1 = doc.compatMode == "CSS1Compat",
         ELEMENT = Ext.core.Element,
         fly = function(el){
             if (!_fly) {
@@ -16,11 +16,11 @@
 
             p = Ext.getDom(p);
             c = Ext.getDom(c);
-            if (p &amp;&amp; c) {
+            if (p && c) {
                 if (p.contains) {
                     return p.contains(c);
                 } else if (p.compareDocumentPosition) {
-                    return !!(p.compareDocumentPosition(c) &amp; 16);
+                    return !!(p.compareDocumentPosition(c) & 16);
                 } else {
                     while ((c = c.parentNode)) {
                         ret = c == p || ret;
@@ -53,7 +53,7 @@
         },
 
         getViewportWidth : function() {
-            return (!Ext.isStrict &amp;&amp; !Ext.isOpera) ? doc.body.clientWidth :
+            return (!Ext.isStrict && !Ext.isOpera) ? doc.body.clientWidth :
                    Ext.isIE ? doc.documentElement.clientWidth : self.innerWidth;
         },
 
@@ -82,7 +82,7 @@
             el = Ext.getDom(el);
 
             if(el != bd){
-                hasAbsolute = fly(el).isStyle(&quot;position&quot;, &quot;absolute&quot;);
+                hasAbsolute = fly(el).isStyle("position", "absolute");
 
                 if (el.getBoundingClientRect) {
                     b = el.getBoundingClientRect();
@@ -96,13 +96,13 @@
                         x += p.offsetLeft;
                         y += p.offsetTop;
 
-                        hasAbsolute = hasAbsolute || pe.isStyle(&quot;position&quot;, &quot;absolute&quot;);
+                        hasAbsolute = hasAbsolute || pe.isStyle("position", "absolute");
 
                         if (Ext.isGecko) {
-                            y += bt = parseInt(pe.getStyle(&quot;borderTopWidth&quot;), 10) || 0;
-                            x += bl = parseInt(pe.getStyle(&quot;borderLeftWidth&quot;), 10) || 0;
+                            y += bt = parseInt(pe.getStyle("borderTopWidth"), 10) || 0;
+                            x += bl = parseInt(pe.getStyle("borderLeftWidth"), 10) || 0;
 
-                            if (p != el &amp;&amp; !pe.isStyle(&#39;overflow&#39;,&#39;visible&#39;)) {
+                            if (p != el && !pe.isStyle('overflow','visible')) {
                                 x += bl;
                                 y += bt;
                             }
@@ -110,20 +110,20 @@
                         p = p.offsetParent;
                     }
 
-                    if (Ext.isSafari &amp;&amp; hasAbsolute) {
+                    if (Ext.isSafari && hasAbsolute) {
                         x -= bd.offsetLeft;
                         y -= bd.offsetTop;
                     }
 
-                    if (Ext.isGecko &amp;&amp; !hasAbsolute) {
+                    if (Ext.isGecko && !hasAbsolute) {
                         dbd = fly(bd);
-                        x += parseInt(dbd.getStyle(&quot;borderLeftWidth&quot;), 10) || 0;
-                        y += parseInt(dbd.getStyle(&quot;borderTopWidth&quot;), 10) || 0;
+                        x += parseInt(dbd.getStyle("borderLeftWidth"), 10) || 0;
+                        y += parseInt(dbd.getStyle("borderTopWidth"), 10) || 0;
                     }
 
                     p = el.parentNode;
-                    while (p &amp;&amp; p != bd) {
-                        if (!Ext.isOpera || (p.tagName != &#39;TR&#39; &amp;&amp; !fly(p).isStyle(&quot;display&quot;, &quot;inline&quot;))) {
+                    while (p && p != bd) {
+                        if (!Ext.isOpera || (p.tagName != 'TR' && !fly(p).isStyle("display", "inline"))) {
                             x -= p.scrollLeft;
                             y -= p.scrollTop;
                         }
@@ -136,7 +136,7 @@
         },
 
         setXY : function(el, xy) {
-            (el = Ext.fly(el, &#39;_setXY&#39;)).position();
+            (el = Ext.fly(el, '_setXY')).position();
 
             var pts = el.translatePoints(xy),
                 style = el.dom.style,
@@ -144,7 +144,7 @@
 
             for (pos in pts) {
                 if (!isNaN(pts[pos])) {
-                    style[pos] = pts[pos] + &quot;px&quot;;
+                    style[pos] = pts[pos] + "px";
                 }
             }
         },
@@ -167,7 +167,7 @@
                 hasSubmit = false,
                 encoder = encodeURIComponent,
                 name,
-                data = &#39;&#39;,
+                data = '',
                 type,
                 hasValue;
 
@@ -175,17 +175,17 @@
                 name = element.name;
                 type = element.type;
 
-                if (!element.disabled &amp;&amp; name) {
+                if (!element.disabled && name) {
                     if (/select-(one|multiple)/i.test(type)) {
                         Ext.each(element.options, function(opt){
                             if (opt.selected) {
-                                hasValue = opt.hasAttribute ? opt.hasAttribute(&#39;value&#39;) : opt.getAttributeNode(&#39;value&#39;).specified;
-                                data += String.format(&quot;{0}={1}&amp;&quot;, encoder(name), encoder(hasValue ? opt.value : opt.text));
+                                hasValue = opt.hasAttribute ? opt.hasAttribute('value') : opt.getAttributeNode('value').specified;
+                                data += String.format("{0}={1}&", encoder(name), encoder(hasValue ? opt.value : opt.text));
                             }
                         });
                     } else if (!(/file|undefined|reset|button/i.test(type))) {
-                        if (!(/radio|checkbox/i.test(type) &amp;&amp; !element.checked) &amp;&amp; !(type == &#39;submit&#39; &amp;&amp; hasSubmit)) {
-                            data += encoder(name) + &#39;=&#39; + encoder(element.value) + &#39;&amp;&#39;;
+                        if (!(/radio|checkbox/i.test(type) && !element.checked) && !(type == 'submit' && hasSubmit)) {
+                            data += encoder(name) + '=' + encoder(element.value) + '&';
                             hasSubmit = /submit/i.test(type);
                         }
                     }

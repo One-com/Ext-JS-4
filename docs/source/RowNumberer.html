@@ -3,25 +3,27 @@
  * @extends Ext.grid.Header
  * This is a utility class that can be passed into a {@link Ext.grid.Header} as a column config that provides
  * an automatic row numbering column.
- * &lt;br&gt;Usage:&lt;br&gt;
- <br><span style="display: none">**/</span> // This is a typical column config with the first column providing row numbers
+ * <br>Usage:<br>
+ <pre><code>
+ // This is a typical column config with the first column providing row numbers
  var colModel = new Ext.grid.ColumnModel([
     new Ext.grid.RowNumberer(),
-    {header: &quot;Name&quot;, width: 80, sortable: true},
-    {header: &quot;Code&quot;, width: 50, sortable: true},
-    {header: &quot;Description&quot;, width: 200, sortable: true}
+    {header: "Name", width: 80, sortable: true},
+    {header: "Code", width: 50, sortable: true},
+    {header: "Description", width: 200, sortable: true}
  ]);
- <br><span style="display: none">/**</span> * @constructor
+ </code></pre>
+ * @constructor
  * @param {Object} config The configuration options
  */
-Ext.define(&#39;Ext.grid.RowNumberer&#39;, {
-    extend: &#39;Ext.grid.column.Column&#39;,
-    alias: &#39;widget.rownumberer&#39;,
+Ext.define('Ext.grid.RowNumberer', {
+    extend: 'Ext.grid.column.Column',
+    alias: 'widget.rownumberer',
     <a name="cfg-Ext.grid.RowNumberer-text"></a>/**
      * @cfg {String} text Any valid text or HTML fragment to display in the header cell for the row
-     * number column (defaults to &#39;&amp;#160&#39;).
+     * number column (defaults to '&#160').
      */
-    text: &quot;&amp;#160&quot;,
+    text: "&#160",
     
     <a name="cfg-Ext.grid.RowNumberer-width"></a>/**
      * @cfg {Number} width The default width in pixels of the row number column (defaults to 23).
@@ -34,7 +36,7 @@ Ext.define(&#39;Ext.grid.RowNumberer&#39;, {
      */
     sortable: false,
     
-    align: &#39;right&#39;,
+    align: 'right',
     
     constructor : function(config){
         this.callParent(arguments);
@@ -47,17 +49,17 @@ Ext.define(&#39;Ext.grid.RowNumberer&#39;, {
     fixed: true,
     hideable: false,
     menuDisabled: true,
-    dataIndex: &#39;&#39;,
-    cls: Ext.baseCSSPrefix + &#39;row-numberer&#39;,
+    dataIndex: '',
+    cls: Ext.baseCSSPrefix + 'row-numberer',
     rowspan: undefined,
 
     // private
     renderer: function(value, metaData, record, rowIdx, colIdx, store) {
         if (this.rowspan){
-            metaData.cellAttr = &#39;rowspan=&quot;&#39;+this.rowspan+&#39;&quot;&#39;;
+            metaData.cellAttr = 'rowspan="'+this.rowspan+'"';
         }
         
-        metaData.tdCls = Ext.baseCSSPrefix + &#39;grid-cell-special&#39;;
+        metaData.tdCls = Ext.baseCSSPrefix + 'grid-cell-special';
         return store.indexOfTotal(record) + 1;
     }
 });

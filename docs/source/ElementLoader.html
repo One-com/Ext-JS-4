@@ -1,89 +1,37 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.ElementLoader"></a>/**
  * @class Ext.ElementLoader
  * A class used to load remote content to an Element. Sample usage:
- * <br><span style="display: none">**/</span>Ext.get(&#39;el&#39;).load({
-    url: &#39;myPage.php&#39;,
+ * <pre><code>
+Ext.get('el').load({
+    url: 'myPage.php',
     scripts: true,
     params: {
         id: 1
     }
 });
- * <br><span style="display: none">/**</span> * &lt;p&gt;
+ * </code></pre>
+ * <p>
  * In general this class will not be instanced directly, rather the {@link Ext.core.Element#load} method
  * will be used.
- * &lt;/p&gt;
+ * </p>
  */
-Ext.define(&#39;Ext.ElementLoader&#39;, {
+Ext.define('Ext.ElementLoader', {
 
     /* Begin Definitions */
 
     mixins: {
-        observable: &#39;Ext.util.Observable&#39;
+        observable: 'Ext.util.Observable'
     },
 
     uses: [
-        &#39;Ext.data.Connection&#39;,
-        &#39;Ext.Ajax&#39;
+        'Ext.data.Connection',
+        'Ext.Ajax'
     ],
     
     statics: {
         Renderer: {
             Html: function(loader, response, active){
-                var target = loader.getTarget(),
-                    html = response.responseText,
-                    id,
-                    interval;
-                    
-                if (active.scripts) {
-                    id = Ext.id();
-                    html += &#39;&lt;span id=&quot;&#39; + id + &#39;&quot;&gt;&lt;/span&gt;&#39;;
-                    // Set this in a timer because it may take a little time to update the dom
-                    interval = setInterval(function(){
-                        var doc = document,
-                            el = document.getElementById(id),
-                            head = doc.getElementsByTagName(&quot;head&quot;)[0],
-                            win = window,
-                            re = /(?:&lt;script([^&gt;]*)?&gt;)((\n|\r|.)*?)(?:&lt;\/script&gt;)/ig,
-                            srcRe = /\ssrc=([\&#39;\&quot;])(.*?)\1/i,
-                            typeRe = /\stype=([\&#39;\&quot;])(.*?)\1/i,
-                            match,
-                            attrs,
-                            srcMatch,
-                            typeMatch,
-                            script;
-                            if (!el) {
-                                return;
-                            }
-                            clearInterval(interval);
-                            
-                            while ((match = re.exec(html))) {
-                                attrs = match[1];
-                                srcMatch = attrs ? attrs.match(srcRe) : false;
-                                if (srcMatch &amp;&amp; srcMatch[2]) {
-                                    script = doc.createElement(&#39;script&#39;);
-                                    script.src = srcMatch[2];
-                                    typeMatch = attrs.match(typeRe);
-                                    if (typeMatch &amp;&amp; typeMatch[2]) {
-                                        script.type = typeMatch[2];
-                                    }
-                                    head.appendChild(script);
-                                } else if (match[2] &amp;&amp; match[2].length &gt; 0) {
-                                    if (win.execScript) {
-                                        win.execScript(match[2]);
-                                    } else {
-                                        win.eval(match[2]);
-                                    }
-                                }
-                            }
-                            el = doc.getElementById(id);
-                            if (el) {
-                                Ext.removeNode(el);
-                            }
-                    }, 50);
-                    target.update(html.replace(/(?:&lt;script.*?&gt;)((\n|\r|.)*?)(?:&lt;\/script&gt;)/ig, &#39;&#39;));
-                } else {
-                    target.update(html);
-                }
+                loader.getTarget().update(response.responseText, active.scripts === true);
                 return true;
             }
         }     
@@ -92,24 +40,24 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
     /* End Definitions */
 
     <a name="cfg-Ext.ElementLoader-url"></a>/**
-     * @cfg {String} url The url to retrieve the content from. Defaults to &lt;tt&gt;null&lt;/tt&gt;.
+     * @cfg {String} url The url to retrieve the content from. Defaults to <tt>null</tt>.
      */
     url: null,
 
     <a name="cfg-Ext.ElementLoader-params"></a>/**
      * @cfg {Object} params Any params to be attached to the Ajax request. These parameters will
-     * be overridden by any params in the load options. Defaults to &lt;tt&gt;null&lt;/tt&gt;.
+     * be overridden by any params in the load options. Defaults to <tt>null</tt>.
      */
     params: null,
 
     <a name="cfg-Ext.ElementLoader-baseParams"></a>/**
      * @cfg {Object} baseParams Params that will be attached to every request. These parameters
-     * will not be overridden by any params in the load options. Defaults to &lt;tt&gt;null&lt;/tt&gt;.
+     * will not be overridden by any params in the load options. Defaults to <tt>null</tt>.
      */
     baseParams: null,
 
     <a name="cfg-Ext.ElementLoader-autoLoad"></a>/**
-     * @cfg {Boolean/Object} autoLoad True to have the loader make a request as soon as it is created. Defaults to &lt;tt&gt;false&lt;/tt&gt;.
+     * @cfg {Boolean/Object} autoLoad True to have the loader make a request as soon as it is created. Defaults to <tt>false</tt>.
      * This argument can also be a set of options that will be passed to {@link #load} is called.
      */
     autoLoad: false,
@@ -125,7 +73,7 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
     loadMask: false,
 
     <a name="cfg-Ext.ElementLoader-ajaxOptions"></a>/**
-     * @cfg {Object} ajaxOptions Any additional options to be passed to the request, for example timeout or headers. Defaults to &lt;tt&gt;null&lt;/tt&gt;.
+     * @cfg {Object} ajaxOptions Any additional options to be passed to the request, for example timeout or headers. Defaults to <tt>null</tt>.
      */
     ajaxOptions: null,
     
@@ -149,11 +97,11 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
     <a name="cfg-Ext.ElementLoader-renderer"></a>/**
      * @cfg {Function} renderer A custom function to render the content to the element. The passed parameters
      * are
-     * &lt;ul&gt;
-     * &lt;li&gt;The loader&lt;/li&gt;
-     * &lt;li&gt;The response&lt;/li&gt;
-     * &lt;li&gt;The active request&lt;/li&gt;
-     * &lt;/ul&gt;
+     * <ul>
+     * <li>The loader</li>
+     * <li>The response</li>
+     * <li>The active request</li>
+     * </ul>
      */
 
     isLoader: true,
@@ -174,7 +122,7 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
              * @param {Ext.ElementLoader} this
              * @param {Object} options The options passed to the request
              */
-            &#39;beforeload&#39;,
+            'beforeload',
 
             <a name="event-Ext.ElementLoader-exception"></a>/**
              * @event exception
@@ -183,7 +131,7 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
              * @param {Object} response The response from the server
              * @param {Object} options The options passed to the request
              */
-            &#39;exception&#39;,
+            'exception',
 
             <a name="event-Ext.ElementLoader-exception"></a>/**
              * @event exception
@@ -192,10 +140,10 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
              * @param {Object} response The response from the server
              * @param {Object} options The options passed to the request
              */
-            &#39;load&#39;
+            'load'
         );
 
-        // don&#39;t pass config because we have already applied it.
+        // don't pass config because we have already applied it.
         me.mixins.observable.constructor.call(me);
 
         if (me.autoLoad) {
@@ -215,7 +163,7 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
     setTarget: function(target){
         var me = this;
         target = Ext.get(target);
-        if (me.target &amp;&amp; me.target != target) {
+        if (me.target && me.target != target) {
             me.abort();
         }
         me.target = target;
@@ -267,9 +215,11 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
      * class defaults.
      */
     load: function(options) {
+        //<debug>
         if (!this.target) {
-            throw &#39;A target is required when loading&#39;;
+            Ext.Error.raise('A valid target is required when loading content');
         }
+        //</debug>
 
         options = Ext.apply({}, options);
 
@@ -292,9 +242,11 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
             url: me.url
         });
 
+        //<debug>
         if (!options.url) {
-            throw &#39;No URL specified&#39;;
+            Ext.Error.raise('You must specify the URL from which content should be loaded');
         }
+        //</debug>
 
         Ext.apply(options, {
             scope: me,
@@ -302,7 +254,7 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
             callback: me.onComplete
         });
 
-        if (me.fireEvent(&#39;beforeload&#39;, me, options) === false) {
+        if (me.fireEvent('beforeload', me, options) === false) {
             return;
         }
 
@@ -353,10 +305,10 @@ Ext.define(&#39;Ext.ElementLoader&#39;, {
 
         if (success) {
             Ext.callback(active.success, scope, [me, response, options]);
-            me.fireEvent(&#39;load&#39;, me, response, options);
+            me.fireEvent('load', me, response, options);
         } else {
             Ext.callback(active.failure, scope, [me, response, options]);
-            me.fireEvent(&#39;exception&#39;, me, response, options);
+            me.fireEvent('exception', me, response, options);
         }
         Ext.callback(active.callback, scope, [me, success, response, options]);
 

@@ -153,7 +153,7 @@
 
     @include x-frame(
         $cls: 'form-invalid-tip',
-        $ui: 'framed',
+        $ui: 'default',
         $border-radius: $tip-error-border-radius,
         $border-width: $tip-error-border-width,
         $background-color: $tip-error-background-color,
@@ -163,7 +163,7 @@
     
     @include x-frame(
         $cls: 'form-invalid-tip-header',
-        $ui: 'framed',
+        $ui: 'default',
         $border-radius: $tip-error-border-radius,
         $border-width: $tip-error-border-width,
         $background-color: $tip-error-background-color,

@@ -61,7 +61,7 @@ Ext.define('Ext.dd.DragZone', {
     extend: 'Ext.dd.DragSource',
 
     constructor : function(el, config){
-        Ext.dd.DragZone.superclass.constructor.call(this, el, config);
+        this.callParent([el, config]);
         if (this.containerScroll) {
             Ext.dd.ScrollManager.register(this.el);
         }
@@ -74,7 +74,7 @@ Ext.define('Ext.dd.DragZone', {
      * @type Object
      * @property dragData
      */
-     
+
     /**
      * @cfg {Boolean} containerScroll True to register this container with the Scrollmanager
      * for auto scrolling during drag operations.
@@ -106,7 +106,7 @@ Ext.define('Ext.dd.DragZone', {
     },
 
     /**
-     * Called after a repair of an invalid drop. By default, highlights this.dragData.ddel 
+     * Called after a repair of an invalid drop. By default, highlights this.dragData.ddel
      */
     afterRepair : function(){
         var me = this;
@@ -123,11 +123,11 @@ Ext.define('Ext.dd.DragZone', {
      * @return {Array} The xy location (e.g. [100, 200])
      */
     getRepairXY : function(e){
-        return Ext.core.Element.fly(this.dragData.ddel).getXY();  
+        return Ext.core.Element.fly(this.dragData.ddel).getXY();
     },
 
     destroy : function(){
-        Ext.dd.DragZone.superclass.destroy.call(this);
+        this.callParent();
         if (this.containerScroll) {
             Ext.dd.ScrollManager.unregister(this.el);
         }

@@ -16,9 +16,9 @@ Ext.onReady(function() {
       Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-      Ext.grid.GridPanel.prototype.ddText = "{0} selected row(s)";
-      Ext.grid.GridPanel.prototype.ddText = "{0} baris terpilih";
+    if(Ext.grid.Panel){
+      Ext.grid.Panel.prototype.ddText = "{0} selected row(s)";
+      Ext.grid.Panel.prototype.ddText = "{0} baris terpilih";
     }
 
     if(Ext.TabPanelItem){
@@ -26,9 +26,9 @@ Ext.onReady(function() {
       Ext.TabPanelItem.prototype.closeText = "Tutup tab ini";
     }
 
-    if(Ext.form.BaseField){
-      Ext.form.BaseField.prototype.invalidText = "The value in this field is invalid";
-      Ext.form.BaseField.prototype.invalidText = "Isian belum benar";
+    if(Ext.form.field.Base){
+      Ext.form.field.Base.prototype.invalidText = "The value in this field is invalid";
+      Ext.form.field.Base.prototype.invalidText = "Isian belum benar";
     }
 
     if(Ext.LoadMask){
@@ -132,7 +132,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
       Ext.apply(Ext.PagingToolbar.prototype, {
         beforePageText : "Hal",
         afterPageText  : "dari {0}",
@@ -146,8 +146,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Text){
-      Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+      Ext.apply(Ext.form.field.Text.prototype, {
         minLengthText : "Panjang minimal untuk field ini adalah {0}",  
         maxLengthText : "Panjang maksimal untuk field ini adalah {0}", 
         blankText     : "Field ini wajib diisi", 
@@ -156,16 +156,16 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Number){
-      Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+      Ext.apply(Ext.form.field.Number.prototype, {
         minText : "Nilai minimal untuk field ini adalah {0}",  
         maxText : "Nilai maksimal untuk field ini adalah {0}",  
         nanText : "{0} bukan angka" 
       });
     }
 
-    if(Ext.form.Date){
-      Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+      Ext.apply(Ext.form.field.Date.prototype, {
         disabledDaysText  : "Disfungsi",  
         disabledDatesText : "Disfungsi",  
         minText           : "Tanggal dalam field ini harus setelah {0}", 
@@ -177,15 +177,15 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.ComboBox){
-      Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+      Ext.apply(Ext.form.field.ComboBox.prototype, {
         loadingText       : "Pemuatan...",  
         valueNotFoundText : undefined
       });
     }
 
-    if(Ext.form.VTypes){
-      Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+      Ext.apply(Ext.form.field.VTypes, {
         emailText    : 'Field ini harus dalam format email seperti "user@example.com"', 
         urlText      : 'Field ini harus dalam format URL seperti "http:/'+'/www.example.com"', 
         alphaText    : 'Field ini harus terdiri dari huruf dan _', 
@@ -193,8 +193,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.HtmlEditor){
-      Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : 'Silakan masukkan URL untuk tautan:', 
         buttonTips : {
           bold : {
@@ -271,8 +271,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.grid.HeaderContainer){
-      Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+      Ext.apply(Ext.grid.header.Container.prototype, {
         sortAscText  : "Urut Naik", 
         sortDescText : "Urut Turun", 
         lockText     : "Kancing Kolom", 

@@ -1,15 +1,15 @@
 /**
  * @class Ext.ux.LiveSearchGridPanel
- * @extends Ext.grid.GridPanel
+ * @extends Ext.grid.Panel
  * <p>A GridPanel class with live search support.</p>
  * @author Nicolas Ferrero
  */
 Ext.define('Ext.ux.LiveSearchGridPanel', {
-    extend: 'Ext.grid.GridPanel',
+    extend: 'Ext.grid.Panel',
     requires: [
         'Ext.toolbar.TextItem',
-        'Ext.form.Checkbox', 
-        'Ext.form.TextField',
+        'Ext.form.field.Checkbox',
+        'Ext.form.field.Text',
         'Ext.ux.statusbar.StatusBar'
     ],
     
@@ -87,11 +87,13 @@ Ext.define('Ext.ux.LiveSearchGridPanel', {
             }, '-', {
                 xtype: 'checkbox',
                 hideLabel: true,
+                margin: '0 0 0 4px',
                 handler: me.regExpToggle,
                 scope: me                
             }, 'Regular expression', {
                 xtype: 'checkbox',
                 hideLabel: true,
+                margin: '0 0 0 4px',
                 handler: me.caseSensitiveToggle,
                 scope: me
             }, 'Case sensitive'];

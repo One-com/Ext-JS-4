@@ -192,9 +192,6 @@ keyframes : {
             duration = me.duration,
             prevMs, ms, i, ln, pct, anim, nextAnim, attr;
 
-        if (keyframes.isPseudoEasing) {
-            me.isPseudoEasing = true;
-        }
         for (pct in keyframes) {
             if (keyframes.hasOwnProperty(pct) && me.animKeyFramesRE.test(pct)) {
                 attr = {attrs: Ext.apply(keyframes[pct], to)};
@@ -239,7 +236,6 @@ keyframes : {
             anims = [],
             timeline = me.timeline,
             reverse = me.reverse,
-            isPseudoEasing = me.isPseudoEasing,
             ln = timeline.length,
             anim, easing, damper, initial, attrs, lastAttrs, i;
 
@@ -251,7 +247,7 @@ keyframes : {
                 damper = attrs.damper || me.damper;
                 delete attrs.easing;
                 delete attrs.damper;
-                anim = new Ext.fx.Anim({
+                anim = Ext.create('Ext.fx.Anim', {
                     target: target,
                     easing: easing,
                     damper: damper,

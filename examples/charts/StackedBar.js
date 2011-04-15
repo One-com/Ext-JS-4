@@ -2,7 +2,7 @@ Ext.require('Ext.chart.*');
 Ext.require('Ext.layout.container.Fit');
 
 Ext.onReady(function () {
-    var store = new Ext.data.JsonStore({
+    var store = Ext.create('Ext.data.JsonStore', {
         fields: ['year', 'comedy', 'action', 'drama', 'thriller'],
         data: [
                 {year: 2005, comedy: 34000000, action: 23890000, drama: 18450000, thriller: 20060000},
@@ -11,7 +11,7 @@ Ext.onReady(function () {
                 {year: 2008, comedy: 38910000, action: 56070000, drama: 24810000, thriller: 26940000}
               ]
     });
-    
+
     var panel1 = Ext.create('widget.panel', {
         width: 800,
         height: 400,
@@ -36,7 +36,8 @@ Ext.onReady(function () {
                     renderer: function(v) {
                         return String(v).replace(/000000$/, 'M');
                     }
-                }
+                },
+                roundToDecimal: false
             }, {
                 type: 'Category',
                 position: 'left',

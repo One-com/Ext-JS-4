@@ -5,7 +5,7 @@ Ext.require([
     'Ext.state.*'
 ]);
 
-Ext.onReady(function() {    
+Ext.onReady(function() {
     Ext.QuickTips.init();
 
     // sample static data for the store
@@ -68,7 +68,7 @@ Ext.onReady(function() {
     }
 
     // create the data store
-    var store = new Ext.data.ArrayStore({
+    var store = Ext.create('Ext.data.ArrayStore', {
         fields: [
            {name: 'company'},
            {name: 'price',      type: 'float'},
@@ -80,42 +80,42 @@ Ext.onReady(function() {
     });
 
     // create the Grid
-    var grid = new Ext.grid.GridPanel({
+    var grid = Ext.create('Ext.grid.Panel', {
         store: store,
         columnLines: true,
         columns: [
             {
                 text     : 'Company',
                 flex     : 1,
-                sortable : false, 
+                sortable : false,
                 dataIndex: 'company'
             },
             {
-                text     : 'Price', 
-                width    : 75, 
-                sortable : true, 
-                renderer : 'usMoney', 
+                text     : 'Price',
+                width    : 75,
+                sortable : true,
+                renderer : 'usMoney',
                 dataIndex: 'price'
             },
             {
-                text     : 'Change', 
-                width    : 75, 
-                sortable : true, 
-                renderer : change, 
+                text     : 'Change',
+                width    : 75,
+                sortable : true,
+                renderer : change,
                 dataIndex: 'change'
             },
             {
-                text     : '% Change', 
-                width    : 75, 
-                sortable : true, 
-                renderer : pctChange, 
+                text     : '% Change',
+                width    : 75,
+                sortable : true,
+                renderer : pctChange,
                 dataIndex: 'pctChange'
             },
             {
-                text     : 'Last Updated', 
-                width    : 85, 
-                sortable : true, 
-                renderer : Ext.util.Format.dateRenderer('m/d/Y'), 
+                text     : 'Last Updated',
+                width    : 85,
+                sortable : true,
+                renderer : Ext.util.Format.dateRenderer('m/d/Y'),
                 dataIndex: 'lastChange'
             },
             {

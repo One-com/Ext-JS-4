@@ -3,7 +3,7 @@
  * @extends Ext.panel.Panel
  *
  * Shows a list of available feeds. Also has the ability to add/remove and load feeds.
- * 
+ *
  * @constructor
  * Create a new Feed Panel
  * @param {Object} config The config object
@@ -11,9 +11,9 @@
 
 Ext.define('FeedViewer.FeedPanel', {
     extend: 'Ext.panel.Panel',
-    
+
     alias: 'widget.feedpanel',
-    
+
     initComponent: function(){
         Ext.apply(this, {
             layout: 'fit',
@@ -31,7 +31,7 @@ Ext.define('FeedViewer.FeedPanel', {
              * @param {String} url The url of the feed
              */
             'feedremove',
-            
+
             /**
              * @event feedselect Fired when a feed is selected
              * @param {FeedPanel} this
@@ -40,17 +40,17 @@ Ext.define('FeedViewer.FeedPanel', {
              */
             'feedselect'
         );
-        
+
         this.callParent(arguments);
     },
-    
+
     // template method
     afterRender: function(){
         this.callParent(arguments);
         var view = this.view;
         view.getSelectionModel().select(view.store.first());
     },
-    
+
     /**
      * Create the DataView to be used for the feed list.
      * @private
@@ -58,7 +58,7 @@ Ext.define('FeedViewer.FeedPanel', {
      */
     createView: function(){
         var view = this.view = Ext.create('widget.dataview', {
-            store: new Ext.data.Store({
+            store: Ext.create('Ext.data.Store', {
                 model: 'Feed',
                 data: this.feeds
             }),
@@ -66,7 +66,7 @@ Ext.define('FeedViewer.FeedPanel', {
                 mode: 'SINGLE',
                 listeners: {
                     scope: this,
-                    selectionchange: this.onSelectionChange 
+                    selectionchange: this.onSelectionChange
                 }
             },
             listeners: {
@@ -79,13 +79,13 @@ Ext.define('FeedViewer.FeedPanel', {
             overItemCls: 'feed-list-item-hover',
             tpl: '<tpl for="."><div class="feed-list-item">{title}</div></tpl>'
         });
-        
+
         view.on('render', function() {
-            
+
         }, this);
         return this.view;
     },
-    
+
     /**
      * Creates the toolbar to be used for controlling feeds.
      * @private
@@ -98,7 +98,7 @@ Ext.define('FeedViewer.FeedPanel', {
         });
         return this.toolbar;
     },
-    
+
     /**
      * Create actions to share between toolbar and menu
      * @private
@@ -109,17 +109,17 @@ Ext.define('FeedViewer.FeedPanel', {
             handler: this.onAddFeedClick,
             text: 'Add feed',
             iconCls: 'feed-add'
-        });  
-        
+        });
+
         this.removeAction = Ext.create('Ext.Action', {
             itemId: 'remove',
             scope: this,
             handler: this.onRemoveFeedClick,
             text: 'Remove feed',
             iconCls: 'feed-remove'
-        });   
+        });
     },
-    
+
     /**
      * Create the context menu
      * @private
@@ -139,7 +139,7 @@ Ext.define('FeedViewer.FeedPanel', {
             }
         });
     },
-    
+
     /**
      * Used when view selection changes so we can disable toolbar buttons.
      * @private
@@ -149,15 +149,15 @@ Ext.define('FeedViewer.FeedPanel', {
         this.toolbar.getComponent('remove').setDisabled(!selected);
         this.loadFeed(selected);
     },
-    
+
     /**
      * React to the load feed menu click.
      * @private
      */
     onLoadClick: function(){
-        this.loadFeed(this.menu.activeFeed);   
+        this.loadFeed(this.menu.activeFeed);
     },
-    
+
     /**
      * Loads a feed.
      * @private
@@ -168,28 +168,28 @@ Ext.define('FeedViewer.FeedPanel', {
             this.fireEvent('feedselect', this, rec.get('title'), rec.get('url'));
         }
     },
-    
+
     /**
      * Gets the currently selected record in the view.
      * @private
      * @return {Ext.data.Model} Returns the selected model. false if nothing is selected.
      */
     getSelectedItem: function(){
-        return this.view.getSelectionModel().getSelection()[0] || false;    
+        return this.view.getSelectionModel().getSelection()[0] || false;
     },
-    
+
     /**
      * Listens for the context menu event on the view
      * @private
      */
     onContextMenu: function(view, index, el, event){
         var menu = this.menu;
-        
+
         event.stopEvent();
         menu.activeFeed = view.store.getAt(index);
         menu.showAt(event.getXY());
     },
-    
+
     /**
      * React to a feed being removed
      * @private
@@ -197,7 +197,7 @@ Ext.define('FeedViewer.FeedPanel', {
     onRemoveFeedClick: function(){
         var active = this.menu.activeFeed || this.getSelectedItem();
 
-            
+
         this.animateNode(this.view.getNode(active), 1, 0, {
             scope: this,
             afteranimate: function(){
@@ -205,9 +205,9 @@ Ext.define('FeedViewer.FeedPanel', {
             }
         });
         this.fireEvent('feedremove', this, active.get('title'), active.get('url'));
-        
+
     },
-    
+
     /**
      * React to a feed attempting to be added
      * @private
@@ -221,7 +221,7 @@ Ext.define('FeedViewer.FeedPanel', {
         });
         win.show();
     },
-    
+
     /**
      * React to a validation on a feed passing
      * @private
@@ -233,14 +233,14 @@ Ext.define('FeedViewer.FeedPanel', {
         var view = this.view,
             store = view.store,
             rec;
-            
+
         rec = store.add({
             url: url,
             title: title
         })[0];
         this.animateNode(view.getNode(rec), 0, 1);
     },
-    
+
     /**
      * Animate a node in the view when it is added/removed
      * @private
@@ -250,7 +250,7 @@ Ext.define('FeedViewer.FeedPanel', {
      * @param {Object} listeners (optional) Any listeners
      */
     animateNode: function(el, start, end, listeners){
-        new Ext.fx.Anim({
+        Ext.create('Ext.fx.Anim', {
             target: Ext.get(el),
             duration: 500,
             from: {
@@ -262,7 +262,7 @@ Ext.define('FeedViewer.FeedPanel', {
             listeners: listeners
          });
     },
-    
+
     // Inherit docs
     onDestroy: function(){
         Ext.destroy(

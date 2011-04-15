@@ -1,25 +1,24 @@
 /**
- * @class Ext.ux.PortalDropZone
+ * @class Ext.app.PortalDropZone
  * @extends Ext.dd.DropTarget
- * Internal class that manages drag/drop for {@link Ext.ux.PortalPanel}.
+ * Internal class that manages drag/drop for {@link Ext.app.PortalPanel}.
  */
-Ext.define('Ext.ux.PortalDropZone', {
+Ext.define('Ext.app.PortalDropZone', {
     extend: 'Ext.dd.DropTarget',
 
     constructor : function(portal, cfg){
         this.portal = portal;
         Ext.dd.ScrollManager.register(portal.body);
-        Ext.ux.PortalDropZone.superclass.constructor.call(this, portal.body, cfg);
-//        portal.body.ddScrollConfig = this.ddScrollConfig;
+        Ext.app.PortalDropZone.superclass.constructor.call(this, portal.body, cfg);
+        portal.body.ddScrollConfig = this.ddScrollConfig;
     },
 
-// TODO: Re-enable this after Ext.lib.Anim is working
-//    ddScrollConfig : {
-//        vthresh: 50,
-//        hthresh: -1,
-//        animate: true,
-//        increment: 200
-//    },
+    ddScrollConfig : {
+        vthresh: 50,
+        hthresh: -1,
+        animate: true,
+        increment: 200
+    },
 
     createEvent : function(dd, e, data, col, c, pos){
         return {
@@ -34,14 +33,14 @@ Ext.define('Ext.ux.PortalDropZone', {
             status: this.dropAllowed
         };
     },
-    
+
     notifyOver : function(dd, e, data){
         var xy = e.getXY(), 
             portal = this.portal, 
             proxy = dd.proxy;
 
         // case column widths
-        if(!this.grid){
+        if(!this.grid) {
             this.grid = this.getGrid();
         }
 
@@ -78,43 +77,47 @@ Ext.define('Ext.ux.PortalDropZone', {
         }
 
         // find insert position
-        var p, pos = 0, h = 0,
+        var overPortlet, pos = 0, h = 0,
             match = false,
-            col = portal.items.getAt(colIndex),
-            portlets = col.items.items,
+            overColumn = portal.items.getAt(colIndex),
+            portlets = overColumn.items.items,
             overSelf = false;
         
         len = portlets.length;
 
         for(len; pos < len; pos++){
-            p = portlets[pos];
-            h = p.el.getHeight();
+            overPortlet = portlets[pos];
+            h = overPortlet.el.getHeight();
             if(h === 0){
                 overSelf = true;
             }
-            else if((p.el.getY()+(h/2)) > xy[1]){
+            else if((overPortlet.el.getY()+(h/2)) > xy[1]){
                 match = true;
                 break;
             }
         }
 
-        pos = (match && p ? pos : col.items.getCount()) + (overSelf ? -1 : 0);
-        var overEvent = this.createEvent(dd, e, data, colIndex, col, pos);
-        
+        pos = (match && overPortlet ? pos : overColumn.items.getCount()) + (overSelf ? -1 : 0);
+        var overEvent = this.createEvent(dd, e, data, colIndex, overColumn, pos);
+
         if(portal.fireEvent('validatedrop', overEvent) !== false &&
-           portal.fireEvent('beforedragover', overEvent) !== false){
-            
+           portal.fireEvent('beforedragover', overEvent) !== false) {
+
             // make sure proxy width is fluid in different width columns
             proxy.getProxy().setWidth('auto');
 
-            if(p){
-                proxy.moveProxy(p.el.dom.parentNode, match ? p.el.dom : null);
+            if(overPortlet){
+                proxy.moveProxy(overPortlet.el.dom.parentNode, match ? overPortlet.el.dom : null);
             }
             else{
-                proxy.moveProxy(col.el.dom, null);
+                proxy.moveProxy(overColumn.el.dom, null);
             }
 
-            this.lastPos = {c: col, col: colIndex, p: overSelf || (match && p) ? pos : false};
+            this.lastPos = {
+                c: overColumn,
+                col: colIndex,
+                p: overSelf || (match && overPortlet) ? pos : false
+            };
             this.scrollPos = portal.body.getScroll();
 
             portal.fireEvent('dragover', overEvent);
@@ -184,6 +187,6 @@ Ext.define('Ext.ux.PortalDropZone', {
     // unregister the dropzone from ScrollManager
     unreg: function() {
         Ext.dd.ScrollManager.unregister(this.portal.body);
-        Ext.ux.PortalDropZone.superclass.unreg.call(this);
+        Ext.app.PortalDropZone.superclass.unreg.call(this);
     }
 });

@@ -38,9 +38,9 @@ Ext.require(['*']);
        // it is generally best to disable state management as dynamically-generated ids
        // can change across page loads, leading to unpredictable results.  The developer
        // should ensure that stable state ids are set for stateful components in real apps.
-       Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+       Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
 
-       var viewport = new Ext.Viewport({
+       var viewport = Ext.create('Ext.Viewport', {
             layout:'border',
             items:[{
                 region:'west',
@@ -75,8 +75,14 @@ Ext.require(['*']);
                 margins:'35 5 5 0',
                 layout:'column',
                 autoScroll:true,
-                items:[{
-                    columnWidth:.33,
+                defaults: {
+                    layout: 'anchor',
+                    defaults: {
+                        anchor: '100%'
+                    }
+                },
+                items: [{
+                    columnWidth: 1/3,
                     baseCls:'x-plain',
                     bodyStyle:'padding:5px 0 5px 5px',
                     items:[{
@@ -84,7 +90,7 @@ Ext.require(['*']);
                         html: Ext.example.shortBogusMarkup
                     }]
                 },{
-                    columnWidth:.33, 
+                    columnWidth: 1/3,
                     baseCls:'x-plain',
                     bodyStyle:'padding:5px 0 5px 5px',
                     items:[{
@@ -92,7 +98,7 @@ Ext.require(['*']);
                         html: Ext.example.shortBogusMarkup
                     }]
                 },{
-                    columnWidth:.33,
+                    columnWidth: 1/3,
                     baseCls:'x-plain',
                     bodyStyle:'padding:5px',
                     items:[{

@@ -122,7 +122,7 @@ var panel = new Ext.panel.Panel({
             items = me.dockedItems;
             
         me.callParent();
-        me.dockedItems = new Ext.util.MixedCollection(false, me.getComponentId);
+        me.dockedItems = Ext.create('Ext.util.MixedCollection', false, me.getComponentId);
         if (items) {
             me.addDocked(items);
         }
@@ -149,7 +149,7 @@ var panel = new Ext.panel.Panel({
      */
     getComponent: function(comp) {
         var component = this.callParent(arguments);
-        if (component == undefined && !Ext.isNumber(comp)) {
+        if (component === undefined && !Ext.isNumber(comp)) {
             // If the arg is a numeric index skip docked items
             component = this.getDockedComponent(comp);
         }
@@ -165,29 +165,30 @@ var panel = new Ext.panel.Panel({
     initBodyStyles: function() {
         var me = this,
             bodyStyle = me.bodyStyle,
-            styles = [];
-            Element = Ext.core.Element;
+            styles = [],
+            Element = Ext.core.Element,
+            prop;
 
         if (Ext.isFunction(bodyStyle)) {
             bodyStyle = bodyStyle();
         }
         if (Ext.isString(bodyStyle)) {
             styles = bodyStyle.split(';');
-        }
-        else {
-            var prop;
+        } else {
             for (prop in bodyStyle) {
-                styles.push(prop + ':' + bodyStyle[prop]);
+                if (bodyStyle.hasOwnProperty(prop)) {
+                    styles.push(prop + ':' + bodyStyle[prop]);
+                }
             }
         }
 
-        if (me.bodyPadding != undefined) {
+        if (me.bodyPadding !== undefined) {
             styles.push('padding: ' + Element.unitizeBox((me.bodyPadding === true) ? 5 : me.bodyPadding));
         }
-        if (me.bodyMargin != undefined) {
+        if (me.bodyMargin !== undefined) {
             styles.push('margin: ' + Element.unitizeBox((me.bodyMargin === true) ? 5 : me.bodyMargin));
         }
-        if (me.bodyBorder != undefined) {
+        if (me.bodyBorder !== undefined) {
             styles.push('border-width: ' + Element.unitizeBox((me.bodyBorder === true) ? 1 : me.bodyBorder));
         }
         delete me.bodyStyle;
@@ -228,7 +229,7 @@ var panel = new Ext.panel.Panel({
 
     /**
      * Adds docked item(s) to the panel.
-     * @param {Object/Array} component. The Component or array of components to add. The components
+     * @param {Object/Array} component The Component or array of components to add. The components
      * must include a 'dock' parameter on each component to indicate where it should be docked ('top', 'right',
      * 'bottom', 'left').
      * @param {Number} pos (optional) The index at which the Component will be added
@@ -330,8 +331,7 @@ var panel = new Ext.panel.Panel({
             // Start with a weight of 1, so users can provide <= 0 to come before top items
             // Odd numbers, so users can provide a weight to come in between if desired
             defaultWeight = { top: 1, left: 3, right: 5, bottom: 7 },
-            dockedItems,
-            i, len;
+            dockedItems;
 
         if (me.dockedItems && me.dockedItems.items.length) {
 

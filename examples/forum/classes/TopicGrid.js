@@ -1,6 +1,6 @@
 Ext.define('ForumBrowser.TopicGrid', {
 
-    extend: 'Ext.grid.GridPanel',
+    extend: 'Ext.grid.Panel',
     
     alias: 'widget.topicgrid',
     
@@ -14,7 +14,7 @@ Ext.define('ForumBrowser.TopicGrid', {
             }],
             proxy: {
                 simpleSortMode: true,
-                type: 'scripttag',
+                type: 'jsonp',
                 url: 'http://sencha.com/forum/topics-browse-remote.php',
                 reader: {
                     type: 'json',

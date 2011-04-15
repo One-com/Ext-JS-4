@@ -1,6 +1,49 @@
 /**
  * @class Ext.draw.Component
  * @extends Ext.Component
+ *
+ * The Draw Component is a surface in which sprites can be rendered. The Draw Component
+ * manages and holds a `Surface` instance: an interface that has
+ * an SVG or VML implementation depending on the browser capabilities and where
+ * Sprites can be appended.
+ *
+ * One way to create a draw component is:
+ * 
+ *     var drawComponent = Ext.create('Ext.draw.Component', {
+ *         viewBox: false,
+ *         items: [{
+ *             type: 'circle',
+ *             fill: '#ffc',
+ *             radius: 100,
+ *             x: 100,
+ *             y: 100
+ *         }]
+ *     });
+ *     
+ *     Ext.create('Ext.Window', {
+ *         width: 230,
+ *         height: 230,
+ *         layout: 'fit',
+ *         items: [drawComponent]
+ *     }).show();
+ * 
+ * In this case we created a draw component and added a sprite to it.
+ * The *type* of the sprite is *circle* so if you run this code you'll see a yellow-ish
+ * circle in a Window. When setting `viewBox` to `false` we are responsible for setting the object's position and
+ * dimensions accordingly. 
+ * 
+ * You can also add sprites by using the surface's add method:
+ *    
+ *     drawComponent.surface.add({
+ *         type: 'circle',
+ *         fill: '#ffc',
+ *         radius: 100,
+ *         x: 100,
+ *         y: 100
+ *     });
+ *  
+ * For more information on Sprites, the core elements added to a draw component's surface,
+ * refer to the Ext.draw.Sprite documentation.
  */
 Ext.define('Ext.draw.Component', {
 
@@ -18,11 +61,11 @@ Ext.define('Ext.draw.Component', {
     /* End Definitions */
 
     /**
-     * @cfg {Array} implOrder
+     * @cfg {Array} enginePriority
      * Defines the priority order for which Surface implementation to use. The first
      * one supported by the current environment will be used.
      */
-    implOrder: ['SVG', 'VML'],
+    enginePriority: ['SVG', 'VML'],
 
     baseCls: Ext.baseCSSPrefix + 'surface',
 
@@ -108,6 +151,8 @@ Ext.define('Ext.draw.Component', {
     },
 
     /**
+     * @private
+     *
      * Create the Surface on initial render
      */
     onRender: function() {
@@ -137,6 +182,7 @@ Ext.define('Ext.draw.Component', {
         }
     },
 
+    //@private
     autoSizeSurface: function() {
         var me = this,
             items = me.surface.items,
@@ -161,10 +207,15 @@ Ext.define('Ext.draw.Component', {
 
     /**
      * Create the Surface instance. Resolves the correct Surface implementation to
-     * instantiate based on the 'implOrder' config.
+     * instantiate based on the 'enginePriority' config. Once the Surface instance is
+     * created you can use the handle to that instance to add sprites. For example:
+     *
+     <pre><code>
+        drawComponent.surface.add(sprite);
+     </code></pre>
      */
     createSurface: function() {
-        var surface = Ext.draw.Surface.newInstance(Ext.apply({}, {
+        var surface = Ext.draw.Surface.create(Ext.apply({}, {
                 width: this.width,
                 height: this.height,
                 renderTo: this.el
@@ -190,6 +241,8 @@ Ext.define('Ext.draw.Component', {
 
 
     /**
+     * @private
+     * 
      * Clean up the Surface instance on component destruction
      */
     onDestroy: function() {

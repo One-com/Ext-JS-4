@@ -15,19 +15,20 @@ Ext.define('Ext.layout.Layout', {
     initialized: false,
 
     statics: {
-        factory: function(config, defaultType) {
-            if (config instanceof Ext.layout.Layout) {
-                return config;
+        create: function(layout, defaultType) {
+            var type;
+            if (layout instanceof Ext.layout.Layout) {
+                return Ext.createByAlias('layout.' + layout);
+            } else {
+                if (Ext.isObject(layout)) {
+                    type = layout.type;
+                }
+                else {
+                    type = layout || defaultType;
+                    layout = {};
+                }
+                return Ext.createByAlias('layout.' + type, layout || {});
             }
-            var type, options = {};
-            if (Ext.isString(config)) {
-                type = config;
-            }
-            else {
-                type = config.type || defaultType;
-                options = config;
-            }
-            return Ext.create('layout.' + type, options);
         }
     },
 

@@ -443,6 +443,18 @@ Ext.supports = {
                 return 'placeholder' in doc.createElement('input');
             }
         },
+        
+        /**
+         * @property Direct2DBug True if when asking for an element's dimension via offsetWidth or offsetHeight, 
+         * getBoundingClientRect, etc. the browser returns the subpixel width rounded to the nearest pixel.
+         * @type {Boolean}
+         */
+        {
+            identity: 'Direct2DBug',
+            fn: function() {
+                return Ext.isString(document.body.style.msTransformOrigin);
+            }
+        },
         /**
          * @property BoundingClientRect True if the browser supports the getBoundingClientRect method on elements
          * @type {Boolean}
@@ -468,8 +480,32 @@ Ext.supports = {
         {
             identity: 'ArraySort',
             fn: function() {
-                return [1, 3].sort(function(a,b) { return b < a; })[0] === 1;
+                var a = [1,2,3,4,5].sort(function(){ return 0; });
+                return a[0] === 1 && a[1] === 2 && a[2] === 3 && a[3] === 4 && a[4] === 5;
+            }
+        },
+        /**
+         * @property Range True if browser support document.createRange native method.
+         * @type {Boolean}
+         */
+        {
+            identity: 'Range',
+            fn: function() {
+                return !!document.createRange;
+            }
+        },
+        /**
+         * @property CreateContextualFragment True if browser support CreateContextualFragment range native methods.
+         * @type {Boolean}
+         */
+        {
+            identity: 'CreateContextualFragment',
+            fn: function() {
+                var range = Ext.supports.Range ? document.createRange() : false;
+                
+                return range && !!range.createContextualFragment;
             }
         }
+        
     ]
 };

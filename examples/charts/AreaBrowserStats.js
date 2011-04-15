@@ -225,27 +225,27 @@ var jsonData = [
 
 Ext.onReady(function () {
     var fields = ['IE', 'Chrome', 'Firefox', 'Safari', 'Opera', 'Other'];
-    
-    var browserStore = new Ext.data.JsonStore({
+
+    var browserStore = Ext.create('Ext.data.JsonStore', {
         fields: fields,
         data: jsonData
     });
-    
+
     var colors = ['rgb(47, 162, 223)',
                   'rgb(60, 133, 46)',
                   'rgb(234, 102, 17)',
                   'rgb(154, 176, 213)',
                   'rgb(186, 10, 25)',
                   'rgb(40, 40, 40)'];
-    
+
     Ext.chart.theme.Browser = Ext.extend(Ext.chart.theme.Base, {
         constructor: function(config) {
             Ext.chart.theme.Base.prototype.constructor.call(this, Ext.apply({
                 colors: colors
             }, config));
         }
-    }); 
-    
+    });
+
     var win = Ext.create('Ext.Window', {
         width: 800,
         height: 600,
@@ -258,6 +258,7 @@ Ext.onReady(function () {
         items: {
             id: 'chartCmp',
             xtype: 'chart',
+            style: 'background:#fff',
             animate: true,
             theme: 'Browser:gradients',
             defaultInsets: 30,
@@ -296,8 +297,8 @@ Ext.onReady(function () {
                       for (var i = 1, total = 0, l = fields.length; i < l; i++) {
                           total += storeItem.get(fields[i]);
                       }
-                      this.setTitle(item.storeField + ' - ' 
-                              + Ext.Date.format(new Date(storeItem.get('date')), 'M y') 
+                      this.setTitle(item.storeField + ' - '
+                              + Ext.Date.format(new Date(storeItem.get('date')), 'M y')
                               + ' - ' + Math.round(storeItem.get(item.storeField) / total * 100) + '%');
                   }
                 },

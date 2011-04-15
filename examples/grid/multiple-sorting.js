@@ -33,7 +33,7 @@ Ext.onReady(function() {
         if (sortData) {
             if (changeDirection !== false) {
                 button.sortData.direction = Ext.String.toggle(button.sortData.direction, "ASC", "DESC");
-                button.setIconClass(Ext.String.toggle(iconCls, "sort-asc", "sort-desc"));
+                button.setIconCls(Ext.String.toggle(iconCls, "sort-asc", "sort-desc"));
             }
             store.clearFilter();
             doSort();
@@ -102,7 +102,8 @@ Ext.onReady(function() {
     }
 
     // create the data store
-    Ext.regModel('Employee', {
+    Ext.define('Employee', {
+        extend: 'Ext.data.Model',
         fields: [
            {name: 'rating', type: 'int'},
            {name: 'salary', type: 'float'},
@@ -213,7 +214,7 @@ Ext.onReady(function() {
     }));
 
     // create the Grid
-    var grid = Ext.create('Ext.grid.GridPanel', {
+    var grid = Ext.create('Ext.grid.Panel', {
         tbar : tbar,
         store: store,
         columns: [
@@ -246,7 +247,7 @@ Ext.onReady(function() {
             //here we tell the toolbar's droppable plugin that it can accept items from the columns' dragdrop group
             afterrender: function(grid) {
                 var headerCt = grid.child("headercontainer"),
-                    //the plugin position depends on browser see Ext.grid.HeaderContainer sources
+                    //the plugin position depends on browser see Ext.grid.header.Container sources
                     dragProxy = headerCt.plugins[0].dragZone || headerCt.plugins[1].dragZone;
 
                 droppable.addDDGroup(dragProxy.ddGroup);

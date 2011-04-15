@@ -5,18 +5,19 @@ Ext.require([
     'Ext.grid.*',
     'Ext.data.*',
     'Ext.util.*',
-    'Ext.toolbar.PagingToolbar',
+    'Ext.toolbar.Paging',
     'Ext.ux.PreviewPlugin',
-    'Ext.ModelMgr',
-    'Ext.tip.QuickTips'
+    'Ext.ModelManager',
+    'Ext.tip.QuickTipManager'
 ]);
 
 
 
 Ext.onReady(function(){
-    Ext.tip.QuickTips.init();
+    Ext.tip.QuickTipManager.init();
 
-    Ext.regModel('ForumThread', {
+    Ext.define('ForumThread', {
+        extend: 'Ext.data.Model',
         fields: [
             'title', 'forumtitle', 'forumid', 'author',
             {name: 'replycount', type: 'int'},
@@ -27,14 +28,14 @@ Ext.onReady(function(){
     });
 
     // create the Data Store
-    var store = new Ext.data.Store({
+    var store = Ext.create('Ext.data.Store', {
         pageSize: 50,
         model: 'ForumThread',
         remoteSort: true,
         proxy: {
             // load using script tags for cross domain, if the data in on the same domain as
             // this page, an HttpProxy would be better
-            type: 'scripttag',
+            type: 'jsonp',
             url: 'http://www.sencha.com/forum/topics-browse-remote.php',
             reader: {
                 root: 'topics',
@@ -42,7 +43,11 @@ Ext.onReady(function(){
             },
             // sends single sort as multi parameter
             simpleSortMode: true
-        }
+        },
+        sorters: [{
+            property: 'lastpost',
+            direction: 'DESC'
+        }]
     });
 
     // pluggable renders
@@ -55,14 +60,14 @@ Ext.onReady(function(){
             record.data.forumid
         );
     }
-    
+
     function renderLast(value, p, r) {
         return Ext.String.format('{0}<br/>by {1}', Ext.Date.dateFormat(value, 'M j, Y, g:i a'), r.data['lastposter']);
     }
-    
+
 
     var pluginExpanded = true;
-    var grid = new Ext.grid.GridPanel({
+    var grid = Ext.create('Ext.grid.Panel', {
         width: 700,
         height: 500,
         title: 'ExtJS.com - Browse Forums',
@@ -84,9 +89,9 @@ Ext.onReady(function(){
         columns:[{
             // id assigned so we can apply custom css (e.g. .x-grid-cell-topic b { color:#333 })
             // TODO: This poses an issue in subclasses of Grid now because Headers are now Components
-            // therefore the id will be registered in the ComponentMgr and conflict. Need a way to
+            // therefore the id will be registered in the ComponentManager and conflict. Need a way to
             // add additional CSS classes to the rendered cells.
-            id: 'topic', 
+            id: 'topic',
             text: "Topic",
             dataIndex: 'title',
             flex: 1,
@@ -113,7 +118,7 @@ Ext.onReady(function(){
             sortable: true
         }],
         // paging bar on the bottom
-        bbar: new Ext.PagingToolbar({
+        bbar: Ext.create('Ext.PagingToolbar', {
             store: store,
             displayInfo: true,
             displayMsg: 'Displaying topics {0} - {1} of {2}',

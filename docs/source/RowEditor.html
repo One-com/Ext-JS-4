@@ -10,17 +10,17 @@
  * @class Ext.grid.RowEditor
  * @extends Ext.form.FormPanel
  */
-Ext.define(&#39;Ext.grid.RowEditor&#39;, {
-    extend: &#39;Ext.form.FormPanel&#39;,
+Ext.define('Ext.grid.RowEditor', {
+    extend: 'Ext.form.FormPanel',
     requires: [
-        &#39;Ext.tip.ToolTip&#39;,
-        &#39;Ext.util.HashMap&#39;,
-        &#39;Ext.util.KeyNav&#39;
+        'Ext.tip.ToolTip',
+        'Ext.util.HashMap',
+        'Ext.util.KeyNav'
     ],
 
-    saveBtnText  : &#39;Update&#39;,
-    cancelBtnText: &#39;Cancel&#39;,
-    errorsText: &#39;Errors&#39;,
+    saveBtnText  : 'Update',
+    cancelBtnText: 'Cancel',
+    errorsText: 'Errors',
     
     lastScrollLeft: 0,
     lastScrollTop: 0,
@@ -31,18 +31,18 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
         var me = this,
             form;
         
-        me.cls = Ext.baseCSSPrefix + &#39;grid-row-editor&#39;;
+        me.cls = Ext.baseCSSPrefix + 'grid-row-editor';
         
         me.layout = {
-            type: &#39;hbox&#39;
+            type: 'hbox'
         };
         
         // Maintain field-to-column mapping
-        // It&#39;s easy to get a field from a column, but not vice versa
-        me.columns = Ext.create(&#39;Ext.util.HashMap&#39;);
+        // It's easy to get a field from a column, but not vice versa
+        me.columns = Ext.create('Ext.util.HashMap');
         me.columns.getKey = function(o) {
             var f;
-            if (o.getField &amp;&amp; (f = o.getField())) {
+            if (o.getField && (f = o.getField())) {
                 return f.id;
             }
             return o.id;
@@ -64,14 +64,14 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
         form = me.getForm();
         form.trackResetOnLoad = true;
         if (me.errorSummary) {
-            me.mon(form, &#39;validitychange&#39;, me.onValidityChange, me);
+            me.mon(form, 'validitychange', me.onValidityChange, me);
         }
     },
     
     onValidityChange: function(form, valid) {
         var me = this;
         if (me.isVisible()) {
-            me[valid ? &#39;hideToolTip&#39; : &#39;showToolTip&#39;]();
+            me[valid ? 'hideToolTip' : 'showToolTip']();
         }
     },
 
@@ -80,7 +80,7 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
             plugin = me.editingPlugin;
             
         me.callParent(arguments);
-        me.renderTo.on(&#39;scroll&#39;, me.onCtScroll, me, { buffer: 100 });
+        me.renderTo.on('scroll', me.onCtScroll, me, { buffer: 100 });
         
         // Prevent from bubbling click events to the grid view
         me.mon(me.el, {
@@ -89,11 +89,11 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
         });
         
         me.el.swallowEvent([
-            &#39;keypress&#39;,
-            &#39;keydown&#39;
+            'keypress',
+            'keydown'
         ]);
         
-        me.keyNav = Ext.create(&#39;Ext.util.KeyNav&#39;, me.el, {
+        me.keyNav = Ext.create('Ext.util.KeyNav', me.el, {
             enter: plugin.completeEdit,
             esc: plugin.onEscKey,
             scope: plugin
@@ -124,11 +124,11 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
         viewDom.appendChild(me.el.dom);
         
         // Recover our row node after a view refresh
-        if (params &amp;&amp; (idx = params.store.indexOf(params.record)) &gt;= 0) {
+        if (params && (idx = params.store.indexOf(params.record)) >= 0) {
             params.row = view.getNode(idx);
             me.reposition();
-            if (me.tooltip &amp;&amp; me.tooltip.isVisible()) {
-                me.tooltip.initTarget(params.row);
+            if (me.tooltip && me.tooltip.isVisible()) {
+                me.tooltip.setTarget(params.row);
             }
         } else {
             me.editingPlugin.cancelEdit();
@@ -192,7 +192,7 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
     onFieldAdd: function(hm, fieldId, column) {
         var me = this,
             colIdx = me.editingPlugin.grid.headerCt.getIndexOfHeader(column),
-            field = column.getField({ xtype: &#39;displayfield&#39; });
+            field = column.getField({ xtype: 'displayfield' });
         
         me.insert(colIdx, field);
     },
@@ -221,35 +221,35 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
     getFloatingButtons: function() {
         var me = this,
             cssPrefix = Ext.baseCSSPrefix,
-            btnsCss = cssPrefix + &#39;grid-row-editor-buttons&#39;,
+            btnsCss = cssPrefix + 'grid-row-editor-buttons',
             plugin = me.editingPlugin,
             btns;
         
         if (!me.floatingButtons) {
-            btns = me.floatingButtons = new Ext.Container({
+            btns = me.floatingButtons = Ext.create('Ext.Container', {
                 renderTpl: [
-                    &#39;&lt;div class=&quot;{baseCls}-ml&quot;&gt;&lt;/div&gt;&#39;,
-                    &#39;&lt;div class=&quot;{baseCls}-mr&quot;&gt;&lt;/div&gt;&#39;,
-                    &#39;&lt;div class=&quot;{baseCls}-bl&quot;&gt;&lt;/div&gt;&#39;,
-                    &#39;&lt;div class=&quot;{baseCls}-br&quot;&gt;&lt;/div&gt;&#39;,
-                    &#39;&lt;div class=&quot;{baseCls}-bc&quot;&gt;&lt;/div&gt;&#39;
+                    '<div class="{baseCls}-ml"></div>',
+                    '<div class="{baseCls}-mr"></div>',
+                    '<div class="{baseCls}-bl"></div>',
+                    '<div class="{baseCls}-br"></div>',
+                    '<div class="{baseCls}-bc"></div>'
                 ],
                 
                 renderTo: me.el,
                 baseCls: btnsCss,
-                layout: &#39;hbox&#39;,
+                layout: 'hbox',
                 defaults: {
-                    margins: &#39;0 1 1 1&#39;
+                    margins: '0 1 1 1'
                 },
                 items: [{
                     flex: 1,
-                    xtype: &#39;button&#39;,
+                    xtype: 'button',
                     handler: plugin.completeEdit,
                     scope: plugin,
                     text: me.saveBtnText
                 }, {
                     flex: 1,
-                    xtype: &#39;button&#39;,
+                    xtype: 'button',
                     handler: plugin.cancelEdit,
                     scope: plugin,
                     text: me.cancelBtnText
@@ -271,14 +271,14 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
     reposition: function(animate) {
         var me = this,
             params = me.params,
-            row = params &amp;&amp; Ext.get(params.row),
+            row = params && Ext.get(params.row),
             btns = me.getFloatingButtons(),
             btnEl = btns.el,
             grid = me.editingPlugin.grid,
             scroller = grid.verticalScroller,
             
             // always get data from ColumnModel as its what drives
-            // the GridView&#39;s sizing
+            // the GridView's sizing
             mainBodyWidth = grid.headerCt.getFullWidth(),
             scrollerWidth = grid.getWidth(),
             
@@ -288,11 +288,10 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
             scrollLeft = grid.view.el.dom.scrollLeft,
             btnWidth = btns.getWidth(),
             left = (width - btnWidth) / 2 + scrollLeft,
-            
-            top, rowH, newHeight,
+            y, rowH, newHeight,
             
             invalidateScroller = function() {
-                // Bring our row into view if necessary, so a row editor that&#39;s already
+                // Bring our row into view if necessary, so a row editor that's already
                 // visible and animated to the row will appear smooth
                 if (scroller) {
                     row.scrollIntoView(scroller.el, false);
@@ -300,19 +299,22 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
                     btnEl.scrollIntoView(scroller.el, false);
                 }
                 
-                if (animate &amp;&amp; animate.callback) {
+                if (animate && animate.callback) {
                     animate.callback();
                 }
             };
 
         // need to set both top/left
-        if (row &amp;&amp; Ext.isElement(row.dom)) {
-            top = row.dom.offsetTop - 5;
+        if (row && Ext.isElement(row.dom)) {
+            // Get the y position of the row relative to its top-most static parent.
+            // offsetTop will be relative to the table, and is incorrect
+            // when mixed with certain grid features (e.g., grouping).
+            y = row.getXY()[1] - 5;
             rowH = row.getHeight();
             newHeight = rowH + 10;
             
-            // IE doesn&#39;t set the height quite right.
-            // This isn&#39;t a border-box issue, it even happens
+            // IE doesn't set the height quite right.
+            // This isn't a border-box issue, it even happens
             // in IE8 and IE7 quirks.
             // TODO: Test in IE9!
             if (Ext.isIE) {
@@ -328,7 +330,7 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
             if (animate) {
                 var animObj = {
                     to: {
-                        top: top
+                        y: y
                     },
                     listeners: {
                         afteranimate: invalidateScroller
@@ -336,7 +338,7 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
                 };
                 me.animate(animObj);
             } else {
-                me.el.setTop(top);
+                me.el.setY(y);
                 invalidateScroller();
             }
         }
@@ -349,7 +351,7 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
     resizeFields: function(height) {
         var me = this;
         
-        Ext.Array.forEach(me.query(&#39;&gt;[isFormField]&#39;), function(field) {
+        Ext.Array.forEach(me.query('>[isFormField]'), function(field) {
             if (field.getHeight() != height) {
                 field.setHeight(height);
             }
@@ -361,9 +363,9 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
         
         if (Ext.isNumber(fieldInfo)) {
             // Query only form fields. This just future-proofs us incase we add
-            // other components to RowEditor later on.  Don&#39;t want to mess with
+            // other components to RowEditor later on.  Don't want to mess with
             // indicies.
-            return me.query(&#39;&gt;[isFormField]&#39;)[fieldInfo];
+            return me.query('>[isFormField]')[fieldInfo];
         } else if (fieldInfo instanceof Ext.grid.Header) {
             return fieldInfo.getField();
         }
@@ -390,8 +392,8 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
         }
         
         // Get a default display field if necessary
-        field = column.getField({ xtype: &#39;displayfield&#39; });
-        field.margins = &#39;5 0 5 2&#39;;
+        field = column.getField({ xtype: 'displayfield' });
+        field.margins = '5 0 5 2';
         field.setWidth(column.getWidth() - 2);
         
         // Maintain mapping of fields-to-columns
@@ -410,7 +412,7 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
         }
         
         // render display fields so they honor the column renderer/template
-        Ext.Array.forEach(me.query(&#39;&gt;displayfield&#39;), function(field) {
+        Ext.Array.forEach(me.query('>displayfield'), function(field) {
             me.renderColumnData(field, record);
         }, me);
     },
@@ -424,9 +426,9 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
             column = me.columns.get(field.id),
             value = field.getRawValue();
         
-        // honor our column&#39;s renderer (TemplateHeader sets renderer for us!)
+        // honor our column's renderer (TemplateHeader sets renderer for us!)
         if (column.renderer) {
-            var metaData = { tdCls: &#39;&#39;, style: &#39;&#39; },
+            var metaData = { tdCls: '', style: '' },
                 rowIdx = store.indexOf(record),
                 colIdx = headerCt.getIndexOfHeader(column);
             
@@ -452,7 +454,7 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
             
             focusCell = function() {
                 field = me.getField(params.colIdx);
-                if (field &amp;&amp; field.focus) {
+                if (field && field.focus) {
                     field.focus();
                 }
             };
@@ -526,13 +528,13 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
             tip;
         
         if (!me.tooltip) {
-            tip = me.tooltip = Ext.createWidget(&#39;tooltip&#39;, {
-                cls: Ext.baseCSSPrefix + &#39;grid-row-editor-errors&#39;,
+            tip = me.tooltip = Ext.createWidget('tooltip', {
+                cls: Ext.baseCSSPrefix + 'grid-row-editor-errors',
                 title: me.errorsText,
                 autoHide: false,
                 closable: true,
-                closeAction: &#39;disable&#39;,
-                anchor: &#39;left&#39;
+                closeAction: 'disable',
+                anchor: 'left'
             });
         }
         
@@ -555,7 +557,7 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
             row = Ext.get(params.row),
             viewEl = params.grid.view.el;
         
-        tip.initTarget(row);
+        tip.setTarget(row);
         tip.showAt(-10000, -10000);
         tip.body.update(me.getErrors());
         tip.mouseOffset = [viewEl.getWidth() - row.getWidth() + me.lastScrollLeft + 15, 0];
@@ -577,7 +579,7 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
             rowTop = row.dom.offsetTop,
             rowBottom = rowTop + rowHeight;
         
-        if (rowBottom &gt; viewTop &amp;&amp; rowTop &lt; viewBottom) {
+        if (rowBottom > viewTop && rowTop < viewBottom) {
             tip.show();
             me.hiddenTip = false;
         } else {
@@ -590,15 +592,15 @@ Ext.define(&#39;Ext.grid.RowEditor&#39;, {
         var me = this,
             errors = [];
         
-        Ext.Array.forEach(me.query(&#39;&gt;[isFormField]&#39;), function(field) {
+        Ext.Array.forEach(me.query('>[isFormField]'), function(field) {
             errors = errors.concat(
                 Ext.Array.map(field.getErrors(), function(e) {
-                    return &#39;&lt;li&gt;&#39; + e + &#39;&lt;/li&gt;&#39;;
+                    return '<li>' + e + '</li>';
                 })
             );
         }, me);
         
-        return &#39;&lt;ul&gt;&#39; + errors.join(&#39;&#39;) + &#39;&lt;/ul&gt;&#39;;
+        return '<ul>' + errors.join('') + '</ul>';
     },
     
     invalidateScroller: function() {

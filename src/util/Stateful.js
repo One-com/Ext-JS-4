@@ -1,6 +1,6 @@
 /**
  * @class Ext.util.Stateful
- * Represents any object whose data can be saved by a {@link Ext.data.Proxy Proxy}. Ext.Model
+ * Represents any object whose data can be saved by a {@link Ext.data.proxy.Proxy Proxy}. Ext.Model
  * and Ext.View both inherit from this class as both can save state (Models save field state,
  * Views save configuration)
  */
@@ -227,7 +227,10 @@ Ext.define('Ext.util.Stateful', {
 
     //<debug>
     markDirty : function() {
-        throw new Error("Stateful: markDirty has been deprecated. Please use setDirty.");
+        if (Ext.isDefined(Ext.global.console)) {
+            Ext.global.console.warn('Ext.util.Stateful: markDirty has been deprecated. Use setDirty instead.');
+        }
+        return this.setDirty.apply(this, arguments);
     },
     //</debug>
 

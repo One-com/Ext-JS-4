@@ -1,16 +1,13 @@
 /**
  * @class Ext.ux.PortalColumn
  * @extends Ext.container.Container
- * A layout column class used internally be {@link Ext.ux.PortalPanel}.
+ * A layout column class used internally be {@link Ext.app.PortalPanel}.
  */
-Ext.define('Ext.ux.PortalColumn', {
+Ext.define('Ext.app.PortalColumn', {
     extend: 'Ext.container.Container',
     alias: 'widget.portalcolumn',
     layout: {
-        type: 'anchor',
-        afterLayout: function() {
-            this.owner.el.setHeight(null);
-        }
+        type: 'anchor'
     },
     defaultType: 'portlet',
     cls: 'x-portal-column',

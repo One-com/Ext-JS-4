@@ -11,7 +11,7 @@ Ext.define('Ext.fx.Anim', {
         observable: 'Ext.util.Observable'
     },
 
-    requires: ['Ext.fx.Manager', 'Ext.fx.Animator', 'Ext.fx.Easing', 'Ext.fx.CubicBezier', 'Ext.fx.PropHandler'],
+    requires: ['Ext.fx.Manager', 'Ext.fx.Animator', 'Ext.fx.Easing', 'Ext.fx.CubicBezier', 'Ext.fx.PropertyHandler'],
 
     /* End Definitions */
 
@@ -187,7 +187,7 @@ from : {
         config = config || {};
         // If keyframes are passed, they really want an Animator instead.
         if (config.keyframes) {
-            return new Ext.fx.Animator(config);
+            return Ext.create('Ext.fx.Animator', config);
         }
         config = Ext.apply(me, config);
         if (me.from == undefined) {
@@ -263,18 +263,18 @@ from : {
                 start = me.target.getAttr(attr, from[attr]);
                 end = to[attr];
                 // Use default (numeric) property handler
-                if (!Ext.fx.PropHandler[attr]) {
+                if (!Ext.fx.PropertyHandler[attr]) {
                     if (Ext.isObject(end)) {
-                        propHandler = me.propHandlers[attr] = Ext.fx.PropHandler.object;
+                        propHandler = me.propHandlers[attr] = Ext.fx.PropertyHandler.object;
                     } else {
-                        propHandler = me.propHandlers[attr] = Ext.fx.PropHandler.defaultHandler;
+                        propHandler = me.propHandlers[attr] = Ext.fx.PropertyHandler.defaultHandler;
                     }
                 }
                 // Use custom handler
                 else {
-                    propHandler = me.propHandlers[attr] = Ext.fx.PropHandler[attr];
+                    propHandler = me.propHandlers[attr] = Ext.fx.PropertyHandler[attr];
                 }
-                out[attr] = propHandler.get(start, end, me.damper, initialFrom[attr]);
+                out[attr] = propHandler.get(start, end, me.damper, initialFrom[attr], attr);
             }
         }
         me.currentAttrs = out;

@@ -3,31 +3,31 @@
  * @extends Ext.draw.Surface
  * Provides specific methods to draw with SVG.
  */
-Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
+Ext.define('Ext.draw.engine.SVG', {
 
     /* Begin Definitions */
 
-    extend: &#39;Ext.draw.Surface&#39;,
+    extend: 'Ext.draw.Surface',
 
-    requires: [&#39;Ext.draw.Draw&#39;, &#39;Ext.draw.Sprite&#39;, &#39;Ext.draw.Matrix&#39;, &#39;Ext.core.Element&#39;],
+    requires: ['Ext.draw.Draw', 'Ext.draw.Sprite', 'Ext.draw.Matrix', 'Ext.core.Element'],
 
     /* End Definitions */
 
-    engine: &#39;SVG&#39;,
+    engine: 'SVG',
 
     trimRe: /^\s+|\s+$/g,
     spacesRe: /\s+/,
-    xlink: &quot;http:/&quot; + &quot;/www.w3.org/1999/xlink&quot;,
+    xlink: "http:/" + "/www.w3.org/1999/xlink",
 
     translateAttrs: {
-        radius: &quot;r&quot;,
-        radiusX: &quot;rx&quot;,
-        radiusY: &quot;ry&quot;,
-        path: &quot;d&quot;,
-        lineWidth: &quot;stroke-width&quot;,
-        fillOpacity: &quot;fill-opacity&quot;,
-        strokeOpacity: &quot;stroke-opacity&quot;,
-        strokeLinejoin: &quot;stroke-linejoin&quot;
+        radius: "r",
+        radiusX: "rx",
+        radiusY: "ry",
+        path: "d",
+        lineWidth: "stroke-width",
+        fillOpacity: "fill-opacity",
+        strokeOpacity: "stroke-opacity",
+        strokeLinejoin: "stroke-linejoin"
     },
 
     minDefaults: {
@@ -35,24 +35,24 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
             cx: 0,
             cy: 0,
             r: 0,
-            fill: &quot;none&quot;,
+            fill: "none",
             stroke: null,
-            &quot;stroke-width&quot;: null,
+            "stroke-width": null,
             opacity: null,
-            &quot;fill-opacity&quot;: null,
-            &quot;stroke-opacity&quot;: null
+            "fill-opacity": null,
+            "stroke-opacity": null
         },
         ellipse: {
             cx: 0,
             cy: 0,
             rx: 0,
             ry: 0,
-            fill: &quot;none&quot;,
+            fill: "none",
             stroke: null,
-            &quot;stroke-width&quot;: null,
+            "stroke-width": null,
             opacity: null,
-            &quot;fill-opacity&quot;: null,
-            &quot;stroke-opacity&quot;: null
+            "fill-opacity": null,
+            "stroke-opacity": null
         },
         rect: {
             x: 0,
@@ -61,49 +61,49 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
             height: 0,
             rx: 0,
             ry: 0,
-            fill: &quot;none&quot;,
+            fill: "none",
             stroke: null,
-            &quot;stroke-width&quot;: null,
+            "stroke-width": null,
             opacity: null,
-            &quot;fill-opacity&quot;: null,
-            &quot;stroke-opacity&quot;: null
+            "fill-opacity": null,
+            "stroke-opacity": null
         },
         text: {
             x: 0,
             y: 0,
-            &quot;text-anchor&quot;: &quot;start&quot;,
-            &quot;font-family&quot;: null,
-            &quot;font-size&quot;: null,
-            &quot;font-weight&quot;: null,
-            &quot;font-style&quot;: null,
-            fill: &quot;#000&quot;,
+            "text-anchor": "start",
+            "font-family": null,
+            "font-size": null,
+            "font-weight": null,
+            "font-style": null,
+            fill: "#000",
             stroke: null,
-            &quot;stroke-width&quot;: null,
+            "stroke-width": null,
             opacity: null,
-            &quot;fill-opacity&quot;: null,
-            &quot;stroke-opacity&quot;: null
+            "fill-opacity": null,
+            "stroke-opacity": null
         },
         path: {
-            d: &quot;M0,0&quot;,
-            fill: &quot;none&quot;,
+            d: "M0,0",
+            fill: "none",
             stroke: null,
-            &quot;stroke-width&quot;: null,
+            "stroke-width": null,
             opacity: null,
-            &quot;fill-opacity&quot;: null,
-            &quot;stroke-opacity&quot;: null
+            "fill-opacity": null,
+            "stroke-opacity": null
         },
         image: {
             x: 0,
             y: 0,
             width: 0,
             height: 0,
-            preserveAspectRatio: &quot;none&quot;,
+            preserveAspectRatio: "none",
             opacity: null
         }
     },
 
     createSVGElement: function(type, attrs) {
-        var el = this.domRef.createElementNS(&quot;http:/&quot; + &quot;/www.w3.org/2000/svg&quot;, type),
+        var el = this.domRef.createElementNS("http:/" + "/www.w3.org/2000/svg", type),
             key;
         if (attrs) {
             for (key in attrs) {
@@ -117,20 +117,20 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
         // Create svg element and append to the DOM.
         var el = this.createSVGElement(sprite.type);
         el.id = sprite.id;
-        el.style.webkitTapHighlightColor = &quot;rgba(0,0,0,0)&quot;;
+        el.style.webkitTapHighlightColor = "rgba(0,0,0,0)";
         sprite.el = Ext.get(el);
         this.applyZIndex(sprite); //performs the insertion
-        sprite.matrix = new Ext.draw.Matrix;
+        sprite.matrix = Ext.create('Ext.draw.Matrix');
         sprite.bbox = {
             plain: 0,
             transform: 0
         };
-        sprite.fireEvent(&quot;render&quot;, sprite);
+        sprite.fireEvent("render", sprite);
         return el;
     },
 
     getBBox: function (sprite, isWithoutTransform) {
-        var realPath = this[&quot;getPath&quot; + sprite.type](sprite);
+        var realPath = this["getPath" + sprite.type](sprite);
         if (isWithoutTransform) {
             sprite.bbox.plain = sprite.bbox.plain || Ext.draw.Draw.pathDimensions(realPath);
             return sprite.bbox.plain;
@@ -143,7 +143,7 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
         var bbox = {},
             bb, height, width, i, ln, el;
 
-        if (sprite &amp;&amp; sprite.el) {
+        if (sprite && sprite.el) {
             el = sprite.el.dom;
             try {
                 bbox = el.getBBox();
@@ -153,7 +153,7 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
             }
             bbox = {x: bbox.x, y: Infinity, width: 0, height: 0};
             ln = el.getNumberOfChars();
-            for (i = 0; i &lt; ln; i++) {
+            for (i = 0; i < ln; i++) {
                 bb = el.getExtentOfChar(i);
                 bbox.y = Math.min(bb.y, bbox.y);
                 height = bb.y + bb.height - bbox.y;
@@ -174,35 +174,35 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
     },
 
     hidePrim: function(sprite) {
-        this.addCls(sprite, Ext.baseCSSPrefix + &#39;hide-visibility&#39;);
+        this.addCls(sprite, Ext.baseCSSPrefix + 'hide-visibility');
     },
 
     showPrim: function(sprite) {
-        this.removeCls(sprite, Ext.baseCSSPrefix + &#39;hide-visibility&#39;);
+        this.removeCls(sprite, Ext.baseCSSPrefix + 'hide-visibility');
     },
 
     getDefs: function() {
-        return this._defs || (this._defs = this.createSVGElement(&quot;defs&quot;));
+        return this._defs || (this._defs = this.createSVGElement("defs"));
     },
 
     transform: function(sprite) {
         var me = this,
-            matrix = new Ext.draw.Matrix,
+            matrix = Ext.create('Ext.draw.Matrix'),
             transforms = sprite.transformations,
             transformsLength = transforms.length,
             i = 0,
             transform, type;
             
-        for (; i &lt; transformsLength; i++) {
+        for (; i < transformsLength; i++) {
             transform = transforms[i];
             type = transform.type;
-            if (type == &quot;translate&quot;) {
+            if (type == "translate") {
                 matrix.translate(transform.x, transform.y);
             }
-            else if (type == &quot;rotate&quot;) {
+            else if (type == "rotate") {
                 matrix.rotate(transform.degrees, transform.x, transform.y);
             }
-            else if (type == &quot;scale&quot;) {
+            else if (type == "scale") {
                 matrix.scale(transform.x, transform.y, transform.centerX, transform.centerY);
             }
         }
@@ -228,7 +228,7 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
     },
 
     <a name="method-Ext.draw.engine.SVG-getRegion"></a>/**
-     * Get the region for the surface&#39;s canvas area
+     * Get the region for the surface's canvas area
      * @returns {Ext.util.Region}
      */
     getRegion: function() {
@@ -256,9 +256,9 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
     },
     
     setViewBox: function(x, y, width, height) {
-        if (isFinite(x) &amp;&amp; isFinite(y) &amp;&amp; isFinite(width) &amp;&amp; isFinite(height)) {
+        if (isFinite(x) && isFinite(y) && isFinite(width) && isFinite(height)) {
             this.callParent(arguments);
-            this.el.dom.setAttribute(&quot;viewBox&quot;, [x, y, width, height].join(&quot; &quot;));
+            this.el.dom.setAttribute("viewBox", [x, y, width, height].join(" "));
         }
     },
 
@@ -267,8 +267,8 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
         if (!me.el) {
             var width = me.width || 10,
                 height = me.height || 10,
-                el = me.createSVGElement(&#39;svg&#39;, {
-                    xmlns: &quot;http:/&quot; + &quot;/www.w3.org/2000/svg&quot;,
+                el = me.createSVGElement('svg', {
+                    xmlns: "http:/" + "/www.w3.org/2000/svg",
                     version: 1.1,
                     width: width,
                     height: height
@@ -279,11 +279,11 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
                 // (1) It allows mouse events to be fired over empty areas in Webkit, and (2) we can
                 // use it rather than the svg element for retrieving the correct client rect of the
                 // surface in Mozilla (see https://bugzilla.mozilla.org/show_bug.cgi?id=530985)
-                bgRect = me.createSVGElement(&quot;rect&quot;, {
-                    width: &quot;100%&quot;,
-                    height: &quot;100%&quot;,
-                    fill: &quot;#000&quot;,
-                    stroke: &quot;none&quot;,
+                bgRect = me.createSVGElement("rect", {
+                    width: "100%",
+                    height: "100%",
+                    fill: "#000",
+                    stroke: "none",
                     opacity: 0
                 });
             el.appendChild(defs);
@@ -309,14 +309,14 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
     // private
     onMouseEnter: function(e) {
         if (this.el.parent().getRegion().contains(e.getPoint())) {
-            this.fireEvent(&#39;mouseenter&#39;, e);
+            this.fireEvent('mouseenter', e);
         }
     },
 
     // private
     onMouseLeave: function(e) {
         if (!this.el.parent().getRegion().contains(e.getPoint())) {
-            this.fireEvent(&#39;mouseleave&#39;, e);
+            this.fireEvent('mouseleave', e);
         }
     },
     // @private - Normalize a delegated single event from the main container to each sprite and sprite group
@@ -327,7 +327,7 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
 
         this.fireEvent(name, e);
         // We wrap text types in a tspan, sprite is the parent.
-        if (target.nodeName == &quot;tspan&quot; &amp;&amp; target.parentNode) {
+        if (target.nodeName == "tspan" && target.parentNode) {
             target = target.parentNode;
         }
         sprite = this.items.get(target.id);
@@ -345,14 +345,14 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
              tspans = [],
              height, tspan, text, i, ln, texts;
 
-         if (attrs.hasOwnProperty(&quot;text&quot;)) {
+         if (attrs.hasOwnProperty("text")) {
             tspans = this.setText(sprite, attrs.text);
          }
          // Normalize baseline via a DY shift of first tspan. Shift other rows by height * line height (1.2)
          if (tspans.length) {
              height = this.getBBoxText(sprite).height;
-             for (i = 0, ln = tspans.length; i &lt; ln; i++) {
-                 tspans[i].setAttribute(&quot;dy&quot;, i ? height * 1.2 : height / 4);
+             for (i = 0, ln = tspans.length; i < ln; i++) {
+                 tspans[i].setAttribute("dy", i ? height * 1.2 : height / 4);
              }
              sprite.dirty = true;
          }
@@ -361,7 +361,7 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
     setText: function(sprite, textString) {
          var me = this,
              el = sprite.el.dom,
-             x = el.getAttribute(&quot;x&quot;),
+             x = el.getAttribute("x"),
              tspans = [],
              height, tspan, text, i, ln, texts;
         
@@ -369,13 +369,13 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
             el.removeChild(el.firstChild);
         }
         // Wrap each row into tspan to emulate rows
-        texts = String(textString).split(&quot;\n&quot;);
-        for (i = 0, ln = texts.length; i &lt; ln; i++) {
+        texts = String(textString).split("\n");
+        for (i = 0, ln = texts.length; i < ln; i++) {
             text = texts[i];
             if (text) {
-                tspan = me.createSVGElement(&quot;tspan&quot;);
+                tspan = me.createSVGElement("tspan");
                 tspan.appendChild(document.createTextNode(Ext.htmlDecode(text)));
-                tspan.setAttribute(&quot;x&quot;, x);
+                tspan.setAttribute("x", x);
                 el.appendChild(tspan);
                 tspans[i] = tspan;
             }
@@ -418,7 +418,7 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
         if (group) {
             groups = [].concat(group);
             ln = groups.length;
-            for (i = 0; i &lt; ln; i++) {
+            for (i = 0; i < ln; i++) {
                 group = groups[i];
                 me.getGroup(group).add(sprite);
             }
@@ -429,29 +429,29 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
         // if (sprite.dirtyPath) {
         sprite.bbox.plain = 0;
         sprite.bbox.transform = 0;
-            if (sprite.type == &quot;circle&quot; || sprite.type == &quot;ellipse&quot;) {
+            if (sprite.type == "circle" || sprite.type == "ellipse") {
                 attrs.cx = attrs.cx || attrs.x;
                 attrs.cy = attrs.cy || attrs.y;
             }
-            else if (sprite.type == &quot;rect&quot;) {
+            else if (sprite.type == "rect") {
                 attrs.rx = attrs.ry = attrs.r;
             }
-            else if (sprite.type == &quot;path&quot; &amp;&amp; attrs.d) {
+            else if (sprite.type == "path" && attrs.d) {
                 attrs.d = Ext.draw.Draw.pathToAbsolute(attrs.d);
             }
             sprite.dirtyPath = false;
         // }
 
-        if (attrs[&#39;clip-rect&#39;]) {
+        if (attrs['clip-rect']) {
             me.setClip(sprite, attrs);
-            delete attrs[&#39;clip-rect&#39;];
+            delete attrs['clip-rect'];
         }
-        if (sprite.type == &#39;text&#39; &amp;&amp; attrs.font &amp;&amp; sprite.dirtyFont) {
-            el.set({ style: &quot;font: &quot; + attrs.font});
+        if (sprite.type == 'text' && attrs.font && sprite.dirtyFont) {
+            el.set({ style: "font: " + attrs.font});
             sprite.dirtyFont = false;
         }
-        if (sprite.type == &quot;image&quot;) {
-            el.dom.setAttributeNS(me.xlink, &quot;href&quot;, attrs.src);
+        if (sprite.type == "image") {
+            el.dom.setAttributeNS(me.xlink, "href", attrs.src);
         }
         Ext.applyIf(attrs, me.minDefaults[sprite.type]);
 
@@ -460,11 +460,11 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
             sprite.dirtyHidden = false;
         }
         for (key in attrs) {
-            if (attrs.hasOwnProperty(key) &amp;&amp; attrs[key] != null) {
+            if (attrs.hasOwnProperty(key) && attrs[key] != null) {
                 el.dom.setAttribute(key, String(attrs[key]));
             }
         }
-        if (sprite.type == &#39;text&#39;) {
+        if (sprite.type == 'text') {
             me.tuneText(sprite, attrs);
         }
 
@@ -479,34 +479,34 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
 
     setClip: function(sprite, params) {
         var me = this,
-            rect = params[&quot;clip-rect&quot;],
+            rect = params["clip-rect"],
             clipEl, clipPath;
         if (rect) {
             if (sprite.clip) {
                 sprite.clip.parentNode.parentNode.removeChild(sprite.clip.parentNode);
             }
-            clipEl = me.createSVGElement(&#39;clipPath&#39;);
-            clipPath = me.createSVGElement(&#39;rect&#39;);
-            clipEl.id = Ext.id(null, &#39;ext-clip-&#39;);
-            clipPath.setAttribute(&quot;x&quot;, rect.x);
-            clipPath.setAttribute(&quot;y&quot;, rect.y);
-            clipPath.setAttribute(&quot;width&quot;, rect.width);
-            clipPath.setAttribute(&quot;height&quot;, rect.height);
+            clipEl = me.createSVGElement('clipPath');
+            clipPath = me.createSVGElement('rect');
+            clipEl.id = Ext.id(null, 'ext-clip-');
+            clipPath.setAttribute("x", rect.x);
+            clipPath.setAttribute("y", rect.y);
+            clipPath.setAttribute("width", rect.width);
+            clipPath.setAttribute("height", rect.height);
             clipEl.appendChild(clipPath);
             me.getDefs().appendChild(clipEl);
-            sprite.el.dom.setAttribute(&quot;clip-path&quot;, &quot;url(#&quot; + clipEl.id + &quot;)&quot;);
+            sprite.el.dom.setAttribute("clip-path", "url(#" + clipEl.id + ")");
             sprite.clip = clipPath;
         }
         // if (!attrs[key]) {
-        //     var clip = Ext.getDoc().dom.getElementById(sprite.el.getAttribute(&quot;clip-path&quot;).replace(/(^url\(#|\)$)/g, &quot;&quot;));
-        //     clip &amp;&amp; clip.parentNode.removeChild(clip);
-        //     sprite.el.setAttribute(&quot;clip-path&quot;, &quot;&quot;);
+        //     var clip = Ext.getDoc().dom.getElementById(sprite.el.getAttribute("clip-path").replace(/(^url\(#|\)$)/g, ""));
+        //     clip && clip.parentNode.removeChild(clip);
+        //     sprite.el.setAttribute("clip-path", "");
         //     delete attrss.clip;
         // }
     },
 
     <a name="method-Ext.draw.engine.SVG-applyZIndex"></a>/**
-     * Insert or move a given sprite&#39;s element to the correct place in the DOM list for its zIndex
+     * Insert or move a given sprite's element to the correct place in the DOM list for its zIndex
      * @param {Ext.draw.Sprite} sprite
      */
     applyZIndex: function(sprite) {
@@ -514,11 +514,11 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
             el = sprite.el,
             prevEl;
         if (this.el.dom.childNodes[idx + 2] !== el.dom) { //shift by 2 to account for defs and bg rect 
-            if (idx &gt; 0) {
+            if (idx > 0) {
                 // Find the first previous sprite which has its DOM element created already
                 do {
                     prevEl = this.items.getAt(--idx).el;
-                } while (!prevEl &amp;&amp; idx &gt; 0);
+                } while (!prevEl && idx > 0);
             }
             el.insertAfter(prevEl || this.bgRect);
         }
@@ -526,7 +526,7 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
     },
 
     createItem: function (config) {
-        var sprite = new Ext.draw.Sprite(config);
+        var sprite = Ext.create('Ext.draw.Sprite', config);
         sprite.surface = this;
         return sprite;
     },
@@ -539,43 +539,43 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
             stop,
             stopEl,
             i;
-        if (gradient.type == &quot;linear&quot;) {
-            gradientEl = this.createSVGElement(&quot;linearGradient&quot;);
-            gradientEl.setAttribute(&quot;x1&quot;, vector[0]);
-            gradientEl.setAttribute(&quot;y1&quot;, vector[1]);
-            gradientEl.setAttribute(&quot;x2&quot;, vector[2]);
-            gradientEl.setAttribute(&quot;y2&quot;, vector[3]);
+        if (gradient.type == "linear") {
+            gradientEl = this.createSVGElement("linearGradient");
+            gradientEl.setAttribute("x1", vector[0]);
+            gradientEl.setAttribute("y1", vector[1]);
+            gradientEl.setAttribute("x2", vector[2]);
+            gradientEl.setAttribute("y2", vector[3]);
         }
         else {
-            gradientEl = this.createSVGElement(&quot;radialGradient&quot;);
-            gradientEl.setAttribute(&quot;cx&quot;, gradient.centerX);
-            gradientEl.setAttribute(&quot;cy&quot;, gradient.centerY);
-            gradientEl.setAttribute(&quot;r&quot;, gradient.radius);
-            if (Ext.isNumber(gradient.focalX) &amp;&amp; Ext.isNumber(gradient.focalY)) {
-                gradientEl.setAttribute(&quot;fx&quot;, gradient.focalX);
-                gradientEl.setAttribute(&quot;fy&quot;, gradient.focalY);
+            gradientEl = this.createSVGElement("radialGradient");
+            gradientEl.setAttribute("cx", gradient.centerX);
+            gradientEl.setAttribute("cy", gradient.centerY);
+            gradientEl.setAttribute("r", gradient.radius);
+            if (Ext.isNumber(gradient.focalX) && Ext.isNumber(gradient.focalY)) {
+                gradientEl.setAttribute("fx", gradient.focalX);
+                gradientEl.setAttribute("fy", gradient.focalY);
             }
         }    
         gradientEl.id = gradient.id;
         this.getDefs().appendChild(gradientEl);
 
-        for (i = 0; i &lt; ln; i++) {
+        for (i = 0; i < ln; i++) {
             stop = gradient.stops[i];
-            stopEl = this.createSVGElement(&quot;stop&quot;);
-            stopEl.setAttribute(&quot;offset&quot;, stop.offset + &quot;%&quot;);
-            stopEl.setAttribute(&quot;stop-color&quot;, stop.color);
-            stopEl.setAttribute(&quot;stop-opacity&quot;,stop.opacity);
+            stopEl = this.createSVGElement("stop");
+            stopEl.setAttribute("offset", stop.offset + "%");
+            stopEl.setAttribute("stop-color", stop.color);
+            stopEl.setAttribute("stop-opacity",stop.opacity);
             gradientEl.appendChild(stopEl);
         }
     },
 
     <a name="method-Ext.draw.engine.SVG-hasCls"></a>/**
-     * Checks if the specified CSS class exists on this element&#39;s DOM node.
+     * Checks if the specified CSS class exists on this element's DOM node.
      * @param {String} className The CSS class to check for
      * @return {Boolean} True if the class exists, else false
      */
     hasCls: function(sprite, className) {
-        return className &amp;&amp; (&#39; &#39; + (sprite.el.dom.getAttribute(&#39;class&#39;) || &#39;&#39;) + &#39; &#39;).indexOf(&#39; &#39; + className + &#39; &#39;) != -1;
+        return className && (' ' + (sprite.el.dom.getAttribute('class') || '') + ' ').indexOf(' ' + className + ' ') != -1;
     },
 
     addCls: function(sprite, className) {
@@ -584,22 +584,22 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
             len,
             v,
             cls = [],
-            curCls =  el.getAttribute(&#39;class&#39;) || &#39;&#39;;
+            curCls =  el.getAttribute('class') || '';
         // Separate case is for speed
         if (!Ext.isArray(className)) {
-            if (typeof className == &#39;string&#39; &amp;&amp; !this.hasCls(sprite, className)) {
-                el.set({ &#39;class&#39;: curCls + &#39; &#39; + className });
+            if (typeof className == 'string' && !this.hasCls(sprite, className)) {
+                el.set({ 'class': curCls + ' ' + className });
             }
         }
         else {
-            for (i = 0, len = className.length; i &lt; len; i++) {
+            for (i = 0, len = className.length; i < len; i++) {
                 v = className[i];
-                if (typeof v == &#39;string&#39; &amp;&amp; (&#39; &#39; + curCls + &#39; &#39;).indexOf(&#39; &#39; + v + &#39; &#39;) == -1) {
+                if (typeof v == 'string' && (' ' + curCls + ' ').indexOf(' ' + v + ' ') == -1) {
                     cls.push(v);
                 }
             }
             if (cls.length) {
-                el.set({ &#39;class&#39;: &#39; &#39; + cls.join(&#39; &#39;) });
+                el.set({ 'class': ' ' + cls.join(' ') });
             }
         }
     },
@@ -607,24 +607,24 @@ Ext.define(&#39;Ext.draw.engine.SVG&#39;, {
     removeCls: function(sprite, className) {
         var me = this,
             el = sprite.el,
-            curCls =  el.getAttribute(&#39;class&#39;) || &#39;&#39;,
+            curCls =  el.getAttribute('class') || '',
             i, idx, len, cls, elClasses;
         if (!Ext.isArray(className)){
             className = [className];
         }
         if (curCls) {
-            elClasses = curCls.replace(me.trimRe, &#39; &#39;).split(me.spacesRe);
-            for (i = 0, len = className.length; i &lt; len; i++) {
+            elClasses = curCls.replace(me.trimRe, ' ').split(me.spacesRe);
+            for (i = 0, len = className.length; i < len; i++) {
                 cls = className[i];
-                if (typeof cls == &#39;string&#39;) {
-                    cls = cls.replace(me.trimRe, &#39;&#39;);
+                if (typeof cls == 'string') {
+                    cls = cls.replace(me.trimRe, '');
                     idx = Ext.Array.indexOf(elClasses, cls);
                     if (idx != -1) {
                         elClasses.splice(idx, 1);
                     }
                 }
             }
-            el.set({ &#39;class&#39;: elClasses.join(&#39; &#39;) });
+            el.set({ 'class': elClasses.join(' ') });
         }
     },
 

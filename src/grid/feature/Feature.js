@@ -1,6 +1,7 @@
 /**
  * @class Ext.grid.feature.Feature
  * @extends Ext.util.Observable
+ * @private
  *
  * Features allow you to manipulate the functionality available within a grid
  * view such as grouping, treegrid, rowbody, rowwrap, etc.
@@ -34,13 +35,13 @@ Ext.define('Ext.grid.feature.Feature', {
     eventSelector: null,
     
     /**
-     * @property {Ext.view.TableView}
+     * @property {Ext.view.Table}
      * Reference to the TableView.
      */
     view: null,
     
     /**
-     * @property {Ext.grid.GridPanel}
+     * @property {Ext.grid.Panel}
      * Reference to the grid panel
      */
     grid: null,
@@ -63,7 +64,7 @@ Ext.define('Ext.grid.feature.Feature', {
         
     },
     
-    getTplFragments: function() {
+    getFragmentTpl: function() {
         return;
     },
     
@@ -84,6 +85,7 @@ Ext.define('Ext.grid.feature.Feature', {
     getMetaRowTplFragments: function() {
         return {};
     },
+
     getTableFragments: function() {
         return {};
     },

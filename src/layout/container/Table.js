@@ -23,6 +23,7 @@
  * top to bottom.  The layout will automatically figure out, based on the column count, rowspans and colspans,
  * how to position each panel within the table.  Just like with HTML tables, your rowspans and colspans must add
  * up correctly in your overall layout or you'll end up with missing and/or extra cells!  Example usage:</p>
+ * {@img Ext.layout.container.Table/Ext.layout.container.Table.png Ext.layout.container.Table container layout}
  * <pre><code>
 // This code will generate a layout table that is 3 columns by 2 rows
 // with some spanning included.  The basic layout will be:
@@ -31,30 +32,33 @@
 // |        |--------+--------|
 // |        |   C    |   D    |
 // +--------+--------+--------+
-var table = new Ext.panel.Panel({
-    title: 'Table Layout',
-    layout: {
-        type: 'table',
-        // The total column count must be specified here
-        columns: 3
-    },
-    defaults: {
-        // applied to each contained panel
-        bodyStyle:'padding:20px'
-    },
-    items: [{
-        html: '&lt;p&gt;Cell A content&lt;/p&gt;',
-        rowspan: 2
-    },{
-        html: '&lt;p&gt;Cell B content&lt;/p&gt;',
-        colspan: 2
-    },{
-        html: '&lt;p&gt;Cell C content&lt;/p&gt;',
-        cellCls: 'highlight'
-    },{
-        html: '&lt;p&gt;Cell D content&lt;/p&gt;'
-    }]
-});
+    Ext.create('Ext.panel.Panel', {
+        title: 'Table Layout',
+        width: 300,
+        height: 150,
+        layout: {
+            type: 'table',
+            // The total column count must be specified here
+            columns: 3
+        },
+        defaults: {
+            // applied to each contained panel
+            bodyStyle:'padding:20px'
+        },
+        items: [{
+            html: '<p>Cell A content</p>',
+            rowspan: 2
+        },{
+            html: '<p>Cell B content</p>',
+            colspan: 2
+        },{
+            html: '<p>Cell C content</p>',
+            cellCls: 'highlight'
+        },{
+            html: '<p>Cell D content</p>'
+        }],
+        renderTo: Ext.getBody()
+    });
 </code></pre>
  */
 
@@ -274,7 +278,6 @@ Ext.define('Ext.layout.container.Table', {
      * seems isolated to just Opera 10.5, but feature detection could be added here if needed.
      */
     needsDivWrap: function() {
-        return Ext.isOpera && this.opera10_5Re.test(Ext.userAgent);
-    },
-    opera10_5Re: /version\/10\.5/
+        return Ext.isOpera10_5;
+    }
 });

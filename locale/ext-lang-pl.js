@@ -14,16 +14,16 @@ Ext.onReady(function() {
        Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-       Ext.grid.GridPanel.prototype.ddText = "{0} wybrano wiersze(y)";
+    if(Ext.grid.Panel){
+       Ext.grid.Panel.prototype.ddText = "{0} wybrano wiersze(y)";
     }
 
     if(Ext.TabPanelItem){
        Ext.TabPanelItem.prototype.closeText = "Zamknij zakładkę";
     }
 
-    if(Ext.form.BaseField){
-       Ext.form.BaseField.prototype.invalidText = "Wartość tego pola jest niewłaściwa";
+    if(Ext.form.field.Base){
+       Ext.form.field.Base.prototype.invalidText = "Wartość tego pola jest niewłaściwa";
     }
 
     if(Ext.LoadMask){
@@ -137,7 +137,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
     	Ext.apply(Ext.PagingToolbar.prototype, {
     		beforePageText	: "Strona",
     		afterPageText	: "z {0}",
@@ -151,8 +151,8 @@ Ext.onReady(function() {
     	});
     }
 
-    if(Ext.form.Text){
-    	Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+    	Ext.apply(Ext.form.field.Text.prototype, {
     	    minLengthText	: "Minimalna ilość znaków dla tego pola to {0}",
     		maxLengthText	: "Maksymalna ilość znaków dla tego pola to {0}",
     	    blankText		: "To pole jest wymagane",
@@ -161,16 +161,16 @@ Ext.onReady(function() {
     	});
     }
 
-    if(Ext.form.Number){
-    	Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+    	Ext.apply(Ext.form.field.Number.prototype, {
     	    minText	: "Minimalna wartość dla tego pola to {0}",
     	    maxText	: "Maksymalna wartość dla tego pola to {0}",
     		nanText	: "{0} to nie jest właściwa wartość"
     	});
     }
 
-    if(Ext.form.Date){
-    	Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+    	Ext.apply(Ext.form.field.Date.prototype, {
     	    disabledDaysText	: "Wyłączony",
     	    disabledDatesText	: "Wyłączony",
     		minText				: "Data w tym polu musi być późniejsza od {0}",
@@ -181,15 +181,15 @@ Ext.onReady(function() {
     	});
     }
 
-    if(Ext.form.ComboBox){
-    	Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+    	Ext.apply(Ext.form.field.ComboBox.prototype, {
     		loadingText       : "Wczytuję...",
     		valueNotFoundText : undefined
     	});
     }
 
-    if(Ext.form.VTypes){
-    	Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+    	Ext.apply(Ext.form.field.VTypes, {
     	    emailText		: 'To pole wymaga podania adresu e-mail w formacie: "nazwa@domena.pl"',
     	    urlText			: 'To pole wymaga podania adresu strony www w formacie: "http:/'+'/www.domena.pl"',
     		alphaText		: 'To pole wymaga podania tylko liter i _',
@@ -197,8 +197,8 @@ Ext.onReady(function() {
     	});
     }
 
-    if(Ext.form.HtmlEditor){
-      Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : 'Wprowadź adres URL strony:',
         buttonTips : {
           bold : {
@@ -275,8 +275,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.grid.HeaderContainer){
-    	Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+    	Ext.apply(Ext.grid.header.Container.prototype, {
     	    sortAscText		: "Sortuj rosnąco",
     	    sortDescText	: "Sortuj malejąco",
     		lockText		: "Zablokuj kolumnę",

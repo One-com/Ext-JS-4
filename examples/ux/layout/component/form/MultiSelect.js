@@ -1,12 +1,12 @@
 /**
  * @private
  * @class Ext.ux.layout.component.form.MultiSelect
- * @extends Ext.layout.component.form.Field
+ * @extends Ext.layout.component.field.Field
  * Layout class for {@link Ext.ux.form.MultiSelect} fields.
  * @private
  */
 Ext.define('Ext.ux.layout.component.form.MultiSelect', {
-    extend: 'Ext.layout.component.form.Field',
+    extend: 'Ext.layout.component.field.Field',
     alias: ['layout.multiselectfield'],
 
     type: 'multiselectfield',

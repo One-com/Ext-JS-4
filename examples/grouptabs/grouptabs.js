@@ -4,14 +4,14 @@ Ext.Loader.setPath('Ext.ux', '../ux/');
 
 Ext.require([
     'Ext.Viewport',
-    'Ext.tip.QuickTips',
+    'Ext.tip.QuickTipManager',
     'Ext.tab.TabPanel',
     'Ext.ux.GroupTabPanel',
     'Ext.grid.*'
 ]);
 
 Ext.onReady(function() {
-	Ext.tip.QuickTips.init();
+	Ext.tip.QuickTipManager.init();
     
     // create some portlet tools using built in Ext tool ids
     var tools = [{
@@ -35,13 +35,11 @@ Ext.onReady(function() {
     			mainItem: 1,
     			items: [{
     				title: 'Tickets',
-                    layout: 'fit',
                     iconCls: 'x-icon-tickets',
                     tabTip: 'Tickets tabtip',
-                    border: false,
-                    items: {
-                        xtype: 'gridportlet'
-                    }
+                    //border: false,
+                    xtype: 'gridportlet',
+                    height: null
     			}, 
                 {
                     xtype: 'portalpanel',

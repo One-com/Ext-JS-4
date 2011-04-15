@@ -30,6 +30,8 @@ $datepicker-th-background-gradient: matte !default;
 $datepicker-th-border-bottom-color: darken($datepicker-th-background-color, 10) !default;
 $datepicker-th-text-align: right !default;
 
+$datepicker-td-height: 17px !default;
+
 //item
 $datepicker-item-color: #000 !default;
 $datepicker-item-border-width: 1px !default;
@@ -50,3 +52,13 @@ $datepicker-selected-item-background-color: #dae5f3 !default;
 $datepicker-footer-background-color: $datepicker-th-background-color !default;
 $datepicker-footer-background-gradient: glossy !default;
 $datepicker-footer-border-top-color: $datepicker-th-border-bottom-color !default; //a3bad9
+
+$datepicker-monthpicker-height: 167px !default;
+
+$datepicker-monthpicker-item-color: #15428B !default;
+$datepicker-monthpicker-item-border: $datepicker-item-border !default;
+
+$datepicker-monthpicker-item-hover-background-color: $datepicker-item-hover-background-color !default;
+
+$datepicker-monthpicker-item-selected-background-color: $datepicker-footer-background-color !default;
+$datepicker-monthpicker-item-selected-border: $datepicker-selected-item-border !default;

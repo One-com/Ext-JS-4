@@ -53,7 +53,7 @@ Ext.define('Ext.ux.statusbar.ValidationStatus', {
         sb.on('render', function(){
             this.statusBar = sb;
             this.monitor = true;
-            this.errors = new Ext.util.MixedCollection();
+            this.errors = Ext.create('Ext.util.MixedCollection');
             this.listAlign = (sb.statusAlign === 'right' ? 'br-tr?' : 'bl-tl?');
             
             if (this.form) {
@@ -120,7 +120,7 @@ Ext.define('Ext.ux.statusbar.ValidationStatus', {
         if (msg) {
             this.errors.add(f.id, {field:f, msg:msg});
         } else {
-            this.errors.removeByKey(f.id);
+            this.errors.removeAtKey(f.id);
         }
         this.updateErrorList();
         if(this.errors.getCount() > 0) {

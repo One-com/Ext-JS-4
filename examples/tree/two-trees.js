@@ -1,7 +1,7 @@
 Ext.require(['*']);
 
 Ext.onReady(function(){
-    var store = new Ext.data.TreeStore({
+    var store = Ext.create('Ext.data.TreeStore', {
         proxy: {
             type: 'ajax',
             url: 'get-nodes.php'
@@ -17,8 +17,8 @@ Ext.onReady(function(){
             direction: 'ASC'
         }]
     });
-        
-    var tree = new Ext.tree.TreePanel({
+
+    var tree = Ext.create('Ext.tree.Panel', {
         id: 'tree',
         store: store,
         width: 250,
@@ -31,8 +31,8 @@ Ext.onReady(function(){
         },
         renderTo: document.body
     });
-    
-    var store2 = new Ext.data.TreeStore({
+
+    var store2 = Ext.create('Ext.data.TreeStore', {
         proxy: {
             type: 'ajax',
             url: 'get-nodes.php'
@@ -49,8 +49,8 @@ Ext.onReady(function(){
             direction: 'ASC'
         }]
     });
-    
-    var tree2 = new Ext.tree.TreePanel({
+
+    var tree2 = Ext.create('Ext.tree.Panel', {
         id: 'tree2',
         width: 250,
         height: 300,

@@ -15,16 +15,16 @@ Ext.onReady(function(){
        Ext.DataView.prototype.emptyText = "<Порожньо>";
     }
 
-    if(Ext.grid.GridPanel){
-       Ext.grid.GridPanel.prototype.ddText = "{0} обраних рядків";
+    if(Ext.grid.Panel){
+       Ext.grid.Panel.prototype.ddText = "{0} обраних рядків";
     }
 
     if(Ext.TabPanelItem){
        Ext.TabPanelItem.prototype.closeText = "Закрити цю вкладку";
     }
 
-    if(Ext.form.BaseField){
-       Ext.form.BaseField.prototype.invalidText = "Хибне значення";
+    if(Ext.form.field.Base){
+       Ext.form.field.Base.prototype.invalidText = "Хибне значення";
     }
 
     if(Ext.LoadMask){
@@ -101,7 +101,7 @@ Ext.onReady(function(){
       });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
        Ext.apply(Ext.PagingToolbar.prototype, {
           beforePageText : "Сторінка",
           afterPageText  : "з {0}",
@@ -115,8 +115,8 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.Text){
-       Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+       Ext.apply(Ext.form.field.Text.prototype, {
           minLengthText : "Мінімальна довжина цього поля {0}",
           maxLengthText : "Максимальна довжина цього поля {0}",
           blankText     : "Це поле є обов’язковим для заповнення",
@@ -125,16 +125,16 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.Number){
-       Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+       Ext.apply(Ext.form.field.Number.prototype, {
           minText : "Значення у цьому полі не може бути меньше {0}",
           maxText : "Значення у цьому полі не може бути більше {0}",
           nanText : "{0} не є числом"
        });
     }
 
-    if(Ext.form.Date){
-       Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+       Ext.apply(Ext.form.field.Date.prototype, {
           disabledDaysText  : "Не доступно",
           disabledDatesText : "Не доступно",
           minText           : "Дата у цьому полі повинна бути більша {0}",
@@ -144,15 +144,15 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.ComboBox){
-       Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+       Ext.apply(Ext.form.field.ComboBox.prototype, {
           loadingText       : "Завантаження...",
           valueNotFoundText : undefined
        });
     }
 
-    if(Ext.form.VTypes){
-       Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+       Ext.apply(Ext.form.field.VTypes, {
           emailText    : 'Це поле повинно містити адресу електронної пошти у форматі "user@example.com"',
           urlText      : 'Це поле повинно містити URL у форматі "http:/'+'/www.example.com"',
           alphaText    : 'Це поле повинно містити виключно латинські літери та символ підкреслення "_"',
@@ -160,8 +160,8 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.HtmlEditor){
-       Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+       Ext.apply(Ext.form.field.HtmlEditor.prototype, {
          createLinkText : 'Будь-ласка введіть адресу:',
          buttonTips : {
                 bold : {
@@ -238,8 +238,8 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.grid.HeaderContainer){
-       Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+       Ext.apply(Ext.grid.header.Container.prototype, {
           sortAscText  : "Сортувати по зростанню",
           sortDescText : "Сортувати по спаданню",
           lockText     : "Закріпити стовпець",

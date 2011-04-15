@@ -13,28 +13,29 @@ Ext.require([
 ]);
 
 Ext.onReady(function(){
-    
+
     function formatDate(value){
         return value ? Ext.Date.dateFormat(value, 'M d, Y') : '';
     }
-    
-    Ext.regModel('Plant', {
+
+    Ext.define('Plant', {
+        extend: 'Ext.data.Model',
         fields: [
             // the 'name' below matches the tag name to read, except 'availDate'
             // which is mapped to the tag 'availability'
             {name: 'common', type: 'string'},
             {name: 'botanical', type: 'string'},
             {name: 'light'},
-            {name: 'price', type: 'float'},             
+            {name: 'price', type: 'float'},
             // dates can be automatically converted by specifying dateFormat
             {name: 'availDate', mapping: 'availability', type: 'date', dateFormat: 'm/d/Y'},
             {name: 'indoor', type: 'bool'}
         ]
     });
-    
+
 
     // create the Data Store
-    var store = new Ext.data.Store({
+    var store = Ext.create('Ext.data.Store', {
         // destroy the store if the grid is destroyed
         autoDestroy: true,
         model: 'Plant',
@@ -54,12 +55,12 @@ Ext.onReady(function(){
             direction:'ASC'
         }]
     });
-    
-    var rowEditing = new Ext.grid.RowEditing();
+
+    var rowEditing = Ext.create('Ext.grid.plugin.RowEditing');
 
     // create the grid and specify what field you want
     // to use for the editor at each header.
-    var grid = new Ext.grid.GridPanel({
+    var grid = Ext.create('Ext.grid.Panel', {
         store: store,
         columns: [{
             id: 'common',
@@ -130,8 +131,8 @@ Ext.onReady(function(){
         tbar: [{
             text: 'Add Plant',
             handler : function(){
-                // Create a record instance through the ModelMgr
-                var r = Ext.ModelMgr.create({
+                // Create a record instance through the ModelManager
+                var r = Ext.ModelManager.create({
                     common: 'New Plant 1',
                     light: 'Mostly Shady',
                     price: 0,

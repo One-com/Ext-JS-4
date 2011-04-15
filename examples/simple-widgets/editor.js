@@ -1,17 +1,16 @@
 Ext.require([
     'Ext.Editor',
-    'Ext.form.FormPanel',
-    'Ext.form.ComboBox',
-    'Ext.form.Date',
+    'Ext.form.Panel',
+    'Ext.form.field.ComboBox',
+    'Ext.form.field.Date',
     'Ext.data.Store',
-    'Ext.data.AjaxProxy',
-    'Ext.data.JsonReader',
-    'Ext.data.JsonWriter',
-    
+    'Ext.data.proxy.Ajax',
+    'Ext.data.reader.Json',
+    'Ext.data.writer.Json'
 ]);
 
 Ext.onReady(function(){
-    Ext.create('Ext.form.FormPanel', {
+    Ext.create('Ext.form.Panel', {
         renderTo: 'container',
         width: 700,
         height: 400,
@@ -81,21 +80,18 @@ Ext.onReady(function(){
                         editable: false,
                         forceSelection: true,
                         queryMode: 'local',
-                        store: Ext.create('Ext.data.Store', {
-                            fields: ['value', 'key'],
-                            displayField: 'key',
-                            valueField: 'value',
+                        displayField: 'text',
+                        valueField: 'text',
+                        store: {
+                            fields: ['text'],
                             data: [{
-                                value: 'user',
                                 text: 'User Details'
                             },{
-                                value: 'dev',
                                 text: 'Developer Detail'
                             },{
-                                value: 'manager',
                                 text: 'Manager Details'
                             }]
-                        })
+                        }
                     }
                 }, cfg));
 

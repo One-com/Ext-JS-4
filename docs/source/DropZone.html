@@ -8,7 +8,7 @@ By default, this class requires that child nodes accepting drop are registered w
 However a simpler way to allow a DropZone to manage any number of target elements is to configure the
 DropZone with an implementation of {@link #getTargetFromEvent} which interrogates the passed
 mouse event to see if it has taken place within an element, or class of elements. This is easily done
-by using the event&#39;s {@link Ext.EventObject#getTarget getTarget} method to identify a node based on a
+by using the event's {@link Ext.EventObject#getTarget getTarget} method to identify a node based on a
 {@link Ext.DomQuery} selector.
 
 Once the DropZone has detected through calling getTargetFromEvent, that the mouse is over
@@ -20,41 +20,41 @@ application state, and UI state.
 For example to make a GridPanel a cooperating target with the example illustrated in
 {@link Ext.dd.DragZone DragZone}, the following technique might be used:
 
-    myGridPanel.on(&#39;render&#39;, function() {
+    myGridPanel.on('render', function() {
         myGridPanel.dropZone = new Ext.dd.DropZone(myGridPanel.getView().scroller, {
 
             // If the mouse is over a grid row, return that node. This is
-            // provided as the &quot;target&quot; parameter in all &quot;onNodeXXXX&quot; node event handling functions
+            // provided as the "target" parameter in all "onNodeXXXX" node event handling functions
             getTargetFromEvent: function(e) {
                 return e.getTarget(myGridPanel.getView().rowSelector);
             },
 
             // On entry into a target node, highlight that node.
             onNodeEnter : function(target, dd, e, data){ 
-                Ext.fly(target).addCls(&#39;my-row-highlight-class&#39;);
+                Ext.fly(target).addCls('my-row-highlight-class');
             },
 
             // On exit from a target node, unhighlight that node.
             onNodeOut : function(target, dd, e, data){ 
-                Ext.fly(target).removeCls(&#39;my-row-highlight-class&#39;);
+                Ext.fly(target).removeCls('my-row-highlight-class');
             },
 
             // While over a target node, return the default drop allowed class which
-            // places a &quot;tick&quot; icon into the drag proxy.
+            // places a "tick" icon into the drag proxy.
             onNodeOver : function(target, dd, e, data){ 
                 return Ext.dd.DropZone.prototype.dropAllowed;
             },
 
             // On node drop we can interrogate the target to find the underlying
             // application object that is the real target of the dragged data.
-            // In this case, it is a Record in the GridPanel&#39;s Store.
-            // We can use the data set up by the DragZone&#39;s getDragData method to read
-            // any data we decided to attach in the DragZone&#39;s getDragData method.
+            // In this case, it is a Record in the GridPanel's Store.
+            // We can use the data set up by the DragZone's getDragData method to read
+            // any data we decided to attach in the DragZone's getDragData method.
             onNodeDrop : function(target, dd, e, data){
                 var rowIndex = myGridPanel.getView().findRowIndex(target);
                 var r = myGridPanel.getStore().getAt(rowIndex);
-                Ext.Msg.alert(&#39;Drop gesture&#39;, &#39;Dropped Record id &#39; + data.draggedRecord.id +
-                    &#39; on Record id &#39; + r.id);
+                Ext.Msg.alert('Drop gesture', 'Dropped Record id ' + data.draggedRecord.id +
+                    ' on Record id ' + r.id);
                 return true;
             }
         });
@@ -68,9 +68,9 @@ cooperates with this DropZone.
  * @param {Object} config
  * @markdown
  */
-Ext.define(&#39;Ext.dd.DropZone&#39;, {
-    extend: &#39;Ext.dd.DropTarget&#39;,
-    requires: [&#39;Ext.dd.Registry&#39;],
+Ext.define('Ext.dd.DropZone', {
+    extend: 'Ext.dd.DropTarget',
+    requires: ['Ext.dd.Registry'],
 
     <a name="method-Ext.dd.DropZone-getTargetFromEvent"></a>/**
      * Returns a custom data object associated with the DOM node that is the target of the event.  By default
@@ -132,7 +132,7 @@ Ext.define(&#39;Ext.dd.DropZone&#39;, {
     <a name="method-Ext.dd.DropZone-onNodeDrop"></a>/**
      * Called when the DropZone determines that a {@link Ext.dd.DragSource} has been dropped onto
      * the drop node.  The default implementation returns false, so it should be overridden to provide the
-     * appropriate processing of the drop event and return true so that the drag source&#39;s repair action does not run.
+     * appropriate processing of the drop event and return true so that the drag source's repair action does not run.
      * @param {Object} nodeData The custom data associated with the drop node (this is the same value returned from
      * {@link #getTargetFromEvent} for this node)
      * @param {Ext.dd.DragSource} source The drag source that was dragged over this drop zone
@@ -162,7 +162,7 @@ Ext.define(&#39;Ext.dd.DropZone&#39;, {
      * Called when the DropZone determines that a {@link Ext.dd.DragSource} has been dropped on it,
      * but not on any of its registered drop nodes.  The default implementation returns false, so it should be
      * overridden to provide the appropriate processing of the drop event if you need the drop zone itself to
-     * be able to accept drops.  It should return true when valid so that the drag source&#39;s repair action does not run.
+     * be able to accept drops.  It should return true when valid so that the drag source's repair action does not run.
      * @param {Ext.dd.DragSource} source The drag source that was dragged over this drop zone
      * @param {Event} e The event
      * @param {Object} data An object containing arbitrary data supplied by the drag source

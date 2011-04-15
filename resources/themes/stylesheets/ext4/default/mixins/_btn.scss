@@ -12,6 +12,7 @@
     $border-color-disabled: null,
     
     $padding: null,
+    $text-padding: null,
     
     $background-color: null,
     $background-color-over: null,
@@ -57,26 +58,32 @@
     
     @include x-frame('btn', $ui, $border-radius, $border-width, $padding, $background-color, $background-gradient, true);
     
-    .#{$prefix}btn-#{$ui} button {
+    .#{$prefix}btn-#{$ui} .#{$prefix}btn-inner {
         font-size: $font-size;
         font-weight: $font-weight;
         font-family: $font-family;
         color: $color;
         background-repeat: no-repeat;
+        padding: 0 $text-padding;
     }
     
-    .#{$prefix}btn-#{$ui}-disabled em {
+    .#{$prefix}btn-#{$ui}-disabled span {
         @include opacity(.4);
     }
     
-    .#{$prefix}btn-#{$ui}-icon button,
-    .#{$prefix}btn-#{$ui}-noicon button {
-        height: $icon-size;
+    .#{$prefix}btn-#{$ui}-icon,
+    .#{$prefix}btn-#{$ui}-noicon {
+        button,
+        .#{$prefix}btn-inner {
+            height: $icon-size;
+            line-height: $icon-size;
+        }
     }
 
     //icons
     .#{$prefix}btn-#{$ui}-icon {
-        button {
+        .#{$prefix}btn-inner {
+            padding: 0;
             width: $icon-size !important;
         }
     }
@@ -84,6 +91,10 @@
     .#{$prefix}btn-#{$ui}-icon-text-left {
         button {
             height: $icon-size;
+        }
+        .#{$prefix}btn-inner {
+            height: $icon-size;
+            line-height: $icon-size;
             padding-left: $icon-size + 4px;
         }
     }
@@ -91,18 +102,22 @@
     .#{$prefix}btn-#{$ui}-icon-text-right {
         button {
             height: $icon-size;
-            padding-right: $icon-size + 4px;
+        }
+        .#{$prefix}btn-inner {
+            height: $icon-size;
+            line-height: $icon-size;
+            padding-right: $icon-size + 4px !important;
         }
     }
     
     .#{$prefix}btn-#{$ui}-icon-text-top {
-        button {
+        .#{$prefix}btn-inner {
             padding-top: $icon-size + 4px;
         }
     }
     
     .#{$prefix}btn-#{$ui}-icon-text-bottom {
-        button {
+        .#{$prefix}btn-inner {
             padding-bottom: $icon-size + 4px;
         }
     }
@@ -120,7 +135,7 @@
             }
         }
 
-        button {
+        .#{$prefix}btn-inner {
             @if $color-over != $color {
                 color: $color-over;
             }
@@ -149,7 +164,7 @@
             }
         }
 
-        button {
+        .#{$prefix}btn-inner {
             @if $color-focus != $color {
                 color: $color-focus;
             }
@@ -179,7 +194,7 @@
             }
         }
 
-        button {
+        .#{$prefix}btn-inner {
             @if $color-pressed != $color {
                 color: $color-pressed;
             }
@@ -208,7 +223,7 @@
             }
         }
 
-        button {
+        .#{$prefix}btn-inner {
             @if $color-disabled != $color {
                 color: $color-disabled;
             }

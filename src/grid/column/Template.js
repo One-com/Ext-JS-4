@@ -17,7 +17,9 @@ Ext.define('Ext.grid.column.Template', {
      */
     constructor: function(cfg){
         this.callParent(arguments);
-        var tpl = this.tpl = (!Ext.isPrimitive(this.tpl) && this.tpl.compile) ? this.tpl : new Ext.XTemplate(this.tpl);
+
+        var tpl = this.tpl = (!Ext.isPrimitive(this.tpl) && this.tpl.compile) ? this.tpl : Ext.create('Ext.XTemplate', this.tpl);
+
         this.renderer = function(value, p, record) {
             return tpl.apply(record.data);
         };

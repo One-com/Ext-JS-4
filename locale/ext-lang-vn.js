@@ -14,16 +14,16 @@ Ext.onReady(function(){
        Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-       Ext.grid.GridPanel.prototype.ddText = "{0} dòng được chọn";
+    if(Ext.grid.Panel){
+       Ext.grid.Panel.prototype.ddText = "{0} dòng được chọn";
     }
 
     if(Ext.TabPanelItem){
        Ext.TabPanelItem.prototype.closeText = "Đóng thẻ này";
     }
 
-    if(Ext.form.BaseField){
-       Ext.form.BaseField.prototype.invalidText = "Giá trị của ô này không hợp lệ.";
+    if(Ext.form.field.Base){
+       Ext.form.field.Base.prototype.invalidText = "Giá trị của ô này không hợp lệ.";
     }
 
     if(Ext.LoadMask){
@@ -92,7 +92,7 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
        Ext.apply(Ext.PagingToolbar.prototype, {
           beforePageText : "Trang",
           afterPageText  : "of {0}",
@@ -106,8 +106,8 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.Text){
-       Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+       Ext.apply(Ext.form.field.Text.prototype, {
           minLengthText : "Chiều dài tối thiểu của ô này là {0}",
           maxLengthText : "Chiều dài tối đa của ô này là {0}",
           blankText     : "Ô này cần phải nhập giá trị",
@@ -116,16 +116,16 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.Number){
-       Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+       Ext.apply(Ext.form.field.Number.prototype, {
           minText : "Giá trị nhỏ nhất của ô này là {0}",
           maxText : "Giá trị lớn nhất của ô này là  {0}",
           nanText : "{0} hông phải là một số hợp lệ"
        });
     }
 
-    if(Ext.form.Date){
-       Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+       Ext.apply(Ext.form.field.Date.prototype, {
           disabledDaysText  : "Vô hiệu",
           disabledDatesText : "Vô hiệu",
           minText           : "Ngày nhập trong ô này phải sau ngày {0}",
@@ -135,15 +135,15 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.ComboBox){
-       Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+       Ext.apply(Ext.form.field.ComboBox.prototype, {
           loadingText       : "Đang tải...",
           valueNotFoundText : undefined
        });
     }
 
-    if(Ext.form.VTypes){
-       Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+       Ext.apply(Ext.form.field.VTypes, {
           emailText    : 'Giá trị của ô này phải là một địa chỉ email có dạng như "ten@abc.com"',
           urlText      : 'Giá trị của ô này phải là một địa chỉ web(URL) hợp lệ, có dạng như "http:/'+'/www.example.com"',
           alphaText    : 'Ô này chỉ được nhập các kí tự và gạch dưới(_)',
@@ -151,8 +151,8 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.grid.HeaderContainer){
-       Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+       Ext.apply(Ext.grid.header.Container.prototype, {
           sortAscText  : "Tăng dần",
           sortDescText : "Giảm dần",
           lockText     : "Khóa cột",

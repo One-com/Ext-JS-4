@@ -31,6 +31,7 @@ Ext.onReady(function () {
         items: {
             id: 'chartCmp',
             xtype: 'chart',
+            style: 'background:#fff',
             theme: 'Category2',
             insetPadding: 20,
             animate: true,

@@ -12,16 +12,16 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} 개가 선택되었습니다.";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} 개가 선택되었습니다.";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "닫기";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "올바른 값이 아닙니다.";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "올바른 값이 아닙니다.";
     }
 
     if(Ext.LoadMask){
@@ -97,7 +97,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "페이지",
             afterPageText  : "/ {0}",
@@ -111,8 +111,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "최소길이는 {0}입니다.",
             maxLengthText : "최대길이는 {0}입니다.",
             blankText     : "값을 입력해주세요.",
@@ -121,16 +121,16 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "최소값은 {0}입니다.",
             maxText : "최대값은 {0}입니다.",
             nanText : "{0}는 올바른 숫자가 아닙니다."
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "비활성",
             disabledDatesText : "비활성",
             minText           : "{0}일 이후여야 합니다.",
@@ -140,15 +140,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "로딩중...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : '이메일 주소 형식에 맞게 입력해야합니다. (예: "user@example.com")',
             urlText      : 'URL 형식에 맞게 입력해야합니다. (예: "http:/'+'/www.example.com")',
             alphaText    : '영문, 밑줄(_)만 입력할 수 있습니다.',
@@ -156,8 +156,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'URL을 입력해주세요:',
             buttonTips : {
                 bold : {
@@ -234,8 +234,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "오름차순 정렬",
             sortDescText : "내림차순 정렬",
             lockText     : "칼럼 잠금",

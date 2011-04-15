@@ -4,13 +4,13 @@
  * A single item of a legend (marker plus label)
  * @constructor
  */
-Ext.define(&#39;Ext.chart.LegendItem&#39;, {
+Ext.define('Ext.chart.LegendItem', {
 
     /* Begin Definitions */
 
-    extend: &#39;Ext.draw.SpriteGroup&#39;,
+    extend: 'Ext.draw.SpriteGroup',
 
-    requires: [&#39;Ext.chart.Shapes&#39;],
+    requires: ['Ext.chart.Shapes'],
 
     /* End Definitions */
 
@@ -47,49 +47,49 @@ Ext.define(&#39;Ext.chart.LegendItem&#39;, {
             return (Ext.isArray(val) ? val[idx] : val);
         }
         
-        label = me.add(&#39;label&#39;, surface.add({
-            type: &#39;text&#39;,
+        label = me.add('label', surface.add({
+            type: 'text',
             x: 20,
             y: 0,
             zIndex: z || 0,
             font: legend.labelFont,
-            text: getSeriesProp(&#39;title&#39;) || getSeriesProp(&#39;yField&#39;)
+            text: getSeriesProp('title') || getSeriesProp('yField')
         }));
 
         // Line series - display as short line with optional marker in the middle
-        if (seriesType === &#39;line&#39; || seriesType === &#39;scatter&#39;) {
-            if(seriesType === &#39;line&#39;) {
-                me.add(&#39;line&#39;, surface.add({
-                    type: &#39;path&#39;,
-                    path: &#39;M0.5,0.5L16.5,0.5&#39;,
+        if (seriesType === 'line' || seriesType === 'scatter') {
+            if(seriesType === 'line') {
+                me.add('line', surface.add({
+                    type: 'path',
+                    path: 'M0.5,0.5L16.5,0.5',
                     zIndex: z,
-                    &quot;stroke-width&quot;: series.lineWidth,
-                    &quot;stroke-linejoin&quot;: &quot;round&quot;,
-                    &quot;stroke-dasharray&quot;: series.dash,
-                    stroke: seriesStyle.stroke || &#39;#000&#39;,
+                    "stroke-width": series.lineWidth,
+                    "stroke-linejoin": "round",
+                    "stroke-dasharray": series.dash,
+                    stroke: seriesStyle.stroke || '#000',
                     style: {
-                        cursor: &#39;pointer&#39;
+                        cursor: 'pointer'
                     }
                 }));
             }
-            if (series.showMarkers || seriesType === &#39;scatter&#39;) {
+            if (series.showMarkers || seriesType === 'scatter') {
                 markerCfg = Ext.apply(series.markerStyle, series.markerCfg || {});
-                me.add(&#39;marker&#39;, Ext.chart.Shapes[markerCfg.type](surface, {
+                me.add('marker', Ext.chart.Shapes[markerCfg.type](surface, {
                     fill: markerCfg.fill,
                     x: 8.5,
                     y: 0.5,
                     zIndex: z,
                     radius: markerCfg.radius || markerCfg.size,
                     style: {
-                        cursor: &#39;pointer&#39;
+                        cursor: 'pointer'
                     }
                 }));
             }
         }
         // All other series types - display as filled box
         else {
-            me.add(&#39;box&#39;, surface.add({
-                type: &#39;rect&#39;,
+            me.add('box', surface.add({
+                type: 'rect',
                 zIndex: z,
                 x: 0,
                 y: 0,
@@ -97,7 +97,7 @@ Ext.define(&#39;Ext.chart.LegendItem&#39;, {
                 height: 12,
                 fill: series.getLegendColor(index),
                 style: {
-                    cursor: &#39;pointer&#39;
+                    cursor: 'pointer'
                 }
             }));
         }
@@ -108,35 +108,35 @@ Ext.define(&#39;Ext.chart.LegendItem&#39;, {
         
         bbox = me.getBBox();
         
-        mask = me.add(&#39;mask&#39;, surface.add({
-            type: &#39;rect&#39;,
+        mask = me.add('mask', surface.add({
+            type: 'rect',
             x: bbox.x,
             y: bbox.y,
             width: bbox.width || 20,
             height: bbox.height || 20,
             zIndex: (z || 0) + 1000,
-            fill: &#39;#f00&#39;,
+            fill: '#f00',
             opacity: 0,
             style: {
-                &#39;cursor&#39;: &#39;pointer&#39;
+                'cursor': 'pointer'
             }
         }));
 
         //add toggle listener
-        me.on(&#39;mouseover&#39;, function() {
+        me.on('mouseover', function() {
             label.setStyle({
-                &#39;font-weight&#39;: &#39;bold&#39;
+                'font-weight': 'bold'
             });
             mask.setStyle({
-                &#39;cursor&#39;: &#39;pointer&#39;
+                'cursor': 'pointer'
             });
             series._index = index;
             series.highlightItem();
         }, me);
 
-        me.on(&#39;mouseout&#39;, function() {
+        me.on('mouseout', function() {
             label.setStyle({
-                &#39;font-weight&#39;: &#39;normal&#39;
+                'font-weight': 'normal'
             });
             series._index = index;
             series.unHighlightItem();
@@ -149,7 +149,7 @@ Ext.define(&#39;Ext.chart.LegendItem&#39;, {
             }, true);
         }
 
-        me.on(&#39;mousedown&#39;, function() {
+        me.on('mousedown', function() {
             if (!toggle) {
                 series.hideAll();
                 label.setAttributes({
@@ -167,9 +167,9 @@ Ext.define(&#39;Ext.chart.LegendItem&#39;, {
     },
 
     <a name="method-Ext.chart.LegendItem-updatePosition"></a>/**
-     * Update the positions of all this item&#39;s sprites to match the root position
+     * Update the positions of all this item's sprites to match the root position
      * of the legend box.
-     * @param {Object} relativeTo (optional) If specified, this object&#39;s &#39;x&#39; and &#39;y&#39; values will be used
+     * @param {Object} relativeTo (optional) If specified, this object's 'x' and 'y' values will be used
      *                 as the reference point for the relative positioning. Defaults to the Legend.
      */
     updatePosition: function(relativeTo) {
@@ -181,16 +181,16 @@ Ext.define(&#39;Ext.chart.LegendItem&#39;, {
         if (!relativeTo) {
             relativeTo = me.legend;
         }
-        for (; i &lt; ln; i++) {
+        for (; i < ln; i++) {
             item = items[i];
             switch (item.type) {
-                case &#39;text&#39;:
+                case 'text':
                     item.setAttributes({
                         x: 20 + relativeTo.x + me.x,
                         y: relativeTo.y + me.y
                     }, true);
                     break;
-                case &#39;rect&#39;:
+                case 'rect':
                     item.setAttributes({
                         translate: {
                             x: relativeTo.x + me.x,

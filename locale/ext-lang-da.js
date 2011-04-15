@@ -15,16 +15,16 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} markerede rækker";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} markerede rækker";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "Luk denne fane";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "Værdien i dette felt er ugyldig";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "Værdien i dette felt er ugyldig";
     }
 
     if(Ext.LoadMask){
@@ -128,7 +128,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Side",
             afterPageText  : "af {0}",
@@ -142,8 +142,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Minimum længden for dette felt er {0}",
             maxLengthText : "Maksimum længden for dette felt er {0}",
             blankText     : "Dette felt skal udfyldes",
@@ -152,16 +152,16 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Mindste-værdien for dette felt er {0}",
             maxText : "Maksimum-værdien for dette felt er {0}",
             nanText : "{0} er ikke et tilladt nummer"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Inaktiveret",
             disabledDatesText : "Inaktiveret",
             minText           : "Datoen i dette felt skal være efter {0}",
@@ -172,15 +172,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "Henter...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Dette felt skal være en email adresse i formatet "xxx@yyy.zzz"',
             urlText      : 'Dette felt skal være en URL i formatet "http:/'+'/xxx.yyy"',
             alphaText    : 'Dette felt kan kun indeholde bogstaver og "_" (understregning)',
@@ -188,8 +188,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'Indtast URL:',
             buttonTips : {
                 bold : {
@@ -266,8 +266,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Sortér stigende",
             sortDescText : "Sortér faldende",
             lockText     : "Lås kolonne",

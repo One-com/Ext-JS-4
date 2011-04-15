@@ -3,23 +3,23 @@
  * @extends Ext.panel.Panel
  *
  * Shows the detail of a feed post
- * 
+ *
  * @constructor
  * Create a new Feed Post
  * @param {Object} config The config object
  */
 Ext.define('FeedViewer.FeedPost', {
-    
+
     extend: 'Ext.panel.Panel',
     requires: ['Ext.util.KeyNav'],
     alias: 'widget.feedpost',
     cls: 'preview',
     autoScroll: true,
-    
+
     initComponent: function(){
         Ext.apply(this, {
             dockedItems: [this.createToolbar()],
-            tpl: new Ext.XTemplate(
+            tpl: Ext.create('Ext.XTemplate',
                 '<div class="post-data">',
                     '<span class="post-date">{pubDate:this.formatDate}</span>',
                     '<h3 class="post-title">{title}</h3>',
@@ -30,23 +30,23 @@ Ext.define('FeedViewer.FeedPost', {
                     getBody: function(value, all){
                         return Ext.util.Format.stripScripts(value);
                     },
-                    
+
                     defaultValue: function(v){
                         return v ? v : 'Unknown';
                     },
-                 
+
                     formatDate: function(value){
                         if (!value) {
                             return '';
                         }
                         return Ext.Date.format(value, 'M j, Y, g:i a');
                     }
-                } 
+                }
              )
         });
         this.callParent(arguments);
     },
-    
+
     afterRender: function() {
         this.callParent(arguments);
         this.keyNav = Ext.create('Ext.util.KeyNav', this.el, {
@@ -58,20 +58,20 @@ Ext.define('FeedViewer.FeedPost', {
             scope: this
         });
     },
-    
+
     onDestroy: function() {
         Ext.destroy(this.keyNav);
         delete this.keyNav;
         this.callParent(arguments);
     },
-    
+
     onNavKey: function(e) {
         var body = this.body,
             fs = parseInt(body.getStyle('font-size'), 10) + 10,
             height = body.getHeight(),
             amount = 0,
             dir = 'b';
-            
+
         switch (e.getKey()) {
             case Ext.EventObject.DOWN:
                 amount = fs;
@@ -89,10 +89,10 @@ Ext.define('FeedViewer.FeedPost', {
                 dir = 't';
                 break;
         }
-        
+
         body.scroll(dir, amount);
     },
-    
+
     /**
      * Set the active post
      * @param {Ext.data.Model} rec The record
@@ -101,7 +101,7 @@ Ext.define('FeedViewer.FeedPost', {
         this.active = rec;
         this.update(rec.data);
     },
-    
+
     /**
      * Create the top toolbar
      * @private
@@ -127,7 +127,7 @@ Ext.define('FeedViewer.FeedPost', {
             items: items
         });
     },
-    
+
     /**
      * Navigate to the active post in a new window
      * @private
@@ -135,7 +135,7 @@ Ext.define('FeedViewer.FeedPost', {
     goToPost: function(){
         window.open(this.active.get('link'));
     },
-    
+
     /**
      * Open the post in a new tab
      * @private
@@ -143,5 +143,5 @@ Ext.define('FeedViewer.FeedPost', {
     openTab: function(){
         this.fireEvent('opentab', this, this.active);
     }
-    
+
 });

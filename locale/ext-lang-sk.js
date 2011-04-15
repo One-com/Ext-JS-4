@@ -13,16 +13,16 @@ Ext.onReady(function() {
        Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-       Ext.grid.GridPanel.prototype.ddText = "{0} označených riadkov";
+    if(Ext.grid.Panel){
+       Ext.grid.Panel.prototype.ddText = "{0} označených riadkov";
     }
 
     if(Ext.TabPanelItem){
        Ext.TabPanelItem.prototype.closeText = "Zavrieť túto záložku";
     }
 
-    if(Ext.form.BaseField){
-       Ext.form.BaseField.prototype.invalidText = "Hodnota v tomto poli je nesprávna";
+    if(Ext.form.field.Base){
+       Ext.form.field.Base.prototype.invalidText = "Hodnota v tomto poli je nesprávna";
     }
 
     if(Ext.LoadMask){
@@ -92,7 +92,7 @@ Ext.onReady(function() {
     }
 
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
        Ext.apply(Ext.PagingToolbar.prototype, {
           beforePageText : "Strana",
           afterPageText  : "z {0}",
@@ -107,8 +107,8 @@ Ext.onReady(function() {
     }
 
 
-    if(Ext.form.Text){
-       Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+       Ext.apply(Ext.form.field.Text.prototype, {
           minLengthText : "Minimálna dĺžka pre toto pole je {0}",
           maxLengthText : "Maximálna dĺžka pre toto pole je {0}",
           blankText     : "Toto pole je povinné",
@@ -117,16 +117,16 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.form.Number){
-       Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+       Ext.apply(Ext.form.field.Number.prototype, {
           minText : "Minimálna hodnota pre toto pole je {0}",
           maxText : "Maximálna hodnota pre toto pole je {0}",
           nanText : "{0} je nesprávne číslo"
        });
     }
 
-    if(Ext.form.Date){
-       Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+       Ext.apply(Ext.form.field.Date.prototype, {
           disabledDaysText  : "Zablokované",
           disabledDatesText : "Zablokované",
           minText           : "Dátum v tomto poli musí byť až po {0}",
@@ -136,15 +136,15 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.form.ComboBox){
-       Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+       Ext.apply(Ext.form.field.ComboBox.prototype, {
           loadingText       : "Nahrávam...",
           valueNotFoundText : undefined
        });
     }
 
-    if(Ext.form.VTypes){
-       Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+       Ext.apply(Ext.form.field.VTypes, {
           emailText    : 'Toto pole musí byť e-mailová adresa vo formáte "user@example.com"',
           urlText      : 'Toto pole musí byť URL vo formáte "http:/'+'/www.example.com"',
           alphaText    : 'Toto pole može obsahovať iba písmená a znak _',
@@ -152,8 +152,8 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.grid.HeaderContainer){
-       Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+       Ext.apply(Ext.grid.header.Container.prototype, {
           sortAscText  : "Zoradiť vzostupne",
           sortDescText : "Zoradiť zostupne",
           lockText     : "Zamknúť stľpec",

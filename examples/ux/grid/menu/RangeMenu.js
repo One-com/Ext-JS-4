@@ -12,10 +12,10 @@ Ext.define('Ext.ux.grid.menu.RangeMenu', {
      * @cfg {String} fieldCls
      * The Class to use to construct each field item within this menu
      * Defaults to:<pre>
-     * fieldCls : Ext.form.Number
+     * fieldCls : Ext.form.field.Number
      * </pre>
      */
-    fieldCls : 'Ext.form.Number',
+    fieldCls : 'Ext.form.field.Number',
 
     /**
      * @cfg {Object} fieldCfg
@@ -125,7 +125,7 @@ menuItemCfgs : {
             'update'
         );
       
-        me.updateTask = new Ext.util.DelayedTask(me.fireUpdate, me);
+        me.updateTask = Ext.create('Ext.util.DelayedTask', me.fireUpdate, me);
     
         for (i = 0, len = me.menuItems.length; i < len; i++) {
             item = me.menuItems[i];
@@ -249,7 +249,7 @@ menuItemCfgs : {
      * @cfg {Ext.XTemplate} iconTpl
      * A template for generating the label for each field in the menu
      */
-    this.prototype.iconTpl = new Ext.XTemplate(
+    this.prototype.iconTpl = Ext.create('Ext.XTemplate',
         '<img src="{src}" alt="{text}" class="' + Ext.baseCSSPrefix + 'menu-item-icon ux-rangemenu-icon {cls}" />'
     );
 

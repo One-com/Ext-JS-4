@@ -14,6 +14,7 @@ Ext.onReady(function() {
                     align: 'stretch'
                 },
                 bodyBorder: 0,
+                bodyPadding: 10,
 
                 fieldDefaults: {
                     labelAlign: 'top',
@@ -93,7 +94,6 @@ Ext.onReady(function() {
             win = Ext.widget('window', {
                 title: 'Contact Us',
                 closeAction: 'hide',
-                bodyPadding: 10,
                 width: 400,
                 height: 400,
                 minHeight: 400,

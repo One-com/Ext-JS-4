@@ -3,10 +3,10 @@ Ext.Loader.setConfig({enabled: true});
 Ext.Loader.setPath('Ext.ux', '../ux');
 
 Ext.require([
-    'Ext.tip.QuickTips',
+    'Ext.tip.QuickTipManager',
     'Ext.container.Viewport',
     'Ext.layout.*',
-    'Ext.form.FormPanel',
+    'Ext.form.Panel',
     'Ext.form.Label',
     'Ext.grid.*',
     'Ext.data.*',
@@ -20,7 +20,7 @@ Ext.require([
 //
 Ext.onReady(function(){
  
-    Ext.tip.QuickTips.init();
+    Ext.tip.QuickTipManager.init();
 
     // This is an inner body element within the Details panel created to provide a "slide in" effect
     // on the panel body without affecting the body's box itself.  This element is created on
@@ -66,7 +66,7 @@ Ext.onReady(function(){
     });
     
     // Go ahead and create the TreePanel now so that we can use it below
-     var treePanel = Ext.create('Ext.tree.TreePanel', {
+     var treePanel = Ext.create('Ext.tree.Panel', {
         id: 'tree-panel',
         title: 'Sample Layouts',
         region:'north',
@@ -74,7 +74,7 @@ Ext.onReady(function(){
         height: 360,
         minSize: 150,
         rootVisible: false,
-        // autoScroll: true,
+        autoScroll: true,
         store: store
     });
     
@@ -87,7 +87,7 @@ Ext.onReady(function(){
                 bd.update('').setStyle('background','#fff');
                 detailEl = bd.createChild(); //create default empty div
             }
-            detailEl.hide().update(Ext.getDom(record.getId() + '-details').innerHTML).slideIn('l', {stopFx:true,duration: 200});
+            detailEl.hide().update(Ext.getDom(record.getId() + '-details').innerHTML).slideIn('l', {stopAnimation:true,duration: 200});
         }
     });
     

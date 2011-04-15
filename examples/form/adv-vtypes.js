@@ -5,7 +5,7 @@ Ext.require([
 Ext.onReady(function() {
 
     // Add the additional 'advanced' VTypes
-    Ext.apply(Ext.form.VTypes, {
+    Ext.apply(Ext.form.field.VTypes, {
         daterange: function(val, field) {
             var date = field.parseDate(val);
 
@@ -31,6 +31,8 @@ Ext.onReady(function() {
             return true;
         },
 
+        daterangeText: 'Start date must be less than end date',
+
         password: function(val, field) {
             if (field.initialPassField) {
                 var pwd = field.up('form').down('#' + field.initialPassField);
@@ -46,7 +48,7 @@ Ext.onReady(function() {
      * ================  Date Range  =======================
      */
 
-    var dr = new Ext.FormPanel({
+    var dr = Ext.create('Ext.FormPanel', {
         renderTo: 'dr',
         frame: true,
         title: 'Date Range',
@@ -84,7 +86,7 @@ Ext.onReady(function() {
      * ================  Password Verification =======================
      */
 
-    var pwd = new Ext.FormPanel({
+    var pwd = Ext.create('Ext.FormPanel', {
         renderTo: 'pw',
         frame: true,
         title: 'Password Verification',

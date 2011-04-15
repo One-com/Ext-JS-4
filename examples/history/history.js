@@ -70,7 +70,9 @@ Ext.onReady(function() {
             title: 'Tab 1',
             id: 'tab1',
             activeTab: 0,
-            padding: 0,
+            padding: 5,
+            border: true,
+            plain: true,
             
             defaults: {
                 padding: 10

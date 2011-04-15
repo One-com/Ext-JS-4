@@ -49,13 +49,13 @@ Ext.regModel('State', {
 });
 
 // The data store holding the states
-var store = new Ext.data.Store({
+var store = Ext.create('Ext.data.Store', {
     model: 'State',
     data: states
 });
 
 // Simple ComboBox using the data store
-var simpleCombo = new Ext.form.ComboBox({
+var simpleCombo = Ext.create('Ext.form.field.ComboBox', {
     fieldLabel: 'Select a single state',
     renderTo: 'simpleCombo',
     displayField: 'name',
@@ -85,13 +85,13 @@ Ext.regModel('State', {
 });
 
 // The data store holding the states
-var store = new Ext.data.Store({
+var store = Ext.create('Ext.data.Store', {
     model: 'State',
     data: states
 });
 
 // ComboBox with a custom item template
-var customTplCombo = new Ext.form.ComboBox({
+var customTplCombo = Ext.create('Ext.form.field.ComboBox', {
     fieldLabel: 'Select a single state',
     renderTo: 'customTplCombo',
     displayField: 'name',
@@ -100,7 +100,7 @@ var customTplCombo = new Ext.form.ComboBox({
     store: store,
     queryMode: 'local',
     getInnerTpl: function() {
-        return '&lt;div ext:qtip="{name}. {slogan}">{name} ({abbr})&lt;/div>';
+        return '&lt;div data-qtip="{name}. {slogan}">{name} ({abbr})&lt;/div>';
     }
 });</pre>
 </div>
@@ -121,13 +121,13 @@ Ext.regModel('State', {
 });
 
 // The data store holding the states
-var store = new Ext.data.Store({
+var store = Ext.create('Ext.data.Store', {
     model: 'State',
     data: states
 });
 
 // ComboBox with multiple selection enabled
-var multiCombo = new Ext.form.ComboBox({
+var multiCombo = Ext.create('Ext.form.field.ComboBox', {
     fieldLabel: 'Select multiple states',
     renderTo: 'multiSelectCombo',
     multiSelect: true,

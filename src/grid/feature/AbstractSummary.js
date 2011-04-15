@@ -59,7 +59,8 @@ Ext.define('Ext.grid.feature.AbstractSummary', {
         inner = inner.replace('{{id}}', '{gridSummaryValue}');
         inner = inner.replace(this.nestedIdRe, '{id$1}');  
         inner = inner.replace('{[this.embedRowCls()]}', '{rowCls}');
-        inner = new Ext.XTemplate(inner);
+        inner = inner.replace('{[this.embedRowAttr()]}', '{rowAttr}');
+        inner = Ext.create('Ext.XTemplate', inner);
         
         return inner.applyTemplate({
             columns: this.getPrintData(index)

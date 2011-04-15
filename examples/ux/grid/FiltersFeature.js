@@ -30,8 +30,8 @@ Filters automatically reconfigure when the grid 'reconfigure' event fires.
 Filter information will be persisted across page loads by specifying a `stateId`
 in the Grid configuration.
 
-The filter collection binds to the {@link Ext.grid.GridPanel#beforestaterestore beforestaterestore}
-and {@link Ext.grid.GridPanel#beforestatesave beforestatesave} events in order to be stateful.
+The filter collection binds to the {@link Ext.grid.Panel#beforestaterestore beforestaterestore}
+and {@link Ext.grid.Panel#beforestatesave beforestatesave} events in order to be stateful.
 
 ##GridPanel Changes:##
 
@@ -48,7 +48,7 @@ and {@link Ext.grid.GridPanel#beforestatesave beforestatesave} events in order t
 
 #Example usage:#
 
-    var store = new Ext.data.Store({
+    var store = Ext.create('Ext.data.Store', {
         pageSize: 15
         ...
     });
@@ -82,13 +82,13 @@ and {@link Ext.grid.GridPanel#beforestatesave beforestatesave} events in order t
         }]
     };
 
-    var grid = new Ext.grid.GridPanel({
+    var grid = Ext.create('Ext.grid.Panel', {
          store: store,
          columns: ...,
          filters: [filtersCfg],
          height: 400,
          width: 700,
-         bbar: new Ext.PagingToolbar({
+         bbar: Ext.create('Ext.PagingToolbar', {
              store: store
          })
     });
@@ -181,10 +181,10 @@ Ext.define('Ext.ux.grid.FiltersFeature', {
         config = config || {};
         Ext.apply(me, config);
 
-        me.deferredUpdate = new Ext.util.DelayedTask(me.reload, me);
+        me.deferredUpdate = Ext.create('Ext.util.DelayedTask', me.reload, me);
 
         // Init filters
-        me.filters = new Ext.util.MixedCollection(false, function (o) {
+        me.filters = Ext.create('Ext.util.MixedCollection', false, function (o) {
             return o ? o.dataIndex : null;
         });
         me.addFilters(config.filters);
@@ -316,7 +316,7 @@ Ext.define('Ext.ux.grid.FiltersFeature', {
         var me = this;
         Ext.destroyMembers(me, 'menuItem', 'sep');
         me.removeAll();
-        me.purgeListeners();
+        me.clearListeners();
     },
 
     /**

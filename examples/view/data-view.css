@@ -5,7 +5,13 @@
 #images-view .thumb{
     background: #dddddd;
     padding: 3px;
+    padding-bottom: 0;
 }
+
+.x-quirks #images-view .thumb {
+    padding-bottom: 3px;
+}
+
 #images-view .thumb img{
     height: 60px;
     width: 80px;

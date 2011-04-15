@@ -2,9 +2,9 @@
  * @class Ext.util.Floating
  * A mixin to add floating capability to a Component
  */
-Ext.define(&#39;Ext.util.Floating&#39;, {
+Ext.define('Ext.util.Floating', {
 
-    uses: [&#39;Ext.Layer&#39;],
+    uses: ['Ext.Layer'],
 
     <a name="cfg-Ext.util.Floating-focusOnToFront"></a>/**
      * @cfg {Boolean} focusOnToFront
@@ -15,18 +15,18 @@ Ext.define(&#39;Ext.util.Floating&#39;, {
 
     <a name="cfg-Ext.util.Floating-shadow"></a>/**
      * @cfg {String/Boolean} shadow Specifies whether the floating component should be given a shadow. Set to
-     * &lt;tt&gt;true&lt;/tt&gt; to automatically create an {@link Ext.Shadow}, or a string indicating the
-     * shadow&#39;s display {@link Ext.Shadow#mode}. Set to &lt;tt&gt;false&lt;/tt&gt; to disable the shadow.
-     * (Defaults to &lt;tt&gt;&#39;sides&#39;&lt;/tt&gt;.)
+     * <tt>true</tt> to automatically create an {@link Ext.Shadow}, or a string indicating the
+     * shadow's display {@link Ext.Shadow#mode}. Set to <tt>false</tt> to disable the shadow.
+     * (Defaults to <tt>'sides'</tt>.)
      */
-    shadow: &#39;sides&#39;,
+    shadow: 'sides',
 
     constructor: function(config) {
         this.floating = true;
-        this.el = new Ext.Layer(Ext.apply({}, config, {
+        this.el = Ext.create('Ext.Layer', Ext.apply({}, config, {
             hideMode: this.hideMode,
             hidden: this.hidden,
-            shadow: Ext.isDefined(this.shadow) ? this.shadow : &#39;sides&#39;,
+            shadow: Ext.isDefined(this.shadow) ? this.shadow : 'sides',
             shadowOffset: this.shadowOffset,
             constrain: false,
             shim: this.shim === false ? false : undefined
@@ -54,10 +54,10 @@ Ext.define(&#39;Ext.util.Floating&#39;, {
     },
 
     <a name="method-Ext.util.Floating-doConstrain"></a>/**
-     * &lt;p&gt;Moves this floating Component into a constrain region.&lt;/p&gt;
-     * &lt;p&gt;By default, this Component is constrained to be within the container it was added to, or the element
-     * it was rendered to.&lt;/p&gt;
-     * &lt;p&gt;An alternative constraint may be passed.&lt;/p&gt;
+     * <p>Moves this floating Component into a constrain region.</p>
+     * <p>By default, this Component is constrained to be within the container it was added to, or the element
+     * it was rendered to.</p>
+     * <p>An alternative constraint may be passed.</p>
      * @param {Mixed} constrainTo Optional. The Element or {@link Ext.util.Region Region} into which this Component is to be constrained.
      */
     doConstrain: function(constrainTo) {
@@ -72,7 +72,7 @@ Ext.define(&#39;Ext.util.Floating&#39;, {
             } else {
                 constrainEl = me.el;
             }
-            vector = constrainEl.getConstrainVector(constrainTo || (me.floatParent &amp;&amp; me.floatParent.getTargetEl()) || me.container);
+            vector = constrainEl.getConstrainVector(constrainTo || (me.floatParent && me.floatParent.getTargetEl()) || me.container);
             if (vector) {
                 xy = me.getPosition();
                 xy[0] += vector[0];
@@ -85,7 +85,7 @@ Ext.define(&#39;Ext.util.Floating&#39;, {
     <a name="method-Ext.util.Floating-alignTo"></a>/**
      * Aligns this floating Component to the specified element
      * @param {Mixed} element The element to align to.
-     * @param {String} position (optional, defaults to &quot;tl-bl?&quot;) The position to align to (see {@link Ext.core.Element#alignTo} for more details).
+     * @param {String} position (optional, defaults to "tl-bl?") The position to align to (see {@link Ext.core.Element#alignTo} for more details).
      * @param {Array} offsets (optional) Offset the positioning by [x, y]
      * @return {Component} this
      */
@@ -96,9 +96,9 @@ Ext.define(&#39;Ext.util.Floating&#39;, {
     },
 
     <a name="method-Ext.util.Floating-toFront"></a>/**
-     * &lt;p&gt;Brings this floating Component to the front of any other visible, floating Components managed by the same {@link Ext.ZIndexManager ZIndexManager}&lt;/p&gt;
-     * &lt;p&gt;If this Component is modal, inserts the modal mask just below this Component in the z-index stack.&lt;/p&gt;
-     * @param {Boolean} preventFocus (optional) Specify &lt;code&gt;true&lt;/code&gt; to prevent the Component from being focused.
+     * <p>Brings this floating Component to the front of any other visible, floating Components managed by the same {@link Ext.ZIndexManager ZIndexManager}</p>
+     * <p>If this Component is modal, inserts the modal mask just below this Component in the z-index stack.</p>
+     * @param {Boolean} preventFocus (optional) Specify <code>true</code> to prevent the Component from being focused.
      * @return {Component} this
      */
     toFront: function(preventFocus) {
@@ -128,10 +128,10 @@ Ext.define(&#39;Ext.util.Floating&#39;, {
             if (!this.maximized) {
                 this.el.enableShadow(true);
             }
-            this.fireEvent(&#39;activate&#39;, this);
+            this.fireEvent('activate', this);
         } else {
             this.el.disableShadow();
-            this.fireEvent(&#39;deactivate&#39;, this);
+            this.fireEvent('deactivate', this);
         }
     },
 
@@ -149,7 +149,7 @@ Ext.define(&#39;Ext.util.Floating&#39;, {
      * @return {Component} this
      */
     center: function() {
-        var xy = this.el.getAlignToXY(this.container, &#39;c-c&#39;);
+        var xy = this.el.getAlignToXY(this.container, 'c-c');
         this.setPagePosition(xy);
         return this;
     },
@@ -163,7 +163,10 @@ Ext.define(&#39;Ext.util.Floating&#39;, {
 
     // private
     fitContainer: function() {
-        var vs = this.container.getViewSize(false);
-        this.setSize(vs);
+        var parent = this.floatParent,
+            container = parent ? parent.getTargetEl() : this.container,
+            size = container.getViewSize(false);
+            
+        this.setSize(size);
     }
 });￿</pre></pre></body></html>

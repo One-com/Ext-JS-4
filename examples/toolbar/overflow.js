@@ -5,7 +5,7 @@ Ext.onReady(function(){
         Ext.example.msg('<b>Action</b>', 'You clicked "' + action + '"');
     };
 
-    new Ext.Window({
+    Ext.create('Ext.Window', {
         title: 'Standard',
         closable: false,
         height:250,
@@ -13,7 +13,7 @@ Ext.onReady(function(){
         bodyStyle: 'padding:10px',
         contentEl: 'content',
         autoScroll: true,
-        tbar: new Ext.toolbar.Toolbar({
+        tbar: Ext.create('Ext.toolbar.Toolbar', {
             layout: {
                 overflowHandler: 'Menu'
             },

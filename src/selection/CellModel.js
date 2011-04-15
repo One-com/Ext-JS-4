@@ -78,7 +78,7 @@ Ext.define('Ext.selection.CellModel', {
 
         // view.el has tabIndex -1 to allow for
         // keyboard events to be passed to it.
-        me.keyNav = new Ext.util.KeyNav(view.el, {
+        me.keyNav = Ext.create('Ext.util.KeyNav', view.el, {
             up: me.onKeyUp,
             down: me.onKeyDown,
             right: me.onKeyRight,
@@ -94,7 +94,7 @@ Ext.define('Ext.selection.CellModel', {
     
     getActiveHeader: function() {
         if (this.position) {
-            return this.getHeaderCt().getHeaderByIndex(this.position.column);
+            return this.getHeaderCt().getHeaderAtIndex(this.position.column);
         }
         return false;
 

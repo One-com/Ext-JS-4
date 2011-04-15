@@ -3,16 +3,16 @@
  * @class Ext.data.Request
  * @extends Object
  * 
- * &lt;p&gt;Simple class that represents a Request that will be made by any {@link Ext.data.ServerProxy} subclass.
+ * <p>Simple class that represents a Request that will be made by any {@link Ext.data.proxy.Server} subclass.
  * All this class does is standardize the representation of a Request as used by any ServerProxy subclass,
- * it does not contain any actual logic or perform the request itself.&lt;/p&gt;
+ * it does not contain any actual logic or perform the request itself.</p>
  * 
  * @constructor
  * @param {Object} config Optional config object
  */
-Ext.define(&#39;Ext.data.Request&#39;, {
+Ext.define('Ext.data.Request', {
     <a name="cfg-Ext.data.Request-action"></a>/**
-     * @cfg {String} action The name of the action this Request represents. Usually one of &#39;create&#39;, &#39;read&#39;, &#39;update&#39; or &#39;destroy&#39;
+     * @cfg {String} action The name of the action this Request represents. Usually one of 'create', 'read', 'update' or 'destroy'
      */
     action: undefined,
     
@@ -22,9 +22,9 @@ Ext.define(&#39;Ext.data.Request&#39;, {
     params: undefined,
     
     <a name="cfg-Ext.data.Request-method"></a>/**
-     * @cfg {String} method The HTTP method to use on this Request (defaults to &#39;GET&#39;). Should be one of &#39;GET&#39;, &#39;POST&#39;, &#39;PUT&#39; or &#39;DELETE&#39;
+     * @cfg {String} method The HTTP method to use on this Request (defaults to 'GET'). Should be one of 'GET', 'POST', 'PUT' or 'DELETE'
      */
-    method: &#39;GET&#39;,
+    method: 'GET',
     
     <a name="cfg-Ext.data.Request-url"></a>/**
      * @cfg {String} url The url to access on this Request

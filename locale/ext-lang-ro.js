@@ -14,16 +14,16 @@ Ext.onReady(function() {
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Încărcare...</div>';
     }
 
-    if(Ext.grid.GridPanel){
-       Ext.grid.GridPanel.prototype.ddText = "{0} rând(uri) selectate";
+    if(Ext.grid.Panel){
+       Ext.grid.Panel.prototype.ddText = "{0} rând(uri) selectate";
     }
 
     if(Ext.TabPanelItem){
        Ext.TabPanelItem.prototype.closeText = "Închide acest tab";
     }
 
-    if(Ext.form.BaseField){
-       Ext.form.BaseField.prototype.invalidText = "Valoarea acestui câmp este invalidă";
+    if(Ext.form.field.Base){
+       Ext.form.field.Base.prototype.invalidText = "Valoarea acestui câmp este invalidă";
     }
 
     if(Ext.LoadMask){
@@ -127,7 +127,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
       Ext.apply(Ext.PagingToolbar.prototype, {
         beforePageText : "Pagina",
         afterPageText  : "din {0}",
@@ -141,8 +141,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Text){
-       Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+       Ext.apply(Ext.form.field.Text.prototype, {
           minLengthText : "Lungimea minimă pentru acest câmp este de {0}",
           maxLengthText : "Lungimea maximă pentru acest câmp este {0}",
           blankText     : "Acest câmp este obligatoriu",
@@ -151,16 +151,16 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.form.Number){
-       Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+       Ext.apply(Ext.form.field.Number.prototype, {
           minText : "Valoarea minimă permisă a acestui câmp este {0}",
           maxText : "Valaorea maximă permisă a acestui câmp este {0}",
           nanText : "{0} nu este un număr valid"
        });
     }
 
-    if(Ext.form.Date){
-      Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+      Ext.apply(Ext.form.field.Date.prototype, {
         disabledDaysText  : "Indisponibil",
         disabledDatesText : "Indisponibil",
         minText           : "Data din această casetă trebuie să fie după {0}",
@@ -171,15 +171,15 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.ComboBox){
-      Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+      Ext.apply(Ext.form.field.ComboBox.prototype, {
         loadingText       : "Încărcare...",
         valueNotFoundText : undefined
       });
     }
 
-    if(Ext.form.VTypes){
-       Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+       Ext.apply(Ext.form.field.VTypes, {
           emailText    : 'Acest câmp trebuie să conţină o adresă de e-mail în formatul "user@domeniu.com"',
           urlText      : 'Acest câmp trebuie să conţină o adresă URL în formatul "http:/'+'/www.domeniu.com"',
           alphaText    : 'Acest câmp trebuie să conţină doar litere şi _',
@@ -187,8 +187,8 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.form.HtmlEditor){
-      Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : 'Vă rugăm introduceti un URL pentru această legătură web:',
         buttonTips : {
           bold : {
@@ -266,8 +266,8 @@ Ext.onReady(function() {
     }
 
 
-    if(Ext.grid.HeaderContainer){
-       Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+       Ext.apply(Ext.grid.header.Container.prototype, {
           sortAscText  : "Sortare ascendentă",
           sortDescText : "Sortare descendentă",
           lockText     : "Blochează coloana",

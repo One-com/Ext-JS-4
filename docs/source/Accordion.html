@@ -1,16 +1,17 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.layout.container.Accordion"></a>/**
  * @class Ext.layout.container.Accordion
  * @extends Ext.layout.container.VBox
- * &lt;p&gt;This is a layout that manages multiple Panels in an expandable accordion style such that only
- * &lt;b&gt;one Panel can be expanded at any given time&lt;/b&gt;. Each Panel has built-in support for expanding and collapsing.&lt;/p&gt;
- * &lt;p&gt;Note: Only Ext.Panels &lt;b&gt;and all subclasses of Ext.panel.Panel&lt;/b&gt; may be used in an accordion layout Container.&lt;/p&gt;
- * &lt;p&gt;Example usage:&lt;/p&gt;
- * <br><span style="display: none">**/</span>var accordion = new Ext.panel.Panel({
-    title: &#39;Accordion Layout&#39;,
-    layout:&#39;accordion&#39;,
+ * <p>This is a layout that manages multiple Panels in an expandable accordion style such that only
+ * <b>one Panel can be expanded at any given time</b>. Each Panel has built-in support for expanding and collapsing.</p>
+ * <p>Note: Only Ext.Panels <b>and all subclasses of Ext.panel.Panel</b> may be used in an accordion layout Container.</p>
+ * <p>Example usage:</p>
+ * <pre><code>
+var accordion = new Ext.panel.Panel({
+    title: 'Accordion Layout',
+    layout:'accordion',
     defaults: {
         // applied to each contained panel
-        bodyStyle: &#39;padding:15px&#39;
+        bodyStyle: 'padding:15px'
     },
     layoutConfig: {
         // layout-specific configs go here
@@ -19,39 +20,40 @@
         activeOnTop: true
     },
     items: [{
-        title: &#39;Panel 1&#39;,
-        html: &#39;&amp;lt;p&amp;gt;Panel content!&amp;lt;/p&amp;gt;&#39;
+        title: 'Panel 1',
+        html: '&lt;p&gt;Panel content!&lt;/p&gt;'
     },{
-        title: &#39;Panel 2&#39;,
-        html: &#39;&amp;lt;p&amp;gt;Panel content!&amp;lt;/p&amp;gt;&#39;
+        title: 'Panel 2',
+        html: '&lt;p&gt;Panel content!&lt;/p&gt;'
     },{
-        title: &#39;Panel 3&#39;,
-        html: &#39;&amp;lt;p&amp;gt;Panel content!&amp;lt;/p&amp;gt;&#39;
+        title: 'Panel 3',
+        html: '&lt;p&gt;Panel content!&lt;/p&gt;'
     }]
 });
-<br><span style="display: none">/**</span> */
-Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
-    extend: &#39;Ext.layout.container.VBox&#39;,
-    alias: [&#39;layout.accordion&#39;],
-    alternateClassName: &#39;Ext.layout.AccordionLayout&#39;,
+</code></pre>
+ */
+Ext.define('Ext.layout.container.Accordion', {
+    extend: 'Ext.layout.container.VBox',
+    alias: ['layout.accordion'],
+    alternateClassName: 'Ext.layout.AccordionLayout',
     
-    align: &#39;stretch&#39;,
+    align: 'stretch',
 
     <a name="cfg-Ext.layout.container.Accordion-fill"></a>/**
      * @cfg {Boolean} fill
-     * True to adjust the active item&#39;s height to fill the available space in the container, false to use the
-     * item&#39;s current height, or auto height if not explicitly set (defaults to true).
+     * True to adjust the active item's height to fill the available space in the container, false to use the
+     * item's current height, or auto height if not explicitly set (defaults to true).
      */
     fill : true,
     <a name="cfg-Ext.layout.container.Accordion-autoWidth"></a>/**
      * @cfg {Boolean} autoWidth
-     * &lt;p&gt;&lt;b&gt;This config is ignored in ExtJS 4.x.&lt;/b&gt;&lt;/p&gt;
-     * Child Panels have their width actively managed to fit within the accordion&#39;s width.
+     * <p><b>This config is ignored in ExtJS 4.x.</b></p>
+     * Child Panels have their width actively managed to fit within the accordion's width.
      */
     autoWidth : true,
     <a name="cfg-Ext.layout.container.Accordion-titleCollapse"></a>/**
      * @cfg {Boolean} titleCollapse
-     * &lt;p&gt;&lt;b&gt;Not implemented in PR2.&lt;/b&gt;&lt;/p&gt;
+     * <p><b>Not implemented in PR2.</b></p>
      * True to allow expand/collapse of each contained panel by clicking anywhere on the title bar, false to allow
      * expand/collapse only when the toggle tool button is clicked (defaults to true).  When set to false,
      * {@link #hideCollapseTool} should be false also.
@@ -59,34 +61,34 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
     titleCollapse : true,
     <a name="cfg-Ext.layout.container.Accordion-hideCollapseTool"></a>/**
      * @cfg {Boolean} hideCollapseTool
-     * True to hide the contained Panels&#39; collapse/expand toggle buttons, false to display them (defaults to false).
-     * When set to true, {@link #titleCollapse} is automatically set to &lt;code&gt;true&lt;/code&gt;.
+     * True to hide the contained Panels' collapse/expand toggle buttons, false to display them (defaults to false).
+     * When set to true, {@link #titleCollapse} is automatically set to <code>true</code>.
      */
     hideCollapseTool : false,
     <a name="cfg-Ext.layout.container.Accordion-collapseFirst"></a>/**
      * @cfg {Boolean} collapseFirst
      * True to make sure the collapse/expand toggle button always renders first (to the left of) any other tools
-     * in the contained Panels&#39; title bars, false to render it last (defaults to false).
+     * in the contained Panels' title bars, false to render it last (defaults to false).
      */
     collapseFirst : false,
     <a name="cfg-Ext.layout.container.Accordion-animate"></a>/**
      * @cfg {Boolean} animate
      * True to slide the contained panels open and closed during expand/collapse using animation, false to open and
-     * close directly with no animation (defaults to &lt;code&gt;true&lt;/code&gt;). Note: The layout performs animated collapsing
-     * and expanding, &lt;i&gt;not&lt;/i&gt; the child Panels.
+     * close directly with no animation (defaults to <code>true</code>). Note: The layout performs animated collapsing
+     * and expanding, <i>not</i> the child Panels.
      */
     animate : true,
     <a name="cfg-Ext.layout.container.Accordion-activeOnTop"></a>/**
      * @cfg {Boolean} activeOnTop
-     * &lt;p&gt;&lt;b&gt;Not implemented in PR4.&lt;/b&gt;&lt;/p&gt;
-     * &lt;p&gt;Only valid when {@link #multi&quot; is &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
+     * <p><b>Not implemented in PR4.</b></p>
+     * <p>Only valid when {@link #multi" is <code>false</code>.</p>
      * True to swap the position of each panel as it is expanded so that it becomes the first item in the container,
-     * false to keep the panels in the rendered order. &lt;b&gt;This is NOT compatible with &quot;animate:true&quot;&lt;/b&gt; (defaults to false).
+     * false to keep the panels in the rendered order. <b>This is NOT compatible with "animate:true"</b> (defaults to false).
      */
     activeOnTop : false,
     <a name="cfg-Ext.layout.container.Accordion-multi"></a>/**
      * @cfg {Boolean} multi
-     * Defaults to &lt;code&gt;false&lt;/code&gt;. Set to &lt;code&gt;true&lt;/code&gt; to enable multiple accordion items to be open at once.
+     * Defaults to <code>false</code>. Set to <code>true</code> to enable multiple accordion items to be open at once.
      */
     multi: false,
 
@@ -95,13 +97,13 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
 
         me.callParent(arguments);
 
-        // animate flag must be false during initial render phase so we don&#39;t get animations.
+        // animate flag must be false during initial render phase so we don't get animations.
         me.initialAnimate = me.animate;
         me.animate = false;
 
         // Child Panels are not absolutely positioned if we are not filling, so use a different itemCls.
         if (me.fill === false) {
-            me.itemCls = Ext.baseCSSPrefix + &#39;accordion-item&#39;;
+            me.itemCls = Ext.baseCSSPrefix + 'accordion-item';
         }
     },
 
@@ -130,7 +132,7 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
             targetSize = me.getLayoutTargetSize(),
             renderedPanels = [];
 
-        for (; i &lt; ln; i++) {
+        for (; i < ln; i++) {
             comp = items[i];
             if (!comp.rendered) {
                 renderedPanels.push(comp);
@@ -149,7 +151,7 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
 
                 delete comp.hideHeader;
                 comp.collapsible = true;
-                comp.title = comp.title || &#39;&amp;#160;&#39;;
+                comp.title = comp.title || '&#160;';
                 comp.border = !(me.owner instanceof Ext.panel.Panel) || me.owner.border === false;
 
                 // Set initial sizes
@@ -179,7 +181,7 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
         }
 
         // If no collapsed:false Panels found, make the first one expanded.
-        if (ln &amp;&amp; me.expandedItem === undefined) {
+        if (ln && me.expandedItem === undefined) {
             me.expandedItem = 0;
             comp = items[0];
             comp.collapsed = false;
@@ -193,13 +195,13 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
 
         // Postprocess rendered Panels.
         ln = renderedPanels.length;
-        for (i = 0; i &lt; ln; i++) {
+        for (i = 0; i < ln; i++) {
             comp = renderedPanels[i];
 
-            // Delete the dimension property so that our align: &#39;stretch&#39; processing manages the width from here
+            // Delete the dimension property so that our align: 'stretch' processing manages the width from here
             delete comp.width;
 
-            comp.header.addCls(Ext.baseCSSPrefix + &#39;accordion-hd&#39;);
+            comp.header.addCls(Ext.baseCSSPrefix + 'accordion-hd');
 
             // If we are fitting, then intercept expand/collapse requests. 
             if (me.fill) {
@@ -223,7 +225,7 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
                 len = items.length,
                 i = 0, comp;
 
-            for (; i &lt; len; i++) {
+            for (; i < len; i++) {
                 comp = items[i];
                 if (comp.collapsed) {
                     items[i].setWidth(targetSize.width);
@@ -245,11 +247,11 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
             i = 0,
             comp;
 
-        for (; i &lt; len; i++) {
+        for (; i < len; i++) {
             comp = it[i];
-            if (comp === toExpand &amp;&amp; comp.collapsed) {
+            if (comp === toExpand && comp.collapsed) {
                 me.setExpanded(comp);
-            } else if (!me.multi &amp;&amp; (comp !== toExpand &amp;&amp; !comp.collapsed)) {
+            } else if (!me.multi && (comp !== toExpand && !comp.collapsed)) {
                 me.setCollapsed(comp);
             }
         }
@@ -262,16 +264,16 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
     onComponentCollapse: function(comp) {
         var me = this,
             toExpand = comp.next() || comp.prev(),
-            expanded = me.multi ? me.owner.query(&#39;&gt;panel:not([collapsed])&#39;) : [];
+            expanded = me.multi ? me.owner.query('>panel:not([collapsed])') : [];
 
-        // If we are allowing multi, and the &quot;toCollapse&quot; component is NOT the only expanded Component,
+        // If we are allowing multi, and the "toCollapse" component is NOT the only expanded Component,
         // then ask the box layout to collapse it to its header.
         if (me.multi) {
             me.setCollapsed(comp);
 
             // If the collapsing Panel is the only expanded one, expand the following Component.
             // All this is handling fill: true, so there must be at least one expanded,
-            if (expanded.length === 1 &amp;&amp; expanded[0] === comp) {
+            if (expanded.length === 1 && expanded[0] === comp) {
                 me.setExpanded(toExpand);
             }
             me.animate = me.initialAnimate;
@@ -293,9 +295,9 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
 
         // Hide all docked items except the header
         comp.hiddenDocked = [];
-        for (; i &lt; len; i++) {
+        for (; i < len; i++) {
             dockItem = otherDocks[i];
-            if ((dockItem !== comp.header) &amp;&amp; !dockItem.hidden) {
+            if ((dockItem !== comp.header) && !dockItem.hidden) {
                 dockItem.hidden = true;
                 comp.hiddenDocked.push(dockItem);
             }
@@ -303,10 +305,11 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
         comp.addCls(comp.collapsedCls);
         comp.header.addCls(comp.collapsedHeaderCls);
         comp.height = comp.header.getHeight();
+        comp.el.setHeight(comp.height);
         comp.collapsed = true;
         delete comp.flex;
-        comp.fireEvent(&#39;collapse&#39;, comp);
-        comp.collapseTool.setType(&#39;expand-&#39; + comp.getOppositeDirection(comp.collapseDirection));
+        comp.fireEvent('collapse', comp);
+        comp.collapseTool.setType('expand-' + comp.getOppositeDirection(comp.collapseDirection));
     },
 
     setExpanded: function(comp) {
@@ -315,7 +318,7 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
             i = 0;
 
         // Show temporarily hidden docked items
-        for (; i &lt; len; i++) {
+        for (; i < len; i++) {
             otherDocks[i].hidden = false;
         }
 
@@ -325,12 +328,13 @@ Ext.define(&#39;Ext.layout.container.Accordion&#39;, {
         }
         delete comp.collapsed;
         delete comp.height;
+        delete comp.componentLayout.lastComponentSize;
         comp.suspendLayout = false;
         comp.flex = 1;
         comp.removeCls(comp.collapsedCls);
         comp.header.removeCls(comp.collapsedHeaderCls);
-        comp.fireEvent(&#39;expand&#39;, comp);
-        comp.collapseTool.setType(&#39;collapse-&#39; + comp.collapseDirection);
+        comp.fireEvent('expand', comp);
+        comp.collapseTool.setType('collapse-' + comp.collapseDirection);
         comp.setAutoScroll(comp.initialConfig.autoScroll);
     }
 });￿</pre></pre></body></html>

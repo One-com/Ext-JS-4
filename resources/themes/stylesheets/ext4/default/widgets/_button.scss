@@ -25,23 +25,39 @@
         
         em {
             background-repeat: no-repeat;
+
+            // Styles for an anchor button.
+            a {
+                text-decoration: none;
+                display: inline-block;
+                color: inherit;
+            }
         }
         
         button {
-            overflow: visible;
             margin: 0;
             padding: 0;      
             border: 0;  
             width: auto;    
-            background: transparent;
-            background-repeat: no-repeat;
-            text-align: center;
-            white-space: nowrap;
+            background: none;
             outline: 0 none;
+            overflow: hidden;
+            vertical-align: bottom;
+            -webkit-appearance: none;
+
             &::-moz-focus-inner {
                 border: 0;
                 padding: 0;
             }
+        }
+
+        .#{$prefix}btn-inner {
+            display: block;
+            white-space: nowrap;
+            text-align: center;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-position: left center;
         }
     }
     
@@ -50,6 +66,11 @@
             .#{$prefix}btn button {
                 width: 1px;
             }
+        }
+
+        .#{$prefix}ie .#{$prefix}btn button {
+            overflow-x: visible; /*prevents extra horiz space in IE*/
+            vertical-align: baseline; /*IE doesn't like bottom*/
         }
 
         .#{$prefix}strict .#{$prefix}ie6,
@@ -73,25 +94,25 @@
         }    
     }
 
-    .#{$prefix}btn-text-icon-right button {
-        background-position: left center;
-    }
-        
-    .#{$prefix}btn-text-icon-right button {
+    .#{$prefix}btn-icon-text-right .#{$prefix}btn-inner {
         background-position: right center;
     }
 
-    .#{$prefix}btn-text-icon-top button {
+    .#{$prefix}btn-icon-text-top .#{$prefix}btn-inner {
         background-position: center top;
     }
 
-    .#{$prefix}btn-text-icon-bottom button {
+    .#{$prefix}btn-icon-text-bottom .#{$prefix}btn-inner {
         background-position: center bottom;
     }
   
     .#{$prefix}btn-arrow-right {
         background: transparent no-repeat right center;
         padding-right: $button-arrow-size;
+        
+        .#{$prefix}btn-inner {
+            padding-right: 0 !important;
+        }
     }  
 
     .#{$prefix}btn-arrow-bottom {
@@ -109,7 +130,7 @@
     .#{$prefix}btn-split-right,
     .#{$prefix}btn-over .#{$prefix}btn-split-right {
         background: transparent theme-image($theme-name, 'button/s-arrow.gif') no-repeat right center;
-        padding-right: $button-split-size;
+        padding-right: $button-split-size !important;
     }
   
     .#{$prefix}btn-split-bottom,
@@ -137,7 +158,7 @@
         color: gray !important;
     }
 
-    .#{$prefix}cycle-fixed-width button {
+    .#{$prefix}cycle-fixed-width .#{$prefix}btn-inner {
         text-align: inherit;
     }
 
@@ -158,7 +179,8 @@
         $button-default-border-color-disabled,
         
         $button-small-padding,
-        
+        $button-small-text-padding,
+
         $button-default-background-color,
         $button-default-background-color-over,
         $button-default-background-color-focus,
@@ -211,7 +233,8 @@
         $button-default-border-color-disabled,
         
         $button-medium-padding,
-        
+        $button-medium-text-padding,
+
         $button-default-background-color,
         $button-default-background-color-over,
         $button-default-background-color-focus,
@@ -264,7 +287,8 @@
         $button-default-border-color-disabled,
         
         $button-large-padding,
-        
+        $button-large-text-padding,
+
         $button-default-background-color,
         $button-default-background-color-over,
         $button-default-background-color-focus,
@@ -305,7 +329,7 @@
     );
     
     @include x-btn(
-        'toolbar-small',
+        'default-toolbar-small',
         
         $button-small-border-radius,
         $button-small-border-width,    
@@ -317,7 +341,8 @@
         $button-toolbar-border-color-disabled,
         
         $button-small-padding,
-        
+        $button-small-text-padding,
+
         $button-toolbar-background-color,
         $button-toolbar-background-color-over,
         $button-toolbar-background-color-focus,
@@ -358,7 +383,7 @@
     );
     
     @include x-btn(
-        'toolbar-medium',
+        'default-toolbar-medium',
         
         $button-medium-border-radius,
         $button-medium-border-width,    
@@ -370,7 +395,8 @@
         $button-toolbar-border-color-disabled,
         
         $button-medium-padding,
-        
+        $button-medium-text-padding,
+
         $button-toolbar-background-color,
         $button-toolbar-background-color-over,
         $button-toolbar-background-color-focus,
@@ -411,7 +437,7 @@
     );
     
     @include x-btn(
-        'toolbar-large',
+        'default-toolbar-large',
         
         $button-large-border-radius,
         $button-large-border-width,    
@@ -423,7 +449,8 @@
         $button-toolbar-border-color-disabled,
         
         $button-large-padding,
-        
+        $button-large-text-padding,
+
         $button-toolbar-background-color,
         $button-toolbar-background-color-over,
         $button-toolbar-background-color-focus,
@@ -463,37 +490,13 @@
         $button-large-icon-size
     );
     
-    .#{$prefix}btn-toolbar-small-disabled,
-    .#{$prefix}btn-toolbar-medium-disabled,
-    .#{$prefix}btn-toolbar-large-disabled {
+    .#{$prefix}btn-default-toolbar-small-disabled,
+    .#{$prefix}btn-default-toolbar-medium-disabled,
+    .#{$prefix}btn-default-toolbar-large-disabled {
         border-color: transparent;
         
         background-image: none;
         background: transparent;
     }
 
-    // Styles for an anchor button. Need fiddling for each browser.
-    .#{$prefix}btn em a {
-        text-decoration: none;
-        display: inline-block;
-        color: #333;
-    }
-    .#{$prefix}ie .#{$prefix}btn em a,
-    .#{$prefix}opera .#{$prefix}btn em a {
-        padding-top: 1px 0 0 0;
-    }
-    .#{$prefix}gecko .#{$prefix}btn em a {
-        padding: 4px 0 0 0;
-    }
-    .#{$prefix}chrome .#{$prefix}btn em a {
-        padding: 2px 0 0 0;
-    }
-    .#{$prefix}ie .#{$prefix}btn em a {
-        padding: 0;
-        font-family: inherit;
-        font-size: 11px;
-    }
-    .#{$prefix}ie6 .#{$prefix}btn em a {
-        padding-top: 0;
-    }
 }

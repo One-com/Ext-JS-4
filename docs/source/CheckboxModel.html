@@ -6,36 +6,36 @@
  * select or deselect rows. The default mode for this selection model is MULTI.
  *
  * The selection model will inject a header for the checkboxes in the first view
- * and according to the &#39;injectCheckbox&#39; configuration.
+ * and according to the 'injectCheckbox' configuration.
  */
-Ext.define(&#39;Ext.selection.CheckboxModel&#39;, {
-    extend: &#39;Ext.selection.RowModel&#39;,
-    
+Ext.define('Ext.selection.CheckboxModel', {
+    extend: 'Ext.selection.RowModel',
+
     <a name="cfg-Ext.selection.CheckboxModel-mode"></a>/**
      * @cfg {String} mode
      * Modes of selection.
-     * Valid values are SINGLE, SIMPLE, and MULTI. Defaults to &#39;MULTI&#39;
+     * Valid values are SINGLE, SIMPLE, and MULTI. Defaults to 'MULTI'
      */
-    mode: &#39;MULTI&#39;,
+    mode: 'MULTI',
 
     <a name="cfg-Ext.selection.CheckboxModel-injectCheckbox"></a>/**
      * @cfg {Mixed} injectCheckbox
      * Instructs the SelectionModel whether or not to inject the checkbox header
      * automatically or not. (Note: By not placing the checkbox in manually, the
      * grid view will need to be rendered 2x on initial render.)
-     * Supported values are a Number index, false and the strings &#39;first&#39; and &#39;last&#39;.
+     * Supported values are a Number index, false and the strings 'first' and 'last'.
      * Default is 0.
      */
     injectCheckbox: 0,
 
     <a name="cfg-Ext.selection.CheckboxModel-checkOnly"></a>/**
-     * @cfg {Boolean} checkOnly &lt;tt&gt;true&lt;/tt&gt; if rows can only be selected by clicking on the
-     * checkbox column (defaults to &lt;tt&gt;false&lt;/tt&gt;).
+     * @cfg {Boolean} checkOnly <tt>true</tt> if rows can only be selected by clicking on the
+     * checkbox column (defaults to <tt>false</tt>).
      */
     checkOnly: false,
 
     // private
-    checkerOnCls: Ext.baseCSSPrefix + &#39;grid-hd-checker-on&#39;,
+    checkerOnCls: Ext.baseCSSPrefix + 'grid-hd-checker-on',
 
     bindComponent: function() {
         this.sortable = false;
@@ -45,14 +45,14 @@ Ext.define(&#39;Ext.selection.CheckboxModel&#39;, {
             headerCt = view.headerCt;
 
         if (this.injectCheckbox !== false) {
-            if (this.injectCheckbox == &#39;first&#39;) {
+            if (this.injectCheckbox == 'first') {
                 this.injectCheckbox = 0;
-            } else if (this.injectCheckbox == &#39;last&#39;) {
+            } else if (this.injectCheckbox == 'last') {
                 this.injectCheckbox = headerCt.getColumnCount();
             }
             headerCt.add(this.injectCheckbox,  this.getHeaderConfig());
         }
-        headerCt.on(&#39;headerclick&#39;, this.onHeaderClick, this);
+        headerCt.on('headerclick', this.onHeaderClick, this);
     },
 
     /**
@@ -63,7 +63,7 @@ Ext.define(&#39;Ext.selection.CheckboxModel&#39;, {
     toggleUiHeader: function(isChecked) {
         var view     = this.views[0],
             headerCt = view.headerCt,
-            checkHd  = headerCt.child(&#39;gridcolumn[isCheckerHd]&#39;);
+            checkHd  = headerCt.child('gridcolumn[isCheckerHd]');
 
         if (checkHd) {
             if (isChecked) {
@@ -81,7 +81,7 @@ Ext.define(&#39;Ext.selection.CheckboxModel&#39;, {
     onHeaderClick: function(headerCt, header, e) {
         if (header.isCheckerHd) {
             e.stopEvent();
-            var isChecked = header.el.hasCls(Ext.baseCSSPrefix + &#39;grid-hd-checker-on&#39;);
+            var isChecked = header.el.hasCls(Ext.baseCSSPrefix + 'grid-hd-checker-on');
             if (isChecked) {
                 this.deselectAll(true);
             } else {
@@ -97,18 +97,18 @@ Ext.define(&#39;Ext.selection.CheckboxModel&#39;, {
     getHeaderConfig: function() {
         return {
             isCheckerHd: true,
-            text : &#39;&amp;#160;&#39;,
+            text : '&#160;',
             width: 24,
             sortable: false,
             fixed: true,
             hideable: false,
             draggable: false,
             menuDisabled: true,
-            dataIndex: &#39;&#39;,
-            cls: Ext.baseCSSPrefix + &#39;column-header-checkbox &#39;,
+            dataIndex: '',
+            cls: Ext.baseCSSPrefix + 'column-header-checkbox ',
             renderer : function(v, p, record) {
-                p.tdCls = Ext.baseCSSPrefix + &#39;grid-cell-special&#39;;
-                return &#39;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-row-checker&quot;&gt;&amp;#160;&lt;/div&gt;&#39;;
+                p.tdCls = Ext.baseCSSPrefix + 'grid-cell-special';
+                return '<div class="' + Ext.baseCSSPrefix + 'grid-row-checker">&#160;</div>';
             }
         };
     },
@@ -117,19 +117,19 @@ Ext.define(&#39;Ext.selection.CheckboxModel&#39;, {
     onRowMouseDown: function(view, record, item, index, e) {
         view.el.focus();
         var me = this,
-            checker = e.getTarget(&#39;.&#39; + Ext.baseCSSPrefix + &#39;grid-row-checker&#39;);
-        
-        // checkOnly set, but we didn&#39;t click on a checker.
-        if (me.checkOnly &amp;&amp; !checker) {
+            checker = e.getTarget('.' + Ext.baseCSSPrefix + 'grid-row-checker');
+
+        // checkOnly set, but we didn't click on a checker.
+        if (me.checkOnly && !checker) {
             return;
         }
-        
+
         if (checker) {
             var mode = me.getSelectionMode();
             // dont change the mode if its single otherwise
             // we would get multiple selection
-            if (mode !== &#39;SINGLE&#39;) {
-                me.setSelectionMode(&#39;SIMPLE&#39;);
+            if (mode !== 'SINGLE') {
+                me.setSelectionMode('SIMPLE');
             }
             me.selectWithEvent(record, e);
             me.setSelectionMode(mode);
@@ -143,7 +143,7 @@ Ext.define(&#39;Ext.selection.CheckboxModel&#39;, {
      * @private
      */
     onSelectChange: function(record, isSelected) {
-        Ext.selection.CheckboxModel.superclass.onSelectChange.call(this, record, isSelected);
+        this.callParent([record, isSelected]);
         // check to see if all records are selected
         var hdSelectStatus = this.selected.getCount() === this.store.getCount();
         this.toggleUiHeader(hdSelectStatus);

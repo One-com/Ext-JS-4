@@ -1,13 +1,8 @@
-Ext.require([
-    'Ext.grid.*',
-    'Ext.data.*'
-]);
-
 Ext.define('Ext.app.GridPortlet', {
-    
-    extend: 'Ext.grid.GridPanel',
+
+    extend: 'Ext.grid.Panel',
     alias: 'widget.gridportlet',
-    
+    height: 300,
     myData: [
         ['3m Co',                               71.72, 0.02,  0.03,  '9/1 12:00am'],
         ['Alcoa Inc',                           29.01, 0.42,  1.47,  '9/1 12:00am'],
@@ -36,10 +31,10 @@ Ext.define('Ext.app.GridPortlet', {
         ['The Home Depot, Inc.',                34.64, 0.35,  1.02,  '9/1 12:00am'],
         ['The Procter & Gamble Company',        61.91, 0.01,  0.02,  '9/1 12:00am'],
         ['United Technologies Corporation',     63.26, 0.55,  0.88,  '9/1 12:00am'],
-        ['Verizon Communications',              35.57, 0.39,  1.11,  '9/1 12:00am'],            
+        ['Verizon Communications',              35.57, 0.39,  1.11,  '9/1 12:00am'],
         ['Wal-Mart Stores, Inc.',               45.45, 0.73,  1.63,  '9/1 12:00am']
     ],
-    
+
     /**
      * Custom function used for column renderer
      * @param {Object} val
@@ -52,7 +47,7 @@ Ext.define('Ext.app.GridPortlet', {
         }
         return val;
     },
-    
+
     /**
      * Custom function used for column renderer
      * @param {Object} val
@@ -65,9 +60,9 @@ Ext.define('Ext.app.GridPortlet', {
         }
         return val;
     },
-    
+
     initComponent: function(){
-        
+
         var store = Ext.create('Ext.data.ArrayStore', {
             fields: [
                {name: 'company'},
@@ -76,10 +71,10 @@ Ext.define('Ext.app.GridPortlet', {
             ],
             data: this.myData
         });
-        
+
         Ext.apply(this, {
-            height: 300,
-            width: 600,
+            //height: 300,
+            height: this.height,
             store: store,
             stripeRows: true,
             columnLines: true,
@@ -88,23 +83,23 @@ Ext.define('Ext.app.GridPortlet', {
                 text   : 'Company',
                 //width: 120,
                 flex: 1,
-                sortable : true, 
+                sortable : true,
                 dataIndex: 'company'
             },{
-                text   : 'Change', 
-                width    : 75, 
-                sortable : true, 
-                renderer : this.change, 
+                text   : 'Change',
+                width    : 75,
+                sortable : true,
+                renderer : this.change,
                 dataIndex: 'change'
             },{
-                text   : '% Change', 
-                width    : 75, 
-                sortable : true, 
-                renderer : this.pctChange, 
+                text   : '% Change',
+                width    : 75,
+                sortable : true,
+                renderer : this.pctChange,
                 dataIndex: 'pctChange'
             }]
         });
-        
+
         this.callParent(arguments);
     }
 });

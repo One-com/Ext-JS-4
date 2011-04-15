@@ -1,36 +1,38 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.HashMap"></a>/**
  * @class Ext.util.HashMap
- * &lt;p&gt;
+ * <p>
  * Represents a collection of a set of key and value pairs. Each key in the HashMap
  * must be unique, the same key cannot exist twice. Access to items is provided via
  * the key only. Sample usage:
- * <br><span style="display: none">**/</span>var map = new Ext.util.HashMap();
-map.add(&#39;key1&#39;, 1);
-map.add(&#39;key2&#39;, 2);
-map.add(&#39;key3&#39;, 3);
+ * <pre><code>
+var map = new Ext.util.HashMap();
+map.add('key1', 1);
+map.add('key2', 2);
+map.add('key3', 3);
 
 map.each(function(key, value, length){
     console.log(key, value, length);
 });
- * <br><span style="display: none">/**</span> * &lt;/p&gt;
+ * </code></pre>
+ * </p>
  *
- * &lt;p&gt;The HashMap is an unordered class,
+ * <p>The HashMap is an unordered class,
  * there is no guarantee when iterating over the items that they will be in any particular
  * order. If this is required, then use a {@link Ext.util.MixedCollection}.
- * &lt;/p&gt;
+ * </p>
  * @constructor
  * @param {Object} config The configuration options
  */
-Ext.define(&#39;Ext.util.HashMap&#39;, {
+Ext.define('Ext.util.HashMap', {
 
     <a name="cfg-Ext.util.HashMap-keyFn"></a>/**
      * @cfg {Function} keyFn A function that is used to retrieve a default key for a passed object.
-     * A default is provided that returns the &lt;b&gt;id&lt;/b&gt; property on the object. This function is only used
+     * A default is provided that returns the <b>id</b> property on the object. This function is only used
      * if the add method is called with a single argument.
      */
 
     mixins: {
-        observable: &#39;Ext.util.Observable&#39;
+        observable: 'Ext.util.Observable'
     },
 
     constructor: function(config) {
@@ -44,13 +46,13 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
              * @param {String} key The key of the added item.
              * @param {Object} value The value of the added item.
              */
-            &#39;add&#39;,
+            'add',
             <a name="event-Ext.util.HashMap-clear"></a>/**
              * @event clear
              * Fires when the hash is cleared.
              * @param {Ext.util.HashMap} this.
              */
-            &#39;clear&#39;,
+            'clear',
             <a name="event-Ext.util.HashMap-remove"></a>/**
              * @event remove
              * Fires when an item is removed from the hash.
@@ -58,7 +60,7 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
              * @param {String} key The key of the removed item.
              * @param {Object} value The value of the removed item.
              */
-            &#39;remove&#39;,
+            'remove',
             <a name="event-Ext.util.HashMap-replace"></a>/**
              * @event replace
              * Fires when an item is replaced in the hash.
@@ -67,7 +69,7 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
              * @param {Object} value The new value for the item.
              * @param {Object} old The old value for the item.
              */
-            &#39;replace&#39;
+            'replace'
         );
 
         me.mixins.observable.constructor.call(me, config);
@@ -112,11 +114,11 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
 
     <a name="method-Ext.util.HashMap-add"></a>/**
      * Adds an item to the collection. Fires the {@link #add} event when complete.
-     * @param {String} key &lt;p&gt;The key to associate with the item, or the new item.&lt;/p&gt;
-     * &lt;p&gt;If a {@link #getKey} implementation was specified for this HashMap,
-     * or if the key of the stored items is in a property called &lt;tt&gt;&lt;b&gt;id&lt;/b&gt;&lt;/tt&gt;,
-     * the HashMap will be able to &lt;i&gt;derive&lt;/i&gt; the key for the new item.
-     * In this case just pass the new item in this parameter.&lt;/p&gt;
+     * @param {String} key <p>The key to associate with the item, or the new item.</p>
+     * <p>If a {@link #getKey} implementation was specified for this HashMap,
+     * or if the key of the stored items is in a property called <tt><b>id</b></tt>,
+     * the HashMap will be able to <i>derive</i> the key for the new item.
+     * In this case just pass the new item in this parameter.</p>
      * @param {Object} o The item to add.
      * @return {Object} The item added.
      */
@@ -138,12 +140,12 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
         value = data[1];
         me.map[key] = value;
         ++me.length;
-        me.fireEvent(&#39;add&#39;, me, key, value);
+        me.fireEvent('add', me, key, value);
         return value;
     },
 
     <a name="method-Ext.util.HashMap-replace"></a>/**
-     * Replaces an item in the hash. If the key doesn&#39;t exist, the
+     * Replaces an item in the hash. If the key doesn't exist, the
      * {@link #add} method will be used.
      * @param {String} key The key of the item.
      * @param {Object} value The new value for the item.
@@ -159,7 +161,7 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
         }
         old = map[key];
         map[key] = value;
-        me.fireEvent(&#39;replace&#39;, me, key, value, old);
+        me.fireEvent('replace', me, key, value, old);
         return value;
     },
 
@@ -189,7 +191,7 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
             value = me.map[key];
             delete me.map[key];
             --me.length;
-            me.fireEvent(&#39;remove&#39;, me, key, value);
+            me.fireEvent('remove', me, key, value);
             return true;
         }
         return false;
@@ -198,7 +200,7 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
     <a name="method-Ext.util.HashMap-get"></a>/**
      * Retrieves an item with a particular key.
      * @param {String} key The key to lookup.
-     * @return {Object} The value at that key. If it doesn&#39;t exist, &lt;tt&gt;undefined&lt;/tt&gt; is returned.
+     * @return {Object} The value at that key. If it doesn't exist, <tt>undefined</tt> is returned.
      */
     get: function(key) {
         return this.map[key];
@@ -213,7 +215,7 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
         me.map = {};
         me.length = 0;
         if (initial !== true) {
-            me.fireEvent(&#39;clear&#39;, me);
+            me.fireEvent('clear', me);
         }
         return me;
     },
@@ -275,13 +277,13 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
      * Returning false from the function will cease iteration.
      *
      * The paramaters passed to the function are:
-     * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
-     * &lt;li&gt;&lt;b&gt;key&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;The key of the item&lt;/p&gt;&lt;/li&gt;
-     * &lt;li&gt;&lt;b&gt;value&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;The value of the item&lt;/p&gt;&lt;/li&gt;
-     * &lt;li&gt;&lt;b&gt;length&lt;/b&gt; : Number&lt;p class=&quot;sub-desc&quot;&gt;The total number of items in the hash&lt;/p&gt;&lt;/li&gt;
-     * &lt;/ul&gt;&lt;/div&gt;
+     * <div class="mdetail-params"><ul>
+     * <li><b>key</b> : String<p class="sub-desc">The key of the item</p></li>
+     * <li><b>value</b> : Number<p class="sub-desc">The value of the item</p></li>
+     * <li><b>length</b> : Number<p class="sub-desc">The total number of items in the hash</p></li>
+     * </ul></div>
      * @param {Function} fn The function to execute.
-     * @param {Object} scope The scope to execute in. Defaults to &lt;tt&gt;this&lt;/tt&gt;.
+     * @param {Object} scope The scope to execute in. Defaults to <tt>this</tt>.
      * @return {Ext.util.HashMap} this
      */
     each: function(fn, scope) {
@@ -324,14 +326,14 @@ Ext.define(&#39;Ext.util.HashMap&#39;, {
      * @private
      * Find the key for a value.
      * @param {Object} value The value to find.
-     * @return {Object} The value of the item. Returns &lt;tt&gt;undefined&lt;/tt&gt; if not found.
+     * @return {Object} The value of the item. Returns <tt>undefined</tt> if not found.
      */
     findKey: function(value) {
         var key,
             map = this.map;
 
         for (key in map) {
-            if (map.hasOwnProperty(key) &amp;&amp; map[key] === value) {
+            if (map.hasOwnProperty(key) && map[key] === value) {
                 return key;
             }
         }

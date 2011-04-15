@@ -4,25 +4,25 @@
  */
 Ext.define('Ext.ux.Spotlight', {
     extend: 'Object',
-    
+
     /**
      * @private
      * The baseCls for the spotlight elements
      */
     baseCls : 'x-spotlight',
-    
+
     /**
      * @cfg animate {Boolean} True to animate the spotlight change
      * (defaults to true)
      */
     animate: true,
-    
+
     /**
      * @cfg duration {Integer} The duration of the animation, in milliseconds
      * (defaults to 250)
      */
     duration: 250,
-    
+
     /**
      * @cfg easing {String} The type of easing for the spotlight animatation
      * (defaults to null)
@@ -45,22 +45,22 @@ Ext.define('Ext.ux.Spotlight', {
         this.left   = body.createChild({cls: this.baseCls});
         this.top    = body.createChild({cls: this.baseCls});
         this.bottom = body.createChild({cls: this.baseCls});
-        
-        this.all = new Ext.CompositeElement([this.right, this.left, this.top, this.bottom]);
+
+        this.all = Ext.create('Ext.CompositeElement', [this.right, this.left, this.top, this.bottom]);
     },
-    
+
     /**
      * Show the spotlight
      */
     show: function(el, callback, scope) {
         //get the target element
         this.el = Ext.get(el);
-        
+
         //create the elements if they don't already exist
         if (!this.right) {
             this.createElements();
         }
-        
+
         if (!this.active) {
             //if the spotlight is not active, show it
             this.all.setDisplayed('');
@@ -72,23 +72,23 @@ Ext.define('Ext.ux.Spotlight', {
             this.applyBounds(false, false);
         }
     },
-    
+
     /**
      * Hide the spotlight
      */
     hide: function(callback, scope) {
         Ext.EventManager.removeResizeListener(this.syncSize, this);
-        
+
         this.applyBounds(this.animate, true);
     },
-    
+
     /**
      * Resizes the spotlight with the window size.
      */
     syncSize: function(){
         this.applyBounds(false, false);
     },
-    
+
     /**
      * Resizes the spotlight depending on the arguments
      * @param {Boolean} animate True to animate the changing of the bounds
@@ -97,7 +97,7 @@ Ext.define('Ext.ux.Spotlight', {
     applyBounds: function(animate, reverse) {
         var me  = this,
             box = me.el.getBox();
-        
+
         //get the current view width and height
         var viewWidth  = Ext.core.Element.getViewWidth(true);
         var viewHeight = Ext.core.Element.getViewHeight(true);
@@ -105,7 +105,7 @@ Ext.define('Ext.ux.Spotlight', {
         var i      = 0,
             config = false,
             from, to;
-        
+
         //where the element should start (if animation)
         from = {
             right : {x: box.right, y: viewHeight,           width: (viewWidth - box.right), height: 0},
@@ -113,7 +113,7 @@ Ext.define('Ext.ux.Spotlight', {
             top   : {x: viewWidth, y: 0,                    width: 0,                       height: box.y},
             bottom: {x: 0,         y: (box.y + box.height), width: 0,                       height: (viewHeight - (box.y + box.height)) + 'px'}
         };
-        
+
         //where the element needs to finish
         to = {
             right : {x: box.right, y: box.y,                width: (viewWidth - box.right) + 'px', height: (viewHeight - box.y) + 'px'},
@@ -121,16 +121,16 @@ Ext.define('Ext.ux.Spotlight', {
             top   : {x: box.x,     y: 0,                    width: (viewWidth - box.x) + 'px',     height: box.y + 'px'},
             bottom: {x: 0,         y: (box.y + box.height), width: (box.x + box.width) + 'px',     height: (viewHeight - (box.y + box.height)) + 'px'}
         };
-        
+
         //reverse the objects
         if (reverse) {
             var clone = Ext.clone(from);
             from = to;
             to   = clone;
-            
+
             delete clone;
         }
-        
+
         if (animate) {
             Ext.each(['right', 'left', 'top', 'bottom'], function(side) {
                 me[side].setBox(from[side]);
@@ -146,7 +146,7 @@ Ext.define('Ext.ux.Spotlight', {
             }, this);
         }
     },
-    
+
     /**
      * Removes all the elements for the spotlight
      */

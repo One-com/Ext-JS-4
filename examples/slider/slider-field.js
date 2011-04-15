@@ -5,7 +5,7 @@ Ext.require([
 ]);
 
 Ext.onReady(function(){
-    Ext.create('Ext.form.FormPanel', {
+    Ext.create('Ext.form.Panel', {
         width: 400,
         height: 160,
         title: 'Sound Settings',

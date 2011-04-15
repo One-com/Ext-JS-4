@@ -5,7 +5,7 @@ Ext.require([
 ]);
 
 Ext.onReady(function() {
-    var form = Ext.create('Ext.form.FormPanel', {
+    var form = Ext.create('Ext.form.Panel', {
         layout: 'absolute',
         url: 'save-form.php',
         defaultType: 'textfield',
@@ -16,25 +16,25 @@ Ext.onReady(function() {
             fieldWidth: 60,
             msgTarget: 'side',
             allowBlank: false,
-            x: 0,
-            y: 0,
+            x: 5,
+            y: 5,
             name: 'to',
-            anchor: '100%'  // anchor width by percentage
+            anchor: '-5'  // anchor width by percentage
         }, {
             fieldLabel: 'Subject',
             fieldWidth: 60,
-            x: 0,
-            y: 30,
+            x: 5,
+            y: 35,
             name: 'subject',
-            anchor: '100%'  // anchor width by percentage
+            anchor: '-5'  // anchor width by percentage
         }, {
-            x:0,
-            y: 60,
+            x:5,
+            y: 65,
             xtype: 'textarea',
             style: 'margin:0',
             hideLabel: true,
             name: 'msg',
-            anchor: '100% 100%'  // anchor width and height
+            anchor: '-5 -5'  // anchor width and height
         }]
     });
 
@@ -46,7 +46,6 @@ Ext.onReady(function() {
         minHeight: 200,
         layout: 'fit',
         plain:true,
-        bodyPadding: 5,
         items: form,
 
         buttons: [{

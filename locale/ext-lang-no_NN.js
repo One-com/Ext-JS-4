@@ -13,16 +13,16 @@ if(Ext.DataView){
   Ext.DataView.prototype.emptyText = "";
 }
 
-if(Ext.grid.GridPanel){
-  Ext.grid.GridPanel.prototype.ddText = "{0} markert(e) rad(er)";
+if(Ext.grid.Panel){
+  Ext.grid.Panel.prototype.ddText = "{0} markert(e) rad(er)";
 }
 
 if(Ext.TabPanelItem){
   Ext.TabPanelItem.prototype.closeText = "Lukk denne fana";
 }
 
-if(Ext.form.BaseField){
-  Ext.form.BaseField.prototype.invalidText = "Verdien i dette feltet er ugyldig";
+if(Ext.form.field.Base){
+  Ext.form.field.Base.prototype.invalidText = "Verdien i dette feltet er ugyldig";
 }
 
 if(Ext.LoadMask){
@@ -126,7 +126,7 @@ if(Ext.picker.Month) {
   });
 }
 
-if(Ext.toolbar.PagingToolbar){
+if(Ext.toolbar.Paging){
   Ext.apply(Ext.PagingToolbar.prototype, {
     beforePageText : "Side",
     afterPageText  : "av {0}",
@@ -140,8 +140,8 @@ if(Ext.toolbar.PagingToolbar){
   });
 }
 
-if(Ext.form.Text){
-  Ext.apply(Ext.form.Text.prototype, {
+if(Ext.form.field.Text){
+  Ext.apply(Ext.form.field.Text.prototype, {
     minLengthText : "Den minste lengda for dette feltet er {0}",
     maxLengthText : "Den største lengda for dette feltet er {0}",
     blankText     : "Dette feltet er påkravd",
@@ -150,16 +150,16 @@ if(Ext.form.Text){
   });
 }
 
-if(Ext.form.Number){
-  Ext.apply(Ext.form.Number.prototype, {
+if(Ext.form.field.Number){
+  Ext.apply(Ext.form.field.Number.prototype, {
     minText : "Den minste verdien for dette feltet er {0}",
     maxText : "Den største verdien for dette feltet er {0}",
     nanText : "{0} er ikkje eit gyldig nummer"
   });
 }
 
-if(Ext.form.Date){
-  Ext.apply(Ext.form.Date.prototype, {
+if(Ext.form.field.Date){
+  Ext.apply(Ext.form.field.Date.prototype, {
     disabledDaysText  : "Deaktivert",
     disabledDatesText : "Deaktivert",
     minText           : "Datoen i dette feltet må vere etter {0}",
@@ -170,15 +170,15 @@ if(Ext.form.Date){
   });
 }
 
-if(Ext.form.ComboBox){
-  Ext.apply(Ext.form.ComboBox.prototype, {
+if(Ext.form.field.ComboBox){
+  Ext.apply(Ext.form.field.ComboBox.prototype, {
     loadingText       : "Lastar...",
     valueNotFoundText : undefined
   });
 }
 
-if(Ext.form.VTypes){
-   Ext.apply(Ext.form.VTypes, {
+if(Ext.form.field.VTypes){
+   Ext.apply(Ext.form.field.VTypes, {
       emailText    : 'Dette feltet skal vere ei epost adresse på formatet "bruker@domene.no"',
       urlText      : 'Dette feltet skal vere ein link (URL) på formatet "http:/'+'/www.domene.no"',
       alphaText    : 'Dette feltet skal berre innehalde bokstavar og _',
@@ -186,8 +186,8 @@ if(Ext.form.VTypes){
    });
 }
 
-if(Ext.form.HtmlEditor){
-  Ext.apply(Ext.form.HtmlEditor.prototype, {
+if(Ext.form.field.HtmlEditor){
+  Ext.apply(Ext.form.field.HtmlEditor.prototype, {
     createLinkText : 'Ver venleg og skriv inn URL for lenken:',
     buttonTips : {
       bold : {
@@ -264,8 +264,8 @@ if(Ext.form.HtmlEditor){
   });
 }
 
-if(Ext.grid.HeaderContainer){
-  Ext.apply(Ext.grid.HeaderContainer.prototype, {
+if(Ext.grid.header.Container){
+  Ext.apply(Ext.grid.header.Container.prototype, {
     sortAscText  : "Sorter stigande",
     sortDescText : "Sorter fallande",
     lockText     : "Lås kolonne",

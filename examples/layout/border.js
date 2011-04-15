@@ -20,7 +20,6 @@ Ext.onReady(function() {
         },{
             region: 'west',
             collapsible: true,
-            floatable: true,
             title: 'Starts at width 30%',
             split: true,
             width: '30%',

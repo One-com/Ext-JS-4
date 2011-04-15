@@ -1,16 +1,16 @@
-/** 
+/**
  * @class Ext.ux.grid.filter.DateFilter
  * @extends Ext.ux.grid.filter.Filter
  * Filter by a configurable Ext.picker.DatePicker menu
  * <p><b><u>Example Usage:</u></b></p>
- * <pre><code>    
-var filters = new Ext.ux.grid.GridFilters({
+ * <pre><code>
+var filters = Ext.create('Ext.ux.grid.GridFilters', {
     ...
     filters: [{
         // required configs
         type: 'date',
         dataIndex: 'dateAdded',
-        
+
         // optional configs
         dateFormat: 'm/d/Y',  // default
         beforeText: 'Before', // default
@@ -89,14 +89,14 @@ Ext.define('Ext.ux.grid.filter.DateFilter', {
      * Defaults to 'On'.
      */
     onText : 'On',
-    
+
     /**
      * @cfg {Object} pickerOpts
      * Configuration options for the date picker associated with each field.
      */
     pickerOpts : {},
 
-    /**  
+    /**
      * @private
      * Template method that is to initialize the filter and install required menu items.
      */
@@ -146,7 +146,7 @@ Ext.define('Ext.ux.grid.filter.DateFilter', {
         this.fireEvent('update', this);
     },
 
-    /**  
+    /**
      * @private
      * Handler method called when there is a keyup event on an input
      * item of this menu.
@@ -168,9 +168,9 @@ Ext.define('Ext.ux.grid.filter.DateFilter', {
     onMenuSelect : function (picker, date) {
         var fields = this.fields,
             field = this.fields[picker.itemId];
-        
+
         field.setChecked(true);
-        
+
         if (field == fields.on) {
             fields.before.setChecked(false, true);
             fields.after.setChecked(false, true);
@@ -209,7 +209,7 @@ Ext.define('Ext.ux.grid.filter.DateFilter', {
      * @param {Boolean} preserve true to preserve the checked status
      * of the other fields.  Defaults to false, unchecking the
      * other fields
-     */	
+     */
     setValue : function (value, preserve) {
         var key;
         for (key in this.fields) {
@@ -268,7 +268,7 @@ Ext.define('Ext.ux.grid.filter.DateFilter', {
     getFieldValue : function(item){
         return this.getPicker(item).getValue();
     },
-    
+
     /**
      * Gets the menu picker associated with the passed field
      * @param {String} item The field identifier ('before', 'after', 'on')
@@ -290,12 +290,12 @@ Ext.define('Ext.ux.grid.filter.DateFilter', {
             pickerValue,
             val = record.get(this.dataIndex),
             clearTime = Ext.Date.clearTime;
-            
+
         if(!Ext.isDate(val)){
             return false;
         }
         val = clearTime(val, true).getTime();
-        
+
         for (key in this.fields) {
             if (this.fields[key].checked) {
                 pickerValue = clearTime(this.getFieldValue(key), true).getTime();

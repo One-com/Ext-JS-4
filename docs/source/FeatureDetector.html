@@ -1,34 +1,34 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.env.FeatureDetector"></a>/**
  * @class Ext.env.FeatureDetector
  */
-Ext.define(&#39;Ext.env.FeatureDetector&#39;, {
+Ext.define('Ext.env.FeatureDetector', {
 
     statics: {
         defaultTests: {
             Canvas: function() {
-                var element = this.getTestElement(&#39;canvas&#39;);
-                return !!(element &amp;&amp; element.getContext &amp;&amp; element.getContext(&#39;2d&#39;));
+                var element = this.getTestElement('canvas');
+                return !!(element && element.getContext && element.getContext('2d'));
             },
             SVG: function() {
                 var doc = Ext.global.document;
 
-                return !!(doc.createElementNS &amp;&amp; !!doc.createElementNS(&quot;http:/&quot; + &quot;/www.w3.org/2000/svg&quot;, &quot;svg&quot;).createSVGRect);
+                return !!(doc.createElementNS && !!doc.createElementNS("http:/" + "/www.w3.org/2000/svg", "svg").createSVGRect);
             },
             VML: function() {
                 var element = this.getTestElement(),
                     ret = false;
 
-                element.innerHTML = &quot;&lt;!--[if vml]&gt;&lt;br&gt;&lt;br&gt;&lt;![endif]--&gt;&quot;;
+                element.innerHTML = "<!--[if vml]><br><br><![endif]-->";
                 ret = (element.childNodes.length === 2);
-                element.innerHTML = &quot;&quot;;
+                element.innerHTML = "";
 
                 return ret;
             },
             Touch: function() {
-                return (&#39;ontouchstart&#39; in Ext.global) &amp;&amp; !(Ext.platform &amp;&amp; Ext.platform.name.match(/Windows|MacOSX|Linux/));
+                return ('ontouchstart' in Ext.global) && !(Ext.platform && Ext.platform.name.match(/Windows|MacOSX|Linux/));
             },
             Orientation: function() {
-                return (&#39;orientation&#39; in Ext.global);
+                return ('orientation' in Ext.global);
             },
             Geolocation: function() {
                 return !!Ext.global.navigator.geolocation;
@@ -37,32 +37,32 @@ Ext.define(&#39;Ext.env.FeatureDetector&#39;, {
                 return !!Ext.global.openDatabase;
             },
             Websockets: function() {
-                return &#39;WebSocket&#39; in Ext.global;
+                return 'WebSocket' in Ext.global;
             },
             History: function() {
-                return !!(Ext.global.history &amp;&amp; Ext.global.history.pushState);
+                return !!(Ext.global.history && Ext.global.history.pushState);
             },
             CSSTransforms: function() {
-                return this.isStyleSupported(&#39;transform&#39;);
+                return this.isStyleSupported('transform');
             },
             CSS3DTransforms: function() {
-                return this.has(&#39;csstransforms&#39;) &amp;&amp; this.isStyleSupported(&#39;perspective&#39;);
+                return this.has('csstransforms') && this.isStyleSupported('perspective');
             },
             CSSAnimations: function() {
-                return this.isStyleSupported(&#39;animationName&#39;);
+                return this.isStyleSupported('animationName');
             },
             CSSTransitions: function() {
-                return this.isStyleSupported(&#39;transitionProperty&#39;);
+                return this.isStyleSupported('transitionProperty');
             },
             Audio: function() {
-                return !!this.getTestElement(&#39;audio&#39;).canPlayType;
+                return !!this.getTestElement('audio').canPlayType;
             },
             Video: function() {
-                return !!this.getTestElement(&#39;video&#39;).canPlayType;
+                return !!this.getTestElement('video').canPlayType;
             }
         },
 
-        stylePrefixes: [&#39;Webkit&#39;, &#39;Moz&#39;, &#39;O&#39;, &#39;ms&#39;]
+        stylePrefixes: ['Webkit', 'Moz', 'O', 'ms']
     },
 
     constructor: function() {
@@ -93,7 +93,7 @@ Ext.define(&#39;Ext.env.FeatureDetector&#39;, {
 
     getTestElement: function(tag) {
         if (!tag) {
-            tag = &#39;div&#39;;
+            tag = 'div';
         }
 
         if (!this.testElements[tag]) {
@@ -104,9 +104,15 @@ Ext.define(&#39;Ext.env.FeatureDetector&#39;, {
     },
 
     registerTest: function(name, fn, isDefault) {
+        //<debug>
         if (this.hasTest(name)) {
-            throw new Error(&quot;[Ext.env.FeatureDetector] Test name &quot; + name + &quot; has already been registered&quot;);
+            Ext.Error.raise({
+                sourceClass: "Ext.env.FeatureDetector",
+                sourceMethod: "registerTest",
+                msg: "Test name " + name + " has already been registered"
+            });
         }
+        //<debug>
 
         this.tests[name] = fn;
 
@@ -130,9 +136,15 @@ Ext.define(&#39;Ext.env.FeatureDetector&#39;, {
     },
 
     getTest: function(name) {
+        //<debug>
         if (!this.hasTest(name)) {
-            throw new Error(&quot;[Ext.env.FeatureDetector] Test name &quot; + name + &quot; does not exist&quot;);
+            Ext.Error.raise({
+                sourceClass: "Ext.env.FeatureDetector",
+                sourceMethod: "getTest",
+                msg: "Test name " + name + " does not exist"
+            });
         }
+        //<debug>
 
         return this.tests[name];
     },
@@ -161,20 +173,20 @@ Ext.define(&#39;Ext.env.FeatureDetector&#39;, {
 
     isEventSupported: function(name, tag) {
         var element = this.getTestElement(tag),
-            eventName = &#39;on&#39; + name,
+            eventName = 'on' + name,
             isSupported = false;
 
-        // When using `setAttribute`, IE skips &quot;unload&quot;, WebKit skips
-        // &quot;unload&quot; and &quot;resize&quot;, whereas `in` &quot;catches&quot; those
+        // When using `setAttribute`, IE skips "unload", WebKit skips
+        // "unload" and "resize", whereas `in` "catches" those
         isSupported = (eventName in element);
 
         if (!isSupported) {
-            if (element.setAttribute &amp;&amp; element.removeAttribute) {
-                element.setAttribute(eventName, &#39;&#39;);
-                isSupported = typeof element[eventName] === &#39;function&#39;;
+            if (element.setAttribute && element.removeAttribute) {
+                element.setAttribute(eventName, '');
+                isSupported = typeof element[eventName] === 'function';
 
-                // If property was created, &quot;remove it&quot; (by setting value to `undefined`)
-                if (typeof element[eventName] !== &#39;undefined&#39;) {
+                // If property was created, "remove it" (by setting value to `undefined`)
+                if (typeof element[eventName] !== 'undefined') {
                     element[eventName] = undefined;
                 }
 

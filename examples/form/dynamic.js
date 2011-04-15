@@ -23,7 +23,7 @@ Ext.onReady(function(){
     bd.createChild({tag: 'h2', html: 'Form 1 - Very Simple'});
 
 
-    var simple = Ext.create('Ext.form.FormPanel', {
+    var simple = Ext.create('Ext.form.Panel', {
         url:'save-form.php',
         frame:true,
         title: 'Simple Form',
@@ -75,7 +75,7 @@ Ext.onReady(function(){
      */
     bd.createChild({tag: 'h2', html: 'Form 2 - Adding fieldsets'});
 
-    var fsf = Ext.create('Ext.form.FormPanel', {
+    var fsf = Ext.create('Ext.form.Panel', {
         url:'save-form.php',
         frame:true,
         title: 'Simple Form with FieldSets',
@@ -154,7 +154,7 @@ Ext.onReady(function(){
     bd.createChild({tag: 'h2', html: 'Form 3 - A little more complex'});
 
 
-    var top = Ext.create('Ext.form.FormPanel', {
+    var top = Ext.create('Ext.form.Panel', {
         frame:true,
         title: 'Multi Column, Nested Layouts and Anchoring',
         bodyStyle:'padding:5px 5px 0',
@@ -225,7 +225,7 @@ Ext.onReady(function(){
 
 
 
-    var tabs = Ext.create('Ext.form.FormPanel', {
+    var tabs = Ext.create('Ext.form.Panel', {
         border:false,
         width: 350,
         fieldDefaults: {
@@ -302,7 +302,7 @@ Ext.onReady(function(){
      */
     bd.createChild({tag: 'h2', html: 'Form 5 - ... and forms can contain TabPanel(s)'});
 
-    var tab2 = Ext.create('Ext.form.FormPanel', {
+    var tab2 = Ext.create('Ext.form.Panel', {
         title: 'Inner Tabs',
         bodyStyle:'padding:5px',
         width: 600,

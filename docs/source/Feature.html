@@ -6,9 +6,9 @@
  * view such as grouping, treegrid, rowbody, rowwrap, etc.
  */
 
-Ext.define(&#39;Ext.grid.feature.Feature&#39;, {
-    extend: &#39;Ext.util.Observable&#39;,
-    alias: &#39;feature.feature&#39;,
+Ext.define('Ext.grid.feature.Feature', {
+    extend: 'Ext.util.Observable',
+    alias: 'feature.feature',
     
     isFeature: true,
     disabled: false,
@@ -23,7 +23,7 @@ Ext.define(&#39;Ext.grid.feature.Feature&#39;, {
     <a name="prop-Ext.grid.feature.Feature-{String}"></a>/**
      * @property {String}
      * Prefix to use when firing events on the view.
-     * For example a prefix of group would expose &quot;groupclick&quot;, &quot;groupcontextmenu&quot;, &quot;groupdblclick&quot;.
+     * For example a prefix of group would expose "groupclick", "groupcontextmenu", "groupdblclick".
      */
     eventPrefix: null,
     
@@ -53,7 +53,7 @@ Ext.define(&#39;Ext.grid.feature.Feature&#39;, {
     collectData: false,
         
     getFeatureTpl: function() {
-        return &#39;&#39;;
+        return '';
     },
     
     <a name="method-Ext.grid.feature.Feature-attachEvents"></a>/**

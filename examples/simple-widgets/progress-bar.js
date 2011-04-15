@@ -36,7 +36,7 @@ Ext.onReady(function(){
     var pbar1 = Ext.create('Ext.ProgressBar', {
        text:'Initializing...'
     });
-    
+
     var btn1 = Ext.get('btn1');
     btn1.on('click', function() {
         Ext.fly('p1text').update('Working');
@@ -59,9 +59,9 @@ Ext.onReady(function(){
         cls:'left-align',
         renderTo:'p2'
     });
-    
+
     var btn2 = Ext.get('btn2');
-    
+
     btn2.on('click', function() {
         Runner.run(pbar2, btn2, 12, function() {
             pbar2.reset();
@@ -70,20 +70,20 @@ Ext.onReady(function(){
     });
 
     //==== Progress bar 3 ====
-    var pbar3 = new Ext.ProgressBar({
+    var pbar3 = Ext.create('Ext.ProgressBar', {
         id:'pbar3',
         width:300,
         renderTo:'p3'
     });
-    
+
     pbar3.on('update', function(val) {
         //You can handle this event at each progress interval if
         //needed to perform some other action
         Ext.fly('p3text').dom.innerHTML += '.';
     });
-    
+
     var btn3 = Ext.get('btn3');
-    
+
     btn3.on('click', function(){
         Ext.fly('p3text').update('Working');
         btn3.dom.disabled = true;
@@ -106,9 +106,9 @@ Ext.onReady(function(){
         cls:'custom',
         renderTo:'p4'
     });
-    
+
     var btn4 = Ext.get('btn4');
-    
+
     btn4.on('click', function() {
         Runner.run(pbar4, btn4, 19, function() {
             pbar4.updateText('All finished!');

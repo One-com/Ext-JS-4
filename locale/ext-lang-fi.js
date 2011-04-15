@@ -11,8 +11,8 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} rivi(ä) valittu";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} rivi(ä) valittu";
     }
 
     if(Ext.TabPanelItem){
@@ -132,7 +132,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Sivu",
             afterPageText  : "/ {0}",
@@ -146,12 +146,12 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "Tämän kentän arvo ei kelpaa";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "Tämän kentän arvo ei kelpaa";
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Tämän kentän minimipituus on {0}",
             maxLengthText : "Tämän kentän maksimipituus on {0}",
             blankText     : "Tämä kenttä on pakollinen",
@@ -160,16 +160,16 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Tämän kentän pienin sallittu arvo on {0}",
             maxText : "Tämän kentän suurin sallittu arvo on {0}",
             nanText : "{0} ei ole numero"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Ei käytössä",
             disabledDatesText : "Ei käytössä",
             minText           : "Tämän kentän päivämäärän tulee olla {0} jälkeen",
@@ -180,15 +180,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "Ladataan...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Syötä tähän kenttään sähköpostiosoite, esim. "etunimi.sukunimi@osoite.fi"',
             urlText      : 'Syötä tähän kenttään URL-osoite, esim. "http:/'+'/www.osoite.fi"',
             alphaText    : 'Syötä tähän kenttään vain kirjaimia (a-z, A-Z) ja alaviivoja (_)',
@@ -196,8 +196,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'Anna linkin URL-osoite:',
             buttonTips : {
                 bold : {
@@ -278,8 +278,8 @@ Ext.onReady(function() {
         Ext.form.Basic.prototype.waitTitle = "Odota...";
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Järjestä A-Ö",
             sortDescText : "Järjestä Ö-A",
             lockText     : "Lukitse sarake",

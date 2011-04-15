@@ -1,7 +1,7 @@
 /**
 * @class Ext.ux.SlidingPager
 * @extends Object
-* Plugin for PagingToolbar which replaces the textfield input with a slider 
+* Plugin for PagingToolbar which replaces the textfield input with a slider
 * @constructor
 * Create a new ItemSelector
 * @param {Object} config Configuration options
@@ -12,22 +12,22 @@ Ext.define('Ext.ux.SlidingPager', {
         'Ext.slider.Single',
         'Ext.slider.Tip'
     ],
-    
+
     constructor : function(config) {
         if (config) {
             Ext.apply(this, config);
         }
     },
-    
+
     init : function(pbar){
         var idx = pbar.items.indexOf(pbar.child("#inputItem")),
             slider;
-            
+
         Ext.each(pbar.items.getRange(idx - 2, idx + 2), function(c){
             c.hide();
         });
-        
-        slider = new Ext.slider.Single({
+
+        slider = Ext.create('Ext.slider.Single', {
             width: 114,
             minValue: 1,
             maxValue: 1,
@@ -43,7 +43,7 @@ Ext.define('Ext.ux.SlidingPager', {
         });
 
         pbar.insert(idx + 1, slider);
-        
+
         pbar.on({
             change: function(pb, data){
                 slider.setMaxValue(data.pageCount);

@@ -3,14 +3,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
     <title>Resizable Examples</title>
-    
+
     <link rel="stylesheet" type="text/css" href="../../resources/css/ext-all.css" />
     <link rel="stylesheet" type="text/css" href="../shared/example.css" />
     <link rel="stylesheet" type="text/css" href="basic.css" />
-    
+
     <script type="text/javascript" src="../../bootstrap.js"></script>
     <script src="basic.js"></script>
-    
+
 </head>
 
 <body>
@@ -25,8 +25,8 @@
     right or border right edge of the box. This example uses the default "floating" handles.
 </p>
 <div id="basic">Resize Me!</div>
-<pre class="code"><code>var basic = new Ext.create('Ext.resizer.Resizer', {
-        target: 'basic', 
+<pre class="code"><code>var basic = Ext.create('Ext.create', 'Ext.resizer.Resizer', {
+        target: 'basic',
         width: 200,
         height: 100,
         minWidth:100,
@@ -69,7 +69,7 @@ And look how simple the code is, even my grandma could write it.
     For some things like images, you will probably want to preserve the ratio of width to height. Just set preserveRatio:true.
 </p>
 <img id="wrapped" src="flower.jpg" width="200" height="133"/>
-<pre class="code"><code>var wrapped = new Ext.create('Ext.resizer.Resizer', {
+<pre class="code"><code>var wrapped = Ext.create('Ext.create', 'Ext.resizer.Resizer', {
     target: 'wrapped',
     pinned:true,
     minWidth:50,
@@ -82,7 +82,7 @@ And look how simple the code is, even my grandma could write it.
     If you just want the element to be resizable without any fancy handles, set transparent to true.
 </p>
 <img id="transparent" src="grass.jpg" width="200" height="133"/>
-<pre class="code"><code>var transparent = new Ext.create('Ext.resizer.Resizer', {
+<pre class="code"><code>var transparent = Ext.create('Ext.create', 'Ext.resizer.Resizer', {
     target: 'transparent',
     minWidth:50,
     minHeight: 50,
@@ -94,7 +94,7 @@ And look how simple the code is, even my grandma could write it.
     <b>Customizable Handles</b><br />
     Resizable elements are resizable 8 ways. 8 way resizing for a static positioned element will cause the element to be positioned relative and taken out of the document flow. For resizing which adjusts the
     x and y of the element, the element should be positioned absolute. You can also control which handles are displayed by setting the "handles" attribute.
-    The handles are styled using CSS so they can be customized to look however you would like them to. 
+    The handles are styled using CSS so they can be customized to look however you would like them to.
 </p>
 <p>
     This image has 8 way resizing, custom handles and preserved aspect ratio.<br />
@@ -102,7 +102,7 @@ And look how simple the code is, even my grandma could write it.
 </p>
 <img id="custom" src="stones.jpg" width="200" height="150" style="position:absolute;left:0;top:0;"/>
 <div style="padding:8px;border:1px solid #c3daf9;background:#d9e8fb;width:150px;text-align:center;"><button id="showMe">Show Me</button></div>
-<pre class="code"><code>var custom = new Ext.create('Ext.resizer.Resizer', {
+<pre class="code"><code>var custom = Ext.create('Ext.create', 'Ext.resizer.Resizer', {
     target: 'custom',
     pinned:true,
     minWidth:50,

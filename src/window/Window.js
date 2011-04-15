@@ -4,13 +4,14 @@
  * <p>A specialized panel intended for use as an application window.  Windows are floated, {@link #resizable}, and
  * {@link #draggable} by default.  Windows can be {@link #maximizable maximized} to fill the viewport,
  * restored to their prior size, and can be {@link #minimize}d.</p>
- * <p>Windows can also be linked to a {@link Ext.ZIndexManager} or managed by the {@link Ext.WindowMgr} to provide
+ * <p>Windows can also be linked to a {@link Ext.ZIndexManager} or managed by the {@link Ext.WindowManager} to provide
  * grouping, activation, to front, to back and other application-specific behavior.</p>
  * <p>By default, Windows will be rendered to document.body. To {@link #constrain} a Window to another element
  * specify {@link Ext.Component#renderTo renderTo}.</p>
  * <p><b>As with all {@link Ext.container.Container Container}s, it is important to consider how you want the Window
  * to size and arrange any child Components. Choose an appropriate {@link #layout} configuration which lays out
  * child Components in the required manner.</b></p>
+ * {@img Ext.window.Window/Ext.window.Window.png Window component}
  * Example:<code><pre>
 Ext.create('Ext.window.Window', {
     title: 'Hello',
@@ -20,7 +21,7 @@ Ext.create('Ext.window.Window', {
     items: {  // Let's put an empty grid in just to illustrate fit layout
         xtype: 'grid',
         border: false,
-        headers: [{header: 'World'}]                 // One header just for show. There's no data,
+        columns: [{header: 'World'}],                 // One header just for show. There's no data,
         store: Ext.create('Ext.data.ArrayStore', {}) // A dummy empty data store
     }
 }).show();
@@ -241,6 +242,10 @@ Ext.define('Ext.window.Window', {
             'restore'
         );
         
+        if (me.plain) {
+            me.ui = [me.ui, 'plain'];
+        }
+        
         if (me.modal) {
             me.ariaRole = 'dialog';
         }
@@ -296,13 +301,7 @@ Ext.define('Ext.window.Window', {
     // private
     onRender: function(ct, position) {
         var me = this;
-        
-        Ext.applyIf(me.renderData, {
-            plain: me.plain ? me.baseCls + '-plain' : undefined
-        });
-
         me.callParent(arguments);
-
         me.focusEl = me.el;
 
         // Double clicking a header will toggleMaximize
@@ -379,7 +378,7 @@ Ext.define('Ext.window.Window', {
          * @type Ext.util.ComponentDragger
          * @property dd
          */
-        me.dd = new Ext.util.ComponentDragger(this, ddConfig);
+        me.dd = Ext.create('Ext.util.ComponentDragger', this, ddConfig);
         me.relayEvents(me.dd, ['dragstart', 'drag', 'dragend']);
     },
 

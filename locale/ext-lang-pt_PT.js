@@ -12,8 +12,8 @@ Ext.onReady(function() {
       Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-      Ext.grid.GridPanel.prototype.ddText = "{0} linha(s) seleccionada(s)";
+    if(Ext.grid.Panel){
+      Ext.grid.Panel.prototype.ddText = "{0} linha(s) seleccionada(s)";
     }
 
     if(Ext.TabPanelItem){
@@ -121,7 +121,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
       Ext.apply(Ext.PagingToolbar.prototype, {
         beforePageText : "P&aacute;gina",
         afterPageText  : "de {0}",
@@ -135,12 +135,12 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.BaseField){
-      Ext.form.BaseField.prototype.invalidText = "O valor deste campo &eacute; inv&aacute;lido";
+    if(Ext.form.field.Base){
+      Ext.form.field.Base.prototype.invalidText = "O valor deste campo &eacute; inv&aacute;lido";
     }
 
-    if(Ext.form.Text){
-      Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+      Ext.apply(Ext.form.field.Text.prototype, {
         minLengthText : "O comprimento m&iacute;nimo deste campo &eaute; {0}",
         maxLengthText : "O comprimento m&aacute;ximo deste campo &eaute; {0}",
         blankText     : "Este campo &eacute; de preenchimento obrigat&oacute;rio",
@@ -149,16 +149,16 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Number){
-      Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+      Ext.apply(Ext.form.field.Number.prototype, {
         minText : "O valor m&iacute;nimo deste campo &eaute; {0}",
         maxText : "O valor m&aacute;ximo deste campo &eaute; {0}",
         nanText : "{0} n&atilde;o &eacute; um numero"
       });
     }
 
-    if(Ext.form.Date){
-      Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+      Ext.apply(Ext.form.field.Date.prototype, {
         disabledDaysText  : "Desabilitado",
         disabledDatesText : "Desabilitado",
         minText           : "A data deste campo deve ser posterior a {0}",
@@ -169,15 +169,15 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.ComboBox){
-      Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+      Ext.apply(Ext.form.field.ComboBox.prototype, {
         loadingText       : "A Carregar...",
         valueNotFoundText : undefined
       });
     }
 
-    if(Ext.form.VTypes){
-      Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+      Ext.apply(Ext.form.field.VTypes, {
         emailText    : 'Este campo deve ser um endere&ccedil;o de email no formato "utilizador@dominio.com"',
         urlText      : 'Este campo deve ser um URL no formato "http:/'+'/www.dominio.com"',
         alphaText    : 'Este campo deve conter apenas letras e _',
@@ -185,8 +185,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.HtmlEditor){
-      Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : 'Indique o endere&ccedil;o do link:',
         buttonTips : {
           bold : {
@@ -267,8 +267,8 @@ Ext.onReady(function() {
       Ext.form.Basic.prototype.waitTitle = "Por favor espere...";
     }
 
-    if(Ext.grid.HeaderContainer){
-      Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+      Ext.apply(Ext.grid.header.Container.prototype, {
         sortAscText  : "Ordena&ccedil;&atilde;o Crescente",
         sortDescText : "Ordena&ccedil;&atilde;o Decrescente",
         lockText     : "Fixar Coluna",

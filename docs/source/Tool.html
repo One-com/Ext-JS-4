@@ -4,22 +4,22 @@
  * 
  * @xtype tool
  */
-Ext.define(&#39;Ext.panel.Tool&#39;, {
-    extend: &#39;Ext.Component&#39;,
-    requires: [&#39;Ext.tip.QuickTips&#39;],
-    alias: &#39;widget.tool&#39;,
+Ext.define('Ext.panel.Tool', {
+    extend: 'Ext.Component',
+    requires: ['Ext.tip.QuickTips'],
+    alias: 'widget.tool',
 
-    baseCls: Ext.baseCSSPrefix + &#39;tool&#39;,
-    disableCls: Ext.baseCSSPrefix + &#39;tool-disabled&#39;,
-    toolPressedCls: Ext.baseCSSPrefix + &#39;tool-pressed&#39;,
-    toolOverCls: Ext.baseCSSPrefix + &#39;tool-over&#39;,
-    ariaRole: &#39;button&#39;,
-    renderTpl: [&#39;&lt;img src=&quot;{blank}&quot; class=&quot;{baseCls}-{type}&quot; role=&quot;presentation&quot;/&gt;&#39;],
+    baseCls: Ext.baseCSSPrefix + 'tool',
+    disableCls: Ext.baseCSSPrefix + 'tool-disabled',
+    toolPressedCls: Ext.baseCSSPrefix + 'tool-pressed',
+    toolOverCls: Ext.baseCSSPrefix + 'tool-over',
+    ariaRole: 'button',
+    renderTpl: ['<img src="http://localhost:3000/new/ext-js/4-0/source/{blank}" class="{baseCls}-{type}" role="presentation"/>'],
     disabled: false,
 
     initComponent: function() {
         var me = this;
-        me.addEvents(&#39;click&#39;);
+        me.addEvents('click');
         me.type = me.type || me.id;
 
         Ext.applyIf(me.renderData, {
@@ -27,7 +27,7 @@ Ext.define(&#39;Ext.panel.Tool&#39;, {
             blank: Ext.BLANK_IMAGE_URL,
             type: me.type
         });
-        me.renderSelectors.toolEl = &#39;.&#39; + me.baseCls + &#39;-&#39; + me.type;
+        me.renderSelectors.toolEl = '.' + me.baseCls + '-' + me.type;
         me.callParent();
     },
 
@@ -57,7 +57,7 @@ Ext.define(&#39;Ext.panel.Tool&#39;, {
     setType: function(type) {
         this.type = type;
         if (this.rendered) {
-            this.toolEl.dom.className = this.baseCls + &#39;-&#39; + type;
+            this.toolEl.dom.className = this.baseCls + '-' + type;
         }
     },
 
@@ -95,7 +95,7 @@ Ext.define(&#39;Ext.panel.Tool&#39;, {
             me.handler.call(me.scope || me, e, target, owner, me);
         }
 
-        this.fireEvent(&#39;click&#39;, me, e, target, owner, me);
+        this.fireEvent('click', me, e, target, owner, me);
         return true;
     },
 

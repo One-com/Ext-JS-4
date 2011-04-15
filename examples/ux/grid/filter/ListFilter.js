@@ -1,4 +1,4 @@
-/** 
+/**
  * @class Ext.ux.grid.filter.ListFilter
  * @extends Ext.ux.grid.filter.Filter
  * <p>List filters are able to be preloaded/backed by an Ext.data.Store to load
@@ -6,10 +6,10 @@
  * {@link Ext.ux.grid.menu.ListMenu} component.</p>
  * <p>Although not shown here, this class accepts all configuration options
  * for {@link Ext.ux.grid.menu.ListMenu}.</p>
- * 
+ *
  * <p><b><u>Example Usage:</u></b></p>
- * <pre><code>    
-var filters = new Ext.ux.grid.GridFilters({
+ * <pre><code>
+var filters = Ext.create('Ext.ux.grid.GridFilters', {
     ...
     filters: [{
         type: 'list',
@@ -20,7 +20,7 @@ var filters = new Ext.ux.grid.GridFilters({
     }]
 });
  * </code></pre>
- * 
+ *
  */
 Ext.define('Ext.ux.grid.filter.ListFilter', {
     extend: 'Ext.ux.grid.filter.Filter',
@@ -38,7 +38,7 @@ Ext.define('Ext.ux.grid.filter.ListFilter', {
      * <li><b>Array</b> :
      * <pre><code>
 options: [
-    [11, 'extra small'], 
+    [11, 'extra small'],
     [18, 'small'],
     [22, 'medium'],
     [35, 'large'],
@@ -50,11 +50,11 @@ options: [
      * <pre><code>
 labelField: 'name', // override default of 'text'
 options: [
-    {id: 11, name:'extra small'}, 
-    {id: 18, name:'small'}, 
-    {id: 22, name:'medium'}, 
-    {id: 35, name:'large'}, 
-    {id: 44, name:'extra large'} 
+    {id: 11, name:'extra small'},
+    {id: 18, name:'small'},
+    {id: 22, name:'medium'},
+    {id: 35, name:'large'},
+    {id: 44, name:'extra large'}
 ]
      * </code></pre>
      * </li>
@@ -73,12 +73,12 @@ options: [
 filter[0][data][type] list
 filter[0][data][value] value1
 filter[0][data][value] value2
-filter[0][field] prod 
+filter[0][field] prod
 
 // phpMode == true:
 filter[0][data][type] list
 filter[0][data][value] value1, value2
-filter[0][field] prod 
+filter[0][field] prod
      * </code></pre>
      * When GridFilters <code>@cfg encode = true</code>:
      * <pre><code>
@@ -97,13 +97,13 @@ filter : [{"type":"list","value":"small,medium","field":"size"}]
      * is local, use the <code>{@link #options}</code> config instead.
      */
 
-    /**  
+    /**
      * @private
      * Template method that is to initialize the filter.
      * @param {Object} config
      */
     init : function (config) {
-        this.dt = new Ext.util.DelayedTask(this.fireUpdate, this);
+        this.dt = Ext.create('Ext.util.DelayedTask', this.fireUpdate, this);
     },
 
     /**
@@ -113,11 +113,11 @@ filter : [{"type":"list","value":"small,medium","field":"size"}]
      * @return {Ext.menu.Menu}
      */
     createMenu: function(config) {
-        var menu = new Ext.ux.grid.menu.ListMenu(config);
+        var menu = Ext.create('Ext.ux.grid.menu.ListMenu', config);
         menu.on('checkchange', this.onCheckChange, this);
         return menu;
     },
-    
+
     /**
      * @private
      * Template method that is to get and return the value of the filter.
@@ -130,7 +130,7 @@ filter : [{"type":"list","value":"small,medium","field":"size"}]
      * @private
      * Template method that is to set the value of the filter.
      * @param {Object} value The value to set the filter
-     */	
+     */
     setValue : function (value) {
         this.menu.setSelected(value);
         this.fireEvent('update', this);
@@ -145,7 +145,7 @@ filter : [{"type":"list","value":"small,medium","field":"size"}]
     isActivatable : function () {
         return this.getValue().length > 0;
     },
-    
+
     /**
      * @private
      * Template method that is to get and return serialized filter data for
@@ -161,8 +161,8 @@ filter : [{"type":"list","value":"small,medium","field":"size"}]
     onCheckChange : function(){
         this.dt.delay(this.updateBuffer);
     },
-    
-    
+
+
     /**
      * Template method that is to validate the provided Ext.data.Record
      * against the filters configuration.

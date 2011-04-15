@@ -1,29 +1,31 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.layout.container.Fit"></a>/**
  * @class Ext.layout.container.Fit
  * @extends Ext.layout.container.AbstractFit
- * &lt;p&gt;This is a base class for layouts that contain &lt;b&gt;a single item&lt;/b&gt; that automatically expands to fill the layout&#39;s
- * container.  This class is intended to be extended or created via the &lt;tt&gt;layout:&#39;fit&#39;&lt;/tt&gt; {@link Ext.container.Container#layout}
- * config, and should generally not need to be created directly via the new keyword.&lt;/p&gt;
- * &lt;p&gt;FitLayout does not have any direct config options (other than inherited ones).  To fit a panel to a container
- * using FitLayout, simply set layout:&#39;fit&#39; on the container and add a single panel to it.  If the container has
- * multiple panels, only the first one will be displayed.  Example usage:&lt;/p&gt;
- * <br><span style="display: none">**/</span>var p = new Ext.panel.Panel({
-    title: &#39;Fit Layout&#39;,
-    layout:&#39;fit&#39;,
+ * <p>This is a base class for layouts that contain <b>a single item</b> that automatically expands to fill the layout's
+ * container.  This class is intended to be extended or created via the <tt>layout:'fit'</tt> {@link Ext.container.Container#layout}
+ * config, and should generally not need to be created directly via the new keyword.</p>
+ * <p>FitLayout does not have any direct config options (other than inherited ones).  To fit a panel to a container
+ * using FitLayout, simply set layout:'fit' on the container and add a single panel to it.  If the container has
+ * multiple panels, only the first one will be displayed.  Example usage:</p>
+ * <pre><code>
+var p = new Ext.panel.Panel({
+    title: 'Fit Layout',
+    layout:'fit',
     items: {
-        title: &#39;Inner Panel&#39;,
-        html: &#39;&amp;lt;p&amp;gt;This is the inner panel content&amp;lt;/p&amp;gt;&#39;,
+        title: 'Inner Panel',
+        html: '&lt;p&gt;This is the inner panel content&lt;/p&gt;',
         border: false
     }
 });
-<br><span style="display: none">/**</span> */
-Ext.define(&#39;Ext.layout.container.Fit&#39;, {
+</code></pre>
+ */
+Ext.define('Ext.layout.container.Fit', {
 
     /* Begin Definitions */
 
-    extend: &#39;Ext.layout.container.AbstractFit&#39;,
-    alias: &#39;layout.fit&#39;,
-    alternateClassName: &#39;Ext.layout.FitLayout&#39;,
+    extend: 'Ext.layout.container.AbstractFit',
+    alias: 'layout.fit',
+    alternateClassName: 'Ext.layout.FitLayout',
 
     /* End Definitions */
    
@@ -43,11 +45,11 @@ Ext.define(&#39;Ext.layout.container.Fit&#39;, {
 
     setItemBox : function(item, box) {
         var me = this;
-        if (item &amp;&amp; box.height &gt; 0) {
-            if (me.isManaged(&#39;width&#39;) === true) {
+        if (item && box.height > 0) {
+            if (me.isManaged('width') === true) {
                box.width = undefined;
             }
-            if (me.isManaged(&#39;height&#39;) === true) {
+            if (me.isManaged('height') === true) {
                box.height = undefined;
             }
             me.setItemSize(item, box.width, box.height);

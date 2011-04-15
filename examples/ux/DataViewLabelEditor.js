@@ -3,38 +3,36 @@
  * @extends Ext.Editor
  */
 Ext.define('Ext.ux.DataViewLabelEditor', {
-    
-    extend: 'Ext.Editor', 
-    
+
+    extend: 'Ext.Editor',
+
     alignment: 'tl-tl',
-    
-    cls: 'x-small-editor',
-    
+
     completeOnEnter: true,
-    
+
     cancelOnEsc: true,
-    
+
     shim: false,
-    
-    autoSize: 'none',
-    
+
+    autoSize: {
+        width: 'boundEl',
+        height: 'field'
+    },
+
     labelSelector: 'x-editable',
-    
+
     requires: [
-        'Ext.form.Text'
+        'Ext.form.field.Text'
     ],
-    
+
     constructor: function(config) {
-        config.field = config.field || new Ext.form.Text({
+        config.field = config.field || Ext.create('Ext.form.field.Text', {
             allowBlank: false,
-            growMin:90,
-            growMax:240,
-            grow:true,
             selectOnFocus:true
         });
         this.callParent([config]);
     },
-    
+
     init: function(view) {
         this.view = view;
         this.mon(view, 'render', this.bindEvents, this);
@@ -45,17 +43,17 @@ Ext.define('Ext.ux.DataViewLabelEditor', {
     bindEvents: function() {
         this.mon(this.view.getEl(), {
             click: {
-                fn: this.onClick, 
+                fn: this.onClick,
                 scope: this
             }
         });
     },
-    
+
     // on mousedown show editor
     onClick: function(e, target) {
         var me = this,
             item, record;
-        
+
         if (Ext.fly(target).hasCls(me.labelSelector) && !me.editing && !e.ctrlKey && !e.shiftKey) {
             e.stopEvent();
             item = me.view.findItemByChild(target);

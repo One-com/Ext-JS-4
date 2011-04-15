@@ -4,15 +4,15 @@
 (function(){
 
 var ELEMENT = Ext.core.Element,
-    LEFT = &quot;left&quot;,
-    RIGHT = &quot;right&quot;,
-    TOP = &quot;top&quot;,
-    BOTTOM = &quot;bottom&quot;,
-    POSITION = &quot;position&quot;,
-    STATIC = &quot;static&quot;,
-    RELATIVE = &quot;relative&quot;,
-    AUTO = &quot;auto&quot;,
-    ZINDEX = &quot;z-index&quot;;
+    LEFT = "left",
+    RIGHT = "right",
+    TOP = "top",
+    BOTTOM = "bottom",
+    POSITION = "position",
+    STATIC = "static",
+    RELATIVE = "relative",
+    AUTO = "auto",
+    ZINDEX = "z-index";
 
 Ext.override(Ext.core.Element, {
     <a name="method-Ext.core.Element-getX"></a>/**
@@ -46,7 +46,7 @@ Ext.override(Ext.core.Element, {
       */
     getOffsetsTo : function(el){
         var o = this.getXY(),
-            e = Ext.fly(el, &#39;_internal&#39;).getXY();
+            e = Ext.fly(el, '_internal').getXY();
         return [o[0]-e[0],o[1]-e[1]];
     },
 
@@ -71,7 +71,7 @@ Ext.override(Ext.core.Element, {
     },
 
     <a name="method-Ext.core.Element-setLeft"></a>/**
-     * Sets the element&#39;s left position directly using CSS style (instead of {@link #setX}).
+     * Sets the element's left position directly using CSS style (instead of {@link #setX}).
      * @param {String} left The left CSS property value
      * @return {Ext.core.Element} this
      */
@@ -81,7 +81,7 @@ Ext.override(Ext.core.Element, {
     },
 
     <a name="method-Ext.core.Element-setTop"></a>/**
-     * Sets the element&#39;s top position directly using CSS style (instead of {@link #setY}).
+     * Sets the element's top position directly using CSS style (instead of {@link #setY}).
      * @param {String} top The top CSS property value
      * @return {Ext.core.Element} this
      */
@@ -91,7 +91,7 @@ Ext.override(Ext.core.Element, {
     },
 
     <a name="method-Ext.core.Element-setRight"></a>/**
-     * Sets the element&#39;s CSS right style.
+     * Sets the element's CSS right style.
      * @param {String} right The right CSS property value
      * @return {Ext.core.Element} this
      */
@@ -101,7 +101,7 @@ Ext.override(Ext.core.Element, {
     },
 
     <a name="method-Ext.core.Element-setBottom"></a>/**
-     * Sets the element&#39;s CSS bottom style.
+     * Sets the element's CSS bottom style.
      * @param {String} bottom The bottom CSS property value
      * @return {Ext.core.Element} this
      */
@@ -113,7 +113,7 @@ Ext.override(Ext.core.Element, {
     <a name="method-Ext.core.Element-setXY"></a>/**
      * Sets the position of the element in page coordinates, regardless of how the element is positioned.
      * The element must be part of the DOM tree to have page coordinates (display:none or elements not appended return false).
-     * @param {Array} pos Contains X &amp; Y [x, y] values for new position (coordinates are page-based)
+     * @param {Array} pos Contains X & Y [x, y] values for new position (coordinates are page-based)
      * @param {Boolean/Object} animate (optional) True for the default animation, or a standard Element animation config object
      * @return {Ext.core.Element} this
      */
@@ -196,7 +196,7 @@ Ext.override(Ext.core.Element, {
     <a name="method-Ext.core.Element-position"></a>/**
     * Initializes positioning on this element. If a desired position is not passed, it will make the
     * the element positioned relative IF it is not already positioned.
-    * @param {String} pos (optional) Positioning to use &quot;relative&quot;, &quot;absolute&quot; or &quot;fixed&quot;
+    * @param {String} pos (optional) Positioning to use "relative", "absolute" or "fixed"
     * @param {Number} zIndex (optional) The zIndex to apply
     * @param {Number} x (optional) Set the page X position
     * @param {Number} y (optional) Set the page Y position
@@ -204,7 +204,7 @@ Ext.override(Ext.core.Element, {
     position : function(pos, zIndex, x, y) {
         var me = this;
 
-        if (!pos &amp;&amp; me.isStyle(POSITION, STATIC)){
+        if (!pos && me.isStyle(POSITION, STATIC)){
             me.setStyle(POSITION, RELATIVE);
         } else if(pos) {
             me.setStyle(POSITION, pos);
@@ -219,17 +219,17 @@ Ext.override(Ext.core.Element, {
 
     <a name="method-Ext.core.Element-clearPositioning"></a>/**
     * Clear positioning back to the default when the document was loaded
-    * @param {String} value (optional) The value to use for the left,right,top,bottom, defaults to &#39;&#39; (empty string). You could use &#39;auto&#39;.
+    * @param {String} value (optional) The value to use for the left,right,top,bottom, defaults to '' (empty string). You could use 'auto'.
     * @return {Ext.core.Element} this
      */
     clearPositioning : function(value){
-        value = value || &#39;&#39;;
+        value = value || '';
         this.setStyle({
             left : value,
             right : value,
             top : value,
             bottom : value,
-            &quot;z-index&quot; : &quot;&quot;,
+            "z-index" : "",
             position : STATIC
         });
         return this;
@@ -244,12 +244,12 @@ Ext.override(Ext.core.Element, {
         var l = this.getStyle(LEFT);
         var t = this.getStyle(TOP);
         return {
-            &quot;position&quot; : this.getStyle(POSITION),
-            &quot;left&quot; : l,
-            &quot;right&quot; : l ? &quot;&quot; : this.getStyle(RIGHT),
-            &quot;top&quot; : t,
-            &quot;bottom&quot; : t ? &quot;&quot; : this.getStyle(BOTTOM),
-            &quot;z-index&quot; : this.getStyle(ZINDEX)
+            "position" : this.getStyle(POSITION),
+            "left" : l,
+            "right" : l ? "" : this.getStyle(RIGHT),
+            "top" : t,
+            "bottom" : t ? "" : this.getStyle(BOTTOM),
+            "z-index" : this.getStyle(ZINDEX)
         };
     },
 
@@ -265,10 +265,10 @@ Ext.override(Ext.core.Element, {
         me.setStyle(pc);
 
         if(pc.right == AUTO){
-            style.right = &quot;&quot;;
+            style.right = "";
         }
         if(pc.bottom == AUTO){
-            style.bottom = &quot;&quot;;
+            style.bottom = "";
         }
 
         return me;
@@ -306,7 +306,7 @@ Ext.override(Ext.core.Element, {
     },
 
     <a name="method-Ext.core.Element-setBox"></a>/**
-     * Sets the element&#39;s box. Use getBox() on another element to get a box obj. If animate is true then width, height, x and y will be animated concurrently.
+     * Sets the element's box. Use getBox() on another element to get a box obj. If animate is true then width, height, x and y will be animated concurrently.
      * @param {Object} box The box to fill {x, y, width, height}
      * @param {Boolean} adjust (optional) Whether to adjust for box-model issues automatically
      * @param {Boolean/Object} animate (optional) true for the default animation or a standard Element animation config object
@@ -316,9 +316,9 @@ Ext.override(Ext.core.Element, {
         var me = this,
             w = box.width,
             h = box.height;
-        if ((adjust &amp;&amp; !me.autoBoxAdjust) &amp;&amp; !me.isBorderBox()) {
-            w -= (me.getBorderWidth(&quot;lr&quot;) + me.getPadding(&quot;lr&quot;));
-            h -= (me.getBorderWidth(&quot;tb&quot;) + me.getPadding(&quot;tb&quot;));
+        if ((adjust && !me.autoBoxAdjust) && !me.isBorderBox()) {
+            w -= (me.getBorderWidth("lr") + me.getPadding("lr"));
+            h -= (me.getBorderWidth("tb") + me.getPadding("tb"));
         }
         me.setBounds(box.x, box.y, w, h, animate);
         return me;
@@ -326,18 +326,20 @@ Ext.override(Ext.core.Element, {
 
     <a name="method-Ext.core.Element-getBox"></a>/**
      * Return an object defining the area of this Element which can be passed to {@link #setBox} to
-     * set another Element&#39;s size/location to match this element.
+     * set another Element's size/location to match this element.
      * @param {Boolean} contentBox (optional) If true a box for the content of the element is returned.
-     * @param {Boolean} local (optional) If true the element&#39;s left and top are returned instead of page x/y.
-     * @return {Object} box An object in the format<br><span style="display: none">**/</span>{
-    x: &amp;lt;Element&#39;s X position&gt;,
-    y: &amp;lt;Element&#39;s Y position&gt;,
-    width: &amp;lt;Element&#39;s width&gt;,
-    height: &amp;lt;Element&#39;s height&gt;,
-    bottom: &amp;lt;Element&#39;s lower bound&gt;,
-    right: &amp;lt;Element&#39;s rightmost bound&gt;
+     * @param {Boolean} local (optional) If true the element's left and top are returned instead of page x/y.
+     * @return {Object} box An object in the format<pre><code>
+{
+    x: &lt;Element's X position>,
+    y: &lt;Element's Y position>,
+    width: &lt;Element's width>,
+    height: &lt;Element's height>,
+    bottom: &lt;Element's lower bound>,
+    right: &lt;Element's rightmost bound>
 }
-<br><span style="display: none">/**</span>     * The returned object may also be addressed as an Array where index 0 contains the X position
+</code></pre>
+     * The returned object may also be addressed as an Array where index 0 contains the X position
      * and index 1 contains the Y position. So the result may also be used for {@link #setXY}
      */
     getBox: function(contentBox, local) {
@@ -351,8 +353,8 @@ Ext.override(Ext.core.Element, {
         if (!local) {
             xy = me.getXY();
         } else {
-            left = parseInt(me.getStyle(&quot;left&quot;), 10) || 0;
-            top = parseInt(me.getStyle(&quot;top&quot;), 10) || 0;
+            left = parseInt(me.getStyle("left"), 10) || 0;
+            top = parseInt(me.getStyle("top"), 10) || 0;
             xy = [left, top];
         }
         w = me.getWidth();
@@ -367,10 +369,10 @@ Ext.override(Ext.core.Element, {
                 height: h
             };
         } else {
-            l = getBorderWidth.call(me, &quot;l&quot;) + getPadding.call(me, &quot;l&quot;);
-            r = getBorderWidth.call(me, &quot;r&quot;) + getPadding.call(me, &quot;r&quot;);
-            t = getBorderWidth.call(me, &quot;t&quot;) + getPadding.call(me, &quot;t&quot;);
-            b = getBorderWidth.call(me, &quot;b&quot;) + getPadding.call(me, &quot;b&quot;);
+            l = getBorderWidth.call(me, "l") + getPadding.call(me, "l");
+            r = getBorderWidth.call(me, "r") + getPadding.call(me, "r");
+            t = getBorderWidth.call(me, "t") + getPadding.call(me, "t");
+            b = getBorderWidth.call(me, "b") + getPadding.call(me, "b");
             bx = {
                 x: xy[0] + l,
                 y: xy[1] + t,
@@ -387,7 +389,7 @@ Ext.override(Ext.core.Element, {
 
     <a name="method-Ext.core.Element-move"></a>/**
      * Move this element relative to its current position.
-     * @param {String} direction Possible values are: &quot;l&quot; (or &quot;left&quot;), &quot;r&quot; (or &quot;right&quot;), &quot;t&quot; (or &quot;top&quot;, or &quot;up&quot;), &quot;b&quot; (or &quot;bottom&quot;, or &quot;down&quot;).
+     * @param {String} direction Possible values are: "l" (or "left"), "r" (or "right"), "t" (or "top", or "up"), "b" (or "bottom", or "down").
      * @param {Number} distance How far to move the element in pixels
      * @param {Boolean/Object} animate (optional) true for the default animation or a standard Element animation config object
      * @return {Ext.core.Element} this
@@ -435,40 +437,44 @@ Ext.override(Ext.core.Element, {
     <a name="method-Ext.core.Element-getRegion"></a>/**
      * Returns the region of this element.
      * The element must be part of the DOM tree to have a region (display:none or elements not appended return false).
-     * @return {Region} A Ext.util.Region containing &quot;top, left, bottom, right&quot; member data.
+     * @return {Region} A Ext.util.Region containing "top, left, bottom, right" member data.
      */
     getRegion: function() {
         return this.getPageBox(true);
     },
 
     <a name="method-Ext.core.Element-getViewRegion"></a>/**
-     * Returns the &lt;b&gt;content&lt;/b&gt; region of this element. That is the region within the borders and padding.
-     * @return {Region} A Ext.util.Region containing &quot;top, left, bottom, right&quot; member data.
+     * Returns the <b>content</b> region of this element. That is the region within the borders and padding.
+     * @return {Region} A Ext.util.Region containing "top, left, bottom, right" member data.
      */
     getViewRegion: function() {
-        var isBody = this.dom === document.body,
-            pos = isBody ? [0, 0] : this.getXY(),
-            top = pos[1] + (isBody ?  0 : this.getBorderWidth(&#39;t&#39;) + this.getPadding(&#39;t&#39;)),
-            left = pos[0] + (isBody ? 0 : this.getBorderWidth(&#39;l&#39;) + this.getPadding(&#39;l&#39;)),
-            width = isBody ? Ext.core.Element.getViewportWidth() : this.getWidth(true),
-            height = isBody ? Ext.core.Element.getViewportHeight() : this.getHeight(true);
-        
-        return new Ext.util.Region(top, left + width, top + height, left);
+        var me = this,
+            isBody = me.dom === document.body,
+            scroll = me.getScroll(),
+            pos = isBody ? [0, 0] : me.getXY(),
+            top = pos[1] + scroll.top + (isBody ?  0 : me.getBorderWidth('t') + me.getPadding('t')),
+            left = pos[0] + scroll.left + (isBody ? 0 : me.getBorderWidth('l') + me.getPadding('l')),
+            width = isBody ? Ext.core.Element.getViewportWidth() : me.getWidth(true),
+            height = isBody ? Ext.core.Element.getViewportHeight() : me.getHeight(true);
+
+        return Ext.create('Ext.util.Region', top, left + width, top + height, left);
     },
 
     <a name="method-Ext.core.Element-getPageBox"></a>/**
      * Return an object defining the area of this Element which can be passed to {@link #setBox} to
-     * set another Element&#39;s size/location to match this element.
+     * set another Element's size/location to match this element.
      * @param {Boolean} asRegion(optional) If true an Ext.util.Region will be returned
-     * @return {Object} box An object in the format<br><span style="display: none">**/</span>{
-    x: &amp;lt;Element&#39;s X position&gt;,
-    y: &amp;lt;Element&#39;s Y position&gt;,
-    width: &amp;lt;Element&#39;s width&gt;,
-    height: &amp;lt;Element&#39;s height&gt;,
-    bottom: &amp;lt;Element&#39;s lower bound&gt;,
-    right: &amp;lt;Element&#39;s rightmost bound&gt;
+     * @return {Object} box An object in the format<pre><code>
+{
+    x: &lt;Element's X position>,
+    y: &lt;Element's Y position>,
+    width: &lt;Element's width>,
+    height: &lt;Element's height>,
+    bottom: &lt;Element's lower bound>,
+    right: &lt;Element's rightmost bound>
 }
-<br><span style="display: none">/**</span>     * The returned object may also be addressed as an Array where index 0 contains the X position
+</code></pre>
+     * The returned object may also be addressed as an Array where index 0 contains the X position
      * and index 1 contains the Y position. So the result may also be used for {@link #setXY}
      */
     getPageBox : function(getRegion) {
@@ -484,7 +490,7 @@ Ext.override(Ext.core.Element, {
             l = xy[0];
 
         if (getRegion) {
-            return new Ext.util.Region(t, r, b, l);
+            return Ext.create('Ext.util.Region', t, r, b, l);
         }
         else {
             return {
@@ -499,17 +505,17 @@ Ext.override(Ext.core.Element, {
     },
 
     <a name="method-Ext.core.Element-setBounds"></a>/**
-     * Sets the element&#39;s position and size in one shot. If animation is true then width, height, x and y will be animated concurrently.
+     * Sets the element's position and size in one shot. If animation is true then width, height, x and y will be animated concurrently.
      * @param {Number} x X value for new position (coordinates are page-based)
      * @param {Number} y Y value for new position (coordinates are page-based)
-     * @param {Mixed} width The new width. This may be one of:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
-     * &lt;li&gt;A Number specifying the new width in this Element&#39;s {@link #defaultUnit}s (by default, pixels)&lt;/li&gt;
-     * &lt;li&gt;A String used to set the CSS width style. Animation may &lt;b&gt;not&lt;/b&gt; be used.
-     * &lt;/ul&gt;&lt;/div&gt;
-     * @param {Mixed} height The new height. This may be one of:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
-     * &lt;li&gt;A Number specifying the new height in this Element&#39;s {@link #defaultUnit}s (by default, pixels)&lt;/li&gt;
-     * &lt;li&gt;A String used to set the CSS height style. Animation may &lt;b&gt;not&lt;/b&gt; be used.&lt;/li&gt;
-     * &lt;/ul&gt;&lt;/div&gt;
+     * @param {Mixed} width The new width. This may be one of:<div class="mdetail-params"><ul>
+     * <li>A Number specifying the new width in this Element's {@link #defaultUnit}s (by default, pixels)</li>
+     * <li>A String used to set the CSS width style. Animation may <b>not</b> be used.
+     * </ul></div>
+     * @param {Mixed} height The new height. This may be one of:<div class="mdetail-params"><ul>
+     * <li>A Number specifying the new height in this Element's {@link #defaultUnit}s (by default, pixels)</li>
+     * <li>A String used to set the CSS height style. Animation may <b>not</b> be used.</li>
+     * </ul></div>
      * @param {Boolean/Object} animate (optional) true for the default animation or a standard Element animation config object
      * @return {Ext.core.Element} this
      */
@@ -535,7 +541,7 @@ Ext.override(Ext.core.Element, {
     },
 
     <a name="method-Ext.core.Element-setRegion"></a>/**
-     * Sets the element&#39;s position and size the specified region. If animation is true then width, height, x and y will be animated concurrently.
+     * Sets the element's position and size the specified region. If animation is true then width, height, x and y will be animated concurrently.
      * @param {Ext.util.Region} region The region to fill
      * @param {Boolean/Object} animate (optional) true for the default animation or a standard Element animation config object
      * @return {Ext.core.Element} this

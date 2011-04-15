@@ -6,7 +6,7 @@
  * <p>Example usage:</p>
  * <pre><code>
 // create the grid
-var grid = new Ext.grid.GridPanel({
+var grid = Ext.create('Ext.grid.Panel', {
     ...
     columns: [{
            text: 'Foo',
@@ -29,7 +29,7 @@ var grid = new Ext.grid.GridPanel({
 Ext.define('Ext.ux.CheckColumn', {
     extend: 'Ext.grid.column.Column',
     alias: 'widget.checkcolumn',
-    
+
     /**
      * @private
      * Process and refire events routed from the GridView's processEvent method.
@@ -50,7 +50,7 @@ Ext.define('Ext.ux.CheckColumn', {
     renderer : function(value){
         var cssPrefix = Ext.baseCSSPrefix,
             cls = [cssPrefix + 'grid-checkheader'];
-        
+
         if (value) {
             cls.push(cssPrefix + 'grid-checkheader-checked');
         }

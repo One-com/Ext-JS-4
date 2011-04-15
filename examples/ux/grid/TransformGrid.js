@@ -1,6 +1,6 @@
 /**
  * @class Ext.ux.grid.TransformGrid
- * @extends Ext.grid.GridPanel
+ * @extends Ext.grid.Panel
  * A Grid which creates itself from an existing HTML table element.
  * @history
  * 2007-03-01 Original version by Nige "Animal" White
@@ -12,7 +12,7 @@
  * properties: fields and columns which allow for customizing data fields and columns for this grid.
  */
 Ext.define('Ext.ux.grid.TransformGrid', {
-    extend: 'Ext.grid.GridPanel',
+    extend: 'Ext.grid.Panel',
     
     constructor: function(table, config) {
         config = Ext.apply({}, config);

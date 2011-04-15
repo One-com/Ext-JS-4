@@ -7,12 +7,12 @@
  * Create a new Shadow
  * @param {Object} config The config object
  */
-Ext.define(&#39;Ext.Shadow&#39;, {
-    requires: [&#39;Ext.ShadowPool&#39;],
+Ext.define('Ext.Shadow', {
+    requires: ['Ext.ShadowPool'],
 
     constructor: function(config) {
         Ext.apply(this, config);
-        if (typeof this.mode != &quot;string&quot;) {
+        if (typeof this.mode != "string") {
             this.mode = this.defaultMode;
         }
         var offset = this.offset,
@@ -23,7 +23,7 @@ Ext.define(&#39;Ext.Shadow&#39;, {
 
         switch (this.mode.toLowerCase()) {
             // all this hideous nonsense calculates the various offsets for shadows
-            case &quot;drop&quot;:
+            case "drop":
                 if (Ext.supports.CSS3BoxShadow) {
                     adjusts.w = adjusts.h = -offset;
                     adjusts.l = adjusts.t = offset;
@@ -40,7 +40,7 @@ Ext.define(&#39;Ext.Shadow&#39;, {
                     }
                 }
                 break;
-            case &quot;sides&quot;:
+            case "sides":
                 if (Ext.supports.CSS3BoxShadow) {
                     adjusts.h -= offset;
                     adjusts.t = offset;
@@ -59,9 +59,9 @@ Ext.define(&#39;Ext.Shadow&#39;, {
                     }
                 }
                 break;
-            case &quot;frame&quot;:
+            case "frame":
                 if (Ext.supports.CSS3BoxShadow) {
-                    adjust.l = adjusts.w = adjust.t = 0;
+                    adjusts.l = adjusts.w = adjusts.t = 0;
                 } else {
                     adjusts.w = adjusts.h = (offset * 2);
                     adjusts.l = adjusts.t = -offset;
@@ -83,20 +83,20 @@ Ext.define(&#39;Ext.Shadow&#39;, {
 
     <a name="cfg-Ext.Shadow-mode"></a>/**
      * @cfg {String} mode
-     * The shadow display mode.  Supports the following options:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
-     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;sides&lt;/tt&gt;&lt;/b&gt; : Shadow displays on both sides and bottom only&lt;/li&gt;
-     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;frame&lt;/tt&gt;&lt;/b&gt; : Shadow displays equally on all four sides&lt;/li&gt;
-     * &lt;li&gt;&lt;b&gt;&lt;tt&gt;drop&lt;/tt&gt;&lt;/b&gt; : Traditional bottom-right drop shadow&lt;/li&gt;
-     * &lt;/ul&gt;&lt;/div&gt;
+     * The shadow display mode.  Supports the following options:<div class="mdetail-params"><ul>
+     * <li><b><tt>sides</tt></b> : Shadow displays on both sides and bottom only</li>
+     * <li><b><tt>frame</tt></b> : Shadow displays equally on all four sides</li>
+     * <li><b><tt>drop</tt></b> : Traditional bottom-right drop shadow</li>
+     * </ul></div>
      */
     <a name="cfg-Ext.Shadow-offset"></a>/**
      * @cfg {String} offset
-     * The number of pixels to offset the shadow from the element (defaults to &lt;tt&gt;4&lt;/tt&gt;)
+     * The number of pixels to offset the shadow from the element (defaults to <tt>4</tt>)
      */
     offset: 4,
 
     // private
-    defaultMode: &quot;drop&quot;,
+    defaultMode: "drop",
 
     <a name="method-Ext.Shadow-show"></a>/**
      * Displays the shadow under the target element
@@ -110,9 +110,9 @@ Ext.define(&#39;Ext.Shadow&#39;, {
                 this.el.insertBefore(target);
             }
         }
-        this.el.setStyle(&quot;z-index&quot;, this.zIndex || parseInt(target.getStyle(&quot;z-index&quot;), 10) - 1);
-        if (Ext.isIE &amp;&amp; !Ext.supports.CSS3BoxShadow) {
-            this.el.dom.style.filter = &quot;progid:DXImageTransform.Microsoft.alpha(opacity=50) progid:DXImageTransform.Microsoft.Blur(pixelradius=&quot; + (this.offset) + &quot;)&quot;;
+        this.el.setStyle("z-index", this.zIndex || parseInt(target.getStyle("z-index"), 10) - 1);
+        if (Ext.isIE && !Ext.supports.CSS3BoxShadow) {
+            this.el.dom.style.filter = "progid:DXImageTransform.Microsoft.alpha(opacity=50) progid:DXImageTransform.Microsoft.Blur(pixelradius=" + (this.offset) + ")";
         }
         this.realign(
             target.getLeft(true),
@@ -120,7 +120,7 @@ Ext.define(&#39;Ext.Shadow&#39;, {
             target.getWidth(),
             target.getHeight()
         );
-        this.el.dom.style.display = &quot;block&quot;;
+        this.el.dom.style.display = "block";
     },
 
     <a name="method-Ext.Shadow-isVisible"></a>/**
@@ -152,27 +152,27 @@ Ext.define(&#39;Ext.Shadow&#39;, {
             sws, 
             shs;
 
-        targetStyle.left = (l + adjusts.l) + &quot;px&quot;;
-        targetStyle.top = (t + adjusts.t) + &quot;px&quot;;
-        shadowWidth = (targetWidth + adjusts.w),
-        shadowHeight = (targetHeight + adjusts.h),
-        sws = shadowWidth + &quot;px&quot;,
-        shs = shadowHeight + &quot;px&quot;;
+        targetStyle.left = (l + adjusts.l) + "px";
+        targetStyle.top = (t + adjusts.t) + "px";
+        shadowWidth = (targetWidth + adjusts.w);
+        shadowHeight = (targetHeight + adjusts.h);
+        sws = shadowWidth + "px";
+        shs = shadowHeight + "px";
         if (targetStyle.width != sws || targetStyle.height != shs) {
             targetStyle.width = sws;
             targetStyle.height = shs;
             if (Ext.supports.CSS3BoxShadow) {
-                targetStyle.boxShadow = &#39;0 0 &#39; + this.offset + &#39;px 0 #888&#39;;
+                targetStyle.boxShadow = '0 0 ' + this.offset + 'px 0 #888';
             } else {
 
                 // Adjust the 9 point framed element to poke out on the required sides
                 if (!Ext.isIE) {
                     cn = d.childNodes;
-                    sww = Math.max(0, (shadowWidth - 12)) + &quot;px&quot;;
+                    sww = Math.max(0, (shadowWidth - 12)) + "px";
                     cn[0].childNodes[1].style.width = sww;
                     cn[1].childNodes[1].style.width = sww;
                     cn[2].childNodes[1].style.width = sww;
-                    cn[1].style.height = Math.max(0, (shadowHeight - 12)) + &quot;px&quot;;
+                    cn[1].style.height = Math.max(0, (shadowHeight - 12)) + "px";
                 }
             }
         }
@@ -183,7 +183,7 @@ Ext.define(&#39;Ext.Shadow&#39;, {
      */
     hide: function() {
         if (this.el) {
-            this.el.dom.style.display = &quot;none&quot;;
+            this.el.dom.style.display = "none";
             Ext.ShadowPool.push(this.el);
             delete this.el;
         }
@@ -196,7 +196,7 @@ Ext.define(&#39;Ext.Shadow&#39;, {
     setZIndex: function(z) {
         this.zIndex = z;
         if (this.el) {
-            this.el.setStyle(&quot;z-index&quot;, z);
+            this.el.setStyle("z-index", z);
         }
     }
 });￿</pre></pre></body></html>

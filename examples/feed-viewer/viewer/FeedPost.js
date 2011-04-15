@@ -3,22 +3,22 @@
  * @extends Ext.panel.Panel
  *
  * Shows the detail of a feed post
- * 
+ *
  * @constructor
  * Create a new Feed Post
  * @param {Object} config The config object
  */
 Ext.define('FeedViewer.FeedPost', {
-    
+
     extend: 'Ext.panel.Panel',
     alias: 'widget.feedpost',
     cls: 'preview',
     autoScroll: true,
-    
+
     initComponent: function(){
         Ext.apply(this, {
             dockedItems: [this.createToolbar()],
-            tpl: new Ext.XTemplate(
+            tpl: Ext.create('Ext.XTemplate',
                 '<div class="post-data">',
                     '<span class="post-date">{pubDate:this.formatDate}</span>',
                     '<h3 class="post-title">{title}</h3>',
@@ -29,23 +29,23 @@ Ext.define('FeedViewer.FeedPost', {
                     getBody: function(value, all){
                         return Ext.util.Format.stripScripts(value);
                     },
-                    
+
                     defaultValue: function(v){
                         return v ? v : 'Unknown';
                     },
-                 
+
                     formatDate: function(value){
                         if (!value) {
                             return '';
                         }
                         return Ext.Date.format(value, 'M j, Y, g:i a');
                     }
-                } 
+                }
              )
         });
         this.callParent(arguments);
     },
-    
+
     /**
      * Set the active post
      * @param {Ext.data.Model} rec The record
@@ -54,7 +54,7 @@ Ext.define('FeedViewer.FeedPost', {
         this.active = rec;
         this.update(rec.data);
     },
-    
+
     /**
      * Create the top toolbar
      * @private
@@ -80,7 +80,7 @@ Ext.define('FeedViewer.FeedPost', {
             items: items
         });
     },
-    
+
     /**
      * Navigate to the active post in a new window
      * @private
@@ -88,7 +88,7 @@ Ext.define('FeedViewer.FeedPost', {
     goToPost: function(){
         window.open(this.active.get('link'));
     },
-    
+
     /**
      * Open the post in a new tab
      * @private
@@ -96,5 +96,5 @@ Ext.define('FeedViewer.FeedPost', {
     openTab: function(){
         this.fireEvent('opentab', this, this.active);
     }
-    
+
 });

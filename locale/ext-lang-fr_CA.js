@@ -12,16 +12,16 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} ligne(s) sélectionné(s)";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} ligne(s) sélectionné(s)";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "Fermer cette onglet";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "La valeur de ce champ est invalide";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "La valeur de ce champ est invalide";
     }
 
     if(Ext.LoadMask){
@@ -131,7 +131,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Page",
             afterPageText  : "de {0}",
@@ -145,8 +145,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "La longueur minimum de ce champ est de {0} caractères",
             maxLengthText : "La longueur maximum de ce champ est de {0} caractères",
             blankText     : "Ce champ est obligatoire",
@@ -155,16 +155,16 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "La valeur minimum de ce champ doit être de {0}",
             maxText : "La valeur maximum de ce champ doit être de {0}",
             nanText : "{0} n'est pas un nombre valide"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Désactivé",
             disabledDatesText : "Désactivé",
             minText           : "La date de ce champ doit être avant le {0}",
@@ -174,15 +174,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "En cours de chargement...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Ce champ doit contenir un courriel et doit être sous ce format: "usager@example.com"',
             urlText      : 'Ce champ doit contenir une URL sous le format suivant: "http:/'+'/www.example.com"',
             alphaText    : 'Ce champ ne peut contenir que des lettres et le caractère souligné (_)',
@@ -190,8 +190,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Tri ascendant",
             sortDescText : "Tri descendant",
             lockText     : "Verrouillé la colonne",

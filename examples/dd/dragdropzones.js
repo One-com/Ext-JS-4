@@ -29,7 +29,8 @@ Ext.onReady(function() {
         telephone: 'N/A'
     }];
 
-    Ext.regModel('Patient', {
+    Ext.define('Patient', {
+        extend: 'Ext.data.Model',
         idProperty: 'insuranceCode',
         fields: [{
                 name: 'name'
@@ -40,7 +41,7 @@ Ext.onReady(function() {
             }]
     });
 
-    var patientStore = new Ext.data.Store({
+    var patientStore = Ext.create('Ext.data.Store', {
         model: 'Patient',
         data: patients
     });
@@ -67,7 +68,8 @@ Ext.onReady(function() {
         telephone: '020 7377 7000'
     }];
 
-    Ext.regModel('Hospital', {
+    Ext.define('Hospital', {
+        extend: 'Ext.data.Model',
         idProperty: 'code',
         fields: [{
             name: 'name'
@@ -78,12 +80,12 @@ Ext.onReady(function() {
         }]
     });
 
-    var hospitalStore = new Ext.data.Store({
+    var hospitalStore = Ext.create('Ext.data.Store', {
         model: 'Hospital',
         data: hospitals
     });
 
-    var patientView = new Ext.DataView({
+    var patientView = Ext.create('Ext.DataView', {
         cls: 'patient-view',
         tpl: '<tpl for=".">' +
                 '<div class="patient-source"><table><tbody>' +
@@ -102,7 +104,7 @@ Ext.onReady(function() {
         }
     });
 
-    var helpWindow = new Ext.Window({
+    var helpWindow = Ext.create('Ext.Window', {
         title: 'Source code',
         width: 920,
         height: 500,
@@ -122,7 +124,7 @@ Ext.onReady(function() {
         }
     });
 
-    var hospitalGrid = new Ext.grid.GridPanel({
+    var hospitalGrid = Ext.create('Ext.grid.Panel', {
         title: 'Hospitals',
         region: 'center',
         margins: '0 5 5 0',
@@ -162,7 +164,7 @@ Ext.onReady(function() {
         store: hospitalStore
     });
 
-    new Ext.Viewport({
+    Ext.create('Ext.Viewport', {
         layout: 'border',
         items: [{
             cls: 'app-header',
@@ -196,7 +198,7 @@ Ext.onReady(function() {
  * to perform the drop operation.
  */
 function initializePatientDragZone(v) {
-    v.dragZone = new Ext.dd.DragZone(v.getEl(), {
+    v.dragZone = Ext.create('Ext.dd.DragZone', v.getEl(), {
 
 //      On receipt of a mousedown event, see if it is within a draggable element.
 //      Return a drag data object if so. The data object can contain arbitrary application
@@ -245,7 +247,7 @@ function initializeHospitalDropZone(v) {
     var gridView = v,
         grid = gridView.up('gridpanel');
 
-    grid.dropZone = new Ext.dd.DropZone(v.el, {
+    grid.dropZone = Ext.create('Ext.dd.DropZone', v.el, {
 
 //      If the mouse is over a target node, return that node. This is
 //      provided as the "target" parameter in all "onNodeXXXX" node event handling functions
@@ -254,18 +256,18 @@ function initializeHospitalDropZone(v) {
         },
 
 //      On entry into a target node, highlight that node.
-        onNodeEnter : function(target, dd, e, data){ 
+        onNodeEnter : function(target, dd, e, data){
             Ext.fly(target).addCls('hospital-target-hover');
         },
 
 //      On exit from a target node, unhighlight that node.
-        onNodeOut : function(target, dd, e, data){ 
+        onNodeOut : function(target, dd, e, data){
             Ext.fly(target).removeCls('hospital-target-hover');
         },
 
 //      While over a target node, return the default drop allowed class which
 //      places a "tick" icon into the drag proxy.
-        onNodeOver : function(target, dd, e, data){ 
+        onNodeOver : function(target, dd, e, data){
             return Ext.dd.DropZone.prototype.dropAllowed;
         },
 

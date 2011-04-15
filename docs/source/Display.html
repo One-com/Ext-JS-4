@@ -1,61 +1,62 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.form.Display"></a>/**
  * @class Ext.form.Display
  * @extends Ext.form.BaseField
- * &lt;p&gt;A display-only text field which is not validated and not submitted. This is useful for when you want
- * to display a value from a form&#39;s {@link Ext.form.Basic#load loaded data} but do not want to allow the
+ * <p>A display-only text field which is not validated and not submitted. This is useful for when you want
+ * to display a value from a form's {@link Ext.form.Basic#load loaded data} but do not want to allow the
  * user to edit or submit that value. The value can be optionally {@link #htmlEncode HTML encoded} if it contains
- * HTML markup that you do not want to be rendered.&lt;/p&gt;
- * &lt;p&gt;If you have more complex content, or need to include components within the displayed content, also
- * consider using a {@link Ext.form.FieldContainer} instead.&lt;/p&gt;
- * &lt;p&gt;Example:&lt;/p&gt;
- * <br><span style="display: none">**/</span>new Ext.form.FormPanel({
-    title: &#39;Final Score&#39;,
+ * HTML markup that you do not want to be rendered.</p>
+ * <p>If you have more complex content, or need to include components within the displayed content, also
+ * consider using a {@link Ext.form.FieldContainer} instead.</p>
+ * <p>Example:</p>
+ * <pre><code>new Ext.form.FormPanel({
+    title: 'Final Score',
     items: [{
-        xtype: &#39;combo&#39;,
-        name: &#39;game&#39;,
+        xtype: 'combo',
+        name: 'game',
         forceSelection: true,
         store: currentGamesStore
     }, {
-        xtype: &#39;displayfield&#39;,
-        fieldLabel: &#39;Home&#39;,
-        name: &#39;home_score&#39;,
-        value: &#39;&lt;span class=&quot;empty&quot;&gt;[select a game]&lt;/span&gt;&#39;
+        xtype: 'displayfield',
+        fieldLabel: 'Home',
+        name: 'home_score',
+        value: '<span class="empty">[select a game]</span>'
     }, {
-        xtype: &#39;displayfield&#39;,
-        fieldLabel: &#39;Visitor&#39;,
-        name: &#39;visitor_score&#39;,
-        value: &#39;&lt;span class=&quot;empty&quot;&gt;[select a game]&lt;/span&gt;&#39;
+        xtype: 'displayfield',
+        fieldLabel: 'Visitor',
+        name: 'visitor_score',
+        value: '<span class="empty">[select a game]</span>'
     }],
     buttons: [{
-        text: &#39;Update&#39;,
+        text: 'Update',
         handler: function() {
-            var formPanel = this.up(&#39;form&#39;);
+            var formPanel = this.up('form');
             formPanel.getForm().load({
-                url: &#39;/current-scores.php?game=&#39; + formPanel.child(&#39;[name=game]&#39;).getValue()
+                url: '/current-scores.php?game=' + formPanel.child('[name=game]').getValue()
             });
         }
     }]
-});<br><span style="display: none">/**</span>
+});</code></pre>
+
  * @constructor
  * Creates a new DisplayField.
  * @param {Object} config Configuration options
  *
  * @xtype displayfield
  */
-Ext.define(&#39;Ext.form.Display&#39;, {
-    extend:&#39;Ext.form.BaseField&#39;,
-    alias: &#39;widget.displayfield&#39;,
-    requires: [&#39;Ext.util.Format&#39;, &#39;Ext.XTemplate&#39;],
-    alternateClassName: &#39;Ext.form.DisplayField&#39;,
+Ext.define('Ext.form.Display', {
+    extend:'Ext.form.BaseField',
+    alias: 'widget.displayfield',
+    requires: ['Ext.util.Format', 'Ext.XTemplate'],
+    alternateClassName: 'Ext.form.DisplayField',
 
     <a name="cfg-Ext.form.Display-fieldCls"></a>/**
-     * @cfg {String} fieldCls The default CSS class for the field (defaults to &lt;tt&gt;&quot;x-form-display-field&quot;&lt;/tt&gt;)
+     * @cfg {String} fieldCls The default CSS class for the field (defaults to <tt>"x-form-display-field"</tt>)
      */
-    fieldCls: Ext.baseCSSPrefix + &#39;form-display-field&#39;,
+    fieldCls: Ext.baseCSSPrefix + 'form-display-field',
 
     <a name="cfg-Ext.form.Display-htmlEncode"></a>/**
-     * @cfg {Boolean} htmlEncode &lt;tt&gt;false&lt;/tt&gt; to skip HTML-encoding the text when rendering it (defaults to
-     * &lt;tt&gt;false&lt;/tt&gt;). This might be useful if you want to include tags in the field&#39;s innerHTML rather than
+     * @cfg {Boolean} htmlEncode <tt>false</tt> to skip HTML-encoding the text when rendering it (defaults to
+     * <tt>false</tt>). This might be useful if you want to include tags in the field's innerHTML rather than
      * rendering them as string literals per the default logic.
      */
     htmlEncode: false,
@@ -80,7 +81,7 @@ Ext.define(&#39;Ext.form.Display&#39;, {
 
     setRawValue: function(value) {
         var me = this;
-        value = Ext.value(value, &#39;&#39;);
+        value = Ext.value(value, '');
         me.rawValue = value;
         if (me.rendered) {
             me.inputEl.dom.innerHTML = me.htmlEncode ? Ext.util.Format.htmlEncode(value) : value;
@@ -120,8 +121,8 @@ Ext.define(&#39;Ext.form.Display&#39;, {
 },
 
 function() {
-    this.prototype.fieldSubTpl = new Ext.XTemplate(
-        &#39;&lt;div id=&quot;{id}&quot; class=&quot;{fieldCls}&quot;&gt;&lt;/div&gt;&#39;,
+    this.prototype.fieldSubTpl = Ext.create('Ext.XTemplate',
+        '<div id="{id}" class="{fieldCls}"></div>',
         {
             compiled: true,
             disableFormats: true

@@ -1,10 +1,13 @@
 Ext.require([
     'Ext.tree.*',
-    'Ext.data.*'
+    'Ext.data.*',
+    'Ext.tip.*'
 ]);
 
-Ext.onReady(function() {    
-    var store = new Ext.data.TreeStore({
+Ext.onReady(function() {
+    Ext.QuickTips.init();
+    
+    var store = Ext.create('Ext.data.TreeStore', {
         proxy: {
             type: 'ajax',
             url: 'get-nodes.php'
@@ -20,8 +23,8 @@ Ext.onReady(function() {
             direction: 'ASC'
         }]
     });
-    
-    var tree = new Ext.tree.TreePanel({
+
+    var tree = Ext.create('Ext.tree.Panel', {
         store: store,
         viewConfig: {
             plugins: {
@@ -30,6 +33,21 @@ Ext.onReady(function() {
         },
         renderTo: 'tree-div',
         height: 300,
-        width: 250
+        width: 250,
+        title: 'Files',
+        dockedItems: [{
+            xtype: 'toolbar',
+            items: [{
+                text: 'Expand All',
+                handler: function(){
+                    tree.expandAll();
+                }
+            }, {
+                text: 'Collapse All',
+                handler: function(){
+                    tree.collapseAll();
+                }
+            }]
+        }]
     });
 });

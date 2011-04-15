@@ -3,14 +3,14 @@ Ext.require([
     'Ext.data.*'
 ]);
 
-Ext.onReady(function() {    
+Ext.onReady(function() {
 
-    var store = new Ext.data.TreeStore({
+    var store = Ext.create('Ext.data.TreeStore', {
         proxy: {
             type: 'ajax',
             url: 'get-nodes.php',
             extraParams: {
-                isXml: true    
+                isXml: true
             },
             reader: {
                 type: 'xml',
@@ -31,9 +31,9 @@ Ext.onReady(function() {
             expanded: true
         }
     });
-    
+
     // create the Tree
-    var tree = new Ext.tree.TreePanel({
+    var tree = Ext.create('Ext.tree.Panel', {
         store: store,
         hideHeaders: true,
         rootVisible: true,

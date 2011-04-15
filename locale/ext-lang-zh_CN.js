@@ -15,16 +15,16 @@ Ext.onReady(function(){
        Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-       Ext.grid.GridPanel.prototype.ddText = "选择了 {0} 行";
+    if(Ext.grid.Panel){
+       Ext.grid.Panel.prototype.ddText = "选择了 {0} 行";
     }
 
     if(Ext.TabPanelItem){
        Ext.TabPanelItem.prototype.closeText = "关闭此标签";
     }
 
-    if(Ext.form.BaseField){
-       Ext.form.BaseField.prototype.invalidText = "输入值非法";
+    if(Ext.form.field.Base){
+       Ext.form.field.Base.prototype.invalidText = "输入值非法";
     }
 
     if (Ext.LoadMask) {
@@ -103,7 +103,7 @@ Ext.onReady(function(){
       });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
        Ext.apply(Ext.PagingToolbar.prototype, {
           beforePageText : "第",//update
           afterPageText  : "页,共 {0} 页",//update
@@ -117,8 +117,8 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.Text){
-       Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+       Ext.apply(Ext.form.field.Text.prototype, {
           minLengthText : "该输入项的最小长度是 {0} 个字符",
           maxLengthText : "该输入项的最大长度是 {0} 个字符",
           blankText     : "该输入项为必输项",
@@ -127,16 +127,16 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.Number){
-       Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+       Ext.apply(Ext.form.field.Number.prototype, {
           minText : "该输入项的最小值是 {0}",
           maxText : "该输入项的最大值是 {0}",
           nanText : "{0} 不是有效数值"
        });
     }
 
-    if(Ext.form.Date){
-       Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+       Ext.apply(Ext.form.field.Date.prototype, {
           disabledDaysText  : "禁用",
           disabledDatesText : "禁用",
           minText           : "该输入项的日期必须在 {0} 之后",
@@ -146,15 +146,15 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.ComboBox){
-       Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+       Ext.apply(Ext.form.field.ComboBox.prototype, {
           loadingText       : "加载中...",
           valueNotFoundText : undefined
        });
     }
 
-    if(Ext.form.VTypes){
-       Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+       Ext.apply(Ext.form.field.VTypes, {
           emailText    : '该输入项必须是电子邮件地址，格式如： "user@example.com"',
           urlText      : '该输入项必须是URL地址，格式如： "http:/'+'/www.example.com"',
           alphaText    : '该输入项只能包含半角字母和_',//update
@@ -162,8 +162,8 @@ Ext.onReady(function(){
        });
     }
     //add HTMLEditor's tips by andy_ghg
-    if(Ext.form.HtmlEditor){
-      Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : '添加超级链接:',
         buttonTips : {
           bold : {
@@ -241,8 +241,8 @@ Ext.onReady(function(){
     }
 
 
-    if(Ext.grid.HeaderContainer){
-       Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+       Ext.apply(Ext.grid.header.Container.prototype, {
           sortAscText  : "正序",//update
           sortDescText : "倒序",//update
           lockText     : "锁定列",//update

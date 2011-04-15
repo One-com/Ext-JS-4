@@ -2,7 +2,7 @@
  * @class Ext.data.DirectStore
  * @extends Ext.data.Store
  * <p>Small helper class to create an {@link Ext.data.Store} configured with an
- * {@link Ext.data.DirectProxy} and {@link Ext.data.JsonReader} to make interacting
+ * {@link Ext.data.proxy.Direct} and {@link Ext.data.reader.Json} to make interacting
  * with an {@link Ext.Direct} Server-side {@link Ext.direct.Provider Provider} easier.
  * To create a different proxy/reader combination create a basic {@link Ext.data.Store}
  * configured as needed.</p>
@@ -13,18 +13,18 @@
  * <div class="sub-desc"><ul class="mdetail-params">
  *
  * </ul></div>
- * <li><b>{@link Ext.data.JsonReader JsonReader}</b></li>
+ * <li><b>{@link Ext.data.reader.Json JsonReader}</b></li>
  * <div class="sub-desc"><ul class="mdetail-params">
- * <li><tt><b>{@link Ext.data.JsonReader#root root}</b></tt></li>
- * <li><tt><b>{@link Ext.data.JsonReader#idProperty idProperty}</b></tt></li>
- * <li><tt><b>{@link Ext.data.JsonReader#totalProperty totalProperty}</b></tt></li>
+ * <li><tt><b>{@link Ext.data.reader.Json#root root}</b></tt></li>
+ * <li><tt><b>{@link Ext.data.reader.Json#idProperty idProperty}</b></tt></li>
+ * <li><tt><b>{@link Ext.data.reader.Json#totalProperty totalProperty}</b></tt></li>
  * </ul></div>
  *
- * <li><b>{@link Ext.data.DirectProxy DirectProxy}</b></li>
+ * <li><b>{@link Ext.data.proxy.Direct DirectProxy}</b></li>
  * <div class="sub-desc"><ul class="mdetail-params">
- * <li><tt><b>{@link Ext.data.DirectProxy#directFn directFn}</b></tt></li>
- * <li><tt><b>{@link Ext.data.DirectProxy#paramOrder paramOrder}</b></tt></li>
- * <li><tt><b>{@link Ext.data.DirectProxy#paramsAsHash paramsAsHash}</b></tt></li>
+ * <li><tt><b>{@link Ext.data.proxy.Direct#directFn directFn}</b></tt></li>
+ * <li><tt><b>{@link Ext.data.proxy.Direct#paramOrder paramOrder}</b></tt></li>
+ * <li><tt><b>{@link Ext.data.proxy.Direct#paramsAsHash paramsAsHash}</b></tt></li>
  * </ul></div>
  * </ul></div>
  *
@@ -39,7 +39,7 @@ Ext.define('Ext.data.DirectStore', {
     
     alias: 'store.direct',
     
-    requires: ['Ext.data.DirectProxy'],
+    requires: ['Ext.data.proxy.Direct'],
    
     /* End Definitions */
    

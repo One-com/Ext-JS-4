@@ -320,12 +320,15 @@ Ext4.onReady(function() {
         height: 600,
         title: 'System Statistics',
         renderTo: Ext4.getBody(),
-        layout: {
-            type: 'hbox',
-            align: 'stretch'
-        },
         closeAction: 'hide',
+        layout: 'fit',
         items: [{
+            xtype: 'panel',
+            layout: {
+                type: 'hbox',
+                align: 'stretch'
+            },
+            items: [{
                 flex: 1,
                 height: 600,
                 width: 400,
@@ -351,8 +354,8 @@ Ext4.onReady(function() {
                     memoryPieChartConfig,
                     barChartConfig
                 ]
-            }
-        ]
+            }]
+        }]
     });
 
     pass = 0;

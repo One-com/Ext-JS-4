@@ -3,16 +3,16 @@
  * @extends Ext.menu.Item
 
 Adds a separator bar to a menu, used to divide logical groups of menu items. Generally you will
-add one of these by using &quot;-&quot; in your call to add() or in your items config rather than creating one directly.
+add one of these by using "-" in your call to add() or in your items config rather than creating one directly.
 
  * @xtype menuseparator
  * @markdown
  * @constructor
  * @param {Object} config The config object
  */
-Ext.define(&#39;Ext.menu.Separator&#39;, {
-    extend: &#39;Ext.menu.Item&#39;,
-    alias: &#39;widget.menuseparator&#39;,
+Ext.define('Ext.menu.Separator', {
+    extend: 'Ext.menu.Item',
+    alias: 'widget.menuseparator',
     
     <a name="cfg-Ext.menu.Separator-activeCls"></a>/**
      * @cfg {String} activeCls @hide
@@ -82,24 +82,24 @@ Ext.define(&#39;Ext.menu.Separator&#39;, {
     <a name="cfg-Ext.menu.Separator-separatorCls"></a>/**
      * @cfg {String} separatorCls
      * The CSS class used by the separator item to show the incised line.
-     * Defaults to `Ext.baseCSSPrefix + &#39;menu-item-separator&#39;`.
+     * Defaults to `Ext.baseCSSPrefix + 'menu-item-separator'`.
      * @markdown
      */
-    separatorCls: Ext.baseCSSPrefix + &#39;menu-item-separator&#39;,
+    separatorCls: Ext.baseCSSPrefix + 'menu-item-separator',
     
     <a name="cfg-Ext.menu.Separator-text"></a>/**
      * @cfg {String} text @hide
      */
-    text: &#39;&amp;#160;&#39;,
+    text: '&#160;',
     
     onRender: function(ct, pos) {
         var me = this,
             sepCls = me.separatorCls;
             
-        me.cls += &#39; &#39; + sepCls;
+        me.cls += ' ' + sepCls;
         
         Ext.applyIf(me.renderSelectors, {
-            itemSepEl: &#39;.&#39; + sepCls
+            itemSepEl: '.' + sepCls
         });
         
         me.callParent(arguments);

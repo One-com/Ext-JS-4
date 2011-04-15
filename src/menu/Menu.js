@@ -10,7 +10,7 @@ Menus may also contain {@link Ext.AbstractPanel#dockedItems docked items} becaus
 To make a contained general {@link Ext.Component Component} line up with other {@link Ext.menu.Item menu items},
 specify `{@link Ext.menu.Item#iconCls iconCls}: 'no-icon'` _or_ `{@link Ext.menu.Item#indent indent}: true`.
 This reserves a space for an icon, and indents the Component in line with the other menu items.
-See {@link Ext.form.ComboBox}.{@link Ext.form.ComboBox#getListParent getListParent} for an example.
+See {@link Ext.form.field.ComboBox}.{@link Ext.form.field.ComboBox#getListParent getListParent} for an example.
 
 By default, Menus are absolutely positioned, floating Components. By configuring a Menu with `{@link #floating}:false`,
 a Menu may be used as a child of a {@link Ext.container.Container Container}.
@@ -29,7 +29,7 @@ Ext.define('Ext.menu.Menu', {
         'Ext.menu.CheckItem',
         'Ext.menu.Item',
         'Ext.menu.KeyNav',
-        'Ext.menu.MenuManager',
+        'Ext.menu.Manager',
         'Ext.menu.Separator'
     ],
     
@@ -148,7 +148,7 @@ Ext.define('Ext.menu.Menu', {
             'mouseover'
         );
 
-        Ext.menu.MenuManager.register(me);
+        Ext.menu.Manager.register(me);
 
         // Menu classes
         var cls = [prefix + 'menu'];
@@ -180,6 +180,17 @@ Ext.define('Ext.menu.Menu', {
         }
 
         me.callParent(arguments);
+        
+        me.on('beforeshow', function() {
+            var hasItems = !!me.items.length;
+            // FIXME: When a menu has its show cancelled because of no items, it
+            // gets a visibility: hidden applied to it (instead of the default display: none)
+            // Not sure why, but we remove this style when we want to show again.
+            if (hasItems && me.rendered) {
+                me.el.setStyle('visibility', null);
+            }
+            return hasItems;
+        });
     },
 
     afterRender: function(ct) {
@@ -214,7 +225,7 @@ Ext.define('Ext.menu.Menu', {
             me.iconSepEl.setHeight(me.el.getHeight());
         }
 
-        me.keyNav = new Ext.menu.KeyNav(me);
+        me.keyNav = Ext.create('Ext.menu.KeyNav', me);
     },
 
     afterLayout: function() {
@@ -224,11 +235,8 @@ Ext.define('Ext.menu.Menu', {
         // For IE6 & IE quirks, we have to resize the el and body since position: absolute
         // floating elements inherit their parent's width, making them the width of
         // document.body instead of the width of their contents.
-        //
-        // In Opera, the width is sometimes collapsed, needing the same resize treatment.
-        //
         // This includes left/right dock items.
-        if ((!Ext.iStrict && Ext.isIE) || Ext.isIE6 || Ext.isOpera) {
+        if ((!Ext.iStrict && Ext.isIE) || Ext.isIE6) {
             var innerCt = me.layout.getRenderTarget(),
                 innerCtWidth = 0,
                 dis = me.dockedItems,
@@ -236,22 +244,8 @@ Ext.define('Ext.menu.Menu', {
                 i = 0,
                 di, clone, newWidth;
             
-            // FIXME: Opera 10.5 gives no width information if it's not in a render box
-            // So we have to do a quick measurement by cloning our menu into a render box
-            if (Ext.isOpera) {
-                clone = innerCt.dom.cloneNode(true);
-                clone.id = Ext.id();
-                clone = Ext.get(clone);
-                
-                clone.setStyle('visibility', 'hidden');
-                
-                Ext.getBody().appendChild(clone);
-                innerCtWidth = clone.getWidth();
-                clone.remove();
-            } else {
-                innerCtWidth = innerCt.getWidth();
-            }
-            
+            innerCtWidth = innerCt.getWidth();
+  
             newWidth = innerCtWidth + me.body.getBorderWidth('lr') + me.body.getPadding('lr');
 
             // First set the body to the new width
@@ -336,7 +330,7 @@ Ext.define('Ext.menu.Menu', {
             if (!cmp.xtype) {
                 cmp = Ext.create('Ext.menu.' + (Ext.isBoolean(cmp.checked) ? 'Check': '') + 'Item', cmp);
             } else {
-                cmp = Ext.ComponentMgr.create(cmp, cmp.xtype);
+                cmp = Ext.ComponentManager.create(cmp, cmp.xtype);
             }
         }
 
@@ -396,9 +390,7 @@ Ext.define('Ext.menu.Menu', {
 
         if ((e.getTarget() == me.focusEl.dom) || e.within(me.layout.getRenderTarget())) {
             item = me.getItemFromEvent(e) || me.activeItem;
-
-            // Regain focus
-            me.focus();
+            
             if (item) {
                 if (item.getXTypes().indexOf('menuitem') >= 0) {
                     if (!item.menu || !me.ignoreParentClicks) {
@@ -415,7 +407,7 @@ Ext.define('Ext.menu.Menu', {
     onDestroy: function() {
         var me = this;
 
-        Ext.menu.MenuManager.unregister(me);
+        Ext.menu.Manager.unregister(me);
         if (me.rendered) {
             me.el.un(me.mouseMonitor);
             me.keyNav.destroy();
@@ -469,6 +461,7 @@ Ext.define('Ext.menu.Menu', {
                     if (item.activated) {
                         me.activeItem = item;
                         me.focusedItem = item;
+                        me.focus();
                     }
                 } else {
                     item.focus();

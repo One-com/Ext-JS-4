@@ -10,10 +10,10 @@ sub-menus, icons, etc.
  * @constructor
  * @param {Object} config The config object
  */
-Ext.define(&#39;Ext.menu.Item&#39;, {
-    extend: &#39;Ext.Component&#39;,
-    alias: &#39;widget.menuitem&#39;,
-    alternateClassName: &#39;Ext.menu.TextItem&#39;,
+Ext.define('Ext.menu.Item', {
+    extend: 'Ext.Component',
+    alias: 'widget.menuitem',
+    alternateClassName: 'Ext.menu.TextItem',
     
     <a name="prop-Ext.menu.Item-{Boolean}"></a>/**
      * @property {Boolean} activated
@@ -23,15 +23,15 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
     <a name="cfg-Ext.menu.Item-activeCls"></a>/**
      * @cfg {String} activeCls
      * The CSS class added to the menu item when the item is activated (focused/mouseover).
-     * Defaults to `Ext.baseCSSPrefix + &#39;menu-item-active&#39;`.
+     * Defaults to `Ext.baseCSSPrefix + 'menu-item-active'`.
      * @markdown
      */
-    activeCls: Ext.baseCSSPrefix + &#39;menu-item-active&#39;,
+    activeCls: Ext.baseCSSPrefix + 'menu-item-active',
     
     <a name="cfg-Ext.menu.Item-ariaRole"></a>/**
      * @cfg {String} ariaRole @hide
      */
-    ariaRole: &#39;menuitem&#39;,
+    ariaRole: 'menuitem',
     
     <a name="cfg-Ext.menu.Item-canActivate"></a>/**
      * @cfg {Boolean} canActivate
@@ -57,10 +57,10 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
     <a name="cfg-Ext.menu.Item-disabledCls"></a>/**
      * @cfg {String} disabledCls
      * The CSS class added to the menu item when the item is disabled.
-     * Defaults to `Ext.baseCSSPrefix + &#39;menu-item-disabled&#39;`.
+     * Defaults to `Ext.baseCSSPrefix + 'menu-item-disabled'`.
      * @markdown
      */
-    disabledCls: Ext.baseCSSPrefix + &#39;menu-item-disabled&#39;,
+    disabledCls: Ext.baseCSSPrefix + 'menu-item-disabled',
     
     <a name="cfg-Ext.menu.Item-href"></a>/**
      * @cfg {String} href
@@ -106,21 +106,21 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
     <a name="cfg-Ext.menu.Item-menuAlign"></a>/**
      * @cfg {String} menuAlign
      * The default {@link Ext.core.Element#getAlignToXY Ext.Element.getAlignToXY} anchor position value for this
-     * item&#39;s sub-menu relative to this item&#39;s position. Defaults to `&#39;tl-tr?&#39;`.
+     * item's sub-menu relative to this item's position. Defaults to `'tl-tr?'`.
      * @markdown
      */
-    menuAlign: &#39;tl-tr?&#39;,
+    menuAlign: 'tl-tr?',
     
     <a name="cfg-Ext.menu.Item-menuExpandDelay"></a>/**
      * @cfg {Number} menuExpandDelay
-     * The delay in milliseconds before this item&#39;s sub-menu expands after this item is moused over. Defaults to `200`.
+     * The delay in milliseconds before this item's sub-menu expands after this item is moused over. Defaults to `200`.
      * @markdown
      */
     menuExpandDelay: 200,
     
     <a name="cfg-Ext.menu.Item-menuHideDelay"></a>/**
      * @cfg {Number} menuHideDelay
-     * The delay in milliseconds before this item&#39;s sub-menu hides after this item is moused out. Defaults to `200`.
+     * The delay in milliseconds before this item's sub-menu hides after this item is moused out. Defaults to `200`.
      * @markdown
      */
     menuHideDelay: 200,
@@ -132,18 +132,18 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
      */
     
     renderTpl: [
-        &#39;&lt;tpl if=&quot;plain&quot;&gt;&#39;,
-            &#39;{text}&#39;,
-        &#39;&lt;/tpl&gt;&#39;,
-        &#39;&lt;tpl if=&quot;!plain&quot;&gt;&#39;,
-            &#39;&lt;a class=&quot;&#39; + Ext.baseCSSPrefix + &#39;menu-item-link&quot; href=&quot;{href}&quot; &lt;tpl if=&quot;hrefTarget&quot;&gt;target=&quot;{hrefTarget}&quot;&lt;/tpl&gt; hidefocus=&quot;true&quot; unselectable=&quot;on&quot;&gt;&#39;,
-                &#39;&lt;img src=&quot;{icon}&quot; class=&quot;&#39; + Ext.baseCSSPrefix + &#39;menu-item-icon {iconCls}&quot; /&gt;&#39;,
-                &#39;&lt;span class=&quot;&#39; + Ext.baseCSSPrefix + &#39;menu-item-text&quot; &lt;tpl if=&quot;menu&quot;&gt;style=&quot;margin-right: 17px;&quot;&lt;/tpl&gt; &gt;{text}&lt;/span&gt;&#39;,
-                &#39;&lt;tpl if=&quot;menu&quot;&gt;&#39;,
-                    &#39;&lt;img src=&quot;&#39; + Ext.BLANK_IMAGE_URL + &#39;&quot; class=&quot;&#39; + Ext.baseCSSPrefix + &#39;menu-item-arrow&quot; /&gt;&#39;,
-                &#39;&lt;/tpl&gt;&#39;,
-            &#39;&lt;/a&gt;&#39;,
-        &#39;&lt;/tpl&gt;&#39;
+        '<tpl if="plain">',
+            '{text}',
+        '</tpl>',
+        '<tpl if="!plain">',
+            '<a class="' + Ext.baseCSSPrefix + 'menu-item-link" href="http://localhost:3000/new/ext-js/4-0/source/{href}" <tpl if="hrefTarget">target="{hrefTarget}"</tpl> hidefocus="true" unselectable="on">',
+                '<img src="http://localhost:3000/new/ext-js/4-0/source/{icon}" class="' + Ext.baseCSSPrefix + 'menu-item-icon {iconCls}" />',
+                '<span class="' + Ext.baseCSSPrefix + 'menu-item-text" <tpl if="menu">style="margin-right: 17px;"</tpl> >{text}</span>',
+                '<tpl if="menu">',
+                    '<img src="http://localhost:3000/new/ext-js/4-0/source/'&#32;+&#32;Ext.BLANK_IMAGE_URL&#32;+&#32;'" class="' + Ext.baseCSSPrefix + 'menu-item-arrow" />',
+                '</tpl>',
+            '</a>',
+        '</tpl>'
     ],
     
     <a name="cfg-Ext.menu.Item-text"></a>/**
@@ -155,11 +155,11 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
     activate: function() {
         var me = this;
         
-        if (!me.activated &amp;&amp; me.canActivate &amp;&amp; me.rendered &amp;&amp; !me.isDisabled() &amp;&amp; me.isVisible()) {
+        if (!me.activated && me.canActivate && me.rendered && !me.isDisabled() && me.isVisible()) {
             me.el.addCls(me.activeCls);
             me.focus();
             me.activated = true;
-            me.fireEvent(&#39;activate&#39;, me);
+            me.fireEvent('activate', me);
         }
     },
     
@@ -176,7 +176,7 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
             me.blur();
             me.hideMenu();
             me.activated = false;
-            me.fireEvent(&#39;deactivate&#39;, me);
+            me.fireEvent('deactivate', me);
         }
     },
     
@@ -242,7 +242,7 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
     initComponent: function() {
         var me = this,
             prefix = Ext.baseCSSPrefix,
-            cls = [prefix + &#39;menu-item&#39;];
+            cls = [prefix + 'menu-item'];
         
         me.addEvents(
             <a name="event-Ext.menu.Item-activate"></a>/**
@@ -250,7 +250,7 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
              * Fires when this item is activated
              * @param {Ext.menu.Item} item The activated item
              */
-            &#39;activate&#39;,
+            'activate',
             
             <a name="event-Ext.menu.Item-click"></a>/**
              * @event click
@@ -258,25 +258,25 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
              * @param {Ext.menu.Item} item The item that was clicked
              * @param {Ext.EventObject} e The underyling {@link Ext.EventObject}.
              */
-            &#39;click&#39;,
+            'click',
             
             <a name="event-Ext.menu.Item-deactivate"></a>/**
              * @event deactivate
              * Fires when this tiem is deactivated
              * @param {Ext.menu.Item} item The deactivated item
              */
-            &#39;deactivate&#39;
+            'deactivate'
         );
         
         if (me.plain) {
-            cls.push(prefix + &#39;menu-item-plain&#39;);
+            cls.push(prefix + 'menu-item-plain');
         }
         
         if (me.cls) {
             cls.push(me.cls);
         }
         
-        me.cls = cls.join(&#39; &#39;);
+        me.cls = cls.join(' ');
         
         if (me.menu) {
             me.menu = Ext.menu.MenuManager.get(me.menu);
@@ -301,7 +301,7 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
         }
         
         Ext.callback(me.handler, me.scope || me, [me, e]);
-        me.fireEvent(&#39;click&#39;, me, e);
+        me.fireEvent('click', me, e);
         
         if (!me.hideOnClick) {
             me.focus();
@@ -328,10 +328,10 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
     
     onRender: function(ct, pos) {
         var me = this,
-            prefix = &#39;.&#39; + Ext.baseCSSPrefix;
+            prefix = '.' + Ext.baseCSSPrefix;
         
         Ext.applyIf(me.renderData, {
-            href: me.href || &#39;#&#39;,
+            href: me.href || '#',
             hrefTarget: me.hrefTarget,
             icon: me.icon || Ext.BLANK_IMAGE_URL,
             iconCls: me.iconCls,
@@ -341,10 +341,10 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
         });
         
         Ext.applyIf(me.renderSelectors, {
-            itemEl: prefix + &#39;menu-item-link&#39;,
-            iconEl: prefix + &#39;menu-item-icon&#39;,
-            textEl: prefix + &#39;menu-item-text&#39;,
-            arrowEl: prefix + &#39;menu-item-arrow&#39;
+            itemEl: prefix + 'menu-item-link',
+            iconEl: prefix + 'menu-item-icon',
+            textEl: prefix + 'menu-item-text',
+            arrowEl: prefix + 'menu-item-arrow'
         });
         
         me.callParent(arguments);
@@ -360,11 +360,11 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
         this.scope = scope;
     },
     
-    <a name="method-Ext.menu.Item-setIconClass"></a>/**
+    <a name="method-Ext.menu.Item-setIconCls"></a>/**
      * Sets the {@link #iconCls} of this item
      * @param {String} iconCls The CSS class to set to {@link #iconCls}
      */
-    setIconClass: function(iconCls) {
+    setIconCls: function(iconCls) {
         var me = this;
         
         if (me.iconEl) {
@@ -389,18 +389,18 @@ Ext.define(&#39;Ext.menu.Item&#39;, {
             el = me.textEl || me.el,
             newWidth;
         
-        if (text &amp;&amp; el) {
+        if (text && el) {
             el.update(text);
                 
             if (me.textEl) {
                 // Resize the menu to fit the text
                 newWidth = me.textEl.getWidth() + me.iconEl.getWidth() + 25 + (me.arrowEl ? me.arrowEl.getWidth() : 0);
-                if (newWidth &gt; me.itemEl.getWidth()) {
+                if (newWidth > me.itemEl.getWidth()) {
                     me.parentMenu.setWidth(newWidth);
                 }
             }
         } else if (el) {
-            el.update(&#39;&#39;);
+            el.update('');
         }
         
         me.text = text;

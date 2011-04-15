@@ -5,7 +5,7 @@ Ext.require([
     'Ext.Action'
 ]);
 
-Ext.onReady(function() {    
+Ext.onReady(function() {
     Ext.QuickTips.init();
 
     // sample static data for the store
@@ -68,7 +68,7 @@ Ext.onReady(function() {
     }
 
     // create the data store
-    var store = new Ext.data.ArrayStore({
+    var store = Ext.create('Ext.data.ArrayStore', {
         fields: [
            {name: 'company'},
            {name: 'price',      type: 'float'},
@@ -79,7 +79,7 @@ Ext.onReady(function() {
         data: myData
     });
 
-    var sellAction = new Ext.Action({
+    var sellAction = Ext.create('Ext.Action', {
         icon   : '../shared/icons/fam/delete.gif',  // Use a URL in the icon config
         text: 'Sell stock',
         disabled: true,
@@ -92,7 +92,7 @@ Ext.onReady(function() {
             }
         }
     });
-    var buyAction = new Ext.Action({
+    var buyAction = Ext.create('Ext.Action', {
         iconCls: 'buy-button',
         text: 'Buy stock',
         disabled: true,
@@ -106,7 +106,7 @@ Ext.onReady(function() {
         }
     });
 
-    var contextMenu = new Ext.menu.Menu({
+    var contextMenu = Ext.create('Ext.menu.Menu', {
         items: [
             buyAction,
             sellAction
@@ -114,42 +114,42 @@ Ext.onReady(function() {
     });
 
     // create the Grid
-    var grid = new Ext.grid.GridPanel({
+    var grid = Ext.create('Ext.grid.Panel', {
         store: store,
         columnLines: true,
         columns: [
             {
                 text     : 'Company',
                 flex     : 1,
-                sortable : false, 
+                sortable : false,
                 dataIndex: 'company'
             },
             {
-                text     : 'Price', 
-                width    : 75, 
-                sortable : true, 
-                renderer : 'usMoney', 
+                text     : 'Price',
+                width    : 75,
+                sortable : true,
+                renderer : 'usMoney',
                 dataIndex: 'price'
             },
             {
-                text     : 'Change', 
-                width    : 75, 
-                sortable : true, 
-                renderer : change, 
+                text     : 'Change',
+                width    : 75,
+                sortable : true,
+                renderer : change,
                 dataIndex: 'change'
             },
             {
-                text     : '% Change', 
-                width    : 75, 
-                sortable : true, 
-                renderer : pctChange, 
+                text     : '% Change',
+                width    : 75,
+                sortable : true,
+                renderer : pctChange,
                 dataIndex: 'pctChange'
             },
             {
-                text     : 'Last Updated', 
-                width    : 85, 
-                sortable : true, 
-                renderer : Ext.util.Format.dateRenderer('m/d/Y'), 
+                text     : 'Last Updated',
+                width    : 85,
+                sortable : true,
+                renderer : Ext.util.Format.dateRenderer('m/d/Y'),
                 dataIndex: 'lastChange'
             }
         ],

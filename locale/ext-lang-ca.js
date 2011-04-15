@@ -13,8 +13,8 @@ Ext.onReady(function() {
       Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-      Ext.grid.GridPanel.prototype.ddText = "{0} fila(es) seleccionada(es)";
+    if(Ext.grid.Panel){
+      Ext.grid.Panel.prototype.ddText = "{0} fila(es) seleccionada(es)";
     }
 
     if(Ext.LoadMask){
@@ -119,7 +119,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
       Ext.apply(Ext.PagingToolbar.prototype, {
         beforePageText : "P&#224;gina",
         afterPageText  : "de {0}",
@@ -133,12 +133,12 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.BaseField){
-      Ext.form.BaseField.prototype.invalidText = "El valor d&#39;aquest camp &#233;s inv&#224;lid";
+    if(Ext.form.field.Base){
+      Ext.form.field.Base.prototype.invalidText = "El valor d&#39;aquest camp &#233;s inv&#224;lid";
     }
 
-    if(Ext.form.Text){
-      Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+      Ext.apply(Ext.form.field.Text.prototype, {
         minLengthText : "El tamany m&#237;nim per aquest camp &#233;s {0}",
         maxLengthText : "El tamany m&#224;xim per aquest camp &#233;s {0}",
         blankText     : "Aquest camp &#233;s obligatori",
@@ -147,8 +147,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Number){
-      Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+      Ext.apply(Ext.form.field.Number.prototype, {
         decimalSeparator : ",",
         decimalPrecision : 2,
         minText : "El valor m&#237;nim per aquest camp &#233;s {0}",
@@ -157,8 +157,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Date){
-      Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+      Ext.apply(Ext.form.field.Date.prototype, {
         disabledDaysText  : "Deshabilitat",
         disabledDatesText : "Deshabilitat",
         minText           : "La data en aquest camp ha de ser posterior a {0}",
@@ -169,15 +169,15 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.ComboBox){
-      Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+      Ext.apply(Ext.form.field.ComboBox.prototype, {
         loadingText       : "Carregant...",
         valueNotFoundText : undefined
       });
     }
 
-    if(Ext.form.VTypes){
-      Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+      Ext.apply(Ext.form.field.VTypes, {
         emailText    : 'Aquest camp ha de ser una adre&#231;a de e-mail amb el format "user@example.com"',
         urlText      : 'Aquest camp ha de ser una URL amb el format "http:/'+'/www.example.com"',
         alphaText    : 'Aquest camp nom&#233;s pot contenir lletres i _',
@@ -185,8 +185,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.HtmlEditor){
-      Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : 'Si us plau, tecleixi la URL per l\'enlla&#231;:',
         buttonTips : {
           bold : {
@@ -263,8 +263,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.grid.HeaderContainer){
-      Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+      Ext.apply(Ext.grid.header.Container.prototype, {
         sortAscText  : "Ordenaci&#243; Ascendent",
         sortDescText : "Ordenaci&#243; Descendent",
         columnsText  : "Columnes"
@@ -294,8 +294,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Time){
-      Ext.apply(Ext.form.Time.prototype, {
+    if(Ext.form.field.Time){
+      Ext.apply(Ext.form.field.Time.prototype, {
         minText : "L\'hora en aquest camp ha de ser igual o posterior a {0}",
         maxText : "L\'hora en aquest camp ha de ser igual o anterior {0}",
         invalidText : "{0} no &#233;s un hora v&#224;lida",

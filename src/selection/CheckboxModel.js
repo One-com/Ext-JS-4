@@ -10,7 +10,7 @@
  */
 Ext.define('Ext.selection.CheckboxModel', {
     extend: 'Ext.selection.RowModel',
-    
+
     /**
      * @cfg {String} mode
      * Modes of selection.
@@ -118,12 +118,12 @@ Ext.define('Ext.selection.CheckboxModel', {
         view.el.focus();
         var me = this,
             checker = e.getTarget('.' + Ext.baseCSSPrefix + 'grid-row-checker');
-        
+
         // checkOnly set, but we didn't click on a checker.
         if (me.checkOnly && !checker) {
             return;
         }
-        
+
         if (checker) {
             var mode = me.getSelectionMode();
             // dont change the mode if its single otherwise
@@ -143,7 +143,7 @@ Ext.define('Ext.selection.CheckboxModel', {
      * @private
      */
     onSelectChange: function(record, isSelected) {
-        Ext.selection.CheckboxModel.superclass.onSelectChange.call(this, record, isSelected);
+        this.callParent([record, isSelected]);
         // check to see if all records are selected
         var hdSelectStatus = this.selected.getCount() === this.store.getCount();
         this.toggleUiHeader(hdSelectStatus);

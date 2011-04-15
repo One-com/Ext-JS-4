@@ -19,7 +19,8 @@ Ext.onReady(function () {
         items: {
             xtype: 'chart',
             animate: true,
-            shadow: true,
+            style: 'background:#fff',
+            shadow: false,
             store: store1,
             axes: [{
                 type: 'Numeric',

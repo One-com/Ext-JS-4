@@ -19,12 +19,30 @@
     }
     
     @if $include-ie or $compile-all {
-      .#{$prefix}ie .#{$prefix}grid-table {
-          border-collapse: collapse;
-      }
+        .#{$prefix}ie .#{$prefix}grid-table {
+            border-collapse: collapse;
+        }
+        .#{$prefix}strict {
+            .#{$prefix}ie6, .#{$prefix}ie7 {
+                .#{$prefix}grid-table {
+                    border-collapse: separate;
+                }
+            }
+        }
+/*        .#{$prefix}border-box {
+            .#{$prefix}ie9 {
+                .#{$prefix}grid-table {
+                    border-collapse: separate;
+                }
+            }
+        }*/
     }
 
     //grid header
+    .#{$prefix}header-ct-no-border {
+        border-width: 0 !important;
+    }
+    
     .#{$prefix}grid-header-ct {
         cursor: default;
         zoom: 1;
@@ -40,10 +58,12 @@
         padding: 0;
         position: absolute;
         overflow: hidden;
-        border-left: 1px solid $grid-header-border-color;
+        
         border-right: 1px solid $grid-header-background-color;
+        border-left: 0 none;
         border-top: 0 none;
         border-bottom: 0 none;
+        
         text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
         font: normal 11px/15px arial, tahoma, helvetica, sans-serif;
 
@@ -239,7 +259,8 @@
     }
     
     .#{$prefix}grid-rowwrap-div {
-        .#{$prefix}grid-cell {
+        .#{$prefix}grid-cell,
+        .#{$prefix}grid-cell-inner {
             border-width: 0;
             
             background: transparent;
@@ -284,7 +305,17 @@
     
     // Action columns with a standard, 16x16 icon require less padding
     .#{$prefix}action-col-cell .#{$prefix}grid-cell-inner {
-        padding: 1px 2px 0px 2px;
+        padding: 1px 2px 0 2px;
+    }
+    
+    .#{$prefix}ie6,
+    .#{$prefix}ie7,
+    .#{$prefix}quirks .#{$prefix}ie9,
+    .#{$prefix}quirks .#{$prefix}ie8,
+    .#{$prefix}strict .#{$prefix}ie8 {
+        .#{$prefix}action-col-cell .#{$prefix}grid-cell-inner {
+            padding: 2px 2px 1px 2px;
+        }
     }
 
     .#{$prefix}grid-row .#{$prefix}grid-cell-special {
@@ -292,6 +323,15 @@
         border-right: 1px solid $grid-cell-with-col-lines-border-color;
         
         @include background-gradient(#f6f6f6, 'grid-cell-special');
+    }
+    
+    .#{$prefix}ie6,
+    .#{$prefix}ie7,
+    .#{$prefix}quirks .#{$prefix}ie8,
+    .#{$prefix}strict .#{$prefix}ie8 {
+        .#{$prefix}grid-row .#{$prefix}grid-cell-special .#{$prefix}grid-cell-inner {
+            padding-bottom: 2px;
+        }
     }
     
     .#{$prefix}grid-row-selected .#{$prefix}grid-cell-special {
@@ -620,6 +660,9 @@
     
     // Row Editor
     .#{$prefix}grid-row-editor {
+        position: absolute !important;
+        z-index: 1;
+        zoom: 1;
         overflow: visible !important;
         
         .#{$prefix}form-field, .#{$prefix}form-display-field {

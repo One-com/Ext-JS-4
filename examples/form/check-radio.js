@@ -125,14 +125,14 @@ Ext.onReady(function(){
             }]
         }]
     };
-    
+
     /*====================================================================
      * RadioGroup examples
      *====================================================================*/
     // NOTE: These radio examples use the exact same options as the checkbox ones
     // above, so the comments will not be repeated.  Please see comments above for
     // additional explanation on some config options.
-    
+
     var radioGroup = {
         xtype: 'fieldset',
         title: 'Radio Groups',
@@ -234,10 +234,10 @@ Ext.onReady(function(){
             }]
         }]
     };
-    
+
 
     // combine all that into one huge form
-    var fp = new Ext.FormPanel({
+    var fp = Ext.create('Ext.FormPanel', {
         title: 'Check/Radio Groups Example',
         frame: true,
         fieldDefaults: {
@@ -255,7 +255,7 @@ Ext.onReady(function(){
             text: 'Save',
             handler: function(){
                if(fp.getForm().isValid()){
-                    Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+ 
+                    Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
                         fp.getForm().getValues(true).replace(/&/g,', '));
                 }
             }

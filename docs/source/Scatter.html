@@ -3,39 +3,41 @@
  * @extends Ext.chart.series.Cartesian
  * 
  * Creates a Scatter Chart. The scatter plot is useful when trying to display more than two variables in the same visualization. 
- * These variables can be mapped into x, y coordinates and also to an element&#39;s radius/size, color, etc.
+ * These variables can be mapped into x, y coordinates and also to an element's radius/size, color, etc.
  * As with all other series, the Scatter Series must be appended in the *series* Chart array configuration. See the Chart 
  * documentation for more information on creating charts. A typical configuration object for the scatter could be:
  * 
-  <br><span style="display: none">**/</span>        series: [{
-            type: &#39;scatter&#39;,
+  <pre><code>
+        series: [{
+            type: 'scatter',
             markerCfg: {
                 radius: 5,
                 size: 5
             },
-            axis: &#39;left&#39;,
-            xField: &#39;name&#39;,
-            yField: &#39;data1&#39;
+            axis: 'left',
+            xField: 'name',
+            yField: 'data1'
         }, {
-            type: &#39;scatter&#39;,
+            type: 'scatter',
             markerCfg: {
                 radius: 5,
                 size: 5
             },
-            axis: &#39;left&#39;,
-            xField: &#39;name&#39;,
-            yField: &#39;data2&#39;
+            axis: 'left',
+            xField: 'name',
+            yField: 'data2'
         }, {
-            type: &#39;scatter&#39;,
+            type: 'scatter',
             markerCfg: {
                 radius: 5,
                 size: 5
             },
-            axis: &#39;left&#39;,
-            xField: &#39;name&#39;,
-            yField: &#39;data3&#39;
+            axis: 'left',
+            xField: 'name',
+            yField: 'data3'
         }]
-   <br><span style="display: none">/**</span> 
+   </code></pre>
+ 
  * 
  * In this configuration we add three different categories of scatter series. Each of them is bound to a different field of the same data store, 
  * `data1`, `data2` and `data3` respectively. All x-fields for the series must be the same field, in this case `name`. 
@@ -45,18 +47,18 @@
  * @xtype scatter
  * 
  */
-Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
+Ext.define('Ext.chart.series.Scatter', {
 
     /* Begin Definitions */
 
-    extend: &#39;Ext.chart.series.Cartesian&#39;,
+    extend: 'Ext.chart.series.Cartesian',
 
-    requires: [&#39;Ext.chart.axis.Axis&#39;, &#39;Ext.chart.Shapes&#39;, &#39;Ext.fx.Anim&#39;],
+    requires: ['Ext.chart.axis.Axis', 'Ext.chart.Shapes', 'Ext.fx.Anim'],
 
     /* End Definitions */
 
-    type: &#39;scatter&#39;,
-    alias: &#39;series.scatter&#39;,
+    type: 'scatter',
+    alias: 'series.scatter',
 
     <a name="cfg-Ext.chart.series.Scatter-markerCfg"></a>/**
      * @cfg {Object} markerCfg
@@ -77,23 +79,23 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             style: {},
             markerCfg: {},
             shadowAttributes: [{
-                &quot;stroke-width&quot;: 6,
-                &quot;stroke-opacity&quot;: 0.05,
-                stroke: &#39;rgb(0, 0, 0)&#39;
+                "stroke-width": 6,
+                "stroke-opacity": 0.05,
+                stroke: 'rgb(0, 0, 0)'
             }, {
-                &quot;stroke-width&quot;: 4,
-                &quot;stroke-opacity&quot;: 0.1,
-                stroke: &#39;rgb(0, 0, 0)&#39;
+                "stroke-width": 4,
+                "stroke-opacity": 0.1,
+                stroke: 'rgb(0, 0, 0)'
             }, {
-                &quot;stroke-width&quot;: 2,
-                &quot;stroke-opacity&quot;: 0.15,
-                stroke: &#39;rgb(0, 0, 0)&#39;
+                "stroke-width": 2,
+                "stroke-opacity": 0.15,
+                stroke: 'rgb(0, 0, 0)'
             }]
         });
         me.group = surface.getGroup(me.seriesId);
         if (shadow) {
-            for (i = 0, l = me.shadowAttributes.length; i &lt; l; i++) {
-                me.shadowGroups.push(surface.getGroup(me.seriesId + &#39;-shadows&#39; + i));
+            for (i = 0, l = me.shadowAttributes.length; i < l; i++) {
+                me.shadowGroups.push(surface.getGroup(me.seriesId + '-shadows' + i));
             }
         }
     },
@@ -109,11 +111,11 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
         me.setBBox();
         bbox = me.bbox;
 
-        for (i = 0, ln = axes.length; i &lt; ln; i++) { 
+        for (i = 0, ln = axes.length; i < ln; i++) { 
             axis = chart.axes.get(axes[i]);
             if (axis) {
                 axis = axis.calcEnds();
-                if (axis.position == &#39;top&#39; || axis.position == &#39;bottom&#39;) {
+                if (axis.position == 'top' || axis.position == 'bottom') {
                     minX = axis.from;
                     maxX = axis.to;
                 }
@@ -124,16 +126,16 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             }
         }
         // If a field was specified without a corresponding axis, create one to get bounds
-        if (me.xField &amp;&amp; !Ext.isNumber(minX)) {
-            axis = new Ext.chart.axis.Axis({
+        if (me.xField && !Ext.isNumber(minX)) {
+            axis = Ext.create('Ext.chart.axis.Axis', {
                 chart: chart,
                 fields: [].concat(me.xField)
             }).calcEnds();
             minX = axis.from;
             maxX = axis.to;
         }
-        if (me.yField &amp;&amp; !Ext.isNumber(minY)) {
-            axis = new Ext.chart.axis.Axis({
+        if (me.yField && !Ext.isNumber(minY)) {
+            axis = Ext.create('Ext.chart.axis.Axis', {
                 chart: chart,
                 fields: [].concat(me.yField)
             }).calcEnds();
@@ -191,19 +193,19 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             yValue = record.get(me.yField);
 
             // Ensure a value
-            if (typeof xValue == &#39;string&#39;) {
+            if (typeof xValue == 'string') {
                 xValue = i;
             }
-            if (typeof yValue == &#39;string&#39;) {
+            if (typeof yValue == 'string') {
                 yValue = i;
             }
             //skip undefined values
-            if (typeof yValue == &#39;undefined&#39;) {
-                //&lt;debug warn&gt;
+            if (typeof yValue == 'undefined') {
+                //<debug warn>
                 if (Ext.isDefined(Ext.global.console)) {
-                    Ext.global.console.warn(&quot;[Ext.chart.series.Scatter]  Skipping a store element with an undefined value at &quot;, record, xValue, yValue);
+                    Ext.global.console.warn("[Ext.chart.series.Scatter]  Skipping a store element with an undefined value at ", record, xValue, yValue);
                 }
-                //&lt;/debug&gt;
+                //</debug>
                 return;
             }
             x = boxX + (xValue - minX) * xScale;
@@ -221,7 +223,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             });
 
             // When resizing, reset before animating
-            if (chart.animate &amp;&amp; chart.resizing) {
+            if (chart.animate && chart.resizing) {
                 sprite = group.getAt(i);
                 if (sprite) {
                     me.resetPoint(sprite);
@@ -253,7 +255,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             ln = me.shadowGroups.length,
             bbox = me.bbox,
             i, attr;
-        for (i = 0; i &lt; ln; i++) {
+        for (i = 0; i < ln; i++) {
             attr = Ext.apply({}, shadowAttributes[i]);
             if (attr.translate) {
                 attr.translate.x += (bbox.x + bbox.width) / 2;
@@ -299,7 +301,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
 
         sprite.shadows = shadows = [];
 
-        for (i = 0; i &lt; lnsh; i++) {
+        for (i = 0; i < lnsh; i++) {
             attr = Ext.apply({}, shadowAttributes[i]);
             if (attr.translate) {
                 attr.translate.x += (bbox.x + bbox.width) / 2;
@@ -342,7 +344,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
         type = endMarkerStyle.type;
         delete endMarkerStyle.type;
 
-        //if the store is empty then there&#39;s nothing to be rendered
+        //if the store is empty then there's nothing to be rendered
         if (!store || !store.getCount()) {
             return;
         }
@@ -352,7 +354,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
 
         attrs = me.getPaths();
         ln = attrs.length;
-        for (i = 0; i &lt; ln; i++) {
+        for (i = 0; i < ln; i++) {
             attr = attrs[i];
             sprite = group.getAt(i);
             Ext.apply(attr, endMarkerStyle);
@@ -373,7 +375,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
                     to: rendererAttributes
                 });
                 //animate shadows
-                for (shindex = 0; shindex &lt; lnsh; shindex++) {
+                for (shindex = 0; shindex < lnsh; shindex++) {
                     shadowAttribute = Ext.apply({}, shadowAttributes[shindex]);
                     rendererAttributes = me.renderer(shadows[shindex], store.getAt(i), Ext.apply({}, { 
                         translate: {
@@ -388,7 +390,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
                 rendererAttributes = me.renderer(sprite, store.getAt(i), Ext.apply({ translate: attr }, { hidden: false }), i, store);
                 sprite.setAttributes(rendererAttributes, true);
                 //update shadows
-                for (shindex = 0; shindex &lt; lnsh; shindex++) {
+                for (shindex = 0; shindex < lnsh; shindex++) {
                     shadowAttribute = shadowAttributes[shindex];
                     rendererAttributes = me.renderer(shadows[shindex], store.getAt(i), Ext.apply({ 
                         x: attr.x,
@@ -402,7 +404,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
 
         // Hide unused sprites
         ln = group.getCount();
-        for (i = attrs.length; i &lt; ln; i++) {
+        for (i = attrs.length; i < ln; i++) {
             group.getAt(i).hide(true);
         }
         me.renderLabels();
@@ -418,7 +420,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             bbox = me.bbox;
         
         return me.chart.surface.add(Ext.apply({
-            type: &#39;text&#39;,
+            type: 'text',
             group: group,
             x: item.point[0],
             y: bbox.y + bbox.height / 2
@@ -444,10 +446,10 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             hidden: true
         }, true);
         
-        if (display == &#39;rotate&#39;) {
+        if (display == 'rotate') {
             label.setAttributes({
-                &#39;text-anchor&#39;: &#39;start&#39;,
-                &#39;rotation&#39;: {
+                'text-anchor': 'start',
+                'rotation': {
                     x: x,
                     y: y,
                     degrees: -45
@@ -457,24 +459,24 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             bb = label.getBBox();
             width = bb.width;
             height = bb.height;
-            x = x &lt; bbox.x? bbox.x : x;
-            x = (x + width &gt; bbox.x + bbox.width)? (x - (x + width - bbox.x - bbox.width)) : x;
-            y = (y - height &lt; bbox.y)? bbox.y + height : y;
+            x = x < bbox.x? bbox.x : x;
+            x = (x + width > bbox.x + bbox.width)? (x - (x + width - bbox.x - bbox.width)) : x;
+            y = (y - height < bbox.y)? bbox.y + height : y;
         
-        } else if (display == &#39;under&#39; || display == &#39;over&#39;) {
+        } else if (display == 'under' || display == 'over') {
             //TODO(nicolas): find out why width/height values in circle bounding boxes are undefined.
             bb = item.sprite.getBBox();
             bb.width = bb.width || (radius * 2);
             bb.height = bb.height || (radius * 2);
-            y = y + (display == &#39;over&#39;? -bb.height : bb.height);
+            y = y + (display == 'over'? -bb.height : bb.height);
             //correct label position to fit into the box
             bb = label.getBBox();
             width = bb.width/2;
             height = bb.height/2;
-            x = x - width &lt; bbox.x ? bbox.x + width : x;
-            x = (x + width &gt; bbox.x + bbox.width) ? (x - (x + width - bbox.x - bbox.width)) : x;
-            y = y - height &lt; bbox.y? bbox.y + height : y;
-            y = (y + height &gt; bbox.y + bbox.height) ? (y - (y + height - bbox.y - bbox.height)) : y;
+            x = x - width < bbox.x ? bbox.x + width : x;
+            x = (x + width > bbox.x + bbox.width) ? (x - (x + width - bbox.x - bbox.width)) : x;
+            y = y - height < bbox.y? bbox.y + height : y;
+            y = (y + height > bbox.y + bbox.height) ? (y - (y + height - bbox.y - bbox.height)) : y;
         }
 
         if (!chart.animate) {
@@ -486,9 +488,9 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
         }
         else {
             if (resizing) {
-                anim = item.sprite.hasActiveFx();
+                anim = item.sprite.getActiveAnimation();
                 if (anim) {
-                    anim.on(&#39;afteranimate&#39;, function() {
+                    anim.on('afteranimate', function() {
                         label.setAttributes({
                             x: x,
                             y: y
@@ -535,17 +537,17 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
         y = cur[1] + normal[1] * offsetFromViz;
         
         //box position and dimensions
-        boxx = x + (normal[0] &gt; 0? 0 : -(bbox.width + 2 * offsetBox));
+        boxx = x + (normal[0] > 0? 0 : -(bbox.width + 2 * offsetBox));
         boxy = y - bbox.height /2 - offsetBox;
         boxw = bbox.width + 2 * offsetBox;
         boxh = bbox.height + 2 * offsetBox;
         
-        //now check if we&#39;re out of bounds and invert the normal vector correspondingly
-        //this may add new overlaps between labels (but labels won&#39;t be out of bounds).
-        if (boxx &lt; clipRect[0] || (boxx + boxw) &gt; (clipRect[0] + clipRect[2])) {
+        //now check if we're out of bounds and invert the normal vector correspondingly
+        //this may add new overlaps between labels (but labels won't be out of bounds).
+        if (boxx < clipRect[0] || (boxx + boxw) > (clipRect[0] + clipRect[2])) {
             normal[0] *= -1;
         }
-        if (boxy &lt; clipRect[1] || (boxy + boxh) &gt; (clipRect[1] + clipRect[3])) {
+        if (boxy < clipRect[1] || (boxy + boxh) > (clipRect[1] + clipRect[3])) {
             normal[1] *= -1;
         }
     
@@ -554,7 +556,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
         y = cur[1] + normal[1] * offsetFromViz;
         
         //update box position and dimensions
-        boxx = x + (normal[0] &gt; 0? 0 : -(bbox.width + 2 * offsetBox));
+        boxx = x + (normal[0] > 0? 0 : -(bbox.width + 2 * offsetBox));
         boxy = y - bbox.height /2 - offsetBox;
         boxw = bbox.width + 2 * offsetBox;
         boxh = bbox.height + 2 * offsetBox;
@@ -563,7 +565,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             //set the line from the middle of the pie to the box.
             me.onAnimate(callout.lines, {
                 to: {
-                    path: [&quot;M&quot;, cur[0], cur[1], &quot;L&quot;, x, y, &quot;Z&quot;]
+                    path: ["M", cur[0], cur[1], "L", x, y, "Z"]
                 }
             }, true);
             //set box position
@@ -578,14 +580,14 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             //set text position
             me.onAnimate(callout.label, {
                 to: {
-                    x: x + (normal[0] &gt; 0? offsetBox : -(bbox.width + offsetBox)),
+                    x: x + (normal[0] > 0? offsetBox : -(bbox.width + offsetBox)),
                     y: y
                 }
             }, true);
         } else {
             //set the line from the middle of the pie to the box.
             callout.lines.setAttributes({
-                path: [&quot;M&quot;, cur[0], cur[1], &quot;L&quot;, x, y, &quot;Z&quot;]
+                path: ["M", cur[0], cur[1], "L", x, y, "Z"]
             }, true);
             //set box position
             callout.box.setAttributes({
@@ -596,7 +598,7 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             }, true);
             //set text position
             callout.label.setAttributes({
-                x: x + (normal[0] &gt; 0? offsetBox : -(bbox.width + offsetBox)),
+                x: x + (normal[0] > 0? offsetBox : -(bbox.width + offsetBox)),
                 y: y
             }, true);
         }
@@ -622,8 +624,8 @@ Ext.define(&#39;Ext.chart.series.Scatter&#39;, {
             return Math.sqrt(dx * dx + dy * dy);
         }
         point = item.point;
-        return (point[0] - tolerance &lt;= x &amp;&amp; point[0] + tolerance &gt;= x &amp;&amp;
-            point[1] - tolerance &lt;= y &amp;&amp; point[1] + tolerance &gt;= y);
+        return (point[0] - tolerance <= x && point[0] + tolerance >= x &&
+            point[1] - tolerance <= y && point[1] + tolerance >= y);
     }
 });
 

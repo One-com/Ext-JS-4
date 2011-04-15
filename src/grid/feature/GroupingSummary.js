@@ -45,7 +45,7 @@ Ext.define('Ext.grid.feature.GroupingSummary', {
      * @private
      * @return {Object} The fragments
      */
-    getTplFragments: function() {
+    getFragmentTpl: function() {
         var me = this,
             fragments = me.callParent();
             
@@ -92,7 +92,7 @@ Ext.define('Ext.grid.feature.GroupingSummary', {
             data = {},
             remoteData = {},
             store = me.view.store,
-            groupField = store.groupField,
+            groupField = this.getGroupField(),
             reader = store.proxy.reader,
             groups = me.summaryGroups,
             columns = me.view.headerCt.getColumnsForTpl(),

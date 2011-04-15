@@ -1,21 +1,21 @@
-/** 
+/**
  * @class Ext.ux.grid.filter.StringFilter
  * @extends Ext.ux.grid.filter.Filter
- * Filter by a configurable Ext.form.TextField
+ * Filter by a configurable Ext.form.field.Text
  * <p><b><u>Example Usage:</u></b></p>
- * <pre><code>    
-var filters = new Ext.ux.grid.GridFilters({
+ * <pre><code>
+var filters = Ext.create('Ext.ux.grid.GridFilters', {
     ...
     filters: [{
         // required configs
         type: 'string',
         dataIndex: 'name',
-        
+
         // optional configs
         value: 'foo',
         active: true, // default is false
         iconCls: 'ux-gridfilter-text-icon' // default
-        // any Ext.form.TextField configs accepted
+        // any Ext.form.field.Text configs accepted
     }]
 });
  * </code></pre>
@@ -34,8 +34,8 @@ Ext.define('Ext.ux.grid.filter.StringFilter', {
     emptyText: 'Enter Filter Text...',
     selectOnFocus: true,
     width: 125,
-    
-    /**  
+
+    /**
      * @private
      * Template method that is to initialize the filter and install required menu items.
      */
@@ -55,11 +55,11 @@ Ext.define('Ext.ux.grid.filter.StringFilter', {
             }
         });
 
-        this.inputItem = Ext.create('Ext.form.Text', config);
+        this.inputItem = Ext.create('Ext.form.field.Text', config);
         this.menu.add(this.inputItem);
-        this.updateTask = new Ext.util.DelayedTask(this.fireUpdate, this);
+        this.updateTask = Ext.create('Ext.util.DelayedTask', this.fireUpdate, this);
     },
-    
+
     /**
      * @private
      * Template method that is to get and return the value of the filter.
@@ -68,12 +68,12 @@ Ext.define('Ext.ux.grid.filter.StringFilter', {
     getValue : function () {
         return this.inputItem.getValue();
     },
-    
+
     /**
      * @private
      * Template method that is to set the value of the filter.
      * @param {Object} value The value to set the filter
-     */	
+     */
     setValue : function (value) {
         this.inputItem.setValue(value);
         this.fireEvent('update', this);
@@ -116,8 +116,8 @@ Ext.define('Ext.ux.grid.filter.StringFilter', {
 
         return val.toLowerCase().indexOf(this.getValue().toLowerCase()) > -1;
     },
-    
-    /**  
+
+    /**
      * @private
      * Handler method called when there is a keyup event on this.inputItem
      */

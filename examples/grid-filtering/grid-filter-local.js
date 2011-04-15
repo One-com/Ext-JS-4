@@ -4,7 +4,7 @@ Ext.require([
     'Ext.grid.*',
     'Ext.data.*',
     'Ext.ux.grid.FiltersFeature',
-    'Ext.toolbar.PagingToolbar'
+    'Ext.toolbar.Paging'
 ]);
 
 Ext.onReady(function(){
@@ -141,13 +141,13 @@ Ext.onReady(function(){
         return columns.slice(start || 0, finish);
     };
     
-    var grid = Ext.create('Ext.grid.GridPanel', {
+    var grid = Ext.create('Ext.grid.Panel', {
         border: false,
         store: store,
         columns: createHeaders(4),
         loadMask: true,
         features: [filters],
-        bbar: Ext.create('Ext.toolbar.PagingToolbar', {
+        bbar: Ext.create('Ext.toolbar.Paging', {
             store: store
         })
     });
@@ -166,7 +166,9 @@ Ext.onReady(function(){
                 grid.filters.reload();
                 button.setText(text);
             } 
-        },{
+        },
+        /* remote filtering disabled by default due to the difficulty of installing the required SQL database
+        {
             text: 'Local Filtering: ' + (local ? 'On' : 'Off'),
             tooltip: 'Toggle Filtering between remote/local',
             enableToggle: true,
@@ -186,7 +188,9 @@ Ext.onReady(function(){
                 button.setText(text);
                 store.load();
             } 
-        },{
+        },
+        */
+        {
             text: 'All Filter Data',
             tooltip: 'Get Filter Data for Grid',
             handler: function () {

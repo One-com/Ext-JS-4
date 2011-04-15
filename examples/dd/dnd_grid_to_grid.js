@@ -6,7 +6,7 @@ Ext.require([
 
 Ext.define('DataObject', {
     extend: 'Ext.data.Model',
-    fields: ['name', 'column1', 'column2']    
+    fields: ['name', 'column1', 'column2']
 });
 
 Ext.onReady(function(){
@@ -25,7 +25,7 @@ Ext.onReady(function(){
     ];
 
     // create the data store
-    var firstGridStore = new Ext.data.Store({
+    var firstGridStore = Ext.create('Ext.data.Store', {
         model: 'DataObject',
         data: myData
     });
@@ -39,7 +39,7 @@ Ext.onReady(function(){
     ];
 
     // declare the source Grid
-    var firstGrid = new Ext.grid.GridPanel({
+    var firstGrid = Ext.create('Ext.grid.Panel', {
         viewConfig: {
             plugins: {
                 ptype: 'gridviewdragdrop',
@@ -60,12 +60,12 @@ Ext.onReady(function(){
         margins          : '0 2 0 0'
     });
 
-    var secondGridStore = new Ext.data.Store({
+    var secondGridStore = Ext.create('Ext.data.Store', {
         model: 'DataObject'
     });
 
     // create the destination Grid
-    var secondGrid = new Ext.grid.GridPanel({
+    var secondGrid = Ext.create('Ext.grid.Panel', {
         viewConfig: {
             plugins: {
                 ptype: 'gridviewdragdrop',
@@ -87,7 +87,7 @@ Ext.onReady(function(){
     });
 
     //Simple 'border layout' panel to house both grids
-    var displayPanel = new Ext.Panel({
+    var displayPanel = Ext.create('Ext.Panel', {
         width        : 650,
         height       : 300,
         layout       : {
@@ -110,7 +110,7 @@ Ext.onReady(function(){
                 handler: function(){
                     //refresh source grid
                     firstGridStore.loadData(myData);
-                    
+
                     //purge destination grid
                     secondGridStore.removeAll();
                 }

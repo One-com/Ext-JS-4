@@ -4,7 +4,7 @@ Ext.require([
 
 Ext.onReady(function() {
 
-    var formPanel = Ext.create('Ext.form.FormPanel', {
+    var formPanel = Ext.create('Ext.form.Panel', {
         frame: true,
         title: 'Form Fields',
         width: 340,

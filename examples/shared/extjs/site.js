@@ -14,7 +14,7 @@ Ext.onReady(function(){
 		}else{
 			bdi.hide();
 			bd.show();
-			bdi.slideIn('l', {duration:0.2, stopFx: true, easing:'easeOut'});
+			bdi.slideIn('l', {duration:0.2, stopAnimation: true, easing:'easeOut'});
 		}
 
 		t.update(!expanded ? 'Hide details' : 'Show details');

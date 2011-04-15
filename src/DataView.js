@@ -11,7 +11,8 @@
  *
  * <p>The example below binds a DataView to a {@link Ext.data.Store} and renders it into an {@link Ext.panel.Panel}.</p>
  * <pre><code>
-Ext.regModel('Image', {
+ImageModel = Ext.define('ImageModel', {
+    extend: 'Ext.data.Model',
     fields: [
         'name', 'url',
         {name:'size', type: 'float'},

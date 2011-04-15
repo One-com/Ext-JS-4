@@ -3,11 +3,11 @@
  * @extends Ext.util.KeyNav
  * A specialized {@link Ext.util.KeyNav} implementation for navigating a {@link Ext.view.BoundList} using
  * the keyboard. The up, down, pageup, pagedown, home, and end keys move the active highlight
- * through the list. The enter key invokes the selection model&#39;s select action using the highlighted item.
+ * through the list. The enter key invokes the selection model's select action using the highlighted item.
  */
-Ext.define(&#39;Ext.view.BoundListKeyNav&#39;, {
-    extend: &#39;Ext.util.KeyNav&#39;,
-    requires: &#39;Ext.view.BoundList&#39;,
+Ext.define('Ext.view.BoundListKeyNav', {
+    extend: 'Ext.util.KeyNav',
+    requires: 'Ext.view.BoundList',
 
     <a name="cfg-Ext.view.BoundListKeyNav-boundList"></a>/**
      * @cfg {Ext.view.BoundList} boundList
@@ -17,7 +17,7 @@ Ext.define(&#39;Ext.view.BoundListKeyNav&#39;, {
 
     constructor: function(el, config) {
         var me = this;
-        Ext.copyTo(me, config, &#39;boundList&#39;);
+        Ext.copyTo(me, config, 'boundList');
         config = Ext.apply({}, config, me.defaultHandlers);
         me.callParent([el, config]);
     },
@@ -29,7 +29,7 @@ Ext.define(&#39;Ext.view.BoundListKeyNav&#39;, {
                 allItems = boundList.all,
                 oldItem = boundList.highlightedItem,
                 oldItemIdx = oldItem ? boundList.indexOf(oldItem) : -1,
-                newItemIdx = oldItemIdx &gt; 0 ? oldItemIdx - 1 : allItems.getCount() - 1; //wraps around
+                newItemIdx = oldItemIdx > 0 ? oldItemIdx - 1 : allItems.getCount() - 1; //wraps around
             me.highlightAt(newItemIdx);
         },
 
@@ -39,7 +39,7 @@ Ext.define(&#39;Ext.view.BoundListKeyNav&#39;, {
                 allItems = boundList.all,
                 oldItem = boundList.highlightedItem,
                 oldItemIdx = oldItem ? boundList.indexOf(oldItem) : -1,
-                newItemIdx = oldItemIdx &lt; allItems.getCount() - 1 ? oldItemIdx + 1 : 0; //wraps around
+                newItemIdx = oldItemIdx < allItems.getCount() - 1 ? oldItemIdx + 1 : 0; //wraps around
             me.highlightAt(newItemIdx);
         },
 

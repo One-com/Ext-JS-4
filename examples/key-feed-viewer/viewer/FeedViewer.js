@@ -8,23 +8,24 @@
  * Create a new Feed Viewer app
  * @param {Object} config The config object
  */
-
 Ext.define('FeedViewer.App', {
     extend: 'Ext.container.Viewport',
-    
+
     initComponent: function(){
-        
-        Ext.regModel('Feed', {
+
+        Ext.define('Feed', {
+            extend: 'Ext.data.Model',
             fields: ['title', 'url']
         });
 
-        Ext.regModel('FeedItem', {
+        Ext.define('FeedItem', {
+            extend: 'Ext.data.Model',
             fields: ['title', 'author', {
                 name: 'pubDate',
                 type: 'date'
             }, 'link', 'description', 'content']
         });
-        
+
         Ext.apply(this, {
             layout: 'border',
             padding: 5,
@@ -32,7 +33,7 @@ Ext.define('FeedViewer.App', {
         });
         this.callParent(arguments);
     },
-    
+
     /**
      * Create the list of fields to be shown on the left
      * @private

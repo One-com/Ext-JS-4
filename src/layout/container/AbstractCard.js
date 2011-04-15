@@ -9,7 +9,7 @@
  * the only way to move from one Component to the next is by calling setActiveItem, passing the id or index of
  * the next panel to display.  The layout itself does not provide a user interface for handling this navigation,
  * so that functionality must be provided by the developer.</p>
- * <p>Containers that are configured with a card layout will have a method setActiveItem dynamically added to it. 
+ * <p>Containers that are configured with a card layout will have a method setActiveItem dynamically added to it.
  * <pre><code>
       var p = new Ext.panel.Panel({
           fullscreen: true,
@@ -56,7 +56,7 @@ Ext.define('Ext.layout.container.AbstractCard', {
             return true;
         }
         else {
-            return Ext.layout.container.AbstractCard.superclass.beforeLayout.apply(me, arguments);
+            return this.callParent(arguments);
         }
     },
 
@@ -120,7 +120,7 @@ Ext.define('Ext.layout.container.AbstractCard', {
 
     // @private
     configureItem: function(item, position) {
-        Ext.layout.container.AbstractCard.superclass.configureItem.call(this, item, position);
+        this.callParent([item, position]);
         if (this.hideInactive && this.activeItem !== item) {
             item.hide();
         }

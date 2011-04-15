@@ -292,10 +292,6 @@ sayGoodbye('Fred'); // both alerts show
      * If called again within that period, the impending invocation will be canceled, and the
      * timeout period will begin again.</p>
      *
-     * <p>The resulting function is also an instance of {@link Ext.util.DelayedTask}, and so
-     * therefore implements the <code>{@link Ext.util.DelayedTask#cancel cancel}</code> and
-     * <code>{@link Ext.util.DelayedTask#delay delay}</code> methods.</p>
-     *
      * @param {Function} fn The function to invoke on a buffered timer.
      * @param {Number} buffer The number of milliseconds by which to buffer the invocation of the
      * function.
@@ -306,10 +302,19 @@ sayGoodbye('Fred'); // both alerts show
      * @return {Function} A function which invokes the passed function after buffering for the specified time.
      */
     createBuffered: function(fn, buffer, scope, args) {
-        var task = fn.task || (fn.task = new Ext.util.DelayedTask());
-        return Ext.apply(function() {
-            task.delay(buffer, fn, scope || this, args || Ext.toArray(arguments));
-        }, task);
+        return function(){
+            var timerId;
+            return function() {
+                var me = this;
+                if (timerId) {
+                    clearInterval(timerId);
+                    timerId = null;
+                }
+                timerId = setTimeout(function(){
+                    fn.apply(me || scope, args || arguments);
+                }, buffer);
+            };
+        }();
     },
 
     /**

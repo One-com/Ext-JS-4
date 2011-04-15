@@ -9,210 +9,219 @@ using a {@link Ext.layout.container.Card CardLayout layout manager}, and display
 
 __Note:__
 
-By default, a tab&#39;s close tool _destroys_ the child tab Component and all its descendants. This makes the child tab 
+By default, a tab's close tool _destroys_ the child tab Component and all its descendants. This makes the child tab 
 Component, and all its descendants __unusable__. To enable re-use of a tab, configure the TabPanel with `{@link #autoDestroy autoDestroy: false}`.
 
-__TabPanel&#39;s layout:__
+__TabPanel's layout:__
 
 TabPanels use a Dock layout to position the {@link Ext.tab.TabBar TabBar} at the top of the widget. Panels added to the TabPanel will have their 
-header hidden by default because the Tab will automatically take the Panel&#39;s configured title and icon.
+header hidden by default because the Tab will automatically take the Panel's configured title and icon.
 
 TabPanels use their {@link Ext.panel.Panel#header header} or {@link Ext.panel.Panel#footer footer} element (depending on the {@link #tabPosition} 
 configuration) to accommodate the tab selector buttons. This means that a TabPanel will not display any configured title, and will not display any 
 configured header {@link Ext.panel.Panel#tools tools}.
 
-To display a header, embed the TabPanel in a {@link Ext.panel.Panel Panel} which uses `{@link Ext.container.Container#layout layout:&#39;fit&#39;}`.
+To display a header, embed the TabPanel in a {@link Ext.panel.Panel Panel} which uses `{@link Ext.container.Container#layout layout:'fit'}`.
 
 __Examples:__
 
 Here is a basic TabPanel rendered to the body. This also shows the useful configuration {@link #activeTab}, which allows you to set the active tab on render. 
 If you do not set an {@link #activeTab}, no tabs will be active by default.
-
+{@img Ext.tab.TabPanel/Ext.tab.TabPanel1.png TabPanel component}
 Example usage:
 
-    var tabs = new Ext.TabPanel({
-        renderTo : Ext.getBody(),
+    Ext.create('Ext.TabPanel', {
+        width: 300,
+        height: 200,
         activeTab: 0,
         items: [
             {
-                title: &#39;Tab 1&#39;,
-                html : &#39;A simple tab&#39;
+                title: 'Tab 1',
+                bodyPadding: 10,
+                html : 'A simple tab'
             },
             {
-                title: &#39;Tab 2&#39;,
-                html : &#39;Another one&#39;
+                title: 'Tab 2',
+                html : 'Another one'
             }
-        ]
-    });
+        ],
+        renderTo : Ext.getBody()
+    }); 
 
 You can remove the background of the TabBar by setting the {@link #plain} property to `false`.
 
 Example usage:
 
-var tabs = new Ext.TabPanel({
-    renderTo : Ext.getBody(),
-    activeTab: 0,
-    plain    : true,
-    items: [
-        {
-            title: &#39;Tab 1&#39;,
-            html : &#39;A simple tab&#39;
-        },
-        {
-            title: &#39;Tab 2&#39;,
-            html : &#39;Another one&#39;
-        }
-    ]
-});
-
-Another useful configuration of TabPanel is {@link #tabPosition}. This allows you to change the position where the tabs are displayed. The available 
-options for this are `&#39;top&#39;` (default) and `&#39;bottom&#39;`.
-
-Example usage:
-
-    var tabs = new Ext.TabPanel({
-        renderTo : Ext.getBody(),
+    Ext.create('Ext.TabPanel', {
+        width: 300,
+        height: 200,
         activeTab: 0,
-        tabPosition: &#39;bottom&#39;,
+        plain: true,
         items: [
             {
-                title: &#39;Tab 1&#39;,
-                html : &#39;A simple tab&#39;
+                title: 'Tab 1',
+                bodyPadding: 10,
+                html : 'A simple tab'
             },
             {
-                title: &#39;Tab 2&#39;,
-                html : &#39;Another one&#39;
+                title: 'Tab 2',
+                html : 'Another one'
             }
-        ]
-    });
+        ],
+        renderTo : Ext.getBody()
+    }); 
+
+Another useful configuration of TabPanel is {@link #tabPosition}. This allows you to change the position where the tabs are displayed. The available 
+options for this are `'top'` (default) and `'bottom'`.
+{@img Ext.tab.TabPanel/Ext.tab.TabPanel2.png TabPanel component}
+Example usage:
+
+    Ext.create('Ext.TabPanel', {
+        width: 300,
+        height: 200,
+        activeTab: 0,
+        bodyPadding: 10,        
+        tabPosition: 'bottom',
+        items: [
+            {
+                title: 'Tab 1',
+                html : 'A simple tab'
+            },
+            {
+                title: 'Tab 2',
+                html : 'Another one'
+            }
+        ],
+        renderTo : Ext.getBody()
+    }); 
 
 The {@link #setActiveTab} is a very useful method in TabPanel which will allow you to change the current active tab. You can either give it an index or 
 an instance of a tab.
 
 Example usage:
 
-    var tabs = new Ext.TabPanel({
-        renderTo : Ext.getBody(),
+    var tabs = Ext.create('Ext.TabPanel', {
         items: [
             {
-                id   : &#39;my-tab&#39;,
-                title: &#39;Tab 1&#39;,
-                html : &#39;A simple tab&#39;
+                id   : 'my-tab',
+                title: 'Tab 1',
+                html : 'A simple tab'
             },
             {
-                title: &#39;Tab 2&#39;,
-                html : &#39;Another one&#39;
+                title: 'Tab 2',
+                html : 'Another one'
             }
-        ]
+        ],
+        renderTo : Ext.getBody()
     });
     
-    var tab = Ext.getCmp(&#39;my-tab&#39;);
+    var tab = Ext.getCmp('my-tab');
     
-    new Ext.button.Button({
+    Ext.create('Ext.button.Button', {
         renderTo: Ext.getBody(),
-        text    : &#39;Select the first tab&#39;,
+        text    : 'Select the first tab',
         scope   : this,
         handler : function() {
             tabs.setActiveTab(tab);
         }
     });
     
-    new Ext.button.Button({
-        renderTo: Ext.getBody(),
-        text    : &#39;Select the second tab&#39;,
+    Ext.create('Ext.button.Button', {
+        text    : 'Select the second tab',
         scope   : this,
         handler : function() {
             tabs.setActiveTab(1);
-        }
+        },
+        renderTo : Ext.getBody()        
     });
 
 The {@link #getActiveTab} is a another useful method in TabPanel which will return the current active tab.
 
 Example usage:
 
-    var tabs = new Ext.TabPanel({
-        renderTo : Ext.getBody(),
+    var tabs = Ext.create('Ext.TabPanel', {
         items: [
             {
-                title: &#39;Tab 1&#39;,
-                html : &#39;A simple tab&#39;
+                title: 'Tab 1',
+                html : 'A simple tab'
             },
             {
-                title: &#39;Tab 2&#39;,
-                html : &#39;Another one&#39;
+                title: 'Tab 2',
+                html : 'Another one'
             }
-        ]
+        ],
+        renderTo : Ext.getBody()        
     });
     
-    new Ext.button.Button({
-        renderTo: Ext.getBody(),
-        text    : &#39;Get active tab&#39;,
+    Ext.create('Ext.button.Button', {
+        text    : 'Get active tab',
         scope   : this,
         handler : function() {
             var tab = tabs.getActiveTab();
-            alert(&#39;Current tab: &#39; + tab.title);
-        }
+            alert('Current tab: ' + tab.title);
+        },
+        renderTo : Ext.getBody()        
     });
 
 Adding a new tab is very simple with a TabPanel. You simple call the {@link #add} method with an config object for a panel.
 
 Example usage:
 
-    var tabs = new Ext.TabPanel({
-        renderTo : Ext.getBody(),
+    var tabs = Ext.Create('Ext.TabPanel', {
         items: [
             {
-                title: &#39;Tab 1&#39;,
-                html : &#39;A simple tab&#39;
+                title: 'Tab 1',
+                html : 'A simple tab'
             },
             {
-                title: &#39;Tab 2&#39;,
-                html : &#39;Another one&#39;
+                title: 'Tab 2',
+                html : 'Another one'
             }
-        ]
+        ],
+        renderTo : Ext.getBody()        
     });
     
-    new Ext.button.Button({
-        renderTo: Ext.getBody(),
-        text    : &#39;New tab&#39;,
+    Ext.create('Ext.button.Button', {
+        text    : 'New tab',
         scope   : this,
         handler : function() {
             var tab = tabs.add({
-                title: &#39;Tab &#39; + (tabs.items.length + 1), //we use the tabs.items property to get the length of current items/tabs
-                html : &#39;Another one&#39;
+                title: 'Tab ' + (tabs.items.length + 1), //we use the tabs.items property to get the length of current items/tabs
+                html : 'Another one'
             });
             
             tabs.setActiveTab(tab);
-        }
+        },
+        renderTo : Ext.getBody()
     });
 
 Additionally, removing a tab is very also simple with a TabPanel. You simple call the {@link #remove} method with an config object for a panel.
 
 Example usage:
 
-    var tabs = new Ext.TabPanel({
-        renderTo : Ext.getBody(),
+    var tabs = Ext.Create('Ext.TabPanel', {        
         items: [
             {
-                title: &#39;Tab 1&#39;,
-                html : &#39;A simple tab&#39;
+                title: 'Tab 1',
+                html : 'A simple tab'
             },
             {
-                id   : &#39;remove-this-tab&#39;,
-                title: &#39;Tab 2&#39;,
-                html : &#39;Another one&#39;
+                id   : 'remove-this-tab',
+                title: 'Tab 2',
+                html : 'Another one'
             }
-        ]
+        ],
+        renderTo : Ext.getBody()
     });
     
-    new Ext.button.Button({
-        renderTo: Ext.getBody(),
-        text    : &#39;Remove tab&#39;,
+    Ext.Create('Ext.button.Button', {
+        text    : 'Remove tab',
         scope   : this,
         handler : function() {
-            var tab = Ext.getCmp(&#39;remove-this-tab&#39;);
+            var tab = Ext.getCmp('remove-this-tab');
             tabs.remove(tab);
-        }
+        },
+        renderTo : Ext.getBody()
     });
 
  * @extends Ext.Panel
@@ -221,27 +230,27 @@ Example usage:
  * @xtype tabpanel
  * @markdown
  */
-Ext.define(&#39;Ext.tab.TabPanel&#39;, {
-    extend: &#39;Ext.panel.Panel&#39;,
-    alias: &#39;widget.tabpanel&#39;,
-    alternateClassName: [&#39;Ext.TabPanel&#39;],
+Ext.define('Ext.tab.TabPanel', {
+    extend: 'Ext.panel.Panel',
+    alias: 'widget.tabpanel',
+    alternateClassName: ['Ext.TabPanel'],
 
-    requires: [&#39;Ext.layout.container.Card&#39;, &#39;Ext.tab.TabBar&#39;],
+    requires: ['Ext.layout.container.Card', 'Ext.tab.TabBar'],
 
     <a name="cfg-Ext.tab.TabPanel-tabPosition"></a>/**
-     * @cfg {String} tabPosition The position where the tab strip should be rendered (defaults to &lt;code&gt;&#39;top&#39;&lt;/code&gt;).
-     * In 4.0, The only other supported value is &lt;code&gt;&#39;bottom&#39;&lt;/code&gt;.
+     * @cfg {String} tabPosition The position where the tab strip should be rendered (defaults to <code>'top'</code>).
+     * In 4.0, The only other supported value is <code>'bottom'</code>.
      */
-    tabPosition : &#39;top&#39;,
+    tabPosition : 'top',
     
     <a name="cfg-Ext.tab.TabPanel-tabBar"></a>/**
      * @cfg {Object} tabBar Optional configuration object for the internal {@link Ext.tab.TabBar}. If present, this is 
-     * passed straight through to the TabBar&#39;s constructor
+     * passed straight through to the TabBar's constructor
      */
 
     <a name="cfg-Ext.tab.TabPanel-layout"></a>/**
      * @cfg {Object} layout Optional configuration object for the internal {@link Ext.layout.container.Card card layout}.
-     * If present, this is passed straight through to the layout&#39;s constructor
+     * If present, this is passed straight through to the layout's constructor
      */
 
     <a name="cfg-Ext.tab.TabPanel-removePanelHeader"></a>/**
@@ -257,27 +266,27 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
     plain: false,
 
     <a name="cfg-Ext.tab.TabPanel-itemCls"></a>/**
-     * @cfg {String} itemCls The class added to each child item of this TabPanel. Defaults to &#39;x-tabpanel-child&#39;.
+     * @cfg {String} itemCls The class added to each child item of this TabPanel. Defaults to 'x-tabpanel-child'.
      */
-    itemCls: &#39;x-tabpanel-child&#39;,
+    itemCls: 'x-tabpanel-child',
 
     <a name="cfg-Ext.tab.TabPanel-minTabWidth"></a>/**
-     * @cfg {Number} minTabWidth The minimum width for a tab in the {@link #tabBar}. Defaults to &lt;code&gt;30&lt;/code&gt;.
+     * @cfg {Number} minTabWidth The minimum width for a tab in the {@link #tabBar}. Defaults to <code>30</code>.
      */
 
     <a name="cfg-Ext.tab.TabPanel-deferredRender"></a>/**
      * @cfg {Boolean} deferredRender
-     * &lt;p&gt;&lt;tt&gt;true&lt;/tt&gt; by default to defer the rendering of child &lt;tt&gt;{@link Ext.container.Container#items items}&lt;/tt&gt;
-     * to the browsers DOM until a tab is activated. &lt;tt&gt;false&lt;/tt&gt; will render all contained
-     * &lt;tt&gt;{@link Ext.container.Container#items items}&lt;/tt&gt; as soon as the {@link Ext.layout.container.Card layout}
+     * <p><tt>true</tt> by default to defer the rendering of child <tt>{@link Ext.container.Container#items items}</tt>
+     * to the browsers DOM until a tab is activated. <tt>false</tt> will render all contained
+     * <tt>{@link Ext.container.Container#items items}</tt> as soon as the {@link Ext.layout.container.Card layout}
      * is rendered. If there is a significant amount of content or a lot of heavy controls being
-     * rendered into panels that are not displayed by default, setting this to &lt;tt&gt;true&lt;/tt&gt; might
-     * improve performance.&lt;/p&gt;
-     * &lt;br&gt;&lt;p&gt;The &lt;tt&gt;deferredRender&lt;/tt&gt; property is internally passed to the layout manager for
+     * rendered into panels that are not displayed by default, setting this to <tt>true</tt> might
+     * improve performance.</p>
+     * <br><p>The <tt>deferredRender</tt> property is internally passed to the layout manager for
      * TabPanels ({@link Ext.layout.container.Card}) as its {@link Ext.layout.container.Card#deferredRender}
-     * configuration value.&lt;/p&gt;
-     * &lt;br&gt;&lt;p&gt;&lt;b&gt;Note&lt;/b&gt;: leaving &lt;tt&gt;deferredRender&lt;/tt&gt; as &lt;tt&gt;true&lt;/tt&gt; means that the content
-     * within an unactivated tab will not be available&lt;/p&gt;
+     * configuration value.</p>
+     * <br><p><b>Note</b>: leaving <tt>deferredRender</tt> as <tt>true</tt> means that the content
+     * within an unactivated tab will not be available</p>
      */
     deferredRender : true,
 
@@ -287,7 +296,7 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
             dockedItems = me.dockedItems || [],
             activeTab = me.activeTab || 0;
 
-        me.layout = Ext.create(&#39;Ext.layout.container.Card&#39;, Ext.apply({
+        me.layout = Ext.create('Ext.layout.container.Card', Ext.apply({
             owner: me,
             deferredRender: me.deferredRender,
             itemCls: me.itemCls
@@ -298,14 +307,14 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
          * @type Ext.TabBar
          * Internal reference to the docked TabBar
          */
-        me.tabBar = Ext.create(&#39;Ext.tab.TabBar&#39;, Ext.apply({}, me.tabBar, {
+        me.tabBar = Ext.create('Ext.tab.TabBar', Ext.apply({}, me.tabBar, {
             dock: me.tabPosition,
             plain: me.plain,
             cardLayout: me.layout,
             tabPanel: me
         }));
 
-        if (dockedItems &amp;&amp; !Ext.isArray(dockedItems)) {
+        if (dockedItems && !Ext.isArray(dockedItems)) {
             dockedItems = [dockedItems];
         }
 
@@ -321,7 +330,7 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
              * @param {Ext.Component} newCard The card that is about to be activated
              * @param {Ext.Component} oldCard The card that is currently active
              */
-            &#39;beforetabchange&#39;,
+            'beforetabchange',
 
             <a name="event-Ext.tab.TabPanel-tabchange"></a>/**
              * @event tabchange
@@ -330,14 +339,14 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
              * @param {Ext.Component} newCard The newly activated item
              * @param {Ext.Component} oldCard The previously active item
              */
-            &#39;tabchange&#39;
+            'tabchange'
         );
         me.callParent(arguments);
 
         //set the active tab
         me.setActiveTab(activeTab);
         //set the active tab after initial layout
-        me.on(&#39;afterlayout&#39;, me.afterInitialLayout, me, {single: true});
+        me.on('afterlayout', me.afterInitialLayout, me, {single: true});
     },
 
     /**
@@ -352,7 +361,7 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
     },
 
     <a name="method-Ext.tab.TabPanel-setActiveTab"></a>/**
-     * Makes the given card active (makes it the visible card in the TabPanel&#39;s CardLayout and highlights the Tab)
+     * Makes the given card active (makes it the visible card in the TabPanel's CardLayout and highlights the Tab)
      * @param {Ext.Component} card The card to make active
      */
     setActiveTab: function(card) {
@@ -362,13 +371,15 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
         card = me.getComponent(card);
         if (card) {
             previous = me.getActiveTab();
-            if (me.fireEvent(&#39;beforetabchange&#39;, me, card, previous) !== false) {
-                me.tabBar.setActiveTab(card.tab);
-                me.activeTab = card;
-                if (me.rendered) {
-                    me.layout.setActiveItem(card);
+            if (previous !== card) {
+                if (me.fireEvent('beforetabchange', me, card, previous) !== false) {
+                    me.tabBar.setActiveTab(card.tab);
+                    me.activeTab = card;
+                    if (me.rendered) {
+                        me.layout.setActiveItem(card);
+                    }
+                    me.fireEvent('tabchange', me, card, previous);
                 }
-                me.fireEvent(&#39;tabchange&#39;, me, card, previous);
             }
         }
     },
@@ -398,7 +409,7 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
         var me = this;
 
         item.tab = me.tabBar.insert(index, {
-            xtype: &#39;tab&#39;,
+            xtype: 'tab',
             card: item,
             disabled: item.disabled,
             closable: item.closable,
@@ -407,12 +418,9 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
         
         item.on({
             scope : me,
-            enable: function() {
-                item.tab.enable();
-            },
-            disable: function() {
-                item.tab.disable();
-            }
+            enable: me.onItemEnable,
+            disable: me.onItemDisable,
+            beforeshow: me.onItemBeforeShow
         });
 
         if (item.isPanel) {
@@ -428,25 +436,40 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
         }
 
         // ensure that there is at least one active tab
-        if (this.rendered &amp;&amp; me.items.getCount() === 1) {
+        if (this.rendered && me.items.getCount() === 1) {
             me.setActiveTab(0);
         }
+    },
+    
+    onItemEnable: function(item){
+        item.tab.enable();
+    },
+    
+    onItemDisable: function(item){
+        item.tab.disable();
+    },
+    
+    onItemBeforeShow: function(item) {
+        if (item !== this.activeTab) {
+            this.setActiveTab(item);
+            return false;
+        }    
     },
 
     /**
      * @ignore
-     * If we&#39;re removing the currently active tab, activate the nearest one. The item is removed when we call super,
-     * so we can do preprocessing before then to find the card&#39;s index
+     * If we're removing the currently active tab, activate the nearest one. The item is removed when we call super,
+     * so we can do preprocessing before then to find the card's index
      */
     doRemove: function(item, autoDestroy) {
         var me = this,
             items = me.items,
             <a name="prop-Ext.tab.TabPanel-hasItemsLeft"></a>/**
-             * At this point the item hasn&#39;t been removed from the items collection.
+             * At this point the item hasn't been removed from the items collection.
              * As such, if we want to check if there are no more tabs left, we have to
              * check for one, as opposed to 0.
              */
-            hasItemsLeft = items.getCount() &gt; 1;
+            hasItemsLeft = items.getCount() > 1;
 
         if (me.destroying || !hasItemsLeft) {
             me.activeTab = null;
@@ -465,8 +488,16 @@ Ext.define(&#39;Ext.tab.TabPanel&#39;, {
      * Makes sure we remove the corresponding Tab when an item is removed
      */
     onRemove: function(item, autoDestroy) {
-        if (!this.destroying &amp;&amp; item.tab.ownerCt == this.tabBar) {
-            this.tabBar.remove(item.tab);
+        var me = this;
+        
+        item.un({
+            scope : me,
+            enable: me.onItemEnable,
+            disable: me.onItemDisable,
+            beforeshow: me.onItemBeforeShow
+        });
+        if (!me.destroying && item.tab.ownerCt == me.tabBar) {
+            me.tabBar.remove(item.tab);
         }
     }
 });

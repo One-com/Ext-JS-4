@@ -7,7 +7,7 @@ Ext.require([
     'Ext.grid.*',
     'Ext.util.*',
     'Ext.ux.data.PagingMemoryProxy',
-    'Ext.toolbar.PagingToolbar',
+    'Ext.toolbar.Paging',
     'Ext.ux.SlidingPager'
 ]);
 
@@ -66,7 +66,8 @@ Ext.onReady(function(){
     }
 
     // register model
-    Ext.regModel('Company', {
+    Ext.define('Company', {
+        extend: 'Ext.data.Model',
         idProperty: 'company',
         fields: [
            {name: 'company'},

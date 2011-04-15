@@ -1,13 +1,10 @@
-Ext.require([
-    'Ext.chart.*', 
-    'Ext.layout.container.Fit'
-]);
-
 Ext.define('Ext.app.ChartPortlet', {
-    
+
     extend: 'Ext.panel.Panel',
     alias: 'widget.chartportlet',
-    
+
+    requires: ['Ext.chart.theme.Base', 'Ext.chart.series.Series'],
+
     generateData: function(){
         var data = [{
                 name: 'x',
@@ -24,9 +21,9 @@ Ext.define('Ext.app.ChartPortlet', {
         }
         return data;
     },
-    
+
     initComponent: function(){
-        
+
         Ext.apply(this, {
             layout: 'fit',
             width: 600,
@@ -35,7 +32,7 @@ Ext.define('Ext.app.ChartPortlet', {
                 xtype: 'chart',
                 animate: false,
                 shadow: false,
-                store: new Ext.data.JsonStore({
+                store: Ext.create('Ext.data.JsonStore', {
                     fields: ['name', 'sp500', 'djia'],
                     data: this.generateData()
                 }),
@@ -84,7 +81,7 @@ Ext.define('Ext.app.ChartPortlet', {
                 }]
             }
         });
-        
+
         this.callParent(arguments);
     }
 });

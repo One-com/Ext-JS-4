@@ -6,7 +6,7 @@
 
 /**
  * @class Ext.ux.form.ItemSelector
- * @extends Ext.form.BaseField
+ * @extends Ext.form.field.Base
  * A control that allows selection of between two Ext.ux.form.MultiSelect controls.
  *
  *  @history
@@ -165,50 +165,108 @@ Ext.define('Ext.ux.form.ItemSelector', {
     onToFieldChange: function() {
         this.checkChange();
     },
+    
+    getSelections: function(list){
+        var store = list.getStore(),
+            selections = list.getSelectionModel().getSelection(),
+            i = 0,
+            len = selections.length;
+            
+        return Ext.Array.sort(selections, function(a, b){
+            a = store.indexOf(a);
+            b = store.indexOf(b);
+            
+            if (a < b) {
+                return -1;
+            } else if (a > b) {
+                return 1;
+            }
+            return 0;
+        });
+    },
 
     onTopBtnClick : function() {
-        var list = this.toField.boundList;
-        list.getStore().insert(0, list.getSelectionModel().getSelection());
+        var list = this.toField.boundList,
+            store = list.getStore(),
+            selected = this.getSelections(list),
+            i = selected.length - 1,
+            selection;
+        
+        
+        store.suspendEvents();
+        for (; i > -1; --i) {
+            selection = selected[i];
+            store.remove(selected);
+            store.insert(0, selected);
+        }
+        store.resumeEvents();
+        list.refresh();    
     },
 
     onBottomBtnClick : function() {
         var list = this.toField.boundList,
-            store = list.getStore();
-        store.insert(store.getCount(), list.getSelectionModel().getSelection());
+            store = list.getStore(),
+            selected = this.getSelections(list),
+            i = 0,
+            len = selected.length,
+            selection;
+            
+        store.suspendEvents();
+        for (; i < len; ++i) {
+            selection = selected[i];
+            store.remove(selection);
+            store.add(selection);
+        }
+        store.resumeEvents();
+        list.refresh();
     },
 
     onUpBtnClick : function() {
         var list = this.toField.boundList,
             store = list.getStore(),
-            selected = list.getSelectionModel().getSelection();
-
-        Ext.Array.each(selected, function(model) {
-            var idx = store.indexOf(model);
-            if (idx === 0) {
-                return false; //already at start, exit
-            }
-            store.insert(idx - 1, model);
-        });
+            selected = this.getSelections(list),
+            i = 0,
+            len = selected.length,
+            selection,
+            index;
+            
+        store.suspendEvents();
+        for (; i < len; ++i) {
+            selection = selected[i];
+            index = Math.max(0, store.indexOf(selection) - 1);
+            store.remove(selection);
+            store.insert(index, selection);
+        }
+        store.resumeEvents();
+        list.refresh();
     },
 
     onDownBtnClick : function() {
         var list = this.toField.boundList,
             store = list.getStore(),
-            selected = list.getSelectionModel().getSelection();
-
-        Ext.Array.each(selected.reverse(), function(model) {
-            var idx = store.indexOf(model);
-            if (idx === store.getCount() - 1) {
-                return false; //already at end, exit
-            }
-            store.insert(idx + 1, model);
-        });
+            selected = this.getSelections(list),
+            i = 0,
+            len = selected.length,
+            max = store.getCount(),
+            selection,
+            index;
+            
+        store.suspendEvents();
+        for (; i < len; ++i) {
+            selection = selected[i];
+            index = Math.min(max, store.indexOf(selection) + 1);
+            store.remove(selection);
+            store.insert(index, selection);
+        }
+        store.resumeEvents();
+        list.refresh();
     },
 
     onAddBtnClick : function() {
         var me = this,
             fromList = me.fromField.boundList,
-            selected = fromList.getSelectionModel().getSelection();
+            selected = this.getSelections(fromList);
+            
         fromList.getStore().remove(selected);
         this.toField.boundList.getStore().add(selected);
     },
@@ -216,7 +274,8 @@ Ext.define('Ext.ux.form.ItemSelector', {
     onRemoveBtnClick : function() {
         var me = this,
             toList = me.toField.boundList,
-            selected = toList.getSelectionModel().getSelection();
+            selected = this.getSelections(toList);
+            
         toList.getStore().remove(selected);
         this.fromField.boundList.getStore().add(selected);
     },

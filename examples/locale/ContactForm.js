@@ -1,10 +1,10 @@
 Ext.define('Ext.app.ContactForm', {
-    extend: 'Ext.form.FormPanel',
+    extend: 'Ext.form.Panel',
     requires: [
      'Ext.data.ArrayStore',
-     'Ext.data.ArrayReader',
-     'Ext.form.ComboBox',
-     'Ext.form.Date'
+     'Ext.data.reader.Array',
+     'Ext.form.field.ComboBox',
+     'Ext.form.field.Date'
     ],
     formTitle: 'Contact Information (English)',
     firstName: 'First Name',
@@ -42,10 +42,10 @@ Ext.define('Ext.app.ContactForm', {
                 },{
                     fieldLabel: this.company,
                     name: 'company'
-                },  new Ext.form.ComboBox({
+                },  Ext.create('Ext.form.field.ComboBox', {
                     fieldLabel: this.province,
                     hiddenName: 'state',
-                    store: new Ext.data.ArrayStore({
+                    store: Ext.create('Ext.data.ArrayStore', {
                         fields: ['provincie'],
                         data : Ext.exampledata.dutch_provinces // from dutch-provinces.js
                     }),
@@ -59,37 +59,37 @@ Ext.define('Ext.app.ContactForm', {
                     fieldLabel: this.email,
                     name: 'email',
                     vtype:'email'
-                }, new Ext.form.Date({
+                }, Ext.create('Ext.form.field.Date', {
                     fieldLabel: this.birth,
                     name: 'birth'
                 })
             ],
-    
+
             buttons: [{
                 text: this.save
             },{
                 text: this.cancel
             }]
         });
-        
+
         this.callParent(arguments);
     }
 });
 
 Ext.require([
-   'Ext.tip.QuickTips'
+   'Ext.tip.QuickTipManager'
 ]);
 
 Ext.onReady(function(){
-    Ext.tip.QuickTips.init();
-    
+    Ext.tip.QuickTipManager.init();
+
     // turn on validation errors beside the field globally
-    Ext.form.Field.prototype.msgTarget = 'side';
-    
+    Ext.form.field.Base.prototype.msgTarget = 'side';
+
     var bd = Ext.getBody();
-    
+
     bd.createChild({tag: 'h2', html: 'Localized Contact Form'});
-        
+
     // simple form
     var simple = Ext.create('Ext.app.ContactForm', {});
     simple.render(document.body);

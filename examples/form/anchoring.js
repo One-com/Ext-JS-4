@@ -4,13 +4,14 @@ Ext.require([
 ]);
 
 Ext.onReady(function() {
-    var form = Ext.create('Ext.form.FormPanel', {
+    var form = Ext.create('Ext.form.Panel', {
         bodyBorder: 0,
         fieldDefaults: {
             labelWidth: 55
         },
         url: 'save-form.php',
         defaultType: 'textfield',
+        bodyPadding: 5,
 
         items: [{
             fieldLabel: 'Send To',
@@ -36,7 +37,6 @@ Ext.onReady(function() {
         minHeight: 200,
         layout: 'fit',
         plain: true,
-        bodyPadding: 5,
         items: form,
 
         buttons: [{

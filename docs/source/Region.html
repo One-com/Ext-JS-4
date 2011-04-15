@@ -6,11 +6,11 @@
  * to compare regions.
  */
 
-Ext.define(&#39;Ext.util.Region&#39;, {
+Ext.define('Ext.util.Region', {
 
     /* Begin Definitions */
 
-    requires: [&#39;Ext.util.Offset&#39;],
+    requires: ['Ext.util.Offset'],
 
     statics: {
         <a name="method-Ext.util.Region-Ext.util.Region.getRegion"></a>/**
@@ -57,10 +57,10 @@ Ext.define(&#39;Ext.util.Region&#39;, {
      */
     contains : function(region) {
         var me = this;
-        return (region.x &gt;= me.x &amp;&amp;
-                region.right &lt;= me.right &amp;&amp;
-                region.y &gt;= me.y &amp;&amp;
-                region.bottom &lt;= me.bottom);
+        return (region.x >= me.x &&
+                region.right <= me.right &&
+                region.y >= me.y &&
+                region.bottom <= me.bottom);
 
     },
 
@@ -76,7 +76,7 @@ Ext.define(&#39;Ext.util.Region&#39;, {
             b = Math.min(me.bottom, region.bottom),
             l = Math.max(me.x, region.x);
 
-        if (b &gt; t &amp;&amp; r &gt; l) {
+        if (b > t && r > l) {
             return new this.self(t, r, b, l);
         }
         else {
@@ -136,16 +136,16 @@ Ext.define(&#39;Ext.util.Region&#39;, {
      */
     getOutOfBoundOffset: function(axis, p) {
         if (!Ext.isObject(axis)) {
-            if (axis == &#39;x&#39;) {
+            if (axis == 'x') {
                 return this.getOutOfBoundOffsetX(p);
             } else {
                 return this.getOutOfBoundOffsetY(p);
             }
         } else {
             p = axis;
-            var d = new Ext.util.Offset();
-                d.x = this.getOutOfBoundOffsetX(p.x);
-                d.y = this.getOutOfBoundOffsetY(p.y);
+            var d = Ext.create('Ext.util.Offset');
+            d.x = this.getOutOfBoundOffsetX(p.x);
+            d.y = this.getOutOfBoundOffsetY(p.y);
             return d;
         }
 
@@ -157,9 +157,9 @@ Ext.define(&#39;Ext.util.Region&#39;, {
      * @return {Number}
      */
     getOutOfBoundOffsetX: function(p) {
-        if (p &lt;= this.x) {
+        if (p <= this.x) {
             return this.x - p;
-        } else if (p &gt;= this.right) {
+        } else if (p >= this.right) {
             return this.right - p;
         }
 
@@ -172,9 +172,9 @@ Ext.define(&#39;Ext.util.Region&#39;, {
      * @return {Number}
      */
     getOutOfBoundOffsetY: function(p) {
-        if (p &lt;= this.y) {
+        if (p <= this.y) {
             return this.y - p;
-        } else if (p &gt;= this.bottom) {
+        } else if (p >= this.bottom) {
             return this.bottom - p;
         }
 
@@ -189,7 +189,7 @@ Ext.define(&#39;Ext.util.Region&#39;, {
      */
     isOutOfBound: function(axis, p) {
         if (!Ext.isObject(axis)) {
-            if (axis == &#39;x&#39;) {
+            if (axis == 'x') {
                 return this.isOutOfBoundX(p);
             } else {
                 return this.isOutOfBoundY(p);
@@ -206,7 +206,7 @@ Ext.define(&#39;Ext.util.Region&#39;, {
      * @return {Boolean}
      */
     isOutOfBoundX: function(p) {
-        return (p &lt; this.x || p &gt; this.right);
+        return (p < this.x || p > this.right);
     },
 
     <a name="method-Ext.util.Region-isOutOfBoundY"></a>/**
@@ -215,7 +215,7 @@ Ext.define(&#39;Ext.util.Region&#39;, {
      * @return {Boolean}
      */
     isOutOfBoundY: function(p) {
-        return (p &lt; this.y || p &gt; this.bottom);
+        return (p < this.y || p > this.bottom);
     },
 
     /*
@@ -246,7 +246,7 @@ Ext.define(&#39;Ext.util.Region&#39;, {
             newP.y = this.restrictY(p.y, factor);
             return newP;
         } else {
-            if (axis == &#39;x&#39;) {
+            if (axis == 'x') {
                 return this.restrictX(p, factor);
             } else {
                 return this.restrictY(p, factor);
@@ -265,10 +265,10 @@ Ext.define(&#39;Ext.util.Region&#39;, {
             factor = 1;
         }
 
-        if (p &lt;= this.x) {
+        if (p <= this.x) {
             p -= (p - this.x) * factor;
         }
-        else if (p &gt;= this.right) {
+        else if (p >= this.right) {
             p -= (p - this.right) * factor;
         }
         return p;
@@ -284,10 +284,10 @@ Ext.define(&#39;Ext.util.Region&#39;, {
             factor = 1;
         }
 
-        if (p &lt;= this.y) {
+        if (p <= this.y) {
             p -= (p - this.y) * factor;
         }
-        else if (p &gt;= this.bottom) {
+        else if (p >= this.bottom) {
             p -= (p - this.bottom) * factor;
         }
         return p;
@@ -332,13 +332,13 @@ Ext.define(&#39;Ext.util.Region&#39;, {
      * @return {String}
      */
     toString: function() {
-        return &quot;Region[&quot; + this.top + &quot;,&quot; + this.right + &quot;,&quot; + this.bottom + &quot;,&quot; + this.left + &quot;]&quot;;
+        return "Region[" + this.top + "," + this.right + "," + this.bottom + "," + this.left + "]";
     },
 
 
     <a name="method-Ext.util.Region-translateBy"></a>/**
      * Translate this region by the given offset amount
-     * @param {Ext.util.Offset/Object} offset Object containing the &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; properties.
+     * @param {Ext.util.Offset/Object} offset Object containing the <code>x</code> and <code>y</code> properties.
      * Or the x value is using the two argument form.
      * @param {Number} The y value unless using an Offset object.
      * @return {Ext.util.Region} this This Region
@@ -377,7 +377,7 @@ Ext.define(&#39;Ext.util.Region&#39;, {
      * @return {Boolean}
      */
     equals: function(region) {
-        return (this.top == region.top &amp;&amp; this.right == region.right &amp;&amp; this.bottom == region.bottom &amp;&amp; this.left == region.left);
+        return (this.top == region.top && this.right == region.right && this.bottom == region.bottom && this.left == region.left);
     }
 });
 ￿</pre></pre></body></html>

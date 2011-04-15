@@ -5,15 +5,16 @@
  * methods from Labels, Highlights, Tips and Callouts mixins. This class implements the logic of handling 
  * mouse events, animating, hiding, showing all elements and returning the color of the series to be used as a legend item.
  */
-Ext.define(&#39;Ext.chart.series.Series&#39;, {
+Ext.define('Ext.chart.series.Series', {
 
     /* Begin Definitions */
 
     mixins: {
-        labels: &#39;Ext.chart.Labels&#39;,
-        highlights: &#39;Ext.chart.Highlights&#39;,
-        tips: &#39;Ext.chart.Tips&#39;,
-        callouts: &#39;Ext.chart.Callouts&#39;
+        observable: 'Ext.util.Observable',
+        labels: 'Ext.chart.Labels',
+        highlights: 'Ext.chart.Highlights',
+        tips: 'Ext.chart.Tips',
+        callouts: 'Ext.chart.Callouts'
     },
 
     /* End Definitions */
@@ -55,12 +56,12 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
      * @cfg {Object} listeners  
      * An (optional) object with event callbacks. All event callbacks get the target *item* as first parameter. The callback functions are:
      *  
-     *  &lt;ul&gt;
-     *      &lt;li&gt;itemmouseover&lt;/li&gt;
-     *      &lt;li&gt;itemmouseout&lt;/li&gt;
-     *      &lt;li&gt;itemmousedown&lt;/li&gt;
-     *      &lt;li&gt;itemmouseup&lt;/li&gt;
-     *  &lt;/ul&gt;
+     *  <ul>
+     *      <li>itemmouseover</li>
+     *      <li>itemmouseout</li>
+     *      <li>itemmousedown</li>
+     *      <li>itemmouseup</li>
+     *  </ul>
      */
     
     constructor: function(config) {
@@ -69,13 +70,6 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
             Ext.apply(me, config);
         }
         
-        me.listeners = Ext.applyIf(config.listeners || {}, {
-            itemmouseover: Ext.emptyFn,
-            itemmouseout: Ext.emptyFn,
-            itemmousedown: Ext.emptyFn,
-            itemmouseup: Ext.emptyFn
-        });
-        
         me.shadowGroups = [];
         
         me.mixins.labels.constructor.call(me, config);
@@ -83,12 +77,29 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
         me.mixins.tips.constructor.call(me, config);
         me.mixins.callouts.constructor.call(me, config);
 
-        me.chart.on({
+        me.addEvents({
+            scope: me,
+            itemmouseover: true,
+            itemmouseout: true,
+            itemmousedown: true,
+            itemmouseup: true,
+            mouseleave: true,
+
+            <a name="event-Ext.chart.series.Series-titlechange"></a>/**
+             * @event titlechange
+             * Fires when the series title is changed via {@link #setTitle}.
+             * @param {String} title The new title value
+             * @param {Number} index The index in the collection of titles
+             */
+            titlechange: true
+        });
+
+        me.mixins.observable.constructor.call(me, config);
+
+        me.on({
             scope: me,
             itemmouseover: me.onItemMouseOver,
             itemmouseout: me.onItemMouseOut,
-            itemmousedown: me.onItemMouseDown,
-            itemmouseup: me.onItemMouseUp,
             mouseleave: me.onMouseLeave
         });
     },
@@ -121,22 +132,13 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
 
     // @private set the animation for the sprite
     onAnimate: function(sprite, attr) {
-        sprite.stopFx();
+        sprite.stopAnimation();
         return sprite.animate(Ext.applyIf(attr, this.chart.animate));
     },
 
     // @private return the gutter.
     getGutters: function() {
         return [0, 0];
-    },
-
-    // @private wrapper for the itemmouseup event.
-    onItemMouseUp: function(item) {
-        this.listeners.itemmouseup(item);
-    },
-    // @private wrapper for the itemmousedown event.
-    onItemMouseDown: function(item) {
-        this.listeners.itemmousedown(item);
     },
 
     // @private wrapper for the itemmouseover event.
@@ -150,7 +152,6 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
                 me.showTip(item);
             }
         }
-        me.listeners.itemmouseover(item);
     },
 
     // @private wrapper for the itemmouseout event.
@@ -162,7 +163,6 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
                 me.hideTip(item);
             }
         }
-        me.listeners.itemmouseout(item);
     },
 
     // @private wrapper for the mouseleave event.
@@ -181,13 +181,13 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
      * @param {Number} y
      * @return {Object} An object describing the item, or null if there is no matching item. The exact contents of
      *                  this object will vary by series type, but should always contain at least the following:
-     *                  &lt;ul&gt;
-     *                    &lt;li&gt;{Ext.chart.series.Series} series - the Series object to which the item belongs&lt;/li&gt;
-     *                    &lt;li&gt;{Object} value - the value(s) of the item&#39;s data point&lt;/li&gt;
-     *                    &lt;li&gt;{Array} point - the x/y coordinates relative to the chart box of a single point
-     *                        for this data item, which can be used as e.g. a tooltip anchor point.&lt;/li&gt;
-     *                    &lt;li&gt;{Ext.draw.Sprite} sprite - the item&#39;s rendering Sprite.
-     *                  &lt;/ul&gt;
+     *                  <ul>
+     *                    <li>{Ext.chart.series.Series} series - the Series object to which the item belongs</li>
+     *                    <li>{Object} value - the value(s) of the item's data point</li>
+     *                    <li>{Array} point - the x/y coordinates relative to the chart box of a single point
+     *                        for this data item, which can be used as e.g. a tooltip anchor point.</li>
+     *                    <li>{Ext.draw.Sprite} sprite - the item's rendering Sprite.
+     *                  </ul>
      */
     getItemForPoint: function(x, y) {
         //if there are no items to query just return null.
@@ -202,8 +202,8 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
         if (!Ext.draw.Draw.withinBox(x, y, bbox)) {
             return null;
         }
-        for (i = 0, ln = items.length; i &lt; ln; i++) {
-            if (items[i] &amp;&amp; this.isItemInPoint(x, y, items[i], i)) {
+        for (i = 0, ln = items.length; i < ln; i++) {
+            if (items[i] && this.isItemInPoint(x, y, items[i], i)) {
                 return items[i];
             }
         }
@@ -230,7 +230,7 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
         //hide all labels
         me.hideLabels(0);
         //hide all sprites
-        for (i = 0, len = items.length; i &lt; len; i++) {
+        for (i = 0, len = items.length; i < len; i++) {
             item = items[i];
             sprite = item.sprite;
             if (sprite) {
@@ -262,12 +262,12 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
         if (me.seriesStyle) {
             fill = me.seriesStyle.fill;
             stroke = me.seriesStyle.stroke;
-            if (fill &amp;&amp; fill != &#39;none&#39;) {
+            if (fill && fill != 'none') {
                 return fill;
             }
             return stroke;
         }
-        return &#39;#000&#39;;
+        return '#000';
     },
     
     /**
@@ -281,6 +281,35 @@ Ext.define(&#39;Ext.chart.series.Series&#39;, {
             return !excludes[index];
         }
         return !this.seriesIsHidden;
+    },
+
+    <a name="method-Ext.chart.series.Series-setTitle"></a>/**
+     * Changes the value of the {@link #title} for the series.
+     * Arguments can take two forms:
+     * <ul>
+     * <li>A single String value: this will be used as the new single title for the series (applies
+     * to series with only one yField)</li>
+     * <li>A numeric index and a String value: this will set the title for a single indexed yField.</li>
+     * </ul>
+     * @param {Number} index
+     * @param {String} title
+     */
+    setTitle: function(index, title) {
+        var me = this,
+            oldTitle = me.title;
+
+        if (Ext.isString(index)) {
+            title = index;
+            index = 0;
+        }
+
+        if (Ext.isArray(oldTitle)) {
+            oldTitle[index] = title;
+        } else {
+            me.title = title;
+        }
+
+        me.fireEvent('titlechange', title, index);
     }
 });
 ￿</pre></pre></body></html>

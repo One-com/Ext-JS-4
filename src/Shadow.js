@@ -61,7 +61,7 @@ Ext.define('Ext.Shadow', {
                 break;
             case "frame":
                 if (Ext.supports.CSS3BoxShadow) {
-                    adjust.l = adjusts.w = adjust.t = 0;
+                    adjusts.l = adjusts.w = adjusts.t = 0;
                 } else {
                     adjusts.w = adjusts.h = (offset * 2);
                     adjusts.l = adjusts.t = -offset;
@@ -154,9 +154,9 @@ Ext.define('Ext.Shadow', {
 
         targetStyle.left = (l + adjusts.l) + "px";
         targetStyle.top = (t + adjusts.t) + "px";
-        shadowWidth = (targetWidth + adjusts.w),
-        shadowHeight = (targetHeight + adjusts.h),
-        sws = shadowWidth + "px",
+        shadowWidth = (targetWidth + adjusts.w);
+        shadowHeight = (targetHeight + adjusts.h);
+        sws = shadowWidth + "px";
         shs = shadowHeight + "px";
         if (targetStyle.width != sws || targetStyle.height != shs) {
             targetStyle.width = sws;

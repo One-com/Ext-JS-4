@@ -7,7 +7,7 @@ Ext.define('Ext.AbstractDataView', {
     extend: 'Ext.Component',
     requires: [
         'Ext.LoadMask',
-        'Ext.data.StoreMgr',
+        'Ext.data.StoreManager',
         'Ext.CompositeElementLite',
         'Ext.DomQuery',
         'Ext.selection.DataViewModel'
@@ -40,7 +40,8 @@ Ext.define('Ext.AbstractDataView', {
      * @required
      * <b>This is a required setting</b>. A simple CSS selector (e.g. <tt>div.some-class</tt> or
      * <tt>span:first-child</tt>) that will be used to determine what nodes this DataView will be
-     * working with.
+     * working with. The itemSelector is used to map DOM nodes to records. As such, there should
+     * only be one root level element that matches the selector for each record.
      */
     
     /**
@@ -68,6 +69,19 @@ Ext.define('Ext.AbstractDataView', {
      * contents will continue to display normally until the new data is loaded and the contents are replaced.
      */
     loadingText: 'Loading...',
+    
+    /**
+     * @cfg {String} loadingCls
+     * The CSS class to apply to the loading message element (defaults to Ext.LoadMask.prototype.msgCls "x-mask-loading")
+     */
+    
+    /**
+     * @cfg {Boolean} loadingUseMsg
+     * Whether or not to use the loading message.
+     * @private
+     */
+    loadingUseMsg: true,
+    
 
     /**
      * @cfg {Number} loadingHeight
@@ -144,39 +158,46 @@ Ext.define('Ext.AbstractDataView', {
             }
             
             itemTpl = Ext.String.format('<tpl for="."><div class="{0}">{1}</div></tpl>', me.itemCls, itemTpl);
-            me.tpl = new Ext.XTemplate(itemTpl, memberFn);
+            me.tpl = Ext.create('Ext.XTemplate', itemTpl, memberFn);
         }
 
         //<debug>
-        if (!isDef(me.tpl) || !isDef(me.store) || !isDef(me.itemSelector)) {
-            throw "DataView requires tpl, store and itemSelector configurations to be defined.";
+        if (!isDef(me.tpl) || !isDef(me.itemSelector)) {
+            Ext.Error.raise({
+                sourceClass: 'Ext.DataView',
+                tpl: me.tpl,
+                itemSelector: me.itemSelector,
+                msg: "DataView requires both tpl and itemSelector configurations to be defined."
+            });
         }
         //</debug>
 
         me.callParent();
         if(Ext.isString(me.tpl) || Ext.isArray(me.tpl)){
-            me.tpl = new Ext.XTemplate(me.tpl);
+            me.tpl = Ext.create('Ext.XTemplate', me.tpl);
         }
 
+        //<debug>
         // backwards compat alias for overClass/selectedClass
         // TODO: Consider support for overCls generation Ext.Component config
         if (isDef(me.overCls) || isDef(me.overClass)) {
+            if (Ext.isDefined(Ext.global.console)) {
+                Ext.global.console.warn('Ext.DataView: Using the deprecated overCls or overClass configuration. Use overItemCls instead.');
+            }
             me.overItemCls = me.overCls || me.overClass;
             delete me.overCls;
             delete me.overClass;
-            //<debug>
-            throw "Using the deprecated overCls or overClass configuration. Use overItemCls.";
-            //</debug>
         }
 
         if (isDef(me.selectedCls) || isDef(me.selectedClass)) {
+            if (Ext.isDefined(Ext.global.console)) {
+                Ext.global.console.warn('Ext.DataView: Using the deprecated selectedCls or selectedClass configuration. Use selectedItemCls instead.');
+            }
             me.selectedItemCls = me.selectedCls || me.selectedClass;
             delete me.selectedCls;
             delete me.selectedClass;
-            //<debug>
-            throw "Using the deprecated selectedCls or selectedClass configuration. Use selectedItemCls.";
-            //</debug>
         }
+        //</debug>
         
         me.addEvents(
             /**
@@ -218,7 +239,9 @@ Ext.define('Ext.AbstractDataView', {
 
         me.addCmpEvents();
 
-        me.store = Ext.data.StoreMgr.lookup(me.store);
+        if (me.store) {
+            me.store = Ext.data.StoreManager.lookup(me.store);
+        }
         me.all = new Ext.CompositeElementLite();
         me.getSelectionModel().bindComponent(me);
     },
@@ -228,12 +251,15 @@ Ext.define('Ext.AbstractDataView', {
 
         me.callParent(arguments);
         if (me.loadingText) {
+            
             // Attach the LoadMask to a *Component* so that it can be sensitive to resizing during long loads.
             // If this DataView is floating, then mask this DataView.
             // Otherwise, mask its owning Container (or this, if there *is* no owning Container).
             // LoadMask captures the element upon render.
-            me.loadMask = new Ext.LoadMask(me.floating ? me : me.ownerCt||me, {
+            me.loadMask = Ext.create('Ext.LoadMask', me.floating ? me : me.ownerCt || me, {
                 msg: me.loadingText,
+                msgCls: me.loadingCls,
+                useMsg: me.loadingUseMsg,
                 listeners: {
                     beforeshow: function() {
                         me.getTargetEl().update('');
@@ -265,7 +291,7 @@ Ext.define('Ext.AbstractDataView', {
         });
 
         if (!me.selModel.events) {
-            me.selModel = new Ext.selection.DataViewModel(me.selModel);
+            me.selModel = Ext.create('Ext.selection.DataViewModel', me.selModel);
         }
 
         if (!me.selModel.hasRelaySetup) {
@@ -490,7 +516,7 @@ Ext.define('Ext.AbstractDataView', {
             }
         }
         if (store) {
-            store = Ext.data.StoreMgr.lookup(store);
+            store = Ext.data.StoreManager.lookup(store);
             me.mon(store, {
                 scope: me,
                 datachanged: me.onDataChanged,

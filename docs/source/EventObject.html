@@ -2,7 +2,7 @@
  * @class Ext.EventObject
 
 Just as {@link Ext.core.Element} wraps around a native DOM node, Ext.EventObject
-wraps the browser&#39;s native event-object normalizing cross-browser differences,
+wraps the browser's native event-object normalizing cross-browser differences,
 such as which mouse button is clicked, keys pressed, mechanisms to stop
 event-propagation along with a method to prevent default actions from taking place.
 
@@ -14,21 +14,21 @@ For example:
         ...
     }
 
-    var myDiv = {@link Ext#get Ext.get}(&quot;myDiv&quot;);  // get reference to an {@link Ext.core.Element}
-    myDiv.on(         // &#39;on&#39; is shorthand for addListener
-        &quot;click&quot;,      // perform an action on click of myDiv
+    var myDiv = {@link Ext#get Ext.get}("myDiv");  // get reference to an {@link Ext.core.Element}
+    myDiv.on(         // 'on' is shorthand for addListener
+        "click",      // perform an action on click of myDiv
         handleClick   // reference to the action handler
     );
 
     // other methods to do the same:
-    Ext.EventManager.on(&quot;myDiv&quot;, &#39;click&#39;, handleClick);
-    Ext.EventManager.addListener(&quot;myDiv&quot;, &#39;click&#39;, handleClick);
+    Ext.EventManager.on("myDiv", 'click', handleClick);
+    Ext.EventManager.addListener("myDiv", 'click', handleClick);
 
  * @singleton
  * @markdown
  */
-Ext.define(&#39;Ext.EventObjectImpl&#39;, {
-    uses: [&#39;Ext.util.Point&#39;],
+Ext.define('Ext.EventObjectImpl', {
+    uses: ['Ext.util.Point'],
 
     <a name="prop-Ext.EventObject-BACKSPACE"></a>/** Key constant @type Number */
     BACKSPACE: 8,
@@ -223,7 +223,7 @@ Ext.define(&#39;Ext.EventObjectImpl&#39;, {
         63273: 36, // home
         63275: 35 // end
     },
-    // normalize button clicks, don&#39;t see any way to feature detect this.
+    // normalize button clicks, don't see any way to feature detect this.
     btnMap: Ext.isIE ? {
         1: 0,
         4: 1,
@@ -243,14 +243,14 @@ Ext.define(&#39;Ext.EventObjectImpl&#39;, {
     setEvent: function(event){
         var me = this, button, options;
 
-        if (event == me || (event &amp;&amp; event.browserEvent)) { // already wrapped
+        if (event == me || (event && event.browserEvent)) { // already wrapped
             return event;
         }
         me.browserEvent = event;
         if (event) {
             // normalize buttons
             button = event.button ? me.btnMap[event.button] : (event.which ? event.which - 1 : -1);
-            if (me.clickRe.test(event.type) &amp;&amp; button == -1) {
+            if (me.clickRe.test(event.type) && button == -1) {
                 button = 0;
             }
             options = {
@@ -267,8 +267,7 @@ Ext.define(&#39;Ext.EventObjectImpl&#39;, {
                 target: Ext.EventManager.getTarget(event),
                 relatedTarget: Ext.EventManager.getRelatedTarget(event),
                 currentTarget: event.currentTarget,
-                // same for XY
-                xy: Ext.EventManager.getPageXY(event)
+                xy: null
             };
         } else {
             options = {
@@ -310,7 +309,7 @@ Ext.define(&#39;Ext.EventObjectImpl&#39;, {
         var browserEvent = this.browserEvent;
 
         if (browserEvent) {
-            if (browserEvent.type == &#39;mousedown&#39;) {
+            if (browserEvent.type == 'mousedown') {
                 Ext.EventManager.stoppedMouseDownEvent.fire(this);
             }
             Ext.EventManager.stopPropagation(browserEvent);
@@ -340,31 +339,53 @@ Ext.define(&#39;Ext.EventObjectImpl&#39;, {
      * @return {Number} The normalized code
      */
     normalizeKey: function(key){
-        // can&#39;t feature detect this
+        // can't feature detect this
         return Ext.isWebKit ? (this.safariKeys[key] || key) : key;
     },
 
     <a name="method-Ext.EventObject-getPageX"></a>/**
      * Gets the x coordinate of the event.
      * @return {Number}
+     * @deprecated 4.0 Replaced by {@link #getX}
      */
     getPageX: function(){
-        return this.xy[0];
+        return this.getX();
     },
 
     <a name="method-Ext.EventObject-getPageY"></a>/**
      * Gets the y coordinate of the event.
      * @return {Number}
+     * @deprecated 4.0 Replaced by {@link #getY}
      */
     getPageY: function(){
-        return this.xy[1];
+        return this.getY();
     },
-
+    
+    <a name="method-Ext.EventObject-getX"></a>/**
+     * Gets the x coordinate of the event.
+     * @return {Number}
+     */
+    getX: function() {
+        return this.getXY()[0];
+    },    
+    
+    <a name="method-Ext.EventObject-getY"></a>/**
+     * Gets the y coordinate of the event.
+     * @return {Number}
+     */
+    getY: function() {
+        return this.getXY()[1];
+    },
+        
     <a name="method-Ext.EventObject-getXY"></a>/**
      * Gets the page coordinates of the event.
      * @return {Array} The xy values like [x, y]
      */
-    getXY: function(){
+    getXY: function() {
+        if (!this.xy) {
+            // same for XY
+            this.xy = Ext.EventManager.getPageXY(this.browserEvent);
+        }
         return this.xy;
     },
 
@@ -414,20 +435,22 @@ Ext.define(&#39;Ext.EventObjectImpl&#39;, {
 
     <a name="method-Ext.EventObject-within"></a>/**
     * Returns true if the target of this event is a child of el.  Unless the allowEl parameter is set, it will return false if if the target is el.
-    * Example usage:<br><span style="display: none">**/</span>// Handle click on any child of an element
-Ext.getBody().on(&#39;click&#39;, function(e){
-    if(e.within(&#39;some-el&#39;)){
-        alert(&#39;Clicked on a child of some-el!&#39;);
+    * Example usage:<pre><code>
+// Handle click on any child of an element
+Ext.getBody().on('click', function(e){
+    if(e.within('some-el')){
+        alert('Clicked on a child of some-el!');
     }
 });
 
 // Handle click directly on an element, ignoring clicks on child nodes
-Ext.getBody().on(&#39;click&#39;, function(e,t){
-    if((t.id == &#39;some-el&#39;) &amp;&amp; !e.within(t, true)){
-        alert(&#39;Clicked directly on some-el!&#39;);
+Ext.getBody().on('click', function(e,t){
+    if((t.id == 'some-el') && !e.within(t, true)){
+        alert('Clicked directly on some-el!');
     }
 });
-<br><span style="display: none">/**</span>     * @param {Mixed} el The id, DOM element or Ext.core.Element to check
+</code></pre>
+     * @param {Mixed} el The id, DOM element or Ext.core.Element to check
      * @param {Boolean} related (optional) true to test if the related target is within el instead of the target
      * @param {Boolean} allowEl {optional} true to also check if the passed element is the target or related target
      * @return {Boolean}
@@ -436,10 +459,10 @@ Ext.getBody().on(&#39;click&#39;, function(e,t){
         if(el){
             var t = related ? this.getRelatedTarget() : this.getTarget(),
                 result;
-                
+
             if (t) {
                 result = Ext.fly(el).contains(t);
-                if (!result &amp;&amp; allowEl) {
+                if (!result && allowEl) {
                     result = t == Ext.getDom(el);
                 }
                 return result;
@@ -449,30 +472,30 @@ Ext.getBody().on(&#39;click&#39;, function(e,t){
     },
 
     <a name="method-Ext.EventObject-isNavKeyPress"></a>/**
-     * Checks if the key pressed was a &quot;navigation&quot; key
+     * Checks if the key pressed was a "navigation" key
      * @return {Boolean} True if the press is a navigation keypress
      */
     isNavKeyPress : function(){
         var me = this,
             k = this.normalizeKey(me.keyCode);
 
-       return (k &gt;= 33 &amp;&amp; k &lt;= 40) ||  // Page Up/Down, End, Home, Left, Up, Right, Down
+       return (k >= 33 && k <= 40) ||  // Page Up/Down, End, Home, Left, Up, Right, Down
        k == me.RETURN ||
        k == me.TAB ||
        k == me.ESC;
     },
 
     <a name="method-Ext.EventObject-isSpecialKey"></a>/**
-     * Checks if the key pressed was a &quot;special&quot; key
+     * Checks if the key pressed was a "special" key
      * @return {Boolean} True if the press is a special keypress
      */
     isSpecialKey : function(){
         var k = this.normalizeKey(this.keyCode);
-        return (this.type == &#39;keypress&#39; &amp;&amp; this.ctrlKey) ||
+        return (this.type == 'keypress' && this.ctrlKey) ||
         this.isNavKeyPress() ||
         (k == this.BACKSPACE) || // Backspace
-        (k &gt;= 16 &amp;&amp; k &lt;= 20) || // Shift, Ctrl, Alt, Pause, Caps Lock
-        (k &gt;= 44 &amp;&amp; k &lt;= 46);   // Print Screen, Insert, Delete
+        (k >= 16 && k <= 20) || // Shift, Ctrl, Alt, Pause, Caps Lock
+        (k >= 44 && k <= 46);   // Print Screen, Insert, Delete
     },
 
     <a name="method-Ext.EventObject-getPoint"></a>/**
@@ -480,7 +503,8 @@ Ext.getBody().on(&#39;click&#39;, function(e,t){
      * @return {Ext.util.Point} point
      */
     getPoint : function(){
-        return new Ext.util.Point(this.xy[0], this.xy[1]);
+        var xy = this.getXY();
+        return Ext.create('Ext.util.Point', xy[0], xy[1]);
     },
 
    <a name="method-Ext.EventObject-hasModifier"></a>/**

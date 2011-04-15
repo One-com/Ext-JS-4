@@ -34,7 +34,7 @@ Ext.onReady(function () {
     var pieChart = Ext.create('Ext.chart.Chart', {
         width: 100,
         height: 100,
-        animate: true,
+        animate: false,
         store: pieStore,
         shadow: false,
         insetPadding: 0,
@@ -52,16 +52,12 @@ Ext.onReady(function () {
         }]
     });
     
-    var listComponent = Ext.create('Ext.Component', {
-        flex: 1    
-    });
-    
     var gridStore = Ext.create('Ext.data.JsonStore', {
         fields: ['name', 'data'],
         data: pieModel
     });
     
-    var grid = Ext.create('Ext.grid.GridPanel', {
+    var grid = Ext.create('Ext.grid.Panel', {
         store: gridStore,
         height: 130,
         columns: [
@@ -82,7 +78,7 @@ Ext.onReady(function () {
         title: 'Line Chart',
         renderTo: Ext.getBody(),
         layout: 'fit',
-        items: {
+        items: [{
             xtype: 'chart',
             animate: true,
             shadow: true,
@@ -109,7 +105,7 @@ Ext.onReady(function () {
                     trackMouse: true,
                     width: 580,
                     height: 160,
-                    //layout: 'fit',
+                    layout: 'fit',
                     items: {
                         xtype: 'container',
                         layout: 'hbox',
@@ -140,6 +136,6 @@ Ext.onReady(function () {
                     }
                 }
             }]
-        }
+        }]
     });
 });

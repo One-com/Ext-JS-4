@@ -15,7 +15,7 @@ Ext.onReady(function() {
     
     
     // create the Tree
-    Ext.create('Ext.grid.GridPanel', {
+    Ext.create('Ext.grid.Panel', {
         store: {
             model: 'Company',
             remoteSort: true,
@@ -35,6 +35,7 @@ Ext.onReady(function() {
             text: 'Name'
         }, {
             dataIndex: 'turnover',
+            align: 'right',
             width: 120,
             text: 'Turnover pa.',
             renderer: Ext.util.Format.usMoney

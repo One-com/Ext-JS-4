@@ -2,19 +2,19 @@
  * @class Ext.grid.feature.Chunking
  * @extends Ext.grid.feature.Feature
  */
-Ext.define(&#39;Ext.grid.feature.Chunking&#39;, {
-    extend: &#39;Ext.grid.feature.Feature&#39;,
-    alias: &#39;feature.chunking&#39;,
+Ext.define('Ext.grid.feature.Chunking', {
+    extend: 'Ext.grid.feature.Feature',
+    alias: 'feature.chunking',
     
     chunkSize: 20,
     rowHeight: Ext.isIE ? 27 : 26,
     visibleChunk: 0,
     hasFeatureEvent: false,
     attachEvents: function() {
-        var grid = this.view.up(&#39;gridpanel&#39;),
-            scroller = grid.down(&#39;gridscroller[dock=right]&#39;);
-        scroller.el.on(&#39;scroll&#39;, this.onBodyScroll, this, {buffer: 300});
-        //this.view.on(&#39;bodyscroll&#39;, this.onBodyScroll, this, {buffer: 300});
+        var grid = this.view.up('gridpanel'),
+            scroller = grid.down('gridscroller[dock=right]');
+        scroller.el.on('scroll', this.onBodyScroll, this, {buffer: 300});
+        //this.view.on('bodyscroll', this.onBodyScroll, this, {buffer: 300});
     },
     
     onBodyScroll: function(e, t) {
@@ -46,14 +46,14 @@ Ext.define(&#39;Ext.grid.feature.Chunking&#39;, {
         rows,
         chunkLength;
 
-        for (; start &lt; recordCount; start+=this.chunkSize, i++) {
-            if (start+this.chunkSize &gt; recordCount) {
+        for (; start < recordCount; start+=this.chunkSize, i++) {
+            if (start+this.chunkSize > recordCount) {
                 chunkLength = recordCount - start;
             } else {
                 chunkLength = this.chunkSize;
             }
             
-            if (i &gt;= visibleChunk - 1 &amp;&amp; i &lt;= visibleChunk + 1) {
+            if (i >= visibleChunk - 1 && i <= visibleChunk + 1) {
                 rows = orig.rows.slice(start, start+this.chunkSize);
             } else {
                 rows = [];
@@ -72,10 +72,10 @@ Ext.define(&#39;Ext.grid.feature.Chunking&#39;, {
     getTableFragments: function() {
         return {
             openTableWrap: function() {
-                return &#39;&lt;tpl for=&quot;chunks&quot;&gt;&lt;div class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-chunk&quot; style=&quot;height: {chunkHeight}px;&quot;&gt;&#39;;
+                return '<tpl for="chunks"><div class="' + Ext.baseCSSPrefix + 'grid-chunk" style="height: {chunkHeight}px;">';
             },
             closeTableWrap: function() {
-                return &#39;&lt;/div&gt;&lt;/tpl&gt;&#39;;
+                return '</div></tpl>';
             }
         };
     }

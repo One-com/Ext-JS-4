@@ -5,13 +5,14 @@ Ext.require([
     'Ext.panel.Panel',
     'Ext.DataView',
     'Ext.layout.container.Fit',
-    'Ext.toolbar.PagingToolbar',
+    'Ext.toolbar.Paging',
     'Ext.ux.form.SearchField'
 ]);
 
 Ext.onReady(function(){
-    
-    Ext.regModel('Post', {
+
+    Ext.define('Post', {
+        extend: 'Ext.data.Model',
         idProperty: 'post_id',
         fields: [
             {name: 'postId', mapping: 'post_id'},
@@ -22,15 +23,15 @@ Ext.onReady(function(){
             {name: 'excerpt', mapping: 'post_text'}
         ]
     });
-    
-    
-    var store = new Ext.data.Store({
+
+
+    var store = Ext.create('Ext.data.Store', {
         model: 'Post',
         proxy: {
-            type: 'scripttag',
+            type: 'jsonp',
             url: 'http://sencha.com/forum/topics-remote.php',
             extraParams: {
-                limit:20, 
+                limit:20,
                 forumId: 4
             },
             reader: {
@@ -41,8 +42,8 @@ Ext.onReady(function(){
         }
     });
     store.loadPage(1);
-    
-    var resultTpl = new Ext.XTemplate(
+
+    var resultTpl = Ext.create('Ext.XTemplate',
         '<tpl for=".">',
         '<div class="search-item">',
             '<h3><span>{lastPost:this.formatDate}<br />by {author}</span>',
@@ -54,8 +55,8 @@ Ext.onReady(function(){
             return Ext.Date.format(value, 'M j, Y');
         }
     });
-    
-    var panel = new Ext.panel.Panel({
+
+    var panel = Ext.create('Ext.panel.Panel', {
         title: 'Forum Search',
         height: 300,
         width: 600,
@@ -87,7 +88,7 @@ Ext.onReady(function(){
             pageSize: 20,
             displayInfo: true,
             displayMsg: 'Topics {0} - {1} of {2}',
-            emptyMsg: 'No topics to display'    
+            emptyMsg: 'No topics to display'
         }]
     });
 });

@@ -1,14 +1,14 @@
 Ext.require([
     'Ext.direct.*',
-    'Ext.form.FormPanel',
-    'Ext.form.TextField',
-    'Ext.form.NumberField'
+    'Ext.form.Panel',
+    'Ext.form.field.Text',
+    'Ext.form.field.Number'
 ]);
 
 Ext.onReady(function(){
     Ext.direct.Manager.addProvider(Ext.app.REMOTING_API);
     
-    var form = Ext.create('Ext.form.FormPanel', {
+    var form = Ext.create('Ext.form.Panel', {
         width: 300,
         height: 130,
         renderTo: document.body,

@@ -2,8 +2,8 @@
  * @class Ext.resizer.ResizeTracker
  * @extends Ext.dd.DragTracker
  */
-Ext.define(&#39;Ext.resizer.ResizeTracker&#39;, {
-    extend: &#39;Ext.dd.DragTracker&#39;,
+Ext.define('Ext.resizer.ResizeTracker', {
+    extend: 'Ext.dd.DragTracker',
     dynamic: true,
     preserveRatio: false,
 
@@ -20,17 +20,17 @@ Ext.define(&#39;Ext.resizer.ResizeTracker&#39;, {
                 me.el = config.target;
             }
         }
-        Ext.resizer.ResizeTracker.superclass.constructor.apply(me, arguments);
+        this.callParent(arguments);
 
         // Ensure that if we are preserving aspect ratio, the largest minimum is honoured
-        if (me.preserveRatio &amp;&amp; me.minWidth &amp;&amp; me.minHeight) {
+        if (me.preserveRatio && me.minWidth && me.minHeight) {
             var widthRatio = me.minWidth / me.el.getWidth(),
                 heightRatio = me.minHeight / me.el.getHeight();
 
             // largest ratio of minimum:size must be preserved.
             // So if a 400x200 pixel image has
             // minWidth: 50, maxWidth: 50, the maxWidth will be 400 * (50/200)... that is 100
-            if (heightRatio &gt; widthRatio) {
+            if (heightRatio > widthRatio) {
                 me.minWidth = me.el.getWidth() * heightRatio;
             } else {
                 me.minHeight = me.el.getHeight() * widthRatio;
@@ -69,8 +69,8 @@ Ext.define(&#39;Ext.resizer.ResizeTracker&#39;, {
         if (this.dynamic) {
             return d;
         } else if (!this.proxy) {
-            this.proxy = d.isComponent ? d.getProxy().addCls(Ext.baseCSSPrefix + &#39;resizable-proxy&#39;) : d.createProxy({tag: &#39;div&#39;, cls: Ext.baseCSSPrefix + &#39;resizable-proxy&#39;, id: d.id + &#39;-rzproxy&#39;}, Ext.getBody());
-            this.proxy.removeCls(Ext.baseCSSPrefix + &#39;proxy-el&#39;);
+            this.proxy = d.isComponent ? d.getProxy().addCls(Ext.baseCSSPrefix + 'resizable-proxy') : d.createProxy({tag: 'div', cls: Ext.baseCSSPrefix + 'resizable-proxy', id: d.id + '-rzproxy'}, Ext.getBody());
+            this.proxy.removeCls(Ext.baseCSSPrefix + 'proxy-el');
         }
         this.proxy.show();
         return this.proxy;
@@ -83,8 +83,8 @@ Ext.define(&#39;Ext.resizer.ResizeTracker&#39;, {
         // If we are using a proxy, ensure it is sized.
         if (!this.dynamic) {
             this.resize(this.startBox, {
-                horizontal: &#39;none&#39;,
-                vertical: &#39;none&#39;
+                horizontal: 'none',
+                vertical: 'none'
             });
         }
     },
@@ -99,7 +99,7 @@ Ext.define(&#39;Ext.resizer.ResizeTracker&#39;, {
     updateDimensions: function(e, atEnd) {
         var me = this,
             region = me.activeResizeHandle.region,
-            offset = me.getOffset(me.constrainTo ? &#39;dragTarget&#39; : null),
+            offset = me.getOffset(me.constrainTo ? 'dragTarget' : null),
             box = me.startBox,
             ratio,
             widthAdjust = 0,
@@ -107,51 +107,51 @@ Ext.define(&#39;Ext.resizer.ResizeTracker&#39;, {
             adjustX = 0,
             adjustY = 0,
             dragRatio,
-            horizDir = offset[0] &lt; 0 ? &#39;right&#39; : &#39;left&#39;,
-            vertDir = offset[1] &lt; 0 ? &#39;down&#39; : &#39;up&#39;,
+            horizDir = offset[0] < 0 ? 'right' : 'left',
+            vertDir = offset[1] < 0 ? 'down' : 'up',
             oppositeCorner,
             axis; // 1 = x, 2 = y, 3 = x and y.
 
         switch (region) {
-            case &#39;south&#39;:
+            case 'south':
                 heightAdjust = offset[1];
                 axis = 2;
                 break;
-            case &#39;north&#39;:
+            case 'north':
                 heightAdjust = -offset[1];
                 adjustY = -heightAdjust;
                 axis = 2;
                 break;
-            case &#39;east&#39;:
+            case 'east':
                 widthAdjust = offset[0];
                 axis = 1;
                 break;
-            case &#39;west&#39;:
+            case 'west':
                 widthAdjust = -offset[0];
                 adjustX = -widthAdjust;
                 axis = 1;
                 break;
-            case &#39;northeast&#39;:
+            case 'northeast':
                 heightAdjust = -offset[1];
                 adjustY = -heightAdjust;
                 widthAdjust = offset[0];
                 oppositeCorner = [box.x, box.y + box.height];
                 axis = 3;
                 break;
-            case &#39;southeast&#39;:
+            case 'southeast':
                 heightAdjust = offset[1];
                 widthAdjust = offset[0];
                 oppositeCorner = [box.x, box.y];
                 axis = 3;
                 break;
-            case &#39;southwest&#39;:
+            case 'southwest':
                 widthAdjust = -offset[0];
                 adjustX = -widthAdjust;
                 heightAdjust = offset[1];
                 oppositeCorner = [box.x + box.width, box.y];
                 axis = 3;
                 break;
-            case &#39;northwest&#39;:
+            case 'northwest':
                 heightAdjust = -offset[1];
                 adjustY = -heightAdjust;
                 widthAdjust = -offset[0];
@@ -169,13 +169,13 @@ Ext.define(&#39;Ext.resizer.ResizeTracker&#39;, {
         };
 
         // out of bounds
-        if (newBox.width &lt; me.minWidth || newBox.width &gt; me.maxWidth) {
+        if (newBox.width < me.minWidth || newBox.width > me.maxWidth) {
             newBox.width = Ext.Number.constrain(newBox.width, me.minWidth, me.maxWidth);
             newBox.x = me.lastX || newBox.x;
         } else {
             me.lastX = newBox.x;
         }
-        if (newBox.height &lt; me.minHeight || newBox.height &gt; me.maxHeight) {
+        if (newBox.height < me.minHeight || newBox.height > me.maxHeight) {
             newBox.height = Ext.Number.constrain(newBox.height, me.minHeight, me.maxHeight);
             newBox.y = me.lastY || newBox.y;
         } else {
@@ -209,30 +209,30 @@ Ext.define(&#39;Ext.resizer.ResizeTracker&#39;, {
                 // Basically what edge we are dragging, a horizontal edge or a vertical edge.
                 dragRatio = Math.abs(oppositeCorner[0] - this.lastXY[0]) / Math.abs(oppositeCorner[1] - this.lastXY[1]);
 
-                // If drag ratio &gt; aspect ratio then width is dominant and height must obey
-                if (dragRatio &gt; ratio) {
+                // If drag ratio > aspect ratio then width is dominant and height must obey
+                if (dragRatio > ratio) {
                     newBox.height = newHeight;
                 } else {
                     newBox.width = newWidth;
                 }
 
                 // Handle dragging start coordinates
-                if (region == &#39;northeast&#39;) {
+                if (region == 'northeast') {
                     newBox.y = box.y - (newBox.height - box.height);
-                } else if (region == &#39;northwest&#39;) {
+                } else if (region == 'northwest') {
                     newBox.y = box.y - (newBox.height - box.height);
                     newBox.x = box.x - (newBox.width - box.width);
-                } else if (region == &#39;southwest&#39;) {
+                } else if (region == 'southwest') {
                     newBox.x = box.x - (newBox.width - box.width);
                 }
             }
         }
 
         if (heightAdjust === 0) {
-            vertDir = &#39;none&#39;;
+            vertDir = 'none';
         }
         if (widthAdjust === 0) {
-            horizDir = &#39;none&#39;;
+            horizDir = 'none';
         }
         me.resize(newBox, {
             horizontal: horizDir,
@@ -266,4 +266,5 @@ Ext.define(&#39;Ext.resizer.ResizeTracker&#39;, {
             this.proxy.hide();
         }
     }
-});￿</pre></pre></body></html>
+});
+￿</pre></pre></body></html>

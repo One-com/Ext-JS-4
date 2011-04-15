@@ -40,7 +40,7 @@ An example showing a classic application border layout:
             collapsible: true,
             title: 'Navigation',
             width: 200
-            // the west region might typically utilize a {@link Ext.tree.TreePanel TreePanel} or a Panel with {@link Ext.layout.container.Accordion Accordion layout}
+            // the west region might typically utilize a {@link Ext.tree.Panel TreePanel} or a Panel with {@link Ext.layout.container.Accordion Accordion layout}
         }, {
             region: 'south',
             title: 'Title for Panel',

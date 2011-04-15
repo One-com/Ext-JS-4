@@ -16,21 +16,21 @@ Easing describes how the intermediate values used during a transition will be ca
 
 You may use the defaults for easing and duration, but you must always set a {@link Ext.fx.Anim#to to} property which is the end value for all animations.  
 
-Popular element &#39;to&#39; configurations are:
+Popular element 'to' configurations are:
 
  opacity, x, y, color, height, width 
 
-Popular sprite &#39;to&#39; configurations are:
+Popular sprite 'to' configurations are:
 
  translation, path, scale, stroke, rotation
 
 The default duration for animations is 250 (which is a 1/4 of a second).  Duration is denoted in milliseconds.  Therefore 1 second is 1000, 1 minute would be 60000, and so on. 
 
-The default easing curve used for all animations is &#39;ease&#39;.  Popular easing functions are included and can be found in {@link Ext.fx.Anim#easing Easing}.
+The default easing curve used for all animations is 'ease'.  Popular easing functions are included and can be found in {@link Ext.fx.Anim#easing Easing}.
 
 For example, a simple animation to fade out an element with a default easing and duration:
 
-    var p1 = Ext.get(&#39;myElementId&#39;);
+    var p1 = Ext.get('myElementId');
 
     p1.animate({
         to: {
@@ -40,7 +40,7 @@ For example, a simple animation to fade out an element with a default easing and
 
 To make this animation fade out in a tenth of a second:
 
-    var p1 = Ext.get(&#39;myElementId&#39;);
+    var p1 = Ext.get('myElementId');
 
     p1.animate({
        duration: 100,
@@ -63,7 +63,7 @@ By default all animations are added to a queue which allows for animation via a 
         }
     }).animate({
         to: {
-            backgroundColor: &#39;#f00&#39;  //red
+            backgroundColor: '#f00'  //red
         }
     }).animate({
         to: {
@@ -85,7 +85,7 @@ You can change this behavior by calling the {@link Ext.util.Animate#syncFx syncF
         }
     }).animate({
         to: {
-            backgroundColor: &#39;#f00&#39;  //red
+            backgroundColor: '#f00'  //red
         }
     }).animate({
         to: {
@@ -99,12 +99,12 @@ This works the same as:
         to: {
             x: 500,
             y: 150,
-            backgroundColor: &#39;#f00&#39;  //red
+            backgroundColor: '#f00'  //red
             opacity: 0
         }
     });
 
-The {@link Ext.util.Animate#stopFx stopFx} method can be used to stop any currently running animations and clear any queued animations. 
+The {@link Ext.util.Animate#stopAnimation stopAnimation} method can be used to stop any currently running animations and clear any queued animations. 
 
 __Animation Keyframes__
 You can also set up complex animations with {@link Ext.fx.Anim#keyframe keyframe} which follows the CSS3 Animation configuration pattern. Note rotation, translation, and scaling can only be done for sprites. The previous example can be written with the following syntax:
@@ -119,7 +119,7 @@ You can also set up complex animations with {@link Ext.fx.Anim#keyframe keyframe
                 y: 0
             },
             75: {  //from 500ms to 750ms (75%)
-                backgroundColor: &#39;#f00&#39;  //red
+                backgroundColor: '#f00'  //red
             },
             100: {  //from 750ms to 1sec
                 opacity: 0
@@ -134,7 +134,7 @@ Each animation you create has events for {@link Ext.fx.Anim#beforeanimation befo
 All animations support the {@link Ext.util.Observable#listeners listeners} configuration to attact functions to these events.
    
     startAnimate: function() {
-        var p1 = Ext.get(&#39;myElementId&#39;);
+        var p1 = Ext.get('myElementId');
         p1.animate({
            duration: 100,
             to: {
@@ -160,14 +160,14 @@ All animations support the {@link Ext.util.Observable#listeners listeners} confi
     }
 
 
-Due to the fact that animations run asynchronously, you can determine if an animation is currently running on any target by using the {@link Ext.util.Animate#hasActiveFx hasActiveFx} method.  This method will return false if there are no active animations or return the currently running {@link Ext.fx.Anim} instance.
+Due to the fact that animations run asynchronously, you can determine if an animation is currently running on any target by using the {@link Ext.util.Animate#getActiveAnimation getActiveAnimation} method.  This method will return false if there are no active animations or return the currently running {@link Ext.fx.Anim} instance.
 
-In this example, we&#39;re going to wait for the current animation to finish, then stop any other queued animations before we fade our element&#39;s opacity to 0:
+In this example, we're going to wait for the current animation to finish, then stop any other queued animations before we fade our element's opacity to 0:
 
-    var curAnim = p1.hasActiveFx();
+    var curAnim = p1.getActiveAnimation();
     if (curAnim) {
-        curAnim.on(&#39;afteranimate&#39;, function() {
-            p1.stopFx();
+        curAnim.on('afteranimate', function() {
+            p1.stopAnimation();
             p1.animate({
                 to: {
                     opacity: 0
@@ -178,11 +178,11 @@ In this example, we&#39;re going to wait for the current animation to finish, th
 
  *
  * @markdown
- * @docauthor Jamie Avins &lt;jamie@sencha.com&gt;
+ * @docauthor Jamie Avins <jamie@sencha.com>
  */
-Ext.define(&#39;Ext.util.Animate&#39;, {
+Ext.define('Ext.util.Animate', {
 
-    uses: [&#39;Ext.fx.Manager&#39;, &#39;Ext.fx.Anim&#39;],
+    uses: ['Ext.fx.Manager', 'Ext.fx.Anim'],
 
     <a name="method-Ext.util.Animate-animate"></a>/**
      * Perform custom animation on this element.
@@ -194,7 +194,7 @@ Ext.define(&#39;Ext.util.Animate&#39;, {
         if (Ext.fx.Manager.hasFxBlock(me.id)) {
             return me;
         }
-        Ext.fx.Manager.queueFx(Ext.create(&#39;Ext.fx.Anim&#39;, me.anim(animObj)));
+        Ext.fx.Manager.queueFx(Ext.create('Ext.fx.Anim', me.anim(animObj)));
         return this;
     },
 
@@ -206,8 +206,8 @@ Ext.define(&#39;Ext.util.Animate&#39;, {
 
         var me = this;
 
-        if (config.stopFx) {
-            me.stopFx();
+        if (config.stopAnimation) {
+            me.stopAnimation();
         }
 
         Ext.applyIf(config, Ext.fx.Manager.getFxDefaults(me.id));
@@ -219,12 +219,20 @@ Ext.define(&#39;Ext.util.Animate&#39;, {
     },
 
     <a name="method-Ext.util.Animate-stopFx"></a>/**
-     * Stops any running effects and clears the element&#39;s internal effects queue if it contains
-     * any additional effects that haven&#39;t started yet.
+     * Stops any running effects and clears the element's internal effects queue if it contains
+     * any additional effects that haven't started yet.
      * @return {Ext.core.Element} The Element
      */
-    stopFx: function() {
-        Ext.fx.Manager.stopFx(this.id);
+    stopFx: Ext.Function.alias(Ext.util.Animate, 'stopAnimation'),
+
+    <a name="method-Ext.util.Animate-stopAnimation"></a>/**
+     * @deprecated 4.0 Replaced by {@link #stopAnimation}
+     * Stops any running effects and clears the element's internal effects queue if it contains
+     * any additional effects that haven't started yet.
+     * @return {Ext.core.Element} The Element
+     */
+    stopAnimation: function() {
+        Ext.fx.Manager.stopAnimation(this.id);
     },
 
     <a name="method-Ext.util.Animate-syncFx"></a>/**
@@ -250,11 +258,18 @@ Ext.define(&#39;Ext.util.Animate&#39;, {
     },
 
     <a name="method-Ext.util.Animate-hasActiveFx"></a>/**
+     * @deprecated 4.0 Replaced by {@link #getActiveAnimation}
      * Returns thq current animation if the element has any effects actively running or queued, else returns false.
      * @return {Mixed} anim if element has active effects, else false
      */
-    hasActiveFx: function() {
-        return Ext.fx.Manager.hasActiveFx(this.id);
+    hasActiveFx: Ext.Function.alias(Ext.util.Animate, 'getActiveAnimation'),
+
+    <a name="method-Ext.util.Animate-getActiveAnimation"></a>/**
+     * Returns thq current animation if the element has any effects actively running or queued, else returns false.
+     * @return {Mixed} anim if element has active effects, else false
+     */
+    getActiveAnimation: function() {
+        return Ext.fx.Manager.getActiveAnimation(this.id);
     }
 });
 

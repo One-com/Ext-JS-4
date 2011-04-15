@@ -76,12 +76,10 @@ Ext.define('FeedViewer.FeedDetail', {
             }, '-', {
                 xtype: 'cycle',
                 text: 'Reading Pane',
-                width: 130,
                 prependText: 'Preview: ',
                 showText: true,
                 scope: this,
                 changeHandler: this.readingPaneChange,
-                menuAlign: 'tr-br?',
                 menu: {
                     id: 'reading-menu',
                     items: [{

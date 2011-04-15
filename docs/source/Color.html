@@ -5,7 +5,7 @@
  * Represents an RGB color and provides helper functions get
  * color components in HSL color space.
  */
-Ext.define(&#39;Ext.draw.Color&#39;, {
+Ext.define('Ext.draw.Color', {
 
     /* Begin Definitions */
 
@@ -87,7 +87,7 @@ Ext.define(&#39;Ext.draw.Color&#39;, {
 
         // min==max means achromatic (hue is undefined)
         if (min != max) {
-            s = (l &lt; 0.5) ? delta / (max + min) : delta / (2 - max - min);
+            s = (l < 0.5) ? delta / (max + min) : delta / (2 - max - min);
             if (r == max) {
                 h = 60 * (g - b) / delta;
             } else if (g == max) {
@@ -95,10 +95,10 @@ Ext.define(&#39;Ext.draw.Color&#39;, {
             } else {
                 h = 240 + 60 * (r - g) / delta;
             }
-            if (h &lt; 0) {
+            if (h < 0) {
                 h += 360;
             }
-            if (h &gt;= 360) {
+            if (h >= 360) {
                 h -= 360;
             }
         }
@@ -128,7 +128,7 @@ Ext.define(&#39;Ext.draw.Color&#39;, {
     },
 
     <a name="method-Ext.draw.Color-toString"></a>/**
-     * Return the color in the hex format, i.e. &#39;#rrggbb&#39;.
+     * Return the color in the hex format, i.e. '#rrggbb'.
      * @return {String}
      */
     toString: function() {
@@ -137,16 +137,16 @@ Ext.define(&#39;Ext.draw.Color&#39;, {
             r = round(me.r).toString(16),
             g = round(me.g).toString(16),
             b = round(me.b).toString(16);
-        r = (r.length == 1) ? &#39;0&#39; + r : r;
-        g = (g.length == 1) ? &#39;0&#39; + g : g;
-        b = (b.length == 1) ? &#39;0&#39; + b : b;
-        return [&#39;#&#39;, r, g, b].join(&#39;&#39;);
+        r = (r.length == 1) ? '0' + r : r;
+        g = (g.length == 1) ? '0' + g : g;
+        b = (b.length == 1) ? '0' + b : b;
+        return ['#', r, g, b].join('');
     },
 
     <a name="method-Ext.draw.Color-toHex"></a>/**
      * Convert a color to hexadecimal format.
      *
-     * @param {String|Array} color The color value (i.e &#39;rgb(255, 255, 255)&#39;, &#39;color: #ffffff&#39;).
+     * @param {String|Array} color The color value (i.e 'rgb(255, 255, 255)', 'color: #ffffff').
      * Can also be an Array, in this case the function handles the first member.
      * @returns {String} The color in hexadecimal format.
      */
@@ -155,9 +155,9 @@ Ext.define(&#39;Ext.draw.Color&#39;, {
             color = color[0];
         }
         if (!Ext.isString(color)) {
-            return &#39;&#39;;
+            return '';
         }
-        if (color.substr(0, 1) === &#39;#&#39;) {
+        if (color.substr(0, 1) === '#') {
             return color;
         }
         var digits = this.colorToHexRe.exec(color);
@@ -166,18 +166,18 @@ Ext.define(&#39;Ext.draw.Color&#39;, {
             var red = parseInt(digits[2], 10),
                 green = parseInt(digits[3], 10),
                 blue = parseInt(digits[4], 10),
-                rgb = blue | (green &lt;&lt; 8) | (red &lt;&lt; 16);
-            return digits[1] + &#39;#&#39; + (&quot;000000&quot; + rgb.toString(16)).slice(-6);
+                rgb = blue | (green << 8) | (red << 16);
+            return digits[1] + '#' + ("000000" + rgb.toString(16)).slice(-6);
         }
         else {
-            return &#39;&#39;;
+            return '';
         }
     },
 
     <a name="method-Ext.draw.Color-fromString"></a>/**
      * Parse the string and create a new color.
      *
-     * Supported formats: &#39;#rrggbb&#39;, &#39;#rgb&#39;, and &#39;rgb(r,g,b)&#39;.
+     * Supported formats: '#rrggbb', '#rgb', and 'rgb(r,g,b)'.
      *
      * If the string is not recognized, an undefined will be returned instead.
      *
@@ -188,12 +188,12 @@ Ext.define(&#39;Ext.draw.Color&#39;, {
         var values, r, g, b,
             parse = parseInt;
 
-        if ((str.length == 4 || str.length == 7) &amp;&amp; str.substr(0, 1) === &#39;#&#39;) {
+        if ((str.length == 4 || str.length == 7) && str.substr(0, 1) === '#') {
             values = str.match(this.hexRe);
             if (values) {
-                r = parse(values[1], 16) &gt;&gt; 0;
-                g = parse(values[2], 16) &gt;&gt; 0;
-                b = parse(values[3], 16) &gt;&gt; 0;
+                r = parse(values[1], 16) >> 0;
+                g = parse(values[2], 16) >> 0;
+                b = parse(values[3], 16) >> 0;
                 if (str.length == 4) {
                     r += (r * 16);
                     g += (g * 16);
@@ -210,7 +210,7 @@ Ext.define(&#39;Ext.draw.Color&#39;, {
             }
         }
 
-        return (typeof r == &#39;undefined&#39;) ? undefined : Ext.create(&#39;Ext.draw.Color&#39;, r, g, b);
+        return (typeof r == 'undefined') ? undefined : Ext.create('Ext.draw.Color', r, g, b);
     },
 
     <a name="method-Ext.draw.Color-getGrayscale"></a>/**
@@ -273,7 +273,7 @@ Ext.define(&#39;Ext.draw.Color&#39;, {
             }
             rgb = [rgb[0] + m, rgb[1] + m, rgb[2] + m];
         }
-        return Ext.create(&#39;Ext.draw.Color&#39;, rgb[0] * 255, rgb[1] * 255, rgb[2] * 255);
+        return Ext.create('Ext.draw.Color', rgb[0] * 255, rgb[1] * 255, rgb[2] * 255);
     }
 }, function() {
     var prototype = this.prototype;

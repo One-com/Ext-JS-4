@@ -32,7 +32,7 @@ $cfg = array(
 	'actions'=>$actions
 );
 
-echo 'Ext.app.REMOTING_API = ';
+echo 'Ext.ns("Ext.app"); Ext.app.REMOTING_API = ';
 
 echo json_encode($cfg);
 echo ';';

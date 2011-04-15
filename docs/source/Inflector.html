@@ -1,44 +1,50 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.Inflector"></a>/**
  * @class Ext.util.Inflector
  * @extends Object
- * &lt;p&gt;General purpose inflector class that {@link #pluralize pluralizes}, {@link #singularize singularizes} and 
- * {@link #ordinalize ordinalizes} words. Sample usage:&lt;/p&gt;
+ * <p>General purpose inflector class that {@link #pluralize pluralizes}, {@link #singularize singularizes} and 
+ * {@link #ordinalize ordinalizes} words. Sample usage:</p>
  * 
-<br><span style="display: none">**/</span>//turning singular words into plurals
-Ext.util.Inflector.pluralize(&#39;word&#39;); //&#39;words&#39;
-Ext.util.Inflector.pluralize(&#39;person&#39;); //&#39;people&#39;
-Ext.util.Inflector.pluralize(&#39;sheep&#39;); //&#39;sheep&#39;
+<pre><code>
+//turning singular words into plurals
+Ext.util.Inflector.pluralize('word'); //'words'
+Ext.util.Inflector.pluralize('person'); //'people'
+Ext.util.Inflector.pluralize('sheep'); //'sheep'
 
 //turning plurals into singulars
-Ext.util.Inflector.singularize(&#39;words&#39;); //&#39;word&#39;
-Ext.util.Inflector.singularize(&#39;people&#39;); //&#39;person&#39;
-Ext.util.Inflector.singularize(&#39;sheep&#39;); //&#39;sheep&#39;
+Ext.util.Inflector.singularize('words'); //'word'
+Ext.util.Inflector.singularize('people'); //'person'
+Ext.util.Inflector.singularize('sheep'); //'sheep'
 
 //ordinalizing numbers
-Ext.util.Inflector.ordinalize(11); //&quot;11th&quot;
-Ext.util.Inflector.ordinalize(21); //&quot;21th&quot;
-Ext.util.Inflector.ordinalize(1043); //&quot;1043rd&quot;
-<br><span style="display: none">/**</span> * 
- * &lt;p&gt;&lt;u&gt;Customization&lt;/u&gt;&lt;/p&gt;
+Ext.util.Inflector.ordinalize(11); //"11th"
+Ext.util.Inflector.ordinalize(21); //"21th"
+Ext.util.Inflector.ordinalize(1043); //"1043rd"
+</code></pre>
  * 
- * &lt;p&gt;The Inflector comes with a default set of US English pluralization rules. These can be augmented with additional
- * rules if the default rules do not meet your application&#39;s requirements, or swapped out entirely for other languages.
- * Here is how we might add a rule that pluralizes &quot;ox&quot; to &quot;oxen&quot;:&lt;/p&gt;
+ * <p><u>Customization</u></p>
  * 
-<br><span style="display: none">**/</span>Ext.util.Inflector.plural(/^(ox)$/i, &quot;$1en&quot;);
-<br><span style="display: none">/**</span> * 
- * &lt;p&gt;Each rule consists of two items - a regular expression that matches one or more rules, and a replacement string.
- * In this case, the regular expression will only match the string &quot;ox&quot;, and will replace that match with &quot;oxen&quot;. 
- * Here&#39;s how we could add the inverse rule:&lt;/p&gt;
+ * <p>The Inflector comes with a default set of US English pluralization rules. These can be augmented with additional
+ * rules if the default rules do not meet your application's requirements, or swapped out entirely for other languages.
+ * Here is how we might add a rule that pluralizes "ox" to "oxen":</p>
  * 
-<br><span style="display: none">**/</span>Ext.util.Inflector.singular(/^(ox)en$/i, &quot;$1&quot;);
-<br><span style="display: none">/**</span> * 
- * &lt;p&gt;Note that the ox/oxen rules are present by default.&lt;/p&gt;
+<pre><code>
+Ext.util.Inflector.plural(/^(ox)$/i, "$1en");
+</code></pre>
+ * 
+ * <p>Each rule consists of two items - a regular expression that matches one or more rules, and a replacement string.
+ * In this case, the regular expression will only match the string "ox", and will replace that match with "oxen". 
+ * Here's how we could add the inverse rule:</p>
+ * 
+<pre><code>
+Ext.util.Inflector.singular(/^(ox)en$/i, "$1");
+</code></pre>
+ * 
+ * <p>Note that the ox/oxen rules are present by default.</p>
  * 
  * @singleton
  */
 
-Ext.define(&#39;Ext.util.Inflector&#39;, {
+Ext.define('Ext.util.Inflector', {
 
     /* Begin Definitions */
 
@@ -55,26 +61,26 @@ Ext.define(&#39;Ext.util.Inflector&#39;, {
      * @type Array
      */
     plurals: [
-        [(/(quiz)$/i),                &quot;$1zes&quot;  ],
-        [(/^(ox)$/i),                 &quot;$1en&quot;   ],
-        [(/([m|l])ouse$/i),           &quot;$1ice&quot;  ],
-        [(/(matr|vert|ind)ix|ex$/i),  &quot;$1ices&quot; ],
-        [(/(x|ch|ss|sh)$/i),          &quot;$1es&quot;   ],
-        [(/([^aeiouy]|qu)y$/i),       &quot;$1ies&quot;  ],
-        [(/(hive)$/i),                &quot;$1s&quot;    ],
-        [(/(?:([^f])fe|([lr])f)$/i),  &quot;$1$2ves&quot;],
-        [(/sis$/i),                   &quot;ses&quot;    ],
-        [(/([ti])um$/i),              &quot;$1a&quot;    ],
-        [(/(buffal|tomat|potat)o$/i), &quot;$1oes&quot;  ],
-        [(/(bu)s$/i),                 &quot;$1ses&quot;  ],
-        [(/(alias|status|sex)$/i),    &quot;$1es&quot;   ],
-        [(/(octop|vir)us$/i),         &quot;$1i&quot;    ],
-        [(/(ax|test)is$/i),           &quot;$1es&quot;   ],
-        [(/^person$/),                &quot;people&quot; ],
-        [(/^man$/),                   &quot;men&quot;    ],
-        [(/^(child)$/),               &quot;$1ren&quot;  ],
-        [(/s$/i),                     &quot;s&quot;      ],
-        [(/$/),                       &quot;s&quot;      ]
+        [(/(quiz)$/i),                "$1zes"  ],
+        [(/^(ox)$/i),                 "$1en"   ],
+        [(/([m|l])ouse$/i),           "$1ice"  ],
+        [(/(matr|vert|ind)ix|ex$/i),  "$1ices" ],
+        [(/(x|ch|ss|sh)$/i),          "$1es"   ],
+        [(/([^aeiouy]|qu)y$/i),       "$1ies"  ],
+        [(/(hive)$/i),                "$1s"    ],
+        [(/(?:([^f])fe|([lr])f)$/i),  "$1$2ves"],
+        [(/sis$/i),                   "ses"    ],
+        [(/([ti])um$/i),              "$1a"    ],
+        [(/(buffal|tomat|potat)o$/i), "$1oes"  ],
+        [(/(bu)s$/i),                 "$1ses"  ],
+        [(/(alias|status|sex)$/i),    "$1es"   ],
+        [(/(octop|vir)us$/i),         "$1i"    ],
+        [(/(ax|test)is$/i),           "$1es"   ],
+        [(/^person$/),                "people" ],
+        [(/^man$/),                   "men"    ],
+        [(/^(child)$/),               "$1ren"  ],
+        [(/s$/i),                     "s"      ],
+        [(/$/),                       "s"      ]
     ],
     
     /**
@@ -86,31 +92,31 @@ Ext.define(&#39;Ext.util.Inflector&#39;, {
      * @type Array
      */
     singulars: [
-      [(/(quiz)zes$/i),                                                    &quot;$1&quot;     ],
-      [(/(matr)ices$/i),                                                   &quot;$1ix&quot;   ],
-      [(/(vert|ind)ices$/i),                                               &quot;$1ex&quot;   ],
-      [(/^(ox)en/i),                                                       &quot;$1&quot;     ],
-      [(/(alias|status)es$/i),                                             &quot;$1&quot;     ],
-      [(/(octop|vir)i$/i),                                                 &quot;$1us&quot;   ],
-      [(/(cris|ax|test)es$/i),                                             &quot;$1is&quot;   ],
-      [(/(shoe)s$/i),                                                      &quot;$1&quot;     ],
-      [(/(o)es$/i),                                                        &quot;$1&quot;     ],
-      [(/(bus)es$/i),                                                      &quot;$1&quot;     ],
-      [(/([m|l])ice$/i),                                                   &quot;$1ouse&quot; ],
-      [(/(x|ch|ss|sh)es$/i),                                               &quot;$1&quot;     ],
-      [(/(m)ovies$/i),                                                     &quot;$1ovie&quot; ],
-      [(/(s)eries$/i),                                                     &quot;$1eries&quot;],
-      [(/([^aeiouy]|qu)ies$/i),                                            &quot;$1y&quot;    ],
-      [(/([lr])ves$/i),                                                    &quot;$1f&quot;    ],
-      [(/(tive)s$/i),                                                      &quot;$1&quot;     ],
-      [(/(hive)s$/i),                                                      &quot;$1&quot;     ],
-      [(/([^f])ves$/i),                                                    &quot;$1fe&quot;   ],
-      [(/(^analy)ses$/i),                                                  &quot;$1sis&quot;  ],
-      [(/((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$/i), &quot;$1$2sis&quot;],
-      [(/([ti])a$/i),                                                      &quot;$1um&quot;   ],
-      [(/(n)ews$/i),                                                       &quot;$1ews&quot;  ],
-      [(/people$/i),                                                       &quot;person&quot; ],
-      [(/s$/i),                                                            &quot;&quot;       ]
+      [(/(quiz)zes$/i),                                                    "$1"     ],
+      [(/(matr)ices$/i),                                                   "$1ix"   ],
+      [(/(vert|ind)ices$/i),                                               "$1ex"   ],
+      [(/^(ox)en/i),                                                       "$1"     ],
+      [(/(alias|status)es$/i),                                             "$1"     ],
+      [(/(octop|vir)i$/i),                                                 "$1us"   ],
+      [(/(cris|ax|test)es$/i),                                             "$1is"   ],
+      [(/(shoe)s$/i),                                                      "$1"     ],
+      [(/(o)es$/i),                                                        "$1"     ],
+      [(/(bus)es$/i),                                                      "$1"     ],
+      [(/([m|l])ice$/i),                                                   "$1ouse" ],
+      [(/(x|ch|ss|sh)es$/i),                                               "$1"     ],
+      [(/(m)ovies$/i),                                                     "$1ovie" ],
+      [(/(s)eries$/i),                                                     "$1eries"],
+      [(/([^aeiouy]|qu)ies$/i),                                            "$1y"    ],
+      [(/([lr])ves$/i),                                                    "$1f"    ],
+      [(/(tive)s$/i),                                                      "$1"     ],
+      [(/(hive)s$/i),                                                      "$1"     ],
+      [(/([^f])ves$/i),                                                    "$1fe"   ],
+      [(/(^analy)ses$/i),                                                  "$1sis"  ],
+      [(/((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)ses$/i), "$1$2sis"],
+      [(/([ti])a$/i),                                                      "$1um"   ],
+      [(/(n)ews$/i),                                                       "$1ews"  ],
+      [(/people$/i),                                                       "person" ],
+      [(/s$/i),                                                            ""       ]
     ],
     
     /**
@@ -120,19 +126,19 @@ Ext.define(&#39;Ext.util.Inflector&#39;, {
      * @type Array
      */
      uncountable: [
-        &quot;sheep&quot;,
-        &quot;fish&quot;,
-        &quot;series&quot;,
-        &quot;species&quot;,
-        &quot;money&quot;,
-        &quot;rice&quot;,
-        &quot;information&quot;,
-        &quot;equipment&quot;,
-        &quot;grass&quot;,
-        &quot;mud&quot;,
-        &quot;offspring&quot;,
-        &quot;deer&quot;,
-        &quot;means&quot;
+        "sheep",
+        "fish",
+        "series",
+        "species",
+        "money",
+        "rice",
+        "information",
+        "equipment",
+        "grass",
+        "mud",
+        "offspring",
+        "deer",
+        "means"
     ],
     
     <a name="method-Ext.util.Inflector-singular"></a>/**
@@ -177,7 +183,7 @@ Ext.define(&#39;Ext.util.Inflector&#39;, {
     },
 
     <a name="method-Ext.util.Inflector-pluralize"></a>/**
-     * Returns the pluralized form of a word (e.g. Ext.util.Inflector.pluralize(&#39;word&#39;) returns &#39;words&#39;)
+     * Returns the pluralized form of a word (e.g. Ext.util.Inflector.pluralize('word') returns 'words')
      * @param {String} word The word to pluralize
      * @return {String} The pluralized form of the word
      */
@@ -190,11 +196,11 @@ Ext.define(&#39;Ext.util.Inflector&#39;, {
             length  = plurals.length,
             tuple, regex, i;
         
-        for (i = 0; i &lt; length; i++) {
+        for (i = 0; i < length; i++) {
             tuple = plurals[i];
             regex = tuple[0];
             
-            if (regex == word || (regex.test &amp;&amp; regex.test(word))) {
+            if (regex == word || (regex.test && regex.test(word))) {
                 return word.replace(regex, tuple[1]);
             }
         }
@@ -203,7 +209,7 @@ Ext.define(&#39;Ext.util.Inflector&#39;, {
     },
     
     <a name="method-Ext.util.Inflector-singularize"></a>/**
-     * Returns the singularized form of a word (e.g. Ext.util.Inflector.singularize(&#39;words&#39;) returns &#39;word&#39;)
+     * Returns the singularized form of a word (e.g. Ext.util.Inflector.singularize('words') returns 'word')
      * @param {String} word The word to singularize
      * @return {String} The singularized form of the word
      */
@@ -216,11 +222,11 @@ Ext.define(&#39;Ext.util.Inflector&#39;, {
             length    = singulars.length,
             tuple, regex, i;
         
-        for (i = 0; i &lt; length; i++) {
+        for (i = 0; i < length; i++) {
             tuple = singulars[i];
             regex = tuple[0];
             
-            if (regex == word || (regex.test &amp;&amp; regex.test(word))) {
+            if (regex == word || (regex.test && regex.test(word))) {
                 return word.replace(regex, tuple[1]);
             }
         }
@@ -239,8 +245,8 @@ Ext.define(&#39;Ext.util.Inflector&#39;, {
     },
     
     <a name="method-Ext.util.Inflector-ordinalize"></a>/**
-     * Ordinalizes a given number by adding a prefix such as &#39;st&#39;, &#39;nd&#39;, &#39;rd&#39; or &#39;th&#39; based on the last digit of the 
-     * number. 21 -&gt; 21st, 22 -&gt; 22nd, 23 -&gt; 23rd, 24 -&gt; 24th etc
+     * Ordinalizes a given number by adding a prefix such as 'st', 'nd', 'rd' or 'th' based on the last digit of the 
+     * number. 21 -> 21st, 22 -> 22nd, 23 -> 23rd, 24 -> 24th etc
      * @param {Number} number The number to ordinalize
      * @return {String} The ordinalized number
      */
@@ -250,51 +256,51 @@ Ext.define(&#39;Ext.util.Inflector&#39;, {
             mod100 = parsed % 100;
         
         //11 through 13 are a special case
-        if (11 &lt;= mod100 &amp;&amp; mod100 &lt;= 13) {
-            return number + &quot;th&quot;;
+        if (11 <= mod100 && mod100 <= 13) {
+            return number + "th";
         } else {
             switch(mod10) {
-                case 1 : return number + &quot;st&quot;;
-                case 2 : return number + &quot;nd&quot;;
-                case 3 : return number + &quot;rd&quot;;
-                default: return number + &quot;th&quot;;
+                case 1 : return number + "st";
+                case 2 : return number + "nd";
+                case 3 : return number + "rd";
+                default: return number + "th";
             }
         }
     }
 }, function() {
     //aside from the rules above, there are a number of words that have irregular pluralization so we add them here
     var irregulars = {
-            alumnus: &#39;alumni&#39;,
-            cactus : &#39;cacti&#39;,
-            focus  : &#39;foci&#39;,
-            nucleus: &#39;nuclei&#39;,
-            radius: &#39;radii&#39;,
-            stimulus: &#39;stimuli&#39;,
-            ellipsis: &#39;ellipses&#39;,
-            paralysis: &#39;paralyses&#39;,
-            oasis: &#39;oases&#39;,
-            appendix: &#39;appendices&#39;,
-            index: &#39;indexes&#39;,
-            beau: &#39;beaux&#39;,
-            bureau: &#39;bureaux&#39;,
-            tableau: &#39;tableaux&#39;,
-            woman: &#39;women&#39;,
-            child: &#39;children&#39;,
-            man: &#39;men&#39;,
-            corpus:	&#39;corpora&#39;,
-            criterion: &#39;criteria&#39;,
-            curriculum:	&#39;curricula&#39;,
-            genus: &#39;genera&#39;,
-            memorandum:	&#39;memoranda&#39;,
-            phenomenon:	&#39;phenomena&#39;,
-            foot: &#39;feet&#39;,
-            goose: &#39;geese&#39;,
-            tooth: &#39;teeth&#39;,
-            antenna: &#39;antennae&#39;,
-            formula: &#39;formulae&#39;,
-            nebula: &#39;nebulae&#39;,
-            vertebra: &#39;vertebrae&#39;,
-            vita: &#39;vitae&#39;
+            alumnus: 'alumni',
+            cactus : 'cacti',
+            focus  : 'foci',
+            nucleus: 'nuclei',
+            radius: 'radii',
+            stimulus: 'stimuli',
+            ellipsis: 'ellipses',
+            paralysis: 'paralyses',
+            oasis: 'oases',
+            appendix: 'appendices',
+            index: 'indexes',
+            beau: 'beaux',
+            bureau: 'bureaux',
+            tableau: 'tableaux',
+            woman: 'women',
+            child: 'children',
+            man: 'men',
+            corpus:	'corpora',
+            criterion: 'criteria',
+            curriculum:	'curricula',
+            genus: 'genera',
+            memorandum:	'memoranda',
+            phenomenon:	'phenomena',
+            foot: 'feet',
+            goose: 'geese',
+            tooth: 'teeth',
+            antenna: 'antennae',
+            formula: 'formulae',
+            nebula: 'nebulae',
+            vertebra: 'vertebrae',
+            vita: 'vitae'
         },
         singular;
     

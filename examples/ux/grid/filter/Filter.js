@@ -5,7 +5,7 @@
  */
 Ext.define('Ext.ux.grid.filter.Filter', {
     extend: 'Ext.util.Observable',
-    
+
     /**
      * @cfg {Boolean} active
      * Indicates the initial status of the filter (defaults to false).
@@ -17,7 +17,7 @@ Ext.define('Ext.ux.grid.filter.Filter', {
      * @property active
      */
     /**
-     * @cfg {String} dataIndex 
+     * @cfg {String} dataIndex
      * The {@link Ext.data.Store} dataIndex of the field this filter represents.
      * The dataIndex does not actually have to exist in the store.
      */
@@ -30,14 +30,14 @@ Ext.define('Ext.ux.grid.filter.Filter', {
     menu : null,
     /**
      * @cfg {Number} updateBuffer
-     * Number of milliseconds to wait after user interaction to fire an update. Only supported 
+     * Number of milliseconds to wait after user interaction to fire an update. Only supported
      * by filters: 'list', 'numeric', and 'string'. Defaults to 500.
      */
     updateBuffer : 500,
 
     constructor : function (config) {
         Ext.apply(this, config);
-            
+
         this.addEvents(
             /**
              * @event activate
@@ -84,7 +84,7 @@ Ext.define('Ext.ux.grid.filter.Filter', {
         if (this.menu){
             this.menu.destroy();
         }
-        this.purgeListeners();
+        this.clearListeners();
     },
 
     /**
@@ -101,9 +101,9 @@ Ext.define('Ext.ux.grid.filter.Filter', {
      * @return {Ext.menu.Menu}
      */
     createMenu: function(config) {
-        return new Ext.menu.Menu(config);
+        return Ext.create('Ext.menu.Menu', config);
     },
-    
+
     /**
      * Template method to be implemented by all subclasses that is to
      * get and return the value of the filter.
@@ -112,16 +112,16 @@ Ext.define('Ext.ux.grid.filter.Filter', {
      * @methodOf Ext.ux.grid.filter.Filter
      */
     getValue : Ext.emptyFn,
-    
+
     /**
      * Template method to be implemented by all subclasses that is to
      * set the value of the filter and fire the 'update' event.
      * Defaults to Ext.emptyFn.
      * @param {Object} data The value to set the filter
      * @methodOf Ext.ux.grid.filter.Filter
-     */	
+     */
     setValue : Ext.emptyFn,
-    
+
     /**
      * Template method to be implemented by all subclasses that is to
      * return <tt>true</tt> if the filter has enough configuration information to be activated.
@@ -131,7 +131,7 @@ Ext.define('Ext.ux.grid.filter.Filter', {
     isActivatable : function(){
         return true;
     },
-    
+
     /**
      * Template method to be implemented by all subclasses that is to
      * get and return serialized filter data for transmission to the server.
@@ -171,7 +171,7 @@ Ext.define('Ext.ux.grid.filter.Filter', {
         }
         this.setActive(this.isActivatable());
     },
-    
+
     /**
      * Sets the status of the filter and fires the appropriate events.
      * @param {Boolean} active        The new filter state.
@@ -185,5 +185,5 @@ Ext.define('Ext.ux.grid.filter.Filter', {
                 this.fireEvent(active ? 'activate' : 'deactivate', this);
             }
         }
-    }    
+    }
 });

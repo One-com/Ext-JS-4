@@ -183,7 +183,7 @@ items: [
      * Defaults to <code>['add', 'remove']</code>.
      */
     bubbleEvents: ['add', 'remove'],
-
+    
     // @private
     initComponent : function(){
         var me = this;
@@ -260,7 +260,7 @@ items: [
         );
 
         // layoutOnShow stack
-        me.layoutOnShow = new Ext.util.MixedCollection();
+        me.layoutOnShow = Ext.create('Ext.util.MixedCollection');
         me.callParent();
         me.initItems();
     },
@@ -305,14 +305,14 @@ items: [
     },
 
     /**
-     * Returns the {@link Ext.layout.AbstractContainer layout} instance currently associated with this Container.
+     * Returns the {@link Ext.layout.container.AbstractContainer layout} instance currently associated with this Container.
      * If a layout has not been instantiated yet, that is done first
-     * @return {Ext.layout.AbstractContainer} The layout
+     * @return {Ext.layout.container.AbstractContainer} The layout
      */
     getLayout : function() {
         var me = this;
         if (!me.layout || !me.layout.isLayout) {
-            me.setLayout(Ext.layout.Manager.create(me.layout, 'autocontainer'));
+            me.setLayout(Ext.layout.Layout.create(me.layout, 'autocontainer'));
         }
 
         return me.layout;
@@ -386,7 +386,7 @@ items: [
             }
 
             if (Ext.isString(config)) {
-                config = Ext.ComponentMgr.get(config);
+                config = Ext.ComponentManager.get(config);
                 Ext.applyIf(config, defaults);
             } else if (!config.isComponent) {
                 Ext.applyIf(config, defaults);
@@ -400,12 +400,7 @@ items: [
 
     // @private
     lookupComponent : function(comp) {
-        if (Ext.isString(comp)) {
-            return Ext.ComponentMgr.get(comp);
-        } else {
-            return this.createComponent(comp);
-        }
-        return comp;
+        return Ext.isString(comp) ? Ext.ComponentManager.get(comp) : this.createComponent(comp);
     },
 
     // @private
@@ -417,7 +412,7 @@ items: [
         // delete component.initialConfig.ownerCt;
         // delete component.ownerCt;
 
-        return Ext.ComponentMgr.create(config, defaultType || this.defaultType);
+        return Ext.ComponentManager.create(config, defaultType || this.defaultType);
     },
 
     // @private - used as the key lookup function for the items collection
@@ -439,23 +434,27 @@ Adds {@link Ext.Component Component}(s) to this Container.
 ##Notes:##
 
 If the Container is __already rendered__ when `add`
-is called, you may need to call {@link #doLayout} to refresh the view which causes
-any unrendered child Components to be rendered. This is required so that you can
-`add` multiple child components if needed while only refreshing the layout
-once. For example:
+is called, it will render the newly added Component into its content area.
 
-    r tb = new {@link Ext.toolbar.Toolbar}();
-    .render(document.body);  // toolbar is rendered
-    .add({text:'Button 1'}); // add multiple items ({@link #defaultType} for {@link Ext.toolbar.Toolbar Toolbar} is 'button')
-    .add({text:'Button 2'});
+__**If**__ the Container was configured with a size-managing {@link #layout} manager, the Container
+will recalculate its internal layout at this time too.
+
+Note that the default layout manager simply renders child Components sequentially into the content area and thereafter performs no sizing.
+
+If adding multiple new child Components, pass them as an array to the `add` method, so that only one layout recalculation is performed.
+
+    tb = new {@link Ext.toolbar.Toolbar}({
+        renderTo: document.body
+    });  // toolbar is rendered
+    tb.add([{text:'Button 1'}, {text:'Button 2'}]); // add multiple items. ({@link #defaultType} for {@link Ext.toolbar.Toolbar Toolbar} is 'button')
 
 ##Warning:## 
 
-Containers directly managed by the BorderLayout layout manager
+Components directly managed by the BorderLayout layout manager
 may not be removed or added.  See the Notes for {@link Ext.layout.container.Border BorderLayout}
 for more details.
 
-     * @param {...Object/Array} component
+     * @param {...Object/Array} Component
      * Either one or more Components to add or an Array of Components to add.
      * See `{@link #items}` for additional information.
      *
@@ -486,10 +485,13 @@ for more details.
             me.suspendLayout = true;
             for (i = 0, ln = items.length; i < ln; i++) {
                 item = items[i];
+                
+                //<debug>
                 if (!item) {
-                    throw "Trying to add a null item as a child of Container with itemId/id: " + me.getItemId();
+                    Ext.Error.raise("Trying to add a null item as a child of Container with itemId/id: " + me.getItemId());
                 }
-
+                //</debug>
+                
                 if (index != -1) {
                     item = me.add(index + i, item);
                 } else {
@@ -534,7 +536,7 @@ for more details.
     registerFloatingItem: function(cmp) {
         var me = this;
         if (!me.floatingItems) {
-            me.floatingItems = new Ext.ZIndexManager(me);
+            me.floatingItems = Ext.create('Ext.ZIndexManager', me);
         }
         me.floatingItems.register(cmp);
     },
@@ -691,7 +693,6 @@ for more details.
             len = items.length,
             i = 0,
             item,
-            childItems,
             result = [];
 
         for (; i < len; i++) {

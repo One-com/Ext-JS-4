@@ -4,26 +4,26 @@ Ext.require(['*']);
 
 Ext.onReady(function(){
     Ext.QuickTips.init();
-    
-    var dateMenu = Ext.create('Ext.menu.DateMenu', {
+
+    var dateMenu = Ext.create('Ext.menu.DatePicker', {
         handler: function(dp, date){
             Ext.example.msg('Date Selected', 'You choose {0}.', Ext.Date.format(date, 'M j, Y'));
-            
+
         }
     });
-    
-    var colorMenu = Ext.create('Ext.menu.ColorMenu', {
+
+    var colorMenu = Ext.create('Ext.menu.ColorPicker', {
         handler: function(cm, color){
             Ext.example.msg('Color Selected', '<span style="color:#' + color + ';">You choose {0}.</span>', color);
         }
     });
-    
-    var store = new Ext.data.ArrayStore({
+
+    var store = Ext.create('Ext.data.ArrayStore', {
         fields: ['abbr', 'state'],
         data : Ext.example.states
     });
 
-    var combo = Ext.create('Ext.form.ComboBox', {
+    var combo = Ext.create('Ext.form.field.ComboBox', {
         hideLabel: true,
         store: store,
         displayField: 'state',
@@ -152,7 +152,7 @@ Ext.onReady(function(){
                     menu: {
                         showSeparator: false,
                         items: [
-                            new Ext.ColorPalette({
+                            Ext.create('Ext.ColorPalette', {
                                 listeners: {
                                     select: function(cp, color){
                                         Ext.example.msg('Color Selected', 'You chose {0}.', color);
@@ -231,7 +231,7 @@ Ext.onReady(function(){
     });
 
     // add a combobox to the toolbar
-    var combo = Ext.create('Ext.form.ComboBox', {
+    var combo = Ext.create('Ext.form.field.ComboBox', {
         hideLabel: true,
         store: store,
         displayField: 'state',

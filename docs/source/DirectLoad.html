@@ -1,78 +1,84 @@
 <!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.form.action.DirectLoad"></a>/**
  * @class Ext.form.action.DirectLoad
  * @extends Ext.form.action.Load
- * &lt;p&gt;Provides {@link Ext.direct.Manager} support for loading form data.&lt;/p&gt;
- * &lt;p&gt;This example illustrates usage of Ext.direct.Direct to &lt;b&gt;load&lt;/b&gt; a form through Ext.Direct.&lt;/p&gt;
- * <br><span style="display: none">**/</span>var myFormPanel = new Ext.form.FormPanel({
+ * <p>Provides {@link Ext.direct.Manager} support for loading form data.</p>
+ * <p>This example illustrates usage of Ext.direct.Direct to <b>load</b> a form through Ext.Direct.</p>
+ * <pre><code>
+var myFormPanel = new Ext.form.FormPanel({
     // configs for FormPanel
-    title: &#39;Basic Information&#39;,
+    title: 'Basic Information',
     renderTo: document.body,
     width: 300, height: 160,
     padding: 10,
 
     // configs apply to child items
-    defaults: {anchor: &#39;100%&#39;},
-    defaultType: &#39;textfield&#39;,
+    defaults: {anchor: '100%'},
+    defaultType: 'textfield',
     items: [{
-        fieldLabel: &#39;Name&#39;,
-        name: &#39;name&#39;
+        fieldLabel: 'Name',
+        name: 'name'
     },{
-        fieldLabel: &#39;Email&#39;,
-        name: &#39;email&#39;
+        fieldLabel: 'Email',
+        name: 'email'
     },{
-        fieldLabel: &#39;Company&#39;,
-        name: &#39;company&#39;
+        fieldLabel: 'Company',
+        name: 'company'
     }],
 
     // configs for BasicForm
     api: {
         // The server-side method to call for load() requests
         load: Profile.getBasicInfo,
-        // The server-side must mark the submit handler as a &#39;formHandler&#39;
+        // The server-side must mark the submit handler as a 'formHandler'
         submit: Profile.updateBasicInfo
     },
     // specify the order for the passed params
-    paramOrder: [&#39;uid&#39;, &#39;foo&#39;]
+    paramOrder: ['uid', 'foo']
 });
 
 // load the form
 myFormPanel.getForm().load({
     // pass 2 arguments to server side getBasicInfo method (len=2)
     params: {
-        foo: &#39;bar&#39;,
+        foo: 'bar',
         uid: 34
     }
 });
- * <br><span style="display: none">/**</span> * The data packet sent to the server will resemble something like:
- * <br><span style="display: none">**/</span>[
+ * </code></pre>
+ * The data packet sent to the server will resemble something like:
+ * <pre><code>
+[
     {
-        &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;getBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:2,
-        &quot;data&quot;:[34,&quot;bar&quot;] // note the order of the params
+        "action":"Profile","method":"getBasicInfo","type":"rpc","tid":2,
+        "data":[34,"bar"] // note the order of the params
     }
 ]
- * <br><span style="display: none">/**</span> * The form will process a data packet returned by the server that is similar
+ * </code></pre>
+ * The form will process a data packet returned by the server that is similar
  * to the following format:
- * <br><span style="display: none">**/</span>[
+ * <pre><code>
+[
     {
-        &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;getBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:2,
-        &quot;result&quot;:{
-            &quot;success&quot;:true,
-            &quot;data&quot;:{
-                &quot;name&quot;:&quot;Fred Flintstone&quot;,
-                &quot;company&quot;:&quot;Slate Rock and Gravel&quot;,
-                &quot;email&quot;:&quot;fred.flintstone@slaterg.com&quot;
+        "action":"Profile","method":"getBasicInfo","type":"rpc","tid":2,
+        "result":{
+            "success":true,
+            "data":{
+                "name":"Fred Flintstone",
+                "company":"Slate Rock and Gravel",
+                "email":"fred.flintstone@slaterg.com"
             }
         }
     }
 ]
- * <br><span style="display: none">/**</span> */
-Ext.define(&#39;Ext.form.action.DirectLoad&#39;, {
-    extend:&#39;Ext.form.action.Load&#39;,
-    requires: [&#39;Ext.direct.Manager&#39;],
-    alternateClassName: &#39;Ext.form.Action.DirectLoad&#39;,
-    alias: &#39;formaction.directload&#39;,
+ * </code></pre>
+ */
+Ext.define('Ext.form.action.DirectLoad', {
+    extend:'Ext.form.action.Load',
+    requires: ['Ext.direct.Manager'],
+    alternateClassName: 'Ext.form.Action.DirectLoad',
+    alias: 'formaction.directload',
 
-    type: &#39;directload&#39;,
+    type: 'directload',
 
     run: function() {
         this.form.api.load.apply(window, this.getArgs());
@@ -92,7 +98,7 @@ Ext.define(&#39;Ext.form.action.DirectLoad&#39;, {
 
         // If a paramOrder was specified, add the params into the argument list in that order.
         if (paramOrder) {
-            for (i = 0, len = paramOrder.length; i &lt; len; i++) {
+            for (i = 0, len = paramOrder.length; i < len; i++) {
                 args.push(params[paramOrder[i]]);
             }
         }
@@ -119,7 +125,7 @@ Ext.define(&#39;Ext.form.action.DirectLoad&#39;, {
             result = {};
         }
         this.callParent([result]);
-        Ext.form.action.DirectLoad.superclass.onSuccess.call(this, result);
+        this.callParent([result]);
     }
 });
 

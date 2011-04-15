@@ -11,7 +11,8 @@ Ext.require([
 ]);
 
 Ext.onReady(function(){
-    Ext.regModel('Image_', { // window.Image is protected in ie6 !!!
+    ImageModel = Ext.define('ImageModel', {
+        extend: 'Ext.data.Model',
         fields: [
            {name: 'name'},
            {name: 'url'},
@@ -19,9 +20,9 @@ Ext.onReady(function(){
            {name:'lastmod', type:'date', dateFormat:'timestamp'}
         ]
     });
-    
+
     var store = Ext.create('Ext.data.Store', {
-        model: 'Image_',
+        model: 'ImageModel',
         proxy: {
             type: 'ajax',
             url: 'get-images.php',

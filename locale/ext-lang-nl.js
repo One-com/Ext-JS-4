@@ -16,8 +16,8 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = '';
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = '{0} geselecteerde rij(en)';
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = '{0} geselecteerde rij(en)';
     }
 
     if(Ext.LoadMask){
@@ -130,7 +130,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText: 'Pagina',
             afterPageText: 'van {0}',
@@ -144,12 +144,12 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = 'De waarde van dit veld is ongeldig';
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = 'De waarde van dit veld is ongeldig';
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText: 'De minimale lengte van dit veld is {0}',
             maxLengthText: 'De maximale lengte van dit veld is {0}',
             blankText: 'Dit veld is verplicht',
@@ -158,8 +158,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             decimalSeparator : ",",
             decimalPrecision : 2,
             minText: 'De minimale waarde van dit veld is {0}',
@@ -168,8 +168,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText: 'Uitgeschakeld',
             disabledDatesText: 'Uitgeschakeld',
             minText: 'De datum in dit veld moet na {0} liggen',
@@ -180,15 +180,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText: 'Bezig met laden...',
             valueNotFoundText: undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText: 'Dit veld moet een e-mail adres bevatten in het formaat "gebruiker@domein.nl"',
             urlText: 'Dit veld moet een URL bevatten in het formaat "http:/'+'/www.domein.nl"',
             alphaText: 'Dit veld mag alleen letters en _ bevatten',
@@ -196,8 +196,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText: 'Vul hier de URL voor de hyperlink in:',
             buttonTips: {
                 bold: {
@@ -274,8 +274,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText: 'Sorteer oplopend',
             sortDescText: 'Sorteer aflopend',
             columnsText: 'Kolommen'
@@ -305,8 +305,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Time){
-        Ext.apply(Ext.form.Time.prototype, {
+    if(Ext.form.field.Time){
+        Ext.apply(Ext.form.field.Time.prototype, {
             minText: 'De tijd in dit veld moet op of na {0} liggen',
             maxText: 'De tijd in dit veld moet op of voor {0} liggen',
             invalidText: '{0} is geen geldig tijdstip',

@@ -6,7 +6,7 @@ Ext.require([
     'Ext.grid.*',
     'Ext.data.*',
     'Ext.util.*',
-    'Ext.tip.QuickTips',
+    'Ext.tip.QuickTipManager',
     'Ext.ux.LiveSearchGridPanel'
 ]);
 

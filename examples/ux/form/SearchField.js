@@ -1,5 +1,5 @@
 Ext.define('Ext.ux.form.SearchField', {
-    extend: 'Ext.form.Trigger',
+    extend: 'Ext.form.field.Trigger',
     
     alias: 'widget.searchfield',
     

@@ -22,7 +22,7 @@ Ext.regModel('User', {
  * POST request to '/users':
  * 
 <pre><code>
-var user = Ext.ModelMgr.create({name: 'Ed Spencer', email: 'ed@sencha.com'}, 'User');
+var user = Ext.ModelManager.create({name: 'Ed Spencer', email: 'ed@sencha.com'}, 'User');
 
 user.save(); //POST /users
 </code></pre>
@@ -63,7 +63,7 @@ store.load(); //GET /users
 //2. Load directly from the Model
 
 //GET /users/123
-Ext.ModelMgr.getModel('User').load(123, {
+Ext.ModelManager.getModel('User').load(123, {
     success: function(user) {
         console.log(user.getId()); //outputs 123
     }

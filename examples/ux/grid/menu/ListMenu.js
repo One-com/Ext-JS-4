@@ -7,7 +7,7 @@
  */
 Ext.define('Ext.ux.grid.menu.ListMenu', {
     extend: 'Ext.menu.Menu',
-    
+
     /**
      * @cfg {String} labelField
      * Defaults to 'text'.
@@ -41,9 +41,9 @@ Ext.define('Ext.ux.grid.menu.ListMenu', {
              */
             'checkchange'
         );
-      
+
         this.callParent([cfg = cfg || {}]);
-    
+
         if(!cfg.store && cfg.options){
             var options = [];
             for(var i=0, len=cfg.options.length; i<len; i++){
@@ -54,8 +54,8 @@ Ext.define('Ext.ux.grid.menu.ListMenu', {
                     case 'string': options.push([value, value]); break;
                 }
             }
-            
-            this.store = new Ext.data.ArrayStore({
+
+            this.store = Ext.create('Ext.data.ArrayStore', {
                 fields: ['id', this.labelField],
                 data:   options,
                 listeners: {
@@ -72,7 +72,7 @@ Ext.define('Ext.ux.grid.menu.ListMenu', {
 
     destroy : function () {
         if (this.store) {
-            this.store.destroy();    
+            this.store.destroy();
         }
         this.callParent();
     },
@@ -98,7 +98,7 @@ Ext.define('Ext.ux.grid.menu.ListMenu', {
             }
         };
     }(),
-    
+
     /** @private */
     onLoad : function (store, records) {
         var me = this,
@@ -112,7 +112,7 @@ Ext.define('Ext.ux.grid.menu.ListMenu', {
         gid = me.single ? Ext.id() : null;
         for (i = 0, len = records.length; i < len; i++) {
             itemValue = records[i].get('id');
-            item = new Ext.menu.CheckItem({
+            item = Ext.create('Ext.menu.CheckItem', {
                 text: records[i].get(me.labelField),
                 group: gid,
                 checked: Ext.Array.contains(me.selected, itemValue),
@@ -124,9 +124,9 @@ Ext.define('Ext.ux.grid.menu.ListMenu', {
 
             me.add(item);
         }
-        
+
         me.loaded = true;
-        
+
         if (visible) {
             me.show();
         }
@@ -140,7 +140,7 @@ Ext.define('Ext.ux.grid.menu.ListMenu', {
     getSelected : function () {
         return this.selected;
     },
-    
+
     /** @private */
     setSelected : function (value) {
         value = this.selected = [].concat(value);
@@ -156,7 +156,7 @@ Ext.define('Ext.ux.grid.menu.ListMenu', {
             }, this);
         }
     },
-    
+
     /**
      * Handler for the 'checkchange' event from an check item in this menu
      * @param {Object} item Ext.menu.CheckItem
@@ -170,7 +170,7 @@ Ext.define('Ext.ux.grid.menu.ListMenu', {
             }
         },this);
         this.selected = value;
-        
+
         this.fireEvent('checkchange', item, checked);
-    }    
+    }
 });

@@ -13,8 +13,8 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} ligne{1} sélectionnée{1}";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} ligne{1} sélectionnée{1}";
     }
 
     if(Ext.LoadMask){
@@ -140,7 +140,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Page",
             afterPageText  : "sur {0}",
@@ -158,12 +158,12 @@ Ext.onReady(function() {
         Ext.form.Basic.prototype.waitTitle = "Veuillez patienter...";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "La valeur de ce champ est invalide";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "La valeur de ce champ est invalide";
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "La longueur minimum de ce champ est de {0} caractère(s)",
             maxLengthText : "La longueur maximum de ce champ est de {0} caractère(s)",
             blankText     : "Ce champ est obligatoire",
@@ -172,8 +172,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             decimalSeparator : ",",
             decimalPrecision : 2,
             minText : "La valeur minimum de ce champ doit être de {0}",
@@ -182,8 +182,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Désactivé",
             disabledDatesText : "Désactivé",
             minText           : "La date de ce champ ne peut être antérieure au {0}",
@@ -194,15 +194,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "En cours de chargement...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Ce champ doit contenir une adresse email au format: "usager@example.com"',
             urlText      : 'Ce champ doit contenir une URL au format suivant: "http:/'+'/www.example.com"',
             alphaText    : 'Ce champ ne peut contenir que des lettres et le caractère souligné (_)',
@@ -210,8 +210,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : "Veuillez entrer l'URL pour ce lien:",
             buttonTips : {
                 bold : {
@@ -288,8 +288,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Tri croissant",
             sortDescText : "Tri décroissant",
             columnsText  : "Colonnes"
@@ -321,8 +321,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Time){
-        Ext.apply(Ext.form.Time.prototype, {
+    if(Ext.form.field.Time){
+        Ext.apply(Ext.form.field.Time.prototype, {
             minText     : "L'heure de ce champ ne peut être antérieure à {0}",
             maxText     : "L'heure de ce champ ne peut être postérieure à {0}",
             invalidText : "{0} n'est pas une heure valide",

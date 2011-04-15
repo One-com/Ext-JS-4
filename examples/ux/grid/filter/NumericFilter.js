@@ -1,10 +1,10 @@
-/** 
+/**
  * @class Ext.ux.grid.filter.NumericFilter
  * @extends Ext.ux.grid.filter.Filter
  * Filters using an Ext.ux.grid.menu.RangeMenu.
  * <p><b><u>Example Usage:</u></b></p>
- * <pre><code>    
-var filters = new Ext.ux.grid.GridFilters({
+ * <pre><code>
+var filters = Ext.create('Ext.ux.grid.GridFilters', {
     ...
     filters: [{
         type: 'numeric',
@@ -18,7 +18,7 @@ var filters = new Ext.ux.grid.GridFilters({
 Ext.define('Ext.ux.grid.filter.NumericFilter', {
     extend: 'Ext.ux.grid.filter.Filter',
     alias: 'gridfilter.numeric',
-    uses: ['Ext.form.Number'],
+    uses: ['Ext.form.field.Number'],
 
     /**
      * @private @override
@@ -29,11 +29,11 @@ Ext.define('Ext.ux.grid.filter.NumericFilter', {
     createMenu: function(config) {
         var me = this,
             menu;
-        menu = new Ext.ux.grid.menu.RangeMenu(config);
+        menu = Ext.create('Ext.ux.grid.menu.RangeMenu', config);
         menu.on('update', me.fireUpdate, me);
         return menu;
     },
-    
+
     /**
      * @private
      * Template method that is to get and return the value of the filter.
@@ -47,7 +47,7 @@ Ext.define('Ext.ux.grid.filter.NumericFilter', {
      * @private
      * Template method that is to set the value of the filter.
      * @param {Object} value The value to set the filter
-     */	
+     */
     setValue : function (value) {
         this.menu.setValue(value);
     },
@@ -68,7 +68,7 @@ Ext.define('Ext.ux.grid.filter.NumericFilter', {
         }
         return false;
     },
-    
+
     /**
      * @private
      * Template method that is to get and return serialized filter data for

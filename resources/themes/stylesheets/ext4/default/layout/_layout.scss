@@ -114,9 +114,6 @@
     .#{$prefix}frame-mc {
         position: relative;
         background-repeat: repeat-x;
-    }
-    
-    .#{$prefix}frame-mc {
         overflow: hidden;
     }
 
@@ -192,5 +189,10 @@
 
     .#{$prefix}column {
         float: left;
+    }
+    @if $include-ie {
+        .#{$prefix}ie6 .#{$prefix}column {
+            display: inline; /*prevent IE6 double-margin bug*/
+        }
     }
 }

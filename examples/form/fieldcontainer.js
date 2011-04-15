@@ -1,14 +1,14 @@
 Ext.require([
     'Ext.form.*',
     'Ext.data.*',
-    'Ext.tip.QuickTips'
+    'Ext.tip.QuickTipManager'
 ]);
 
 Ext.onReady(function() {
     Ext.QuickTips.init();
 
-
-    Ext.regModel('Employee', {
+    Ext.define('Employee', {
+        extend: 'Ext.data.Model',
         fields: [
             {name: 'email',     type: 'string'},
             {name: 'title',     type: 'string'},
@@ -24,8 +24,7 @@ Ext.onReady(function() {
         ]
     });
 
-    
-    var form = new Ext.form.FormPanel({
+    var form = Ext.create('Ext.form.Panel', {
         renderTo: 'docbody',
         title   : 'FieldContainers',
         autoHeight: true,
@@ -47,6 +46,7 @@ Ext.onReady(function() {
             {
                 xtype: 'fieldcontainer',
                 fieldLabel: 'Date Range',
+                combineErrors: true,
                 msgTarget : 'side',
                 layout: 'hbox',
                 defaults: {
@@ -85,6 +85,7 @@ Ext.onReady(function() {
                     {
                         xtype: 'fieldcontainer',
                         fieldLabel: 'Phone',
+                        combineErrors: true,
                         msgTarget: 'under',
                         defaults: {
                             hideLabel: true
@@ -130,6 +131,7 @@ Ext.onReady(function() {
                     },
                     {
                         xtype : 'fieldcontainer',
+                        combineErrors: true,
                         msgTarget: 'side',
                         fieldLabel: 'Full Name',
                         defaults: {
@@ -152,7 +154,7 @@ Ext.onReady(function() {
                                 displayField:   'name',
                                 valueField:     'value',
                                 queryMode: 'local',
-                                store:          new Ext.data.Store({
+                                store:          Ext.create('Ext.data.Store', {
                                     fields : ['name', 'value'],
                                     data   : [
                                         {name : 'Mr',   value: 'mr'},
@@ -185,7 +187,7 @@ Ext.onReady(function() {
             {
                 text   : 'Load test data',
                 handler: function() {
-                    this.up('form').getForm().loadRecord(Ext.ModelMgr.create({
+                    this.up('form').getForm().loadRecord(Ext.ModelManager.create({
                         'email'    : 'abe@sencha.com',
                         'title'    : 'mr',
                         'firstName': 'Abraham',
@@ -209,12 +211,12 @@ Ext.onReady(function() {
                         Ext.iterate(form.getValues(), function(key, value) {
                             s += Ext.util.Format.format("{0} = {1}<br />", key, value);
                         }, this);
-                    
+
                         Ext.Msg.alert('Form Values', s);
                     }
                 }
             },
-            
+
             {
                 text   : 'Reset',
                 handler: function() {

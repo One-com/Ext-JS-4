@@ -15,42 +15,42 @@ Ext.require([
 
 Ext.onReady(function() {
     var items = [];
-    
+
     /**
      * Basic panel
      */
     items.push({
         xtype: 'panel',
-        
+
         x: 50, y: 100,
-        
+
         width : 150,
         height: 150,
-        
+
         title: 'Basic Panel',
-        
+
         bodyPadding: 5,
         html       : 'Some content',
         collapsible: true
     });
-    
+
     /**
      * Masked Panel
      */
     items.push({
         xtype: 'panel',
-        
+
         x: 210, y: 100,
-        
+
         width : 150,
         height: 150,
-        
+
         title: 'Masked Panel',
-        
+
         bodyPadding: 5,
         html       : 'Some content',
         collapsible: true,
-        
+
         listeners: {
             render: function(p) {
                 p.body.mask('Loading...');
@@ -58,45 +58,45 @@ Ext.onReady(function() {
             delay: 50
         }
     });
-    
+
     /**
      * Framed Panel
      */
     items.push({
         xtype: 'panel',
-        
+
         x: 370, y: 100,
-        
+
         width : 150,
         height: 150,
-        
+
         title: 'Framed Panel',
-        
+
         html       : 'Some content',
         frame      : true,
         collapsible: true
     });
-    
+
     /**
      * Basic Window
      */
     Ext.createWidget('window', {
         x: 530, y: 100,
-        
+
         width   : 150,
         height  : 150,
         minWidth: 150,
-        
+
         title: 'Window',
-        
+
         bodyPadding: 5,
         html       : 'Click Submit for Confirmation Msg.',
-        
+
         collapsible: true,
         closable   : false,
         draggable  : false,
         resizable: false,
-        
+
         tbar: [
             {text: 'Toolbar'}
         ],
@@ -104,15 +104,13 @@ Ext.onReady(function() {
             {
                 text   : 'Submit',
                 id     : 'message_box',
-                cls    : 'x-icon-btn',
-                iconCls: 'x-icon-btn-ok',
                 handler: function() {
                     Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?');
                 }
             }
-        ]        
+        ]
     }).show();
-    
+
     /**
      * Toolbar with a menu
      */
@@ -136,17 +134,17 @@ Ext.onReady(function() {
             }
         ]
     });
-    
+
     items.push({
         xtype: 'panel',
-        
+
         x: 690, y: 100,
-        
+
         width : 450,
         height: 150,
-        
+
         title: 'Basic Panel With Toolbars',
-        
+
         tbar: [
             'Toolbar &amp; Menus',
             ' ',
@@ -178,22 +176,22 @@ Ext.onReady(function() {
             {text: 'Bottom Bar'}
         ]
     });
-    
+
     /**
      * Form and form widgets
      */
     items.push({
         xtype: 'form',
-        
+
         id   : 'form-widgets',
         title: 'Form Widgets',
-        
+
         x: 50, y: 260,
-        
+
         width : 630,
         height: 700,
         frame: true,
-        
+
         tools: [
             {id:'toggle'},
             {id:'close'},
@@ -215,15 +213,15 @@ Ext.onReady(function() {
             {id:'save'},
             {id:'print'}
         ],
-        
+
         bodyPadding: '10 20',
-        
+
         defaults: {
             anchor    : '98%',
             msgTarget : 'side',
             allowBlank: false
         },
-        
+
         items: [
             {
                 xtype: 'label',
@@ -254,13 +252,13 @@ Ext.onReady(function() {
             //     itemCls: 'x-form-required',
             //     xtype: 'textfield'
             // },
-            {
-                fieldLabel: 'NumberField',
-                xtype     : 'numberfield',
-                name      : 'number',
-                emptyText : '(This field is optional)',
-                allowBlank: true
-            },
+            // {
+            //     fieldLabel: 'NumberField',
+            //     xtype     : 'numberfield',
+            //     name      : 'number',
+            //     emptyText : '(This field is optional)',
+            //     allowBlank: true
+            // },
             {
                 fieldLabel: 'TextArea',
                 xtype     : 'textareafield',
@@ -308,12 +306,10 @@ Ext.onReady(function() {
                 height        : 50
             }
         ],
-        
+
         buttons: [
             {
                 text   :'Toggle Enabled',
-                cls    : 'x-icon-btn',
-                iconCls: 'x-icon-btn-toggle',
                 handler: function() {
                     Ext.each(Ext.getCmp('form-widgets').getForm()._fields.items, function(item) {
                         item.setDisabled(!item.disabled);
@@ -322,42 +318,38 @@ Ext.onReady(function() {
             },
             {
                 text   : 'Reset Form',
-                cls    : 'x-icon-btn',
-                iconCls: 'x-icon-btn-reset',
                 handler: function() {
                     Ext.getCmp('form-widgets').getForm().reset();
                 }
             },
             {
                 text   : 'Validate',
-                cls    : 'x-icon-btn',
-                iconCls: 'x-icon-btn-ok',
                 handler: function() {
                     Ext.getCmp('form-widgets').getForm().isValid();
                 }
             }
         ]
     });
-    
+
     /**
      * Border layout
      */
     items.push({
         xtype: 'panel',
-        
+
         width : 450,
         height: 350,
-        
+
         x: 690, y: 260,
-        
+
         title : 'BorderLayout Panel',
         layout: 'border',
-        
+
         defaults: {
             collapsible: true,
             split      : true
         },
-        
+
         items: [
             {
                 title  : 'North',
@@ -398,7 +390,7 @@ Ext.onReady(function() {
             }
         ]
     });
-    
+
     /**
      * Grid
      */
@@ -408,7 +400,7 @@ Ext.onReady(function() {
         ['Altria Group Inc',                    83.81, 0.28,  0.34],
         ['Citigroup, Inc.',                     49.37, 0.02,  0.04]
     ];
-    
+
     var store = Ext.create('Ext.data.ArrayStore', {
         fields: [
            {name: 'company'},
@@ -422,96 +414,97 @@ Ext.onReady(function() {
         },
         data: myData
     });
-    
+
     var pagingBar = Ext.createWidget('pagingtoolbar', {
         pageSize   : 5,
         store      : store,
         displayInfo: true,
         displayMsg : 'Displaying topics {0} - {1} of {2}'
     });
-    
+
     items.push({
         xtype: 'gridpanel',
-        
+
         height: 200,
         width : 450,
-        
+
         x: 690, y: 620,
-        
+
         title: 'GridPanel',
-        
+
         store: store,
-        
+
         columns: [
             {header: "Company",      width: 160, sortable: true, dataIndex: 'company', id:'company'},
             {header: "Price",        width: 75,  sortable: true, dataIndex: 'price'},
             {header: "Change",       width: 75,  sortable: true, dataIndex: 'change'},
             {header: "% Change",     width: 75,  sortable: true, dataIndex: 'pctChange'}
         ],
-        
+
         autoExpandColumn: 'company',
         loadMask        : true,
-        
+
         viewConfig: {
             stripeRows: true
         },
-        
+
         bbar: pagingBar,
         tbar: [
             {text: 'Toolbar'}
          ]
     });
-    
+
     //=============================================================
     // Accordion / Tree
     //=============================================================
-    // Ext.regModel('TreeItem', {
+    // Ext.define('TreeItem', {
+    //     extend: 'Ext.data.Model',
     //     fields: [
     //         'text'
     //     ]
     // });
-    // 
-    // var store = new Ext.data.TreeStore({
+    //
+    // var store = Ext.create('Ext.data.TreeStore', {
     //     model: 'TreeItem'
     // });
-    // 
+    //
     // sto
-    // 
-    // var tree = new Ext.tree.TreePanel({
+    //
+    // var tree = Ext.create('Ext.tree.Panel', {
     //     title: 'TreePanel'
     //     //autoScroll: true,
     //     //enableDD: true
     // });
 
-    // var root = new Ext.tree.TreeNode({
+    // var root = Ext.create('Ext.tree.TreeNode', {
     //     text: 'Root Node',
     //     expanded: true
     // });
     // tree.setRootNode(root);
-    // 
-    // root.appendChild(new Ext.tree.TreeNode({text: 'Item 1'}));
-    // root.appendChild(new Ext.tree.TreeNode({text: 'Item 2'}));
-    // var node = new Ext.tree.TreeNode({text: 'Folder'});
-    // node.appendChild(new Ext.tree.TreeNode({text: 'Item 3'}));
+    //
+    // root.appendChild(Ext.create('Ext.tree.TreeNode', {text: 'Item 1'}));
+    // root.appendChild(Ext.create('Ext.tree.TreeNode', {text: 'Item 2'}));
+    // var node = Ext.create('Ext.tree.TreeNode', {text: 'Folder'});
+    // node.appendChild(Ext.create('Ext.tree.TreeNode', {text: 'Item 3'}));
     // root.appendChild(node);
 
     var accConfig = {
         title : 'Accordion and TreePanel',
         layout: 'accordion',
-        
+
         x: 690, y: 830,
-        
+
         width : 450,
         height: 240,
-        
+
         bodyStyle: {
             'background-color': '#eee'
         },
-        
+
         defaults: {
             border: false
         },
-        
+
         items: [
             {
                 title: 'Item 1',
@@ -535,16 +528,16 @@ Ext.onReady(function() {
      */
     var tabCfg = {
         xtype: 'tabpanel',
-        
+
         width : 310,
         height: 150,
-        
+
         activeTab: 0,
-        
+
         defaults: {
             bodyStyle: 'padding:10px;'
         },
-        
+
         items: [
             {
                 title: 'Tab 1',
@@ -560,12 +553,12 @@ Ext.onReady(function() {
             }
         ]
     };
-    
+
     items.push(Ext.applyIf({
         x: 50, y: 970,
-        
+
         enableTabScroll: true,
-        
+
         items: [
             {
                 title: 'Tab 1',
@@ -593,28 +586,28 @@ Ext.onReady(function() {
             }
         ]
     }, tabCfg));
-    
+
     items.push(Ext.apply({
         plain: true,
         x    : 370, y: 970
     }, tabCfg));
-    
+
     /**
      * DatePicker
      */
     items.push({
         xtype: 'panel',
-        
+
         x: 50, y: 1130,
-        
+
         border: false,
         width : 180,
-        
+
         items: {
             xtype: 'datepicker'
         }
     });
-    
+
     //=============================================================
     // Resizable
     //=============================================================
@@ -622,7 +615,7 @@ Ext.onReady(function() {
         style: 'background: transparent;',
         html: '<div style="padding:20px;">Resizable handles</div>'
     });
-    
+
     rszEl.position('absolute', 1, 240, 1130);
     rszEl.setSize(180, 180);
     Ext.create('Ext.resizer.Resizer', {
@@ -630,7 +623,7 @@ Ext.onReady(function() {
         handles: 'all',
         pinned: true
     });
-    
+
     /**
      * ProgressBar / Slider
      */
@@ -638,22 +631,22 @@ Ext.onReady(function() {
         value: 0.5,
         text : 'Progress text...'
     });
-    
+
     items.push({
         xtype: 'panel',
         title: 'ProgressBar / Slider',
-        
+
         x: 690, y: 1080,
-        
+
         width: 450,
         height: 200,
-        
+
         bodyPadding: 5,
         layout     : {
             type : 'vbox',
             align: 'stretch'
         },
-        
+
         items: [
             progressbar,
             {
@@ -671,26 +664,26 @@ Ext.onReady(function() {
             }
         ]
     });
-    
+
     Ext.createWidget('viewport', {
         layout: 'absolute',
         autoScroll: true,
         items: items
     });
-    
+
     progressbar.wait();
-    
+
     /**
      * Stylesheet Switcher
      */
     Ext.get('styleswitcher_select').on('change', function(e, select) {
         var name = select[select.selectedIndex].value;
         setActiveStyleSheet(name);
-        
+
         Ext.getBody().addCls('x-hide-visibility');
-        Ext.ComponentMgr.each(function(id, c){c.doLayout && c.doLayout();});
+        Ext.ComponentManager.each(function(id, c){c.doLayout && c.doLayout();});
         Ext.getBody().removeCls('x-hide-visibility');
-        
+
         Ext.getCmp('htmleditor').initEditor();
     });
 

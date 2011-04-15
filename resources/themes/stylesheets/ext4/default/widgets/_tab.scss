@@ -4,7 +4,7 @@
 @mixin extjs-tab {
     @include x-frame(
         $cls: 'tab',
-        $ui: 'top',
+        $ui: 'default-top',
         $border-radius: $tab-top-border-radius,
         $border-width: $tab-top-border-width,
         $background-color: $tab-base-color,
@@ -15,7 +15,7 @@
 
     @include x-frame(
         $cls: 'tab',
-        $ui: 'bottom',
+        $ui: 'default-bottom',
         $border-radius: $tab-bottom-border-radius,
         $border-width: $tab-bottom-border-width,
         $background-color: $tab-base-color,
@@ -34,6 +34,12 @@
         height: $tab-height - 1;
         border-color: $tab-border-color;
         cursor: pointer;
+        cursor: hand;
+
+        * {
+            cursor: pointer;
+            cursor: hand;
+        }
 
         em {
             display: block;
@@ -41,9 +47,7 @@
         }
         
         button {
-            background-color: transparent;
-            background-position: 0 -1px;
-            background-repeat: no-repeat;
+            background: none;
             border: 0;
             padding: 0;
             margin: 0;
@@ -57,16 +61,25 @@
             }
             
             color: $tab-color;
-            cursor: pointer;
             outline: 0 none;
             
-            overflow: visible;
+            overflow: hidden;
+            overflow-x: visible;
             -o-text-overflow: ellipsis;
             text-overflow: ellipsis;
             
             &::-moz-focus-inner {
                 border: 0;
                 padding: 0;
+            }
+
+            .#{$prefix}tab-inner {
+                background-color: transparent;
+                background-repeat: no-repeat;
+                background-position: 0 -1px;
+                display: block;
+                text-align: center;
+                white-space: nowrap;
             }
         }
         
@@ -92,9 +105,15 @@
                 height: 100%;
             }
         }
+
+        .#{$prefix}ie .#{$prefix}tab-active button:active {
+            position: relative;
+            top: -1px;
+            left: -1px;
+        }
     }
 
-    .#{$prefix}tab-top {
+    .#{$prefix}tab-default-top {
         @if $tab-inner-border {
             @include inner-border(
                 $width: $tab-top-inner-border-width,
@@ -110,16 +129,18 @@
             padding-bottom: $framepad;
         }
 
-        button {
+        button,
+        .#{$prefix}tab-inner {
             height: $tab-height - $framepad * 2 - top($tab-top-border-width) - 1;
+            line-height: $tab-height - $framepad * 2 - top($tab-top-border-width) - 1;
         }
     }
-    .#{$prefix}tab-top-active {
+    .#{$prefix}tab-default-top-active {
         border-bottom-color: $tab-bar-strip-background-color !important;
     }
 
     
-    .#{$prefix}tab-bottom {
+    .#{$prefix}tab-default-bottom {
         @if $tab-inner-border {
             @include inner-border(
                 $width: $tab-bottom-inner-border-width,
@@ -140,30 +161,34 @@
             padding-top: $framepad;
         }
 
-        button {
+        button,
+        .#{$prefix}tab-inner {
             height: $tab-height - $framepad * 2 - bottom($tab-bottom-border-width) - 1;
+            line-height: $tab-height - $framepad * 2 - bottom($tab-bottom-border-width) - 1;
         }
     }
 
-    .#{$prefix}tab-bottom-active {
+    .#{$prefix}tab-default-bottom-active {
         border-top-color: $tab-bar-strip-background-color !important;
     }
 
     .#{$prefix}tab-default-disabled {
         cursor: default;
+
+        * {
+            cursor: default;
+        }
         
         border-color: $tab-border-color-disabled;
         @include background-gradient($tab-base-color-disabled, $tab-background-gradient-disabled);
         
         button {
             color: $tab-color-disabled !important;
-            
-            cursor: default;
         }
     }
     
-    .#{$prefix}tab-text-icon-left {
-        button {
+    .#{$prefix}tab-icon-text-left {
+        .#{$prefix}tab-inner {
             padding-left: 20px;
         }
     }
@@ -287,17 +312,17 @@
     
     @if not $supports-gradients or $compile-all {
         .#{$prefix}nlg {
-            .#{$prefix}tab-top { background-image: theme-image($theme-name, 'tab/tab-top-bg.gif'); }
-            .#{$prefix}tab-bottom { background-image: theme-image($theme-name, 'tab/tab-bottom-bg.gif'); }
+            .#{$prefix}tab-top { background-image: theme-image($theme-name, 'tab/tab-default-top-bg.gif'); }
+            .#{$prefix}tab-bottom { background-image: theme-image($theme-name, 'tab/tab-default-bottom-bg.gif'); }
             
-            .#{$prefix}tab-top-over { background-image: theme-image($theme-name, 'tab/tab-top-over-bg.gif'); }
-            .#{$prefix}tab-bottom-over { background-image: theme-image($theme-name, 'tab/tab-bottom-over-bg.gif'); }
+            .#{$prefix}tab-top-over { background-image: theme-image($theme-name, 'tab/tab-default-top-over-bg.gif'); }
+            .#{$prefix}tab-bottom-over { background-image: theme-image($theme-name, 'tab/tab-default-bottom-over-bg.gif'); }
         
-            .#{$prefix}tab-top-active { background-image: theme-image($theme-name, 'tab/tab-top-active-bg.gif'); }
-            .#{$prefix}tab-bottom-active { background-image: theme-image($theme-name, 'tab/tab-bottom-active-bg.gif'); }
+            .#{$prefix}tab-top-active { background-image: theme-image($theme-name, 'tab/tab-default-top-active-bg.gif'); }
+            .#{$prefix}tab-bottom-active { background-image: theme-image($theme-name, 'tab/tab-default-bottom-active-bg.gif'); }
             
-            .#{$prefix}tab-top-disabled { background-image: theme-image($theme-name, 'tab/tab-top-disabled-bg.gif') !important; }
-            .#{$prefix}tab-bottom-disabled { background-image: theme-image($theme-name, 'tab/tab-bottom-disabled-bg.gif') !important; }
+            .#{$prefix}tab-top-disabled { background-image: theme-image($theme-name, 'tab/tab-default-top-disabled-bg.gif') !important; }
+            .#{$prefix}tab-bottom-disabled { background-image: theme-image($theme-name, 'tab/tab-default-bottom-disabled-bg.gif') !important; }
         }     
     }
     
@@ -330,16 +355,16 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-image($theme-name, 'tab/tab-top-over-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-over-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-image($theme-name, 'tab/tab-top-over-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-over-sides.gif');
                 }
                 .#{$prefix}frame-mc {
                     background-color: $tab-base-color-over;
                     background-repeat: repeat-x;
-                    background-image: theme-image($theme-name, 'tab/tab-top-over-bg.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-over-bg.gif');
                 }
             }
 
@@ -350,16 +375,16 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-image($theme-name, 'tab/tab-bottom-over-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-over-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-image($theme-name, 'tab/tab-bottom-over-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-over-sides.gif');
                 }
                 .#{$prefix}frame-mc {
                     background-color: $tab-base-color-over;
                     background-repeat: repeat-x;
-                    background-image: theme-image($theme-name, 'tab/tab-bottom-over-bg.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-over-bg.gif');
                 }
             }
 
@@ -370,16 +395,16 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-image($theme-name, 'tab/tab-top-active-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-active-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-image($theme-name, 'tab/tab-top-active-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-active-sides.gif');
                 }
                 .#{$prefix}frame-mc {
                     background-color: $tab-base-color-active;
                     background-repeat: repeat-x;
-                    background-image: theme-image($theme-name, 'tab/tab-top-active-bg.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-active-bg.gif');
                 }
             }
 
@@ -390,16 +415,16 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-image($theme-name, 'tab/tab-bottom-active-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-active-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-image($theme-name, 'tab/tab-bottom-active-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-active-sides.gif');
                 }
                 .#{$prefix}frame-mc {
                     background-color: $tab-base-color-active;
                     background-repeat: repeat-x;
-                    background-image: theme-image($theme-name, 'tab/tab-bottom-active-bg.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-active-bg.gif');
                 }
             }
             
@@ -410,15 +435,15 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-image($theme-name, 'tab/tab-top-disabled-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-disabled-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-image($theme-name, 'tab/tab-top-disabled-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-disabled-sides.gif');
                 }
                 .#{$prefix}frame-mc {
                     background-repeat: repeat-x;
-                    background-image: theme-image($theme-name, 'tab/tab-top-disabled-bg.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-top-disabled-bg.gif');
                 }
             }
 
@@ -429,15 +454,15 @@
                 .#{$prefix}frame-br,
                 .#{$prefix}frame-tc,
                 .#{$prefix}frame-bc {
-                    background-image: theme-image($theme-name, 'tab/tab-bottom-disabled-corners.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-disabled-corners.gif');
                 }
                 .#{$prefix}frame-ml,
                 .#{$prefix}frame-mr {
-                    background-image: theme-image($theme-name, 'tab/tab-bottom-disabled-sides.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-disabled-sides.gif');
                 }
                 .#{$prefix}frame-mc {
                     background-repeat: repeat-x;
-                    background-image: theme-image($theme-name, 'tab/tab-bottom-disabled-bg.gif');
+                    background-image: theme-image($theme-name, 'tab/tab-default-bottom-disabled-bg.gif');
                 }
             }
         }   

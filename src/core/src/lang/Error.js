@@ -1,5 +1,6 @@
 /**
  * @class Ext.Error
+ * @private
  * @extends Error
 
 A wrapper class for the native JavaScript Error object that adds a few useful capabilities for handling
@@ -75,9 +76,7 @@ and will not be thrown to the browser. If anything but true is returned then the
  * @author Brian Moeskau <brian@sencha.com>
  * @docauthor Brian Moeskau <brian@sencha.com>
  */
-Ext.define('Ext.Error', {
-    extend: 'Error',
-
+Ext.Error = Ext.extend(Error, {
     statics: {
         /**
          * @property ignore
@@ -145,24 +144,28 @@ execution will halt.
             }
 
             if (Ext.Error.handle(err) !== true) {
-                var con = Ext.global.console,
+                var global = Ext.global,
+                    con = global.console,
                     msg = Ext.Error.prototype.toString.call(err),
-                    noConsoleMsg = 'An error was raised: "' + msg + 
+                    noConsoleMsg = 'An uncaught error was raised: "' + msg + 
                         '". Use Firebug or Webkit console for additional details.';
 
                 if (con) {
                     if (con.dir) {
-                        con.warn('An error was raised with the following data:');
+                        con.warn('An uncaught error was raised with the following data:');
                         con.dir(err);
                     }
                     else {
                         con.warn(noConsoleMsg);
                     }
+                    if (con.error) {
+                        con.error(msg);
+                    }
                 }
-                else {
-                    alert(noConsoleMsg);
+                else if (global.alert){
+                    global.alert(noConsoleMsg);
                 }
-
+                
                 throw new Ext.Error(err);
             }
         },

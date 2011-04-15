@@ -2,26 +2,28 @@
  * @class Ext.ComponentLoader
  * @extend Ext.ElementLoader
  * A class used to load remote content to a component. Sample usage:
- * <br><span style="display: none">**/</span>new Ext.Component({
-    tpl: &#39;{firstName} - {lastName}&#39;,
+ * <pre><code>
+new Ext.Component({
+    tpl: '{firstName} - {lastName}',
     loader: {
-        url: &#39;myPage.php&#39;,
-        renderer: &#39;data&#39;,
+        url: 'myPage.php',
+        renderer: 'data',
         params: {
             userId: 1
         }
     }
 });
- * <br><span style="display: none">/**</span> * &lt;p&gt;
+ * </code></pre>
+ * <p>
  * In general this class will not be instanced directly, rather a loader configuration will be passed to the
  * constructor of the {@link Ext.Component}
- * &lt;/p&gt;
+ * </p>
  */
-Ext.define(&#39;Ext.ComponentLoader&#39;, {
+Ext.define('Ext.ComponentLoader', {
 
     /* Begin Definitions */
     
-    extend: &#39;Ext.ElementLoader&#39;,
+    extend: 'Ext.ElementLoader',
 
     statics: {
         Renderer: {
@@ -40,9 +42,14 @@ Ext.define(&#39;Ext.ComponentLoader&#39;, {
                     target = loader.getTarget(),
                     items = [];
 
+                //<debug>
                 if (!target.isContainer) {
-                    throw &#39;Components can only be loader to a container&#39;;
+                    Ext.Error.raise({
+                        target: target,
+                        msg: 'Components can only be loaded into a container'
+                    });
                 }
+                //</debug>
 
                 try {
                     items = Ext.decode(response.responseText);
@@ -64,13 +71,13 @@ Ext.define(&#39;Ext.ComponentLoader&#39;, {
     /* End Definitions */
 
     <a name="cfg-Ext.ComponentLoader-target"></a>/**
-     * @cfg {Ext.Component/String} target The target {@link Ext.Component} for the loader. Defaults to &lt;tt&gt;null&lt;/tt&gt;.
+     * @cfg {Ext.Component/String} target The target {@link Ext.Component} for the loader. Defaults to <tt>null</tt>.
      * If a string is passed it will be looked up via the id.
      */
     target: null,
 
     <a name="cfg-Ext.ComponentLoader-loadMask"></a>/**
-     * @cfg {Mixed} loadMask True or a {@link Ext.LoadMask} configuration to enable masking during loading. Defaults to &lt;tt&gt;false&lt;/tt&gt;.
+     * @cfg {Mixed} loadMask True or a {@link Ext.LoadMask} configuration to enable masking during loading. Defaults to <tt>false</tt>.
      */
     loadMask: false,
     
@@ -100,17 +107,17 @@ The function must return false is loading is not successful. Below is a sample o
 
     new Ext.Component({
         loader: {
-            url: &#39;myPage.php&#39;,
+            url: 'myPage.php',
             renderer: function(loader, response, active) {
                 var text = response.responseText;
-                loader.getTarget().update(&#39;The response is &#39; + text);
+                loader.getTarget().update('The response is ' + text);
                 return true;
             }
         }
     });
      * @markdown
      */
-    renderer: &#39;html&#39;,
+    renderer: 'html',
 
     <a name="method-Ext.ComponentLoader-setTarget"></a>/**
      * Set a {Ext.Component} as the target of this loader. Note that if the target is changed,
@@ -125,7 +132,7 @@ The function must return false is loading is not successful. Below is a sample o
             target = Ext.getCmp(target);
         }
 
-        if (me.target &amp;&amp; me.target != target) {
+        if (me.target && me.target != target) {
             me.abort();
         }
         me.target = target;
@@ -167,9 +174,9 @@ The function must return false is loading is not successful. Below is a sample o
 
         var renderers = this.statics().Renderer;
         switch (renderer) {
-            case &#39;component&#39;:
+            case 'component':
                 return renderers.Component;
-            case &#39;data&#39;:
+            case 'data':
                 return renderers.Data;
             default:
                 return Ext.ElementLoader.Renderer.Html;

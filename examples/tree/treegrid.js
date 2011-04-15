@@ -6,29 +6,27 @@ Ext.require([
 
 Ext.onReady(function() {
     //we want to setup a model and store instead of using dataUrl
-    Ext.regModel('Task', {
+    Ext.define('Task', {
+        extend: 'Ext.data.Model',
         fields: [
             {name: 'task',     type: 'string'},
             {name: 'user',     type: 'string'},
             {name: 'duration', type: 'string'}
         ]
     });
-    
-    var store = new Ext.data.TreeStore({
+
+    var store = Ext.create('Ext.data.TreeStore', {
         model: 'Task',
         proxy: {
             type: 'ajax',
             //the store will get the content from the .json file
             url: 'treegrid.json'
         },
-        root: {
-            expanded: true
-        },
         folderSort: true
     });
 
     //Ext.ux.tree.TreeGrid is no longer a Ux. You can simply use a tree.TreePanel
-    var tree = new Ext.tree.TreePanel({
+    var tree = Ext.create('Ext.tree.Panel', {
         title: 'Core Team Projects',
         width: 500,
         height: 300,
@@ -55,7 +53,7 @@ Ext.onReady(function() {
             dataIndex: 'duration',
             align: 'center',
             //add in the custom tpl for the rows
-            tpl: new Ext.XTemplate('{duration:this.formatHours}', {
+            tpl: Ext.create('Ext.XTemplate', '{duration:this.formatHours}', {
                 formatHours: function(v) {
                     if (v < 1) {
                         return Math.round(v * 60) + ' mins';

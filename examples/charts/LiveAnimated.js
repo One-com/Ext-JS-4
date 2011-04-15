@@ -3,7 +3,7 @@ Ext.require('Ext.chart.*');
 Ext.onReady(function () {
     var chart;
     var generateData = (function() {
-        var data = [], i = 0, 
+        var data = [], i = 0,
             last = false,
             date = new Date(2011, 1, 1),
             seconds = +date,
@@ -26,12 +26,12 @@ Ext.onReady(function () {
     var group = false,
         groupOp = [{
             dateFormat: 'M d',
-            groupBy: 'year,month,day' 
+            groupBy: 'year,month,day'
         }, {
             dateFormat: 'M',
             groupBy: 'year,month'
         }];
-    
+
     function regroup() {
         group = !group;
         var axis = chart.axes.get(1),
@@ -40,12 +40,12 @@ Ext.onReady(function () {
         axis.groupBy = selectedGroup.groupBy;
         chart.redraw();
     }
-    
-    var store = new Ext.data.JsonStore({
+
+    var store = Ext.create('Ext.data.JsonStore', {
         fields: ['date', 'visits', 'views', 'users'],
         data: generateData()
     });
-    
+
     var intr = setInterval(function() {
         var gs = generateData();
         var toDate = timeAxis.toDate,
@@ -70,6 +70,7 @@ Ext.onReady(function () {
         layout: 'fit',
         items: [{
             xtype: 'chart',
+            style: 'background:#fff',
             id: 'chartCmp',
             store: store,
             animate: true,
@@ -113,7 +114,7 @@ Ext.onReady(function () {
                     renderer: function(v) { return v >> 0; },
                     'text-anchor': 'middle'
                 },
-                markerCfg: {
+                markerConfig: {
                     radius: 5,
                     size: 5
                 }
@@ -128,7 +129,7 @@ Ext.onReady(function () {
                     renderer: function(v) { return v >> 0; },
                     'text-anchor': 'middle'
                 },
-                markerCfg: {
+                markerConfig: {
                     radius: 5,
                     size: 5
                 }
@@ -143,7 +144,7 @@ Ext.onReady(function () {
                     renderer: function(v) { return v >> 0; },
                     'text-anchor': 'middle'
                 },
-                markerCfg: {
+                markerConfig: {
                     radius: 5,
                     size: 5
                 }

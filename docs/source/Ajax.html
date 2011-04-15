@@ -8,7 +8,7 @@ A singleton instance of an {@link Ext.data.Connection}. This class
 is used to communicate with your server side code. It can be used as follows:
 
     Ext.Ajax.request({
-        url: &#39;page.php&#39;,
+        url: 'page.php',
         params: {
             id: 1
         },
@@ -28,7 +28,7 @@ request will be 60 seconds.
 
     Ext.Ajax.timeout = 120000; // 120 seconds
     Ext.Ajax.request({
-        url: &#39;page.aspx&#39;,
+        url: 'page.aspx',
         timeout: 60000
     });
 
@@ -38,8 +38,8 @@ series of requests that share common settings that are different to all other
 requests in the application.
 
  */
-Ext.define(&#39;Ext.Ajax&#39;, {
-    extend: &#39;Ext.data.Connection&#39;,
+Ext.define('Ext.Ajax', {
+    extend: 'Ext.data.Connection',
     singleton: true,
 
     <a name="cfg-Ext.Ajax-url"></a>/**
@@ -94,7 +94,7 @@ Ext.define(&#39;Ext.Ajax&#39;, {
      * @property  method
      * The default HTTP method to be used for requests. Note that this is case-sensitive and
      * should be all caps (defaults to undefined; if not set but params are present will use
-     * &lt;tt&gt;&quot;POST&quot;&lt;/tt&gt;, otherwise will use &lt;tt&gt;&quot;GET&quot;&lt;/tt&gt;.)
+     * <tt>"POST"</tt>, otherwise will use <tt>"GET"</tt>.)
      * @type String
      */
     <a name="prop-Ext.Ajax-timeout"></a>/**

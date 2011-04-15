@@ -14,16 +14,16 @@ Ext.onReady(function() {
        Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-       Ext.grid.GridPanel.prototype.ddText = "{0} markerade rad(er)";
+    if(Ext.grid.Panel){
+       Ext.grid.Panel.prototype.ddText = "{0} markerade rad(er)";
     }
 
     if(Ext.TabPanelItem){
        Ext.TabPanelItem.prototype.closeText = "Stäng denna flik";
     }
 
-    if(Ext.form.BaseField){
-       Ext.form.BaseField.prototype.invalidText = "Värdet i detta fält är inte tillåtet";
+    if(Ext.form.field.Base){
+       Ext.form.field.Base.prototype.invalidText = "Värdet i detta fält är inte tillåtet";
     }
 
     if(Ext.LoadMask){
@@ -93,7 +93,7 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
        Ext.apply(Ext.PagingToolbar.prototype, {
           beforePageText : "Sida",
           afterPageText  : "av {0}",
@@ -107,8 +107,8 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.form.Text){
-       Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+       Ext.apply(Ext.form.field.Text.prototype, {
           minLengthText : "Minsta tillåtna längd för detta fält är {0}",
           maxLengthText : "Största tillåtna längd för detta fält är {0}",
           blankText     : "Detta fält är obligatoriskt",
@@ -117,16 +117,16 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.form.Number){
-       Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+       Ext.apply(Ext.form.field.Number.prototype, {
           minText : "Minsta tillåtna värde för detta fält är {0}",
           maxText : "Största tillåtna värde för detta fält är {0}",
           nanText : "{0} är inte ett tillåtet nummer"
        });
     }
 
-    if(Ext.form.Date){
-       Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+       Ext.apply(Ext.form.field.Date.prototype, {
           disabledDaysText  : "Inaktiverad",
           disabledDatesText : "Inaktiverad",
           minText           : "Datumet i detta fält måste inträffa efter {0}",
@@ -136,15 +136,15 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.form.ComboBox){
-       Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+       Ext.apply(Ext.form.field.ComboBox.prototype, {
           loadingText       : "Laddar...",
           valueNotFoundText : undefined
        });
     }
 
-    if(Ext.form.VTypes){
-       Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+       Ext.apply(Ext.form.field.VTypes, {
           emailText    : 'Detta fält ska innehålla en e-post adress i formatet "användare@domän.se"',
           urlText      : 'Detta fält ska innehålla en länk (URL) i formatet "http:/'+'/www.domän.se"',
           alphaText    : 'Detta fält får bara innehålla bokstäver och "_"',
@@ -152,8 +152,8 @@ Ext.onReady(function() {
        });
     }
 
-    if(Ext.grid.HeaderContainer){
-       Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+       Ext.apply(Ext.grid.header.Container.prototype, {
           sortAscText  : "Sortera stigande",
           sortDescText : "Sortera fallande",
           lockText     : "Lås kolumn",

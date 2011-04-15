@@ -13,7 +13,7 @@ Ext.require([
   'Ext.menu.Menu',
   'Ext.toolbar.Spacer',
   'Ext.button.Split',
-  'Ext.form.TextArea'
+  'Ext.form.field.TextArea'
 ]);
 
 Ext.onReady(function(){
@@ -230,7 +230,7 @@ Ext.onReady(function(){
                     Ext.fly(clock.getEl().parent()).addCls('x-status-text-panel').createChild({cls:'spacer'});
 
                     // Kick off the clock timer that updates the clock el every second:
-                 Ext.TaskMgr.start({
+                 Ext.TaskManager.start({
                      run: function(){
                          Ext.fly(clock.getEl()).update(Ext.Date.format(new Date(), 'g:i:s A'));
                      },

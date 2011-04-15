@@ -1,10 +1,10 @@
-/** 
+/**
  * @class Ext.ux.grid.filter.BooleanFilter
  * @extends Ext.ux.grid.filter.Filter
  * Boolean filters use unique radio group IDs (so you can have more than one!)
  * <p><b><u>Example Usage:</u></b></p>
- * <pre><code>    
-var filters = new Ext.ux.grid.GridFilters({
+ * <pre><code>
+var filters = Ext.create('Ext.ux.grid.GridFilters', {
     ...
     filters: [{
         // required configs
@@ -39,24 +39,24 @@ Ext.define('Ext.ux.grid.filter.BooleanFilter', {
 	 */
 	noText : 'No',
 
-    /**  
+    /**
      * @private
      * Template method that is to initialize the filter and install required menu items.
      */
     init : function (config) {
         var gId = Ext.id();
 		this.options = [
-			new Ext.menu.CheckItem({text: this.yesText, group: gId, checked: this.defaultValue === true}),
-			new Ext.menu.CheckItem({text: this.noText, group: gId, checked: this.defaultValue === false})];
-		
+			Ext.create('Ext.menu.CheckItem', {text: this.yesText, group: gId, checked: this.defaultValue === true}),
+			Ext.create('Ext.menu.CheckItem', {text: this.noText, group: gId, checked: this.defaultValue === false})];
+
 		this.menu.add(this.options[0], this.options[1]);
-		
+
 		for(var i=0; i<this.options.length; i++){
 			this.options[i].on('click', this.fireUpdate, this);
 			this.options[i].on('checkchange', this.fireUpdate, this);
 		}
 	},
-	
+
     /**
      * @private
      * Template method that is to get and return the value of the filter.
@@ -70,7 +70,7 @@ Ext.define('Ext.ux.grid.filter.BooleanFilter', {
      * @private
      * Template method that is to set the value of the filter.
      * @param {Object} value The value to set the filter
-     */	
+     */
 	setValue : function (value) {
 		this.options[value ? 0 : 1].setChecked(true);
 	},
@@ -86,7 +86,7 @@ Ext.define('Ext.ux.grid.filter.BooleanFilter', {
 		var args = {type: 'boolean', value: this.getValue()};
 		return args;
 	},
-	
+
     /**
      * Template method that is to validate the provided Ext.data.Record
      * against the filters configuration.

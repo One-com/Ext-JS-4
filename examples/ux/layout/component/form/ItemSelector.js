@@ -1,12 +1,12 @@
 /**
  * @private
  * @class Ext.ux.layout.component.form.ItemSelector
- * @extends Ext.layout.component.form.Field
+ * @extends Ext.layout.component.field.Field
  * Layout class for {@link Ext.ux.form.ItemSelector} fields.
  * @private
  */
 Ext.define('Ext.ux.layout.component.form.ItemSelector', {
-    extend: 'Ext.layout.component.form.Field',
+    extend: 'Ext.layout.component.field.Field',
     alias: ['layout.itemselectorfield'],
 
     type: 'itemselectorfield',

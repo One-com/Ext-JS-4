@@ -2,6 +2,7 @@ Ext.require('Ext.chart.*');
 Ext.require(['Ext.Window', 'Ext.fx.target.Sprite', 'Ext.layout.container.Fit']);
 
 Ext.onReady(function () {
+    store1.loadData(generateData(8));
     var win = Ext.create('Ext.Window', {
         width: 800,
         height: 600,
@@ -13,7 +14,7 @@ Ext.onReady(function () {
         tbar: [{
             text: 'Reload Data',
             handler: function() {
-                store1.loadData(generateData());
+                store1.loadData(generateData(8));
             }
         }, {
             enableToggle: true,
@@ -27,6 +28,7 @@ Ext.onReady(function () {
         items: {
             id: 'chartCmp',
             xtype: 'chart',
+            style: 'background:#fff',
             animate: true,
             theme: 'Category1',
             store: store1,
@@ -47,7 +49,7 @@ Ext.onReady(function () {
                 axis: 'left',
                 xField: 'name',
                 yField: 'data1',
-                markerCfg: {
+                markerConfig: {
                     type: 'cross',
                     size: 3
                 }
@@ -56,7 +58,7 @@ Ext.onReady(function () {
                 axis: 'left',
                 xField: 'name',
                 yField: 'data2',
-                markerCfg: {
+                markerConfig: {
                     type: 'circle',
                     size: 5
                 }

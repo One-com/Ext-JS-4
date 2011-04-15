@@ -3,7 +3,7 @@
  * @extends Object
  * Represents a single sorter that can be applied to a Store
  */
-Ext.define(&#39;Ext.util.Sorter&#39;, {
+Ext.define('Ext.util.Sorter', {
 
     <a name="cfg-Ext.util.Sorter-property"></a>/**
      * @cfg {String} property The property to sort by. Required unless {@link #sorter} is provided
@@ -15,7 +15,7 @@ Ext.define(&#39;Ext.util.Sorter&#39;, {
     
     <a name="cfg-Ext.util.Sorter-root"></a>/**
      * @cfg {String} root Optional root property. This is mostly useful when sorting a Store, in which case we set the
-     * root to &#39;data&#39; to make the filter pull the {@link #property} out of the data object of each item
+     * root to 'data' to make the filter pull the {@link #property} out of the data object of each item
      */
     
     <a name="cfg-Ext.util.Sorter-transform"></a>/**
@@ -27,16 +27,18 @@ Ext.define(&#39;Ext.util.Sorter&#39;, {
     <a name="cfg-Ext.util.Sorter-direction"></a>/**
      * @cfg {String} direction The direction to sort by. Defaults to ASC
      */
-    direction: &quot;ASC&quot;,
+    direction: "ASC",
     
     constructor: function(config) {
         var me = this;
         
         Ext.apply(me, config);
         
-        if (me.property == undefined &amp;&amp; me.sorterFn == undefined) {
-            throw &quot;A Sorter requires either a property or a sorter function&quot;;
+        //<debug>
+        if (me.property == undefined && me.sorterFn == undefined) {
+            Ext.Error.raise("A Sorter requires either a property or a sorter function");
         }
+        //</debug>
         
         me.updateSortFunction();
     },
@@ -49,8 +51,8 @@ Ext.define(&#39;Ext.util.Sorter&#39;, {
     createSortFunction: function(sorterFn) {
         var me        = this,
             property  = me.property,
-            direction = me.direction || &quot;ASC&quot;,
-            modifier  = direction.toUpperCase() == &quot;DESC&quot; ? -1 : 1;
+            direction = me.direction || "ASC",
+            modifier  = direction.toUpperCase() == "DESC" ? -1 : 1;
         
         //create a comparison function. Takes 2 objects, returns 1 if object 1 is greater,
         //-1 if object 2 is greater or 0 if they are equal
@@ -74,7 +76,7 @@ Ext.define(&#39;Ext.util.Sorter&#39;, {
             v2 = transform(v2);
         }
 
-        return v1 &gt; v2 ? 1 : (v1 &lt; v2 ? -1 : 0);
+        return v1 > v2 ? 1 : (v1 < v2 ? -1 : 0);
     },
     
     /**
@@ -96,7 +98,7 @@ Ext.define(&#39;Ext.util.Sorter&#39;, {
     
     toggle: function() {
         var me = this;
-        me.direction = Ext.String.toggle(me.direction, &quot;ASC&quot;, &quot;DESC&quot;);
+        me.direction = Ext.String.toggle(me.direction, "ASC", "DESC");
         me.updateSortFunction();
     },
     

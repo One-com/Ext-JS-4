@@ -2,51 +2,53 @@
  * @class Ext.chart.series.Bar
  * @extends Ext.chart.series.Cartesian
  * 
-  &lt;p&gt; 
+  <p> 
    Creates a Bar Chart. A Bar Chart is a useful visualization technique to display quantitative information for different 
    categories that can show some progression (or regression) in the dataset.
    As with all other series, the Bar Series must be appended in the *series* Chart array configuration. See the Chart 
    documentation for more information. A typical configuration object for the bar series could be:
-  &lt;/p&gt;
+  </p>
   
-  <br><span style="display: none">**/</span>    series: [{
-        type: &#39;bar&#39;,
-        axis: &#39;bottom&#39;,
-        xField: &#39;name&#39;,
-        yField: &#39;data1&#39;,
+  <pre><code>
+    series: [{
+        type: 'bar',
+        axis: 'bottom',
+        xField: 'name',
+        yField: 'data1',
         highlight: true,
         label: {
-            display: &#39;insideEnd&#39;,
-            field: &#39;data1&#39;,
-            renderer: Ext.util.Format.numberRenderer(&#39;0&#39;),
-            orientation: &#39;horizontal&#39;,
-            color: &#39;#333&#39;,
-           &#39;text-anchor&#39;: &#39;middle&#39;
+            display: 'insideEnd',
+            field: 'data1',
+            renderer: Ext.util.Format.numberRenderer('0'),
+            orientation: 'horizontal',
+            color: '#333',
+           'text-anchor': 'middle'
         }
     }]
-   <br><span style="display: none">/**</span> 
+   </code></pre>
+ 
   
-   &lt;p&gt;
+   <p>
     In this configuration we set `bar` as the series type, bind the values of the bar to the bottom axis and set the xField or category field to 
     the `name` parameter of the store. We also set `highlight` to true which enables smooth animations when bars are hovered. We also set some configuration
     for the bar labels to be displayed inside the bar, to display the information found in the `data1` property of each element store, to render a 
     formated text with the `Ext.util.Format` we pass in, to have an `horizontal` orientation (as opposed to a vertical one) and we also set other styles 
     like `color`, `text-anchor`, etc.
-   &lt;/p&gt;
+   </p>
  */
-Ext.define(&#39;Ext.chart.series.Bar&#39;, {
+Ext.define('Ext.chart.series.Bar', {
 
     /* Begin Definitions */
 
-    extend: &#39;Ext.chart.series.Cartesian&#39;,
+    extend: 'Ext.chart.series.Cartesian',
 
-    requires: [&#39;Ext.chart.axis.Axis&#39;, &#39;Ext.fx.Anim&#39;],
+    requires: ['Ext.chart.axis.Axis', 'Ext.fx.Anim'],
 
     /* End Definitions */
 
-    type: &#39;bar&#39;,
+    type: 'bar',
 
-    alias: &#39;series.bar&#39;,
+    alias: 'series.bar',
     <a name="cfg-Ext.chart.series.Bar-column"></a>/**
      * @cfg {Boolean} column
      * Whether to set the visualization as column chart or horizontal bar chart.
@@ -92,41 +94,41 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
         Ext.apply(me, config, {
             highlightCfg: {
                 lineWidth: 3,
-                stroke: &#39;#55c&#39;,
+                stroke: '#55c',
                 opacity: 0.8,
-                color: &#39;#f00&#39;
+                color: '#f00'
             },
             
             shadowAttributes: [{
-                &quot;stroke-width&quot;: 6,
-                &quot;stroke-opacity&quot;: 0.05,
-                stroke: &#39;rgb(200, 200, 200)&#39;,
+                "stroke-width": 6,
+                "stroke-opacity": 0.05,
+                stroke: 'rgb(200, 200, 200)',
                 translate: {
                     x: 1.2,
                     y: 1.2
                 }
             }, {
-                &quot;stroke-width&quot;: 4,
-                &quot;stroke-opacity&quot;: 0.1,
-                stroke: &#39;rgb(150, 150, 150)&#39;,
+                "stroke-width": 4,
+                "stroke-opacity": 0.1,
+                stroke: 'rgb(150, 150, 150)',
                 translate: {
                     x: 0.9,
                     y: 0.9
                 }
             }, {
-                &quot;stroke-width&quot;: 2,
-                &quot;stroke-opacity&quot;: 0.15,
-                stroke: &#39;rgb(100, 100, 100)&#39;,
+                "stroke-width": 2,
+                "stroke-opacity": 0.15,
+                stroke: 'rgb(100, 100, 100)',
                 translate: {
                     x: 0.6,
                     y: 0.6
                 }
             }]
         });
-        me.group = surface.getGroup(me.seriesId + &#39;-bars&#39;);
+        me.group = surface.getGroup(me.seriesId + '-bars');
         if (shadow) {
-            for (i = 0, l = me.shadowAttributes.length; i &lt; l; i++) {
-                me.shadowGroups.push(surface.getGroup(me.seriesId + &#39;-shadows&#39; + i));
+            for (i = 0, l = me.shadowAttributes.length; i < l; i++) {
+                me.shadowGroups.push(surface.getGroup(me.seriesId + '-shadows' + i));
             }
         }
     },
@@ -139,14 +141,14 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             ln = store.getCount(),
             gutter = me.gutter / 100;
         
-        return (me.chart.chartBBox[column ? &#39;width&#39; : &#39;height&#39;] - me[column ? &#39;xpadding&#39; : &#39;ypadding&#39;] * 2) / (ln * (gutter + 1) - gutter);
+        return (me.chart.chartBBox[column ? 'width' : 'height'] - me[column ? 'xpadding' : 'ypadding'] * 2) / (ln * (gutter + 1) - gutter);
     },
 
     // @private returns the gutters.
     getGutters: function() {
         var me = this,
             column = me.column,
-            gutter = Math.ceil(me[column ? &#39;xpadding&#39; : &#39;ypadding&#39;] + me.getBarGirth() / 2);
+            gutter = Math.ceil(me[column ? 'xpadding' : 'ypadding'] + me.getBarGirth() / 2);
         return me.column ? [gutter, 0] : [0, gutter];
     },
 
@@ -175,7 +177,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
 
         //Skip excluded series
         if (me.__excludes) {
-            for (j = 0, total = me.__excludes.length; j &lt; total; j++) {
+            for (j = 0, total = me.__excludes.length; j < total; j++) {
                 if (me.__excludes[j]) {
                     groupBarsLen--;
                 }
@@ -190,9 +192,9 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
                 maxY = mmax(out.to || axis.prevMax, 0);
             }
         }
-        
-        if (me.yField &amp;&amp; !Ext.isNumber(minY)) {
-            axis = new Ext.chart.axis.Axis({
+
+        if (me.yField && !Ext.isNumber(minY)) {
+            axis = Ext.create('Ext.chart.axis.Axis', {
                 chart: chart,
                 fields: [].concat(me.yField)
             });
@@ -200,7 +202,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             minY = out.from || axis.prevMin;
             maxY = mmax(out.to || axis.prevMax, 0);
         }
-        
+
         if (!Ext.isNumber(minY)) {
             minY = 0;
         }
@@ -210,18 +212,18 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
         scale = (column ? bbox.height - ypadding * 2 : bbox.width - xpadding * 2) / (maxY - minY);
         groupBarWidth = barWidth / ((stacked ? 1 : groupBarsLen) * (groupGutter + 1) - groupGutter);
         zero = (column) ? bbox.y + bbox.height - ypadding : bbox.x + xpadding;
-        
+
         if (stacked) {
             total = [[], []];
             store.each(function(record, i) {
                 total[0][i] = total[0][i] || 0;
                 total[1][i] = total[1][i] || 0;
-                for (j = 0; j &lt; barsLen; j++) {
-                    if (me.__excludes &amp;&amp; me.__excludes[j]) {
+                for (j = 0; j < barsLen; j++) {
+                    if (me.__excludes && me.__excludes[j]) {
                         continue;
                     }
                     rec = record.get(bars[j]);
-                    total[+(rec &gt; 0)][i] += mabs(rec);
+                    total[+(rec > 0)][i] += mabs(rec);
                 }
             });
             plus = mmax.apply(math, total[0]);
@@ -229,7 +231,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             scale = (column ? bbox.height - ypadding * 2 : bbox.width - xpadding * 2) / mmax(plus + minus, (maxY - minY) || 1);
             zero = zero + plus * scale * (column ? -1 : 1);
         }
-        else if (minY / maxY &lt; 0) {
+        else if (minY / maxY < 0) {
             zero = zero - minY * scale * (column ? -1 : 1);
         }
         return {
@@ -243,7 +245,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             zero: zero,
             xpadding: xpadding,
             ypadding: ypadding,
-            signed: minY / maxY &lt; 0,
+            signed: minY / maxY < 0,
             minY: minY,
             maxY: maxY
         };
@@ -271,7 +273,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             stacked = me.stacked,
             barsLen = bounds.barsLen,
             colors = me.colorArrayStyle,
-            colorLength = colors &amp;&amp; colors.length || 0,
+            colorLength = colors && colors.length || 0,
             math = Math,
             mmax = math.max,
             mmin = math.min,
@@ -285,15 +287,15 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             totalDim = 0;
             totalNegDim = 0;
             hasShadow = false; 
-            for (j = 0, counter = 0; j &lt; barsLen; j++) {
+            for (j = 0, counter = 0; j < barsLen; j++) {
                 // Excluded series
-                if (me.__excludes &amp;&amp; me.__excludes[j]) {
+                if (me.__excludes && me.__excludes[j]) {
                     continue;
                 }
                 yValue = record.get(bounds.bars[j]);
-                height = Math.round((yValue - ((bounds.minY &lt; 0) ? 0 : bounds.minY)) * bounds.scale);
+                height = Math.round((yValue - ((bounds.minY < 0) ? 0 : bounds.minY)) * bounds.scale);
                 barAttr = {
-                    fill: colors[(barsLen &gt; 1 ? j : 0) % colorLength]
+                    fill: colors[(barsLen > 1 ? j : 0) % colorLength]
                 };
                 if (column) {
                     Ext.apply(barAttr, {
@@ -313,7 +315,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
                         y: (bbox.y + ypadding + offset * bounds.barWidth * (1 + gutter) + counter * bounds.groupBarWidth * (1 + groupGutter) * !stacked + 1)
                     });
                 }
-                if (height &lt; 0) {
+                if (height < 0) {
                     if (column) {
                         barAttr.y = top;
                         barAttr.height = mabs(height);
@@ -323,13 +325,13 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
                     }
                 }
                 if (stacked) {
-                    if (height &lt; 0) {
+                    if (height < 0) {
                         top += height * (column ? -1 : 1);
                     } else {
                         bottom += height * (column ? -1 : 1);
                     }
                     totalDim += mabs(height);
-                    if (height &lt; 0) {
+                    if (height < 0) {
                         totalNegDim += mabs(height);
                     }
                 }
@@ -342,11 +344,11 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
                     storeItem: record,
                     value: [record.get(me.xField), yValue],
                     attr: barAttr,
-                    point: column ? [barAttr.x + barAttr.width / 2, yValue &gt;= 0 ? barAttr.y : barAttr.y + barAttr.height] :
-                                    [yValue &gt;= 0 ? barAttr.x + barAttr.width : barAttr.x, barAttr.y + barAttr.height / 2]
+                    point: column ? [barAttr.x + barAttr.width / 2, yValue >= 0 ? barAttr.y : barAttr.y + barAttr.height] :
+                                    [yValue >= 0 ? barAttr.x + barAttr.width : barAttr.x, barAttr.y + barAttr.height / 2]
                 });
                 // When resizing, reset before animating
-                if (animate &amp;&amp; chart.resizing) {
+                if (animate && chart.resizing) {
                     attrs = column ? {
                         x: barAttr.x,
                         y: bounds.zero,
@@ -358,10 +360,10 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
                         width: 0,
                         height: barAttr.height
                     };
-                    if (enableShadows &amp;&amp; (stacked &amp;&amp; !hasShadow || !stacked)) {
+                    if (enableShadows && (stacked && !hasShadow || !stacked)) {
                         hasShadow = true;
                         //update shadows
-                        for (shadowIndex = 0; shadowIndex &lt; shadowGroupsLn; shadowIndex++) {
+                        for (shadowIndex = 0; shadowIndex < shadowGroupsLn; shadowIndex++) {
                             shadow = shadowGroups[shadowIndex].getAt(stacked ? i : (i * barsLen + j));
                             if (shadow) {
                                 shadow.setAttributes(attrs, true);
@@ -376,7 +378,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
                 }
                 counter++;
             }
-            if (stacked &amp;&amp; items.length) {
+            if (stacked && items.length) {
                 items[i * counter].totalDim = totalDim;
                 items[i * counter].totalNegDim = totalNegDim;
             }
@@ -400,16 +402,16 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             zero = bounds.zero,
             shadowIndex, shadowBarAttr, shadow, totalDim, totalNegDim, j, rendererAttributes;
 
-        if ((stacked &amp;&amp; (i % bounds.groupBarsLen === 0)) || !stacked) {
+        if ((stacked && (i % bounds.groupBarsLen === 0)) || !stacked) {
             j = i / bounds.groupBarsLen;
             //create shadows
-            for (shadowIndex = 0; shadowIndex &lt; shadowGroupsLn; shadowIndex++) {
+            for (shadowIndex = 0; shadowIndex < shadowGroupsLn; shadowIndex++) {
                 shadowBarAttr = Ext.apply({}, shadowAttributes[shadowIndex]);
                 shadow = shadowGroups[shadowIndex].getAt(stacked ? j : i);
-                Ext.copyTo(shadowBarAttr, barAttr, &#39;x,y,width,height&#39;);
+                Ext.copyTo(shadowBarAttr, barAttr, 'x,y,width,height');
                 if (!shadow) {
                     shadow = surface.add(Ext.apply({
-                        type: &#39;rect&#39;,
+                        type: 'rect',
                         group: shadowGroups[shadowIndex]
                     }, Ext.apply({}, baseAttrs, shadowBarAttr)));
                 }
@@ -487,7 +489,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
         };
         ln = items.length;
         // Create new or reuse sprites and animate/display
-        for (i = 0; i &lt; ln; i++) {
+        for (i = 0; i < ln; i++) {
             sprite = group.getAt(i);
             barAttr = items[i].attr;
 
@@ -500,7 +502,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
                 attrs = Ext.apply({}, baseAttrs, barAttr);
                 attrs = Ext.apply(attrs, endSeriesStyle || {});
                 sprite = surface.add(Ext.apply({}, {
-                    type: &#39;rect&#39;,
+                    type: 'rect',
                     group: group
                 }, attrs));
             }
@@ -508,10 +510,10 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
                 rendererAttributes = me.renderer(sprite, store.getAt(i), barAttr, i, store);
                 sprite._to = rendererAttributes;
                 anim = me.onAnimate(sprite, { to: Ext.apply(rendererAttributes, endSeriesStyle) });
-                if (enableShadows &amp;&amp; stacked &amp;&amp; (i % bounds.barsLen === 0)) {
+                if (enableShadows && stacked && (i % bounds.barsLen === 0)) {
                     j = i / bounds.barsLen;
-                    for (shadowIndex = 0; shadowIndex &lt; shadowGroupsLn; shadowIndex++) {
-                        anim.on(&#39;afteranimate&#39;, function() {
+                    for (shadowIndex = 0; shadowIndex < shadowGroupsLn; shadowIndex++) {
+                        anim.on('afteranimate', function() {
                             this.show(true);
                         }, shadowGroups[shadowIndex].getAt(j));
                     }
@@ -526,15 +528,15 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
 
         // Hide unused sprites
         ln = group.getCount();
-        for (j = i; j &lt; ln; j++) {
+        for (j = i; j < ln; j++) {
             group.getAt(j).hide(true);
         }
         // Hide unused shadows
         if (enableShadows) {
-            for (shadowIndex = 0; shadowIndex &lt; shadowGroupsLn; shadowIndex++) {
+            for (shadowIndex = 0; shadowIndex < shadowGroupsLn; shadowIndex++) {
                 shadowGroup = shadowGroups[shadowIndex];
                 ln = shadowGroup.getCount();
-                for (j = i; j &lt; ln; j++) {
+                for (j = i; j < ln; j++) {
                     shadowGroup.getAt(j).hide(true);
                 }
             }
@@ -551,14 +553,14 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             endLabelStyle = Ext.apply({}, config, me.seriesLabelStyle || {}),
             sprite;
         return surface.add(Ext.apply({
-            type: &#39;text&#39;,
+            type: 'text',
             group: group
         }, endLabelStyle || {}));
     },
     
     // @private callback used when placing a label.
     onPlaceLabel: function(label, storeItem, item, i, display, animate, index) {
-        // Determine the label&#39;s final position. Starts with the configured preferred value but
+        // Determine the label's final position. Starts with the configured preferred value but
         // may get flipped from inside to outside or vice-versa depending on space.
         var me = this,
             opt = me.bounds,
@@ -571,7 +573,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             yValue = item.value[1],
             attr = item.attr,
             config = me.label,
-            rotate = config.orientation == &#39;vertical&#39;,
+            rotate = config.orientation == 'vertical',
             field = [].concat(config.field),
             format = config.renderer,
             text = format(storeItem.get(field[index])),
@@ -579,9 +581,9 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             width = size.width,
             height = size.height,
             zero = opt.zero,
-            outside = &#39;outside&#39;,
-            insideStart = &#39;insideStart&#39;,
-            insideEnd = &#39;insideEnd&#39;,
+            outside = 'outside',
+            insideStart = 'insideStart',
+            insideEnd = 'insideEnd',
             offsetX = 10,
             offsetY = 6,
             signed = opt.signed,
@@ -593,34 +595,34 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
 
         if (column) {
             if (display == outside) {
-                if (height + offsetY + attr.height &gt; (yValue &gt;= 0 ? zero - chartBBox.y : chartBBox.y + chartBBox.height - zero)) {
+                if (height + offsetY + attr.height > (yValue >= 0 ? zero - chartBBox.y : chartBBox.y + chartBBox.height - zero)) {
                     display = insideEnd;
                 }
             } else {
-                if (height + offsetY &gt; attr.height) {
+                if (height + offsetY > attr.height) {
                     display = outside;
                 }
             }
             x = attr.x + groupBarWidth / 2;
             y = display == insideStart ?
-                    (zero + ((height / 2 + 3) * (yValue &gt;= 0 ? -1 : 1))) :
-                    (yValue &gt;= 0 ? (attr.y + ((height / 2 + 3) * (display == outside ? -1 : 1))) :
+                    (zero + ((height / 2 + 3) * (yValue >= 0 ? -1 : 1))) :
+                    (yValue >= 0 ? (attr.y + ((height / 2 + 3) * (display == outside ? -1 : 1))) :
                                    (attr.y + attr.height + ((height / 2 + 3) * (display === outside ? 1 : -1))));
         }
         else {
             if (display == outside) {
-                if (width + offsetX + attr.width &gt; (yValue &gt;= 0 ? chartBBox.x + chartBBox.width - zero : zero - chartBBox.x)) {
+                if (width + offsetX + attr.width > (yValue >= 0 ? chartBBox.x + chartBBox.width - zero : zero - chartBBox.x)) {
                     display = insideEnd;
                 }
             }
             else {
-                if (width + offsetX &gt; attr.width) {
+                if (width + offsetX > attr.width) {
                     display = outside;
                 }
             }
             x = display == insideStart ?
-                (zero + ((width / 2 + 5) * (yValue &gt;= 0 ? 1 : -1))) :
-                (yValue &gt;= 0 ? (attr.x + attr.width + ((width / 2 + 5) * (display === outside ? 1 : -1))) :
+                (zero + ((width / 2 + 5) * (yValue >= 0 ? 1 : -1))) :
+                (yValue >= 0 ? (attr.x + attr.width + ((width / 2 + 5) * (display === outside ? 1 : -1))) :
                 (attr.x + ((width / 2 + 5) * (display === outside ? -1 : 1))));
             y = attr.y + groupBarWidth / 2;
         }
@@ -638,7 +640,7 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
             };
         }
         //check for resizing
-        if (animate &amp;&amp; resizing) {
+        if (animate && resizing) {
             if (column) {
                 x = attr.x + attr.width / 2;
                 y = zero;
@@ -680,12 +682,12 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
         var tester = this.testerLabel,
             config = this.label,
             endLabelStyle = Ext.apply({}, config, this.seriesLabelStyle || {}),
-            rotated = config.orientation === &#39;vertical&#39;,
+            rotated = config.orientation === 'vertical',
             bbox, w, h,
             undef;
         if (!tester) {
             tester = this.testerLabel = this.chart.surface.add(Ext.apply({
-                type: &#39;text&#39;,
+                type: 'text',
                 opacity: 0
             }, endLabelStyle));
         }
@@ -711,9 +713,9 @@ Ext.define(&#39;Ext.chart.series.Bar&#39;, {
     
     isItemInPoint: function(x, y, item) {
         var bbox = item.sprite.getBBox();
-        return bbox.x &lt;= x &amp;&amp; bbox.y &lt;= y
-            &amp;&amp; (bbox.x + bbox.width) &gt;= x
-            &amp;&amp; (bbox.y + bbox.height) &gt;= y;
+        return bbox.x <= x && bbox.y <= y
+            && (bbox.x + bbox.width) >= x
+            && (bbox.y + bbox.height) >= y;
     },
     
     // @private hide all markers

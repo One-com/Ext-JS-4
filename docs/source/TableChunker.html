@@ -6,27 +6,27 @@
  *
  * @singleton
  */
-Ext.define(&#39;Ext.view.TableChunker&#39;, {
+Ext.define('Ext.view.TableChunker', {
     singleton: true,
-    requires: [&#39;Ext.XTemplate&#39;],
+    requires: ['Ext.XTemplate'],
     metaTableTpl: [
-        &#39;{[this.openTableWrap()]}&#39;,
-        &#39;&lt;table class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-table &#39; + Ext.baseCSSPrefix + &#39;grid-table-resizer&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; {[this.embedFullWidth()]}&gt;&#39;,
-            &#39;&lt;tbody&gt;&#39;,
-            &#39;&lt;tr&gt;&#39;,
-            &#39;&lt;tpl for=&quot;columns&quot;&gt;&#39;,
-                &#39;&lt;th class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-col-resizer-{id}&quot; style=&quot;width: {width}px; height: 0px;&quot;&gt;&lt;/th&gt;&#39;,
-            &#39;&lt;/tpl&gt;&#39;,
-            &#39;&lt;/tr&gt;&#39;,
-            &#39;{[this.openRows()]}&#39;,
-                &#39;{row}&#39;,
-                &#39;&lt;tpl for=&quot;features&quot;&gt;&#39;,
-                    &#39;{[this.embedFeature(values, parent, xindex, xcount)]}&#39;,
-                &#39;&lt;/tpl&gt;&#39;,
-            &#39;{[this.closeRows()]}&#39;,
-            &#39;&lt;/tbody&gt;&#39;,
-        &#39;&lt;/table&gt;&#39;,
-        &#39;{[this.closeTableWrap()]}&#39;
+        '{[this.openTableWrap()]}',
+        '<table class="' + Ext.baseCSSPrefix + 'grid-table ' + Ext.baseCSSPrefix + 'grid-table-resizer" border="0" cellspacing="0" cellpadding="0" {[this.embedFullWidth()]}>',
+            '<tbody>',
+            '<tr>',
+            '<tpl for="columns">',
+                '<th class="' + Ext.baseCSSPrefix + 'grid-col-resizer-{id}" style="width: {width}px; height: 0px;"></th>',
+            '</tpl>',
+            '</tr>',
+            '{[this.openRows()]}',
+                '{row}',
+                '<tpl for="features">',
+                    '{[this.embedFeature(values, parent, xindex, xcount)]}',
+                '</tpl>',
+            '{[this.closeRows()]}',
+            '</tbody>',
+        '</table>',
+        '{[this.closeTableWrap()]}'
     ],
 
     constructor: function() {
@@ -36,7 +36,7 @@ Ext.define(&#39;Ext.view.TableChunker&#39;, {
     },
 
     embedFeature: function(values, parent, x, xcount) {
-        var tpl = &#39;&#39;;
+        var tpl = '';
         if (!values.disabled) {
             tpl = values.getFeatureTpl(values, parent, x, xcount);
         }
@@ -44,32 +44,32 @@ Ext.define(&#39;Ext.view.TableChunker&#39;, {
     },
 
     embedFullWidth: function() {
-        return &#39;style=&quot;width: {fullWidth}px;&quot;&#39;;
+        return 'style="width: {fullWidth}px;"';
     },
 
     openRows: function() {
-        return &#39;&lt;tpl for=&quot;rows&quot;&gt;&#39;;
+        return '<tpl for="rows">';
     },
 
     closeRows: function() {
-        return &#39;&lt;/tpl&gt;&#39;;
+        return '</tpl>';
     },
 
     metaRowTpl: [
-        &#39;&lt;tr class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-row {addlSelector} {[this.embedRowCls()]}&quot;&gt;&#39;,
-            &#39;&lt;tpl for=&quot;columns&quot;&gt;&#39;,
-                &#39;&lt;td class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-cell &#39; + Ext.baseCSSPrefix + &#39;grid-cell-{id} {{id}-modified} {{id}-tdCls}&quot; {{id}-tdAttr}&gt;&lt;div unselectable=&quot;on&quot; class=&quot;&#39; + Ext.baseCSSPrefix + &#39;grid-cell-inner &#39; + Ext.baseCSSPrefix + &#39;unselectable&quot; style=&quot;{{id}-style}; text-align: {align};&quot;&gt;{{id}}&lt;/div&gt;&lt;/td&gt;&#39;,
-            &#39;&lt;/tpl&gt;&#39;,
-        &#39;&lt;/tr&gt;&#39;
+        '<tr class="' + Ext.baseCSSPrefix + 'grid-row {addlSelector} {[this.embedRowCls()]}">',
+            '<tpl for="columns">',
+                '<td class="' + Ext.baseCSSPrefix + 'grid-cell ' + Ext.baseCSSPrefix + 'grid-cell-{id} {{id}-modified} {{id}-tdCls}" {{id}-tdAttr}><div unselectable="on" class="' + Ext.baseCSSPrefix + 'grid-cell-inner ' + Ext.baseCSSPrefix + 'unselectable" style="{{id}-style}; text-align: {align};">{{id}}</div></td>',
+            '</tpl>',
+        '</tr>'
     ],
     embedRowCls: function() {
-        return &#39;{rowCls}&#39;;
+        return '{rowCls}';
     },
     openTableWrap: function() {
-        return &#39;&#39;;
+        return '';
     },
     closeTableWrap: function() {
-        return &#39;&#39;;
+        return '';
     },
 
     getTableTpl: function(cfg, textOnly) {
@@ -93,7 +93,7 @@ Ext.define(&#39;Ext.view.TableChunker&#39;, {
             metaRowTpl = Array.prototype.slice.call(this.metaRowTpl, 0),
             metaTableTpl;
             
-        for (; i &lt; ln; i++) {
+        for (; i < ln; i++) {
             if (!features[i].disabled) {
                 features[i].mutateMetaRowTpl(metaRowTpl);
                 Ext.apply(memberFns, features[i].getMetaRowTplFragments());
@@ -102,16 +102,16 @@ Ext.define(&#39;Ext.view.TableChunker&#39;, {
             }
         }
         
-        metaRowTpl = new Ext.XTemplate(metaRowTpl.join(&#39;&#39;), memberFns);
+        metaRowTpl = Ext.create('Ext.XTemplate', metaRowTpl.join(''), memberFns);
         cfg.row = metaRowTpl.applyTemplate(cfg);
         
-        metaTableTpl = new Ext.XTemplate(this.metaTableTpl.join(&#39;&#39;), tableTplMemberFns);
+        metaTableTpl = Ext.create('Ext.XTemplate', this.metaTableTpl.join(''), tableTplMemberFns);
         
         tpl = metaTableTpl.applyTemplate(cfg);
         
         // TODO: Investigate eliminating.
         if (!textOnly) {
-            tpl = new Ext.XTemplate(tpl, tplMemberFns);
+            tpl = Ext.create('Ext.XTemplate', tpl, tplMemberFns);
         }
         return tpl;
         

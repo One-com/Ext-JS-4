@@ -14,8 +14,8 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} Zeile(n) ausgewählt";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} Zeile(n) ausgewählt";
     }
 
     if(Ext.TabPanelItem){
@@ -26,8 +26,8 @@ Ext.onReady(function() {
         Ext.form.Basic.prototype.waitTitle = "Bitte warten...";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "Der Wert des Feldes ist nicht korrekt";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "Der Wert des Feldes ist nicht korrekt";
     }
 
     if(Ext.LoadMask){
@@ -135,7 +135,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Seite",
             afterPageText  : "von {0}",
@@ -149,8 +149,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Bitte geben Sie mindestens {0} Zeichen ein",
             maxLengthText : "Bitte geben Sie maximal {0} Zeichen ein",
             blankText     : "Dieses Feld darf nicht leer sein",
@@ -159,8 +159,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Der Mindestwert für dieses Feld ist {0}",
             maxText : "Der Maximalwert für dieses Feld ist {0}",
             nanText : "{0} ist keine Zahl",
@@ -168,8 +168,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "nicht erlaubt",
             disabledDatesText : "nicht erlaubt",
             minText           : "Das Datum in diesem Feld muss nach dem {0} liegen",
@@ -180,15 +180,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "Lade Daten ...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Dieses Feld sollte eine E-Mail-Adresse enthalten. Format: "user@example.com"',
             urlText      : 'Dieses Feld sollte eine URL enthalten. Format: "http:/'+'/www.example.com"',
             alphaText    : 'Dieses Feld darf nur Buchstaben enthalten und _',
@@ -196,8 +196,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.HtmlEditor){
-        Ext.apply(Ext.form.HtmlEditor.prototype, {
+    if(Ext.form.field.HtmlEditor){
+        Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'Bitte geben Sie die URL für den Link ein:',
             buttonTips : {
                 bold : {
@@ -274,8 +274,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Aufsteigend sortieren",
             sortDescText : "Absteigend sortieren",
             lockText     : "Spalte sperren",
@@ -326,8 +326,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Time){
-        Ext.apply(Ext.form.Time.prototype, {
+    if(Ext.form.field.Time){
+        Ext.apply(Ext.form.field.Time.prototype, {
             minText : "Die Zeit muss gleich oder nach {0} liegen",
             maxText : "Die Zeit muss gleich oder vor {0} liegen",
             invalidText : "{0} ist keine gültige Zeit",

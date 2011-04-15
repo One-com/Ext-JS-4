@@ -2,18 +2,18 @@
  * @author Ed Spencer
  * @class Ext.data.Batch
  * 
- * &lt;p&gt;Provides a mechanism to run one or more {@link Ext.data.Operation operations} in a given order. Fires the &#39;operationcomplete&#39; event
- * after the completion of each Operation, and the &#39;complete&#39; event when all Operations have been successfully executed. Fires an &#39;exception&#39;
- * event if any of the Operations encounter an exception.&lt;/p&gt;
+ * <p>Provides a mechanism to run one or more {@link Ext.data.Operation operations} in a given order. Fires the 'operationcomplete' event
+ * after the completion of each Operation, and the 'complete' event when all Operations have been successfully executed. Fires an 'exception'
+ * event if any of the Operations encounter an exception.</p>
  * 
- * &lt;p&gt;Usually these are only used internally by {@link Ext.data.Proxy} classes&lt;/p&gt;
+ * <p>Usually these are only used internally by {@link Ext.data.Proxy} classes</p>
  * 
  * @constructor
  * @param {Object} config Optional config object
  */
-Ext.define(&#39;Ext.data.Batch&#39;, {
+Ext.define('Ext.data.Batch', {
     mixins: {
-        observable: &#39;Ext.util.Observable&#39;
+        observable: 'Ext.util.Observable'
     },
     
     <a name="prop-Ext.data.Batch-autoStart"></a>/**
@@ -75,7 +75,7 @@ Ext.define(&#39;Ext.data.Batch&#39;, {
            * @param {Ext.data.Batch} batch The batch object
            * @param {Object} operation The last operation that was executed
            */
-          &#39;complete&#39;,
+          'complete',
           
           <a name="event-Ext.data.Batch-exception"></a>/**
            * @event exception
@@ -83,7 +83,7 @@ Ext.define(&#39;Ext.data.Batch&#39;, {
            * @param {Ext.data.Batch} batch The batch object
            * @param {Object} operation The operation that encountered the exception
            */
-          &#39;exception&#39;,
+          'exception',
           
           <a name="event-Ext.data.Batch-operationcomplete"></a>/**
            * @event operationcomplete
@@ -91,7 +91,7 @@ Ext.define(&#39;Ext.data.Batch&#39;, {
            * @param {Ext.data.Batch} batch The batch object
            * @param {Object} operation The operation that just completed
            */
-          &#39;operationcomplete&#39;
+          'operationcomplete'
         );
         
         me.mixins.observable.constructor.call(me, config);
@@ -155,7 +155,7 @@ Ext.define(&#39;Ext.data.Batch&#39;, {
         if (operation === undefined) {
             me.isRunning  = false;
             me.isComplete = true;
-            me.fireEvent(&#39;complete&#39;, me, operations[operations.length - 1]);
+            me.fireEvent('complete', me, operations[operations.length - 1]);
         } else {
             me.current = index;
             
@@ -164,12 +164,12 @@ Ext.define(&#39;Ext.data.Batch&#39;, {
                 
                 if (hasException) {
                     me.hasException = true;
-                    me.fireEvent(&#39;exception&#39;, me, operation);
+                    me.fireEvent('exception', me, operation);
                 } else {
-                    me.fireEvent(&#39;operationcomplete&#39;, me, operation);
+                    me.fireEvent('operationcomplete', me, operation);
                 }
 
-                if (hasException &amp;&amp; me.pauseOnException) {
+                if (hasException && me.pauseOnException) {
                     me.pause();
                 } else {
                     operation.setCompleted();

@@ -12,16 +12,16 @@ Ext.onReady(function() {
         Ext.DataView.prototype.emptyText = "";
     }
 
-    if(Ext.grid.GridPanel){
-        Ext.grid.GridPanel.prototype.ddText = "{0} избрани редици";
+    if(Ext.grid.Panel){
+        Ext.grid.Panel.prototype.ddText = "{0} избрани редици";
     }
 
     if(Ext.TabPanelItem){
         Ext.TabPanelItem.prototype.closeText = "Затвори tab";
     }
 
-    if(Ext.form.BaseField){
-        Ext.form.BaseField.prototype.invalidText = "Вредноста во ова поле е невалидна";
+    if(Ext.form.field.Base){
+        Ext.form.field.Base.prototype.invalidText = "Вредноста во ова поле е невалидна";
     }
 
     if(Ext.LoadMask){
@@ -90,7 +90,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.PagingToolbar){
+    if(Ext.toolbar.Paging){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Страница",
             afterPageText  : "од {0}",
@@ -104,8 +104,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Text){
-        Ext.apply(Ext.form.Text.prototype, {
+    if(Ext.form.field.Text){
+        Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Минималната должина за ова поле е {0}",
             maxLengthText : "Максималната должина за ова поле е {0}",
             blankText     : "Податоците во ова поле се потребни",
@@ -114,16 +114,16 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Number){
-        Ext.apply(Ext.form.Number.prototype, {
+    if(Ext.form.field.Number){
+        Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Минималната вредност за ова поле е {0}",
             maxText : "Максималната вредност за ова поле е {0}",
             nanText : "{0} не е валиден број"
         });
     }
 
-    if(Ext.form.Date){
-        Ext.apply(Ext.form.Date.prototype, {
+    if(Ext.form.field.Date){
+        Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Неактивно",
             disabledDatesText : "Неактивно",
             minText           : "Датумот во ова поле мора да биде пред {0}",
@@ -133,15 +133,15 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.ComboBox){
-        Ext.apply(Ext.form.ComboBox.prototype, {
+    if(Ext.form.field.ComboBox){
+        Ext.apply(Ext.form.field.ComboBox.prototype, {
             loadingText       : "Вчитувам...",
             valueNotFoundText : undefined
         });
     }
 
-    if(Ext.form.VTypes){
-        Ext.apply(Ext.form.VTypes, {
+    if(Ext.form.field.VTypes){
+        Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Ова поле треба да биде e-mail адреса во формат "user@example.com"',
             urlText      : 'Ова поле треба да биде URL во формат "http:/'+'/www.example.com"',
             alphaText    : 'Ова поле треба да содржи само букви и _',
@@ -149,8 +149,8 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.HeaderContainer){
-        Ext.apply(Ext.grid.HeaderContainer.prototype, {
+    if(Ext.grid.header.Container){
+        Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Сортирај Растечки",
             sortDescText : "Сортирај Опаѓачки",
             lockText     : "Заклучи Колона",
