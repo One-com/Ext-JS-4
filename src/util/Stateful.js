@@ -223,6 +223,10 @@ Ext.define('Ext.util.Stateful', {
         me.fields.each(function(field) {
             me.modified[name] = me.get(name);
         }, me);
+
+        if (this.innerOf) {
+            this.innerOf.setDirty();
+        }
     },
 
     //<debug>

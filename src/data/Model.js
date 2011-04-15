@@ -609,6 +609,10 @@ Ext.define('Ext.data.Model', {
      * @return {Ext.data.Model} The Model instance
      */
     save: function(options) {
+        if (this.innerOf) {
+            return this.innerOf.save(options);
+        }
+
         options = Ext.apply({}, options);
 
         var me     = this,
