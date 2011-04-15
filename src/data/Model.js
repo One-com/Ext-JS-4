@@ -558,6 +558,13 @@ Ext.define('Ext.data.Model', {
         var errors      = Ext.create('Ext.data.Errors'),
             validations = this.validations,
             validators  = Ext.data.validations,
+            inners      = this.inners,
+            innerFn     = function (record) {
+                var errs = record.validate();
+                if (!errs.isValid()) {
+                    errors.addAll(errs.items);
+                }
+            },
             length, validation, field, valid, type, i;
 
         if (validations) {
@@ -572,11 +579,18 @@ Ext.define('Ext.data.Model', {
                 if (!valid) {
                     errors.add({
                         field  : field,
+                        value  : this.get(field),
                         message: validation.message || validators[type + 'Message']
                     });
                 }
             }
         }
+
+        Ext.iterate(this.associations.map, function (key, value, scope) {
+            if (value.inner === true) {
+                this[key]().each(innerFn);
+            }
+        }, this);
 
         return errors;
     },
