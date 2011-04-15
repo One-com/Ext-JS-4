@@ -197,4 +197,17 @@ Ext.define('Ext.data.Types', {
          */
         NUMBER: this.FLOAT    
     });
+
+    Ext.iterate(this, function (key, value, obj) {
+        if (value.convert) {
+            var fn = value.convert;
+            obj[key] = {
+                convert: function (v) {
+                    return (this.optional && (v === undefined || v === null)) ? null : fn(v);
+                },
+                sortType: value.sortType,
+                type: value.type
+            };
+        }
+    });
 });
