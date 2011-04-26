@@ -1,7 +1,90 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.draw.Sprite"></a>/**
- * @class Ext.draw.Sprite
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-draw.Sprite'>/**
+</span> * @class Ext.draw.Sprite
  * @extends Object
- * Base drawing spriteitive class.  Provides bucket for all spriteitive attributes and basic methods for updating them.
+ *
+ * A Sprite is an object rendered in a Drawing surface. There are different options and types of sprites.
+ * The configuration of a Sprite is an object with the following properties:
+ *
+ * - **type** - (String) The type of the sprite. Possible options are 'circle', 'path', 'rect', 'text', 'square'. 
+ * - **width** - (Number) Used in rectangle sprites, the width of the rectangle.
+ * - **height** - (Number) Used in rectangle sprites, the height of the rectangle.
+ * - **size** - (Number) Used in square sprites, the dimension of the square.
+ * - **radius** - (Number) Used in circle sprites, the radius of the circle.
+ * - **x** - (Number) The position along the x-axis.
+ * - **y** - (Number) The position along the y-axis.
+ * - **path** - (Array) Used in path sprites, the path of the sprite written in SVG-like path syntax.
+ * - **opacity** - (Number) The opacity of the sprite.
+ * - **fill** - (String) The fill color.
+ * - **stroke** - (String) The stroke color.
+ * - **stroke-width** - (Number) The width of the stroke.
+ * - **font** - (String) Used with text type sprites. The full font description. Uses the same syntax as the CSS `font` parameter.
+ * - **text** - (String) Used with text type sprites. The text itself.
+ * 
+ * Additionally there are three transform objects that can be set with `setAttributes` which are `translate`, `rotate` and
+ * `scale`.
+ * 
+ * For translate, the configuration object contains x and y attributes that indicate where to
+ * translate the object. For example:
+ * 
+ *     sprite.setAttributes({
+ *       translate: {
+ *        x: 10,
+ *        y: 10
+ *       }
+ *     }, true);
+ * 
+ * For rotation, the configuration object contains x and y attributes for the center of the rotation (which are optional),
+ * and a `degrees` attribute that specifies the rotation in degrees. For example:
+ * 
+ *     sprite.setAttributes({
+ *       rotate: {
+ *        degrees: 90
+ *       }
+ *     }, true);
+ * 
+ * For scaling, the configuration object contains x and y attributes for the x-axis and y-axis scaling. For example:
+ * 
+ *     sprite.setAttributes({
+ *       scale: {
+ *        x: 10,
+ *        y: 3
+ *       }
+ *     }, true);
+ *
+ * Sprites can be created with a reference to a {@link Ext.draw.Surface}
+ *
+ *      var drawComponent = Ext.create('Ext.draw.Component', options here...);
+ *
+ *      var sprite = Ext.create('Ext.draw.Sprite', {
+ *          type: 'circle',
+ *          fill: '#ff0',
+ *          surface: drawComponent.surface,
+ *          radius: 5
+ *      });
+ *
+ * Sprites can also be added to the surface as a configuration object:
+ *
+ *      var sprite = drawComponent.surface.add({
+ *          type: 'circle',
+ *          fill: '#ff0',
+ *          radius: 5
+ *      });
+ *
+ * In order to properly apply properties and render the sprite we have to
+ * `show` the sprite setting the option `redraw` to `true`:
+ *
+ *      sprite.show(true);
+ *
+ * The constructor configuration object of the Sprite can also be used and passed into the {@link Ext.draw.Surface}
+ * add method to append a new sprite to the canvas. For example:
+ *
+ *     drawComponent.surface.add({
+ *         type: 'circle',
+ *         fill: '#ffc',
+ *         radius: 100,
+ *         x: 100,
+ *         y: 100
+ *     });
  */
 Ext.define('Ext.draw.Sprite', {
     /* Begin Definitions */
@@ -10,7 +93,7 @@ Ext.define('Ext.draw.Sprite', {
         observable: 'Ext.util.Observable',
         animate: 'Ext.util.Animate'
     },
-    
+
     requires: ['Ext.draw.SpriteDD'],
 
     /* End Definitions */
@@ -79,6 +162,8 @@ Ext.define('Ext.draw.Sprite', {
         delete config.draggable;
         me.setAttributes(config);
         me.addEvents(
+            'beforedestroy',
+            'destroy',
             'render',
             'mousedown',
             'mouseup',
@@ -89,26 +174,28 @@ Ext.define('Ext.draw.Sprite', {
         );
         me.mixins.observable.constructor.apply(this, arguments);
     },
-    
+
+<span id='Ext-draw.Sprite-property-dd'>    /**
+</span>     * &lt;p&gt;If this Sprite is configured {@link #draggable}, this property will contain
+     * an instance of {@link Ext.dd.DragSource} which handles dragging the Sprite.&lt;/p&gt;
+     * The developer must provide implementations of the abstract methods of {@link Ext.dd.DragSource}
+     * in order to supply behaviour for each stage of the drag/drop process. See {@link #draggable}.
+     * @type Ext.dd.DragSource.
+     * @property dd
+     */
     initDraggable: function() {
-        <a name="prop-Ext.draw.Sprite-dd"></a>/**
-         * <p>If this Sprite is configured {@link #draggable}, this property will contain
-         * an instance of {@link Ext.dd.DragSource} which handles dragging the Sprite.</p>
-         * The developer must provide implementations of the abstract methods of {@link Ext.dd.DragSource}
-         * in order to supply behaviour for each stage of the drag/drop process. See {@link #draggable}.
-         * @type Ext.dd.DragSource.
-         * @property dd
-         */
-        this.draggable = true;
+        var me = this;
+        me.draggable = true;
         //create element if it doesn't exist.
-        if (!this.el) {
-            this.surface.createSprite(this);
+        if (!me.el) {
+            me.surface.createSprite(me);
         }
-        this.dd = Ext.create('Ext.draw.SpriteDD', this, Ext.isBoolean(this.draggable) ? null : this.draggable);
+        me.dd = Ext.create('Ext.draw.SpriteDD', me, Ext.isBoolean(me.draggable) ? null : me.draggable);
+        me.on('beforedestroy', me.dd.destroy, me.dd);
     },
 
-    <a name="method-Ext.draw.Sprite-setAttributes"></a>/**
-     * Change the attributes of the sprite.
+<span id='Ext-draw.Sprite-method-setAttributes'>    /**
+</span>     * Change the attributes of the sprite.
      * @param {Object} attrs attributes to be changed on the sprite.
      * @param {Boolean} redraw Flag to immediatly draw the change.
      * @return {Ext.draw.Sprite} this
@@ -119,12 +206,13 @@ Ext.define('Ext.draw.Sprite', {
             fontPropsLength = fontProps.length,
             pathProps = me.pathProperties,
             pathPropsLength = pathProps.length,
-            custom = me.surface.customAttributes,
+            hasSurface = !!me.surface,
+            custom = hasSurface &amp;&amp; me.surface.customAttributes || {},
             spriteAttrs = me.attr,
             attr, i, translate, translation, rotate, rotation, scale, scaling;
 
         for (attr in custom) {
-            if (attrs.hasOwnProperty(attr) && typeof custom[attr] == "function") {
+            if (attrs.hasOwnProperty(attr) &amp;&amp; typeof custom[attr] == &quot;function&quot;) {
                 Ext.apply(attrs, custom[attr].apply(me, [].concat(attrs[attr])));
             }
         }
@@ -135,9 +223,9 @@ Ext.define('Ext.draw.Sprite', {
         }
 
         // Flag path change
-        for (i = 0; i < pathPropsLength; i++) {
+        for (i = 0; i &lt; pathPropsLength; i++) {
             attr = pathProps[i];
-            if (attr in attrs && attrs[attr] !== spriteAttrs[attr]) {
+            if (attr in attrs &amp;&amp; attrs[attr] !== spriteAttrs[attr]) {
                 me.dirtyPath = true;
                 break;
             }
@@ -149,9 +237,9 @@ Ext.define('Ext.draw.Sprite', {
         }
 
         // Flag font/text change
-        for (i = 0; i < fontPropsLength; i++) {
+        for (i = 0; i &lt; fontPropsLength; i++) {
             attr = fontProps[i];
-            if (attr in attrs && attrs[attr] !== spriteAttrs[attr]) {
+            if (attr in attrs &amp;&amp; attrs[attr] !== spriteAttrs[attr]) {
                 me.dirtyFont = true;
                 break;
             }
@@ -160,8 +248,8 @@ Ext.define('Ext.draw.Sprite', {
         translate = attrs.translate;
         translation = spriteAttrs.translation;
         if (translate) {
-            if ((translate.x && translate.x !== translation.x) ||
-                (translate.y && translate.y !== translation.y)) {
+            if ((translate.x &amp;&amp; translate.x !== translation.x) ||
+                (translate.y &amp;&amp; translate.y !== translation.y)) {
                 Ext.apply(translation, translate);
                 me.dirtyTransform = true;
             }
@@ -171,9 +259,9 @@ Ext.define('Ext.draw.Sprite', {
         rotate = attrs.rotate;
         rotation = spriteAttrs.rotation;
         if (rotate) {
-            if ((rotate.x && rotate.x !== rotation.x) || 
-                (rotate.y && rotate.y !== rotation.y) ||
-                (rotate.degrees && rotate.degrees !== rotation.degrees)) {
+            if ((rotate.x &amp;&amp; rotate.x !== rotation.x) || 
+                (rotate.y &amp;&amp; rotate.y !== rotation.y) ||
+                (rotate.degrees &amp;&amp; rotate.degrees !== rotation.degrees)) {
                 Ext.apply(rotation, rotate);
                 me.dirtyTransform = true;
             }
@@ -183,10 +271,10 @@ Ext.define('Ext.draw.Sprite', {
         scale = attrs.scale;
         scaling = spriteAttrs.scaling;
         if (scale) {
-            if ((scale.x && scale.x !== scaling.x) || 
-                (scale.y && scale.y !== scaling.y) ||
-                (scale.cx && scale.cx !== scaling.cx) ||
-                (scale.cy && scale.cy !== scaling.cy)) {
+            if ((scale.x &amp;&amp; scale.x !== scaling.x) || 
+                (scale.y &amp;&amp; scale.y !== scaling.y) ||
+                (scale.cx &amp;&amp; scale.cx !== scaling.cx) ||
+                (scale.cy &amp;&amp; scale.cy !== scaling.cy)) {
                 Ext.apply(scaling, scale);
                 me.dirtyTransform = true;
             }
@@ -196,14 +284,14 @@ Ext.define('Ext.draw.Sprite', {
         Ext.apply(spriteAttrs, attrs);
         me.dirty = true;
 
-        if (redraw === true) {
+        if (redraw === true &amp;&amp; hasSurface) {
             me.redraw();
         }
         return this;
     },
 
-    <a name="method-Ext.draw.Sprite-getBBox"></a>/**
-     * Retrieve the bounding box of the sprite. This will be returned as an object with x, y, width, and height properties.
+<span id='Ext-draw.Sprite-method-getBBox'>    /**
+</span>     * Retrieve the bounding box of the sprite. This will be returned as an object with x, y, width, and height properties.
      * @return {Object} bbox
      */
     getBBox: function() {
@@ -214,8 +302,8 @@ Ext.define('Ext.draw.Sprite', {
         return this.surface.setText(this, text);
     },
 
-    <a name="method-Ext.draw.Sprite-hide"></a>/**
-     * Hide the sprite.
+<span id='Ext-draw.Sprite-method-hide'>    /**
+</span>     * Hide the sprite.
      * @param {Boolean} redraw Flag to immediatly draw the change.
      * @return {Ext.draw.Sprite} this
      */
@@ -226,8 +314,8 @@ Ext.define('Ext.draw.Sprite', {
         return this;
     },
 
-    <a name="method-Ext.draw.Sprite-show"></a>/**
-     * Show the sprite.
+<span id='Ext-draw.Sprite-method-show'>    /**
+</span>     * Show the sprite.
      * @param {Boolean} redraw Flag to immediatly draw the change.
      * @return {Ext.draw.Sprite} this
      */
@@ -238,8 +326,8 @@ Ext.define('Ext.draw.Sprite', {
         return this;
     },
 
-    <a name="method-Ext.draw.Sprite-remove"></a>/**
-     * Remove the sprite.
+<span id='Ext-draw.Sprite-method-remove'>    /**
+</span>     * Remove the sprite.
      */
     remove: function() {
         if (this.surface) {
@@ -248,17 +336,26 @@ Ext.define('Ext.draw.Sprite', {
         }
         return false;
     },
-    
-    <a name="method-Ext.draw.Sprite-destroy"></a>/**
-     * Removes the sprite and clears all listeners.
-     */
-    destroy: function() {
-        this.remove();
-        this.clearListeners();
+
+    onRemove: function() {
+        this.surface.onRemove(this);
     },
 
-    <a name="method-Ext.draw.Sprite-redraw"></a>/**
-     * Redraw the sprite.
+<span id='Ext-draw.Sprite-method-destroy'>    /**
+</span>     * Removes the sprite and clears all listeners.
+     */
+    destroy: function() {
+        var me = this;
+        if (me.fireEvent('beforedestroy', me) !== false) {
+            me.remove();
+            me.surface.onDestroy(me);
+            me.clearListeners();
+            me.fireEvent('destroy');
+        }
+    },
+
+<span id='Ext-draw.Sprite-method-redraw'>    /**
+</span>     * Redraw the sprite.
      * @return {Ext.draw.Sprite} this
      */
     redraw: function() {
@@ -266,8 +363,8 @@ Ext.define('Ext.draw.Sprite', {
         return this;
     },
 
-    <a name="method-Ext.draw.Sprite-setStyle"></a>/**
-     * Wrapper for setting style properties, also takes single object parameter of multiple styles.
+<span id='Ext-draw.Sprite-method-setStyle'>    /**
+</span>     * Wrapper for setting style properties, also takes single object parameter of multiple styles.
      * @param {String/Object} property The style property to be set, or an object of multiple styles.
      * @param {String} value (optional) The value to apply to the given property, or null if an object was passed.
      * @return {Ext.draw.Sprite} this
@@ -277,8 +374,8 @@ Ext.define('Ext.draw.Sprite', {
         return this;
     },
 
-    <a name="method-Ext.draw.Sprite-addCls"></a>/**
-     * Adds one or more CSS classes to the element. Duplicate classes are automatically filtered out.  Note this method
+<span id='Ext-draw.Sprite-method-addCls'>    /**
+</span>     * Adds one or more CSS classes to the element. Duplicate classes are automatically filtered out.  Note this method
      * is severly limited in VML.
      * @param {String/Array} className The CSS class to add, or an array of classes
      * @return {Ext.draw.Sprite} this
@@ -288,8 +385,8 @@ Ext.define('Ext.draw.Sprite', {
         return this;
     },
 
-    <a name="method-Ext.draw.Sprite-removeCls"></a>/**
-     * Removes one or more CSS classes from the element.
+<span id='Ext-draw.Sprite-method-removeCls'>    /**
+</span>     * Removes one or more CSS classes from the element.
      * @param {String/Array} className The CSS class to remove, or an array of classes.  Note this method
      * is severly limited in VML.
      * @return {Ext.draw.Sprite} this
@@ -299,4 +396,4 @@ Ext.define('Ext.draw.Sprite', {
         return this;
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

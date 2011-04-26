@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.view.TableChunker"></a>/**
- * @class Ext.view.TableChunker
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-view.TableChunker'>/**
+</span> * @class Ext.view.TableChunker
  * 
  * Produces optimized XTemplates for chunks of tables to be
  * used in grids, trees and other table based widgets.
@@ -11,21 +11,21 @@ Ext.define('Ext.view.TableChunker', {
     requires: ['Ext.XTemplate'],
     metaTableTpl: [
         '{[this.openTableWrap()]}',
-        '<table class="' + Ext.baseCSSPrefix + 'grid-table ' + Ext.baseCSSPrefix + 'grid-table-resizer" border="0" cellspacing="0" cellpadding="0" {[this.embedFullWidth()]}>',
-            '<tbody>',
-            '<tr>',
-            '<tpl for="columns">',
-                '<th class="' + Ext.baseCSSPrefix + 'grid-col-resizer-{id}" style="width: {width}px; height: 0px;"></th>',
-            '</tpl>',
-            '</tr>',
+        '&lt;table class=&quot;' + Ext.baseCSSPrefix + 'grid-table ' + Ext.baseCSSPrefix + 'grid-table-resizer&quot; border=&quot;0&quot; cellspacing=&quot;0&quot; cellpadding=&quot;0&quot; {[this.embedFullWidth()]}&gt;',
+            '&lt;tbody&gt;',
+            '&lt;tr&gt;',
+            '&lt;tpl for=&quot;columns&quot;&gt;',
+                '&lt;th class=&quot;' + Ext.baseCSSPrefix + 'grid-col-resizer-{id}&quot; style=&quot;width: {width}px; height: 0px;&quot;&gt;&lt;/th&gt;',
+            '&lt;/tpl&gt;',
+            '&lt;/tr&gt;',
             '{[this.openRows()]}',
                 '{row}',
-                '<tpl for="features">',
+                '&lt;tpl for=&quot;features&quot;&gt;',
                     '{[this.embedFeature(values, parent, xindex, xcount)]}',
-                '</tpl>',
+                '&lt;/tpl&gt;',
             '{[this.closeRows()]}',
-            '</tbody>',
-        '</table>',
+            '&lt;/tbody&gt;',
+        '&lt;/table&gt;',
         '{[this.closeTableWrap()]}'
     ],
 
@@ -44,30 +44,47 @@ Ext.define('Ext.view.TableChunker', {
     },
 
     embedFullWidth: function() {
-        return 'style="width: {fullWidth}px;"';
+        return 'style=&quot;width: {fullWidth}px;&quot;';
     },
 
     openRows: function() {
-        return '<tpl for="rows">';
+        return '&lt;tpl for=&quot;rows&quot;&gt;';
     },
 
     closeRows: function() {
-        return '</tpl>';
+        return '&lt;/tpl&gt;';
     },
 
     metaRowTpl: [
-        '<tr class="' + Ext.baseCSSPrefix + 'grid-row {addlSelector} {[this.embedRowCls()]}">',
-            '<tpl for="columns">',
-                '<td class="' + Ext.baseCSSPrefix + 'grid-cell ' + Ext.baseCSSPrefix + 'grid-cell-{id} {{id}-modified} {{id}-tdCls}" {{id}-tdAttr}><div unselectable="on" class="' + Ext.baseCSSPrefix + 'grid-cell-inner ' + Ext.baseCSSPrefix + 'unselectable" style="{{id}-style}; text-align: {align};">{{id}}</div></td>',
-            '</tpl>',
-        '</tr>'
+        '&lt;tr class=&quot;' + Ext.baseCSSPrefix + 'grid-row {addlSelector} {[this.embedRowCls()]}&quot; {[this.embedRowAttr()]}&gt;',
+            '&lt;tpl for=&quot;columns&quot;&gt;',
+                '&lt;td class=&quot;{cls} ' + Ext.baseCSSPrefix + 'grid-cell ' + Ext.baseCSSPrefix + 'grid-cell-{columnId} {{id}-modified} {{id}-tdCls} {[this.firstOrLastCls(xindex, xcount)]}&quot; {{id}-tdAttr}&gt;&lt;div unselectable=&quot;on&quot; class=&quot;' + Ext.baseCSSPrefix + 'grid-cell-inner ' + Ext.baseCSSPrefix + 'unselectable&quot; style=&quot;{{id}-style}; text-align: {align};&quot;&gt;{{id}}&lt;/div&gt;&lt;/td&gt;',
+            '&lt;/tpl&gt;',
+        '&lt;/tr&gt;'
     ],
+    
+    firstOrLastCls: function(xindex, xcount) {
+        var cssCls = '';
+        if (xindex === 1) {
+            cssCls = Ext.baseCSSPrefix + 'grid-cell-first';
+        } else if (xindex === xcount) {
+            cssCls = Ext.baseCSSPrefix + 'grid-cell-last';
+        }
+        return cssCls;
+    },
+    
     embedRowCls: function() {
         return '{rowCls}';
     },
+    
+    embedRowAttr: function() {
+        return '{rowAttr}';
+    },
+    
     openTableWrap: function() {
         return '';
     },
+    
     closeTableWrap: function() {
         return '';
     },
@@ -87,17 +104,19 @@ Ext.define('Ext.view.TableChunker', {
             ln = features.length,
             i  = 0,
             memberFns = {
-                embedRowCls: this.embedRowCls
+                embedRowCls: this.embedRowCls,
+                embedRowAttr: this.embedRowAttr,
+                firstOrLastCls: this.firstOrLastCls
             },
             // copy the default
             metaRowTpl = Array.prototype.slice.call(this.metaRowTpl, 0),
             metaTableTpl;
             
-        for (; i < ln; i++) {
+        for (; i &lt; ln; i++) {
             if (!features[i].disabled) {
                 features[i].mutateMetaRowTpl(metaRowTpl);
                 Ext.apply(memberFns, features[i].getMetaRowTplFragments());
-                Ext.apply(tplMemberFns, features[i].getTplFragments());
+                Ext.apply(tplMemberFns, features[i].getFragmentTpl());
                 Ext.apply(tableTplMemberFns, features[i].getTableFragments());
             }
         }
@@ -117,4 +136,4 @@ Ext.define('Ext.view.TableChunker', {
         
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

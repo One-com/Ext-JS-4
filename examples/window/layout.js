@@ -1,5 +1,5 @@
 Ext.require([
-    'Ext.tab.*', 
+    'Ext.tab.*',
     'Ext.window.*',
     'Ext.tip.*',
     'Ext.layout.container.Border'
@@ -44,10 +44,15 @@ Ext.onReady(function(){
                 }]
             });
         }
+        button.dom.disabled = true;
         if (win.isVisible()) {
-            win.hide(this);
+            win.hide(this, function() {
+                button.dom.disabled = false;
+            });
         } else {
-            win.show(this);
+            win.show(this, function() {
+                button.dom.disabled = false;
+            });
         }
     });
 });

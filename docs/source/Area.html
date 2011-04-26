@@ -1,33 +1,78 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.chart.series.Area"></a>/**
- * @class Ext.chart.series.Area
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-chart.series.Area'>/**
+</span> * @class Ext.chart.series.Area
  * @extends Ext.chart.series.Cartesian
  * 
- <p>
+ &lt;p&gt;
     Creates a Stacked Area Chart. The stacked area chart is useful when displaying multiple aggregated layers of information.
     As with all other series, the Area Series must be appended in the *series* Chart array configuration. See the Chart 
     documentation for more information. A typical configuration object for the area series could be:
- </p>
- 
-  <pre><code>
-   series: [{
-       type: 'area',
-       highlight: true,
-       axis: 'left',
-       xField: 'name',
-       yField: ['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7'],
-       style: {
-           opacity: 0.93
-       }
-   }]
-   </code></pre>
+ &lt;/p&gt;
+{@img Ext.chart.series.Area/Ext.chart.series.Area.png Ext.chart.series.Area chart series} 
+  &lt;pre&gt;&lt;code&gt;
+   var store = Ext.create('Ext.data.JsonStore', {
+        fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
+        data: [
+            {'name':'metric one', 'data1':10, 'data2':12, 'data3':14, 'data4':8, 'data5':13},
+            {'name':'metric two', 'data1':7, 'data2':8, 'data3':16, 'data4':10, 'data5':3},
+            {'name':'metric three', 'data1':5, 'data2':2, 'data3':14, 'data4':12, 'data5':7},
+            {'name':'metric four', 'data1':2, 'data2':14, 'data3':6, 'data4':1, 'data5':23},
+            {'name':'metric five', 'data1':27, 'data2':38, 'data3':36, 'data4':13, 'data5':33}                                                
+        ]
+    });
+    
+    Ext.create('Ext.chart.Chart', {
+        renderTo: Ext.getBody(),
+        width: 500,
+        height: 300,
+        store: store,
+        axes: [{
+            type: 'Numeric',
+            grid: true,
+            position: 'left',
+            fields: ['data1', 'data2', 'data3', 'data4', 'data5'],
+            title: 'Sample Values',
+            grid: {
+                odd: {
+                    opacity: 1,
+                    fill: '#ddd',
+                    stroke: '#bbb',
+                    'stroke-width': 1
+                }
+            },
+            minimum: 0,
+            adjustMinimumByMajorUnit: 0
+        }, {
+            type: 'Category',
+            position: 'bottom',
+            fields: ['name'],
+            title: 'Sample Metrics',
+            grid: true,
+            label: {
+                rotate: {
+                    degrees: 315
+                }
+            }
+        }],
+        series: [{
+            type: 'area',
+            highlight: false,
+            axis: 'left',
+            xField: 'name',
+            yField: ['data1', 'data2', 'data3', 'data4', 'data5'],
+            style: {
+                opacity: 0.93
+            }
+        }]
+    });
+   &lt;/code&gt;&lt;/pre&gt;
  
   
- <p>
+ &lt;p&gt;
   In this configuration we set `area` as the type for the series, set highlighting options to true for highlighting elements on hover, 
   take the left axis to measure the data in the area series, set as xField (x values) the name field of each element in the store, 
   and as yFields (aggregated layers) seven data fields from the same store. Then we override some theming styles by adding some opacity 
   to the style object.
- </p>
+ &lt;/p&gt;
   
  * @xtype area
  * 
@@ -46,8 +91,11 @@ Ext.define('Ext.chart.series.Area', {
 
     type: 'area',
 
-    <a name="cfg-Ext.chart.series.Area-style"></a>/**
-     * @cfg {Object} style 
+    // @private Area charts are alyways stacked
+    stacked: true,
+
+<span id='Ext-chart.series.Area-cfg-style'>    /**
+</span>     * @cfg {Object} style 
      * Append styling properties to this object for it to override theme properties.
      */
     style: {},
@@ -91,24 +139,24 @@ Ext.define('Ext.chart.series.Area', {
             xRes = [],
             yRes = [];
         //initialize array
-        for (j = 0; j < yCompLen; ++j) {
+        for (j = 0; j &lt; yCompLen; ++j) {
             ySum[j] = 0;
         }
-        for (i = 0; i < len; ++i) {
+        for (i = 0; i &lt; len; ++i) {
             xSum += xValues[i];
-            for (j = 0; j < yCompLen; ++j) {
+            for (j = 0; j &lt; yCompLen; ++j) {
                 ySum[j] += yValues[i][j];
             }
             if (i % ratio == 0) {
                 //push averages
                 xRes.push(xSum/ratio);
-                for (j = 0; j < yCompLen; ++j) {
+                for (j = 0; j &lt; yCompLen; ++j) {
                     ySum[j] /= ratio;
                 }
                 yRes.push(ySum);
                 //reset sum accumulators
                 xSum = 0;
-                for (j = 0, ySum = []; j < yCompLen; ++j) {
+                for (j = 0, ySum = []; j &lt; yCompLen; ++j) {
                     ySum[j] = 0;
                 }
             }
@@ -141,6 +189,33 @@ Ext.define('Ext.chart.series.Area', {
         me.setBBox();
         bbox = me.bbox;
 
+        // Run through the axis
+        if (me.axis) {
+            axis = chart.axes.get(me.axis);
+            if (axis) {
+                out = axis.calcEnds();
+                minY = out.from || axis.prevMin;
+                maxY = mmax(out.to || axis.prevMax, 0);
+            }
+        }
+
+        if (me.yField &amp;&amp; !Ext.isNumber(minY)) {
+            axis = Ext.create('Ext.chart.axis.Axis', {
+                chart: chart,
+                fields: [].concat(me.yField)
+            });
+            out = axis.calcEnds();
+            minY = out.from || axis.prevMin;
+            maxY = mmax(out.to || axis.prevMax, 0);
+        }
+
+        if (!Ext.isNumber(minY)) {
+            minY = 0;
+        }
+        if (!Ext.isNumber(maxY)) {
+            maxY = 0;
+        }
+
         store.each(function(record, i) {
             xValue = record.get(me.xField);
             yValue = [];
@@ -149,7 +224,7 @@ Ext.define('Ext.chart.series.Area', {
             }
             xValues.push(xValue);
             acumY = 0;
-            for (areaIndex = 0; areaIndex < areasLen; areaIndex++) {
+            for (areaIndex = 0; areaIndex &lt; areasLen; areaIndex++) {
                 areaElem = record.get(areas[areaIndex]);
                 if (typeof areaElem == 'number') {
                     minY = mmin(minY, areaElem);
@@ -167,7 +242,7 @@ Ext.define('Ext.chart.series.Area', {
         yScale = bbox.height / (maxY - minY);
 
         ln = xValues.length;
-        if ((ln > bbox.width) && me.areas) {
+        if ((ln &gt; bbox.width) &amp;&amp; me.areas) {
             sumValues = me.shrink(xValues, yValues, bbox.width);
             xValues = sumValues.x;
             yValues = sumValues.y;
@@ -201,12 +276,12 @@ Ext.define('Ext.chart.series.Area', {
 
         ln = bounds.xValues.length;
         // Start the path
-        for (i = 0; i < ln; i++) {
+        for (i = 0; i &lt; ln; i++) {
             xValue = bounds.xValues[i];
             yValue = bounds.yValues[i];
             x = bbox.x + (xValue - bounds.minX) * bounds.xScale;
             acumY = 0;
-            for (areaIndex = 0; areaIndex < bounds.areasLen; areaIndex++) {
+            for (areaIndex = 0; areaIndex &lt; bounds.areasLen; areaIndex++) {
                 // Excluded series
                 if (me.__excludes[areaIndex]) {
                     continue;
@@ -236,7 +311,7 @@ Ext.define('Ext.chart.series.Area', {
         }
         
         // Close the paths
-        for (areaIndex = 0; areaIndex < bounds.areasLen; areaIndex++) {
+        for (areaIndex = 0; areaIndex &lt; bounds.areasLen; areaIndex++) {
             // Excluded series
             if (me.__excludes[areaIndex]) {
                 continue;
@@ -254,7 +329,7 @@ Ext.define('Ext.chart.series.Area', {
                 componentPath = componentPaths[prevAreaIndex];
                 componentPath.reverse();
                 path.push('L', x, componentPath[0][2]);
-                for (i = 0; i < ln; i++) {
+                for (i = 0; i &lt; ln; i++) {
                     path.push(componentPath[i][0],
                               componentPath[i][1],
                               componentPath[i][2]);
@@ -270,8 +345,8 @@ Ext.define('Ext.chart.series.Area', {
         };
     },
 
-    <a name="method-Ext.chart.series.Area-drawSeries"></a>/**
-     * Draws the series for the current chart.
+<span id='Ext-chart.series.Area-method-drawSeries'>    /**
+</span>     * Draws the series for the current chart.
      */
     drawSeries: function() {
         var me = this,
@@ -282,7 +357,7 @@ Ext.define('Ext.chart.series.Area', {
             group = me.group,
             endLineStyle = Ext.apply(me.seriesStyle, me.style),
             colorArrayStyle = me.colorArrayStyle,
-            colorArrayLength = colorArrayStyle && colorArrayStyle.length || 0,
+            colorArrayLength = colorArrayStyle &amp;&amp; colorArrayStyle.length || 0,
             areaIndex, areaElem, paths, path, rendererAttributes;
 
         me.unHighlightItem();
@@ -298,7 +373,7 @@ Ext.define('Ext.chart.series.Area', {
             me.areas = [];
         }
 
-        for (areaIndex = 0; areaIndex < paths.areasLen; areaIndex++) {
+        for (areaIndex = 0; areaIndex &lt; paths.areasLen; areaIndex++) {
             // Excluded series
             if (me.__excludes[areaIndex]) {
                 continue;
@@ -387,12 +462,12 @@ Ext.define('Ext.chart.series.Area', {
         width = bb.width / 2;
         height = bb.height / 2;
         
-        x = x - width < bbox.x? bbox.x + width : x;
-        x = (x + width > bbox.x + bbox.width) ? (x - (x + width - bbox.x - bbox.width)) : x;
-        y = y - height < bbox.y? bbox.y + height : y;
-        y = (y + height > bbox.y + bbox.height) ? (y - (y + height - bbox.y - bbox.height)) : y;
+        x = x - width &lt; bbox.x? bbox.x + width : x;
+        x = (x + width &gt; bbox.x + bbox.width) ? (x - (x + width - bbox.x - bbox.width)) : x;
+        y = y - height &lt; bbox.y? bbox.y + height : y;
+        y = (y + height &gt; bbox.y + bbox.height) ? (y - (y + height - bbox.y - bbox.height)) : y;
 
-        if (me.chart.animate && !me.chart.resizing) {
+        if (me.chart.animate &amp;&amp; !me.chart.resizing) {
             label.show(true);
             me.onAnimate(label, {
                 to: {
@@ -450,11 +525,11 @@ Ext.define('Ext.chart.series.Area', {
         dir = [1 / norm, a / norm];
         normal = [-dir[1], dir[0]];
         
-        //keep the label always on the outer part of the "elbow"
-        if (aprev > 0 && anext < 0 && normal[1] < 0 || aprev < 0 && anext > 0 && normal[1] > 0) {
+        //keep the label always on the outer part of the &quot;elbow&quot;
+        if (aprev &gt; 0 &amp;&amp; anext &lt; 0 &amp;&amp; normal[1] &lt; 0 || aprev &lt; 0 &amp;&amp; anext &gt; 0 &amp;&amp; normal[1] &gt; 0) {
             normal[0] *= -1;
             normal[1] *= -1;
-        } else if (Math.abs(aprev) < Math.abs(anext) && normal[0] < 0 || Math.abs(aprev) > Math.abs(anext) && normal[0] > 0) {
+        } else if (Math.abs(aprev) &lt; Math.abs(anext) &amp;&amp; normal[0] &lt; 0 || Math.abs(aprev) &gt; Math.abs(anext) &amp;&amp; normal[0] &gt; 0) {
             normal[0] *= -1;
             normal[1] *= -1;
         }
@@ -464,17 +539,17 @@ Ext.define('Ext.chart.series.Area', {
         y = cur[1] + normal[1] * offsetFromViz;
         
         //box position and dimensions
-        boxx = x + (normal[0] > 0? 0 : -(bbox.width + 2 * offsetBox));
+        boxx = x + (normal[0] &gt; 0? 0 : -(bbox.width + 2 * offsetBox));
         boxy = y - bbox.height /2 - offsetBox;
         boxw = bbox.width + 2 * offsetBox;
         boxh = bbox.height + 2 * offsetBox;
         
         //now check if we're out of bounds and invert the normal vector correspondingly
         //this may add new overlaps between labels (but labels won't be out of bounds).
-        if (boxx < clipRect[0] || (boxx + boxw) > (clipRect[0] + clipRect[2])) {
+        if (boxx &lt; clipRect[0] || (boxx + boxw) &gt; (clipRect[0] + clipRect[2])) {
             normal[0] *= -1;
         }
-        if (boxy < clipRect[1] || (boxy + boxh) > (clipRect[1] + clipRect[3])) {
+        if (boxy &lt; clipRect[1] || (boxy + boxh) &gt; (clipRect[1] + clipRect[3])) {
             normal[1] *= -1;
         }
 
@@ -483,14 +558,14 @@ Ext.define('Ext.chart.series.Area', {
         y = cur[1] + normal[1] * offsetFromViz;
         
         //update box position and dimensions
-        boxx = x + (normal[0] > 0? 0 : -(bbox.width + 2 * offsetBox));
+        boxx = x + (normal[0] &gt; 0? 0 : -(bbox.width + 2 * offsetBox));
         boxy = y - bbox.height /2 - offsetBox;
         boxw = bbox.width + 2 * offsetBox;
         boxh = bbox.height + 2 * offsetBox;
         
         //set the line from the middle of the pie to the box.
         callout.lines.setAttributes({
-            path: ["M", cur[0], cur[1], "L", x, y, "Z"]
+            path: [&quot;M&quot;, cur[0], cur[1], &quot;L&quot;, x, y, &quot;Z&quot;]
         }, true);
         //set box position
         callout.box.setAttributes({
@@ -501,7 +576,7 @@ Ext.define('Ext.chart.series.Area', {
         }, true);
         //set text position
         callout.label.setAttributes({
-            x: x + (normal[0] > 0? offsetBox : -(bbox.width + offsetBox)),
+            x: x + (normal[0] &gt; 0? offsetBox : -(bbox.width + offsetBox)),
             y: y
         }, true);
         for (p in callout) {
@@ -516,13 +591,13 @@ Ext.define('Ext.chart.series.Area', {
             abs = Math.abs,
             dist = Infinity, p, pln, point;
         
-        for (p = 0, pln = pointsUp.length; p < pln; p++) {
+        for (p = 0, pln = pointsUp.length; p &lt; pln; p++) {
             point = [pointsUp[p][0], pointsUp[p][1]];
-            if (dist > abs(x - point[0])) {
+            if (dist &gt; abs(x - point[0])) {
                 dist = abs(x - point[0]);
             } else {
                 point = pointsUp[p -1];
-                if (y >= point[1] && (!pointsDown.length || y <= (pointsDown[p -1][1]))) {
+                if (y &gt;= point[1] &amp;&amp; (!pointsDown.length || y &lt;= (pointsDown[p -1][1]))) {
                     item.storeIndex = p -1;
                     item.storeField = me.yField[i];
                     item.storeItem = me.chart.store.getAt(p -1);
@@ -536,8 +611,8 @@ Ext.define('Ext.chart.series.Area', {
         return false;
     },
 
-    <a name="method-Ext.chart.series.Area-highlightSeries"></a>/**
-     * Highlight this entire series.
+<span id='Ext-chart.series.Area-method-highlightSeries'>    /**
+</span>     * Highlight this entire series.
      * @param {Object} item Info about the item; same format as returned by #getItemForPoint.
      */
     highlightSeries: function() {
@@ -573,8 +648,8 @@ Ext.define('Ext.chart.series.Area', {
         }
     },
 
-    <a name="method-Ext.chart.series.Area-unHighlightSeries"></a>/**
-     * UnHighlight this entire series.
+<span id='Ext-chart.series.Area-method-unHighlightSeries'>    /**
+</span>     * UnHighlight this entire series.
      * @param {Object} item Info about the item; same format as returned by #getItemForPoint.
      */
     unHighlightSeries: function() {
@@ -598,8 +673,8 @@ Ext.define('Ext.chart.series.Area', {
         }
     },
 
-    <a name="method-Ext.chart.series.Area-highlightItem"></a>/**
-     * Highlight the specified item. If no item is provided the whole series will be highlighted.
+<span id='Ext-chart.series.Area-method-highlightItem'>    /**
+</span>     * Highlight the specified item. If no item is provided the whole series will be highlighted.
      * @param item {Object} Info about the item; same format as returned by #getItemForPoint
      */
     highlightItem: function(item) {
@@ -618,8 +693,8 @@ Ext.define('Ext.chart.series.Area', {
         }, true);
     },
 
-    <a name="method-Ext.chart.series.Area-unHighlightItem"></a>/**
-     * un-highlights the specified item. If no item is provided it will un-highlight the entire series.
+<span id='Ext-chart.series.Area-method-unHighlightItem'>    /**
+</span>     * un-highlights the specified item. If no item is provided it will un-highlight the entire series.
      * @param item {Object} Info about the item; same format as returned by #getItemForPoint
      */
     unHighlightItem: function(item) {
@@ -650,8 +725,8 @@ Ext.define('Ext.chart.series.Area', {
         }
     },
 
-    <a name="method-Ext.chart.series.Area-getLegendColor"></a>/**
-     * Returns the color of the series (to be displayed as color for the series legend item).
+<span id='Ext-chart.series.Area-method-getLegendColor'>    /**
+</span>     * Returns the color of the series (to be displayed as color for the series legend item).
      * @param item {Object} Info about the item; same format as returned by #getItemForPoint
      */
     getLegendColor: function(index) {
@@ -659,4 +734,4 @@ Ext.define('Ext.chart.series.Area', {
         return me.colorArrayStyle[index % me.colorArrayStyle.length];
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

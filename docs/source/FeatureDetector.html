@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.env.FeatureDetector"></a>/**
- * @class Ext.env.FeatureDetector
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-env.FeatureDetector'>/**
+</span> * @class Ext.env.FeatureDetector
  */
 Ext.define('Ext.env.FeatureDetector', {
 
@@ -7,25 +7,25 @@ Ext.define('Ext.env.FeatureDetector', {
         defaultTests: {
             Canvas: function() {
                 var element = this.getTestElement('canvas');
-                return !!(element && element.getContext && element.getContext('2d'));
+                return !!(element &amp;&amp; element.getContext &amp;&amp; element.getContext('2d'));
             },
             SVG: function() {
                 var doc = Ext.global.document;
 
-                return !!(doc.createElementNS && !!doc.createElementNS("http:/" + "/www.w3.org/2000/svg", "svg").createSVGRect);
+                return !!(doc.createElementNS &amp;&amp; !!doc.createElementNS(&quot;http:/&quot; + &quot;/www.w3.org/2000/svg&quot;, &quot;svg&quot;).createSVGRect);
             },
             VML: function() {
                 var element = this.getTestElement(),
                     ret = false;
 
-                element.innerHTML = "<!--[if vml]><br><br><![endif]-->";
+                element.innerHTML = &quot;&lt;!--[if vml]&gt;&lt;br&gt;&lt;br&gt;&lt;![endif]--&gt;&quot;;
                 ret = (element.childNodes.length === 2);
-                element.innerHTML = "";
+                element.innerHTML = &quot;&quot;;
 
                 return ret;
             },
             Touch: function() {
-                return ('ontouchstart' in Ext.global) && !(Ext.platform && Ext.platform.name.match(/Windows|MacOSX|Linux/));
+                return ('ontouchstart' in Ext.global) &amp;&amp; !(Ext.platform &amp;&amp; Ext.platform.name.match(/Windows|MacOSX|Linux/));
             },
             Orientation: function() {
                 return ('orientation' in Ext.global);
@@ -40,13 +40,13 @@ Ext.define('Ext.env.FeatureDetector', {
                 return 'WebSocket' in Ext.global;
             },
             History: function() {
-                return !!(Ext.global.history && Ext.global.history.pushState);
+                return !!(Ext.global.history &amp;&amp; Ext.global.history.pushState);
             },
             CSSTransforms: function() {
                 return this.isStyleSupported('transform');
             },
             CSS3DTransforms: function() {
-                return this.has('csstransforms') && this.isStyleSupported('perspective');
+                return this.has('csstransforms') &amp;&amp; this.isStyleSupported('perspective');
             },
             CSSAnimations: function() {
                 return this.isStyleSupported('animationName');
@@ -104,15 +104,15 @@ Ext.define('Ext.env.FeatureDetector', {
     },
 
     registerTest: function(name, fn, isDefault) {
-        //<debug>
+        //&lt;debug&gt;
         if (this.hasTest(name)) {
             Ext.Error.raise({
-                sourceClass: "Ext.env.FeatureDetector",
-                sourceMethod: "registerTest",
-                msg: "Test name " + name + " has already been registered"
+                sourceClass: &quot;Ext.env.FeatureDetector&quot;,
+                sourceMethod: &quot;registerTest&quot;,
+                msg: &quot;Test name &quot; + name + &quot; has already been registered&quot;
             });
         }
-        //<debug>
+        //&lt;debug&gt;
 
         this.tests[name] = fn;
 
@@ -136,15 +136,15 @@ Ext.define('Ext.env.FeatureDetector', {
     },
 
     getTest: function(name) {
-        //<debug>
+        //&lt;debug&gt;
         if (!this.hasTest(name)) {
             Ext.Error.raise({
-                sourceClass: "Ext.env.FeatureDetector",
-                sourceMethod: "getTest",
-                msg: "Test name " + name + " does not exist"
+                sourceClass: &quot;Ext.env.FeatureDetector&quot;,
+                sourceMethod: &quot;getTest&quot;,
+                msg: &quot;Test name &quot; + name + &quot; does not exist&quot;
             });
         }
-        //<debug>
+        //&lt;debug&gt;
 
         return this.tests[name];
     },
@@ -176,16 +176,16 @@ Ext.define('Ext.env.FeatureDetector', {
             eventName = 'on' + name,
             isSupported = false;
 
-        // When using `setAttribute`, IE skips "unload", WebKit skips
-        // "unload" and "resize", whereas `in` "catches" those
+        // When using `setAttribute`, IE skips &quot;unload&quot;, WebKit skips
+        // &quot;unload&quot; and &quot;resize&quot;, whereas `in` &quot;catches&quot; those
         isSupported = (eventName in element);
 
         if (!isSupported) {
-            if (element.setAttribute && element.removeAttribute) {
+            if (element.setAttribute &amp;&amp; element.removeAttribute) {
                 element.setAttribute(eventName, '');
                 isSupported = typeof element[eventName] === 'function';
 
-                // If property was created, "remove it" (by setting value to `undefined`)
+                // If property was created, &quot;remove it&quot; (by setting value to `undefined`)
                 if (typeof element[eventName] !== 'undefined') {
                     element[eventName] = undefined;
                 }
@@ -206,4 +206,4 @@ Ext.define('Ext.env.FeatureDetector', {
 Ext.features = new Ext.env.FeatureDetector();
 
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

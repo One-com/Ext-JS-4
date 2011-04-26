@@ -1,6 +1,6 @@
 Ext.Loader.setConfig({enabled: true});
 Ext.Loader.setPath('Ext.org', '.');
-Ext.Loader.setPath('Ext.ux.DataView', 'ux');
+Ext.Loader.setPath('Ext.ux.DataView', '../ux/DataView');
 
 Ext.require([
     'Ext.org.ImageView',

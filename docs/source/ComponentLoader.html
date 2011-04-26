@@ -1,23 +1,46 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.ComponentLoader"></a>/**
- * @class Ext.ComponentLoader
- * @extend Ext.ElementLoader
- * A class used to load remote content to a component. Sample usage:
- * <pre><code>
-new Ext.Component({
-    tpl: '{firstName} - {lastName}',
-    loader: {
-        url: 'myPage.php',
-        renderer: 'data',
-        params: {
-            userId: 1
-        }
-    }
-});
- * </code></pre>
- * <p>
- * In general this class will not be instanced directly, rather a loader configuration will be passed to the
- * constructor of the {@link Ext.Component}
- * </p>
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-ComponentLoader'>/**
+</span> * @class Ext.ComponentLoader
+ * @extends Ext.ElementLoader
+ * 
+ * This class is used to load content via Ajax into a {@link Ext.Component}. In general 
+ * this class will not be instanced directly, rather a loader configuration will be passed to the
+ * constructor of the {@link Ext.Component}.
+ * 
+ * ## HTML Renderer
+ * By default, the content loaded will be processed as raw html. The response text
+ * from the request is taken and added to the component. This can be used in
+ * conjunction with the {@link #scripts} option to execute any inline scripts in
+ * the resulting content. Using this renderer has the same effect as passing the
+ * {@link Ext.Component#html} configuration option.
+ * 
+ * ## Data Renderer
+ * This renderer allows content to be added by using JSON data and a {@link Ext.XTemplate}.
+ * The content received from the response is passed to the {@link Ext.Component#update} method.
+ * This content is run through the attached {@link Ext.Component#tpl} and the data is added to
+ * the Component. Using this renderer has the same effect as using the {@link Ext.Component#data}
+ * configuration in conjunction with a {@link Ext.Component#tpl}.
+ * 
+ * ## Component Renderer
+ * This renderer can only be used with a {@link Ext.Container} and subclasses. It allows for
+ * Components to be loaded remotely into a Container. The response is expected to be a single/series of
+ * {@link Ext.Component} configuration objects. When the response is received, the data is decoded
+ * and then passed to {@link Ext.Container#add}. Using this renderer has the same effect as specifying
+ * the {@link Ext.Container#items} configuration on a Container. 
+ * 
+ * ## Custom Renderer
+ * A custom function can be passed to handle any other special case, see the {@link #renderer} option.
+ * 
+ * ## Example Usage
+ *     new Ext.Component({
+ *         tpl: '{firstName} - {lastName}',
+ *         loader: {
+ *             url: 'myPage.php',
+ *             renderer: 'data',
+ *             params: {
+ *                 userId: 1
+ *             }
+ *         }
+ *     });
  */
 Ext.define('Ext.ComponentLoader', {
 
@@ -42,14 +65,14 @@ Ext.define('Ext.ComponentLoader', {
                     target = loader.getTarget(),
                     items = [];
 
-                //<debug>
+                //&lt;debug&gt;
                 if (!target.isContainer) {
                     Ext.Error.raise({
                         target: target,
                         msg: 'Components can only be loaded into a container'
                     });
                 }
-                //</debug>
+                //&lt;/debug&gt;
 
                 try {
                     items = Ext.decode(response.responseText);
@@ -70,24 +93,24 @@ Ext.define('Ext.ComponentLoader', {
 
     /* End Definitions */
 
-    <a name="cfg-Ext.ComponentLoader-target"></a>/**
-     * @cfg {Ext.Component/String} target The target {@link Ext.Component} for the loader. Defaults to <tt>null</tt>.
+<span id='Ext-ComponentLoader-cfg-target'>    /**
+</span>     * @cfg {Ext.Component/String} target The target {@link Ext.Component} for the loader. Defaults to &lt;tt&gt;null&lt;/tt&gt;.
      * If a string is passed it will be looked up via the id.
      */
     target: null,
 
-    <a name="cfg-Ext.ComponentLoader-loadMask"></a>/**
-     * @cfg {Mixed} loadMask True or a {@link Ext.LoadMask} configuration to enable masking during loading. Defaults to <tt>false</tt>.
+<span id='Ext-ComponentLoader-cfg-loadMask'>    /**
+</span>     * @cfg {Mixed} loadMask True or a {@link Ext.LoadMask} configuration to enable masking during loading. Defaults to &lt;tt&gt;false&lt;/tt&gt;.
      */
     loadMask: false,
     
-    <a name="cfg-Ext.ComponentLoader-scripts"></a>/**
-     * @cfg {Boolean} scripts True to parse any inline script tags in the response. This only used when using the html
+<span id='Ext-ComponentLoader-cfg-scripts'>    /**
+</span>     * @cfg {Boolean} scripts True to parse any inline script tags in the response. This only used when using the html
      * {@link #renderer}.
      */
 
-    <a name="cfg-Ext.ComponentLoader-renderer"></a>/**
-     * @cfg {String/Function} renderer
+<span id='Ext-ComponentLoader-cfg-renderer'>    /**
+</span>     * @cfg {String/Function} renderer
 
 The type of content that is to be loaded into, which can be one of 3 types:
 
@@ -119,8 +142,8 @@ The function must return false is loading is not successful. Below is a sample o
      */
     renderer: 'html',
 
-    <a name="method-Ext.ComponentLoader-setTarget"></a>/**
-     * Set a {Ext.Component} as the target of this loader. Note that if the target is changed,
+<span id='Ext-ComponentLoader-method-setTarget'>    /**
+</span>     * Set a {Ext.Component} as the target of this loader. Note that if the target is changed,
      * any active requests will be aborted.
      * @param {String/Ext.Component} target The component to be the target of this loader. If a string is passed
      * it will be looked up via its id.
@@ -132,7 +155,7 @@ The function must return false is loading is not successful. Below is a sample o
             target = Ext.getCmp(target);
         }
 
-        if (me.target && me.target != target) {
+        if (me.target &amp;&amp; me.target != target) {
             me.abort();
         }
         me.target = target;
@@ -143,8 +166,8 @@ The function must return false is loading is not successful. Below is a sample o
         this.target.setLoading(false);
     },
     
-    /**
-     * Add the mask on the target
+<span id='Ext-ComponentLoader-method-addMask'>    /**
+</span>     * Add the mask on the target
      * @private
      * @param {Mixed} mask The mask configuration
      */
@@ -152,8 +175,8 @@ The function must return false is loading is not successful. Below is a sample o
         this.target.setLoading(mask);
     },
 
-    <a name="method-Ext.ComponentLoader-setOptions"></a>/**
-     * Get the target of this loader.
+<span id='Ext-ComponentLoader-method-setOptions'>    /**
+</span>     * Get the target of this loader.
      * @return {Ext.Component} target The target, null if none exists.
      */
     
@@ -161,8 +184,8 @@ The function must return false is loading is not successful. Below is a sample o
         active.removeAll = Ext.isDefined(options.removeAll) ? options.removeAll : this.removeAll;
     },
 
-    /**
-     * Gets the renderer to use
+<span id='Ext-ComponentLoader-method-getRenderer'>    /**
+</span>     * Gets the renderer to use
      * @private
      * @param {String/Function} renderer The renderer to use
      * @return {Function} A rendering function to use.
@@ -183,4 +206,4 @@ The function must return false is loading is not successful. Below is a sample o
         }
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

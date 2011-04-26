@@ -71,13 +71,14 @@ Ext.define('ForumBrowser.TopicGrid', {
             ],
             dockedItems: [{
                 xtype: 'toolbar',
+                cls: 'x-docked-noborder-top',
                 items: [{
                     text: 'New Topic',
                     iconCls: 'icon-new-topic',
                     handler: function(){
                         alert('Not implemented');
                     }
-                }, '|', {
+                }, '-', {
                     text: 'Preview Pane',
                     iconCls: 'icon-preview',
                     enableToggle: true,

@@ -150,6 +150,14 @@ Ext.onReady(function(){
     ////////////////////////////////////////////////////////////////////////////////////////
     // Grid 4
     ////////////////////////////////////////////////////////////////////////////////////////
+    var selModel = Ext.create('Ext.selection.CheckboxModel', {
+        listeners: {
+            selectionchange: function(sm, selections) {
+                grid4.down('#removeButton').setDisabled(selections.length == 0);
+            }
+        }
+    });
+    
     var grid4 = Ext.create('Ext.grid.Panel', {
         id:'button-grid',
         store: getLocalStore(),
@@ -161,6 +169,7 @@ Ext.onReady(function(){
             {text: "Last Updated", width: 120, sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/Y'), dataIndex: 'lastChange'}
         ],
         columnLines: true,
+        selModel: selModel,
 
         // inline buttons
         dockedItems: [{
@@ -188,6 +197,7 @@ Ext.onReady(function(){
                 tooltip:'Set options',
                 iconCls:'option'
             },'-',{
+                itemId: 'removeButton',
                 text:'Remove Something',
                 tooltip:'Remove the selected item',
                 iconCls:'remove',

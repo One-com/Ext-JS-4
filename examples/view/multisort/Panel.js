@@ -13,7 +13,7 @@ Ext.define('Ext.multisort.Panel', {
     title: 'Multisort DataView',
     autoScroll: true,
     
-    requires: ['Ext.toolbar.TextItem', 'Ext.DataView'],
+    requires: ['Ext.toolbar.TextItem', 'Ext.view.View'],
     
     initComponent: function() {
         this.tbar = Ext.create('Ext.toolbar.Toolbar', {

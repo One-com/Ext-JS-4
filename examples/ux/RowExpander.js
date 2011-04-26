@@ -4,7 +4,7 @@
 
 /**
  * @class Ext.ux.RowExpander
- * @extends Ext.grid.Header
+ * @extends Ext.AbstractPlugin
  * Plugin (ptype = 'rowexpander') that adds the ability to have a Column in a grid which enables
  * a second row body which expands/contracts.  The expand/contract behavior is configurable to react
  * on clicking of the column, double click of the row, and/or hitting enter while a row is selected.
@@ -30,7 +30,7 @@ Ext.define('Ext.ux.RowExpander', {
      * (defaults to <tt>true</tt>).
      */
     expandOnDblClick: true,
-    
+
     /**
      * @cfg {Boolean} selectRowOnExpand
      * <tt>true</tt> to select a row when clicking on the expander icon
@@ -51,6 +51,21 @@ Ext.define('Ext.ux.RowExpander', {
         return '<div class="x-grid-row-expander">&#160;</div>';
     },
 
+    /**
+     * @event expandbody
+     * <b<Fired through the grid's View</b>
+     * @param {HtmlElement} rowNode The &lt;tr> element which owns the expanded row.
+     * @param {Ext.data.Model} record The record providing the data.
+     * @param {HtmlElement} expandRow The &lt;tr> element containing the expanded data.
+     */
+    /**
+     * @event collapsebody
+     * <b<Fired through the grid's View.</b>
+     * @param {HtmlElement} rowNode The &lt;tr> element which owns the expanded row.
+     * @param {Ext.data.Model} record The record providing the data.
+     * @param {HtmlElement} expandRow The &lt;tr> element containing the expanded data.
+     */
+
     constructor: function() {
         this.callParent(arguments);
         var grid = this.getCmp();
@@ -62,21 +77,26 @@ Ext.define('Ext.ux.RowExpander', {
         // </debug>
         // TODO: if XTemplate/Template receives a template as an arg, should
         // just return it back!
-        var rowBodyTpl = Ext.create('Ext.XTemplate', this.rowBodyTpl);
+        var rowBodyTpl = Ext.create('Ext.XTemplate', this.rowBodyTpl),
+            features = [{
+                ftype: 'rowbody',
+                columnId: this.getHeaderId(),
+                recordsExpanded: this.recordsExpanded,
+                rowBodyHiddenCls: this.rowBodyHiddenCls,
+                rowCollapsedCls: this.rowCollapsedCls,
+                getAdditionalData: this.getRowBodyFeatureData,
+                getRowBodyContents: function(data) {
+                    return rowBodyTpl.applyTemplate(data);
+                }
+            },{
+                ftype: 'rowwrap'
+            }];
 
-        grid.features = [{
-            ftype: 'rowbody',
-            columnId: this.getHeaderId(),
-            recordsExpanded: this.recordsExpanded,
-            rowBodyHiddenCls: this.rowBodyHiddenCls,
-            rowCollapsedCls: this.rowCollapsedCls,
-            getAdditionalData: this.getRowBodyFeatureData,
-            getRowBodyContents: function(data) {
-                return rowBodyTpl.applyTemplate(data);
-            }
-        },{
-            ftype: 'rowwrap'
-        }];
+        if (grid.features) {
+            grid.features = features.concat(grid.features);
+        } else {
+            grid.features = features;
+        }
 
         grid.columns.unshift(this.getHeaderConfig());
         grid.on('afterlayout', this.onGridAfterLayout, this, {single: true});
@@ -151,18 +171,18 @@ Ext.define('Ext.ux.RowExpander', {
             row.removeCls(this.rowCollapsedCls);
             nextBd.removeCls(this.rowBodyHiddenCls);
             this.recordsExpanded[record.internalId] = true;
-            this.view.fireEvent('expandbody');
+            this.view.fireEvent('expandbody', rowNode, record, nextBd.dom);
         } else {
             row.addCls(this.rowCollapsedCls);
             nextBd.addCls(this.rowBodyHiddenCls);
             this.recordsExpanded[record.internalId] = false;
-            this.view.fireEvent('collapsebody');
+            this.view.fireEvent('collapsebody', rowNode, record, nextBd.dom);
         }
         this.view.up('gridpanel').invalidateScroller();
     },
 
     onDblClick: function(view, cell, rowIdx, cellIndex, e) {
-        
+
         this.toggleRow(rowIdx);
     },
 
@@ -176,6 +196,7 @@ Ext.define('Ext.ux.RowExpander', {
             width: 24,
             sortable: false,
             fixed: true,
+            draggable: false,
             hideable: false,
             menuDisabled: true,
             cls: Ext.baseCSSPrefix + 'grid-header-special',

@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.Sortable"></a>/**
- * @class Ext.util.Sortable
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-util.Sortable'>/**
+</span> * @class Ext.util.Sortable
 
 A mixin which allows a data component to be sorted. This is used by e.g. {@link Ext.data.Store} and {@link Ext.data.TreeStore}.
 
@@ -7,43 +7,43 @@ A mixin which allows a data component to be sorted. This is used by e.g. {@link 
 is more likely you will want to use one of the component classes that import this mixin, such as
 {@link Ext.data.Store} or {@link Ext.data.TreeStore}.
  * @markdown
- * @docauthor Tommy Maintz <tommy@sencha.com>
+ * @docauthor Tommy Maintz &lt;tommy@sencha.com&gt;
  */
-Ext.define("Ext.util.Sortable", {
-    <a name="prop-Ext.util.Sortable-isSortable"></a>/**
-     * @property isSortable
+Ext.define(&quot;Ext.util.Sortable&quot;, {
+<span id='Ext-util.Sortable-property-isSortable'>    /**
+</span>     * @property isSortable
      * @type Boolean
      * Flag denoting that this object is sortable. Always true.
      */
     isSortable: true,
     
-    <a name="prop-Ext.util.Sortable-defaultSortDirection"></a>/**
-     * The default sort direction to use if one is not specified (defaults to "ASC")
+<span id='Ext-util.Sortable-property-defaultSortDirection'>    /**
+</span>     * The default sort direction to use if one is not specified (defaults to &quot;ASC&quot;)
      * @property defaultSortDirection
      * @type String
      */
-    defaultSortDirection: "ASC",
+    defaultSortDirection: &quot;ASC&quot;,
     
     requires: [
         'Ext.util.Sorter'
     ],
 
-    <a name="prop-Ext.util.Sortable-sortRoot"></a>/**
-     * The property in each item that contains the data to sort. (defaults to null)
+<span id='Ext-util.Sortable-property-sortRoot'>    /**
+</span>     * The property in each item that contains the data to sort. (defaults to null)
      * @type String
      */    
     sortRoot: null,
     
-    <a name="method-Ext.util.Sortable-initSortable"></a>/**
-     * Performs initialization of this mixin. Component classes using this mixin should call this method
+<span id='Ext-util.Sortable-method-initSortable'>    /**
+</span>     * Performs initialization of this mixin. Component classes using this mixin should call this method
      * during their own initialization.
      */
     initSortable: function() {
         var me = this,
             sorters = me.sorters;
         
-        <a name="prop-Ext.util.Sortable-sorters"></a>/**
-         * The collection of {@link Ext.util.Sorter Sorters} currently applied to this Store
+<span id='Ext-util.Sortable-property-sorters'>        /**
+</span>         * The collection of {@link Ext.util.Sorter Sorters} currently applied to this Store
          * @property sorters
          * @type Ext.util.MixedCollection
          */
@@ -56,9 +56,9 @@ Ext.define("Ext.util.Sortable", {
         }
     },
 
-    <a name="method-Ext.util.Sortable-sort"></a>/**
-     * <p>Sorts the data in the Store by one or more of its properties. Example usage:</p>
-<pre><code>
+<span id='Ext-util.Sortable-method-sort'>    /**
+</span>     * &lt;p&gt;Sorts the data in the Store by one or more of its properties. Example usage:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
 //sort by a single field
 myStore.sort('myField', 'DESC');
 
@@ -73,22 +73,22 @@ myStore.sort([
         direction: 'DESC'
     }
 ]);
-</code></pre>
-     * <p>Internally, Store converts the passed arguments into an array of {@link Ext.util.Sorter} instances, and delegates the actual
-     * sorting to its internal {@link Ext.util.MixedCollection}.</p>
-     * <p>When passing a single string argument to sort, Store maintains a ASC/DESC toggler per field, so this code:</p>
-<pre><code>
+&lt;/code&gt;&lt;/pre&gt;
+     * &lt;p&gt;Internally, Store converts the passed arguments into an array of {@link Ext.util.Sorter} instances, and delegates the actual
+     * sorting to its internal {@link Ext.util.MixedCollection}.&lt;/p&gt;
+     * &lt;p&gt;When passing a single string argument to sort, Store maintains a ASC/DESC toggler per field, so this code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
 store.sort('myField');
 store.sort('myField');
-     </code></pre>
-     * <p>Is equivalent to this code, because Store handles the toggling automatically:</p>
-<pre><code>
+     &lt;/code&gt;&lt;/pre&gt;
+     * &lt;p&gt;Is equivalent to this code, because Store handles the toggling automatically:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
 store.sort('myField', 'ASC');
 store.sort('myField', 'DESC');
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
      * @param {String|Array} sorters Either a string name of one of the fields in this Store's configured {@link Ext.data.Model Model},
      * or an Array of sorter configurations.
-     * @param {String} direction The overall direction to sort the data by. Defaults to "ASC".
+     * @param {String} direction The overall direction to sort the data by. Defaults to &quot;ASC&quot;.
      */
     sort: function(sorters, direction, where, doSort) {
         var me = this,
@@ -123,7 +123,7 @@ store.sort('myField', 'DESC');
             }
         }
         
-        if (newSorters && newSorters.length) {
+        if (newSorters &amp;&amp; newSorters.length) {
             newSorters = me.decodeSorters(newSorters);
             if (Ext.isString(where)) {
                 if (where === 'prepend') {
@@ -157,7 +157,7 @@ store.sort('myField', 'DESC');
                         i;
 
                         //if we have more than one sorter, OR any additional sorter functions together
-                        for (i = 1; i < length; i++) {
+                        for (i = 1; i &lt; length; i++) {
                             result = result || sorters[i].sort.call(this, r1, r2);
                         }
 
@@ -173,8 +173,8 @@ store.sort('myField', 'DESC');
     
     onBeforeSort: Ext.emptyFn,
         
-    /**
-     * @private
+<span id='Ext-util.Sortable-method-decodeSorters'>    /**
+</span>     * @private
      * Normalizes an array of sorter objects, ensuring that they are all Ext.util.Sorter instances
      * @param {Array} sorters The sorters array
      * @return {Array} Array of Ext.util.Sorter objects
@@ -194,7 +194,7 @@ store.sort('myField', 'DESC');
             field,
             config, i;
 
-        for (i = 0; i < length; i++) {
+        for (i = 0; i &lt; length; i++) {
             config = sorters[i];
 
             if (!(config instanceof Sorter)) {
@@ -206,7 +206,7 @@ store.sort('myField', 'DESC');
                 
                 Ext.applyIf(config, {
                     root     : this.sortRoot,
-                    direction: "ASC"
+                    direction: &quot;ASC&quot;
                 });
 
                 //support for 3.x style sorters where a function can be defined as 'fn'
@@ -222,7 +222,7 @@ store.sort('myField', 'DESC');
                 }
 
                 // ensure sortType gets pushed on if necessary
-                if (fields && !config.transform) {
+                if (fields &amp;&amp; !config.transform) {
                     field = fields.get(config.property);
                     config.transform = field ? field.sortType : undefined;
                 }
@@ -237,16 +237,15 @@ store.sort('myField', 'DESC');
         return this.sorters.items;
     },
     
-    <a name="method-Ext.util.Sortable-TODO"></a>/**
-     * Returns an object describing the current sort state of this Store.
-     * @return {Object} The sort state of the Store. An object with two properties:<ul>
-     * <li><b>field : String<p class="sub-desc">The name of the field by which the Records are sorted.</p></li>
-     * <li><b>direction : String<p class="sub-desc">The sort order, 'ASC' or 'DESC' (case-sensitive).</p></li>
-     * </ul>
-     * See <tt>{@link #sortInfo}</tt> for additional details.
+<span id='Ext-util.Sortable-method-getSortState'>    /**
+</span>     * Returns an object describing the current sort state of this Store.
+     * @return {Object} The sort state of the Store. An object with two properties:&lt;ul&gt;
+     * &lt;li&gt;&lt;b&gt;field&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;The name of the field by which the Records are sorted.&lt;/p&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;direction&lt;/b&gt; : String&lt;p class=&quot;sub-desc&quot;&gt;The sort order, 'ASC' or 'DESC' (case-sensitive).&lt;/p&gt;&lt;/li&gt;
+     * &lt;/ul&gt;
+     * See &lt;tt&gt;{@link #sortInfo}&lt;/tt&gt; for additional details.
      */
-     // @TODO: remove this?
     getSortState : function() {
         return this.sortInfo;
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

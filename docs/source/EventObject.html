@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.EventObject"></a>/**
- * @class Ext.EventObject
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-EventObject'>/**
+</span> * @class Ext.EventObject
 
 Just as {@link Ext.core.Element} wraps around a native DOM node, Ext.EventObject
 wraps the browser's native event-object normalizing cross-browser differences,
@@ -14,15 +14,15 @@ For example:
         ...
     }
 
-    var myDiv = {@link Ext#get Ext.get}("myDiv");  // get reference to an {@link Ext.core.Element}
+    var myDiv = {@link Ext#get Ext.get}(&quot;myDiv&quot;);  // get reference to an {@link Ext.core.Element}
     myDiv.on(         // 'on' is shorthand for addListener
-        "click",      // perform an action on click of myDiv
+        &quot;click&quot;,      // perform an action on click of myDiv
         handleClick   // reference to the action handler
     );
 
     // other methods to do the same:
-    Ext.EventManager.on("myDiv", 'click', handleClick);
-    Ext.EventManager.addListener("myDiv", 'click', handleClick);
+    Ext.EventManager.on(&quot;myDiv&quot;, 'click', handleClick);
+    Ext.EventManager.addListener(&quot;myDiv&quot;, 'click', handleClick);
 
  * @singleton
  * @markdown
@@ -30,183 +30,183 @@ For example:
 Ext.define('Ext.EventObjectImpl', {
     uses: ['Ext.util.Point'],
 
-    <a name="prop-Ext.EventObject-BACKSPACE"></a>/** Key constant @type Number */
-    BACKSPACE: 8,
-    <a name="prop-Ext.EventObject-TAB"></a>/** Key constant @type Number */
-    TAB: 9,
-    <a name="prop-Ext.EventObject-NUM_CENTER"></a>/** Key constant @type Number */
-    NUM_CENTER: 12,
-    <a name="prop-Ext.EventObject-ENTER"></a>/** Key constant @type Number */
-    ENTER: 13,
-    <a name="prop-Ext.EventObject-RETURN"></a>/** Key constant @type Number */
-    RETURN: 13,
-    <a name="prop-Ext.EventObject-SHIFT"></a>/** Key constant @type Number */
-    SHIFT: 16,
-    <a name="prop-Ext.EventObject-CTRL"></a>/** Key constant @type Number */
-    CTRL: 17,
-    <a name="prop-Ext.EventObject-ALT"></a>/** Key constant @type Number */
-    ALT: 18,
-    <a name="prop-Ext.EventObject-PAUSE"></a>/** Key constant @type Number */
-    PAUSE: 19,
-    <a name="prop-Ext.EventObject-CAPS_LOCK"></a>/** Key constant @type Number */
-    CAPS_LOCK: 20,
-    <a name="prop-Ext.EventObject-ESC"></a>/** Key constant @type Number */
-    ESC: 27,
-    <a name="prop-Ext.EventObject-SPACE"></a>/** Key constant @type Number */
-    SPACE: 32,
-    <a name="prop-Ext.EventObject-PAGE_UP"></a>/** Key constant @type Number */
-    PAGE_UP: 33,
-    <a name="prop-Ext.EventObject-PAGE_DOWN"></a>/** Key constant @type Number */
-    PAGE_DOWN: 34,
-    <a name="prop-Ext.EventObject-END"></a>/** Key constant @type Number */
-    END: 35,
-    <a name="prop-Ext.EventObject-HOME"></a>/** Key constant @type Number */
-    HOME: 36,
-    <a name="prop-Ext.EventObject-LEFT"></a>/** Key constant @type Number */
-    LEFT: 37,
-    <a name="prop-Ext.EventObject-UP"></a>/** Key constant @type Number */
-    UP: 38,
-    <a name="prop-Ext.EventObject-RIGHT"></a>/** Key constant @type Number */
-    RIGHT: 39,
-    <a name="prop-Ext.EventObject-DOWN"></a>/** Key constant @type Number */
-    DOWN: 40,
-    <a name="prop-Ext.EventObject-PRINT_SCREEN"></a>/** Key constant @type Number */
-    PRINT_SCREEN: 44,
-    <a name="prop-Ext.EventObject-INSERT"></a>/** Key constant @type Number */
-    INSERT: 45,
-    <a name="prop-Ext.EventObject-DELETE"></a>/** Key constant @type Number */
-    DELETE: 46,
-    <a name="prop-Ext.EventObject-ZERO"></a>/** Key constant @type Number */
-    ZERO: 48,
-    <a name="prop-Ext.EventObject-ONE"></a>/** Key constant @type Number */
-    ONE: 49,
-    <a name="prop-Ext.EventObject-TWO"></a>/** Key constant @type Number */
-    TWO: 50,
-    <a name="prop-Ext.EventObject-THREE"></a>/** Key constant @type Number */
-    THREE: 51,
-    <a name="prop-Ext.EventObject-FOUR"></a>/** Key constant @type Number */
-    FOUR: 52,
-    <a name="prop-Ext.EventObject-FIVE"></a>/** Key constant @type Number */
-    FIVE: 53,
-    <a name="prop-Ext.EventObject-SIX"></a>/** Key constant @type Number */
-    SIX: 54,
-    <a name="prop-Ext.EventObject-SEVEN"></a>/** Key constant @type Number */
-    SEVEN: 55,
-    <a name="prop-Ext.EventObject-EIGHT"></a>/** Key constant @type Number */
-    EIGHT: 56,
-    <a name="prop-Ext.EventObject-NINE"></a>/** Key constant @type Number */
-    NINE: 57,
-    <a name="prop-Ext.EventObject-A"></a>/** Key constant @type Number */
-    A: 65,
-    <a name="prop-Ext.EventObject-B"></a>/** Key constant @type Number */
-    B: 66,
-    <a name="prop-Ext.EventObject-C"></a>/** Key constant @type Number */
-    C: 67,
-    <a name="prop-Ext.EventObject-D"></a>/** Key constant @type Number */
-    D: 68,
-    <a name="prop-Ext.EventObject-E"></a>/** Key constant @type Number */
-    E: 69,
-    <a name="prop-Ext.EventObject-F"></a>/** Key constant @type Number */
-    F: 70,
-    <a name="prop-Ext.EventObject-G"></a>/** Key constant @type Number */
-    G: 71,
-    <a name="prop-Ext.EventObject-H"></a>/** Key constant @type Number */
-    H: 72,
-    <a name="prop-Ext.EventObject-I"></a>/** Key constant @type Number */
-    I: 73,
-    <a name="prop-Ext.EventObject-J"></a>/** Key constant @type Number */
-    J: 74,
-    <a name="prop-Ext.EventObject-K"></a>/** Key constant @type Number */
-    K: 75,
-    <a name="prop-Ext.EventObject-L"></a>/** Key constant @type Number */
-    L: 76,
-    <a name="prop-Ext.EventObject-M"></a>/** Key constant @type Number */
-    M: 77,
-    <a name="prop-Ext.EventObject-N"></a>/** Key constant @type Number */
-    N: 78,
-    <a name="prop-Ext.EventObject-O"></a>/** Key constant @type Number */
-    O: 79,
-    <a name="prop-Ext.EventObject-P"></a>/** Key constant @type Number */
-    P: 80,
-    <a name="prop-Ext.EventObject-Q"></a>/** Key constant @type Number */
-    Q: 81,
-    <a name="prop-Ext.EventObject-R"></a>/** Key constant @type Number */
-    R: 82,
-    <a name="prop-Ext.EventObject-S"></a>/** Key constant @type Number */
-    S: 83,
-    <a name="prop-Ext.EventObject-T"></a>/** Key constant @type Number */
-    T: 84,
-    <a name="prop-Ext.EventObject-U"></a>/** Key constant @type Number */
-    U: 85,
-    <a name="prop-Ext.EventObject-V"></a>/** Key constant @type Number */
-    V: 86,
-    <a name="prop-Ext.EventObject-W"></a>/** Key constant @type Number */
-    W: 87,
-    <a name="prop-Ext.EventObject-X"></a>/** Key constant @type Number */
-    X: 88,
-    <a name="prop-Ext.EventObject-Y"></a>/** Key constant @type Number */
-    Y: 89,
-    <a name="prop-Ext.EventObject-Z"></a>/** Key constant @type Number */
-    Z: 90,
-    <a name="prop-Ext.EventObject-CONTEXT_MENU"></a>/** Key constant @type Number */
-    CONTEXT_MENU: 93,
-    <a name="prop-Ext.EventObject-NUM_ZERO"></a>/** Key constant @type Number */
-    NUM_ZERO: 96,
-    <a name="prop-Ext.EventObject-NUM_ONE"></a>/** Key constant @type Number */
-    NUM_ONE: 97,
-    <a name="prop-Ext.EventObject-NUM_TWO"></a>/** Key constant @type Number */
-    NUM_TWO: 98,
-    <a name="prop-Ext.EventObject-NUM_THREE"></a>/** Key constant @type Number */
-    NUM_THREE: 99,
-    <a name="prop-Ext.EventObject-NUM_FOUR"></a>/** Key constant @type Number */
-    NUM_FOUR: 100,
-    <a name="prop-Ext.EventObject-NUM_FIVE"></a>/** Key constant @type Number */
-    NUM_FIVE: 101,
-    <a name="prop-Ext.EventObject-NUM_SIX"></a>/** Key constant @type Number */
-    NUM_SIX: 102,
-    <a name="prop-Ext.EventObject-NUM_SEVEN"></a>/** Key constant @type Number */
-    NUM_SEVEN: 103,
-    <a name="prop-Ext.EventObject-NUM_EIGHT"></a>/** Key constant @type Number */
-    NUM_EIGHT: 104,
-    <a name="prop-Ext.EventObject-NUM_NINE"></a>/** Key constant @type Number */
-    NUM_NINE: 105,
-    <a name="prop-Ext.EventObject-NUM_MULTIPLY"></a>/** Key constant @type Number */
-    NUM_MULTIPLY: 106,
-    <a name="prop-Ext.EventObject-NUM_PLUS"></a>/** Key constant @type Number */
-    NUM_PLUS: 107,
-    <a name="prop-Ext.EventObject-NUM_MINUS"></a>/** Key constant @type Number */
-    NUM_MINUS: 109,
-    <a name="prop-Ext.EventObject-NUM_PERIOD"></a>/** Key constant @type Number */
-    NUM_PERIOD: 110,
-    <a name="prop-Ext.EventObject-NUM_DIVISION"></a>/** Key constant @type Number */
-    NUM_DIVISION: 111,
-    <a name="prop-Ext.EventObject-F1"></a>/** Key constant @type Number */
-    F1: 112,
-    <a name="prop-Ext.EventObject-F2"></a>/** Key constant @type Number */
-    F2: 113,
-    <a name="prop-Ext.EventObject-F3"></a>/** Key constant @type Number */
-    F3: 114,
-    <a name="prop-Ext.EventObject-F4"></a>/** Key constant @type Number */
-    F4: 115,
-    <a name="prop-Ext.EventObject-F5"></a>/** Key constant @type Number */
-    F5: 116,
-    <a name="prop-Ext.EventObject-F6"></a>/** Key constant @type Number */
-    F6: 117,
-    <a name="prop-Ext.EventObject-F7"></a>/** Key constant @type Number */
-    F7: 118,
-    <a name="prop-Ext.EventObject-F8"></a>/** Key constant @type Number */
-    F8: 119,
-    <a name="prop-Ext.EventObject-F9"></a>/** Key constant @type Number */
-    F9: 120,
-    <a name="prop-Ext.EventObject-F10"></a>/** Key constant @type Number */
-    F10: 121,
-    <a name="prop-Ext.EventObject-F11"></a>/** Key constant @type Number */
-    F11: 122,
-    <a name="prop-Ext.EventObject-F12"></a>/** Key constant @type Number */
-    F12: 123,
+<span id='Ext-EventObject-property-BACKSPACE'>    /** Key constant @type Number */
+</span>    BACKSPACE: 8,
+<span id='Ext-EventObject-property-TAB'>    /** Key constant @type Number */
+</span>    TAB: 9,
+<span id='Ext-EventObject-property-NUM_CENTER'>    /** Key constant @type Number */
+</span>    NUM_CENTER: 12,
+<span id='Ext-EventObject-property-ENTER'>    /** Key constant @type Number */
+</span>    ENTER: 13,
+<span id='Ext-EventObject-property-RETURN'>    /** Key constant @type Number */
+</span>    RETURN: 13,
+<span id='Ext-EventObject-property-SHIFT'>    /** Key constant @type Number */
+</span>    SHIFT: 16,
+<span id='Ext-EventObject-property-CTRL'>    /** Key constant @type Number */
+</span>    CTRL: 17,
+<span id='Ext-EventObject-property-ALT'>    /** Key constant @type Number */
+</span>    ALT: 18,
+<span id='Ext-EventObject-property-PAUSE'>    /** Key constant @type Number */
+</span>    PAUSE: 19,
+<span id='Ext-EventObject-property-CAPS_LOCK'>    /** Key constant @type Number */
+</span>    CAPS_LOCK: 20,
+<span id='Ext-EventObject-property-ESC'>    /** Key constant @type Number */
+</span>    ESC: 27,
+<span id='Ext-EventObject-property-SPACE'>    /** Key constant @type Number */
+</span>    SPACE: 32,
+<span id='Ext-EventObject-property-PAGE_UP'>    /** Key constant @type Number */
+</span>    PAGE_UP: 33,
+<span id='Ext-EventObject-property-PAGE_DOWN'>    /** Key constant @type Number */
+</span>    PAGE_DOWN: 34,
+<span id='Ext-EventObject-property-END'>    /** Key constant @type Number */
+</span>    END: 35,
+<span id='Ext-EventObject-property-HOME'>    /** Key constant @type Number */
+</span>    HOME: 36,
+<span id='Ext-EventObject-property-LEFT'>    /** Key constant @type Number */
+</span>    LEFT: 37,
+<span id='Ext-EventObject-property-UP'>    /** Key constant @type Number */
+</span>    UP: 38,
+<span id='Ext-EventObject-property-RIGHT'>    /** Key constant @type Number */
+</span>    RIGHT: 39,
+<span id='Ext-EventObject-property-DOWN'>    /** Key constant @type Number */
+</span>    DOWN: 40,
+<span id='Ext-EventObject-property-PRINT_SCREEN'>    /** Key constant @type Number */
+</span>    PRINT_SCREEN: 44,
+<span id='Ext-EventObject-property-INSERT'>    /** Key constant @type Number */
+</span>    INSERT: 45,
+<span id='Ext-EventObject-property-DELETE'>    /** Key constant @type Number */
+</span>    DELETE: 46,
+<span id='Ext-EventObject-property-ZERO'>    /** Key constant @type Number */
+</span>    ZERO: 48,
+<span id='Ext-EventObject-property-ONE'>    /** Key constant @type Number */
+</span>    ONE: 49,
+<span id='Ext-EventObject-property-TWO'>    /** Key constant @type Number */
+</span>    TWO: 50,
+<span id='Ext-EventObject-property-THREE'>    /** Key constant @type Number */
+</span>    THREE: 51,
+<span id='Ext-EventObject-property-FOUR'>    /** Key constant @type Number */
+</span>    FOUR: 52,
+<span id='Ext-EventObject-property-FIVE'>    /** Key constant @type Number */
+</span>    FIVE: 53,
+<span id='Ext-EventObject-property-SIX'>    /** Key constant @type Number */
+</span>    SIX: 54,
+<span id='Ext-EventObject-property-SEVEN'>    /** Key constant @type Number */
+</span>    SEVEN: 55,
+<span id='Ext-EventObject-property-EIGHT'>    /** Key constant @type Number */
+</span>    EIGHT: 56,
+<span id='Ext-EventObject-property-NINE'>    /** Key constant @type Number */
+</span>    NINE: 57,
+<span id='Ext-EventObject-property-A'>    /** Key constant @type Number */
+</span>    A: 65,
+<span id='Ext-EventObject-property-B'>    /** Key constant @type Number */
+</span>    B: 66,
+<span id='Ext-EventObject-property-C'>    /** Key constant @type Number */
+</span>    C: 67,
+<span id='Ext-EventObject-property-D'>    /** Key constant @type Number */
+</span>    D: 68,
+<span id='Ext-EventObject-property-E'>    /** Key constant @type Number */
+</span>    E: 69,
+<span id='Ext-EventObject-property-F'>    /** Key constant @type Number */
+</span>    F: 70,
+<span id='Ext-EventObject-property-G'>    /** Key constant @type Number */
+</span>    G: 71,
+<span id='Ext-EventObject-property-H'>    /** Key constant @type Number */
+</span>    H: 72,
+<span id='Ext-EventObject-property-I'>    /** Key constant @type Number */
+</span>    I: 73,
+<span id='Ext-EventObject-property-J'>    /** Key constant @type Number */
+</span>    J: 74,
+<span id='Ext-EventObject-property-K'>    /** Key constant @type Number */
+</span>    K: 75,
+<span id='Ext-EventObject-property-L'>    /** Key constant @type Number */
+</span>    L: 76,
+<span id='Ext-EventObject-property-M'>    /** Key constant @type Number */
+</span>    M: 77,
+<span id='Ext-EventObject-property-N'>    /** Key constant @type Number */
+</span>    N: 78,
+<span id='Ext-EventObject-property-O'>    /** Key constant @type Number */
+</span>    O: 79,
+<span id='Ext-EventObject-property-P'>    /** Key constant @type Number */
+</span>    P: 80,
+<span id='Ext-EventObject-property-Q'>    /** Key constant @type Number */
+</span>    Q: 81,
+<span id='Ext-EventObject-property-R'>    /** Key constant @type Number */
+</span>    R: 82,
+<span id='Ext-EventObject-property-S'>    /** Key constant @type Number */
+</span>    S: 83,
+<span id='Ext-EventObject-property-T'>    /** Key constant @type Number */
+</span>    T: 84,
+<span id='Ext-EventObject-property-U'>    /** Key constant @type Number */
+</span>    U: 85,
+<span id='Ext-EventObject-property-V'>    /** Key constant @type Number */
+</span>    V: 86,
+<span id='Ext-EventObject-property-W'>    /** Key constant @type Number */
+</span>    W: 87,
+<span id='Ext-EventObject-property-X'>    /** Key constant @type Number */
+</span>    X: 88,
+<span id='Ext-EventObject-property-Y'>    /** Key constant @type Number */
+</span>    Y: 89,
+<span id='Ext-EventObject-property-Z'>    /** Key constant @type Number */
+</span>    Z: 90,
+<span id='Ext-EventObject-property-CONTEXT_MENU'>    /** Key constant @type Number */
+</span>    CONTEXT_MENU: 93,
+<span id='Ext-EventObject-property-NUM_ZERO'>    /** Key constant @type Number */
+</span>    NUM_ZERO: 96,
+<span id='Ext-EventObject-property-NUM_ONE'>    /** Key constant @type Number */
+</span>    NUM_ONE: 97,
+<span id='Ext-EventObject-property-NUM_TWO'>    /** Key constant @type Number */
+</span>    NUM_TWO: 98,
+<span id='Ext-EventObject-property-NUM_THREE'>    /** Key constant @type Number */
+</span>    NUM_THREE: 99,
+<span id='Ext-EventObject-property-NUM_FOUR'>    /** Key constant @type Number */
+</span>    NUM_FOUR: 100,
+<span id='Ext-EventObject-property-NUM_FIVE'>    /** Key constant @type Number */
+</span>    NUM_FIVE: 101,
+<span id='Ext-EventObject-property-NUM_SIX'>    /** Key constant @type Number */
+</span>    NUM_SIX: 102,
+<span id='Ext-EventObject-property-NUM_SEVEN'>    /** Key constant @type Number */
+</span>    NUM_SEVEN: 103,
+<span id='Ext-EventObject-property-NUM_EIGHT'>    /** Key constant @type Number */
+</span>    NUM_EIGHT: 104,
+<span id='Ext-EventObject-property-NUM_NINE'>    /** Key constant @type Number */
+</span>    NUM_NINE: 105,
+<span id='Ext-EventObject-property-NUM_MULTIPLY'>    /** Key constant @type Number */
+</span>    NUM_MULTIPLY: 106,
+<span id='Ext-EventObject-property-NUM_PLUS'>    /** Key constant @type Number */
+</span>    NUM_PLUS: 107,
+<span id='Ext-EventObject-property-NUM_MINUS'>    /** Key constant @type Number */
+</span>    NUM_MINUS: 109,
+<span id='Ext-EventObject-property-NUM_PERIOD'>    /** Key constant @type Number */
+</span>    NUM_PERIOD: 110,
+<span id='Ext-EventObject-property-NUM_DIVISION'>    /** Key constant @type Number */
+</span>    NUM_DIVISION: 111,
+<span id='Ext-EventObject-property-F1'>    /** Key constant @type Number */
+</span>    F1: 112,
+<span id='Ext-EventObject-property-F2'>    /** Key constant @type Number */
+</span>    F2: 113,
+<span id='Ext-EventObject-property-F3'>    /** Key constant @type Number */
+</span>    F3: 114,
+<span id='Ext-EventObject-property-F4'>    /** Key constant @type Number */
+</span>    F4: 115,
+<span id='Ext-EventObject-property-F5'>    /** Key constant @type Number */
+</span>    F5: 116,
+<span id='Ext-EventObject-property-F6'>    /** Key constant @type Number */
+</span>    F6: 117,
+<span id='Ext-EventObject-property-F7'>    /** Key constant @type Number */
+</span>    F7: 118,
+<span id='Ext-EventObject-property-F8'>    /** Key constant @type Number */
+</span>    F8: 119,
+<span id='Ext-EventObject-property-F9'>    /** Key constant @type Number */
+</span>    F9: 120,
+<span id='Ext-EventObject-property-F10'>    /** Key constant @type Number */
+</span>    F10: 121,
+<span id='Ext-EventObject-property-F11'>    /** Key constant @type Number */
+</span>    F11: 122,
+<span id='Ext-EventObject-property-F12'>    /** Key constant @type Number */
+</span>    F12: 123,
 
-    /**
-     * Simple click regex
+<span id='Ext-EventObject-property-clickRe'>    /**
+</span>     * Simple click regex
      * @private
      */
     clickRe: /(dbl)?click/,
@@ -234,23 +234,23 @@ Ext.define('Ext.EventObjectImpl', {
         2: 2
     },
 
-    constructor: function(event){
+    constructor: function(event, freezeEvent){
         if (event) {
-            this.setEvent(event.browserEvent || event);
+            this.setEvent(event.browserEvent || event, freezeEvent);
         }
     },
 
-    setEvent: function(event){
+    setEvent: function(event, freezeEvent){
         var me = this, button, options;
 
-        if (event == me || (event && event.browserEvent)) { // already wrapped
+        if (event == me || (event &amp;&amp; event.browserEvent)) { // already wrapped
             return event;
         }
         me.browserEvent = event;
         if (event) {
             // normalize buttons
             button = event.button ? me.btnMap[event.button] : (event.which ? event.which - 1 : -1);
-            if (me.clickRe.test(event.type) && button == -1) {
+            if (me.clickRe.test(event.type) &amp;&amp; button == -1) {
                 button = 0;
             }
             options = {
@@ -267,7 +267,7 @@ Ext.define('Ext.EventObjectImpl', {
                 target: Ext.EventManager.getTarget(event),
                 relatedTarget: Ext.EventManager.getRelatedTarget(event),
                 currentTarget: event.currentTarget,
-                xy: null
+                xy: (freezeEvent ? me.getXY() : null)
             };
         } else {
             options = {
@@ -285,16 +285,16 @@ Ext.define('Ext.EventObjectImpl', {
         return me;
     },
 
-    <a name="method-Ext.EventObject-stopEvent"></a>/**
-     * Stop the event (preventDefault and stopPropagation)
+<span id='Ext-EventObject-method-stopEvent'>    /**
+</span>     * Stop the event (preventDefault and stopPropagation)
      */
     stopEvent: function(){
         this.stopPropagation();
         this.preventDefault();
     },
 
-    <a name="method-Ext.EventObject-preventDefault"></a>/**
-     * Prevents the browsers default handling of the event.
+<span id='Ext-EventObject-method-preventDefault'>    /**
+</span>     * Prevents the browsers default handling of the event.
      */
     preventDefault: function(){
         if (this.browserEvent) {
@@ -302,8 +302,8 @@ Ext.define('Ext.EventObjectImpl', {
         }
     },
 
-    <a name="method-Ext.EventObject-stopPropagation"></a>/**
-     * Cancels bubbling of the event.
+<span id='Ext-EventObject-method-stopPropagation'>    /**
+</span>     * Cancels bubbling of the event.
      */
     stopPropagation: function(){
         var browserEvent = this.browserEvent;
@@ -316,24 +316,24 @@ Ext.define('Ext.EventObjectImpl', {
         }
     },
 
-    <a name="method-Ext.EventObject-getCharCode"></a>/**
-     * Gets the character code for the event.
+<span id='Ext-EventObject-method-getCharCode'>    /**
+</span>     * Gets the character code for the event.
      * @return {Number}
      */
     getCharCode: function(){
         return this.charCode || this.keyCode;
     },
 
-    <a name="method-Ext.EventObject-getKey"></a>/**
-     * Returns a normalized keyCode for the event.
+<span id='Ext-EventObject-method-getKey'>    /**
+</span>     * Returns a normalized keyCode for the event.
      * @return {Number} The key code
      */
     getKey: function(){
         return this.normalizeKey(this.keyCode || this.charCode);
     },
 
-    /**
-     * Normalize key codes across browsers
+<span id='Ext-EventObject-method-normalizeKey'>    /**
+</span>     * Normalize key codes across browsers
      * @private
      * @param {Number} key The key code
      * @return {Number} The normalized code
@@ -343,8 +343,8 @@ Ext.define('Ext.EventObjectImpl', {
         return Ext.isWebKit ? (this.safariKeys[key] || key) : key;
     },
 
-    <a name="method-Ext.EventObject-getPageX"></a>/**
-     * Gets the x coordinate of the event.
+<span id='Ext-EventObject-method-getPageX'>    /**
+</span>     * Gets the x coordinate of the event.
      * @return {Number}
      * @deprecated 4.0 Replaced by {@link #getX}
      */
@@ -352,8 +352,8 @@ Ext.define('Ext.EventObjectImpl', {
         return this.getX();
     },
 
-    <a name="method-Ext.EventObject-getPageY"></a>/**
-     * Gets the y coordinate of the event.
+<span id='Ext-EventObject-method-getPageY'>    /**
+</span>     * Gets the y coordinate of the event.
      * @return {Number}
      * @deprecated 4.0 Replaced by {@link #getY}
      */
@@ -361,24 +361,24 @@ Ext.define('Ext.EventObjectImpl', {
         return this.getY();
     },
     
-    <a name="method-Ext.EventObject-getX"></a>/**
-     * Gets the x coordinate of the event.
+<span id='Ext-EventObject-method-getX'>    /**
+</span>     * Gets the x coordinate of the event.
      * @return {Number}
      */
     getX: function() {
         return this.getXY()[0];
     },    
     
-    <a name="method-Ext.EventObject-getY"></a>/**
-     * Gets the y coordinate of the event.
+<span id='Ext-EventObject-method-getY'>    /**
+</span>     * Gets the y coordinate of the event.
      * @return {Number}
      */
     getY: function() {
         return this.getXY()[1];
     },
         
-    <a name="method-Ext.EventObject-getXY"></a>/**
-     * Gets the page coordinates of the event.
+<span id='Ext-EventObject-method-getXY'>    /**
+</span>     * Gets the page coordinates of the event.
      * @return {Array} The xy values like [x, y]
      */
     getXY: function() {
@@ -389,8 +389,8 @@ Ext.define('Ext.EventObjectImpl', {
         return this.xy;
     },
 
-    <a name="method-Ext.EventObject-getTarget"></a>/**
-     * Gets the target for the event.
+<span id='Ext-EventObject-method-getTarget'>    /**
+</span>     * Gets the target for the event.
      * @param {String} selector (optional) A simple selector to filter the target or look for an ancestor of the target
      * @param {Number/Mixed} maxDepth (optional) The max depth to search as a number or element (defaults to 10 || document.body)
      * @param {Boolean} returnEl (optional) True to return a Ext.core.Element object instead of DOM node
@@ -403,8 +403,8 @@ Ext.define('Ext.EventObjectImpl', {
         return returnEl ? Ext.get(this.target) : this.target;
     },
 
-    <a name="method-Ext.EventObject-getRelatedTarget"></a>/**
-     * Gets the related target.
+<span id='Ext-EventObject-method-getRelatedTarget'>    /**
+</span>     * Gets the related target.
      * @param {String} selector (optional) A simple selector to filter the target or look for an ancestor of the target
      * @param {Number/Mixed} maxDepth (optional) The max depth to search as a number or element (defaults to 10 || document.body)
      * @param {Boolean} returnEl (optional) True to return a Ext.core.Element object instead of DOM node
@@ -417,8 +417,8 @@ Ext.define('Ext.EventObjectImpl', {
         return returnEl ? Ext.get(this.relatedTarget) : this.relatedTarget;
     },
 
-    <a name="method-Ext.EventObject-getWheelDelta"></a>/**
-     * Normalizes mouse wheel delta across browsers
+<span id='Ext-EventObject-method-getWheelDelta'>    /**
+</span>     * Normalizes mouse wheel delta across browsers
      * @return {Number} The delta
      */
     getWheelDelta : function(){
@@ -433,9 +433,9 @@ Ext.define('Ext.EventObjectImpl', {
         return delta;
     },
 
-    <a name="method-Ext.EventObject-within"></a>/**
-    * Returns true if the target of this event is a child of el.  Unless the allowEl parameter is set, it will return false if if the target is el.
-    * Example usage:<pre><code>
+<span id='Ext-EventObject-method-within'>    /**
+</span>    * Returns true if the target of this event is a child of el.  Unless the allowEl parameter is set, it will return false if if the target is el.
+    * Example usage:&lt;pre&gt;&lt;code&gt;
 // Handle click on any child of an element
 Ext.getBody().on('click', function(e){
     if(e.within('some-el')){
@@ -445,11 +445,11 @@ Ext.getBody().on('click', function(e){
 
 // Handle click directly on an element, ignoring clicks on child nodes
 Ext.getBody().on('click', function(e,t){
-    if((t.id == 'some-el') && !e.within(t, true)){
+    if((t.id == 'some-el') &amp;&amp; !e.within(t, true)){
         alert('Clicked directly on some-el!');
     }
 });
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
      * @param {Mixed} el The id, DOM element or Ext.core.Element to check
      * @param {Boolean} related (optional) true to test if the related target is within el instead of the target
      * @param {Boolean} allowEl {optional} true to also check if the passed element is the target or related target
@@ -462,7 +462,7 @@ Ext.getBody().on('click', function(e,t){
 
             if (t) {
                 result = Ext.fly(el).contains(t);
-                if (!result && allowEl) {
+                if (!result &amp;&amp; allowEl) {
                     result = t == Ext.getDom(el);
                 }
                 return result;
@@ -471,35 +471,35 @@ Ext.getBody().on('click', function(e,t){
         return false;
     },
 
-    <a name="method-Ext.EventObject-isNavKeyPress"></a>/**
-     * Checks if the key pressed was a "navigation" key
+<span id='Ext-EventObject-method-isNavKeyPress'>    /**
+</span>     * Checks if the key pressed was a &quot;navigation&quot; key
      * @return {Boolean} True if the press is a navigation keypress
      */
     isNavKeyPress : function(){
         var me = this,
             k = this.normalizeKey(me.keyCode);
 
-       return (k >= 33 && k <= 40) ||  // Page Up/Down, End, Home, Left, Up, Right, Down
+       return (k &gt;= 33 &amp;&amp; k &lt;= 40) ||  // Page Up/Down, End, Home, Left, Up, Right, Down
        k == me.RETURN ||
        k == me.TAB ||
        k == me.ESC;
     },
 
-    <a name="method-Ext.EventObject-isSpecialKey"></a>/**
-     * Checks if the key pressed was a "special" key
+<span id='Ext-EventObject-method-isSpecialKey'>    /**
+</span>     * Checks if the key pressed was a &quot;special&quot; key
      * @return {Boolean} True if the press is a special keypress
      */
     isSpecialKey : function(){
         var k = this.normalizeKey(this.keyCode);
-        return (this.type == 'keypress' && this.ctrlKey) ||
+        return (this.type == 'keypress' &amp;&amp; this.ctrlKey) ||
         this.isNavKeyPress() ||
         (k == this.BACKSPACE) || // Backspace
-        (k >= 16 && k <= 20) || // Shift, Ctrl, Alt, Pause, Caps Lock
-        (k >= 44 && k <= 46);   // Print Screen, Insert, Delete
+        (k &gt;= 16 &amp;&amp; k &lt;= 20) || // Shift, Ctrl, Alt, Pause, Caps Lock
+        (k &gt;= 44 &amp;&amp; k &lt;= 46);   // Print Screen, Insert, Delete
     },
 
-    <a name="method-Ext.EventObject-getPoint"></a>/**
-     * Returns a point object that consists of the object coordinates.
+<span id='Ext-EventObject-method-getPoint'>    /**
+</span>     * Returns a point object that consists of the object coordinates.
      * @return {Ext.util.Point} point
      */
     getPoint : function(){
@@ -507,17 +507,266 @@ Ext.getBody().on('click', function(e,t){
         return Ext.create('Ext.util.Point', xy[0], xy[1]);
     },
 
-   <a name="method-Ext.EventObject-hasModifier"></a>/**
-    * Returns true if the control, meta, shift or alt key was pressed during this event.
+<span id='Ext-EventObject-method-hasModifier'>   /**
+</span>    * Returns true if the control, meta, shift or alt key was pressed during this event.
     * @return {Boolean}
     */
     hasModifier : function(){
-        return ((this.ctrlKey || this.altKey) || this.shiftKey);
-    }
+        return this.ctrlKey || this.altKey || this.shiftKey || this.metaKey;
+    },
+
+<span id='Ext-EventObject-method-injectEvent'>    /**
+</span>     * Injects a DOM event using the data in this object and (optionally) a new target.
+     * This is a low-level technique and not likely to be used by application code. The
+     * currently supported event types are:
+     * &lt;p&gt;&lt;b&gt;HTMLEvents&lt;/b&gt;&lt;/p&gt;
+     * &lt;ul&gt;
+     * &lt;li&gt;load&lt;/li&gt;
+     * &lt;li&gt;unload&lt;/li&gt;
+     * &lt;li&gt;select&lt;/li&gt;
+     * &lt;li&gt;change&lt;/li&gt;
+     * &lt;li&gt;submit&lt;/li&gt;
+     * &lt;li&gt;reset&lt;/li&gt;
+     * &lt;li&gt;resize&lt;/li&gt;
+     * &lt;li&gt;scroll&lt;/li&gt;
+     * &lt;/ul&gt;
+     * &lt;p&gt;&lt;b&gt;MouseEvents&lt;/b&gt;&lt;/p&gt;
+     * &lt;ul&gt;
+     * &lt;li&gt;click&lt;/li&gt;
+     * &lt;li&gt;dblclick&lt;/li&gt;
+     * &lt;li&gt;mousedown&lt;/li&gt;
+     * &lt;li&gt;mouseup&lt;/li&gt;
+     * &lt;li&gt;mouseover&lt;/li&gt;
+     * &lt;li&gt;mousemove&lt;/li&gt;
+     * &lt;li&gt;mouseout&lt;/li&gt;
+     * &lt;/ul&gt;
+     * &lt;p&gt;&lt;b&gt;UIEvents&lt;/b&gt;&lt;/p&gt;
+     * &lt;ul&gt;
+     * &lt;li&gt;focusin&lt;/li&gt;
+     * &lt;li&gt;focusout&lt;/li&gt;
+     * &lt;li&gt;activate&lt;/li&gt;
+     * &lt;li&gt;focus&lt;/li&gt;
+     * &lt;li&gt;blur&lt;/li&gt;
+     * &lt;/ul&gt;
+     * @param {Element/HTMLElement} target If specified, the target for the event. This
+     * is likely to be used when relaying a DOM event. If not specified, {@link #getTarget}
+     * is used to determine the target.
+     */
+    injectEvent: function () {
+        var API,
+            dispatchers = {}; // keyed by event type (e.g., 'mousedown')
+
+        // Good reference: http://developer.yahoo.com/yui/docs/UserAction.js.html
+
+        // IE9 has createEvent, but this code causes major problems with htmleditor (it
+        // blocks all mouse events and maybe more). TODO
+
+        if (!Ext.isIE &amp;&amp; document.createEvent) { // if (DOM compliant)
+            API = {
+                createHtmlEvent: function (doc, type, bubbles, cancelable) {
+                    var event = doc.createEvent('HTMLEvents');
+
+                    event.initEvent(type, bubbles, cancelable);
+                    return event;
+                },
+
+                createMouseEvent: function (doc, type, bubbles, cancelable, detail,
+                                            clientX, clientY, ctrlKey, altKey, shiftKey, metaKey,
+                                            button, relatedTarget) {
+                    var event = doc.createEvent('MouseEvents'),
+                        view = doc.defaultView || window;
+
+                    if (event.initMouseEvent) {
+                        event.initMouseEvent(type, bubbles, cancelable, view, detail,
+                                    clientX, clientY, clientX, clientY, ctrlKey, altKey,
+                                    shiftKey, metaKey, button, relatedTarget);
+                    } else { // old Safari
+                        event = doc.createEvent('UIEvents');
+                        event.initEvent(type, bubbles, cancelable);
+                        event.view = view;
+                        event.detail = detail;
+                        event.screenX = clientX;
+                        event.screenY = clientY;
+                        event.clientX = clientX;
+                        event.clientY = clientY;
+                        event.ctrlKey = ctrlKey;
+                        event.altKey = altKey;
+                        event.metaKey = metaKey;
+                        event.shiftKey = shiftKey;
+                        event.button = button;
+                        event.relatedTarget = relatedTarget;
+                    }
+
+                    return event;
+                },
+
+                createUIEvent: function (doc, type, bubbles, cancelable, detail) {
+                    var event = doc.createEvent('UIEvents'),
+                        view = doc.defaultView || window;
+
+                    event.initUIEvent(type, bubbles, cancelable, view, detail);
+                    return event;
+                },
+
+                fireEvent: function (target, type, event) {
+                    target.dispatchEvent(event);
+                },
+
+                fixTarget: function (target) {
+                    // Safari3 doesn't have window.dispatchEvent()
+                    if (target == window &amp;&amp; !target.dispatchEvent) {
+                        return document;
+                    }
+
+                    return target;
+                }
+            }
+        } else if (document.createEventObject) { // else if (IE)
+            var crazyIEButtons = { 0: 1, 1: 4, 2: 2 };
+
+            API = {
+                createHtmlEvent: function (doc, type, bubbles, cancelable) {
+                    var event = doc.createEventObject();
+                    event.bubbles = bubbles;
+                    event.cancelable = cancelable;
+                    return event;
+                },
+
+                createMouseEvent: function (doc, type, bubbles, cancelable, detail,
+                                            clientX, clientY, ctrlKey, altKey, shiftKey, metaKey,
+                                            button, relatedTarget) {
+                    var event = doc.createEventObject();
+                    event.bubbles = bubbles;
+                    event.cancelable = cancelable;
+                    event.detail = detail;
+                    event.screenX = clientX;
+                    event.screenY = clientY;
+                    event.clientX = clientX;
+                    event.clientY = clientY;
+                    event.ctrlKey = ctrlKey;
+                    event.altKey = altKey;
+                    event.shiftKey = shiftKey;
+                    event.metaKey = metaKey;
+                    event.button = crazyIEButtons[button] || button;
+                    event.relatedTarget = relatedTarget; // cannot assign to/fromElement
+                    return event;
+                },
+
+                createUIEvent: function (doc, type, bubbles, cancelable, detail) {
+                    var event = doc.createEventObject();
+                    event.bubbles = bubbles;
+                    event.cancelable = cancelable;
+                    return event;
+                },
+
+                fireEvent: function (target, type, event) {
+                    target.fireEvent('on' + type, event);
+                },
+
+                fixTarget: function (target) {
+                    if (target == document) {
+                        // IE6,IE7 thinks window==document and doesn't have window.fireEvent()
+                        // IE6,IE7 cannot properly call document.fireEvent()
+                        return document.documentElement;
+                    }
+
+                    return target;
+                }
+            };
+        }
+
+        //----------------
+        // HTMLEvents
+
+        Ext.Object.each({
+                load:   [false, false],
+                unload: [false, false],
+                select: [true, false],
+                change: [true, false],
+                submit: [true, true],
+                reset:  [true, false],
+                resize: [true, false],
+                scroll: [true, false]
+            },
+            function (name, value) {
+                var bubbles = value[0], cancelable = value[1];
+                dispatchers[name] = function (targetEl, srcEvent) {
+                    var e = API.createHtmlEvent(name, bubbles, cancelable);
+                    API.fireEvent(targetEl, name, e);
+                };
+            });
+
+        //----------------
+        // MouseEvents
+
+        function createMouseEventDispatcher (type, detail) {
+            var cancelable = (type != 'mousemove');
+            return function (targetEl, srcEvent) {
+                var xy = srcEvent.getXY(),
+                    e = API.createMouseEvent(targetEl.ownerDocument, type, true, cancelable,
+                                detail, xy[0], xy[1], srcEvent.ctrlKey, srcEvent.altKey,
+                                srcEvent.shiftKey, srcEvent.metaKey, srcEvent.button,
+                                srcEvent.relatedTarget);
+                API.fireEvent(targetEl, type, e);
+            };
+        }
+
+        Ext.each(['click', 'dblclick', 'mousedown', 'mouseup', 'mouseover', 'mousemove', 'mouseout'],
+            function (eventName) {
+                dispatchers[eventName] = createMouseEventDispatcher(eventName, 1);
+            });
+
+        //----------------
+        // UIEvents
+
+        Ext.Object.each({
+                focusin:  [true, false],
+                focusout: [true, false],
+                activate: [true, true],
+                focus:    [false, false],
+                blur:     [false, false]
+            },
+            function (name, value) {
+                var bubbles = value[0], cancelable = value[1];
+                dispatchers[name] = function (targetEl, srcEvent) {
+                    var e = API.createUIEvent(targetEl.ownerDocument, name, bubbles, cancelable, 1);
+                    API.fireEvent(targetEl, name, e);
+                };
+            });
+
+        //---------
+        if (!API) {
+            // not even sure what ancient browsers fall into this category...
+
+            dispatchers = {}; // never mind all those we just built :P
+
+            API = {
+                fixTarget: function (t) {
+                    return t;
+                }
+            };
+        }
+
+        function cannotInject (target, srcEvent) {
+            //&lt;debug&gt;
+            // TODO log something
+            //&lt;/debug&gt;
+        }
+
+        return function (target) {
+            var me = this,
+                dispatcher = dispatchers[me.type] || cannotInject,
+                t = target ? (target.dom || target) : me.getTarget();
+
+            t = API.fixTarget(t);
+            dispatcher(t, me);
+        };
+    }() // call to produce method
+
 }, function() {
 
 Ext.EventObject = new Ext.EventObjectImpl();
 
 });
 
-￿</pre></pre></body></html>
+</pre></pre></body></html>

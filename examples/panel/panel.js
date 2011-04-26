@@ -41,6 +41,7 @@ Ext.onReady(function() {
         width: 150,
         height: 150,
         border: false,
+        frame: true,
         title: 'Panel with border:false',
         html: 'Some content'
     },{
@@ -50,10 +51,7 @@ Ext.onReady(function() {
         frame: true,
         autoScroll: true,
         width: 280,
-        height: 180,
-        tools: [
-            {type: 'close'}
-        ]
+        height: 180
     },{
         title : 'Panel as child',
         width : 500,
@@ -63,16 +61,16 @@ Ext.onReady(function() {
         items: [
             {
                 xtype: 'panel',
-                title: 'Panel',
-                border:false,
+                border: false,
                 layout: {
                     type: 'vbox',
                     align: 'stretch'
                 },
                 items: [
                     {
-                        html: 'top',
-                        height: 100
+                        html: 'top, with no title',
+                        height: 100,
+                        margin: '0 0 5 0'
                     },{
                         xtype: 'panel',
                         title: 'test',

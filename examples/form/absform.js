@@ -9,7 +9,7 @@ Ext.onReady(function() {
         layout: 'absolute',
         url: 'save-form.php',
         defaultType: 'textfield',
-        bodyBorder: 0,
+        border: false,
 
         items: [{
             fieldLabel: 'Send To',

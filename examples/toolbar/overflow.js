@@ -5,6 +5,12 @@ Ext.onReady(function(){
         Ext.example.msg('<b>Action</b>', 'You clicked "' + action + '"');
     };
 
+    var colorMenu = Ext.create('Ext.menu.ColorPicker', {
+        handler: function(cm, color){
+            Ext.example.msg('Color Selected', '<span style="color:#' + color + ';">You choose {0}.</span>', color);
+        }
+    });
+
     Ext.create('Ext.Window', {
         title: 'Standard',
         closable: false,
@@ -45,6 +51,9 @@ Ext.onReady(function(){
                 text: 'Right',
                 iconCls: 'add16',
                 handler: Ext.Function.pass(handleAction, 'Right')
+            }, {
+                text: 'Choose a Color',
+                menu: colorMenu // <-- submenu by reference
             }]
         })
     }).show();

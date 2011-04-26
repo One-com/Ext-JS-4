@@ -76,7 +76,7 @@ function getBasicLayouts() {
             defaults: {bodyStyle: 'padding:15px'},
             items: [{
                 title: 'Introduction',
-                tools: [{id:'gear'},{id:'refresh'}],
+                tools: [{type:'gear'},{type:'refresh'}],
                 html: '<p>Here is some accordion content.  Click on one of the other bars below for more.</p>'
             },{
                 title: 'Basic Content',
@@ -175,6 +175,7 @@ function getBasicLayouts() {
             id: 'card-tabs-panel',
             plain: true,  //remove the header border
             activeTab: 0,
+            style: 'background-color:#dfe8f6; ',
             defaults: {bodyStyle: 'padding:15px'},
             items:[{
                 title: 'Tab 1',
@@ -254,7 +255,7 @@ function getBasicLayouts() {
             items: {
                 title: 'Inner Panel',
                 html: '<p>This panel is fit within its container.</p>',
-                bodyStyle: 'margin:15px',
+                bodyStyle: 'padding:15px',
                 border: false
             }
         },

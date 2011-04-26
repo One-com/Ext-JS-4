@@ -1,9 +1,9 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.grid.feature.RowBody"></a>/**
- * @class Ext.grid.feature.RowBody
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-grid.feature.RowBody'>/**
+</span> * @class Ext.grid.feature.RowBody
  * @extends Ext.grid.feature.Feature
  *
  * The rowbody feature enhances the grid's markup to have an additional
- * tr -> td -> div which spans the entire width of the original row.
+ * tr -&gt; td -&gt; div which spans the entire width of the original row.
  *
  * This is useful to to associate additional information with a particular
  * record in a grid.
@@ -28,11 +28,11 @@ Ext.define('Ext.grid.feature.RowBody', {
     
     getRowBody: function(values) {
         return [
-            '<tr class="' + this.rowBodyTrCls + ' {rowBodyCls}">',
-                '<td class="' + this.rowBodyTdCls + '" colspan="{rowBodyColspan}">',
-                    '<div class="' + this.rowBodyDivCls + '">{rowBody}</div>',
-                '</td>',
-            '</tr>'
+            '&lt;tr class=&quot;' + this.rowBodyTrCls + ' {rowBodyCls}&quot;&gt;',
+                '&lt;td class=&quot;' + this.rowBodyTdCls + '&quot; colspan=&quot;{rowBodyColspan}&quot;&gt;',
+                    '&lt;div class=&quot;' + this.rowBodyDivCls + '&quot;&gt;{rowBody}&lt;/div&gt;',
+                '&lt;/td&gt;',
+            '&lt;/tr&gt;'
         ].join('');
     },
     
@@ -50,8 +50,8 @@ Ext.define('Ext.grid.feature.RowBody', {
         metaRowTpl.push('{[this.getRowBody(values)]}');
     },
 
-    <a name="method-Ext.grid.feature.RowBody-getAdditionalData"></a>/**
-     * Provide additional data to the prepareData call within the grid view.
+<span id='Ext-grid.feature.RowBody-method-getAdditionalData'>    /**
+</span>     * Provide additional data to the prepareData call within the grid view.
      * The rowbody feature adds 3 additional variables into the grid view's template.
      * These are rowBodyCls, rowBodyColspan, and rowBody.
      * @param {Object} data The data for this particular record.
@@ -64,9 +64,9 @@ Ext.define('Ext.grid.feature.RowBody', {
             colspan  = headerCt.getColumnCount();
 
         return {
-            rowBody: "",
+            rowBody: &quot;&quot;,
             rowBodyCls: this.rowBodyCls,
             rowBodyColspan: colspan
         };
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

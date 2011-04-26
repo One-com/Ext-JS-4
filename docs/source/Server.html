@@ -1,138 +1,138 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.proxy.Server"></a>/**
- * @author Ed Spencer
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-data.proxy.Server'>/**
+</span> * @author Ed Spencer
  * @class Ext.data.proxy.Server
- * @extends Ext.data.Proxy
+ * @extends Ext.data.proxy.Proxy
  * 
- * <p>ServerProxy is a superclass of {@link Ext.data.proxy.ScriptTag ScriptTagProxy} and {@link Ext.data.proxy.Ajax AjaxProxy},
- * and would not usually be used directly.</p>
+ * &lt;p&gt;ServerProxy is a superclass of {@link Ext.data.proxy.JsonP JsonPProxy} and {@link Ext.data.proxy.Ajax AjaxProxy},
+ * and would not usually be used directly.&lt;/p&gt;
  * 
- * <p>ServerProxy should ideally be named HttpProxy as it is a superclass for all HTTP proxies - for Ext JS 4.x it has been 
+ * &lt;p&gt;ServerProxy should ideally be named HttpProxy as it is a superclass for all HTTP proxies - for Ext JS 4.x it has been 
  * called ServerProxy to enable any 3.x applications that reference the HttpProxy to continue to work (HttpProxy is now an 
- * alias of AjaxProxy).</p>
+ * alias of AjaxProxy).&lt;/p&gt;
  */
 Ext.define('Ext.data.proxy.Server', {
-    extend: 'Ext.data.Proxy',
+    extend: 'Ext.data.proxy.Proxy',
     alias : 'proxy.server',
     alternateClassName: 'Ext.data.ServerProxy',
     uses  : ['Ext.data.Request'],
     
-    <a name="cfg-Ext.data.proxy.Server-url"></a>/**
-     * @cfg {String} url The URL from which to request the data object.
+<span id='Ext-data.proxy.Server-cfg-url'>    /**
+</span>     * @cfg {String} url The URL from which to request the data object.
      */
     
-    <a name="cfg-Ext.data.proxy.Server-reader"></a>/**
-     * @cfg {Object/String/Ext.data.reader.Reader} reader The Ext.data.reader.Reader to use to decode the server's response. This can
+<span id='Ext-data.proxy.Server-cfg-reader'>    /**
+</span>     * @cfg {Object/String/Ext.data.reader.Reader} reader The Ext.data.reader.Reader to use to decode the server's response. This can
      * either be a Reader instance, a config object or just a valid Reader type name (e.g. 'json', 'xml').
      */
     
-    <a name="cfg-Ext.data.proxy.Server-writer"></a>/**
-     * @cfg {Object/String/Ext.data.writer.Writer} writer The Ext.data.writer.Writer to use to encode any request sent to the server.
+<span id='Ext-data.proxy.Server-cfg-writer'>    /**
+</span>     * @cfg {Object/String/Ext.data.writer.Writer} writer The Ext.data.writer.Writer to use to encode any request sent to the server.
      * This can either be a Writer instance, a config object or just a valid Writer type name (e.g. 'json', 'xml').
      */
     
-    <a name="cfg-Ext.data.proxy.Server-pageParam"></a>/**
-     * @cfg {String} pageParam The name of the 'page' parameter to send in a request. Defaults to 'page'. Set this to
+<span id='Ext-data.proxy.Server-cfg-pageParam'>    /**
+</span>     * @cfg {String} pageParam The name of the 'page' parameter to send in a request. Defaults to 'page'. Set this to
      * undefined if you don't want to send a page parameter
      */
     pageParam: 'page',
     
-    <a name="cfg-Ext.data.proxy.Server-startParam"></a>/**
-     * @cfg {String} startParam The name of the 'start' parameter to send in a request. Defaults to 'start'. Set this
+<span id='Ext-data.proxy.Server-cfg-startParam'>    /**
+</span>     * @cfg {String} startParam The name of the 'start' parameter to send in a request. Defaults to 'start'. Set this
      * to undefined if you don't want to send a start parameter
      */
     startParam: 'start',
 
-    <a name="cfg-Ext.data.proxy.Server-limitParam"></a>/**
-     * @cfg {String} limitParam The name of the 'limit' parameter to send in a request. Defaults to 'limit'. Set this
+<span id='Ext-data.proxy.Server-cfg-limitParam'>    /**
+</span>     * @cfg {String} limitParam The name of the 'limit' parameter to send in a request. Defaults to 'limit'. Set this
      * to undefined if you don't want to send a limit parameter
      */
     limitParam: 'limit',
     
-    <a name="cfg-Ext.data.proxy.Server-groupParam"></a>/**
-     * @cfg {String} groupParam The name of the 'group' parameter to send in a request. Defaults to 'group'. Set this
+<span id='Ext-data.proxy.Server-cfg-groupParam'>    /**
+</span>     * @cfg {String} groupParam The name of the 'group' parameter to send in a request. Defaults to 'group'. Set this
      * to undefined if you don't want to send a group parameter
      */
     groupParam: 'group',
     
-    <a name="cfg-Ext.data.proxy.Server-sortParam"></a>/**
-     * @cfg {String} sortParam The name of the 'sort' parameter to send in a request. Defaults to 'sort'. Set this
+<span id='Ext-data.proxy.Server-cfg-sortParam'>    /**
+</span>     * @cfg {String} sortParam The name of the 'sort' parameter to send in a request. Defaults to 'sort'. Set this
      * to undefined if you don't want to send a sort parameter
      */
     sortParam: 'sort',
     
-    <a name="cfg-Ext.data.proxy.Server-filterParam"></a>/**
-     * @cfg {String} filterParam The name of the 'filter' parameter to send in a request. Defaults to 'filter'. Set 
+<span id='Ext-data.proxy.Server-cfg-filterParam'>    /**
+</span>     * @cfg {String} filterParam The name of the 'filter' parameter to send in a request. Defaults to 'filter'. Set 
      * this to undefined if you don't want to send a filter parameter
      */
     filterParam: 'filter',
     
-    <a name="cfg-Ext.data.proxy.Server-dirParam"></a>/**
-     * @cfg {String} dirParam The name of the direction parameter to send in a request. <strong>This is only used when simpleSortMode is set to true.</strong>
+<span id='Ext-data.proxy.Server-cfg-directionParam'>    /**
+</span>     * @cfg {String} directionParam The name of the direction parameter to send in a request. &lt;strong&gt;This is only used when simpleSortMode is set to true.&lt;/strong&gt;
      * Defaults to 'dir'.
      */
-    dirParam: 'dir',
+    directionParam: 'dir',
     
-    <a name="cfg-Ext.data.proxy.Server-simpleSortMode"></a>/**
-     * @cfg {Boolean} simpleSortMode Enabling simpleSortMode in conjunction with remoteSort will only send one sort property and a direction when a remote sort is requested.
-     * The dirParam and sortParam will be sent with the property name and either 'ASC' or 'DESC'
+<span id='Ext-data.proxy.Server-cfg-simpleSortMode'>    /**
+</span>     * @cfg {Boolean} simpleSortMode Enabling simpleSortMode in conjunction with remoteSort will only send one sort property and a direction when a remote sort is requested.
+     * The directionParam and sortParam will be sent with the property name and either 'ASC' or 'DESC'
      */
     simpleSortMode: false,
     
-    <a name="cfg-Ext.data.proxy.Server-noCache"></a>/**
-     * @cfg {Boolean} noCache (optional) Defaults to true. Disable caching by adding a unique parameter
+<span id='Ext-data.proxy.Server-cfg-noCache'>    /**
+</span>     * @cfg {Boolean} noCache (optional) Defaults to true. Disable caching by adding a unique parameter
      * name to the request.
      */
     noCache : true,
     
-    <a name="cfg-Ext.data.proxy.Server-cacheString"></a>/**
-     * @cfg {String} cacheString The name of the cache param added to the url when using noCache (defaults to "_dc")
+<span id='Ext-data.proxy.Server-cfg-cacheString'>    /**
+</span>     * @cfg {String} cacheString The name of the cache param added to the url when using noCache (defaults to &quot;_dc&quot;)
      */
-    cacheString: "_dc",
+    cacheString: &quot;_dc&quot;,
     
-    <a name="cfg-Ext.data.proxy.Server-timeout"></a>/**
-     * @cfg {Number} timeout (optional) The number of milliseconds to wait for a response. Defaults to 30 seconds.
+<span id='Ext-data.proxy.Server-cfg-timeout'>    /**
+</span>     * @cfg {Number} timeout (optional) The number of milliseconds to wait for a response. Defaults to 30 seconds.
      */
     timeout : 30000,
     
-    <a name="cfg-Ext.data.proxy.Server-api"></a>/**
-     * @cfg {Object} api
-     * Specific urls to call on CRUD action methods "read", "create", "update" and "destroy".
-     * Defaults to:<pre><code>
+<span id='Ext-data.proxy.Server-cfg-api'>    /**
+</span>     * @cfg {Object} api
+     * Specific urls to call on CRUD action methods &quot;read&quot;, &quot;create&quot;, &quot;update&quot; and &quot;destroy&quot;.
+     * Defaults to:&lt;pre&gt;&lt;code&gt;
 api: {
     read    : undefined,
     create  : undefined,
     update  : undefined,
     destroy : undefined
 }
-     * </code></pre>
-     * <p>The url is built based upon the action being executed <tt>[load|create|save|destroy]</tt>
-     * using the commensurate <tt>{@link #api}</tt> property, or if undefined default to the
-     * configured {@link Ext.data.Store}.{@link Ext.data.proxy.Server#url url}.</p><br>
-     * <p>For example:</p>
-     * <pre><code>
+     * &lt;/code&gt;&lt;/pre&gt;
+     * &lt;p&gt;The url is built based upon the action being executed &lt;tt&gt;[load|create|save|destroy]&lt;/tt&gt;
+     * using the commensurate &lt;tt&gt;{@link #api}&lt;/tt&gt; property, or if undefined default to the
+     * configured {@link Ext.data.Store}.{@link Ext.data.proxy.Server#url url}.&lt;/p&gt;&lt;br&gt;
+     * &lt;p&gt;For example:&lt;/p&gt;
+     * &lt;pre&gt;&lt;code&gt;
 api: {
     load :    '/controller/load',
     create :  '/controller/new',
     save :    '/controller/update',
     destroy : '/controller/destroy_action'
 }
-     * </code></pre>
-     * <p>If the specific URL for a given CRUD action is undefined, the CRUD action request
-     * will be directed to the configured <tt>{@link Ext.data.proxy.Server#url url}</tt>.</p>
+     * &lt;/code&gt;&lt;/pre&gt;
+     * &lt;p&gt;If the specific URL for a given CRUD action is undefined, the CRUD action request
+     * will be directed to the configured &lt;tt&gt;{@link Ext.data.proxy.Server#url url}&lt;/tt&gt;.&lt;/p&gt;
      */
     
-    /**
-     * @ignore
+<span id='Ext-data.proxy.Server-method-constructor'>    /**
+</span>     * @ignore
      */
     constructor: function(config) {
         var me = this;
         
         config = config || {};
         this.addEvents(
-            <a name="event-Ext.data.proxy.Server-exception"></a>/**
-             * @event exception
+<span id='Ext-data.proxy.Server-event-exception'>            /**
+</span>             * @event exception
              * Fires when the server returns an exception
-             * @param {Ext.data.Proxy} this
+             * @param {Ext.data.proxy.Proxy} this
              * @param {Object} response The response from the AJAX request
              * @param {Ext.data.Operation} operation The operation that triggered request
              */
@@ -140,8 +140,8 @@ api: {
         );
         me.callParent([config]);
         
-        <a name="cfg-Ext.data.proxy.Server-extraParams"></a>/**
-         * @cfg {Object} extraParams Extra parameters that will be included on every request. Individual requests with params
+<span id='Ext-data.proxy.Server-cfg-extraParams'>        /**
+</span>         * @cfg {Object} extraParams Extra parameters that will be included on every request. Individual requests with params
          * of the same name will override these params when they are in conflict.
          */
         me.extraParams = config.extraParams || {};
@@ -169,8 +169,8 @@ api: {
         return this.doRequest.apply(this, arguments);
     },
     
-    <a name="method-Ext.data.proxy.Server-buildRequest"></a>/**
-     * Creates and returns an Ext.data.Request object based on the options passed by the {@link Ext.data.Store Store}
+<span id='Ext-data.proxy.Server-method-buildRequest'>    /**
+</span>     * Creates and returns an Ext.data.Request object based on the options passed by the {@link Ext.data.Store Store}
      * that this Proxy is attached to.
      * @param {Ext.data.Operation} operation The {@link Ext.data.Operation Operation} object to execute
      * @return {Ext.data.Request} The request object
@@ -182,7 +182,7 @@ api: {
         //copy any sorters, filters etc into the params so they can be sent over the wire
         params = Ext.applyIf(params, this.getParams(params, operation));
         
-        if (operation.id && !params.id) {
+        if (operation.id &amp;&amp; !params.id) {
             params.id = operation.id;
         }
         
@@ -205,8 +205,8 @@ api: {
         return request;
     },
     
-    <a name="method-Ext.data.proxy.Server-processResponse"></a>/**
-     * 
+<span id='Ext-data.proxy.Server-method-processResponse'>    /**
+</span>     * 
      */
     processResponse: function(success, operation, request, response, callback, scope){
         var me = this,
@@ -227,7 +227,7 @@ api: {
             if (result.success !== false) {
                 mc = Ext.create('Ext.util.MixedCollection', true, function(r) {return r.getId();});
                 mc.addAll(operation.records);
-                for (i = 0; i < length; i++) {
+                for (i = 0; i &lt; length; i++) {
                     record = mc.get(records[i].getId());
                     
                     if (record) {
@@ -262,8 +262,8 @@ api: {
         me.afterRequest(request, success);
     },
     
-    /**
-     * Sets up an exception on the operation
+<span id='Ext-data.proxy.Server-method-setException'>    /**
+</span>     * Sets up an exception on the operation
      * @private
      * @param {Ext.data.Operation} operation The operation
      * @param {Object} response The response
@@ -275,8 +275,8 @@ api: {
         });     
     },
     
-    /**
-     * Template method to allow subclasses to specify how to get the response for the reader.
+<span id='Ext-data.proxy.Server-method-extractResponseData'>    /**
+</span>     * Template method to allow subclasses to specify how to get the response for the reader.
      * @private
      * @param {Object} response The server response
      * @return {Mixed} The response data to be used by the reader
@@ -285,8 +285,8 @@ api: {
         return response; 
     },
     
-    /**
-     * Encode any values being sent to the server. Can be overridden in subclasses.
+<span id='Ext-data.proxy.Server-method-applyEncoding'>    /**
+</span>     * Encode any values being sent to the server. Can be overridden in subclasses.
      * @private
      * @param {Array} An array of sorters/filters.
      * @return {Mixed} The encoded value
@@ -295,8 +295,8 @@ api: {
         return Ext.encode(value);
     },
     
-    <a name="method-Ext.data.proxy.Server-encodeSorters"></a>/**
-     * Encodes the array of {@link Ext.util.Sorter} objects into a string to be sent in the request url. By default, 
+<span id='Ext-data.proxy.Server-method-encodeSorters'>    /**
+</span>     * Encodes the array of {@link Ext.util.Sorter} objects into a string to be sent in the request url. By default, 
      * this simply JSON-encodes the sorter data
      * @param {Array} sorters The array of {@link Ext.util.Sorter Sorter} objects
      * @return {String} The encoded sorters
@@ -306,7 +306,7 @@ api: {
             length = sorters.length,
             i = 0;
         
-        for (; i < length; i++) {
+        for (; i &lt; length; i++) {
             min[i] = {
                 property : sorters[i].property,
                 direction: sorters[i].direction
@@ -316,8 +316,8 @@ api: {
         
     },
     
-    <a name="method-Ext.data.proxy.Server-encodeFilters"></a>/**
-     * Encodes the array of {@link Ext.util.Filter} objects into a string to be sent in the request url. By default, 
+<span id='Ext-data.proxy.Server-method-encodeFilters'>    /**
+</span>     * Encodes the array of {@link Ext.util.Filter} objects into a string to be sent in the request url. By default, 
      * this simply JSON-encodes the filter data
      * @param {Array} sorters The array of {@link Ext.util.Filter Filter} objects
      * @return {String} The encoded filters
@@ -327,7 +327,7 @@ api: {
             length = filters.length,
             i = 0;
         
-        for (; i < length; i++) {
+        for (; i &lt; length; i++) {
             min[i] = {
                 property: filters[i].property,
                 value   : filters[i].value
@@ -336,8 +336,8 @@ api: {
         return this.applyEncoding(min);
     },
     
-    /**
-     * @private
+<span id='Ext-data.proxy.Server-method-getParams'>    /**
+</span>     * @private
      * Copy any sorters, filters etc into the params so they can be sent over the wire
      */
     getParams: function(params, operation) {
@@ -360,44 +360,44 @@ api: {
             groupParam     = me.groupParam,
             sortParam      = me.sortParam,
             filterParam    = me.filterParam,
-            dirParam       = me.dirParam;
+            directionParam       = me.directionParam;
         
-        if (pageParam && isDef(page)) {
+        if (pageParam &amp;&amp; isDef(page)) {
             params[pageParam] = page;
         }
         
-        if (startParam && isDef(start)) {
+        if (startParam &amp;&amp; isDef(start)) {
             params[startParam] = start;
         }
         
-        if (limitParam && isDef(limit)) {
+        if (limitParam &amp;&amp; isDef(limit)) {
             params[limitParam] = limit;
         }
         
-        if (groupParam && groupers && groupers.length > 0) {
+        if (groupParam &amp;&amp; groupers &amp;&amp; groupers.length &gt; 0) {
             // Grouper is a subclass of sorter, so we can just use the sorter method
             params[groupParam] = me.encodeSorters(groupers);
         }
         
-        if (sortParam && sorters && sorters.length > 0) {
+        if (sortParam &amp;&amp; sorters &amp;&amp; sorters.length &gt; 0) {
             if (simpleSortMode) {
                 params[sortParam] = sorters[0].property;
-                params[dirParam] = sorters[0].direction;
+                params[directionParam] = sorters[0].direction;
             } else {
                 params[sortParam] = me.encodeSorters(sorters);
             }
             
         }
         
-        if (filterParam && filters && filters.length > 0) {
+        if (filterParam &amp;&amp; filters &amp;&amp; filters.length &gt; 0) {
             params[filterParam] = me.encodeFilters(filters);
         }
         
         return params;
     },
     
-    <a name="method-Ext.data.proxy.Server-buildUrl"></a>/**
-     * Generates a url based on a given Ext.data.Request object. By default, ServerProxy's buildUrl will
+<span id='Ext-data.proxy.Server-method-buildUrl'>    /**
+</span>     * Generates a url based on a given Ext.data.Request object. By default, ServerProxy's buildUrl will
      * add the cache-buster param to the end of the url. Subclasses may need to perform additional modifications
      * to the url.
      * @param {Ext.data.Request} request The request object
@@ -405,37 +405,50 @@ api: {
      */
     buildUrl: function(request) {
         var me = this,
-            url = request.url || me.api[request.action] || me.url;
+            url = me.getUrl(request);
         
-        //<debug>
+        //&lt;debug&gt;
         if (!url) {
-            Ext.Error.raise("You are using a ServerProxy but have not supplied it with a url.");
+            Ext.Error.raise(&quot;You are using a ServerProxy but have not supplied it with a url.&quot;);
         }
-        //</debug>
+        //&lt;/debug&gt;
         
         if (me.noCache) {
-            url = Ext.urlAppend(url, Ext.String.format("{0}={1}", me.cacheString, Ext.Date.now()));
+            url = Ext.urlAppend(url, Ext.String.format(&quot;{0}={1}&quot;, me.cacheString, Ext.Date.now()));
         }
         
         return url;
     },
     
-    <a name="method-Ext.data.proxy.Server-doRequest"></a>/**
-     * In ServerProxy subclasses, the {@link #create}, {@link #read}, {@link #update} and {@link #destroy} methods all pass
-     * through to doRequest. Each ServerProxy subclass must implement the doRequest method - see {@link Ext.data.proxy.ScriptTag}
+<span id='Ext-data.proxy.Server-method-getUrl'>    /**
+</span>     * Get the url for the request taking into account the order of priority,
+     * - The request
+     * - The api
+     * - The url
+     * @private
+     * @param {Ext.data.Request} request The request
+     * @return {String} The url
+     */
+    getUrl: function(request){
+        return request.url || this.api[request.action] || this.url;
+    },
+    
+<span id='Ext-data.proxy.Server-method-doRequest'>    /**
+</span>     * In ServerProxy subclasses, the {@link #create}, {@link #read}, {@link #update} and {@link #destroy} methods all pass
+     * through to doRequest. Each ServerProxy subclass must implement the doRequest method - see {@link Ext.data.proxy.JsonP}
      * and {@link Ext.data.proxy.Ajax} for examples. This method carries the same signature as each of the methods that delegate to it.
      * @param {Ext.data.Operation} operation The Ext.data.Operation object
      * @param {Function} callback The callback function to call when the Operation has completed
      * @param {Object} scope The scope in which to execute the callback
      */
     doRequest: function(operation, callback, scope) {
-        //<debug>
-        Ext.Error.raise("The doRequest function has not been implemented on your Ext.data.proxy.Server subclass. See src/data/ServerProxy.js for details");
-        //</debug>
+        //&lt;debug&gt;
+        Ext.Error.raise(&quot;The doRequest function has not been implemented on your Ext.data.proxy.Server subclass. See src/data/ServerProxy.js for details&quot;);
+        //&lt;/debug&gt;
     },
     
-    <a name="method-Ext.data.proxy.Server-afterRequest"></a>/**
-     * Optional callback function which can be used to clean up after a request has been completed.
+<span id='Ext-data.proxy.Server-property-afterRequest'>    /**
+</span>     * Optional callback function which can be used to clean up after a request has been completed.
      * @param {Ext.data.Request} request The Request object
      * @param {Boolean} success True if the request was successful
      */
@@ -445,4 +458,4 @@ api: {
         Ext.destroy(this.reader, this.writer);
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

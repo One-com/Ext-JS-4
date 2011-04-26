@@ -60,8 +60,6 @@ Ext.define('FV.controller.Feeds', {
 
         if (feed) {
             grid.enable();
-            grid.down('button[action=openall]').enable();
-            grid.down('toolbar').enable();
             store.load({
                 params: {
                     feed: feed.get('url')

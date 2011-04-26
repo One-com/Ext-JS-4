@@ -1,12 +1,12 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.Batch"></a>/**
- * @author Ed Spencer
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-data.Batch-method-constructor'><span id='Ext-data.Batch'>/**
+</span></span> * @author Ed Spencer
  * @class Ext.data.Batch
  * 
- * <p>Provides a mechanism to run one or more {@link Ext.data.Operation operations} in a given order. Fires the 'operationcomplete' event
+ * &lt;p&gt;Provides a mechanism to run one or more {@link Ext.data.Operation operations} in a given order. Fires the 'operationcomplete' event
  * after the completion of each Operation, and the 'complete' event when all Operations have been successfully executed. Fires an 'exception'
- * event if any of the Operations encounter an exception.</p>
+ * event if any of the Operations encounter an exception.&lt;/p&gt;
  * 
- * <p>Usually these are only used internally by {@link Ext.data.Proxy} classes</p>
+ * &lt;p&gt;Usually these are only used internally by {@link Ext.data.proxy.Proxy} classes&lt;/p&gt;
  * 
  * @constructor
  * @param {Object} config Optional config object
@@ -16,50 +16,50 @@ Ext.define('Ext.data.Batch', {
         observable: 'Ext.util.Observable'
     },
     
-    <a name="prop-Ext.data.Batch-autoStart"></a>/**
-     * True to immediately start processing the batch as soon as it is constructed (defaults to false)
+<span id='Ext-data.Batch-property-autoStart'>    /**
+</span>     * True to immediately start processing the batch as soon as it is constructed (defaults to false)
      * @property autoStart
      * @type Boolean
      */
     autoStart: false,
     
-    <a name="prop-Ext.data.Batch-current"></a>/**
-     * The index of the current operation being executed
+<span id='Ext-data.Batch-property-current'>    /**
+</span>     * The index of the current operation being executed
      * @property current
      * @type Number
      */
     current: -1,
     
-    <a name="prop-Ext.data.Batch-total"></a>/**
-     * The total number of operations in this batch. Read only
+<span id='Ext-data.Batch-property-total'>    /**
+</span>     * The total number of operations in this batch. Read only
      * @property total
      * @type Number
      */
     total: 0,
     
-    <a name="prop-Ext.data.Batch-isRunning"></a>/**
-     * True if the batch is currently running
+<span id='Ext-data.Batch-property-isRunning'>    /**
+</span>     * True if the batch is currently running
      * @property isRunning
      * @type Boolean
      */
     isRunning: false,
     
-    <a name="prop-Ext.data.Batch-isComplete"></a>/**
-     * True if this batch has been executed completely
+<span id='Ext-data.Batch-property-isComplete'>    /**
+</span>     * True if this batch has been executed completely
      * @property isComplete
      * @type Boolean
      */
     isComplete: false,
     
-    <a name="prop-Ext.data.Batch-hasException"></a>/**
-     * True if this batch has encountered an exception. This is cleared at the start of each operation
+<span id='Ext-data.Batch-property-hasException'>    /**
+</span>     * True if this batch has encountered an exception. This is cleared at the start of each operation
      * @property hasException
      * @type Boolean
      */
     hasException: false,
     
-    <a name="prop-Ext.data.Batch-pauseOnException"></a>/**
-     * True to automatically pause the execution of the batch if any operation encounters an exception (defaults to true)
+<span id='Ext-data.Batch-property-pauseOnException'>    /**
+</span>     * True to automatically pause the execution of the batch if any operation encounters an exception (defaults to true)
      * @property pauseOnException
      * @type Boolean
      */
@@ -69,24 +69,24 @@ Ext.define('Ext.data.Batch', {
         var me = this;
                      
         me.addEvents(
-          <a name="event-Ext.data.Batch-complete"></a>/**
-           * @event complete
+<span id='Ext-data.Batch-event-complete'>          /**
+</span>           * @event complete
            * Fired when all operations of this batch have been completed
            * @param {Ext.data.Batch} batch The batch object
            * @param {Object} operation The last operation that was executed
            */
           'complete',
           
-          <a name="event-Ext.data.Batch-exception"></a>/**
-           * @event exception
+<span id='Ext-data.Batch-event-exception'>          /**
+</span>           * @event exception
            * Fired when a operation encountered an exception
            * @param {Ext.data.Batch} batch The batch object
            * @param {Object} operation The operation that encountered the exception
            */
           'exception',
           
-          <a name="event-Ext.data.Batch-operationcomplete"></a>/**
-           * @event operationcomplete
+<span id='Ext-data.Batch-event-operationcomplete'>          /**
+</span>           * @event operationcomplete
            * Fired when each operation of the batch completes
            * @param {Ext.data.Batch} batch The batch object
            * @param {Object} operation The operation that just completed
@@ -96,16 +96,16 @@ Ext.define('Ext.data.Batch', {
         
         me.mixins.observable.constructor.call(me, config);
         
-        <a name="prop-Ext.data.Batch-operations"></a>/**
-         * Ordered array of operations that will be executed by this batch
+<span id='Ext-data.Batch-property-operations'>        /**
+</span>         * Ordered array of operations that will be executed by this batch
          * @property operations
          * @type Array
          */
         me.operations = [];
     },
     
-    <a name="method-Ext.data.Batch-add"></a>/**
-     * Adds a new operation to this batch
+<span id='Ext-data.Batch-method-add'>    /**
+</span>     * Adds a new operation to this batch
      * @param {Object} operation The {@link Ext.data.Operation Operation} object
      */
     add: function(operation) {
@@ -116,8 +116,8 @@ Ext.define('Ext.data.Batch', {
         this.operations.push(operation);
     },
     
-    <a name="method-Ext.data.Batch-start"></a>/**
-     * Kicks off the execution of the batch, continuing from the next operation if the previous
+<span id='Ext-data.Batch-method-start'>    /**
+</span>     * Kicks off the execution of the batch, continuing from the next operation if the previous
      * operation encountered an exception, or if execution was paused
      */
     start: function() {
@@ -127,23 +127,23 @@ Ext.define('Ext.data.Batch', {
         this.runNextOperation();
     },
     
-    /**
-     * @private
+<span id='Ext-data.Batch-method-runNextOperation'>    /**
+</span>     * @private
      * Runs the next operation, relative to this.current.
      */
     runNextOperation: function() {
         this.runOperation(this.current + 1);
     },
     
-    <a name="method-Ext.data.Batch-pause"></a>/**
-     * Pauses execution of the batch, but does not cancel the current operation
+<span id='Ext-data.Batch-method-pause'>    /**
+</span>     * Pauses execution of the batch, but does not cancel the current operation
      */
     pause: function() {
         this.isRunning = false;
     },
     
-    <a name="method-Ext.data.Batch-runOperation"></a>/**
-     * Executes a operation by its numeric index
+<span id='Ext-data.Batch-method-runOperation'>    /**
+</span>     * Executes a operation by its numeric index
      * @param {Number} index The operation index to run
      */
     runOperation: function(index) {
@@ -169,7 +169,7 @@ Ext.define('Ext.data.Batch', {
                     me.fireEvent('operationcomplete', me, operation);
                 }
 
-                if (hasException && me.pauseOnException) {
+                if (hasException &amp;&amp; me.pauseOnException) {
                     me.pause();
                 } else {
                     operation.setCompleted();
@@ -182,4 +182,4 @@ Ext.define('Ext.data.Batch', {
             me.proxy[operation.action](operation, onProxyReturn, me);
         }
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

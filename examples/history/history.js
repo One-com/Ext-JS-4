@@ -1,6 +1,6 @@
 Ext.require([
     'Ext.util.History',
-    'Ext.tab.TabPanel'
+    'Ext.tab.Panel'
 ]);
 
 Ext.onReady(function() {
@@ -20,11 +20,12 @@ Ext.onReady(function() {
 
         tabs.push(tab.id);
         tabs.push(tabPanel.id);
-        
+
         while (ownerCt && ownerCt.is('tabpanel')) {
             tabs.push(ownerCt.id);
             ownerCt = ownerCt.ownerCt;
         }
+        
         newToken = tabs.reverse().join(tokenDelimiter);
         
         oldToken = Ext.History.getToken();
@@ -52,7 +53,10 @@ Ext.onReady(function() {
         
         // This is the initial default state.  Necessary if you navigate starting from the
         // page without any existing history token params and go back to the start state.
-        this.getActiveTab().setActiveTab(0);
+        var activeTab1 = Ext.getCmp('main-tabs').getActiveTab(),
+            activeTab2 = activeTab1.getActiveTab();
+            
+        onTabChange(activeTab1, activeTab2);
     }
     
     Ext.create('Ext.TabPanel', {

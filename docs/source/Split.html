@@ -1,33 +1,35 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.button.Split"></a>/**
- * @class Ext.button.Split
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-button.Split-method-constructor'><span id='Ext-button.Split-cfg-arrowTooltip'><span id='Ext-button.Split-cfg-arrowHandler'><span id='Ext-button.Split'>/**
+</span></span></span></span> * @class Ext.button.Split
  * @extends Ext.button.Button
  * A split button that provides a built-in dropdown arrow that can fire an event separately from the default
  * click event of the button.  Typically this would be used to display a dropdown menu that provides additional
- * options to the primary button action, but any custom handler can provide the arrowclick implementation.  Example usage:
- * <pre><code>
+ * options to the primary button action, but any custom handler can provide the arrowclick implementation.  
+ * {@img Ext.button.Split/Ext.button.Split.png Ext.button.Split component}
+ * Example usage:
+ * &lt;pre&gt;&lt;code&gt;
 // display a dropdown menu:
-new Ext.button.Split({
-    renderTo: 'button-ct', // the container id
-    text: 'Options',
-    handler: optionsHandler, // handle a click on the button itself
-    menu: new Ext.menu.Menu({
-    items: [
-            // these items will render as dropdown menu items when the arrow is clicked:
-            {text: 'Item 1', handler: item1Handler},
-            {text: 'Item 2', handler: item2Handler}
-    ]
-    })
-});
+    Ext.create('Ext.button.Split', {
+        renderTo: 'button-ct', // the container id
+        text: 'Options',
+        handler: optionsHandler, // handle a click on the button itself
+        menu: new Ext.menu.Menu({
+        items: [
+                // these items will render as dropdown menu items when the arrow is clicked:
+                {text: 'Item 1', handler: item1Handler},
+                {text: 'Item 2', handler: item2Handler}
+        ]
+        })
+    });
 
 // Instead of showing a menu, you provide any type of custom
 // functionality you want when the dropdown arrow is clicked:
-new Ext.button.Split({
-    renderTo: 'button-ct',
-    text: 'Options',
-    handler: optionsHandler,
-    arrowHandler: myCustomHandler
-});
-</code></pre>
+    Ext.create('Ext.button.Split', {
+        renderTo: 'button-ct',
+        text: 'Options',
+        handler: optionsHandler,
+        arrowHandler: myCustomHandler
+    });
+&lt;/code&gt;&lt;/pre&gt;
  * @cfg {Function} arrowHandler A function called when the arrow button is clicked (can be used instead of click event)
  * @cfg {String} arrowTooltip The title attribute of the arrow
  * @constructor
@@ -52,17 +54,17 @@ Ext.define('Ext.button.Split', {
     // private
     initComponent : function(){
         this.callParent();
-        /**
-         * @event arrowclick
+<span id='Ext-button.Split-event-arrowclick'>        /**
+</span>         * @event arrowclick
          * Fires when this button's arrow is clicked
          * @param {MenuButton} this
          * @param {EventObject} e The click event
          */
-        this.addEvents("arrowclick");
+        this.addEvents(&quot;arrowclick&quot;);
     },
 
-     /**
-     * Sets this button's arrow click handler.
+<span id='Ext-button.Split-method-setArrowHandler'>     /**
+</span>     * Sets this button's arrow click handler.
      * @param {Function} handler The function to call when the arrow is clicked
      * @param {Object} scope (optional) Scope for the function passed above
      */
@@ -78,10 +80,10 @@ Ext.define('Ext.button.Split', {
         e.preventDefault();
         if (!me.disabled) {
             if (me.overMenuTrigger) {
-                if (me.menu && !me.menu.isVisible() && !me.ignoreNextClick) {
+                if (me.menu &amp;&amp; !me.menu.isVisible() &amp;&amp; !me.ignoreNextClick) {
                     me.showMenu();
                 }
-                me.fireEvent("arrowclick", me, e);
+                me.fireEvent(&quot;arrowclick&quot;, me, e);
                 if (me.arrowHandler) {
                     me.arrowHandler.call(me.scope || me, me, e);
                 }
@@ -89,11 +91,12 @@ Ext.define('Ext.button.Split', {
                 if (me.enableToggle) {
                     me.toggle();
                 }
-                me.fireEvent("click", me, e);
+                me.fireEvent(&quot;click&quot;, me, e);
                 if (me.handler) {
                     me.handler.call(me.scope || me, me, e);
                 }
+                me.onBlur();
             }
         }
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

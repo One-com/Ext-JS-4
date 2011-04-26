@@ -36,10 +36,6 @@ children: [{
         id:'fit',
         leaf:true
     },{
-        text:'Form',
-        id:'form',
-        leaf:true
-    },{
         text:'Table',
         id:'table',
         leaf:true

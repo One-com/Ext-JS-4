@@ -1,11 +1,11 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.Filter"></a>/**
- * @class Ext.util.Filter
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-util.Filter-method-constructor'><span id='Ext-util.Filter'>/**
+</span></span> * @class Ext.util.Filter
  * @extends Object
- * <p>Represents a filter that can be applied to a {@link Ext.util.MixedCollection MixedCollection}. Can either simply
+ * &lt;p&gt;Represents a filter that can be applied to a {@link Ext.util.MixedCollection MixedCollection}. Can either simply
  * filter on a property/value pair or pass in a filter function with custom logic. Filters are always used in the context
  * of MixedCollections, though {@link Ext.data.Store Store}s frequently create them when filtering and searching on their
- * records. Example usage:</p>
-<pre><code>
+ * records. Example usage:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
 //set up a fictional MixedCollection containing a few people to filter on
 var allNames = new Ext.util.MixedCollection();
 allNames.addAll([
@@ -23,7 +23,7 @@ var ageFilter = new Ext.util.Filter({
 
 var longNameFilter = new Ext.util.Filter({
     filterFn: function(item) {
-        return item.name.length > 4;
+        return item.name.length &gt; 4;
     }
 });
 
@@ -32,7 +32,7 @@ var longNames = allNames.filter(longNameFilter);
 
 //a new MixedCollection with the 2 people of age 24:
 var youngFolk = allNames.filter(ageFilter);
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * @constructor
  * @param {Object} config Config object
  */
@@ -41,33 +41,33 @@ Ext.define('Ext.util.Filter', {
     /* Begin Definitions */
 
     /* End Definitions */
-    <a name="cfg-Ext.util.Filter-property"></a>/**
-     * @cfg {String} property The property to filter on. Required unless a {@link #filter} is passed
+<span id='Ext-util.Filter-cfg-property'>    /**
+</span>     * @cfg {String} property The property to filter on. Required unless a {@link #filter} is passed
      */
     
-    <a name="cfg-Ext.util.Filter-filterFn"></a>/**
-     * @cfg {Function} filterFn A custom filter function which is passed each item in the {@link Ext.util.MixedCollection} 
+<span id='Ext-util.Filter-cfg-filterFn'>    /**
+</span>     * @cfg {Function} filterFn A custom filter function which is passed each item in the {@link Ext.util.MixedCollection} 
      * in turn. Should return true to accept each item or false to reject it
      */
     
-    <a name="cfg-Ext.util.Filter-anyMatch"></a>/**
-     * @cfg {Boolean} anyMatch True to allow any match - no regex start/end line anchors will be added. Defaults to false
+<span id='Ext-util.Filter-cfg-anyMatch'>    /**
+</span>     * @cfg {Boolean} anyMatch True to allow any match - no regex start/end line anchors will be added. Defaults to false
      */
     anyMatch: false,
     
-    <a name="cfg-Ext.util.Filter-exactMatch"></a>/**
-     * @cfg {Boolean} exactMatch True to force exact match (^ and $ characters added to the regex). Defaults to false.
+<span id='Ext-util.Filter-cfg-exactMatch'>    /**
+</span>     * @cfg {Boolean} exactMatch True to force exact match (^ and $ characters added to the regex). Defaults to false.
      * Ignored if anyMatch is true.
      */
     exactMatch: false,
     
-    <a name="cfg-Ext.util.Filter-caseSensitive"></a>/**
-     * @cfg {Boolean} caseSensitive True to make the regex case sensitive (adds 'i' switch to regex). Defaults to false.
+<span id='Ext-util.Filter-cfg-caseSensitive'>    /**
+</span>     * @cfg {Boolean} caseSensitive True to make the regex case sensitive (adds 'i' switch to regex). Defaults to false.
      */
     caseSensitive: false,
     
-    <a name="cfg-Ext.util.Filter-root"></a>/**
-     * @cfg {String} root Optional root property. This is mostly useful when filtering a Store, in which case we set the
+<span id='Ext-util.Filter-cfg-root'>    /**
+</span>     * @cfg {String} root Optional root property. This is mostly useful when filtering a Store, in which case we set the
      * root to 'data' to make the filter pull the {@link #property} out of the data object of each item
      */
     
@@ -83,7 +83,7 @@ Ext.define('Ext.util.Filter', {
                 // Commented this out temporarily because it stops us using string ids in models. TODO: Remove this once
                 // Model has been updated to allow string ids
                 
-                // Ext.Error.raise("A Filter requires either a property or a filterFn to be set");
+                // Ext.Error.raise(&quot;A Filter requires either a property or a filterFn to be set&quot;);
             } else {
                 this.filter = this.createFilterFn();
             }
@@ -92,8 +92,8 @@ Ext.define('Ext.util.Filter', {
         }
     },
     
-    /**
-     * @private
+<span id='Ext-util.Filter-method-createFilterFn'>    /**
+</span>     * @private
      * Creates a filter function for the configured property/value/anyMatch/caseSensitive options for this Filter
      */
     createFilterFn: function() {
@@ -106,8 +106,8 @@ Ext.define('Ext.util.Filter', {
         };
     },
     
-    /**
-     * @private
+<span id='Ext-util.Filter-method-getRoot'>    /**
+</span>     * @private
      * Returns the root property of the given item, based on the configured {@link #root} property
      * @param {Object} item The item
      * @return {Object} The root property of the object
@@ -116,8 +116,8 @@ Ext.define('Ext.util.Filter', {
         return this.root == undefined ? item : item[this.root];
     },
     
-    /**
-     * @private
+<span id='Ext-util.Filter-method-createValueMatcher'>    /**
+</span>     * @private
      * Returns a regular expression based on the given value and matching options
      */
     createValueMatcher : function() {
@@ -144,4 +144,4 @@ Ext.define('Ext.util.Filter', {
          
          return value;
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

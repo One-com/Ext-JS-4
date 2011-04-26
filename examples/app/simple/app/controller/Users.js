@@ -1,8 +1,12 @@
 Ext.define('AM.controller.Users', {
     extend: 'Ext.app.Controller',
+
     stores: ['Users'],
+
     models: ['User'],
-    requires: ['AM.view.user.Edit'],
+
+    views: ['user.Edit', 'user.List'],
+
     refs: [
         {
             ref: 'usersPanel',

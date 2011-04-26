@@ -84,7 +84,7 @@ Ext.onReady(function() {
         fieldLabel: 'Select a single state',
         renderTo: 'simpleCombo',
         displayField: 'name',
-        width: 500,
+        width: 320,
         labelWidth: 130,
         store: store,
         queryMode: 'local',
@@ -96,7 +96,7 @@ Ext.onReady(function() {
         fieldLabel: 'Select a single state',
         renderTo: 'customTplCombo',
         displayField: 'name',
-        width: 500,
+        width: 320,
         labelWidth: 130,
         store: store,
         queryMode: 'local',
@@ -114,12 +114,19 @@ Ext.onReady(function() {
         renderTo: 'multiSelectCombo',
         multiSelect: true,
         displayField: 'name',
-        width: 500,
+        width: 320,
         labelWidth: 130,
         store: store,
         queryMode: 'local'
     });
 
+    // ComboBox transformed from HTML select
+    var transformed = Ext.create('Ext.form.field.ComboBox', {
+        typeAhead: true,
+        transform: 'stateSelect',
+        width: 135,
+        forceSelection: true
+    });
 
 
     ////// Collapsible code panels; ignore: /////

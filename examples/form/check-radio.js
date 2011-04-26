@@ -9,19 +9,99 @@ Ext.onReady(function(){
 
 
     /*====================================================================
+     * Individual checkbox/radio examples
+     *====================================================================*/
+
+    // Using checkbox/radio groups will generally be more convenient and flexible than
+    // using individual checkbox and radio controls, but this shows that you can
+    // certainly do so if you only have a single control at a time.
+    var individual = {
+        xtype: 'container',
+        layout: 'hbox',
+        margin: '0 0 10',
+        items: [{
+            xtype: 'fieldset',
+            flex: 1,
+            title: 'Individual Checkboxes',
+            defaultType: 'checkbox', // each item will be a checkbox
+            layout: 'anchor',
+            defaults: {
+                anchor: '100%',
+                hideEmptyLabel: false
+            },
+            items: [{
+                xtype: 'textfield',
+                name: 'txt-test1',
+                fieldLabel: 'Alignment Test'
+            }, {
+                fieldLabel: 'Favorite Animals',
+                boxLabel: 'Dog',
+                name: 'fav-animal-dog',
+                inputValue: 'dog'
+            }, {
+                boxLabel: 'Cat',
+                name: 'fav-animal-cat',
+                inputValue: 'cat'
+            }, {
+                checked: true,
+                boxLabel: 'Monkey',
+                name: 'fav-animal-monkey',
+                inputValue: 'monkey'
+            }]
+        }, {
+            xtype: 'component',
+            width: 10
+        }, {
+            xtype: 'fieldset',
+            flex: 1,
+            title: 'Individual Radios',
+            defaultType: 'radio', // each item will be a radio button
+            layout: 'anchor',
+            defaults: {
+                anchor: '100%',
+                hideEmptyLabel: false
+            },
+            items: [{
+                xtype: 'textfield',
+                name: 'txt-test2',
+                fieldLabel: 'Alignment Test'
+            }, {
+                checked: true,
+                fieldLabel: 'Favorite Color',
+                boxLabel: 'Red',
+                name: 'fav-color',
+                inputValue: 'red'
+            }, {
+                boxLabel: 'Blue',
+                name: 'fav-color',
+                inputValue: 'blue'
+            }, {
+                boxLabel: 'Green',
+                name: 'fav-color',
+                inputValue: 'green'
+            }]
+        }]
+    };
+
+
+
+
+    /*====================================================================
      * CheckGroup example
      *====================================================================*/
     var checkGroup = {
         xtype: 'fieldset',
-        title: 'Checkbox Groups',
+        title: 'Checkbox Groups (initially collapsed)',
         layout: 'anchor',
         defaults: {
-            anchor: '100%'
+            anchor: '100%',
+            labelStyle: 'padding-left:4px;'
         },
         collapsible: true,
+        collapsed: true,
         items: [{
             xtype: 'textfield',
-            name: 'txt-test1',
+            name: 'txt-test3',
             fieldLabel: 'Alignment Test'
         },{
             // Use the default, automatic layout to distribute the controls evenly
@@ -138,12 +218,13 @@ Ext.onReady(function(){
         title: 'Radio Groups',
         layout: 'anchor',
         defaults: {
-            anchor: '100%'
+            anchor: '100%',
+            labelStyle: 'padding-left:4px;'
         },
         collapsible: true,
         items: [{
             xtype: 'textfield',
-            name: 'txt-test2',
+            name: 'txt-test4',
             fieldLabel: 'Alignment Test'
         },{
             xtype: 'radiogroup',
@@ -241,13 +322,13 @@ Ext.onReady(function(){
         title: 'Check/Radio Groups Example',
         frame: true,
         fieldDefaults: {
-            labelWidth: 110,
-            labelStyle: 'padding-left:4px'
+            labelWidth: 110
         },
         width: 600,
         renderTo:'form-ct',
         bodyPadding: 10,
         items: [
+            individual,
             checkGroup,
             radioGroup
         ],

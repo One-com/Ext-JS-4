@@ -12,7 +12,7 @@ Ext.require([
 Ext.onReady(function() {
     var form = Ext.create('Ext.form.Panel', {
         plain: true,
-        bodyBorder: 0,
+        border: 0,
         bodyPadding: 5,
         url: 'save-form.php',
 

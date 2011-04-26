@@ -1,14 +1,14 @@
 /**
  * @class Ext.chooser.IconBrowser
- * @extends Ext.DataView
+ * @extends Ext.view.View
  * @author Ed Spencer
  * 
- * This is a really basic subclass of Ext.DataView. All we're really doing here is providing the template that dataview
+ * This is a really basic subclass of Ext.view.View. All we're really doing here is providing the template that dataview
  * should use (the tpl property below), and a Store to get the data from. In this case we're loading data from a JSON
  * file over AJAX.
  */
 Ext.define('Ext.chooser.IconBrowser', {
-    extend: 'Ext.DataView',
+    extend: 'Ext.view.View',
     alias: 'widget.iconbrowser',
     
     uses: 'Ext.data.Store',

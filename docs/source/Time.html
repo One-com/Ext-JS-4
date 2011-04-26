@@ -1,352 +1,418 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.chart.axis.Time"></a>/**
- * @class Ext.chart.axis.Time
- * @extends Ext.chart.axis.Axis
- *
- * A type of axis whose units are measured in time values. Use this axis
- * for listing dates that you will want to group or dynamically change.
- * If you just want to display dates as categories then use the
- * Category class for axis instead.
- *
- * For example:
- *
-  <pre><code>
-    axes: [{
-        type: 'Time',
-        position: 'bottom',
-        fields: 'date',
-        title: 'Day',
-        dateFormat: 'M d',
-        groupBy: 'year,month,day',
-        aggregateOp: 'sum',
-
-        constrain: true,
-        fromDate: new Date('1/1/11'),
-        toDate: new Date('1/7/11')
-    }]
-  </code></pre>
- *
- * In this example we're creating a time axis that has as title <em>Day</em>.
- * The field the axis is bound to is <em>date</em>.
- * The date format to use to display the text for the axis labels is <em>M d</em>
- * which is a three letter month abbreviation followed by the day number.
- * The time axis will show values for dates betwee <em>fromDate</em> and <em>toDate</em>.
- * Since <em>constrain</em> is set to true all other values for other dates not between
- * the fromDate and toDate will not be displayed.
- * 
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-form.field.Time-method-constructor'><span id='Ext-form.field.Time'>/**
+</span></span> * @class Ext.form.field.Time
+ * @extends Ext.form.field.Picker
+ * &lt;p&gt;Provides a time input field with a time dropdown and automatic time validation.&lt;/p&gt;
+ * &lt;p&gt;This field recognizes and uses JavaScript Date objects as its main {@link #value} type (only the time
+ * portion of the date is used; the month/day/year are ignored). In addition, it recognizes string values which
+ * are parsed according to the {@link #format} and/or {@link #altFormats} configs. These may be reconfigured
+ * to use time formats appropriate for the user's locale.&lt;/p&gt;
+ * &lt;p&gt;The field may be limited to a certain range of times by using the {@link #minValue} and {@link #maxValue}
+ * configs, and the interval between time options in the dropdown can be changed with the {@link #increment} config.&lt;/p&gt;
+ * {@img Ext.form.Time/Ext.form.Time.png Ext.form.Time component}
+ * &lt;p&gt;Example usage:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+Ext.create('Ext.form.Panel', {
+    title: 'Time Card',
+    width: 300,
+    bodyPadding: 10,
+    renderTo: Ext.getBody(),        
+    items: [{
+        xtype: 'timefield',
+        name: 'in',
+        fieldLabel: 'Time In',
+        minValue: '6:00 AM',
+        maxValue: '8:00 PM',
+        increment: 30,
+        anchor: '100%'
+    }, {
+        xtype: 'timefield',
+        name: 'out',
+        fieldLabel: 'Time Out',
+        minValue: '6:00 AM',
+        maxValue: '8:00 PM',
+        increment: 30,
+        anchor: '100%'
+   }]
+});
+&lt;/code&gt;&lt;/pre&gt;
  * @constructor
+ * Create a new Time field
+ * @param {Object} config
+ * @xtype timefield
  */
-Ext.define('Ext.chart.axis.Time', {
+Ext.define('Ext.form.field.Time', {
+    extend:'Ext.form.field.Picker',
+    alias: 'widget.timefield',
+    requires: ['Ext.form.field.Date', 'Ext.picker.Time', 'Ext.view.BoundListKeyNav', 'Ext.Date'],
+    alternateClassName: ['Ext.form.TimeField', 'Ext.form.Time'],
 
-    /* Begin Definitions */
-
-    extend: 'Ext.chart.axis.Category',
-
-    alias: 'axis.time',
-
-    requires: ['Ext.data.Store', 'Ext.data.JsonStore'],
-
-    /* End Definitions */
-
-     <a name="prop-Ext.chart.axis.Time-calculateByLabelSize"></a>/**
-      * The minimum value drawn by the axis. If not set explicitly, the axis
-      * minimum will be calculated automatically.
-      * @property calculateByLabelSize
-      * @type Boolean
-      */
-    calculateByLabelSize: true,
-    
-     <a name="prop-Ext.chart.axis.Time-dateFormat"></a>/**
-     * Indicates the format the date will be rendered on. 
-     * For example: 'M d' will render the dates as 'Jan 30', etc.
-      *
-     * @property dateFormat
-     * @type {String|Boolean}
-      */
-    dateFormat: false,
-    
-     <a name="prop-Ext.chart.axis.Time-timeUnit"></a>/**
-     * Indicates the time unit to use for each step. Can be 'day', 'month', 'year' or a comma-separated combination of all of them.
-     * Default's 'year,month,day'.
-     *
-     * @property timeUnit
-     * @type {String}
+<span id='Ext-form.field.Time-cfg-triggerCls'>    /**
+</span>     * @cfg {String} triggerCls
+     * An additional CSS class used to style the trigger button.  The trigger will always get the
+     * {@link #triggerBaseCls} by default and &lt;tt&gt;triggerCls&lt;/tt&gt; will be &lt;b&gt;appended&lt;/b&gt; if specified.
+     * Defaults to &lt;tt&gt;'x-form-time-trigger'&lt;/tt&gt; for the Time field trigger.
      */
-    groupBy: 'year,month,day',
-    
-    <a name="prop-Ext.chart.axis.Time-aggregateOp"></a>/**
-     * Aggregation operation when grouping. Possible options are 'sum', 'avg', 'max', 'min'. Default's 'sum'.
-     * 
-     * @property aggregateOp
-     * @type {String}
-      */
-    aggregateOp: 'sum',
-    
-    <a name="prop-Ext.chart.axis.Time-fromDate"></a>/**
-     * The starting date for the time axis.
-     * @property fromDate
-     * @type Date
+    triggerCls: Ext.baseCSSPrefix + 'form-time-trigger',
+
+<span id='Ext-form.field.Time-cfg-minValue'>    /**
+</span>     * @cfg {Date/String} minValue
+     * The minimum allowed time. Can be either a Javascript date object with a valid time value or a string
+     * time in a valid format -- see {@link #format} and {@link #altFormats} (defaults to undefined).
      */
-    fromDate: false,
-    
-    <a name="prop-Ext.chart.axis.Time-toDate"></a>/**
-     * The ending date for the time axis.
-     * @property toDate
-     * @type Date
+
+<span id='Ext-form.field.Time-cfg-maxValue'>    /**
+</span>     * @cfg {Date/String} maxValue
+     * The maximum allowed time. Can be either a Javascript date object with a valid time value or a string
+     * time in a valid format -- see {@link #format} and {@link #altFormats} (defaults to undefined).
      */
-    toDate: false,
-    
-    <a name="prop-Ext.chart.axis.Time-step"></a>/**
-     * An array with two components: The first is the unit of the step (day, month, year, etc). The second one is the number of units for the step (1, 2, etc.).
-     * Default's [Ext.Date.DAY, 1].
-     * 
-     * @property step 
-     * @type Array
+
+<span id='Ext-form.field.Time-cfg-minText'>    /**
+</span>     * @cfg {String} minText
+     * The error text to display when the entered time is before {@link #minValue} (defaults to
+     * 'The time in this field must be equal to or after {0}').
      */
-    step: [Ext.Date.DAY, 1],
-    
-    <a name="prop-Ext.chart.axis.Time-constrain"></a>/**
-     * If true, the values of the chart will be rendered only if they belong between the fromDate and toDate. 
-     * If false, the time axis will adapt to the new values by adding/removing steps.
-     * Default's [Ext.Date.DAY, 1].
-     * 
-     * @property constrain 
-     * @type Boolean
+    minText : &quot;The time in this field must be equal to or after {0}&quot;,
+
+<span id='Ext-form.field.Time-cfg-maxText'>    /**
+</span>     * @cfg {String} maxText
+     * The error text to display when the entered time is after {@link #maxValue} (defaults to
+     * 'The time in this field must be equal to or before {0}').
      */
-    constrain: false,
-    
-    // @private a wrapper for date methods.
-    dateMethods: {
-        'year': function(date) {
-            return date.getFullYear();
-        },
-        'month': function(date) {
-            return date.getMonth() + 1;
-        },
-        'day': function(date) {
-            return date.getDate();
-        },
-        'hour': function(date) {
-            return date.getHours();
-        },
-        'minute': function(date) {
-            return date.getMinutes();
-        },
-        'second': function(date) {
-            return date.getSeconds();
-        },
-        'millisecond': function(date) {
-            return date.getMilliseconds();
+    maxText : &quot;The time in this field must be equal to or before {0}&quot;,
+
+<span id='Ext-form.field.Time-cfg-invalidText'>    /**
+</span>     * @cfg {String} invalidText
+     * The error text to display when the time in the field is invalid (defaults to
+     * '{value} is not a valid time').
+     */
+    invalidText : &quot;{0} is not a valid time&quot;,
+
+<span id='Ext-form.field.Time-cfg-format'>    /**
+</span>     * @cfg {String} format
+     * The default time format string which can be overriden for localization support.  The format must be
+     * valid according to {@link Ext.Date#parse} (defaults to 'g:i A', e.g., '3:15 PM').  For 24-hour time
+     * format try 'H:i' instead.
+     */
+    format : &quot;g:i A&quot;,
+
+<span id='Ext-form.field.Time-cfg-submitFormat'>    /**
+</span>     * @cfg {String} submitFormat The date format string which will be submitted to the server.
+     * The format must be valid according to {@link Ext.Date#parse} (defaults to &lt;tt&gt;{@link #format}&lt;/tt&gt;).
+     */
+
+<span id='Ext-form.field.Time-cfg-altFormats'>    /**
+</span>     * @cfg {String} altFormats
+     * Multiple date formats separated by &quot;|&quot; to try when parsing a user input value and it doesn't match the defined
+     * format (defaults to 'g:ia|g:iA|g:i a|g:i A|h:i|g:i|H:i|ga|ha|gA|h a|g a|g A|gi|hi|gia|hia|g|H|gi a|hi a|giA|hiA|gi A|hi A').
+     */
+    altFormats : &quot;g:ia|g:iA|g:i a|g:i A|h:i|g:i|H:i|ga|ha|gA|h a|g a|g A|gi|hi|gia|hia|g|H|gi a|hi a|giA|hiA|gi A|hi A&quot;,
+
+<span id='Ext-form.field.Time-cfg-increment'>    /**
+</span>     * @cfg {Number} increment
+     * The number of minutes between each time value in the list (defaults to 15).
+     */
+    increment: 15,
+
+<span id='Ext-form.field.Time-cfg-pickerMaxHeight'>    /**
+</span>     * @cfg {Number} pickerMaxHeight
+     * The maximum height of the {@link Ext.picker.Time} dropdown. Defaults to 300.
+     */
+    pickerMaxHeight: 300,
+
+<span id='Ext-form.field.Time-cfg-selectOnTab'>    /**
+</span>     * @cfg {Boolean} selectOnTab
+     * Whether the Tab key should select the currently highlighted item. Defaults to &lt;tt&gt;true&lt;/tt&gt;.
+     */
+    selectOnTab: true,
+
+<span id='Ext-form.field.Time-property-initDate'>    /**
+</span>     * @private
+     * This is the date to use when generating time values in the absence of either minValue
+     * or maxValue.  Using the current date causes DST issues on DST boundary dates, so this is an
+     * arbitrary &quot;safe&quot; date that can be any date aside from DST boundary dates.
+     */
+    initDate: '1/1/2008',
+    initDateFormat: 'j/n/Y',
+
+
+    initComponent: function() {
+        var me = this,
+            min = me.minValue,
+            max = me.maxValue;
+        if (min) {
+            me.setMinValue(min);
+        }
+        if (max) {
+            me.setMaxValue(max);
+        }
+        this.callParent();
+    },
+
+    initValue: function() {
+        var me = this,
+            value = me.value;
+
+        // If a String value was supplied, try to convert it to a proper Date object
+        if (Ext.isString(value)) {
+            me.value = me.rawToValue(value);
+        }
+
+        me.callParent();
+    },
+
+<span id='Ext-form.field.Time-method-setMinValue'>    /**
+</span>     * Replaces any existing {@link #minValue} with the new time and refreshes the picker's range.
+     * @param {Date/String} value The minimum time that can be selected
+     */
+    setMinValue: function(value) {
+        var me = this,
+            picker = me.picker;
+        me.setLimit(value, true);
+        if (picker) {
+            picker.setMinValue(me.minValue);
         }
     },
-    
-    // @private holds aggregate functions.
-    aggregateFn: (function() {
-        var etype = (function() {
-            var rgxp = /^\[object\s(.*)\]$/,
-                toString = Object.prototype.toString;
-            return function(e) {
-                return toString.call(e).match(rgxp)[1];
-            };
-        })();
-        return {
-            'sum': function(list) {
-                var i = 0, l = list.length, acum = 0;
-                if (!list.length || etype(list[0]) != 'Number') {
-                    return list[0];
-                }
-                for (; i < l; i++) {
-                    acum += list[i];
-                }
-                return acum;
-            },
-            'max': function(list) {
-                if (!list.length || etype(list[0]) != 'Number') {
-                    return list[0];
-                }
-                return Math.max.apply(Math, list);
-            },
-            'min': function(list) {
-                if (!list.length || etype(list[0]) != 'Number') {
-                    return list[0];
-                }
-                return Math.min.apply(Math, list);
-            },
-            'avg': function(list) {
-                var i = 0, l = list.length, acum = 0;
-                if (!list.length || etype(list[0]) != 'Number') {
-                    return list[0];
-                }
-                for (; i < l; i++) {
-                    acum += list[i];
-                }
-                return acum / l;
+
+<span id='Ext-form.field.Time-method-setMaxValue'>    /**
+</span>     * Replaces any existing {@link #maxValue} with the new time and refreshes the picker's range.
+     * @param {Date/String} value The maximum time that can be selected
+     */
+    setMaxValue: function(value) {
+        var me = this,
+            picker = me.picker;
+        me.setLimit(value, false);
+        if (picker) {
+            picker.setMaxValue(me.maxValue);
+        }
+    },
+
+<span id='Ext-form.field.Time-method-setLimit'>    /**
+</span>     * @private
+     * Updates either the min or max value. Converts the user's value into a Date object whose
+     * year/month/day is set to the {@link #initDate} so that only the time fields are significant.
+     */
+    setLimit: function(value, isMin) {
+        var me = this,
+            d, val;
+        if (Ext.isString(value)) {
+            d = me.parseDate(value);
+        }
+        else if (Ext.isDate(value)) {
+            d = value;
+        }
+        if (d) {
+            val = Ext.Date.clearTime(new Date(me.initDate));
+            val.setHours(d.getHours(), d.getMinutes(), d.getSeconds(), d.getMilliseconds());
+            me[isMin ? 'minValue' : 'maxValue'] = val;
+        }
+    },
+
+    rawToValue: function(rawValue) {
+        return this.parseDate(rawValue) || rawValue || null;
+    },
+
+    valueToRaw: function(value) {
+        return this.formatDate(this.parseDate(value));
+    },
+
+<span id='Ext-form.field.Time-method-getErrors'>    /**
+</span>     * Runs all of Time's validations and returns an array of any errors. Note that this first
+     * runs Text's validations, so the returned array is an amalgamation of all field errors.
+     * The additional validation checks are testing that the time format is valid, that the chosen
+     * time is within the {@link #minValue} and {@link #maxValue} constraints set.
+     * @param {Mixed} value The value to get errors for (defaults to the current field value)
+     * @return {Array} All validation errors for this field
+     */
+    getErrors: function(value) {
+        var me = this,
+            format = Ext.String.format,
+            errors = me.callParent(arguments),
+            minValue = me.minValue,
+            maxValue = me.maxValue,
+            date;
+
+        value = me.formatDate(value || me.processRawValue(me.getRawValue()));
+
+        if (value === null || value.length &lt; 1) { // if it's blank and textfield didn't flag it then it's valid
+             return errors;
+        }
+
+        date = me.parseDate(value);
+        if (!date) {
+            errors.push(format(me.invalidText, value, me.format));
+            return errors;
+        }
+
+        if (minValue &amp;&amp; date &lt; minValue) {
+            errors.push(format(me.minText, me.formatDate(minValue)));
+        }
+
+        if (maxValue &amp;&amp; date &gt; maxValue) {
+            errors.push(format(me.maxText, me.formatDate(maxValue)));
+        }
+
+        return errors;
+    },
+
+    formatDate: function() {
+        return Ext.form.field.Date.prototype.formatDate.apply(this, arguments);
+    },
+
+<span id='Ext-form.field.Time-method-parseDate'>    /**
+</span>     * @private
+     * Parses an input value into a valid Date object.
+     * @param {String/Date} value
+     */
+    parseDate: function(value) {
+        if (!value || Ext.isDate(value)) {
+            return value;
+        }
+
+        var me = this,
+            val = me.safeParse(value, me.format),
+            altFormats = me.altFormats,
+            altFormatsArray = me.altFormatsArray,
+            i = 0,
+            len;
+
+        if (!val &amp;&amp; altFormats) {
+            altFormatsArray = altFormatsArray || altFormats.split('|');
+            len = altFormatsArray.length;
+            for (; i &lt; len &amp;&amp; !val; ++i) {
+                val = me.safeParse(value, altFormatsArray[i]);
             }
-        };
-    })(),
-    
-    // @private normalized the store to fill date gaps in the time interval.
-    constrainDates: function() {
-        var fromDate = Ext.Date.clone(this.fromDate),
-            toDate = Ext.Date.clone(this.toDate),
-            step = this.step,
-            field = this.fields,
-            store = this.chart.store,
-            record, recObj, fieldNames = [],
-            newStore = Ext.create('Ext.data.Store', {
-                model: store.model
+        }
+        return val;
+    },
+
+    safeParse: function(value, format){
+        var me = this,
+            utilDate = Ext.Date,
+            parsedDate,
+            result = null;
+
+        if (utilDate.formatContainsDateInfo(format)) {
+            // assume we've been given a full date
+            result = utilDate.parse(value, format);
+        } else {
+            // Use our initial safe date
+            parsedDate = utilDate.parse(me.initDate + ' ' + value, me.initDateFormat + ' ' + format);
+            if (parsedDate) {
+                result = parsedDate;
+            }
+        }
+        return result;
+    },
+
+    // @private
+    getSubmitValue: function() {
+        var me = this,
+            format = me.submitFormat || me.format,
+            value = me.getValue();
+
+        return value ? Ext.Date.format(value, format) : null;
+    },
+
+<span id='Ext-form.field.Time-method-createPicker'>    /**
+</span>     * @private
+     * Creates the {@link Ext.picker.Time}
+     */
+    createPicker: function() {
+        var me = this,
+            picker = Ext.create('Ext.picker.Time', {
+                selModel: {
+                    mode: 'SINGLE'
+                },
+                floating: true,
+                hidden: true,
+                minValue: me.minValue,
+                maxValue: me.maxValue,
+                increment: me.increment,
+                format: me.format,
+                ownerCt: this.ownerCt,
+                renderTo: document.body,
+                maxHeight: me.pickerMaxHeight,
+                focusOnToFront: false
             });
-        
-        var getRecordByDate = (function() {
-            var index = 0, l = store.getCount();
-            return function(date) {
-                var rec, recDate;
-                for (; index < l; index++) {
-                    rec = store.getAt(index);
-                    recDate = rec.get(field);
-                    if (+recDate > +date) {
-                        return false;
-                    } else if (+recDate == +date) {
-                        return rec;
+
+        me.mon(picker.getSelectionModel(), {
+            selectionchange: me.onListSelect,
+            scope: me
+        });
+
+        return picker;
+    },
+
+<span id='Ext-form.field.Time-method-onExpand'>    /**
+</span>     * @private
+     * Enables the key nav for the Time picker when it is expanded.
+     * TODO this is largely the same logic as ComboBox, should factor out.
+     */
+    onExpand: function() {
+        var me = this,
+            keyNav = me.pickerKeyNav,
+            selectOnTab = me.selectOnTab,
+            picker = me.getPicker(),
+            lastSelected = picker.getSelectionModel().lastSelected,
+            itemNode;
+
+        if (!keyNav) {
+            keyNav = me.pickerKeyNav = Ext.create('Ext.view.BoundListKeyNav', this.inputEl, {
+                boundList: picker,
+                forceKeyDown: true,
+                tab: function(e) {
+                    if (selectOnTab) {
+                        this.selectHighlighted(e);
+                        me.triggerBlur();
                     }
+                    // Tab key event is allowed to propagate to field
+                    return true;
                 }
-                return false;
-            };
-        })();
-        
-        if (!this.constrain) {
-            this.chart.filteredStore = this.chart.store;
-            return;
+            });
+            // stop tab monitoring from Ext.form.field.Trigger so it doesn't short-circuit selectOnTab
+            if (selectOnTab) {
+                me.ignoreMonitorTab = true;
+            }
         }
+        Ext.defer(keyNav.enable, 1, keyNav); //wait a bit so it doesn't react to the down arrow opening the picker
 
-        while(+fromDate <= +toDate) {
-            record = getRecordByDate(fromDate);
-            recObj = {};
-            if (record) {
-                newStore.add(record.data);
-            } else {
-                newStore.model.prototype.fields.each(function(f) {
-                    recObj[f.name] = false;
-                });
-                recObj.date = fromDate;
-                newStore.add(recObj);
+        // Highlight the last selected item and scroll it into view
+        if (lastSelected) {
+            itemNode = picker.getNode(lastSelected);
+            if (itemNode) {
+                picker.highlightItem(itemNode);
+                picker.el.scrollChildIntoView(itemNode, false);
             }
-            fromDate = Ext.Date.add(fromDate, step[0], step[1]);
         }
-         
-        this.chart.filteredStore = newStore;
-    },
-    
-    // @private aggregates values if multiple store elements belong to the same time step.
-    aggregate: function() {
-        var aggStore = {}, 
-            aggKeys = [], key, value,
-            op = this.aggregateOp,
-            field = this.fields, i,
-            fields = this.groupBy.split(','),
-            curField,
-            recFields = [],
-            recFieldsLen = 0,
-            obj,
-            dates = [],
-            json = [],
-            l = fields.length,
-            dateMethods = this.dateMethods,
-            aggregateFn = this.aggregateFn,
-            store = this.chart.filteredStore || this.chart.store;
-        
-        store.each(function(rec) {
-            //get all record field names in a simple array
-            if (!recFields.length) {
-                rec.fields.each(function(f) {
-                    recFields.push(f.name);
-                });
-                recFieldsLen = recFields.length;
-            }
-            //get record date value
-            value = rec.get(field);
-            //generate key for grouping records
-            for (i = 0; i < l; i++) {
-                if (i == 0) {
-                    key = String(dateMethods[fields[i]](value));
-                } else {
-                    key += '||' + dateMethods[fields[i]](value);
-                }
-            }
-            //get aggregation record from hash
-            if (key in aggStore) {
-                obj = aggStore[key];
-            } else {
-                obj = aggStore[key] = {};
-                aggKeys.push(key);
-                dates.push(value);
-            }
-            //append record values to an aggregation record
-            for (i = 0; i < recFieldsLen; i++) {
-                curField = recFields[i];
-                if (!obj[curField]) {
-                    obj[curField] = [];
-                }
-                if (rec.get(curField) !== undefined) {
-                    obj[curField].push(rec.get(curField));
-                }
-            }
-        });
-        //perform aggregation operations on fields
-        for (key in aggStore) {
-            obj = aggStore[key];
-            for (i = 0; i < recFieldsLen; i++) {
-                curField = recFields[i];
-                obj[curField] = aggregateFn[op](obj[curField]);
-            }
-            json.push(obj);
-        }
-        this.chart.substore = Ext.create('Ext.data.JsonStore', {
-            fields: recFields,
-            data: json
-        });
-        
-        this.dates = dates;
-    },
-    
-    // @private creates a label array to be used as the axis labels.
-     setLabels: function() {
-        var store = this.chart.substore,
-            fields = this.fields,
-            format = this.dateFormat,
-            labels, i, dates = this.dates,
-            formatFn = Ext.Date.format;
-        this.labels = labels = [];
-        store.each(function(record, i) {
-            if (!format) {
-                labels.push(record.get(fields));
-            } else {
-                labels.push(formatFn(dates[i], format));
-            }
-         }, this);
-     },
-
-    processView: function() {
-         //TODO(nico): fix this eventually...
-         if (this.constrain) {
-             this.constrainDates();
-             this.aggregate();
-             this.chart.substore = this.chart.filteredStore;
-         } else {
-             this.aggregate();
-         }
     },
 
-     // @private modifies the store and creates the labels for the axes.
-     applyData: function() {
-        this.setLabels();
-        var count = this.chart.substore.getCount();
-         return {
-             from: 0,
-             to: count,
-             steps: count - 1,
-             step: 1
-         };
-     }
- });
+<span id='Ext-form.field.Time-method-onCollapse'>    /**
+</span>     * @private
+     * Disables the key nav for the Time picker when it is collapsed.
+     */
+    onCollapse: function() {
+        var me = this,
+            keyNav = me.pickerKeyNav;
+        if (keyNav) {
+            keyNav.disable();
+            me.ignoreMonitorTab = false;
+        }
+    },
 
-￿</pre></pre></body></html>
+<span id='Ext-form.field.Time-method-onListSelect'>    /**
+</span>     * @private
+     * Handles a time being selected from the Time picker.
+     */
+    onListSelect: function(list, recordArray) {
+        var me = this,
+            record = recordArray[0],
+            val = record ? record.get('date') : null;
+        me.setValue(val);
+        me.fireEvent('select', me, val);
+        me.picker.clearHighlight();
+        me.collapse();
+        me.inputEl.focus();
+    }
+});
+
+</pre></pre></body></html>

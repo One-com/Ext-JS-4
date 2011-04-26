@@ -1,8 +1,8 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.ClickRepeater"></a>/**
- * @class Ext.util.ClickRepeater
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-util.ClickRepeater-method-constructor'><span id='Ext-util.ClickRepeater'>/**
+</span></span> * @class Ext.util.ClickRepeater
  * @extends Ext.util.Observable
  *
- * A wrapper class which can be applied to any element. Fires a "click" event while the
+ * A wrapper class which can be applied to any element. Fires a &quot;click&quot; event while the
  * mouse is pressed. The interval between firings may be specified in the config but
  * defaults to 20 milliseconds.
  *
@@ -23,27 +23,27 @@ Ext.define('Ext.util.ClickRepeater', {
         Ext.apply(this, config);
 
         this.addEvents(
-        <a name="event-Ext.util.ClickRepeater-mousedown"></a>/**
-         * @event mousedown
+<span id='Ext-util.ClickRepeater-event-mousedown'>        /**
+</span>         * @event mousedown
          * Fires when the mouse button is depressed.
          * @param {Ext.util.ClickRepeater} this
          * @param {Ext.EventObject} e
          */
-        "mousedown",
-        <a name="event-Ext.util.ClickRepeater-click"></a>/**
-         * @event click
+        &quot;mousedown&quot;,
+<span id='Ext-util.ClickRepeater-event-click'>        /**
+</span>         * @event click
          * Fires on a specified interval during the time the element is pressed.
          * @param {Ext.util.ClickRepeater} this
          * @param {Ext.EventObject} e
          */
-        "click",
-        <a name="event-Ext.util.ClickRepeater-mouseup"></a>/**
-         * @event mouseup
+        &quot;click&quot;,
+<span id='Ext-util.ClickRepeater-event-mouseup'>        /**
+</span>         * @event mouseup
          * Fires when the mouse key is released.
          * @param {Ext.util.ClickRepeater} this
          * @param {Ext.EventObject} e
          */
-        "mouseup"
+        &quot;mouseup&quot;
         );
 
         if(!this.disabled){
@@ -53,49 +53,49 @@ Ext.define('Ext.util.ClickRepeater', {
 
         // allow inline handler
         if(this.handler){
-            this.on("click", this.handler,  this.scope || this);
+            this.on(&quot;click&quot;, this.handler,  this.scope || this);
         }
 
         this.callParent();
     },
 
-    <a name="cfg-Ext.util.ClickRepeater-el"></a>/**
-     * @cfg {Mixed} el The element to act as a button.
+<span id='Ext-util.ClickRepeater-cfg-el'>    /**
+</span>     * @cfg {Mixed} el The element to act as a button.
      */
 
-    <a name="cfg-Ext.util.ClickRepeater-pressedCls"></a>/**
-     * @cfg {String} pressedCls A CSS class name to be applied to the element while pressed.
+<span id='Ext-util.ClickRepeater-cfg-pressedCls'>    /**
+</span>     * @cfg {String} pressedCls A CSS class name to be applied to the element while pressed.
      */
 
-    <a name="cfg-Ext.util.ClickRepeater-accelerate"></a>/**
-     * @cfg {Boolean} accelerate True if autorepeating should start slowly and accelerate.
-     * "interval" and "delay" are ignored.
+<span id='Ext-util.ClickRepeater-cfg-accelerate'>    /**
+</span>     * @cfg {Boolean} accelerate True if autorepeating should start slowly and accelerate.
+     * &quot;interval&quot; and &quot;delay&quot; are ignored.
      */
 
-    <a name="cfg-Ext.util.ClickRepeater-interval"></a>/**
-     * @cfg {Number} interval The interval between firings of the "click" event. Default 20 ms.
+<span id='Ext-util.ClickRepeater-cfg-interval'>    /**
+</span>     * @cfg {Number} interval The interval between firings of the &quot;click&quot; event. Default 20 ms.
      */
     interval : 20,
 
-    <a name="cfg-Ext.util.ClickRepeater-delay"></a>/**
-     * @cfg {Number} delay The initial delay before the repeating event begins firing.
+<span id='Ext-util.ClickRepeater-cfg-delay'>    /**
+</span>     * @cfg {Number} delay The initial delay before the repeating event begins firing.
      * Similar to an autorepeat key delay.
      */
     delay: 250,
 
-    <a name="cfg-Ext.util.ClickRepeater-preventDefault"></a>/**
-     * @cfg {Boolean} preventDefault True to prevent the default click event
+<span id='Ext-util.ClickRepeater-cfg-preventDefault'>    /**
+</span>     * @cfg {Boolean} preventDefault True to prevent the default click event
      */
     preventDefault : true,
-    <a name="cfg-Ext.util.ClickRepeater-stopDefault"></a>/**
-     * @cfg {Boolean} stopDefault True to stop the default click event
+<span id='Ext-util.ClickRepeater-cfg-stopDefault'>    /**
+</span>     * @cfg {Boolean} stopDefault True to stop the default click event
      */
     stopDefault : false,
 
     timer : 0,
 
-    <a name="method-Ext.util.ClickRepeater-enable"></a>/**
-     * Enables the repeater and allows events to fire.
+<span id='Ext-util.ClickRepeater-method-enable'>    /**
+</span>     * Enables the repeater and allows events to fire.
      */
     enable: function(){
         if(this.disabled){
@@ -110,8 +110,8 @@ Ext.define('Ext.util.ClickRepeater', {
         this.disabled = false;
     },
 
-    <a name="method-Ext.util.ClickRepeater-disable"></a>/**
-     * Disables the repeater and stops events from firing.
+<span id='Ext-util.ClickRepeater-method-disable'>    /**
+</span>     * Disables the repeater and stops events from firing.
      */
     disable: function(/* private */ force){
         if(force || !this.disabled){
@@ -125,8 +125,8 @@ Ext.define('Ext.util.ClickRepeater', {
         this.disabled = true;
     },
 
-    <a name="method-Ext.util.ClickRepeater-setDisabled"></a>/**
-     * Convenience function for setting disabled/enabled by boolean.
+<span id='Ext-util.ClickRepeater-method-setDisabled'>    /**
+</span>     * Convenience function for setting disabled/enabled by boolean.
      * @param {Boolean} disabled
      */
     setDisabled: function(disabled){
@@ -153,8 +153,8 @@ Ext.define('Ext.util.ClickRepeater', {
         clearTimeout(this.timer);
         this.el.blur();
 
-        this.fireEvent("mousedown", this, e);
-        this.fireEvent("click", this, e);
+        this.fireEvent(&quot;mousedown&quot;, this, e);
+        this.fireEvent(&quot;click&quot;, this, e);
     },
 
     // private
@@ -166,11 +166,11 @@ Ext.define('Ext.util.ClickRepeater', {
         }
         this.mousedownTime = new Date();
 
-        Ext.getDoc().on("mouseup", this.handleMouseUp, this);
-        this.el.on("mouseout", this.handleMouseOut, this);
+        Ext.getDoc().on(&quot;mouseup&quot;, this.handleMouseUp, this);
+        this.el.on(&quot;mouseout&quot;, this.handleMouseOut, this);
 
-        this.fireEvent("mousedown", this, e);
-        this.fireEvent("click", this, e);
+        this.fireEvent(&quot;mousedown&quot;, this, e);
+        this.fireEvent(&quot;click&quot;, this, e);
 
         // Do not honor delay or interval if acceleration wanted.
         if (this.accelerate) {
@@ -186,7 +186,7 @@ Ext.define('Ext.util.ClickRepeater', {
 
     // private
     click : function(e){
-        this.fireEvent("click", this, e);
+        this.fireEvent(&quot;click&quot;, this, e);
         this.timer =  Ext.defer(this.click, this.accelerate ?
             this.easeOutExpo(Ext.Date.getElapsed(this.mousedownTime),
                 400,
@@ -205,12 +205,12 @@ Ext.define('Ext.util.ClickRepeater', {
         if(this.pressedCls){
             this.el.removeCls(this.pressedCls);
         }
-        this.el.on("mouseover", this.handleMouseReturn, this);
+        this.el.on(&quot;mouseover&quot;, this.handleMouseReturn, this);
     },
 
     // private
     handleMouseReturn : function(){
-        this.el.un("mouseover", this.handleMouseReturn, this);
+        this.el.un(&quot;mouseover&quot;, this.handleMouseReturn, this);
         if(this.pressedCls){
             this.el.addCls(this.pressedCls);
         }
@@ -220,13 +220,13 @@ Ext.define('Ext.util.ClickRepeater', {
     // private
     handleMouseUp : function(e){
         clearTimeout(this.timer);
-        this.el.un("mouseover", this.handleMouseReturn, this);
-        this.el.un("mouseout", this.handleMouseOut, this);
-        Ext.getDoc().un("mouseup", this.handleMouseUp, this);
+        this.el.un(&quot;mouseover&quot;, this.handleMouseReturn, this);
+        this.el.un(&quot;mouseout&quot;, this.handleMouseOut, this);
+        Ext.getDoc().un(&quot;mouseup&quot;, this.handleMouseUp, this);
         if(this.pressedCls){
             this.el.removeCls(this.pressedCls);
         }
-        this.fireEvent("mouseup", this, e);
+        this.fireEvent(&quot;mouseup&quot;, this, e);
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

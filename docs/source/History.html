@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.History"></a>/**
- * @class Ext.util.History
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-util.History'>/**
+</span> * @class Ext.util.History
  * History management component that allows you to register arbitrary tokens that signify application
  * history state on navigation actions.  You can then handle the history {@link #change} event in order
  * to reset your application UI to the appropriate state when the user navigates forward or backward through
@@ -15,7 +15,7 @@ Ext.define('Ext.util.History', {
     
     constructor: function() {
         var me = this;
-        me.oldIEMode = Ext.isIE6 || Ext.isIE7 || !Ext.isStrict && Ext.isIE8;
+        me.oldIEMode = Ext.isIE6 || Ext.isIE7 || !Ext.isStrict &amp;&amp; Ext.isIE8;
         me.iframe = null;
         me.hiddenField = null;
         me.ready = false;
@@ -24,9 +24,9 @@ Ext.define('Ext.util.History', {
     
     getHash: function() {
         var href = window.location.href,
-            i = href.indexOf("#");
+            i = href.indexOf(&quot;#&quot;);
             
-        return i >= 0 ? href.substr(i + 1) : null;
+        return i &gt;= 0 ? href.substr(i + 1) : null;
     },
 
     doSave: function() {
@@ -40,9 +40,9 @@ Ext.define('Ext.util.History', {
     },
 
     updateIFrame: function(token) {
-        var html = '<html><body><div id="state">' + 
+        var html = '&lt;html&gt;&lt;body&gt;&lt;div id=&quot;state&quot;&gt;' + 
                     Ext.util.Format.htmlEncode(token) + 
-                    '</div></body></html>';
+                    '&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;';
 
         try {
             var doc = this.iframe.contentWindow.document;
@@ -65,14 +65,14 @@ Ext.define('Ext.util.History', {
         }
        
         var doc = contentWindow.document,
-            elem = doc.getElementById("state"),
+            elem = doc.getElementById(&quot;state&quot;),
             oldToken = elem ? elem.innerText : null,
             oldHash = me.getHash();
            
         Ext.TaskManager.start({
             run: function () {
                 var doc = contentWindow.document,
-                    elem = doc.getElementById("state"),
+                    elem = doc.getElementById(&quot;state&quot;),
                     newToken = elem ? elem.innerText : null,
                     newHash = me.getHash();
 
@@ -121,24 +121,24 @@ Ext.define('Ext.util.History', {
         
     },
 
-    <a name="prop-Ext.util.History-fieldId"></a>/**
-     * The id of the hidden field required for storing the current history token.
+<span id='Ext-util.History-property-fieldId'>    /**
+</span>     * The id of the hidden field required for storing the current history token.
      * @type String
      * @property
      */
     fieldId: Ext.baseCSSPrefix + 'history-field',
-    <a name="prop-Ext.util.History-iframeId"></a>/**
-     * The id of the iframe required by IE to manage the history stack.
+<span id='Ext-util.History-property-iframeId'>    /**
+</span>     * The id of the iframe required by IE to manage the history stack.
      * @type String
      * @property
      */
     iframeId: Ext.baseCSSPrefix + 'history-frame',
 
-    <a name="method-Ext.util.History-init"></a>/**
-     * Initialize the global History instance.
+<span id='Ext-util.History-method-init'>    /**
+</span>     * Initialize the global History instance.
      * @param {Boolean} onReady (optional) A callback function that will be called once the history
      * component is fully initialized.
-     * @param {Object} scope (optional) The scope (<code>this</code> reference) in which the callback is executed. Defaults to the browser window.
+     * @param {Object} scope (optional) The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the callback is executed. Defaults to the browser window.
      */
     init: function (onReady, scope) {
         var me = this;
@@ -162,14 +162,14 @@ Ext.define('Ext.util.History', {
         }
         
         me.addEvents(
-            <a name="event-Ext.util.History-ready"></a>/**
-             * @event ready
+<span id='Ext-util.History-event-ready'>            /**
+</span>             * @event ready
              * Fires when the Ext.util.History singleton has been initialized and is ready for use.
              * @param {Ext.util.History} The Ext.util.History singleton.
              */
             'ready',
-            <a name="event-Ext.util.History-change"></a>/**
-             * @event change
+<span id='Ext-util.History-event-change'>            /**
+</span>             * @event change
              * Fires when navigation back or forwards within the local page's history occurs.
              * @param {String} token An identifier associated with the page state at that point in its history.
              */
@@ -182,16 +182,16 @@ Ext.define('Ext.util.History', {
         me.startUp();
     },
 
-    <a name="method-Ext.util.History-add"></a>/**
-     * Add a new token to the history stack. This can be any arbitrary value, although it would
+<span id='Ext-util.History-method-add'>    /**
+</span>     * Add a new token to the history stack. This can be any arbitrary value, although it would
      * commonly be the concatenation of a component id and another id marking the specifc history
      * state of that component.  Example usage:
-     * <pre><code>
+     * &lt;pre&gt;&lt;code&gt;
 // Handle tab changes on a TabPanel
 tabPanel.on('tabchange', function(tabPanel, tab){
 Ext.History.add(tabPanel.id + ':' + tab.id);
 });
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
      * @param {String} token The value that defines a particular application-specific history state
      * @param {Boolean} preventDuplicates When true, if the passed token matches the current token
      * it will not save a new history step. Set to false if the same state can be saved more than once
@@ -214,25 +214,25 @@ Ext.History.add(tabPanel.id + ':' + tab.id);
         }
     },
 
-    <a name="method-Ext.util.History-back"></a>/**
-     * Programmatically steps back one step in browser history (equivalent to the user pressing the Back button).
+<span id='Ext-util.History-method-back'>    /**
+</span>     * Programmatically steps back one step in browser history (equivalent to the user pressing the Back button).
      */
     back: function() {
         window.history.go(-1);
     },
 
-    <a name="method-Ext.util.History-forward"></a>/**
-     * Programmatically steps forward one step in browser history (equivalent to the user pressing the Forward button).
+<span id='Ext-util.History-method-forward'>    /**
+</span>     * Programmatically steps forward one step in browser history (equivalent to the user pressing the Forward button).
      */
     forward: function(){
         window.history.go(1);
     },
 
-    <a name="method-Ext.util.History-getToken"></a>/**
-     * Retrieves the currently-active history token.
+<span id='Ext-util.History-method-getToken'>    /**
+</span>     * Retrieves the currently-active history token.
      * @return {String} The token
      */
     getToken: function() {
         return this.ready ? this.currentToken : this.getHash();
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

@@ -18,6 +18,7 @@ Ext.onReady(function(){
                 closeAction: 'hide',
                 width:450,
                 height:450,
+                border: false,
                 x: 40,
                 y: 60,
                 items: {

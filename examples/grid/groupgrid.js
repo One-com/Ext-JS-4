@@ -214,16 +214,21 @@ Ext.onReady(function() {
             cuisine: 'Chinese'
         }]
     });
+    
+    var groupingFeature = Ext.create('Ext.grid.feature.Grouping',{
+        groupHeaderTpl: 'Cuisine: {name} ({rows.length} Item{[values.rows.length > 1 ? "s" : ""]})'
+    });
 
     var grid = Ext.create('Ext.grid.Panel', {
         renderTo: Ext.getBody(),
+        collapsible: true,
+        iconCls: 'icon-grid',
+        frame: true,
         store: Restaurants,
         width: 600,
         height: 400,
         title: 'Restaurants',
-        features: [{
-            ftype: 'grouping'
-        }],
+        features: [groupingFeature],
         columns: [{
             text: 'Name',
             flex: 1,
@@ -232,6 +237,13 @@ Ext.onReady(function() {
             text: 'Cuisine',
             flex: 1,
             dataIndex: 'cuisine'
+        }],
+        fbar  : ['->', {
+            text:'Clear Grouping',
+            iconCls: 'icon-clear-group',
+            handler : function(){
+                groupingFeature.disable();
+            }
         }]
     });
 });

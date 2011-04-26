@@ -5,7 +5,7 @@ Ext.Loader.setPath('Ext.ux', '../ux/');
 Ext.require([
     'Ext.tip.QuickTipManager',
     'Ext.window.Window',
-    'Ext.tab.TabPanel',
+    'Ext.tab.Panel',
     'Ext.ux.TabScrollerMenu'
 ]);
 
@@ -18,7 +18,7 @@ Ext.onReady(function() {
         width: 600,
         layout: 'fit',
         title: 'Exercising scrollable tabs with a TabScroller menu',
-        bodyBorder: false,
+        border: false,
         items: {
             xtype: 'tabpanel',
             activeTab: 0,

@@ -1,10 +1,10 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.form.action.DirectSubmit"></a>/**
- * @class Ext.form.action.DirectSubmit
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-form.action.DirectSubmit'>/**
+</span> * @class Ext.form.action.DirectSubmit
  * @extends Ext.form.action.Submit
- * <p>Provides Ext.direct support for submitting form data.</p>
- * <p>This example illustrates usage of Ext.direct.Direct to <b>submit</b> a form through Ext.Direct.</p>
- * <pre><code>
-var myFormPanel = new Ext.form.FormPanel({
+ * &lt;p&gt;Provides Ext.direct support for submitting form data.&lt;/p&gt;
+ * &lt;p&gt;This example illustrates usage of Ext.direct.Direct to &lt;b&gt;submit&lt;/b&gt; a form through Ext.Direct.&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+var myFormPanel = new Ext.form.Panel({
     // configs for FormPanel
     title: 'Basic Information',
     renderTo: document.body,
@@ -46,46 +46,46 @@ var myFormPanel = new Ext.form.FormPanel({
     // specify the order for the passed params
     paramOrder: ['uid', 'foo']
 });
- * </code></pre>
+ * &lt;/code&gt;&lt;/pre&gt;
  * The data packet sent to the server will resemble something like:
- * <pre><code>
+ * &lt;pre&gt;&lt;code&gt;
 {
-    "action":"Profile","method":"updateBasicInfo","type":"rpc","tid":"6",
-    "result":{
-        "success":true,
-        "id":{
-            "extAction":"Profile","extMethod":"updateBasicInfo",
-            "extType":"rpc","extTID":"6","extUpload":"false",
-            "name":"Aaron Conran","email":"aaron@sencha.com","company":"Sencha Inc."
+    &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;updateBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:&quot;6&quot;,
+    &quot;result&quot;:{
+        &quot;success&quot;:true,
+        &quot;id&quot;:{
+            &quot;extAction&quot;:&quot;Profile&quot;,&quot;extMethod&quot;:&quot;updateBasicInfo&quot;,
+            &quot;extType&quot;:&quot;rpc&quot;,&quot;extTID&quot;:&quot;6&quot;,&quot;extUpload&quot;:&quot;false&quot;,
+            &quot;name&quot;:&quot;Aaron Conran&quot;,&quot;email&quot;:&quot;aaron@sencha.com&quot;,&quot;company&quot;:&quot;Sencha Inc.&quot;
         }
     }
 }
- * </code></pre>
+ * &lt;/code&gt;&lt;/pre&gt;
  * The form will process a data packet returned by the server that is similar
  * to the following:
- * <pre><code>
+ * &lt;pre&gt;&lt;code&gt;
 // sample success packet (batched requests)
 [
     {
-        "action":"Profile","method":"updateBasicInfo","type":"rpc","tid":3,
-        "result":{
-            "success":true
+        &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;updateBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:3,
+        &quot;result&quot;:{
+            &quot;success&quot;:true
         }
     }
 ]
 
 // sample failure packet (one request)
 {
-        "action":"Profile","method":"updateBasicInfo","type":"rpc","tid":"6",
-        "result":{
-            "errors":{
-                "email":"already taken"
+        &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;updateBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:&quot;6&quot;,
+        &quot;result&quot;:{
+            &quot;errors&quot;:{
+                &quot;email&quot;:&quot;already taken&quot;
             },
-            "success":false,
-            "foo":"bar"
+            &quot;success&quot;:false,
+            &quot;foo&quot;:&quot;bar&quot;
         }
 }
- * </code></pre>
+ * &lt;/code&gt;&lt;/pre&gt;
  * Also see the discussion in {@link Ext.form.action.DirectLoad}.
  */
 Ext.define('Ext.form.action.DirectSubmit', {
@@ -97,9 +97,10 @@ Ext.define('Ext.form.action.DirectSubmit', {
     type: 'directsubmit',
 
     doSubmit: function() {
-        var callback = Ext.Function.bind(this.onSuccess, this),
-            formEl = this.buildForm();
-        this.form.api.submit(formEl, callback, this);
+        var me = this,
+            callback = Ext.Function.bind(me.onSuccess, me),
+            formEl = me.buildForm();
+        me.form.api.submit(formEl, callback, me);
         Ext.removeNode(formEl);
     },
 
@@ -117,4 +118,4 @@ Ext.define('Ext.form.action.DirectSubmit', {
         this.callParent([response]);
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

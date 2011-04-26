@@ -1,3 +1,9 @@
+/*
+Ext JS - JavaScript Library
+Copyright (c) 2006-2011, Sencha Inc.
+All rights reserved.
+licensing@sencha.com
+*/
 /**
  * @class Ext.core.DomHelper
  * <p>The DomHelper class provides a layer of abstraction from DOM and transparently supports creating
@@ -1557,7 +1563,7 @@ if(opt.anim.isAnimated()){
     var DOC = document,
         EC = Ext.cache;
 
-    Ext.core.Element = function(element, forceNew) {
+    Ext.Element = Ext.core.Element = function(element, forceNew) {
         var dom = typeof element == "string" ? DOC.getElementById(element) : element,
         id;
 
@@ -2245,7 +2251,7 @@ el.un('click', this.handlerFn);
      * @method clearListeners
      */
     ep.clearListeners = ep.removeAllListeners;
-    
+
     /**
      * Removes this element's dom reference.  Note that event and cache removal is handled at {@link Ext#removeNode Ext.removeNode}.
      * Alias to {@link #remove}.
@@ -2501,6 +2507,7 @@ el.un('click', this.handlerFn);
         noBoxAdjust['button'] = 1;
     }
 })();
+
 /**
  * @class Ext.core.Element
  */
@@ -3347,7 +3354,7 @@ Ext.core.Element.addMethods({
                     width = dom.offsetWidth;
                     dom.parentNode.style.position = parentPosition;
                 }
-                width = Math.max(width || 0, dom.offsetWidth)
+                width = Math.max(width || 0, dom.offsetWidth);
             
             // Gecko will in some cases report an offsetWidth that is actually less than the width of the
             // text contents, because it measures fonts with sub-pixel precision but rounds the calculated
@@ -3873,10 +3880,14 @@ Ext.fly('elId').setHeight(150, {
          * @return {Ext.core.Element} this
          */
         unselectable : function(){
-            this.dom.unselectable = "on";
-            return this.swallowEvent("selectstart", true).
-                        applyStyles("-moz-user-select:none;-khtml-user-select:none;").
-                        addCls(Ext.baseCSSPrefix + 'unselectable');
+            var me = this;
+            me.dom.unselectable = "on";
+
+            me.swallowEvent("selectstart", true);
+            me.applyStyles("-moz-user-select:none;-khtml-user-select:none;");
+            me.addCls(Ext.baseCSSPrefix + 'unselectable');
+            
+            return me;
         },
 
         /**
@@ -4051,11 +4062,14 @@ Ext.core.Element.addMethods(function(){
                 } else if (visMode == El.OFFSETS){
 
                     if (!visible){
-                        me.hideModeStyles = {
-                            position: me.getStyle('position'),
-                            top: me.getStyle('top'),
-                            left: me.getStyle('left')
-                        };
+                        // Remember position for restoring, if we are not already hidden by offsets.
+                        if (!me.hideModeStyles) {
+                            me.hideModeStyles = {
+                                position: me.getStyle('position'),
+                                top: me.getStyle('top'),
+                                left: me.getStyle('left')
+                            };
+                        }
                         me.applyStyles({position: 'absolute', top: '-10000px', left: '-10000px'});
                     }
 
@@ -4294,6 +4308,13 @@ el.slideIn('t', {
             }
 
             box = me.getBox();
+            if ((anchor == 't' || anchor == 'b') && box.height == 0) {
+                box.height = me.dom.scrollHeight;
+            }
+            else if ((anchor == 'l' || anchor == 'r') && box.width == 0) {
+                box.width = me.dom.scrollWidth;
+            }
+            
             position = me.getPositioning();
             me.setSize(box.width, box.height);
 
@@ -4485,7 +4506,7 @@ el.slideIn('t', {
                 },
                 afteranimate: {
                     fn: function() {
-                        if (wrapAnim.running) {
+                        if (wrapAnim && wrapAnim.running) {
                             wrapAnim.end();
                         }
                     }
@@ -5595,42 +5616,40 @@ Ext.select = Ext.core.Element.select;
 
 /**
  * @class Ext.util.DelayedTask
-
-The DelayedTask class provides a convenient way to "buffer" the execution of a method,
-performing setTimeout where a new timeout cancels the old timeout. When called, the
-task will wait the specified time period before executing. If durng that time period,
-the task is called again, the original call will be cancelled. This continues so that
-the function is only called a single time for each iteration.
-
-This method is especially useful for things like detecting whether a user has finished
-typing in a text field. An example would be performing validation on a keypress. You can
-use this class to buffer the keypress events for a certain number of milliseconds, and
-perform only if they stop for that amount of time.  
-
-**Usage:**
-
-    var task = new Ext.util.DelayedTask(function(){
-        alert(Ext.getDom('myInputField').value.length);
-    });
-    
-    // Wait 500ms before calling our function. If the user presses another key
-    // during that 500ms, it will be cancelled and we'll wait another 500ms.
-    Ext.get('myInputField').on('keypress', function(){
-        task.{@link #delay}(500);
-    });
-
-Note that we are using a DelayedTask here to illustrate a point. The configuration
-option `buffer` for {@link Ext.util.Observable#addListener addListener/on} will
-also setup a delayed task for you to buffer events.
-
+ * 
+ * The DelayedTask class provides a convenient way to "buffer" the execution of a method,
+ * performing setTimeout where a new timeout cancels the old timeout. When called, the
+ * task will wait the specified time period before executing. If durng that time period,
+ * the task is called again, the original call will be cancelled. This continues so that
+ * the function is only called a single time for each iteration.
+ * 
+ * This method is especially useful for things like detecting whether a user has finished
+ * typing in a text field. An example would be performing validation on a keypress. You can
+ * use this class to buffer the keypress events for a certain number of milliseconds, and
+ * perform only if they stop for that amount of time.  
+ * 
+ * ## Usage
+ * 
+ *     var task = new Ext.util.DelayedTask(function(){
+ *         alert(Ext.getDom('myInputField').value.length);
+ *     });
+ *     
+ *     // Wait 500ms before calling our function. If the user presses another key
+ *     // during that 500ms, it will be cancelled and we'll wait another 500ms.
+ *     Ext.get('myInputField').on('keypress', function(){
+ *         task.{@link #delay}(500);
+ *     });
+ * 
+ * Note that we are using a DelayedTask here to illustrate a point. The configuration
+ * option `buffer` for {@link Ext.util.Observable#addListener addListener/on} will
+ * also setup a delayed task for you to buffer events.
+ * 
  * @constructor The parameters to this constructor serve as defaults and are not required.
  * @param {Function} fn (optional) The default function to call.
  * @param {Object} scope The default scope (The <code><b>this</b></code> reference) in which the
  * function is called. If not specified, <code>this</code> will refer to the browser window.
  * @param {Array} args (optional) The default Array of arguments.
- * @markdown
  */
-
 Ext.util.DelayedTask = function(fn, scope, args) {
     var me = this,
         id,
@@ -5938,15 +5957,11 @@ Ext.EventManager = {
             // fallback, load will ~always~ fire
             window.addEventListener('load', me.fireDocReady, false);
         } else {
-            // Important: commented out since this hack causes issues with our new framing
-            // There's no need to apply hacks anyway, the native window onload event on IEs works
-            // just fine for us since we don't care about initial DOM
-
             // check if the document is ready, this will also kick off the scroll checking timer
-            //if (!me.checkReadyState()) {
-            //    document.attachEvent('onreadystatechange', me.checkReadyState);
-            //    me.hasOnReadyStateChange = true;
-            //}
+            if (!me.checkReadyState()) {
+                document.attachEvent('onreadystatechange', me.checkReadyState);
+                me.hasOnReadyStateChange = true;
+            }
             // fallback, onload will ~always~ fire
             window.attachEvent('onload', me.fireDocReady, false);
         }
@@ -6032,21 +6047,25 @@ Ext.EventManager = {
      * @return {String} id
      */
     getId : function(element) {
-        var skip = false,
+        var skipGarbageCollection = false,
             id;
-
+    
         element = Ext.getDom(element);
-
+    
         if (element === document || element === window) {
             id = element === document ? Ext.documentId : Ext.windowId;
-            skip = true;
-        } else {
+        }
+        else {
             id = Ext.id(element);
         }
-
+        // skip garbage collection for special elements (window, document, iframes)
+        if (element && (element.getElementById || element.navigator)) {
+            skipGarbageCollection = true;
+        }
+    
         if (!Ext.cache[id]){
             Ext.core.Element.addToCache(new Ext.core.Element(element), id);
-            if (skip) {
+            if (skipGarbageCollection) {
                 Ext.cache[id].skipGarbageCollection = true;
             }
         }
@@ -6080,7 +6099,7 @@ Ext.EventManager = {
                         // if its not a function, it must be an object like click: {fn: function(){}, scope: this}
                         args = [element, key, value.fn, value.scope, value];
                     }
-                    
+
                     if (isRemove === true) {
                         me.removeListener.apply(this, args);
                     } else {
@@ -7330,8 +7349,257 @@ Ext.getBody().on('click', function(e,t){
     * @return {Boolean}
     */
     hasModifier : function(){
-        return ((this.ctrlKey || this.altKey) || this.shiftKey);
-    }
+        return this.ctrlKey || this.altKey || this.shiftKey || this.metaKey;
+    },
+
+    /**
+     * Injects a DOM event using the data in this object and (optionally) a new target.
+     * This is a low-level technique and not likely to be used by application code. The
+     * currently supported event types are:
+     * <p><b>HTMLEvents</b></p>
+     * <ul>
+     * <li>load</li>
+     * <li>unload</li>
+     * <li>select</li>
+     * <li>change</li>
+     * <li>submit</li>
+     * <li>reset</li>
+     * <li>resize</li>
+     * <li>scroll</li>
+     * </ul>
+     * <p><b>MouseEvents</b></p>
+     * <ul>
+     * <li>click</li>
+     * <li>dblclick</li>
+     * <li>mousedown</li>
+     * <li>mouseup</li>
+     * <li>mouseover</li>
+     * <li>mousemove</li>
+     * <li>mouseout</li>
+     * </ul>
+     * <p><b>UIEvents</b></p>
+     * <ul>
+     * <li>focusin</li>
+     * <li>focusout</li>
+     * <li>activate</li>
+     * <li>focus</li>
+     * <li>blur</li>
+     * </ul>
+     * @param {Element/HTMLElement} target If specified, the target for the event. This
+     * is likely to be used when relaying a DOM event. If not specified, {@link #getTarget}
+     * is used to determine the target.
+     */
+    injectEvent: function () {
+        var API,
+            dispatchers = {}; // keyed by event type (e.g., 'mousedown')
+
+        // Good reference: http://developer.yahoo.com/yui/docs/UserAction.js.html
+
+        // IE9 has createEvent, but this code causes major problems with htmleditor (it
+        // blocks all mouse events and maybe more). TODO
+
+        if (!Ext.isIE && document.createEvent) { // if (DOM compliant)
+            API = {
+                createHtmlEvent: function (doc, type, bubbles, cancelable) {
+                    var event = doc.createEvent('HTMLEvents');
+
+                    event.initEvent(type, bubbles, cancelable);
+                    return event;
+                },
+
+                createMouseEvent: function (doc, type, bubbles, cancelable, detail,
+                                            clientX, clientY, ctrlKey, altKey, shiftKey, metaKey,
+                                            button, relatedTarget) {
+                    var event = doc.createEvent('MouseEvents'),
+                        view = doc.defaultView || window;
+
+                    if (event.initMouseEvent) {
+                        event.initMouseEvent(type, bubbles, cancelable, view, detail,
+                                    clientX, clientY, clientX, clientY, ctrlKey, altKey,
+                                    shiftKey, metaKey, button, relatedTarget);
+                    } else { // old Safari
+                        event = doc.createEvent('UIEvents');
+                        event.initEvent(type, bubbles, cancelable);
+                        event.view = view;
+                        event.detail = detail;
+                        event.screenX = clientX;
+                        event.screenY = clientY;
+                        event.clientX = clientX;
+                        event.clientY = clientY;
+                        event.ctrlKey = ctrlKey;
+                        event.altKey = altKey;
+                        event.metaKey = metaKey;
+                        event.shiftKey = shiftKey;
+                        event.button = button;
+                        event.relatedTarget = relatedTarget;
+                    }
+
+                    return event;
+                },
+
+                createUIEvent: function (doc, type, bubbles, cancelable, detail) {
+                    var event = doc.createEvent('UIEvents'),
+                        view = doc.defaultView || window;
+
+                    event.initUIEvent(type, bubbles, cancelable, view, detail);
+                    return event;
+                },
+
+                fireEvent: function (target, type, event) {
+                    target.dispatchEvent(event);
+                },
+
+                fixTarget: function (target) {
+                    // Safari3 doesn't have window.dispatchEvent()
+                    if (target == window && !target.dispatchEvent) {
+                        return document;
+                    }
+
+                    return target;
+                }
+            }
+        } else if (document.createEventObject) { // else if (IE)
+            var crazyIEButtons = { 0: 1, 1: 4, 2: 2 };
+
+            API = {
+                createHtmlEvent: function (doc, type, bubbles, cancelable) {
+                    var event = doc.createEventObject();
+                    event.bubbles = bubbles;
+                    event.cancelable = cancelable;
+                    return event;
+                },
+
+                createMouseEvent: function (doc, type, bubbles, cancelable, detail,
+                                            clientX, clientY, ctrlKey, altKey, shiftKey, metaKey,
+                                            button, relatedTarget) {
+                    var event = doc.createEventObject();
+                    event.bubbles = bubbles;
+                    event.cancelable = cancelable;
+                    event.detail = detail;
+                    event.screenX = clientX;
+                    event.screenY = clientY;
+                    event.clientX = clientX;
+                    event.clientY = clientY;
+                    event.ctrlKey = ctrlKey;
+                    event.altKey = altKey;
+                    event.shiftKey = shiftKey;
+                    event.metaKey = metaKey;
+                    event.button = crazyIEButtons[button] || button;
+                    event.relatedTarget = relatedTarget; // cannot assign to/fromElement
+                    return event;
+                },
+
+                createUIEvent: function (doc, type, bubbles, cancelable, detail) {
+                    var event = doc.createEventObject();
+                    event.bubbles = bubbles;
+                    event.cancelable = cancelable;
+                    return event;
+                },
+
+                fireEvent: function (target, type, event) {
+                    target.fireEvent('on' + type, event);
+                },
+
+                fixTarget: function (target) {
+                    if (target == document) {
+                        // IE6,IE7 thinks window==document and doesn't have window.fireEvent()
+                        // IE6,IE7 cannot properly call document.fireEvent()
+                        return document.documentElement;
+                    }
+
+                    return target;
+                }
+            };
+        }
+
+        //----------------
+        // HTMLEvents
+
+        Ext.Object.each({
+                load:   [false, false],
+                unload: [false, false],
+                select: [true, false],
+                change: [true, false],
+                submit: [true, true],
+                reset:  [true, false],
+                resize: [true, false],
+                scroll: [true, false]
+            },
+            function (name, value) {
+                var bubbles = value[0], cancelable = value[1];
+                dispatchers[name] = function (targetEl, srcEvent) {
+                    var e = API.createHtmlEvent(name, bubbles, cancelable);
+                    API.fireEvent(targetEl, name, e);
+                };
+            });
+
+        //----------------
+        // MouseEvents
+
+        function createMouseEventDispatcher (type, detail) {
+            var cancelable = (type != 'mousemove');
+            return function (targetEl, srcEvent) {
+                var xy = srcEvent.getXY(),
+                    e = API.createMouseEvent(targetEl.ownerDocument, type, true, cancelable,
+                                detail, xy[0], xy[1], srcEvent.ctrlKey, srcEvent.altKey,
+                                srcEvent.shiftKey, srcEvent.metaKey, srcEvent.button,
+                                srcEvent.relatedTarget);
+                API.fireEvent(targetEl, type, e);
+            };
+        }
+
+        Ext.each(['click', 'dblclick', 'mousedown', 'mouseup', 'mouseover', 'mousemove', 'mouseout'],
+            function (eventName) {
+                dispatchers[eventName] = createMouseEventDispatcher(eventName, 1);
+            });
+
+        //----------------
+        // UIEvents
+
+        Ext.Object.each({
+                focusin:  [true, false],
+                focusout: [true, false],
+                activate: [true, true],
+                focus:    [false, false],
+                blur:     [false, false]
+            },
+            function (name, value) {
+                var bubbles = value[0], cancelable = value[1];
+                dispatchers[name] = function (targetEl, srcEvent) {
+                    var e = API.createUIEvent(targetEl.ownerDocument, name, bubbles, cancelable, 1);
+                    API.fireEvent(targetEl, name, e);
+                };
+            });
+
+        //---------
+        if (!API) {
+            // not even sure what ancient browsers fall into this category...
+
+            dispatchers = {}; // never mind all those we just built :P
+
+            API = {
+                fixTarget: function (t) {
+                    return t;
+                }
+            };
+        }
+
+        function cannotInject (target, srcEvent) {
+            //<debug>
+            // TODO log something
+            //</debug>
+        }
+
+        return function (target) {
+            var me = this,
+                dispatcher = dispatchers[me.type] || cannotInject,
+                t = target ? (target.dom || target) : me.getTarget();
+
+            t = API.fixTarget(t);
+            dispatcher(t, me);
+        };
+    }() // call to produce method
+
 }, function() {
 
 Ext.EventObject = new Ext.EventObjectImpl();
@@ -8629,12 +8897,23 @@ Ext.override(Ext.core.Element, {
     getViewRegion: function() {
         var me = this,
             isBody = me.dom === document.body,
-            scroll = me.getScroll(),
-            pos = isBody ? [0, 0] : me.getXY(),
-            top = pos[1] + scroll.top + (isBody ?  0 : me.getBorderWidth('t') + me.getPadding('t')),
-            left = pos[0] + scroll.left + (isBody ? 0 : me.getBorderWidth('l') + me.getPadding('l')),
-            width = isBody ? Ext.core.Element.getViewportWidth() : me.getWidth(true),
-            height = isBody ? Ext.core.Element.getViewportHeight() : me.getHeight(true);
+            scroll, pos, top, left, width, height;
+            
+        // For the body we want to do some special logic
+        if (isBody) {
+            scroll = me.getScroll();
+            left = scroll.left;
+            top = scroll.top;
+            width = Ext.core.Element.getViewportWidth();
+            height = Ext.core.Element.getViewportHeight();
+        }
+        else {
+            pos = me.getXY();
+            left = pos[0] + me.getBorderWidth('l') + me.getPadding('l');
+            top = pos[1] + me.getBorderWidth('t') + me.getPadding('t');
+            width = me.getWidth(true);
+            height = me.getHeight(true);
+        }
 
         return Ext.create('Ext.util.Region', top, left + width, top + height, left);
     },
@@ -8915,11 +9194,11 @@ Ext.core.Element.addMethods(
             isVisible : function(deep) {
                 var vis = !this.isStyle(VISIBILITY, HIDDEN) && !this.isStyle(DISPLAY, NONE),
                     p   = this.dom.parentNode;
-                
+
                 if (deep !== true || !vis) {
                     return vis;
                 }
-                
+
                 while (p && !(/^body/i.test(p.tagName))) {
                     if (!Ext.fly(p, '_isVisible').isVisible()) {
                         return false;
@@ -8944,11 +9223,11 @@ Ext.core.Element.addMethods(
              */
             enableDisplayMode : function(display) {
                 this.setVisibilityMode(Ext.core.Element.DISPLAY);
-                
+
                 if (!Ext.isEmpty(display)) {
                     data(this.dom, 'originalDisplay', display);
                 }
-                
+
                 return this;
             },
 
@@ -8962,6 +9241,7 @@ Ext.core.Element.addMethods(
             mask : function(msg, msgCls) {
                 var me  = this,
                     dom = me.dom,
+                    setExpression = dom.style.setExpression,
                     dh  = Ext.core.DomHelper,
                     EXTELMASKMSG = Ext.baseCSSPrefix + "mask-msg",
                     el,
@@ -8970,10 +9250,12 @@ Ext.core.Element.addMethods(
                 if (!(/^body/i.test(dom.tagName) && me.getStyle('position') == 'static')) {
                     me.addCls(XMASKEDRELATIVE);
                 }
-                if (el = data(dom, 'maskMsg')) {
+                el = data(dom, 'maskMsg');
+                if (el) {
                     el.remove();
                 }
-                if (el = data(dom, 'mask')) {
+                el = data(dom, 'mask');
+                if (el) {
                     el.remove();
                 }
 
@@ -8982,7 +9264,7 @@ Ext.core.Element.addMethods(
 
                 me.addCls(XMASKED);
                 mask.setDisplayed(true);
-                
+
                 if (typeof msg == 'string') {
                     var mm = dh.append(dom, {cls : EXTELMASKMSG, cn:{tag:'div'}}, true);
                     data(dom, 'maskMsg', mm);
@@ -8991,16 +9273,24 @@ Ext.core.Element.addMethods(
                     mm.setDisplayed(true);
                     mm.center(me);
                 }
-                
-                if (!Ext.supports.IncludePaddingInWidthCalculation) {
-                    mask.setSize(me.getWidth(), me.getHeight());
+                // NOTE: CSS expressions are resource intensive and to be used only as a last resort
+                // These expressions are removed as soon as they are no longer necessary - in the unmask method.
+                // In normal use cases an element will be masked for a limited period of time.
+                // Fix for https://sencha.jira.com/browse/EXTJSIV-19.
+                // IE6 strict mode and IE6-9 quirks mode takes off left+right padding when calculating width!
+                if (!Ext.supports.IncludePaddingInWidthCalculation && setExpression) {
+                    mask.dom.style.setExpression('width', 'this.parentNode.offsetWidth + "px"');
                 }
-                
+
+                // Some versions and modes of IE subtract top+bottom padding when calculating height.
+                // Different versions from those which make the same error for width!
+                if (!Ext.supports.IncludePaddingInHeightCalculation && setExpression) {
+                    mask.dom.style.setExpression('height', 'this.parentNode.offsetHeight + "px"');
+                }
                 // ie will not expand full height automatically
-                if (Ext.isIE && !(Ext.isIE7 && Ext.isStrict) && me.getStyle('height') == 'auto') {
+                else if (Ext.isIE && !(Ext.isIE7 && Ext.isStrict) && me.getStyle('height') == 'auto') {
                     mask.setSize(undefined, me.getHeight());
                 }
-                
                 return mask;
             },
 
@@ -9014,11 +9304,16 @@ Ext.core.Element.addMethods(
                     maskMsg = data(dom, 'maskMsg');
 
                 if (mask) {
+                    // Remove resource-intensive CSS expressions as soon as they are not required.
+                    if (mask.dom.style.clearExpression) {
+                        mask.dom.style.clearExpression('width');
+                        mask.dom.style.clearExpression('height');
+                    }
                     if (maskMsg) {
                         maskMsg.remove();
                         data(dom, 'maskMsg', undefined);
                     }
-                    
+
                     mask.remove();
                     data(dom, 'mask', undefined);
                     me.removeCls([XMASKED, XMASKEDRELATIVE]);
@@ -9050,9 +9345,9 @@ Ext.core.Element.addMethods(
             createShim : function() {
                 var el = document.createElement('iframe'),
                     shim;
-                
+
                 el.frameBorder = '0';
-                el.className = 'ext-shim';
+                el.className = Ext.baseCSSPrefix + 'shim';
                 el.src = Ext.SSL_SECURE_URL;
                 shim = Ext.get(this.dom.parentNode.insertBefore(el, this.dom));
                 shim.autoBoxAdjust = false;
@@ -9298,3 +9593,4 @@ Ext.core.Element.select = function(selector, unique, root){
  * @method select
  */
 Ext.select = Ext.core.Element.select;
+

@@ -1,15 +1,15 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.Errors"></a>/**
- * @author Ed Spencer
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-data.Errors'>/**
+</span> * @author Ed Spencer
  * @class Ext.data.Errors
  * @extends Ext.util.MixedCollection
  * 
- * <p>Wraps a collection of validation error responses and provides convenient functions for
- * accessing and errors for specific fields.</p>
+ * &lt;p&gt;Wraps a collection of validation error responses and provides convenient functions for
+ * accessing and errors for specific fields.&lt;/p&gt;
  * 
- * <p>Usually this class does not need to be instantiated directly - instances are instead created
- * automatically when {@link Ext.data.Model#validate validate} on a model instance:</p>
+ * &lt;p&gt;Usually this class does not need to be instantiated directly - instances are instead created
+ * automatically when {@link Ext.data.Model#validate validate} on a model instance:&lt;/p&gt;
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 //validate some existing model instance - in this case it returned 2 failures messages
 var errors = myModel.validate();
 
@@ -18,21 +18,21 @@ errors.isValid(); //false
 errors.length; //2
 errors.getByField('name');  // [{field: 'name',  error: 'must be present'}]
 errors.getByField('title'); // [{field: 'title', error: 'is too short'}]
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  */
 Ext.define('Ext.data.Errors', {
     extend: 'Ext.util.MixedCollection',
     
-    <a name="method-Ext.data.Errors-isValid"></a>/**
-     * Returns true if there are no errors in the collection
+<span id='Ext-data.Errors-method-isValid'>    /**
+</span>     * Returns true if there are no errors in the collection
      * @return {Boolean} 
      */
     isValid: function() {
         return this.length === 0;
     },
     
-    <a name="method-Ext.data.Errors-getByField"></a>/**
-     * Returns all of the errors for the given field
+<span id='Ext-data.Errors-method-getByField'>    /**
+</span>     * Returns all of the errors for the given field
      * @param {String} fieldName The field to get errors for
      * @return {Array} All errors for the given field
      */
@@ -40,7 +40,7 @@ Ext.define('Ext.data.Errors', {
         var errors = [],
             error, field, i;
             
-        for (i = 0; i < this.length; i++) {
+        for (i = 0; i &lt; this.length; i++) {
             error = this.items[i];
             
             if (error.field == fieldName) {
@@ -51,4 +51,4 @@ Ext.define('Ext.data.Errors', {
         return errors;
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

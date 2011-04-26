@@ -2,7 +2,8 @@ Ext.require([
     'Ext.grid.*',
     'Ext.data.*',
     'Ext.form.field.Number',
-    'Ext.form.field.Date'
+    'Ext.form.field.Date',
+    'Ext.tip.QuickTipManager'
 ]);
 
 Ext.define('Task', {
@@ -40,6 +41,9 @@ var data = [
 ];
 
 Ext.onReady(function(){
+    
+    Ext.tip.QuickTipManager.init();
+    
     var store = Ext.create('Ext.data.Store', {
         model: 'Task',
         data: data,
@@ -50,18 +54,19 @@ Ext.onReady(function(){
     var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
         clicksToEdit: 1,
         listeners: {
-            afteredit: function(){
+            edit: function(){
                 // refresh summaries
                 grid.getView().refresh();
             }
         }
     });
-
+    var showSummary = true;
     var grid = Ext.create('Ext.grid.Panel', {
         width: 800,
         height: 450,
         frame: true,
         title: 'Sponsored Projects',
+        iconCls: 'icon-grid',
         renderTo: document.body,
         store: store,
         plugins: [cellEditing],
@@ -69,12 +74,12 @@ Ext.onReady(function(){
             dock: 'top',
             xtype: 'toolbar',
             items: [{
-                text: 'Show Summary',
-                pressed: true,
-                enableToggle: true,
-                toggleHandler: function(btn, pressed){
+                tooltip: 'Toggle the visibility of the summary row',
+                text: 'Toggle Summary',
+                handler: function(){
                     var view = grid.getView();
-                    view.getFeature('group').toggleSummaryRow(pressed);
+                    showSummary = !showSummary;
+                    view.getFeature('group').toggleSummaryRow(showSummary);
                     view.refresh();
                 }
             }]

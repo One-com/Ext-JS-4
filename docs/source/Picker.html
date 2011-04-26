@@ -1,63 +1,64 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.form.Picker"></a>/**
- * @class Ext.form.Picker
- * @extends Ext.form.Trigger
- * <p>An abstract class for fields that have a single trigger which opens a "picker" popup below
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-form.field.Picker-method-constructor'><span id='Ext-form.field.Picker'>/**
+</span></span> * @class Ext.form.field.Picker
+ * @extends Ext.form.field.Trigger
+ * &lt;p&gt;An abstract class for fields that have a single trigger which opens a &quot;picker&quot; popup below
  * the field, e.g. a combobox menu list or a date picker. It provides a base implementation for
  * toggling the picker's visibility when the trigger is clicked, as well as keyboard navigation
  * and some basic events. Sizing and alignment of the picker can be controlled via the {@link #matchFieldWidth}
- * and {@link #pickerAlign}/{@link #pickerOffset} config properties respectively.</p>
- * <p>You would not normally use this class directly, but instead use it as the parent class for
+ * and {@link #pickerAlign}/{@link #pickerOffset} config properties respectively.&lt;/p&gt;
+ * &lt;p&gt;You would not normally use this class directly, but instead use it as the parent class for
  * a specific picker field implementation. Subclasses must implement the {@link #createPicker} method
- * to create a picker component appropriate for the field.</p>
+ * to create a picker component appropriate for the field.&lt;/p&gt;
  *
  * @xtype pickerfield
  * @constructor
  * Create a new picker field
  * @param {Object} config
  */
-Ext.define('Ext.form.Picker', {
-    extend: 'Ext.form.Trigger',
+Ext.define('Ext.form.field.Picker', {
+    extend: 'Ext.form.field.Trigger',
     alias: 'widget.pickerfield',
+    alternateClassName: 'Ext.form.Picker',
     requires: ['Ext.util.KeyNav'],
 
-    <a name="cfg-Ext.form.Picker-matchFieldWidth"></a>/**
-     * @cfg {Boolean} matchFieldWidth
+<span id='Ext-form.field.Picker-cfg-matchFieldWidth'>    /**
+</span>     * @cfg {Boolean} matchFieldWidth
      * Whether the picker dropdown's width should be explicitly set to match the width of the field.
-     * Defaults to <tt>true</tt>.
+     * Defaults to &lt;tt&gt;true&lt;/tt&gt;.
      */
     matchFieldWidth: true,
 
-    <a name="cfg-Ext.form.Picker-pickerAlign"></a>/**
-     * @cfg {String} pickerAlign
+<span id='Ext-form.field.Picker-cfg-pickerAlign'>    /**
+</span>     * @cfg {String} pickerAlign
      * The {@link Ext.core.Element#alignTo alignment position} with which to align the picker. Defaults
-     * to <tt>"tl-bl?"</tt>
+     * to &lt;tt&gt;&quot;tl-bl?&quot;&lt;/tt&gt;
      */
     pickerAlign: 'tl-bl?',
 
-    <a name="cfg-Ext.form.Picker-pickerOffset"></a>/**
-     * @cfg {Array} pickerOffset
+<span id='Ext-form.field.Picker-cfg-pickerOffset'>    /**
+</span>     * @cfg {Array} pickerOffset
      * An offset [x,y] to use in addition to the {@link #pickerAlign} when positioning the picker.
      * Defaults to undefined.
      */
 
-    <a name="cfg-Ext.form.Picker-openCls"></a>/**
-     * @cfg {String} openCls
+<span id='Ext-form.field.Picker-cfg-openCls'>    /**
+</span>     * @cfg {String} openCls
      * A class to be added to the field's {@link #bodyEl} element when the picker is opened. Defaults
      * to 'x-pickerfield-open'.
      */
     openCls: Ext.baseCSSPrefix + 'pickerfield-open',
 
-    <a name="prop-Ext.form.Picker-isExpanded"></a>/**
-     * @property isExpanded
+<span id='Ext-form.field.Picker-property-isExpanded'>    /**
+</span>     * @property isExpanded
      * @type Boolean
      * True if the picker is currently expanded, false if not.
      */
 
-    <a name="cfg-Ext.form.Picker-editable"></a>/**
-     * @cfg {Boolean} editable <tt>false</tt> to prevent the user from typing text directly into the field;
+<span id='Ext-form.field.Picker-cfg-editable'>    /**
+</span>     * @cfg {Boolean} editable &lt;tt&gt;false&lt;/tt&gt; to prevent the user from typing text directly into the field;
      * the field can only have its value set via selecting a value from the picker. In this state, the picker
      * can also be opened by clicking directly on the input field itself.
-     * (defaults to <tt>true</tt>).
+     * (defaults to &lt;tt&gt;true&lt;/tt&gt;).
      */
     editable: true,
 
@@ -67,22 +68,22 @@ Ext.define('Ext.form.Picker', {
 
         // Custom events
         this.addEvents(
-            <a name="event-Ext.form.Picker-expand"></a>/**
-             * @event expand
+<span id='Ext-form.field.Picker-event-expand'>            /**
+</span>             * @event expand
              * Fires when the field's picker is expanded.
-             * @param {Ext.form.Picker} field This field instance
+             * @param {Ext.form.field.Picker} field This field instance
              */
             'expand',
-            <a name="event-Ext.form.Picker-collapse"></a>/**
-             * @event collapse
+<span id='Ext-form.field.Picker-event-collapse'>            /**
+</span>             * @event collapse
              * Fires when the field's picker is collapsed.
-             * @param {Ext.form.Picker} field This field instance
+             * @param {Ext.form.field.Picker} field This field instance
              */
             'collapse',
-            <a name="event-Ext.form.Picker-select"></a>/**
-             * @event select
+<span id='Ext-form.field.Picker-event-select'>            /**
+</span>             * @event select
              * Fires when a value is selected via the picker.
-             * @param {Ext.form.Picker} field This field instance
+             * @param {Ext.form.field.Picker} field This field instance
              * @param {Mixed} value The value that was selected. The exact type of this value is dependent on
              * the individual field and picker implementations.
              */
@@ -121,14 +122,14 @@ Ext.define('Ext.form.Picker', {
     },
 
 
-    <a name="method-Ext.form.Picker-expand"></a>/**
-     * Expand this field's picker dropdown.
+<span id='Ext-form.field.Picker-method-expand'>    /**
+</span>     * Expand this field's picker dropdown.
      */
     expand: function() {
         var me = this,
             bodyEl, picker, collapseIf;
 
-        if (me.rendered && !me.isExpanded && !me.isDestroyed) {
+        if (me.rendered &amp;&amp; !me.isExpanded &amp;&amp; !me.isDestroyed) {
             bodyEl = me.bodyEl;
             picker = me.getPicker();
             collapseIf = me.collapseIf;
@@ -153,8 +154,8 @@ Ext.define('Ext.form.Picker', {
 
     onExpand: Ext.emptyFn,
 
-    <a name="method-Ext.form.Picker-alignPicker"></a>/**
-     * @protected
+<span id='Ext-form.field.Picker-method-alignPicker'>    /**
+</span>     * @protected
      * Aligns the picker to the
      */
     alignPicker: function() {
@@ -165,25 +166,26 @@ Ext.define('Ext.form.Picker', {
         if (this.isExpanded) {
             picker = me.getPicker();
             if (me.matchFieldWidth) {
-                picker.setSize(me.bodyEl.getWidth(), null);
+                // Auto the height (it will be constrained by min and max width) unless there are no records to display.
+                picker.setSize(me.bodyEl.getWidth(), picker.store &amp;&amp; picker.store.getCount() ? null : 0);
             }
             if (picker.isFloating()) {
                 picker.alignTo(me.inputEl, me.pickerAlign, me.pickerOffset);
 
                 // add the {openCls}-above class if the picker was aligned above
                 // the field due to hitting the bottom of the viewport
-                isAbove = picker.el.getY() < me.inputEl.getY();
+                isAbove = picker.el.getY() &lt; me.inputEl.getY();
                 me.bodyEl[isAbove ? 'addCls' : 'removeCls'](me.openCls + aboveSfx);
                 picker.el[isAbove ? 'addCls' : 'removeCls'](picker.baseCls + aboveSfx);
             }
         }
     },
 
-    <a name="method-Ext.form.Picker-collapse"></a>/**
-     * Collapse this field's picker dropdown.
+<span id='Ext-form.field.Picker-method-collapse'>    /**
+</span>     * Collapse this field's picker dropdown.
      */
     collapse: function() {
-        if (this.isExpanded && !this.isDestroyed) {
+        if (this.isExpanded &amp;&amp; !this.isDestroyed) {
             var me = this,
                 openCls = me.openCls,
                 picker = me.picker,
@@ -211,19 +213,19 @@ Ext.define('Ext.form.Picker', {
     onCollapse: Ext.emptyFn,
 
 
-    /**
-     * @private
+<span id='Ext-form.field.Picker-method-collapseIf'>    /**
+</span>     * @private
      * Runs on mousewheel and mousedown of doc to check to see if we should collapse the picker
      */
     collapseIf: function(e) {
         var me = this;
-        if (!me.isDestroyed && !e.within(me.bodyEl, false, true) && !e.within(me.picker.el, false, true)) {
+        if (!me.isDestroyed &amp;&amp; !e.within(me.bodyEl, false, true) &amp;&amp; !e.within(me.picker.el, false, true)) {
             me.collapse();
         }
     },
 
-    <a name="method-Ext.form.Picker-getPicker"></a>/**
-     * Return a reference to the picker component for this field, creating it if necessary by
+<span id='Ext-form.field.Picker-method-getPicker'>    /**
+</span>     * Return a reference to the picker component for this field, creating it if necessary by
      * calling {@link #createPicker}.
      * @return {Ext.Component} The picker component
      */
@@ -232,20 +234,20 @@ Ext.define('Ext.form.Picker', {
         return me.picker || (me.picker = me.createPicker());
     },
 
-    <a name="method-Ext.form.Picker-createPicker"></a>/**
-     * Create and return the component to be used as this field's picker. Must be implemented
+<span id='Ext-form.field.Picker-property-createPicker'>    /**
+</span>     * Create and return the component to be used as this field's picker. Must be implemented
      * by subclasses of Picker.
      * @return {Ext.Component} The picker component
      */
     createPicker: Ext.emptyFn,
 
-    <a name="method-Ext.form.Picker-onTriggerClick"></a>/**
-     * Handles the trigger click; by default toggles between expanding and collapsing the
+<span id='Ext-form.field.Picker-method-onTriggerClick'>    /**
+</span>     * Handles the trigger click; by default toggles between expanding and collapsing the
      * picker component.
      */
     onTriggerClick: function() {
         var me = this;
-        if (!me.readOnly && !me.disabled) {
+        if (!me.readOnly &amp;&amp; !me.disabled) {
             if (me.isExpanded) {
                 me.collapse();
             } else {
@@ -272,4 +274,4 @@ Ext.define('Ext.form.Picker', {
 
 });
 
-￿</pre></pre></body></html>
+</pre></pre></body></html>

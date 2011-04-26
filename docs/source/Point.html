@@ -1,12 +1,12 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.Point"></a>/**
- * @class Ext.util.Point
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-util.Point'>/**
+</span> * @class Ext.util.Point
  * @extends Ext.util.Region
  *
  * Represents a 2D point with x and y properties, useful for comparison and instantiation
  * from an event:
- * <pre><code>
+ * &lt;pre&gt;&lt;code&gt;
  * var point = Ext.util.Point.fromEvent(e);
- * </code></pre>
+ * &lt;/code&gt;&lt;/pre&gt;
  */
 
 Ext.define('Ext.util.Point', {
@@ -16,14 +16,14 @@ Ext.define('Ext.util.Point', {
 
     statics: {
 
-        <a name="method-Ext.util.Point-Ext.util.Point.fromEvent"></a>/**
-         * Returns a new instance of Ext.util.Point base on the pageX / pageY values of the given event
+<span id='Ext-util.Point-method-fromEvent'>        /**
+</span>         * Returns a new instance of Ext.util.Point base on the pageX / pageY values of the given event
          * @static
          * @param {Event} e The event
          * @returns Ext.util.Point
          */
         fromEvent: function(e) {
-            e = (e.changedTouches && e.changedTouches.length > 0) ? e.changedTouches[0] : e;
+            e = (e.changedTouches &amp;&amp; e.changedTouches.length &gt; 0) ? e.changedTouches[0] : e;
             return new this(e.pageX, e.pageY);
         }
     },
@@ -34,27 +34,27 @@ Ext.define('Ext.util.Point', {
         this.callParent([y, x, y, x]);
     },
 
-    <a name="method-Ext.util.Point-toString"></a>/**
-     * Returns a human-eye-friendly string that represents this point,
+<span id='Ext-util.Point-method-toString'>    /**
+</span>     * Returns a human-eye-friendly string that represents this point,
      * useful for debugging
      * @return {String}
      */
     toString: function() {
-        return "Point[" + this.x + "," + this.y + "]";
+        return &quot;Point[&quot; + this.x + &quot;,&quot; + this.y + &quot;]&quot;;
     },
 
-    <a name="method-Ext.util.Point-equals"></a>/**
-     * Compare this point and another point
+<span id='Ext-util.Point-method-equals'>    /**
+</span>     * Compare this point and another point
      * @param {Ext.util.Point/Object} The point to compare with, either an instance
      * of Ext.util.Point or an object with left and top properties
      * @return {Boolean} Returns whether they are equivalent
      */
     equals: function(p) {
-        return (this.x == p.x && this.y == p.y);
+        return (this.x == p.x &amp;&amp; this.y == p.y);
     },
 
-    <a name="method-Ext.util.Point-isWithin"></a>/**
-     * Whether the given point is not away from this point within the given threshold amount.
+<span id='Ext-util.Point-method-isWithin'>    /**
+</span>     * Whether the given point is not away from this point within the given threshold amount.
      * TODO: Rename this isNear.
      * @param {Ext.util.Point/Object} The point to check with, either an instance
      * of Ext.util.Point or an object with left and top properties
@@ -69,28 +69,28 @@ Ext.define('Ext.util.Point', {
             };
         }
 
-        return (this.x <= p.x + threshold.x && this.x >= p.x - threshold.x &&
-                this.y <= p.y + threshold.y && this.y >= p.y - threshold.y);
+        return (this.x &lt;= p.x + threshold.x &amp;&amp; this.x &gt;= p.x - threshold.x &amp;&amp;
+                this.y &lt;= p.y + threshold.y &amp;&amp; this.y &gt;= p.y - threshold.y);
     },
 
-    <a name="method-Ext.util.Point-roundedEquals"></a>/**
-     * Compare this point with another point when the x and y values of both points are rounded. E.g:
+<span id='Ext-util.Point-method-roundedEquals'>    /**
+</span>     * Compare this point with another point when the x and y values of both points are rounded. E.g:
      * [100.3,199.8] will equals to [100, 200]
      * @param {Ext.util.Point/Object} The point to compare with, either an instance
      * of Ext.util.Point or an object with x and y properties
      * @return {Boolean}
      */
     roundedEquals: function(p) {
-        return (Math.round(this.x) == Math.round(p.x) && Math.round(this.y) == Math.round(p.y));
+        return (Math.round(this.x) == Math.round(p.x) &amp;&amp; Math.round(this.y) == Math.round(p.y));
     }
 }, function() {
-    <a name="method-Ext.util.Point-translate"></a>/**
-     * Translate this region by the given offset amount. TODO: Either use translate or translateBy!
-     * @param {Ext.util.Offset/Object} offset Object containing the <code>x</code> and <code>y</code> properties.
+<span id='Ext-util.Point-property-translate'>    /**
+</span>     * Translate this region by the given offset amount. TODO: Either use translate or translateBy!
+     * @param {Ext.util.Offset/Object} offset Object containing the &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; properties.
      * Or the x value is using the two argument form.
      * @param {Number} The y value unless using an Offset object.
      * @return {Ext.util.Region} this This Region
      */
     this.prototype.translate = Ext.util.Region.prototype.translateBy;
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

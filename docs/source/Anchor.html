@@ -1,20 +1,44 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.layout.container.Anchor"></a>/**
- * @class Ext.layout.container.Anchor
- * @extends Ext.layout.Container
- * <p>This is a layout that enables anchoring of contained elements relative to the container's dimensions.
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-layout.container.Anchor'>/**
+</span> * @class Ext.layout.container.Anchor
+ * @extends Ext.layout.container.Container
+ * 
+ * This is a layout that enables anchoring of contained elements relative to the container's dimensions.
  * If the container is resized, all anchored items are automatically rerendered according to their
- * <b><tt>{@link #anchor}</tt></b> rules.</p>
- * <p>This class is intended to be extended or created via the layout: 'anchor' {@link Ext.layout.AbstractContainer#layout}
- * config, and should generally not need to be created directly via the new keyword.</p>
- * <p>AnchorLayout does not have any direct config options (other than inherited ones). By default,
+ * &lt;b&gt;&lt;tt&gt;{@link #anchor}&lt;/tt&gt;&lt;/b&gt; rules.
+ *
+ * This class is intended to be extended or created via the layout: 'anchor' {@link Ext.layout.container.AbstractContainer#layout}
+ * config, and should generally not need to be created directly via the new keyword.&lt;/p&gt;
+ * 
+ * AnchorLayout does not have any direct config options (other than inherited ones). By default,
  * AnchorLayout will calculate anchor measurements based on the size of the container itself. However, the
- * container using the AnchorLayout can supply an anchoring-specific config property of <b>anchorSize</b>.
+ * container using the AnchorLayout can supply an anchoring-specific config property of &lt;b&gt;anchorSize&lt;/b&gt;.
  * If anchorSize is specifed, the layout will use it as a virtual container for the purposes of calculating
  * anchor measurements based on it instead, allowing the container to be sized independently of the anchoring
- * logic if necessary.  For example:</p>
- * <pre><code>
- * TODO: Make a real world example.
- * </code></pre>
+ * logic if necessary.  
+ *
+ * {@img Ext.layout.container.Anchor/Ext.layout.container.Anchor.png Ext.layout.container.Anchor container layout}
+ *
+ * For example:
+ *     Ext.create('Ext.Panel', {
+ *         width: 500,
+ *         height: 400,
+ *         title: &quot;AnchorLayout Panel&quot;,
+ *         layout: 'anchor',
+ *         renderTo: Ext.getBody(),
+ *         items: [{
+ *             xtype: 'panel',
+ *             title: '75% Width and 20% Height',
+ *             anchor: '75% 20%'
+ *         },{
+ *             xtype: 'panel',
+ *             title: 'Offset -300 Width &amp; -200 Height',
+ *             anchor: '-300 -200'		
+ *         },{
+ *             xtype: 'panel',
+ *             title: 'Mixed Offset and Percent',
+ *             anchor: '-250 20%'
+ *         }]
+ *     });
  */
 
 Ext.define('Ext.layout.container.Anchor', {
@@ -22,34 +46,34 @@ Ext.define('Ext.layout.container.Anchor', {
     /* Begin Definitions */
 
     alias: 'layout.anchor',
-    extend: 'Ext.layout.Container',
+    extend: 'Ext.layout.container.Container',
     alternateClassName: 'Ext.layout.AnchorLayout',
 
     /* End Definitions */
 
-    <a name="cfg-Ext.layout.container.Anchor-anchor"></a>/**
-     * @cfg {String} anchor
-     * <p>This configuation option is to be applied to <b>child <tt>items</tt></b> of a container managed by
-     * this layout (ie. configured with <tt>layout:'anchor'</tt>).</p><br/>
+<span id='Ext-layout.container.Anchor-cfg-anchor'>    /**
+</span>     * @cfg {String} anchor
+     * &lt;p&gt;This configuation option is to be applied to &lt;b&gt;child &lt;tt&gt;items&lt;/tt&gt;&lt;/b&gt; of a container managed by
+     * this layout (ie. configured with &lt;tt&gt;layout:'anchor'&lt;/tt&gt;).&lt;/p&gt;&lt;br/&gt;
      *
-     * <p>This value is what tells the layout how an item should be anchored to the container. <tt>items</tt>
-     * added to an AnchorLayout accept an anchoring-specific config property of <b>anchor</b> which is a string
+     * &lt;p&gt;This value is what tells the layout how an item should be anchored to the container. &lt;tt&gt;items&lt;/tt&gt;
+     * added to an AnchorLayout accept an anchoring-specific config property of &lt;b&gt;anchor&lt;/b&gt; which is a string
      * containing two values: the horizontal anchor value and the vertical anchor value (for example, '100% 50%').
-     * The following types of anchor values are supported:<div class="mdetail-params"><ul>
+     * The following types of anchor values are supported:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
      *
-     * <li><b>Percentage</b> : Any value between 1 and 100, expressed as a percentage.<div class="sub-desc">
+     * &lt;li&gt;&lt;b&gt;Percentage&lt;/b&gt; : Any value between 1 and 100, expressed as a percentage.&lt;div class=&quot;sub-desc&quot;&gt;
      * The first anchor is the percentage width that the item should take up within the container, and the
-     * second is the percentage height.  For example:<pre><code>
+     * second is the percentage height.  For example:&lt;pre&gt;&lt;code&gt;
 // two values specified
 anchor: '100% 50%' // render item complete width of the container and
                    // 1/2 height of the container
 // one value specified
 anchor: '100%'     // the width value; the height will default to auto
-     * </code></pre></div></li>
+     * &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
      *
-     * <li><b>Offsets</b> : Any positive or negative integer value.<div class="sub-desc">
+     * &lt;li&gt;&lt;b&gt;Offsets&lt;/b&gt; : Any positive or negative integer value.&lt;div class=&quot;sub-desc&quot;&gt;
      * This is a raw adjustment where the first anchor is the offset from the right edge of the container,
-     * and the second is the offset from the bottom edge. For example:<pre><code>
+     * and the second is the offset from the bottom edge. For example:&lt;pre&gt;&lt;code&gt;
 // two values specified
 anchor: '-50 -100' // render item the complete width of the container
                    // minus 50 pixels and
@@ -57,28 +81,28 @@ anchor: '-50 -100' // render item the complete width of the container
 // one value specified
 anchor: '-50'      // anchor value is assumed to be the right offset value
                    // bottom offset will default to 0
-     * </code></pre></div></li>
+     * &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
      *
-     * <li><b>Sides</b> : Valid values are <tt>'right'</tt> (or <tt>'r'</tt>) and <tt>'bottom'</tt>
-     * (or <tt>'b'</tt>).<div class="sub-desc">
+     * &lt;li&gt;&lt;b&gt;Sides&lt;/b&gt; : Valid values are &lt;tt&gt;'right'&lt;/tt&gt; (or &lt;tt&gt;'r'&lt;/tt&gt;) and &lt;tt&gt;'bottom'&lt;/tt&gt;
+     * (or &lt;tt&gt;'b'&lt;/tt&gt;).&lt;div class=&quot;sub-desc&quot;&gt;
      * Either the container must have a fixed size or an anchorSize config value defined at render time in
-     * order for these to have any effect.</div></li>
+     * order for these to have any effect.&lt;/div&gt;&lt;/li&gt;
      *
-     * <li><b>Mixed</b> : <div class="sub-desc">
+     * &lt;li&gt;&lt;b&gt;Mixed&lt;/b&gt; : &lt;div class=&quot;sub-desc&quot;&gt;
      * Anchor values can also be mixed as needed.  For example, to render the width offset from the container
      * right edge by 50 pixels and 75% of the container's height use:
-     * <pre><code>
+     * &lt;pre&gt;&lt;code&gt;
 anchor: '-50 75%'
-     * </code></pre></div></li>
+     * &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
      *
      *
-     * </ul></div>
+     * &lt;/ul&gt;&lt;/div&gt;
      */
 
     type: 'anchor',
 
-    <a name="cfg-Ext.layout.container.Anchor-defaultAnchor"></a>/**
-     * @cfg {String} defaultAnchor
+<span id='Ext-layout.container.Anchor-cfg-defaultAnchor'>    /**
+</span>     * @cfg {String} defaultAnchor
      *
      * default anchor for all child container items applied if no anchor or specific width is set on the child item.  Defaults to '100%'.
      *
@@ -104,13 +128,13 @@ anchor: '-50 75%'
             box, newTargetSize, anchorWidth, anchorHeight, component, anchorSpec, calcWidth, calcHeight,
             anchorsArray, anchor, i, el;
 
-        if (ownerWidth < 20 && ownerHeight < 20) {
+        if (ownerWidth &lt; 20 &amp;&amp; ownerHeight &lt; 20) {
             return;
         }
 
         // Anchor layout uses natural HTML flow to arrange the child items.
         // To ensure that all browsers (I'm looking at you IE!) add the bottom margin of the last child to the
-        // containing element height, we create a zero-sized element with style clear:both to force a "new line"
+        // containing element height, we create a zero-sized element with style clear:both to force a &quot;new line&quot;
         if (!me.clearEl) {
             me.clearEl = target.createChild({
                 cls: Ext.baseCSSPrefix + 'clear',
@@ -138,12 +162,12 @@ anchor: '-50 75%'
             target.addCls(Ext.baseCSSPrefix + 'inline-children');
         }
 
-        for (i = 0; i < len; i++) {
+        for (i = 0; i &lt; len; i++) {
             component = components[i];
             el = component.el;
             anchor = component.anchor;
 
-            if (!component.anchor && component.items && !Ext.isNumber(component.width) && !(Ext.isIE6 && Ext.isStrict)) {
+            if (!component.anchor &amp;&amp; component.items &amp;&amp; !Ext.isNumber(component.width) &amp;&amp; !(Ext.isIE6 &amp;&amp; Ext.isStrict)) {
                 component.anchor = anchor = me.defaultAnchor;
             }
 
@@ -179,12 +203,12 @@ anchor: '-50 75%'
             target.removeCls(Ext.baseCSSPrefix + 'inline-children');
         }
 
-        for (i = 0; i < len; i++) {
+        for (i = 0; i &lt; len; i++) {
             box = boxes[i];
             me.setItemSize(box.component, box.width, box.height);
         }
 
-        if (overflow && overflow != 'hidden' && !me.adjustmentPass) {
+        if (overflow &amp;&amp; overflow != 'hidden' &amp;&amp; !me.adjustmentPass) {
             newTargetSize = me.getLayoutTargetSize();
             if (newTargetSize.width != size.width || newTargetSize.height != size.height) {
                 me.adjustmentPass = true;
@@ -197,7 +221,7 @@ anchor: '-50 75%'
 
     // private
     parseAnchor: function(a, start, cstart) {
-        if (a && a != 'none') {
+        if (a &amp;&amp; a != 'none') {
             var ratio;
             // standard anchor
             if (this.parseAnchorRE.test(a)) {
@@ -236,4 +260,4 @@ anchor: '-50 75%'
         return value;
     }
 
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

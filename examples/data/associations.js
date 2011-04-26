@@ -240,7 +240,8 @@ Ext.define('OrderItemGrid', {
                     text: 'Parent association loader',
                     tooltip: 'Demonstrate loading parent relationships - A new record will be created so we ignore any previous associations setup',
                     scope: this,
-                    handler: this.onLoadClick
+                    handler: this.onLoadClick,
+                    disabled: true
                 }]
             }]
         });
@@ -278,6 +279,7 @@ Ext.define('ItemLoader', {
     
     initComponent: function(){
         Ext.apply(this, {
+            border: false,
             dockedItems: [{
                 xtype: 'toolbar',
                 items: [{
@@ -373,6 +375,7 @@ Ext.onReady(function(){
         renderTo: document.body,
         width: 750,
         height: 400,
+        border: false,
         layout: {
             type: 'vbox',
             align: 'stretch'
@@ -380,7 +383,8 @@ Ext.onReady(function(){
         items: [{
             height: 200,
             xtype: 'container',
-            layout: 'card'
+            layout: 'card',
+            margin: '0 0 5 0'
         }, {
             flex: 1,
             title: 'Loader log',

@@ -1,6 +1,6 @@
 /**
  * @class FeedViewer.FeedInfo
- * @extends Ext.tab.TabPanel
+ * @extends Ext.tab.Panel
  *
  * A container class for showing a series of feed details
  * 
@@ -10,11 +10,19 @@
  */
 Ext.define('FeedViewer.FeedInfo', {
     
-    extend: 'Ext.tab.TabPanel',
+    extend: 'Ext.tab.Panel',
     alias: 'widget.feedinfo',
     
     maxTabWidth: 230,
     border: false,
+    
+    initComponent: function() {
+        this.tabBar = {
+            border: true
+        };
+        
+        this.callParent();
+    },
     
     /**
      * Add a new feed

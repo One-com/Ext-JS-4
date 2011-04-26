@@ -1,12 +1,13 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.HasManyAssociation"></a>/**
- * @author Ed Spencer
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-data.HasManyAssociation'>/**
+</span> * @author Ed Spencer
  * @class Ext.data.HasManyAssociation
  * @extends Ext.data.Association
  * 
- * <p>Represents a one-to-many relationship between two models. Usually created indirectly via a model definition:</p>
+ * &lt;p&gt;Represents a one-to-many relationship between two models. Usually created indirectly via a model definition:&lt;/p&gt;
  * 
-<pre><code>
-Ext.regModel('Product', {
+&lt;pre&gt;&lt;code&gt;
+Ext.define('Product', {
+    extend: 'Ext.data.Model',
     fields: [
         {name: 'id',      type: 'int'},
         {name: 'user_id', type: 'int'},
@@ -14,24 +15,25 @@ Ext.regModel('Product', {
     ]
 });
 
-Ext.regModel('User', {
+Ext.define('User', {
+    extend: 'Ext.data.Model',
     fields: [
         {name: 'id',   type: 'int'},
         {name: 'name', type: 'string'}
     ],
-    
+    // we can use the hasMany shortcut on the model to create a hasMany association
     hasMany: {model: 'Product', name: 'products'}
 });
-</pre></code>
+&lt;/pre&gt;&lt;/code&gt;
 * 
- * <p>Above we created Product and User models, and linked them by saying that a User hasMany Products. This gives
+ * &lt;p&gt;Above we created Product and User models, and linked them by saying that a User hasMany Products. This gives
  * us a new function on every User instance, in this case the function is called 'products' because that is the name
- * we specified in the association configuration above.</p>
+ * we specified in the association configuration above.&lt;/p&gt;
  * 
- * <p>This new function returns a specialized {@link Ext.data.Store Store} which is automatically filtered to load
- * only Products for the given model instance:</p>
+ * &lt;p&gt;This new function returns a specialized {@link Ext.data.Store Store} which is automatically filtered to load
+ * only Products for the given model instance:&lt;/p&gt;
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 //first, we load up a User with id of 1
 var user = Ext.ModelManager.create({id: 1, name: 'Ed'}, 'User');
 
@@ -46,22 +48,23 @@ products.add({
 
 //saves the changes to the store - this automatically sets the new Product's user_id to 1 before saving
 products.sync();
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>The new Store is only instantiated the first time you call products() to conserve memory and processing time,
- * though calling products() a second time returns the same store instance.</p>
+ * &lt;p&gt;The new Store is only instantiated the first time you call products() to conserve memory and processing time,
+ * though calling products() a second time returns the same store instance.&lt;/p&gt;
  * 
- * <p><u>Custom filtering</u></p>
+ * &lt;p&gt;&lt;u&gt;Custom filtering&lt;/u&gt;&lt;/p&gt;
  * 
- * <p>The Store is automatically furnished with a filter - by default this filter tells the store to only return
+ * &lt;p&gt;The Store is automatically furnished with a filter - by default this filter tells the store to only return
  * records where the associated model's foreign key matches the owner model's primary key. For example, if a User
- * with ID = 100 hasMany Products, the filter loads only Products with user_id == 100.</p>
+ * with ID = 100 hasMany Products, the filter loads only Products with user_id == 100.&lt;/p&gt;
  * 
- * <p>Sometimes we want to filter by another field - for example in the case of a Twitter search application we may
- * have models for Search and Tweet:</p>
+ * &lt;p&gt;Sometimes we want to filter by another field - for example in the case of a Twitter search application we may
+ * have models for Search and Tweet:&lt;/p&gt;
  * 
-<pre><code>
-var Search = Ext.regModel('Search', {
+&lt;pre&gt;&lt;code&gt;
+Ext.define('Search', {
+    extend: 'Ext.data.Model',
     fields: [
         'id', 'query'
     ],
@@ -73,7 +76,8 @@ var Search = Ext.regModel('Search', {
     }
 });
 
-Ext.regModel('Tweet', {
+Ext.define('Tweet', {
+    extend: 'Ext.data.Model',
     fields: [
         'id', 'text', 'from_user'
     ]
@@ -81,12 +85,12 @@ Ext.regModel('Tweet', {
 
 //returns a Store filtered by the filterProperty
 var store = new Search({query: 'Sencha Touch'}).tweets();
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>The tweets association above is filtered by the query property by setting the {@link #filterProperty}, and is
- * equivalent to this:</p>
+ * &lt;p&gt;The tweets association above is filtered by the query property by setting the {@link #filterProperty}, and is
+ * equivalent to this:&lt;/p&gt;
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 var store = new Ext.data.Store({
     model: 'Tweet',
     filters: [
@@ -96,36 +100,84 @@ var store = new Ext.data.Store({
         }
     ]
 });
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  */
 Ext.define('Ext.data.HasManyAssociation', {
     extend: 'Ext.data.Association',
     requires: ['Ext.util.Inflector'],
-    
-    <a name="cfg-Ext.data.HasManyAssociation-foreignKey"></a>/**
-     * @cfg {String} foreignKey The name of the foreign key on the associated model that links it to the owner
-     * model. Defaults to the lowercased name of the owner model plus "_id", e.g. an association with a where a
-     * model called Group hasMany Users would create 'group_id' as the foreign key.
+
+    alias: 'association.hasmany',
+
+<span id='Ext-data.HasManyAssociation-cfg-foreignKey'>    /**
+</span>     * @cfg {String} foreignKey The name of the foreign key on the associated model that links it to the owner
+     * model. Defaults to the lowercased name of the owner model plus &quot;_id&quot;, e.g. an association with a where a
+     * model called Group hasMany Users would create 'group_id' as the foreign key. When the remote store is loaded,
+     * the store is automatically filtered so that only records with a matching foreign key are included in the 
+     * resulting child store. This can be overridden by specifying the {@link #filterProperty}.
+     * &lt;pre&gt;&lt;code&gt;
+Ext.define('Group', {
+    extend: 'Ext.data.Model',
+    fields: ['id', 'name'],
+    hasMany: 'User'
+});
+
+Ext.define('User', {
+    extend: 'Ext.data.Model',
+    fields: ['id', 'name', 'group_id'], // refers to the id of the group that this user belongs to
+    belongsTo: 'Group'
+});
+     * &lt;/code&gt;&lt;/pre&gt;
      */
     
-    <a name="cfg-Ext.data.HasManyAssociation-name"></a>/**
-     * @cfg {String} name The name of the function to create on the owner model. Required
+<span id='Ext-data.HasManyAssociation-cfg-name'>    /**
+</span>     * @cfg {String} name The name of the function to create on the owner model to retrieve the child store.
+     * If not specified, the pluralized name of the child model is used.
+     * &lt;pre&gt;&lt;code&gt;
+// This will create a users() method on any Group model instance
+Ext.define('Group', {
+    extend: 'Ext.data.Model',
+    fields: ['id', 'name'],
+    hasMany: 'User'
+});
+var group = new Group();
+console.log(group.users());
+
+// The method to retrieve the users will now be getUserList
+Ext.define('Group', {
+    extend: 'Ext.data.Model',
+    fields: ['id', 'name'],
+    hasMany: {model: 'User', name: 'getUserList'}
+});
+var group = new Group();
+console.log(group.getUserList());
+     * &lt;/code&gt;&lt;/pre&gt;
      */
     
-    <a name="cfg-Ext.data.HasManyAssociation-storeConfig"></a>/**
-     * @cfg {Object} storeConfig Optional configuration object that will be passed to the generated Store. Defaults to 
+<span id='Ext-data.HasManyAssociation-cfg-storeConfig'>    /**
+</span>     * @cfg {Object} storeConfig Optional configuration object that will be passed to the generated Store. Defaults to 
      * undefined.
      */
     
-    <a name="cfg-Ext.data.HasManyAssociation-filterProperty"></a>/**
-     * @cfg {String} filterProperty Optionally overrides the default filter that is set up on the associated Store. If
+<span id='Ext-data.HasManyAssociation-cfg-filterProperty'>    /**
+</span>     * @cfg {String} filterProperty Optionally overrides the default filter that is set up on the associated Store. If
      * this is not set, a filter is automatically created which filters the association based on the configured 
      * {@link #foreignKey}. See intro docs for more details. Defaults to undefined
      */
     
-    <a name="cfg-Ext.data.HasManyAssociation-autoLoad"></a>/**
-     * @cfg {Boolean} autoLoad True to automatically load the related store from a remote source when instantiated.
-     * Defaults to <tt>false</tt>.
+<span id='Ext-data.HasManyAssociation-cfg-autoLoad'>    /**
+</span>     * @cfg {Boolean} autoLoad True to automatically load the related store from a remote source when instantiated.
+     * Defaults to &lt;tt&gt;false&lt;/tt&gt;.
+     */
+    
+<span id='Ext-data.HasManyAssociation-cfg-type'>    /**
+</span>     * @cfg {String} type The type configuration can be used when creating associations using a configuration object.
+     * Use 'hasMany' to create a HasManyAssocation
+     * &lt;pre&gt;&lt;code&gt;
+associations: [{
+    type: 'hasMany',
+    model: 'User'
+}]
+     * &lt;/code&gt;&lt;/pre&gt;
      */
     
     constructor: function(config) {
@@ -141,15 +193,15 @@ Ext.define('Ext.data.HasManyAssociation', {
         name = me.name;
         
         Ext.applyIf(me, {
-            storeName : name + "Store",
-            foreignKey: me.ownerName.toLowerCase() + "_id"
+            storeName : name + &quot;Store&quot;,
+            foreignKey: me.ownerName.toLowerCase() + &quot;_id&quot;
         });
         
         ownerProto[name] = me.createStore();
     },
     
-    /**
-     * @private
+<span id='Ext-data.HasManyAssociation-method-createStore'>    /**
+</span>     * @private
      * Creates a function that returns an Ext.data.Store which is configured to load a set of data filtered
      * by the owner model's primary key - e.g. in a hasMany association where Group hasMany Users, this function
      * returns a Store configured to return the filtered set of a single Group's Users.
@@ -204,8 +256,8 @@ Ext.define('Ext.data.HasManyAssociation', {
         };
     },
     
-    /**
-     * Read associated data
+<span id='Ext-data.HasManyAssociation-method-read'>    /**
+</span>     * Read associated data
      * @private
      * @param {Ext.data.Model} record The record we're writing to
      * @param {Ext.data.reader.Reader} reader The reader for the associated model
@@ -220,7 +272,7 @@ Ext.define('Ext.data.HasManyAssociation', {
         //now that we've added the related records to the hasMany association, set the inverse belongsTo
         //association on each of them if it exists
         inverse = this.associatedModel.prototype.associations.findBy(function(assoc){
-            return assoc.type === 'belongsTo' && assoc.associatedName === record.$className;
+            return assoc.type === 'belongsTo' &amp;&amp; assoc.associatedName === record.$className;
         });
     
         //if the inverse association was found, set it now on each record we've just created
@@ -230,4 +282,4 @@ Ext.define('Ext.data.HasManyAssociation', {
             });
         }
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

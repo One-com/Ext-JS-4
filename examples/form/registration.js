@@ -12,7 +12,7 @@ Ext.onReady(function() {
         frame: true,
         width: 350,
         bodyPadding: 10,
-        bodyBorder: 1,
+        bodyBorder: true,
         title: 'Account Registration',
 
         defaults: {

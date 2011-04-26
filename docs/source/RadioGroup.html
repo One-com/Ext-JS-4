@@ -1,22 +1,22 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.form.RadioGroup"></a>/**
- * @class Ext.form.RadioGroup
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-form.RadioGroup-method-constructor'><span id='Ext-form.RadioGroup'>/**
+</span></span> * @class Ext.form.RadioGroup
  * @extends Ext.form.CheckboxGroup
- * <p>A {@link Ext.form.FieldContainer field container} which has a specialized layout for arranging
- * {@link Ext.form.Radio} controls into columns, and provides convenience {@link Ext.form.Field} methods
+ * &lt;p&gt;A {@link Ext.form.FieldContainer field container} which has a specialized layout for arranging
+ * {@link Ext.form.field.Radio} controls into columns, and provides convenience {@link Ext.form.field.Field} methods
  * for {@link #getValue getting}, {@link #setValue setting}, and {@link #validate validating} the group
- * of radio buttons as a whole.</p>
- * <p><b>Validation:</b> Individual radio buttons themselves have no default validation behavior, but
+ * of radio buttons as a whole.&lt;/p&gt;
+ * &lt;p&gt;&lt;b&gt;Validation:&lt;/b&gt; Individual radio buttons themselves have no default validation behavior, but
  * sometimes you want to require a user to select one of a group of radios. RadioGroup
- * allows this by setting the config <tt>{@link #allowBlank}:false</tt>; when the user does not check at
+ * allows this by setting the config &lt;tt&gt;{@link #allowBlank}:false&lt;/tt&gt;; when the user does not check at
  * one of the radio buttons, the entire group will be highlighted as invalid and the
- * {@link #blankText error message} will be displayed according to the {@link #msgTarget} config.</p>
- * <p><b>Layout:</b> The default layout for RadioGroup makes it easy to arrange the radio buttons into
+ * {@link #blankText error message} will be displayed according to the {@link #msgTarget} config.&lt;/p&gt;
+ * &lt;p&gt;&lt;b&gt;Layout:&lt;/b&gt; The default layout for RadioGroup makes it easy to arrange the radio buttons into
  * columns; see the {@link #columns} and {@link #vertical} config documentation for details. You may also
  * use a completely different layout by setting the {@link #layout} to one of the other supported layout
  * types; for instance you may wish to use a custom arrangement of hbox and vbox containers. In that case
- * the Radio components at any depth will still be managed by the RadioGroup's validation.</p>
- * <p>Example usage:</p>
- * <pre><code>
+ * the Radio components at any depth will still be managed by the RadioGroup's validation.&lt;/p&gt;
+ * &lt;p&gt;Example usage:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
 var myRadioGroup = new Ext.form.RadioGroup({
     id: 'myGroup',
     xtype: 'radiogroup',
@@ -33,7 +33,7 @@ var myRadioGroup = new Ext.form.RadioGroup({
         {boxLabel: 'Item 6', name: 'rb', inputValue: '6'}
     ]
 });
- * </code></pre>
+ * &lt;/code&gt;&lt;/pre&gt;
  * @constructor
  * Creates a new RadioGroup
  * @param {Object} config Configuration options
@@ -43,18 +43,18 @@ Ext.define('Ext.form.RadioGroup', {
     extend: 'Ext.form.CheckboxGroup',
     alias: 'widget.radiogroup',
 
-    <a name="cfg-Ext.form.RadioGroup-items"></a>/**
-     * @cfg {Array} items An Array of {@link Ext.form.Radio Radio}s or Radio config objects
+<span id='Ext-form.RadioGroup-cfg-items'>    /**
+</span>     * @cfg {Array} items An Array of {@link Ext.form.field.Radio Radio}s or Radio config objects
      * to arrange in the group.
      */
-    <a name="cfg-Ext.form.RadioGroup-allowBlank"></a>/**
-     * @cfg {Boolean} allowBlank True to allow every item in the group to be blank (defaults to true).
+<span id='Ext-form.RadioGroup-cfg-allowBlank'>    /**
+</span>     * @cfg {Boolean} allowBlank True to allow every item in the group to be blank (defaults to true).
      * If allowBlank = false and no items are selected at validation time, {@link @blankText} will
      * be used as the error text.
      */
     allowBlank : true,
-    <a name="cfg-Ext.form.RadioGroup-blankText"></a>/**
-     * @cfg {String} blankText Error text to display if the {@link #allowBlank} validation fails
+<span id='Ext-form.RadioGroup-cfg-blankText'>    /**
+</span>     * @cfg {String} blankText Error text to display if the {@link #allowBlank} validation fails
      * (defaults to 'You must select one item in this group')
      */
     blankText : 'You must select one item in this group',
@@ -70,4 +70,4 @@ Ext.define('Ext.form.RadioGroup', {
     }
 
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

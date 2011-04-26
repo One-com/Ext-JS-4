@@ -8,19 +8,20 @@ Ext.define('FV.view.feed.Show', {
     ],
 
 	closable: false,
-	layout: 'fit',
+	layout: {
+		type: 'vbox',
+		align: 'stretch'
+	},
 
 	initComponent: function() {
 		Ext.apply(this, {
 			items: [{
-				xtype: 'articlegrid'
-			}],
-
-			dockedItems: [{
+				xtype: 'articlegrid',
+				flex: 1
+			},{
 				xtype: 'articlepreview',
-				dock: 'bottom',
-				height: 300,
-				padding: '0 5 5 5'
+				cls: 'articlepreview',
+				height: 300
 			}]
 		});
 

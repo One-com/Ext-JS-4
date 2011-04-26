@@ -1,73 +1,75 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.layout.container.Border"></a>/**
- * @class Ext.layout.container.Border
- * @extends Ext.layout.Container
- * <p>This is a multi-pane, application-oriented UI layout style that supports multiple
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-layout.container.Border'>/**
+</span> * @class Ext.layout.container.Border
+ * @extends Ext.layout.container.Container
+ * &lt;p&gt;This is a multi-pane, application-oriented UI layout style that supports multiple
  * nested panels, automatic bars between regions and built-in
- * {@link Ext.panel.Panel#collapsible expanding and collapsing} of regions.</p>
- * <p>This class is intended to be extended or created via the <code>layout:'border'</code>
+ * {@link Ext.panel.Panel#collapsible expanding and collapsing} of regions.&lt;/p&gt;
+ * &lt;p&gt;This class is intended to be extended or created via the &lt;code&gt;layout:'border'&lt;/code&gt;
  * {@link Ext.container.Container#layout} config, and should generally not need to be created directly
- * via the new keyword.</p>
- * <p>Example usage:</p>
- * <pre><code>
-var myBorderPanel = new Ext.panel.Panel({
-    {@link Ext.Component#renderTo renderTo}: document.body,
-    {@link Ext.AbstractComponent#width width}: 700,
-    {@link Ext.AbstractComponent#height height}: 500,
-    {@link Ext.panel.Panel#title title}: 'Border Layout',
-    {@link Ext.container.Container#layout layout}: 'border',
-    {@link Ext.container.Container#items items}: [{
-        {@link Ext.panel.Panel#title title}: 'South Region is resizable',
-        region: 'south',     // position for region
-        {@link Ext.AbstractComponent#height height}: 100,
-        split: true,         // enable resizing
-        margins: '0 5 5 5'
-    },{
-        // xtype: 'panel' implied by default
-        {@link Ext.panel.Panel#title title}: 'West Region is collapsible',
-        region:'west',
-        margins: '5 0 0 5',
-        {@link Ext.AbstractComponent#width width}: 200,
-        collapsible: true,   // make collapsible
-        {@link Ext.Component#id id}: 'west-region-container',
-        {@link Ext.container.Container#layout layout}: 'fit',
-        {@link Ext.panel.Panel#unstyled unstyled}: true
-    },{
-        {@link Ext.panel.Panel#title title}: 'Center Region',
-        region: 'center',     // center region is required, no width/height specified
-        {@link Ext.Component#xtype xtype}: 'container',
-        {@link Ext.container.Container#layout layout}: 'fit',
-        margins: '5 5 0 0'
-    }]
-});
-</code></pre>
- * <p><b><u>Notes</u></b>:</p><div class="mdetail-params"><ul>
- * <li>Any Container using the Border layout <b>must</b> have a child item with <code>region:'center'</code>.
+ * via the new keyword.&lt;/p&gt;
+ * {@img Ext.layout.container.Border/Ext.layout.container.Border.png Ext.layout.container.Border container layout}
+ * &lt;p&gt;Example usage:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+     Ext.create('Ext.panel.Panel', {
+        width: 500,
+        height: 400,
+        title: 'Border Layout',
+        layout: 'border',
+        items: [{
+            title: 'South Region is resizable',
+            region: 'south',     // position for region
+            xtype: 'panel',
+            height: 100,
+            split: true,         // enable resizing
+            margins: '0 5 5 5'
+        },{
+            // xtype: 'panel' implied by default
+            title: 'West Region is collapsible',
+            region:'west',
+            xtype: 'panel',
+            margins: '5 0 0 5',
+            width: 200,
+            collapsible: true,   // make collapsible
+            id: 'west-region-container',
+            layout: 'fit'
+        },{
+            title: 'Center Region',
+            region: 'center',     // center region is required, no width/height specified
+            xtype: 'panel',
+            layout: 'fit',
+            margins: '5 5 0 0'
+        }],
+        renderTo: Ext.getBody()
+    });
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;&lt;b&gt;&lt;u&gt;Notes&lt;/u&gt;&lt;/b&gt;:&lt;/p&gt;&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;Any Container using the Border layout &lt;b&gt;must&lt;/b&gt; have a child item with &lt;code&gt;region:'center'&lt;/code&gt;.
  * The child item in the center region will always be resized to fill the remaining space not used by
- * the other regions in the layout.</li>
- * <li>Any child items with a region of <code>west</code> or <code>east</code> may be configured with either
- * an initial <code>width</code>, or a {@link Ext.layout.container.Box#flex} value, or an initial percentage width <b>string</b> (Which is simply divided by 100 and used as a flex value). The 'center' region has a flex value of <code>1</code>.</li>
- * <li>Any child items with a region of <code>north</code> or <code>south</code> may be configured with either
- * an initial <code>height</code>, or a {@link Ext.layout.container.Box#flex} value, or an initial percentage height <b>string</b> (Which is simply divided by 100 and used as a flex value). The 'center' region has a flex value of <code>1</code>.</li>
- * <li>The regions of a BorderLayout are <b>fixed at render time</b> and thereafter, its child Components may not be removed or added</b>.To add/remove
+ * the other regions in the layout.&lt;/li&gt;
+ * &lt;li&gt;Any child items with a region of &lt;code&gt;west&lt;/code&gt; or &lt;code&gt;east&lt;/code&gt; may be configured with either
+ * an initial &lt;code&gt;width&lt;/code&gt;, or a {@link Ext.layout.container.Box#flex} value, or an initial percentage width &lt;b&gt;string&lt;/b&gt; (Which is simply divided by 100 and used as a flex value). The 'center' region has a flex value of &lt;code&gt;1&lt;/code&gt;.&lt;/li&gt;
+ * &lt;li&gt;Any child items with a region of &lt;code&gt;north&lt;/code&gt; or &lt;code&gt;south&lt;/code&gt; may be configured with either
+ * an initial &lt;code&gt;height&lt;/code&gt;, or a {@link Ext.layout.container.Box#flex} value, or an initial percentage height &lt;b&gt;string&lt;/b&gt; (Which is simply divided by 100 and used as a flex value). The 'center' region has a flex value of &lt;code&gt;1&lt;/code&gt;.&lt;/li&gt;
+ * &lt;li&gt;The regions of a BorderLayout are &lt;b&gt;fixed at render time&lt;/b&gt; and thereafter, its child Components may not be removed or added&lt;/b&gt;.To add/remove
  * Components within a BorderLayout, have them wrapped by an additional Container which is directly
  * managed by the BorderLayout.  If the region is to be collapsible, the Container used directly
  * by the BorderLayout manager should be a Panel.  In the following example a Container (an Ext.panel.Panel)
- * is added to the west region:<pre><code>
+ * is added to the west region:&lt;pre&gt;&lt;code&gt;
 wrc = {@link Ext#getCmp Ext.getCmp}('west-region-container');
 wrc.{@link Ext.container.Container#removeAll removeAll}();
 wrc.{@link Ext.container.Container#add add}({
     title: 'Added Panel',
     html: 'Some content'
 });
- * </code></pre>
- * </li>
- * <li><b>There is no BorderLayout.Region class in ExtJS 4.0+</b></li>
- * </ul></div>
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;There is no BorderLayout.Region class in ExtJS 4.0+&lt;/b&gt;&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
  */
 Ext.define('Ext.layout.container.Border', {
 
     alias: ['layout.border'],
-    extend: 'Ext.layout.Container',
+    extend: 'Ext.layout.container.Container',
     requires: ['Ext.resizer.Splitter', 'Ext.container.Container', 'Ext.fx.Anim'],
     alternateClassName: 'Ext.layout.BorderLayout',
 
@@ -99,14 +101,14 @@ Ext.define('Ext.layout.container.Border', {
             me.initializeBorderLayout();
         }
 
-        // Delegate this operation to the shadow "V" or "H" box layout, and then down to any embedded layout.
+        // Delegate this operation to the shadow &quot;V&quot; or &quot;H&quot; box layout, and then down to any embedded layout.
         me.shadowLayout.onLayout();
         if (me.embeddedContainer) {
             me.embeddedContainer.layout.onLayout();
         }
 
         // If the panel was originally configured with collapsed: true, it will have
-        // been initialized with a "borderCollapse" flag: Collapse it now before the first layout.
+        // been initialized with a &quot;borderCollapse&quot; flag: Collapse it now before the first layout.
         if (!me.initialCollapsedComplete) {
             Ext.iterate(me.regions, function(name, region){
                 if (region.borderCollapse) {
@@ -122,7 +124,7 @@ Ext.define('Ext.layout.container.Border', {
             this.initializeBorderLayout();
         }
 
-        // Delegate this operation to the shadow "V" or "H" box layout.
+        // Delegate this operation to the shadow &quot;V&quot; or &quot;H&quot; box layout.
         return this.shadowLayout.isValidParent(item, target, position);
     },
 
@@ -131,20 +133,20 @@ Ext.define('Ext.layout.container.Border', {
             this.initializeBorderLayout();
         }
 
-        // Delegate this operation to the shadow "V" or "H" box layout.
+        // Delegate this operation to the shadow &quot;V&quot; or &quot;H&quot; box layout.
         this.shadowLayout.beforeLayout();
     },
 
     renderItems: function(items, target) {
-        //<debug>
+        //&lt;debug&gt;
         Ext.Error.raise('This should not be called');
-        //</debug>
+        //&lt;/debug&gt;
     },
 
     renderItem: function(item) {
-        //<debug>
+        //&lt;debug&gt;
         Ext.Error.raise('This should not be called');
-        //</debug>
+        //&lt;/debug&gt;
     },
 
     initializeBorderLayout: function() {
@@ -163,12 +165,12 @@ Ext.define('Ext.layout.container.Border', {
         me.splitters = {};
 
         // Map of regions
-        for (; i < ln; i++) {
+        for (; i &lt; ln; i++) {
             comp = items[i];
             regions[comp.region] = comp;
 
-            // Intercept collapsing to implement showing an alternate Component as a collapsed placeHolder
-            if (comp.region != 'center' && comp.collapsible && comp.collapseMode != 'header') {
+            // Intercept collapsing to implement showing an alternate Component as a collapsed placeholder
+            if (comp.region != 'center' &amp;&amp; comp.collapsible &amp;&amp; comp.collapseMode != 'header') {
 
                 // This layout intercepts any initial collapsed state. Panel must not do this itself.
                 comp.borderCollapse = comp.collapsed;
@@ -183,11 +185,11 @@ Ext.define('Ext.layout.container.Border', {
                 me.setupState(comp);
             }
         }
-        //<debug>
+        //&lt;debug&gt;
         if (!regions.center) {
-            Ext.Error.raise("You must specify a center region when defining a BorderLayout.");
+            Ext.Error.raise(&quot;You must specify a center region when defining a BorderLayout.&quot;);
         }
-        //</debug>
+        //&lt;/debug&gt;
         comp = regions.center;
         if (!comp.flex) {
             comp.flex = 1;
@@ -203,7 +205,7 @@ Ext.define('Ext.layout.container.Border', {
             if (comp.split) {
                 hBoxItems.push(me.splitters.west = me.createSplitter(comp));
             }
-            percentage = Ext.isString(comp.width) && comp.width.match(me.percentageRe);
+            percentage = Ext.isString(comp.width) &amp;&amp; comp.width.match(me.percentageRe);
             if (percentage) {
                 horizontalFlex += (comp.flex = parseInt(percentage[1], 10) / 100);
                 delete comp.width;
@@ -216,7 +218,7 @@ Ext.define('Ext.layout.container.Border', {
             if (comp.split) {
                 vBoxItems.push(me.splitters.north = me.createSplitter(comp));
             }
-            percentage = Ext.isString(comp.height) && comp.height.match(me.percentageRe);
+            percentage = Ext.isString(comp.height) &amp;&amp; comp.height.match(me.percentageRe);
             if (percentage) {
                 verticalFlex += (comp.flex = parseInt(percentage[1], 10) / 100);
                 delete comp.height;
@@ -259,7 +261,7 @@ Ext.define('Ext.layout.container.Border', {
             if (comp.split) {
                 vBoxItems.push(me.splitters.south = me.createSplitter(comp));
             }
-            percentage = Ext.isString(comp.height) && comp.height.match(me.percentageRe);
+            percentage = Ext.isString(comp.height) &amp;&amp; comp.height.match(me.percentageRe);
             if (percentage) {
                 verticalFlex += (comp.flex = parseInt(percentage[1], 10) / 100);
                 delete comp.height;
@@ -272,7 +274,7 @@ Ext.define('Ext.layout.container.Border', {
             if (comp.split) {
                 hBoxItems.push(me.splitters.east = me.createSplitter(comp));
             }
-            percentage = Ext.isString(comp.width) && comp.width.match(me.percentageRe);
+            percentage = Ext.isString(comp.width) &amp;&amp; comp.width.match(me.percentageRe);
             if (percentage) {
                 horizontalFlex += (comp.flex = parseInt(percentage[1], 10) / 100);
                 delete comp.width;
@@ -280,7 +282,7 @@ Ext.define('Ext.layout.container.Border', {
             hBoxItems.push(comp);
         }
 
-        // Create the injected "items" collections for the Containers.
+        // Create the injected &quot;items&quot; collections for the Containers.
         // If we have north or south, then the shadow Container will be a VBox.
         // If there are also east or west regions, its center will be a shadow HBox.
         // If there are *only* east or west regions, then the shadow layout will be an HBox (or Fit).
@@ -360,11 +362,11 @@ Ext.define('Ext.layout.container.Border', {
         }
 
         // Create upward links from the region Components to their shadow ownerCts
-        for (i = 0, items = me.shadowContainer.items.items, ln = items.length; i < ln; i++) {
+        for (i = 0, items = me.shadowContainer.items.items, ln = items.length; i &lt; ln; i++) {
             items[i].shadowOwnerCt = me.shadowContainer;
         }
         if (me.embeddedContainer) {
-            for (i = 0, items = me.embeddedContainer.items.items, ln = items.length; i < ln; i++) {
+            for (i = 0, items = me.embeddedContainer.items.items, ln = items.length; i &lt; ln; i++) {
                 items[i].shadowOwnerCt = me.embeddedContainer;
             }
         }
@@ -394,8 +396,8 @@ Ext.define('Ext.layout.container.Border', {
         comp.addStateEvents(['collapse', 'expand', 'resize']);
     },
 
-    /**
-     * Create the items collection for our shadow/embedded containers
+<span id='Ext-layout.container.Border-method-createItems'>    /**
+</span>     * Create the items collection for our shadow/embedded containers
      * @private
      */
     createItems: function(container, items){
@@ -427,7 +429,7 @@ Ext.define('Ext.layout.container.Border', {
 
         // Mini collapse means that the splitter is the placeholder Component
         if (comp.collapseMode == 'mini') {
-            comp.placeHolder = resizer;
+            comp.placeholder = resizer;
         }
 
         // Arrange to hide/show a region's associated splitter when the region is hidden/shown
@@ -456,32 +458,32 @@ Ext.define('Ext.layout.container.Border', {
         }
     },
 
-    <a name="method-Ext.layout.container.Border-getPlaceHolder"></a>/**
-     * <p>Return the {@link Ext.panel.Panel#placeHolder placeHolder} Component to which the passed child Panel of the layout will collapse.
-     * By default, this will be a {@link Ext.panel.Header Header} component (Docked to the appropriate border). See {@link Ext.panel.Panel#placeHolder placeHolder}.
-     * config to customize this.</p>
-     * <p><b>Note that this will be a fully instantiated Component, but will only be <i>rendered</i> when the Panel is first collapsed.</b></p>
-     * @param {Panel} panel The child Panel of the layout for which to return the {@link Ext.panel.Panel#placeHolder placeHolder}.
-     * @returns {Component} The Panel's {@link Ext.panel.Panel#placeHolder placeHolder} unless the {@link Ext.panel.Panel#collapseMode collapseMode} is
-     * <code>'header'</code>, in which case <i>undefined</i> is returned.
+<span id='Ext-layout.container.Border-method-getPlaceholder'>    /**
+</span>     * &lt;p&gt;Return the {@link Ext.panel.Panel#placeholder placeholder} Component to which the passed child Panel of the layout will collapse.
+     * By default, this will be a {@link Ext.panel.Header Header} component (Docked to the appropriate border). See {@link Ext.panel.Panel#placeholder placeholder}.
+     * config to customize this.&lt;/p&gt;
+     * &lt;p&gt;&lt;b&gt;Note that this will be a fully instantiated Component, but will only be &lt;i&gt;rendered&lt;/i&gt; when the Panel is first collapsed.&lt;/b&gt;&lt;/p&gt;
+     * @param {Panel} panel The child Panel of the layout for which to return the {@link Ext.panel.Panel#placeholder placeholder}.
+     * @returns {Component} The Panel's {@link Ext.panel.Panel#placeholder placeholder} unless the {@link Ext.panel.Panel#collapseMode collapseMode} is
+     * &lt;code&gt;'header'&lt;/code&gt;, in which case &lt;i&gt;undefined&lt;/i&gt; is returned.
      */
-    getPlaceHolder: function(comp) {
+    getPlaceholder: function(comp) {
         var me = this,
-            placeHolder = comp.placeHolder,
+            placeholder = comp.placeholder,
             shadowContainer = comp.shadowOwnerCt,
             shadowLayout = shadowContainer.layout,
             oppositeDirection = Ext.panel.Panel.prototype.getOppositeDirection(comp.collapseDirection),
             horiz = (comp.region == 'north' || comp.region == 'south');
 
-        // No placeHolder if the collapse mode is not the Border layout default
+        // No placeholder if the collapse mode is not the Border layout default
         if (comp.collapseMode == 'header') {
             return;
         }
 
         // Provide a replacement Container with an expand tool
-        if (!placeHolder) {
+        if (!placeholder) {
             if (comp.collapseMode == 'mini') {
-                placeHolder = Ext.create('Ext.resizer.Splitter', {
+                placeholder = Ext.create('Ext.resizer.Splitter', {
                     id: 'collapse-placeholder-' + comp.id,
                     collapseTarget: comp,
                     performCollapse: false,
@@ -492,11 +494,11 @@ Ext.define('Ext.layout.container.Border', {
                         }
                     }
                 });
-                placeHolder.addCls(placeHolder.collapsedCls);
+                placeholder.addCls(placeholder.collapsedCls);
             } else {
-                placeHolder = {
+                placeholder = {
                     id: 'collapse-placeholder-' + comp.id,
-                    margins: comp.initialConfig.margins,
+                    margins: comp.initialConfig.margins || Ext.getClass(comp).prototype.margins,
                     xtype: 'header',
                     orientation: horiz ? 'horizontal' : 'vertical',
                     title: comp.title,
@@ -516,10 +518,10 @@ Ext.define('Ext.layout.container.Border', {
                     } : null
                 };
                 // Hack for IE6/7/IEQuirks's inability to display an inline-block
-                if ((Ext.isIE6 || Ext.isIE7 || (Ext.isIEQuirks)) && !horiz) {
-                    placeHolder.width = 25;
+                if ((Ext.isIE6 || Ext.isIE7 || (Ext.isIEQuirks)) &amp;&amp; !horiz) {
+                    placeholder.width = 25;
                 }
-                placeHolder[horiz ? 'tools' : 'items'] = [{
+                placeholder[horiz ? 'tools' : 'items'] = [{
                     xtype: 'tool',
                     client: comp,
                     type: 'expand-' + oppositeDirection,
@@ -527,28 +529,41 @@ Ext.define('Ext.layout.container.Border', {
                     scope: me
                 }];
             }
-            placeHolder = me.owner.createComponent(placeHolder);
+            placeholder = me.owner.createComponent(placeholder);
             if (comp.isXType('panel')) {
-                comp.on('titlechange', me.onRegionTitleChange, me);
+                comp.on({
+                    titlechange: me.onRegionTitleChange,
+                    iconchange: me.onRegionIconChange,
+                    scope: me
+                });
             }
         }
 
-        // The collapsed Component holds a reference to its placeHolder and vice versa
-        comp.placeHolder = placeHolder;
-        placeHolder.comp = comp;
+        // The collapsed Component holds a reference to its placeholder and vice versa
+        comp.placeholder = placeholder;
+        placeholder.comp = comp;
 
-        return placeHolder;
+        return placeholder;
     },
-    /*
-     * @private
-     * Update the placeHolder title when panel title has been set or changed.
+
+<span id='Ext-layout.container.Border-method-onRegionTitleChange'>    /**
+</span>     * @private
+     * Update the placeholder title when panel title has been set or changed.
      */
-    onRegionTitleChange: function(comp, newTitle) {s
-        comp.placeHolder.setTitle(newTitle);
+    onRegionTitleChange: function(comp, newTitle) {
+        comp.placeholder.setTitle(newTitle);
     },
-      
-    /**
-     * @private
+
+<span id='Ext-layout.container.Border-method-onRegionIconChange'>    /**
+</span>     * @private
+     * Update the placeholder iconCls when panel iconCls has been set or changed.
+     */
+    onRegionIconChange: function(comp, newIconCls) {
+        comp.placeholder.setIconCls(newIconCls);
+    },
+
+<span id='Ext-layout.container.Border-method-calculateChildBox'>    /**
+</span>     * @private
      * Calculates the size and positioning of the passed child item. Must be present because Panel's expand,
      * when configured with a flex, calls this method on its ownerCt's layout.
      * @param {Component} child The child Component to calculate the box for
@@ -559,13 +574,13 @@ Ext.define('Ext.layout.container.Border', {
         if (me.shadowContainer.items.contains(comp)) {
             return me.shadowContainer.layout.calculateChildBox(comp);
         }
-        else if (me.embeddedContainer && me.embeddedContainer.items.contains(comp)) {
+        else if (me.embeddedContainer &amp;&amp; me.embeddedContainer.items.contains(comp)) {
             return me.embeddedContainer.layout.calculateChildBox(comp);
         }
     },
 
-    /**
-     * @private
+<span id='Ext-layout.container.Border-method-onBeforeRegionCollapse'>    /**
+</span>     * @private
      * Intercepts the Panel's own collapse event and perform's substitution of the Panel
      * with a placeholder Header orientated in the appropriate dimension.
      * @param comp The Panel being collapsed.
@@ -579,13 +594,12 @@ Ext.define('Ext.layout.container.Border', {
             miniCollapse = comp.collapseMode == 'mini',
             shadowContainer = comp.shadowOwnerCt,
             shadowLayout = shadowContainer.layout,
-            centerComp = shadowContainer.child('[region=center]'),
-            placeHolder = comp.placeHolder,
-            placeHolderBox,
+            placeholder = comp.placeholder,
+            placeholderBox,
             targetSize = shadowLayout.getLayoutTargetSize(),
             sl = me.owner.suspendLayout,
             scsl = shadowContainer.suspendLayout,
-            isNorthOrWest = (comp.region == 'north' || comp.region == 'west'); // Flag to keep the placeHolder non-adjacent to any Splitter
+            isNorthOrWest = (comp.region == 'north' || comp.region == 'west'); // Flag to keep the placeholder non-adjacent to any Splitter
 
         // Do not trigger a layout during transition to collapsed Component
         me.owner.suspendLayout = true;
@@ -601,30 +615,30 @@ Ext.define('Ext.layout.container.Border', {
         me.owner.componentLayout.layoutBusy = true;
 
         // Provide a replacement Container with an expand tool
-        if (!placeHolder) {
-            placeHolder = me.getPlaceHolder(comp);
+        if (!placeholder) {
+            placeholder = me.getPlaceholder(comp);
         }
 
-        // placeHolder already in place; show it.
-        if (placeHolder.shadowOwnerCt === shadowContainer) {
-            placeHolder.show();
+        // placeholder already in place; show it.
+        if (placeholder.shadowOwnerCt === shadowContainer) {
+            placeholder.show();
         }
-        // Insert the collapsed placeHolder Component into the appropriate Box layout shadow Container
+        // Insert the collapsed placeholder Component into the appropriate Box layout shadow Container
         // It must go next to its client Component, but non-adjacent to the splitter so splitter can find its collapse client.
         // Inject an ownerCt value pointing to the owner, border layout Container as the user will expect.
         else {
-            shadowContainer.insert(shadowContainer.items.indexOf(comp) + (isNorthOrWest ? 0 : 1), placeHolder);
-            placeHolder.shadowOwnerCt = shadowContainer;
-            placeHolder.ownerCt = me.owner;
+            shadowContainer.insert(shadowContainer.items.indexOf(comp) + (isNorthOrWest ? 0 : 1), placeholder);
+            placeholder.shadowOwnerCt = shadowContainer;
+            placeholder.ownerCt = me.owner;
         }
 
-        // Flag the collapsing Component as hidden and show the placeHolder.
+        // Flag the collapsing Component as hidden and show the placeholder.
         // This causes the shadow Box layout's calculateChildBoxes to calculate the correct new arrangement.
         // We hide or slideOut the Component's element
         comp.hidden = true;
 
-        if (!placeHolder.rendered) {
-            shadowLayout.renderItem(placeHolder, shadowLayout.innerCt);
+        if (!placeholder.rendered) {
+            shadowLayout.renderItem(placeholder, shadowLayout.innerCt);
         }
 
         // Jobs to be done after the collapse has been done
@@ -651,13 +665,13 @@ Ext.define('Ext.layout.container.Border', {
          * only want to animate the collapse if it wasn't configured
          * initially with collapsed: true
          */
-        if (comp.animCollapse && me.initialCollapsedComplete) {
+        if (comp.animCollapse &amp;&amp; me.initialCollapsedComplete) {
             shadowLayout.layout();
             compEl.dom.style.zIndex = 100;
 
-            // If we're mini-collapsing, the placholder is a Splitter. We don't want it to "bounce in"
+            // If we're mini-collapsing, the placholder is a Splitter. We don't want it to &quot;bounce in&quot;
             if (!miniCollapse) {
-                placeHolder.el.hide();
+                placeholder.el.hide();
             }
             compEl.slideOut(me.slideDirection[comp.region], {
                 duration: Ext.Number.from(comp.animCollapse, Ext.fx.Anim.prototype.duration),
@@ -666,9 +680,9 @@ Ext.define('Ext.layout.container.Border', {
                         compEl.show().setLeftTop(-10000, -10000);
                         compEl.dom.style.zIndex = '';
 
-                        // If we're mini-collapsing, the placholder is a Splitter. We don't want it to "bounce in"
+                        // If we're mini-collapsing, the placholder is a Splitter. We don't want it to &quot;bounce in&quot;
                        if (!miniCollapse) {
-                            placeHolder.el.slideIn(me.slideDirection[comp.region], {
+                            placeholder.el.slideIn(me.slideDirection[comp.region], {
                                 easing: 'linear',
                                 duration: 100
                             });
@@ -681,6 +695,11 @@ Ext.define('Ext.layout.container.Border', {
             compEl.setLeftTop(-10000, -10000);
             shadowLayout.layout();
             afterCollapse();
+
+            // Horrible workaround for https://sencha.jira.com/browse/EXTJSIV-1562
+            if (Ext.isIE) {
+                placeholder.setCalculatedSize(placeholder.el.getWidth());
+            }
         }
 
         return false;
@@ -692,7 +711,7 @@ Ext.define('Ext.layout.container.Border', {
         return false;
     },
 
-    // Called when the collapsed placeHolder is clicked to reinstate a "collapsed" (in reality hidden) Panel.
+    // Called when the collapsed placeholder is clicked to reinstate a &quot;collapsed&quot; (in reality hidden) Panel.
     onPlaceHolderToolClick: function(e, target, owner, tool) {
         var me = this,
             comp = tool.client,
@@ -701,8 +720,8 @@ Ext.define('Ext.layout.container.Border', {
             hidePlaceholder = (comp.collapseMode != 'mini') || !comp.split,
             compEl = comp.el,
             toCompBox,
-            placeHolder = comp.placeHolder,
-            placeHolderEl = placeHolder.el,
+            placeholder = comp.placeholder,
+            placeholderEl = placeholder.el,
             shadowContainer = comp.shadowOwnerCt,
             shadowLayout = shadowContainer.layout,
             curSize,
@@ -717,17 +736,17 @@ Ext.define('Ext.layout.container.Border', {
             comp.stopAnimation();
         }
 
-        // If the Component is fully floated when they click the placeHolder Tool,
+        // If the Component is fully floated when they click the placeholder Tool,
         // it will be primed with a slide out animation object... so delete that
         // and remove the mouseout listeners
         if (comp.slideOutAnim) {
             // Remove mouse leave monitors
             compEl.un(comp.panelMouseMon);
-            placeHolderEl.un(comp.placeHolderMouseMon);
+            placeholderEl.un(comp.placeholderMouseMon);
 
             delete comp.slideOutAnim;
             delete comp.panelMouseMon;
-            delete comp.placeHolderMouseMon;
+            delete comp.placeholderMouseMon;
 
             // If the Panel was floated and primed with a slideOut animation, we don't want to animate its layout operation.
             isFloating = true;
@@ -751,7 +770,7 @@ Ext.define('Ext.layout.container.Border', {
         comp.hidden = false;
         comp.collapsed = false;
         if (hidePlaceholder) {
-            placeHolder.hidden = true;
+            placeholder.hidden = true;
         }
         toCompBox = shadowLayout.calculateChildBox(comp);
 
@@ -761,7 +780,7 @@ Ext.define('Ext.layout.container.Border', {
         }
 
         // If we're going to animate, we need to hide the component before moving it back into position
-        if (comp.animCollapse && !isFloating) {
+        if (comp.animCollapse &amp;&amp; !isFloating) {
             compEl.setStyle('visibility', 'hidden');
         }
         compEl.setLeftTop(toCompBox.left, toCompBox.top);
@@ -795,12 +814,12 @@ Ext.define('Ext.layout.container.Border', {
 
         // Hide the placeholder
         if (hidePlaceholder) {
-            placeHolder.el.hide();
+            placeholder.el.hide();
         }
 
         // Slide the expanding Component to its new position.
         // When that is done, layout the layout.
-        if (comp.animCollapse && !isFloating) {
+        if (comp.animCollapse &amp;&amp; !isFloating) {
             compEl.dom.style.zIndex = 100;
             compEl.slideIn(me.slideDirection[comp.region], {
                 duration: Ext.Number.from(comp.animCollapse, Ext.fx.Anim.prototype.duration),
@@ -827,11 +846,11 @@ Ext.define('Ext.layout.container.Border', {
 
         var me = this,
             compEl = comp.el,
-            placeHolder = comp.placeHolder,
-            placeHolderEl = placeHolder.el,
+            placeholder = comp.placeholder,
+            placeholderEl = placeholder.el,
             shadowContainer = comp.shadowOwnerCt,
             shadowLayout = shadowContainer.layout,
-            placeHolderBox = shadowLayout.getChildBox(placeHolder),
+            placeholderBox = shadowLayout.getChildBox(placeholder),
             scsl = shadowContainer.suspendLayout,
             curSize, toCompBox, compAnim;
 
@@ -846,7 +865,7 @@ Ext.define('Ext.layout.container.Border', {
             return;
         }
 
-        // If the Component is already fully floated when they click the placeHolder,
+        // If the Component is already fully floated when they click the placeholder,
         // it will be primed with a slide out animation object... so slide it out.
         if (comp.slideOutAnim) {
             me.slideOutFloatedComponent(comp);
@@ -854,9 +873,9 @@ Ext.define('Ext.layout.container.Border', {
         }
 
         // Function to be called when the mouse leaves the floated Panel
-        // Slide out when the mouse leaves the region bounded by the slid Component and its placeHolder.
+        // Slide out when the mouse leaves the region bounded by the slid Component and its placeholder.
         function onMouseLeaveFloated(e) {
-            var slideRegion = compEl.getRegion().union(placeHolderEl.getRegion()).adjust(1, -1, -1, 1);
+            var slideRegion = compEl.getRegion().union(placeholderEl.getRegion()).adjust(1, -1, -1, 1);
 
             // If mouse is not within slide Region, slide it out
             if (!slideRegion.contains(e.getPoint())) {
@@ -865,7 +884,7 @@ Ext.define('Ext.layout.container.Border', {
         }
 
         // Monitor for mouseouting of the placeholder. Hide it if they exit for half a second or more
-        comp.placeHolderMouseMon = placeHolderEl.monitorMouseLeave(500, onMouseLeaveFloated);
+        comp.placeholderMouseMon = placeholderEl.monitorMouseLeave(500, onMouseLeaveFloated);
 
         // Do not trigger a layout during slide out of the Component
         shadowContainer.suspendLayout = true;
@@ -883,17 +902,17 @@ Ext.define('Ext.layout.container.Border', {
         // Set flags so that the layout will calculate the boxes for what we want
         comp.hidden = false;
         comp.collapsed = false;
-        placeHolder.hidden = true;
+        placeholder.hidden = true;
 
         // Recalculate new arrangement of the Component being floated.
         toCompBox = shadowLayout.calculateChildBox(comp);
-        placeHolder.hidden = false;
+        placeholder.hidden = false;
 
-        // Component to appear just after the placeholder, whatever "after" means in the context of the shadow Box layout.
+        // Component to appear just after the placeholder, whatever &quot;after&quot; means in the context of the shadow Box layout.
         if (comp.region == 'north' || comp.region == 'west') {
-            toCompBox[shadowLayout.parallelBefore] += placeHolderBox[shadowLayout.parallelPrefix] - 1;
+            toCompBox[shadowLayout.parallelBefore] += placeholderBox[shadowLayout.parallelPrefix] - 1;
         } else {
-            toCompBox[shadowLayout.parallelBefore] -= (placeHolderBox[shadowLayout.parallelPrefix] - 1);
+            toCompBox[shadowLayout.parallelBefore] -= (placeholderBox[shadowLayout.parallelPrefix] - 1);
         }
         compEl.setStyle('visibility', 'hidden');
         compEl.setLeftTop(toCompBox.left, toCompBox.top);
@@ -905,7 +924,7 @@ Ext.define('Ext.layout.container.Border', {
             me.setItemSize(comp, toCompBox.width, toCompBox.height);
         }
 
-        // This animation slides the collapsed Component's el out to just beyond its placeHolder
+        // This animation slides the collapsed Component's el out to just beyond its placeholder
         compAnim = {
             listeners: {
                 afteranimate: function() {
@@ -923,7 +942,7 @@ Ext.define('Ext.layout.container.Border', {
                             comp.collapsed = true;
                             delete comp.slideOutAnim;
                             delete comp.panelMouseMon;
-                            delete comp.placeHolderMouseMon;
+                            delete comp.placeholderMouseMon;
                         }
                     };
                     comp.slideOutAnim = compAnim;
@@ -949,26 +968,26 @@ Ext.define('Ext.layout.container.Border', {
 
         // Remove mouse leave monitors
         compEl.un(comp.panelMouseMon);
-        comp.placeHolder.el.un(comp.placeHolderMouseMon);
+        comp.placeholder.el.un(comp.placeholderMouseMon);
 
         // Slide the Component out
         compEl.slideOut(this.slideDirection[comp.region], comp.slideOutAnim);
 
         delete comp.slideOutAnim;
         delete comp.panelMouseMon;
-        delete comp.placeHolderMouseMon;
+        delete comp.placeholderMouseMon;
     },
 
     /*
      * @private
-     * Ensure any collapsed placeHolder Component is destroyed along with its region.
+     * Ensure any collapsed placeholder Component is destroyed along with its region.
      * Can't do this in onDestroy because they may remove a Component and use it elsewhere.
      */
     onRegionDestroy: function(comp) {
-        var placeHolder = comp.placeHolder;
-        if (placeHolder) {
-            delete placeHolder.ownerCt;
-            placeHolder.destroy();
+        var placeholder = comp.placeholder;
+        if (placeholder) {
+            delete placeholder.ownerCt;
+            placeholder.destroy();
         }
     },
 
@@ -998,4 +1017,4 @@ Ext.define('Ext.layout.container.Border', {
         me.callParent(arguments);
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

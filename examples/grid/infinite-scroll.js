@@ -4,7 +4,6 @@ Ext.Loader.setPath('Ext.ux', '../ux/');
 Ext.require([
     'Ext.grid.*',
     'Ext.data.*',
-    'Ext.data.BufferStore',
     'Ext.util.*',
     'Ext.grid.PagingScroller'
 ]);
@@ -22,11 +21,13 @@ Ext.onReady(function(){
     });
 
     // create the Data Store
-    var store = Ext.create('Ext.data.BufferStore', {
+    var store = Ext.create('Ext.data.Store', {
         id: 'store',
         pageSize: 200,
         model: 'ForumThread',
         remoteSort: true,
+        // allow the grid to interact with the paging scroller by buffering
+        buffered: true,
         proxy: {
             // load using script tags for cross domain, if the data in on the same domain as
             // this page, an HttpProxy would be better
@@ -72,7 +73,7 @@ Ext.onReady(function(){
             trackOver: false
         },
         // grid columns
-        columns:[{xtype: 'rownumberer',width: 40, sortable: false},{
+        columns:[{xtype: 'rownumberer',width: 50, sortable: false},{
             // id assigned so we can apply custom css (e.g. .x-grid-cell-topic b { color:#333 })
             // TODO: This poses an issue in subclasses of Grid now because Headers are now Components
             // therefore the id will be registered in the ComponentManager and conflict. Need a way to

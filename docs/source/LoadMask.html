@@ -1,14 +1,14 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.LoadMask"></a>/**
- * @class Ext.LoadMask
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-LoadMask-method-constructor'><span id='Ext-LoadMask'>/**
+</span></span> * @class Ext.LoadMask
  * A simple utility class for generically masking elements while loading data.  If the {@link #store}
  * config option is specified, the masking will be automatically synchronized with the store's loading
  * process and the mask element will be cached for reuse.
- * <p>Example usage:</p>
- * <pre><code>
+ * &lt;p&gt;Example usage:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
 // Basic mask:
-var myMask = new Ext.LoadMask(Ext.getBody(), {msg:"Please wait..."});
+var myMask = new Ext.LoadMask(Ext.getBody(), {msg:&quot;Please wait...&quot;});
 myMask.show();
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
  * @constructor
  * Create a new LoadMask
@@ -28,31 +28,31 @@ Ext.define('Ext.LoadMask', {
 
     /* End Definitions */
 
-    <a name="cfg-Ext.LoadMask-store"></a>/**
-     * @cfg {Ext.data.Store} store
+<span id='Ext-LoadMask-cfg-store'>    /**
+</span>     * @cfg {Ext.data.Store} store
      * Optional Store to which the mask is bound. The mask is displayed when a load request is issued, and
      * hidden on either load success, or load fail.
      */
 
-    <a name="cfg-Ext.LoadMask-msg"></a>/**
-     * @cfg {String} msg
+<span id='Ext-LoadMask-cfg-msg'>    /**
+</span>     * @cfg {String} msg
      * The text to display in a centered loading message box (defaults to 'Loading...')
      */
     msg : 'Loading...',
-    <a name="cfg-Ext.LoadMask-msgCls"></a>/**
-     * @cfg {String} msgCls
-     * The CSS class to apply to the loading message element (defaults to "x-mask-loading")
+<span id='Ext-LoadMask-cfg-msgCls'>    /**
+</span>     * @cfg {String} msgCls
+     * The CSS class to apply to the loading message element (defaults to &quot;x-mask-loading&quot;)
      */
     msgCls : Ext.baseCSSPrefix + 'mask-loading',
     
-    <a name="cfg-Ext.LoadMask-useMsg"></a>/**
-     * @cfg {Boolean} useMsg
+<span id='Ext-LoadMask-cfg-useMsg'>    /**
+</span>     * @cfg {Boolean} useMsg
      * Whether or not to use a loading message class or simply mask the bound element.
      */
     useMsg: true,
 
-    <a name="prop-Ext.LoadMask-disabled"></a>/**
-     * Read-only. True if the mask is currently disabled so that it will not be displayed (defaults to false)
+<span id='Ext-LoadMask-property-disabled'>    /**
+</span>     * Read-only. True if the mask is currently disabled so that it will not be displayed (defaults to false)
      * @type Boolean
      */
     disabled: false,
@@ -93,30 +93,30 @@ Ext.define('Ext.LoadMask', {
         me.mon(comp, listeners);
     },
 
-    /**
-     * @private
+<span id='Ext-LoadMask-method-onComponentRender'>    /**
+</span>     * @private
      * Called if we were configured with a Component, and that Component was not yet rendered. Collects the element to mask.
      */
     onComponentRender: function(comp) {
         this.el = comp.getContentTarget();
     },
 
-    /**
-     * @private
+<span id='Ext-LoadMask-method-onComponentResize'>    /**
+</span>     * @private
      * Called when this LoadMask's Component is resized. The isMasked method also re-centers any displayed message.
      */
     onComponentResize: function(comp, w, h) {
         this.el.isMasked();
     },
 
-    <a name="method-Ext.LoadMask-bindStore"></a>/**
-     * Changes the data store bound to this LoadMask.
+<span id='Ext-LoadMask-method-bindStore'>    /**
+</span>     * Changes the data store bound to this LoadMask.
      * @param {Store} store The store to bind to this LoadMask
      */
     bindStore : function(store, initial) {
         var me = this;
 
-        if (!initial && me.store) {
+        if (!initial &amp;&amp; me.store) {
             me.mun(me.store, {
                 scope: me,
                 beforeload: me.onBeforeLoad,
@@ -138,13 +138,13 @@ Ext.define('Ext.LoadMask', {
 
         }
         me.store = store;
-        if (store && store.isLoading()) {
+        if (store &amp;&amp; store.isLoading()) {
             me.onBeforeLoad();
         }
     },
 
-    <a name="method-Ext.LoadMask-disable"></a>/**
-     * Disables the mask to prevent it from being displayed
+<span id='Ext-LoadMask-method-disable'>    /**
+</span>     * Disables the mask to prevent it from being displayed
      */
     disable : function() {
         var me = this;
@@ -155,15 +155,15 @@ Ext.define('Ext.LoadMask', {
        }
     },
 
-    <a name="method-Ext.LoadMask-enable"></a>/**
-     * Enables the mask so that it can be displayed
+<span id='Ext-LoadMask-method-enable'>    /**
+</span>     * Enables the mask so that it can be displayed
      */
     enable : function() {
         this.disabled = false;
     },
 
-    <a name="method-Ext.LoadMask-isDisabled"></a>/**
-     * Method to determine whether this LoadMask is currently disabled.
+<span id='Ext-LoadMask-method-isDisabled'>    /**
+</span>     * Method to determine whether this LoadMask is currently disabled.
      * @return {Boolean} the disabled state of this LoadMask.
      */
     isDisabled : function() {
@@ -183,7 +183,7 @@ Ext.define('Ext.LoadMask', {
     onBeforeLoad : function() {
         var me = this;
 
-        if (!me.disabled && !me.loading && me.fireEvent('beforeshow', me, me.el, me.store) !== false) {
+        if (!me.disabled &amp;&amp; !me.loading &amp;&amp; me.fireEvent('beforeshow', me, me.el, me.store) !== false) {
             if (me.useMsg) {
                 me.el.mask(me.msg, me.msgCls, false);
             } else {
@@ -195,15 +195,15 @@ Ext.define('Ext.LoadMask', {
         }
     },
 
-    <a name="method-Ext.LoadMask-show"></a>/**
-     * Show this LoadMask over the configured Element.
+<span id='Ext-LoadMask-method-show'>    /**
+</span>     * Show this LoadMask over the configured Element.
      */
     show: function() {
         this.onBeforeLoad();
     },
 
-    <a name="method-Ext.LoadMask-hide"></a>/**
-     * Hide this LoadMask.
+<span id='Ext-LoadMask-method-hide'>    /**
+</span>     * Hide this LoadMask.
      */
     hide: function() {
         this.onLoad();
@@ -215,4 +215,4 @@ Ext.define('Ext.LoadMask', {
         this.clearListeners();
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

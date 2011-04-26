@@ -119,63 +119,64 @@
     </style>
 </head>
 <body>
-<div id="loading-mask" style=""></div>
-<div id="loading">
-    <div class="loading-indicator"><img src="shared/extjs/images/extanim32.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/>Ext JS 4.0 - <a href="http://www.sencha.com">sencha.com</a><br /><span id="loading-msg">Loading styles and images...</span></div>
-</div>
-
-<div id="viewport">
-
-<div id="hd">
-    <a href="http://www.sencha.com" id="logo"><img src="../welcome/img/logo-sencha-sm.png" alt="Sencha" width="120" height="50" /></a>
-
-</div>
-
-<div id="bd">
-    <h1 id="pagetitle">
-        Ext JS 4.0 Samples
-        <div>
-            <a href="../docs/index.html">View Documentation</a>
-            <a href="../release-notes.html">Release Notes</a>
-            <a href="../overview/index.html">Upgrade Overview</a>
-        </div>
-    </h1>
-    <div class="left-column">
-        <div id="sample-spacer" style="height:800px;"></div>
-
-        <link rel="stylesheet" type="text/css" href="../resources/css/ext-all.css" />
-        <link rel="stylesheet" type="text/css" href="shared/extjs/css/extjs.css" />
-
-        <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Loading Core API...';</script>
-        <script type="text/javascript" src="../ext-all-debug.js"></script>
-        <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Loading UI Components...';</script>
-        <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Initializing...';</script>
-
-        <!-- App.js contains Ext.App, a simple, re-usable Application component -->
-        <script type="text/javascript" src="shared/extjs/App.js"></script>
-        <script type="text/javascript" src="shared/extjs/site.js"></script>
-        <script type="text/javascript" src="data.js"></script>
-        <script type="text/javascript" src="init.js"></script>
-
-        <div id="all-demos">
+    <div id="loading-mask" style=""></div>
+    <div id="loading">
+        <div class="loading-indicator">
+            <img src="shared/extjs/images/extanim32.gif" width="32" height="32" style="margin-right:8px;float:left;vertical-align:top;"/>Ext JS 4.0 - <a href="http://www.sencha.com">sencha.com</a>
+            <br /><span id="loading-msg">Loading styles and images...</span>
         </div>
     </div>
 
-    <div class="right-column">
-        <div class="side-box"><div class="side-box-inner">
-            <ul id="sample-menu" class="features"></ul>
-        </div></div>
+    <div id="viewport">
+
+        <div id="hd">
+            <a href="http://www.sencha.com" id="logo"><img src="../welcome/img/logo-sencha-sm.png" alt="Sencha" width="120" height="50" /></a>
+        </div>
+
+    <div id="bd">
+        <h1 id="pagetitle">
+            Ext JS 4.0 Samples
+            <div>
+                <a href="../docs/index.html">View Documentation</a>
+                <a href="../release-notes.html">Release Notes</a>
+                <a href="../overview/index.html">Upgrade Overview</a>
+            </div>
+        </h1>
+        <div class="left-column">
+            <div id="sample-spacer" style="height:800px;"></div>
+
+            <link rel="stylesheet" type="text/css" href="../resources/css/ext-all.css" />
+            <link rel="stylesheet" type="text/css" href="shared/extjs/css/extjs.css" />
+
+            <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Loading Core API...';</script>
+            <script type="text/javascript" src="../ext-all-debug.js"></script>
+            <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Loading UI Components...';</script>
+            <script type="text/javascript">document.getElementById('loading-msg').innerHTML = 'Initializing...';</script>
+
+            <!-- App.js contains Ext.App, a simple, re-usable Application component -->
+            <script type="text/javascript" src="shared/extjs/App.js"></script>
+            <script type="text/javascript" src="shared/extjs/site.js"></script>
+            <script type="text/javascript" src="data.js"></script>
+            <script type="text/javascript" src="init.js"></script>
+
+            <div id="all-demos">
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="side-box"><div class="side-box-inner">
+                <ul id="sample-menu" class="features"></ul>
+            </div></div>
+        </div>
+
+        <div style="clear:both"></div>
+    </div><!-- end bd -->
+
+    <div id="ft">
+        <div class="copy">&copy; 2006-2011 Sencha Inc.</div>
     </div>
 
-    <div style="clear:both"></div>
-</div><!-- end bd -->
-
-<div id="ft">
-    <div class="copy">&copy; 2006-2011 Sencha Inc.</div>
-</div>
-
-</div><!-- end viewport -->
-
+    </div><!-- end viewport -->
 
 </body>
 </html>

@@ -1,29 +1,31 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.slider.Single"></a>/**
- * @class Ext.slider.Single
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-slider.Single'>/**
+</span> * @class Ext.slider.Single
  * @extends Ext.slider.Multi
  * Slider which supports vertical or horizontal orientation, keyboard adjustments,
  * configurable snapping, axis clicking and animation. Can be added as an item to
- * any container. Example usage:
-<pre><code>
-new Ext.slider.Single({
-    renderTo: Ext.getBody(),
-    width: 200,
-    value: 50,
-    increment: 10,
-    minValue: 0,
-    maxValue: 100
-});
-</code></pre>
+ * any container. 
+ * {@img Ext.slider.Single/Ext.slider.Single.png Ext.slider.Single component}
+ * Example usage:
+&lt;pre&gt;&lt;code&gt;
+    Ext.create('Ext.slider.Single', {
+        width: 200,
+        value: 50,
+        increment: 10,
+        minValue: 0,
+        maxValue: 100,
+        renderTo: Ext.getBody()
+    });
+&lt;/code&gt;&lt;/pre&gt;
  * The class Ext.slider.Single is aliased to Ext.Slider for backwards compatibility.
  * @xtype slider
  */
 Ext.define('Ext.slider.Single', {
     extend: 'Ext.slider.Multi',
     alias: ['widget.slider', 'widget.sliderfield'],
-    alternateClassName: ['Ext.Slider', 'Ext.form.SliderField', 'Ext.slider.SingleSlider'],
+    alternateClassName: ['Ext.Slider', 'Ext.form.SliderField', 'Ext.slider.SingleSlider', 'Ext.slider.Slider'],
 
-    <a name="method-Ext.slider.Single-getValue"></a>/**
-     * Returns the current value of the slider
+<span id='Ext-slider.Single-method-getValue'>    /**
+</span>     * Returns the current value of the slider
      * @return {Number} The current value of the slider
      */
     getValue: function() {
@@ -31,8 +33,8 @@ Ext.define('Ext.slider.Single', {
         return this.callParent([0]);
     },
 
-    <a name="method-Ext.slider.Single-setValue"></a>/**
-     * Programmatically sets the value of the Slider. Ensures that the value is constrained within
+<span id='Ext-slider.Single-method-setValue'>    /**
+</span>     * Programmatically sets the value of the Slider. Ensures that the value is constrained within
      * the minValue and maxValue.
      * @param {Number} value The value to set the slider to. (This will be constrained within minValue and maxValue)
      * @param {Boolean} animate Turn on or off animation, defaults to true
@@ -44,7 +46,7 @@ Ext.define('Ext.slider.Single', {
         //this is to maintain backwards compatiblity for sliders with only one thunb. Usually you must pass the thumb
         //index to setValue, but if we only have one thumb we inject the index here first if given the multi-slider
         //signature without the required index. The index will always be 0 for a single slider
-        if (len == 1 || (len <= 3 && typeof arguments[1] != 'number')) {
+        if (len == 1 || (len &lt;= 3 &amp;&amp; typeof arguments[1] != 'number')) {
             args.unshift(0);
         }
 
@@ -57,4 +59,4 @@ Ext.define('Ext.slider.Single', {
         return this.thumbs[0];
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

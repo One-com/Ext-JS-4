@@ -1,294 +1,216 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.draw.Color"></a>/**
- * @class Ext.draw.Color
- * @extends Object
- *
- * Represents an RGB color and provides helper functions get
- * color components in HSL color space.
- */
-Ext.define('Ext.draw.Color', {
-
-    /* Begin Definitions */
-
-    /* End Definitions */
-
-    colorToHexRe: /(.*?)rgb\((\d+),\s*(\d+),\s*(\d+)\)/,
-    rgbRe: /\s*rgb\s*\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)\s*/,
-    hexRe: /\s*#([0-9a-fA-F][0-9a-fA-F]?)([0-9a-fA-F][0-9a-fA-F]?)([0-9a-fA-F][0-9a-fA-F]?)\s*/,
-
-    <a name="cfg-Ext.draw.Color-lightnessFactor"></a>/**
-     * @cfg {Number} lightnessFactor
-     *
-     * The default factor to compute the lighter or darker color. Defaults to 0.2.
-     */
-    lightnessFactor: 0.2,
-
-    <a name="method-Ext.draw.Color-constructor"></a>/**
-     * @constructor
-     * @param {Number} red Red component (0..255)
-     * @param {Number} green Green component (0..255)
-     * @param {Number} blue Blue component (0..255)
-     */
-    constructor : function(red, green, blue) {
-        var me = this,
-            clamp = Ext.Number.constrain;
-        me.r = clamp(red, 0, 255);
-        me.g = clamp(green, 0, 255);
-        me.b = clamp(blue, 0, 255);
-    },
-
-    <a name="method-Ext.draw.Color-getRed"></a>/**
-     * Get the red component of the color, in the range 0..255.
-     * @return {Number}
-     */
-    getRed: function() {
-        return this.r;
-    },
-
-    <a name="method-Ext.draw.Color-getGreen"></a>/**
-     * Get the green component of the color, in the range 0..255.
-     * @return {Number}
-     */
-    getGreen: function() {
-        return this.g;
-    },
-
-    <a name="method-Ext.draw.Color-getBlue"></a>/**
-     * Get the blue component of the color, in the range 0..255.
-     * @return {Number}
-     */
-    getBlue: function() {
-        return this.b;
-    },
-
-    <a name="method-Ext.draw.Color-getRGB"></a>/**
-     * Get the RGB values.
-     * @return {Array}
-     */
-    getRGB: function() {
-        var me = this;
-        return [me.r, me.g, me.b];
-    },
-
-    <a name="method-Ext.draw.Color-getHSL"></a>/**
-     * Get the equivalent HSL components of the color.
-     * @return {Array}
-     */
-    getHSL: function() {
-        var me = this,
-            r = me.r / 255,
-            g = me.g / 255,
-            b = me.b / 255,
-            max = Math.max(r, g, b),
-            min = Math.min(r, g, b),
-            delta = max - min,
-            h,
-            s = 0,
-            l = 0.5 * (max + min);
-
-        // min==max means achromatic (hue is undefined)
-        if (min != max) {
-            s = (l < 0.5) ? delta / (max + min) : delta / (2 - max - min);
-            if (r == max) {
-                h = 60 * (g - b) / delta;
-            } else if (g == max) {
-                h = 120 + 60 * (b - r) / delta;
-            } else {
-                h = 240 + 60 * (r - g) / delta;
-            }
-            if (h < 0) {
-                h += 360;
-            }
-            if (h >= 360) {
-                h -= 360;
-            }
-        }
-        return [h, s, l];
-    },
-
-    <a name="method-Ext.draw.Color-getLighter"></a>/**
-     * Return a new color that is lighter than this color.
-     * @param {Number} factor Lighter factor (0..1), default to 0.2
-     * @return Ext.draw.Color
-     */
-    getLighter: function(factor) {
-        var hsl = this.getHSL();
-        factor = factor || this.lightnessFactor;
-        hsl[2] = Ext.Number.constrain(hsl[2] + factor, 0, 1);
-        return this.fromHSL(hsl[0], hsl[1], hsl[2]);
-    },
-
-    <a name="method-Ext.draw.Color-getDarker"></a>/**
-     * Return a new color that is darker than this color.
-     * @param {Number} factor Darker factor (0..1), default to 0.2
-     * @return Ext.draw.Color
-     */
-    getDarker: function(factor) {
-        factor = factor || this.lightnessFactor;
-        return this.getLighter(-factor);
-    },
-
-    <a name="method-Ext.draw.Color-toString"></a>/**
-     * Return the color in the hex format, i.e. '#rrggbb'.
-     * @return {String}
-     */
-    toString: function() {
-        var me = this,
-            round = Math.round,
-            r = round(me.r).toString(16),
-            g = round(me.g).toString(16),
-            b = round(me.b).toString(16);
-        r = (r.length == 1) ? '0' + r : r;
-        g = (g.length == 1) ? '0' + g : g;
-        b = (b.length == 1) ? '0' + b : b;
-        return ['#', r, g, b].join('');
-    },
-
-    <a name="method-Ext.draw.Color-toHex"></a>/**
-     * Convert a color to hexadecimal format.
-     *
-     * @param {String|Array} color The color value (i.e 'rgb(255, 255, 255)', 'color: #ffffff').
-     * Can also be an Array, in this case the function handles the first member.
-     * @returns {String} The color in hexadecimal format.
-     */
-    toHex: function(color) {
-        if (Ext.isArray(color)) {
-            color = color[0];
-        }
-        if (!Ext.isString(color)) {
-            return '';
-        }
-        if (color.substr(0, 1) === '#') {
-            return color;
-        }
-        var digits = this.colorToHexRe.exec(color);
-
-        if (Ext.isArray(digits)) {
-            var red = parseInt(digits[2], 10),
-                green = parseInt(digits[3], 10),
-                blue = parseInt(digits[4], 10),
-                rgb = blue | (green << 8) | (red << 16);
-            return digits[1] + '#' + ("000000" + rgb.toString(16)).slice(-6);
-        }
-        else {
-            return '';
-        }
-    },
-
-    <a name="method-Ext.draw.Color-fromString"></a>/**
-     * Parse the string and create a new color.
-     *
-     * Supported formats: '#rrggbb', '#rgb', and 'rgb(r,g,b)'.
-     *
-     * If the string is not recognized, an undefined will be returned instead.
-     *
-     * @param {String} str Color in string.
-     * @returns Ext.draw.Color
-     */
-    fromString: function(str) {
-        var values, r, g, b,
-            parse = parseInt;
-
-        if ((str.length == 4 || str.length == 7) && str.substr(0, 1) === '#') {
-            values = str.match(this.hexRe);
-            if (values) {
-                r = parse(values[1], 16) >> 0;
-                g = parse(values[2], 16) >> 0;
-                b = parse(values[3], 16) >> 0;
-                if (str.length == 4) {
-                    r += (r * 16);
-                    g += (g * 16);
-                    b += (b * 16);
-                }
-            }
-        }
-        else {
-            values = str.match(this.rgbRe);
-            if (values) {
-                r = values[1];
-                g = values[2];
-                b = values[3];
-            }
-        }
-
-        return (typeof r == 'undefined') ? undefined : Ext.create('Ext.draw.Color', r, g, b);
-    },
-
-    <a name="method-Ext.draw.Color-getGrayscale"></a>/**
-     * Returns the gray value (0 to 255) of the color.
-     *
-     * The gray value is calculated using the formula r*0.3 + g*0.59 + b*0.11.
-     *
-     * @returns {Number}
-     */
-    getGrayscale: function() {
-        // http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
-        return this.r * 0.3 + this.g * 0.59 + this.b * 0.11;
-    },
-
-    <a name="method-Ext.draw.Color-fromHSL"></a>/**
-     * Create a new color based on the specified HSL values.
-     *
-     * @param {Number} h Hue component (0..359)
-     * @param {Number} s Saturation component (0..1)
-     * @param {Number} l Lightness component (0..1)
-     * @returns Ext.draw.Color
-     */
-    fromHSL: function(h, s, l) {
-        var C, X, m, i, rgb = [],
-            abs = Math.abs,
-            floor = Math.floor;
-
-        if (s == 0 || h == null) {
-            // achromatic
-            rgb = [l, l, l];
-        }
-        else {
-            // http://en.wikipedia.org/wiki/HSL_and_HSV#From_HSL
-            // C is the chroma
-            // X is the second largest component
-            // m is the lightness adjustment
-            h /= 60;
-            C = s * (1 - abs(2 * l - 1));
-            X = C * (1 - abs(h - 2 * floor(h / 2) - 1));
-            m = l - C / 2;
-            switch (floor(h)) {
-                case 0:
-                    rgb = [C, X, 0];
-                    break;
-                case 1:
-                    rgb = [X, C, 0];
-                    break;
-                case 2:
-                    rgb = [0, C, X];
-                    break;
-                case 3:
-                    rgb = [0, X, C];
-                    break;
-                case 4:
-                    rgb = [X, 0, C];
-                    break;
-                case 5:
-                    rgb = [C, 0, X];
-                    break;
-            }
-            rgb = [rgb[0] + m, rgb[1] + m, rgb[2] + m];
-        }
-        return Ext.create('Ext.draw.Color', rgb[0] * 255, rgb[1] * 255, rgb[2] * 255);
-    }
-}, function() {
-    var prototype = this.prototype;
-
-    //These functions are both static and instance. TODO: find a more elegant way of copying them
-    this.addStatics({
-        fromHSL: function() {
-            return prototype.fromHSL.apply(prototype, arguments);
-        },
-        fromString: function() {
-            return prototype.fromString.apply(prototype, arguments);
-        },
-        toHex: function() {
-            return prototype.toHex.apply(prototype, arguments);
-        }
-    });
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-picker.Color-method-constructor'><span id='Ext-picker.Color'>/**
+</span></span> * @class Ext.picker.Color
+ * @extends Ext.Component
+ * &lt;p&gt;ColorPicker provides a simple color palette for choosing colors. The picker can be rendered to any container.
+ * The available default to a standard 40-color palette; this can be customized with the {@link #colors} config.&lt;/p&gt;
+ * &lt;p&gt;Typically you will need to implement a handler function to be notified when the user chooses a color from the
+ * picker; you can register the handler using the {@link #select} event, or by implementing the {@link #handler}
+ * method.&lt;/p&gt;
+ * &lt;p&gt;Here's an example of typical usage:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;var cp = new Ext.picker.Color({
+    value: '993300',  // initial selected color
+    renderTo: 'my-div'
 });
-￿</pre></pre></body></html>
+
+cp.on('select', function(picker, selColor){
+    // do something with selColor
+});
+&lt;/code&gt;&lt;/pre&gt;
+ * {@img Ext.picker.Color/Ext.picker.Color.png Ext.picker.Color component}
+ *
+ * @constructor
+ * Create a new ColorPicker
+ * @param {Object} config The config object
+ * 
+ * @xtype colorpicker
+ */
+Ext.define('Ext.picker.Color', {
+    extend: 'Ext.Component',
+    requires: 'Ext.XTemplate',
+    alias: 'widget.colorpicker',
+    alternateClassName: 'Ext.ColorPalette',
+    
+<span id='Ext-picker.Color-cfg-componentCls'>    /**
+</span>     * @cfg {String} componentCls
+     * The CSS class to apply to the containing element (defaults to 'x-color-picker')
+     */
+    componentCls : Ext.baseCSSPrefix + 'color-picker',
+    
+<span id='Ext-picker.Color-cfg-selectedCls'>    /**
+</span>     * @cfg {String} selectedCls
+     * The CSS class to apply to the selected element
+     */
+    selectedCls: Ext.baseCSSPrefix + 'color-picker-selected',
+    
+<span id='Ext-picker.Color-cfg-value'>    /**
+</span>     * @cfg {String} value
+     * The initial color to highlight (should be a valid 6-digit color hex code without the # symbol).  Note that
+     * the hex codes are case-sensitive.
+     */
+    value : null,
+    
+<span id='Ext-picker.Color-cfg-clickEvent'>    /**
+</span>     * @cfg {String} clickEvent
+     * The DOM event that will cause a color to be selected. This can be any valid event name (dblclick, contextmenu).
+     * Defaults to &lt;tt&gt;'click'&lt;/tt&gt;.
+     */
+    clickEvent :'click',
+
+<span id='Ext-picker.Color-cfg-allowReselect'>    /**
+</span>     * @cfg {Boolean} allowReselect If set to true then reselecting a color that is already selected fires the {@link #select} event
+     */
+    allowReselect : false,
+
+<span id='Ext-picker.Color-property-colors'>    /**
+</span>     * &lt;p&gt;An array of 6-digit color hex code strings (without the # symbol).  This array can contain any number
+     * of colors, and each hex code should be unique.  The width of the picker is controlled via CSS by adjusting
+     * the width property of the 'x-color-picker' class (or assigning a custom class), so you can balance the number
+     * of colors with the width setting until the box is symmetrical.&lt;/p&gt;
+     * &lt;p&gt;You can override individual colors if needed:&lt;/p&gt;
+     * &lt;pre&gt;&lt;code&gt;
+var cp = new Ext.picker.Color();
+cp.colors[0] = 'FF0000';  // change the first box to red
+&lt;/code&gt;&lt;/pre&gt;
+
+Or you can provide a custom array of your own for complete control:
+&lt;pre&gt;&lt;code&gt;
+var cp = new Ext.picker.Color();
+cp.colors = ['000000', '993300', '333300'];
+&lt;/code&gt;&lt;/pre&gt;
+     * @type Array
+     */
+    colors : [
+        '000000', '993300', '333300', '003300', '003366', '000080', '333399', '333333',
+        '800000', 'FF6600', '808000', '008000', '008080', '0000FF', '666699', '808080',
+        'FF0000', 'FF9900', '99CC00', '339966', '33CCCC', '3366FF', '800080', '969696',
+        'FF00FF', 'FFCC00', 'FFFF00', '00FF00', '00FFFF', '00CCFF', '993366', 'C0C0C0',
+        'FF99CC', 'FFCC99', 'FFFF99', 'CCFFCC', 'CCFFFF', '99CCFF', 'CC99FF', 'FFFFFF'
+    ],
+
+<span id='Ext-picker.Color-cfg-handler'>    /**
+</span>     * @cfg {Function} handler
+     * Optional. A function that will handle the select event of this picker.
+     * The handler is passed the following parameters:&lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+     * &lt;li&gt;&lt;code&gt;picker&lt;/code&gt; : ColorPicker&lt;div class=&quot;sub-desc&quot;&gt;The {@link #picker Ext.picker.Color}.&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;code&gt;color&lt;/code&gt; : String&lt;div class=&quot;sub-desc&quot;&gt;The 6-digit color hex code (without the # symbol).&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;&lt;/div&gt;
+     */
+<span id='Ext-picker.Color-cfg-scope'>    /**
+</span>     * @cfg {Object} scope
+     * The scope (&lt;tt&gt;&lt;b&gt;this&lt;/b&gt;&lt;/tt&gt; reference) in which the &lt;code&gt;{@link #handler}&lt;/code&gt;
+     * function will be called.  Defaults to this ColorPicker instance.
+     */
+    
+    colorRe: /(?:^|\s)color-(.{6})(?:\s|$)/,
+    
+    constructor: function() {
+        this.renderTpl = Ext.create('Ext.XTemplate', '&lt;tpl for=&quot;colors&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;color-{.}&quot; hidefocus=&quot;on&quot;&gt;&lt;em&gt;&lt;span style=&quot;background:#{.}&quot; unselectable=&quot;on&quot;&gt;&amp;#160;&lt;/span&gt;&lt;/em&gt;&lt;/a&gt;&lt;/tpl&gt;');
+        this.callParent(arguments);
+    },
+    
+    // private
+    initComponent : function(){
+        var me = this;
+        
+        this.callParent(arguments);
+        me.addEvents(
+<span id='Ext-picker.Color-event-select'>            /**
+</span>             * @event select
+             * Fires when a color is selected
+             * @param {Ext.picker.Color} this
+             * @param {String} color The 6-digit color hex code (without the # symbol)
+             */
+            'select'
+        );
+
+        if (me.handler) {
+            me.on('select', me.handler, me.scope, true);
+        }
+    },
+
+
+    // private
+    onRender : function(container, position){
+        var me = this,
+            clickEvent = me.clickEvent;
+            
+        Ext.apply(me.renderData, {
+            itemCls: me.itemCls,
+            colors: me.colors    
+        });
+        this.callParent(arguments);
+
+        me.mon(me.el, clickEvent, me.handleClick, me, {delegate: 'a'});
+        // always stop following the anchors
+        if(clickEvent != 'click'){
+            me.mon(me.el, 'click', Ext.emptyFn, me, {delegate: 'a', stopEvent: true});
+        }
+    },
+
+    // private
+    afterRender : function(){
+        var me = this,
+            value;
+            
+        this.callParent(arguments);
+        if (me.value) {
+            value = me.value;
+            me.value = null;
+            me.select(value, true);
+        }
+    },
+
+    // private
+    handleClick : function(event, target){
+        var me = this,
+            color;
+            
+        event.stopEvent();
+        if (!me.disabled) {
+            color = target.className.match(me.colorRe)[1];
+            me.select(color.toUpperCase());
+        }
+    },
+
+<span id='Ext-picker.Color-method-select'>    /**
+</span>     * Selects the specified color in the picker (fires the {@link #select} event)
+     * @param {String} color A valid 6-digit color hex code (# will be stripped if included)
+     * @param {Boolean} suppressEvent (optional) True to stop the select event from firing. Defaults to &lt;tt&gt;false&lt;/tt&gt;.
+     */
+    select : function(color, suppressEvent){
+        
+        var me = this,
+            selectedCls = me.selectedCls,
+            value = me.value,
+            el;
+            
+        color = color.replace('#', '');
+        if (!me.rendered) {
+            me.value = color;
+            return;
+        }
+        
+        
+        if (color != value || me.allowReselect) {
+            el = me.el;
+
+            if (me.value) {
+                el.down('a.color-' + value).removeCls(selectedCls);
+            }
+            el.down('a.color-' + color).addCls(selectedCls);
+            me.value = color;
+            if (suppressEvent !== true) {
+                me.fireEvent('select', me, color);
+            }
+        }
+    },
+    
+<span id='Ext-picker.Color-method-getValue'>    /**
+</span>     * Get the currently selected color value.
+     * @return {String} value The selected value. Null if nothing is selected.
+     */
+    getValue: function(){
+        return this.value || null;
+    }
+});
+</pre></pre></body></html>

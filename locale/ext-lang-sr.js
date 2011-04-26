@@ -9,8 +9,8 @@ Ext.onReady(function() {
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Učitavam...</div>';
     }
 
-    if(Ext.DataView){
-       Ext.DataView.prototype.emptyText = "Ne postoji ni jedan slog";
+    if(Ext.view.View){
+       Ext.view.View.prototype.emptyText = "Ne postoji ni jedan slog";
     }
 
     if(Ext.grid.Panel){

@@ -1,7 +1,7 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.env.OS"></a>/**
- * @class Ext.env.OS
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-env.OS'>/**
+</span> * @class Ext.env.OS
  * Provide useful information about the current operating system environment. Access the global instance stored in Ext.os. Example:
- * <pre><code>
+ * &lt;pre&gt;&lt;code&gt;
  * if (Ext.os.is.Windows) {
  *      // Windows specific code here
  * }
@@ -10,8 +10,8 @@
  *      // iPad, iPod, iPhone, etc.
  * }
  *
- * console.log("Version " + Ext.os.version);
- * </code></pre>
+ * console.log(&quot;Version &quot; + Ext.os.version);
+ * &lt;/code&gt;&lt;/pre&gt;
  *
  * For a full list of supported values, refer to: {@link Ext.env.OS#is Ext.env.OS.is}
  */
@@ -37,24 +37,24 @@ Ext.define('Ext.env.OS', {
     },
 
     /*
-     * A "hybrid" property, can be either accessed as a method call, i.e:
-     * <pre><code>
+     * A &quot;hybrid&quot; property, can be either accessed as a method call, i.e:
+     * &lt;pre&gt;&lt;code&gt;
      * if (Ext.os.is('Android')) { ... }
-     * </code></pre>
+     * &lt;/code&gt;&lt;/pre&gt;
      *
      * or as an object with boolean properties, i.e:
-     * <pre><code>
+     * &lt;pre&gt;&lt;code&gt;
      * if (Ext.os.is.Android) { ... }
-     * </code></pre>
+     * &lt;/code&gt;&lt;/pre&gt;
      *
      * Versions can be conveniently checked as well. For example:
-     * <pre><code>
-     * if (Ext.os.is.Android2) { ... } // Equivalent to (Ext.os.is.Android && Ext.os.version.equals(2))
+     * &lt;pre&gt;&lt;code&gt;
+     * if (Ext.os.is.Android2) { ... } // Equivalent to (Ext.os.is.Android &amp;&amp; Ext.os.version.equals(2))
      *
-     * if (Ext.os.is.iOS32) { ... } // Equivalent to (Ext.os.is.iOS && Ext.os.version.equals(3.2))
-     * </code></pre>
+     * if (Ext.os.is.iOS32) { ... } // Equivalent to (Ext.os.is.iOS &amp;&amp; Ext.os.version.equals(3.2))
+     * &lt;/code&gt;&lt;/pre&gt;
      *
-     * Note that only {@link Ext.Version#getMajor major component}  and {@link Ext.Version#getSimplified simplified}
+     * Note that only {@link Ext.Version#getMajor major component}  and {@link Ext.Version#getShortVersion shortVersion}
      * value of the version are available via direct property checking.
      *
      * Supported values are: iOS, iPad, iPhone, iPod, Android, WebOS, BlackBerry, MacOSX, Windows, Linux and Other
@@ -87,7 +87,7 @@ Ext.define('Ext.env.OS', {
             actualVersionMatch;
 
         if (osMatch) {
-            name = selfClass.osNames[Ext.Object.keyOf(selfClass.osPrefixes, osMatch[1])];
+            name = selfClass.osNames[Ext.Object.getKey(selfClass.osPrefixes, osMatch[1])];
             version = osMatch[2];
 
             if (name === 'BlackBerry') {
@@ -117,7 +117,7 @@ Ext.define('Ext.env.OS', {
 
         this.is[this.name] = true;
         this.is[this.name + (this.version.getMajor() || '')] = true;
-        this.is[this.name + this.version.getSimplified()] = true;
+        this.is[this.name + this.version.getShortVersion()] = true;
 
         Ext.Object.each(selfClass.osNames, function(key, name) {
             this.is[name] = (this.name === name);
@@ -130,4 +130,4 @@ Ext.define('Ext.env.OS', {
 Ext.os = new Ext.env.OS();
 
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

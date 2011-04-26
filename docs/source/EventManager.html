@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.EventManager"></a>/**
- * @class Ext.EventManager
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-EventManager'>/**
+</span> * @class Ext.EventManager
  * Registers event handlers that want to receive a normalized EventObject instead of the standard browser event and provides
  * several useful events directly.
  * See {@link Ext.EventObject} for more details on normalized event objects.
@@ -9,38 +9,38 @@ Ext.EventManager = {
 
     // --------------------- onReady ---------------------
 
-    /**
-     * Check if we have bound our global onReady listener
+<span id='Ext-EventManager-property-hasBoundOnReady'>    /**
+</span>     * Check if we have bound our global onReady listener
      * @private
      */
     hasBoundOnReady: false,
 
-    /**
-     * Check if fireDocReady has been called
+<span id='Ext-EventManager-property-hasFiredReady'>    /**
+</span>     * Check if fireDocReady has been called
      * @private
      */
     hasFiredReady: false,
 
-    /**
-     * Timer for the document ready event in old IE versions
+<span id='Ext-EventManager-property-readyTimeout'>    /**
+</span>     * Timer for the document ready event in old IE versions
      * @private
      */
     readyTimeout: null,
 
-    /**
-     * Checks if we have bound an onreadystatechange event
+<span id='Ext-EventManager-property-hasOnReadyStateChange'>    /**
+</span>     * Checks if we have bound an onreadystatechange event
      * @private
      */
     hasOnReadyStateChange: false,
 
-    /**
-     * Holds references to any onReady functions
+<span id='Ext-EventManager-property-readyEvent'>    /**
+</span>     * Holds references to any onReady functions
      * @private
      */
     readyEvent: new Ext.util.Event(),
 
-    /**
-     * Check the ready state for old IE versions
+<span id='Ext-EventManager-method-checkReadyState'>    /**
+</span>     * Check the ready state for old IE versions
      * @private
      * @return {Boolean} True if the document is ready
      */
@@ -68,8 +68,8 @@ Ext.EventManager = {
         return false;
     },
 
-    /**
-     * Binds the appropriate browser event for checking if the DOM has loaded.
+<span id='Ext-EventManager-method-bindReadyEvent'>    /**
+</span>     * Binds the appropriate browser event for checking if the DOM has loaded.
      * @private
      */
     bindReadyEvent: function(){
@@ -83,23 +83,19 @@ Ext.EventManager = {
             // fallback, load will ~always~ fire
             window.addEventListener('load', me.fireDocReady, false);
         } else {
-            // Important: commented out since this hack causes issues with our new framing
-            // There's no need to apply hacks anyway, the native window onload event on IEs works
-            // just fine for us since we don't care about initial DOM
-
             // check if the document is ready, this will also kick off the scroll checking timer
-            //if (!me.checkReadyState()) {
-            //    document.attachEvent('onreadystatechange', me.checkReadyState);
-            //    me.hasOnReadyStateChange = true;
-            //}
+            if (!me.checkReadyState()) {
+                document.attachEvent('onreadystatechange', me.checkReadyState);
+                me.hasOnReadyStateChange = true;
+            }
             // fallback, onload will ~always~ fire
             window.attachEvent('onload', me.fireDocReady, false);
         }
         me.hasBoundOnReady = true;
     },
 
-    /**
-     * We know the document is loaded, so trigger any onReady events.
+<span id='Ext-EventManager-method-fireDocReady'>    /**
+</span>     * We know the document is loaded, so trigger any onReady events.
      * @private
      */
     fireDocReady: function(){
@@ -130,11 +126,11 @@ Ext.EventManager = {
         }
     },
 
-    <a name="method-Ext.EventManager-onDocumentReady"></a>/**
-     * Adds a listener to be notified when the document is ready (before onload and before images are loaded). Can be
+<span id='Ext-EventManager-method-onDocumentReady'>    /**
+</span>     * Adds a listener to be notified when the document is ready (before onload and before images are loaded). Can be
      * accessed shorthanded as Ext.onReady().
      * @param {Function} fn The method the event invokes.
-     * @param {Object} scope (optional) The scope (<code>this</code> reference) in which the handler function executes. Defaults to the browser window.
+     * @param {Object} scope (optional) The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the handler function executes. Defaults to the browser window.
      * @param {boolean} options (optional) Options object as passed to {@link Ext.core.Element#addListener}.
      */
     onDocumentReady: function(fn, scope, options){
@@ -159,47 +155,51 @@ Ext.EventManager = {
 
     // --------------------- event binding ---------------------
 
-    /**
-     * Contains a list of all document mouse downs, so we can ensure they fire even when stopEvent is called.
+<span id='Ext-EventManager-property-stoppedMouseDownEvent'>    /**
+</span>     * Contains a list of all document mouse downs, so we can ensure they fire even when stopEvent is called.
      * @private
      */
     stoppedMouseDownEvent: new Ext.util.Event(),
 
-    /**
-     * Options to parse for the 4th argument to addListener.
+<span id='Ext-EventManager-property-propRe'>    /**
+</span>     * Options to parse for the 4th argument to addListener.
      * @private
      */
-    propRe: /^(?:scope|delay|buffer|single|stopEvent|preventDefault|stopPropagation|normalized|args|delegate)$/,
+    propRe: /^(?:scope|delay|buffer|single|stopEvent|preventDefault|stopPropagation|normalized|args|delegate|freezeEvent)$/,
 
-    <a name="method-Ext.EventManager-getId"></a>/**
-     * Get the id of the element. If one has not been assigned, automatically assign it.
+<span id='Ext-EventManager-method-getId'>    /**
+</span>     * Get the id of the element. If one has not been assigned, automatically assign it.
      * @param {Mixed} element The element to get the id for.
      * @return {String} id
      */
     getId : function(element) {
-        var skip = false,
+        var skipGarbageCollection = false,
             id;
-
+    
         element = Ext.getDom(element);
-
+    
         if (element === document || element === window) {
             id = element === document ? Ext.documentId : Ext.windowId;
-            skip = true;
-        } else {
+        }
+        else {
             id = Ext.id(element);
         }
-
+        // skip garbage collection for special elements (window, document, iframes)
+        if (element &amp;&amp; (element.getElementById || element.navigator)) {
+            skipGarbageCollection = true;
+        }
+    
         if (!Ext.cache[id]){
             Ext.core.Element.addToCache(new Ext.core.Element(element), id);
-            if (skip) {
+            if (skipGarbageCollection) {
                 Ext.cache[id].skipGarbageCollection = true;
             }
         }
         return id;
     },
 
-    /**
-     * Convert a "config style" listener into a set of flat arguments so they can be passed to addListener
+<span id='Ext-EventManager-method-prepareListenerConfig'>    /**
+</span>     * Convert a &quot;config style&quot; listener into a set of flat arguments so they can be passed to addListener
      * @private
      * @param {Object} element The element the event is for
      * @param {Object} event The event configuration
@@ -225,7 +225,7 @@ Ext.EventManager = {
                         // if its not a function, it must be an object like click: {fn: function(){}, scope: this}
                         args = [element, key, value.fn, value.scope, value];
                     }
-                    
+
                     if (isRemove === true) {
                         me.removeListener.apply(this, args);
                     } else {
@@ -236,20 +236,20 @@ Ext.EventManager = {
         }
     },
 
-    /**
-     * Normalize cross browser event differences
+<span id='Ext-EventManager-method-normalizeEvent'>    /**
+</span>     * Normalize cross browser event differences
      * @private
      * @param {Object} eventName The event name
      * @param {Object} fn The function to execute
      * @return {Object} The new event name/function
      */
     normalizeEvent: function(eventName, fn){
-        if (/mouseenter|mouseleave/.test(eventName) && !Ext.supports.MouseEnterLeave) {
+        if (/mouseenter|mouseleave/.test(eventName) &amp;&amp; !Ext.supports.MouseEnterLeave) {
             if (fn) {
                 fn = Ext.Function.createInterceptor(fn, this.contains, this);
             }
             eventName = eventName == 'mouseenter' ? 'mouseover' : 'mouseout';
-        } else if (eventName == 'mousewheel' && !Ext.supports.MouseWheel && !Ext.isOpera){
+        } else if (eventName == 'mousewheel' &amp;&amp; !Ext.supports.MouseWheel &amp;&amp; !Ext.isOpera){
             eventName = 'DOMMouseScroll';
         }
         return {
@@ -258,8 +258,8 @@ Ext.EventManager = {
         };
     },
 
-    /**
-     * Checks whether the event's relatedTarget is contained inside (or <b>is</b>) the element.
+<span id='Ext-EventManager-method-contains'>    /**
+</span>     * Checks whether the event's relatedTarget is contained inside (or &lt;b&gt;is&lt;/b&gt;) the element.
      * @private
      * @param {Object} event
      */
@@ -267,13 +267,13 @@ Ext.EventManager = {
         var parent = event.browserEvent.currentTarget,
             child = this.getRelatedTarget(event);
 
-        if (parent && parent.firstChild) {
+        if (parent &amp;&amp; parent.firstChild) {
             while (child) {
                 if (child === parent) {
                     return false;
                 }
                 child = child.parentNode;
-                if (child && (child.nodeType != 1)) {
+                if (child &amp;&amp; (child.nodeType != 1)) {
                     child = null;
                 }
             }
@@ -281,38 +281,38 @@ Ext.EventManager = {
         return true;
     },
 
-    <a name="method-Ext.EventManager-addListener"></a>/**
-    * Appends an event handler to an element.  The shorthand version {@link #on} is equivalent.  Typically you will
+<span id='Ext-EventManager-method-addListener'>    /**
+</span>    * Appends an event handler to an element.  The shorthand version {@link #on} is equivalent.  Typically you will
     * use {@link Ext.core.Element#addListener} directly on an Element in favor of calling this version.
     * @param {String/HTMLElement} el The html element or id to assign the event handler to.
     * @param {String} eventName The name of the event to listen for.
     * @param {Function} handler The handler function the event invokes. This function is passed
-    * the following parameters:<ul>
-    * <li>evt : EventObject<div class="sub-desc">The {@link Ext.EventObject EventObject} describing the event.</div></li>
-    * <li>t : Element<div class="sub-desc">The {@link Ext.core.Element Element} which was the target of the event.
-    * Note that this may be filtered by using the <tt>delegate</tt> option.</div></li>
-    * <li>o : Object<div class="sub-desc">The options object from the addListener call.</div></li>
-    * </ul>
-    * @param {Object} scope (optional) The scope (<b><code>this</code></b> reference) in which the handler function is executed. <b>Defaults to the Element</b>.
+    * the following parameters:&lt;ul&gt;
+    * &lt;li&gt;evt : EventObject&lt;div class=&quot;sub-desc&quot;&gt;The {@link Ext.EventObject EventObject} describing the event.&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;t : Element&lt;div class=&quot;sub-desc&quot;&gt;The {@link Ext.core.Element Element} which was the target of the event.
+    * Note that this may be filtered by using the &lt;tt&gt;delegate&lt;/tt&gt; option.&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;o : Object&lt;div class=&quot;sub-desc&quot;&gt;The options object from the addListener call.&lt;/div&gt;&lt;/li&gt;
+    * &lt;/ul&gt;
+    * @param {Object} scope (optional) The scope (&lt;b&gt;&lt;code&gt;this&lt;/code&gt;&lt;/b&gt; reference) in which the handler function is executed. &lt;b&gt;Defaults to the Element&lt;/b&gt;.
     * @param {Object} options (optional) An object containing handler configuration properties.
-    * This may contain any of the following properties:<ul>
-    * <li>scope : Object<div class="sub-desc">The scope (<b><code>this</code></b> reference) in which the handler function is executed. <b>Defaults to the Element</b>.</div></li>
-    * <li>delegate : String<div class="sub-desc">A simple selector to filter the target or look for a descendant of the target</div></li>
-    * <li>stopEvent : Boolean<div class="sub-desc">True to stop the event. That is stop propagation, and prevent the default action.</div></li>
-    * <li>preventDefault : Boolean<div class="sub-desc">True to prevent the default action</div></li>
-    * <li>stopPropagation : Boolean<div class="sub-desc">True to prevent event propagation</div></li>
-    * <li>normalized : Boolean<div class="sub-desc">False to pass a browser event to the handler function instead of an Ext.EventObject</div></li>
-    * <li>delay : Number<div class="sub-desc">The number of milliseconds to delay the invocation of the handler after te event fires.</div></li>
-    * <li>single : Boolean<div class="sub-desc">True to add a handler to handle just the next firing of the event, and then remove itself.</div></li>
-    * <li>buffer : Number<div class="sub-desc">Causes the handler to be scheduled to run in an {@link Ext.util.DelayedTask} delayed
+    * This may contain any of the following properties:&lt;ul&gt;
+    * &lt;li&gt;scope : Object&lt;div class=&quot;sub-desc&quot;&gt;The scope (&lt;b&gt;&lt;code&gt;this&lt;/code&gt;&lt;/b&gt; reference) in which the handler function is executed. &lt;b&gt;Defaults to the Element&lt;/b&gt;.&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;delegate : String&lt;div class=&quot;sub-desc&quot;&gt;A simple selector to filter the target or look for a descendant of the target&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;stopEvent : Boolean&lt;div class=&quot;sub-desc&quot;&gt;True to stop the event. That is stop propagation, and prevent the default action.&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;preventDefault : Boolean&lt;div class=&quot;sub-desc&quot;&gt;True to prevent the default action&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;stopPropagation : Boolean&lt;div class=&quot;sub-desc&quot;&gt;True to prevent event propagation&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;normalized : Boolean&lt;div class=&quot;sub-desc&quot;&gt;False to pass a browser event to the handler function instead of an Ext.EventObject&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;delay : Number&lt;div class=&quot;sub-desc&quot;&gt;The number of milliseconds to delay the invocation of the handler after te event fires.&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;single : Boolean&lt;div class=&quot;sub-desc&quot;&gt;True to add a handler to handle just the next firing of the event, and then remove itself.&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;buffer : Number&lt;div class=&quot;sub-desc&quot;&gt;Causes the handler to be scheduled to run in an {@link Ext.util.DelayedTask} delayed
     * by the specified number of milliseconds. If the event fires again within that time, the original
-    * handler is <em>not</em> invoked, but the new handler is scheduled in its place.</div></li>
-    * <li>target : Element<div class="sub-desc">Only call the handler if the event was fired on the target Element, <i>not</i> if the event was bubbled up from a child node.</div></li>
-    * </ul><br>
-    * <p>See {@link Ext.core.Element#addListener} for examples of how to use these options.</p>
+    * handler is &lt;em&gt;not&lt;/em&gt; invoked, but the new handler is scheduled in its place.&lt;/div&gt;&lt;/li&gt;
+    * &lt;li&gt;target : Element&lt;div class=&quot;sub-desc&quot;&gt;Only call the handler if the event was fired on the target Element, &lt;i&gt;not&lt;/i&gt; if the event was bubbled up from a child node.&lt;/div&gt;&lt;/li&gt;
+    * &lt;/ul&gt;&lt;br&gt;
+    * &lt;p&gt;See {@link Ext.core.Element#addListener} for examples of how to use these options.&lt;/p&gt;
     */
     addListener: function(element, eventName, fn, scope, options){
-        // Check if we've been passed a "config style" event.
+        // Check if we've been passed a &quot;config style&quot; event.
         if (Ext.isObject(eventName)) {
             this.prepareListenerConfig(element, eventName);
             return;
@@ -322,14 +322,14 @@ Ext.EventManager = {
             bind,
             wrap;
 
-        //<debug>
+        //&lt;debug&gt;
         if (!dom){
             Ext.Error.raise({
                 sourceClass: 'Ext.EventManager',
                 sourceMethod: 'addListener',
                 targetElement: element,
                 eventName: eventName,
-                msg: 'Error adding "' + eventName + '\" listener for nonexistent element "' + element + '"'
+                msg: 'Error adding &quot;' + eventName + '\&quot; listener for nonexistent element &quot;' + element + '&quot;'
             });
         }
         if (!fn) {
@@ -338,10 +338,10 @@ Ext.EventManager = {
                 sourceMethod: 'addListener',
                 targetElement: element,
                 eventName: eventName,
-                msg: 'Error adding "' + eventName + '\" listener. The handler function is undefined.'
+                msg: 'Error adding &quot;' + eventName + '\&quot; listener. The handler function is undefined.'
             });
         }
-        //</debug>
+        //&lt;/debug&gt;
 
         // create the wrapper function
         options = options || {};
@@ -356,7 +356,7 @@ Ext.EventManager = {
             dom.addEventListener(bind.eventName, wrap, options.capture || false);
         }
 
-        if (dom == document && eventName == 'mousedown') {
+        if (dom == document &amp;&amp; eventName == 'mousedown') {
             this.stoppedMouseDownEvent.addListener(wrap);
         }
 
@@ -368,13 +368,13 @@ Ext.EventManager = {
         });
     },
 
-    <a name="method-Ext.EventManager-removeListener"></a>/**
-    * Removes an event handler from an element.  The shorthand version {@link #un} is equivalent.  Typically
+<span id='Ext-EventManager-method-removeListener'>    /**
+</span>    * Removes an event handler from an element.  The shorthand version {@link #un} is equivalent.  Typically
     * you will use {@link Ext.core.Element#removeListener} directly on an Element in favor of calling this version.
     * @param {String/HTMLElement} el The id or html element from which to remove the listener.
     * @param {String} eventName The name of the event.
-    * @param {Function} fn The handler function to remove. <b>This must be a reference to the function passed into the {@link #addListener} call.</b>
-    * @param {Object} scope If a scope (<b><code>this</code></b> reference) was specified when the listener was added,
+    * @param {Function} fn The handler function to remove. &lt;b&gt;This must be a reference to the function passed into the {@link #addListener} call.&lt;/b&gt;
+    * @param {Object} scope If a scope (&lt;b&gt;&lt;code&gt;this&lt;/code&gt;&lt;/b&gt; reference) was specified when the listener was added,
     * then this must refer to the same object.
     */
     removeListener : function(element, eventName, fn, scope) {
@@ -394,7 +394,7 @@ Ext.EventManager = {
         while (i--) {
             listener = cache[i];
 
-            if (listener && (!fn || listener.fn == fn) && (!scope || listener.scope === scope)) {
+            if (listener &amp;&amp; (!fn || listener.fn == fn) &amp;&amp; (!scope || listener.scope === scope)) {
                 wrap = listener.wrap;
 
                 // clear buffered calls
@@ -404,7 +404,7 @@ Ext.EventManager = {
                 }
 
                 // clear delayed calls
-                j = wrap.tasks && wrap.tasks.length;
+                j = wrap.tasks &amp;&amp; wrap.tasks.length;
                 if (j) {
                     while (j--) {
                         clearTimeout(wrap.tasks[j]);
@@ -418,7 +418,7 @@ Ext.EventManager = {
                     dom.removeEventListener(bindName, wrap, false);
                 }
 
-                if (wrap && dom == document && eventName == 'mousedown') {
+                if (wrap &amp;&amp; dom == document &amp;&amp; eventName == 'mousedown') {
                     this.stoppedMouseDownEvent.removeListener(wrap);
                 }
 
@@ -428,8 +428,8 @@ Ext.EventManager = {
         }
     },
 
-    <a name="method-Ext.EventManager-removeAll"></a>/**
-    * Removes all event handers from an element.  Typically you will use {@link Ext.core.Element#removeAllListeners}
+<span id='Ext-EventManager-method-removeAll'>    /**
+</span>    * Removes all event handers from an element.  Typically you will use {@link Ext.core.Element#removeAllListeners}
     * directly on an Element in favor of calling this version.
     * @param {String/HTMLElement} el The id or html element from which to remove all event handlers.
     */
@@ -449,8 +449,8 @@ Ext.EventManager = {
         Ext.cache[dom.id].events = {};
     },
 
-    <a name="method-Ext.EventManager-purgeElement"></a>/**
-     * Recursively removes all previous added listeners from an element and its children. Typically you will use {@link Ext.core.Element#purgeAllListeners}
+<span id='Ext-EventManager-method-purgeElement'>    /**
+</span>     * Recursively removes all previous added listeners from an element and its children. Typically you will use {@link Ext.core.Element#purgeAllListeners}
      * directly on an Element in favor of calling this version.
      * @param {String/HTMLElement} el The id or html element from which to remove all event handlers.
      * @param {String} eventName (optional) The name of the event.
@@ -466,15 +466,15 @@ Ext.EventManager = {
             this.removeAll(dom);
         }
 
-        if(dom && dom.childNodes) {
-            for(len = element.childNodes.length; i < len; i++) {
+        if(dom &amp;&amp; dom.childNodes) {
+            for(len = element.childNodes.length; i &lt; len; i++) {
                 this.purgeElement(element.childNodes[i], eventName);
             }
         }
     },
 
-    /**
-     * Create the wrapper function for the event
+<span id='Ext-EventManager-method-createListenerWrap'>    /**
+</span>     * Create the wrapper function for the event
      * @private
      * @param {HTMLElement} dom The dom element
      * @param {String} ename The event name
@@ -488,14 +488,14 @@ Ext.EventManager = {
         var f = ['if(!Ext) {return;}'],
             gen;
 
-        if(options.buffer || options.delay) {
-            f.push('e = new Ext.EventObjectImpl(e);');
+        if(options.buffer || options.delay || options.freezeEvent) {
+            f.push('e = new Ext.EventObjectImpl(e, ' + (options.freezeEvent ? 'true' : 'false' ) + ');');
         } else {
             f.push('e = Ext.EventObject.setEvent(e);');
         }
 
         if (options.delegate) {
-            f.push('var t = e.getTarget("' + options.delegate + '", this);');
+            f.push('var t = e.getTarget(&quot;' + options.delegate + '&quot;, this);');
             f.push('if(!t) {return;}');
         } else {
             f.push('var t = e.target;');
@@ -521,7 +521,7 @@ Ext.EventManager = {
         }
 
         if(options.buffer) {
-            f.push('(wrap.task && clearTimeout(wrap.task));');
+            f.push('(wrap.task &amp;&amp; clearTimeout(wrap.task));');
             f.push('wrap.task = setTimeout(function(){');
         }
 
@@ -552,8 +552,8 @@ Ext.EventManager = {
         };
     },
 
-    /**
-     * Get the event cache for a particular element for a particular event
+<span id='Ext-EventManager-method-getEventListenerCache'>    /**
+</span>     * Get the event cache for a particular element for a particular event
      * @private
      * @param {HTMLElement} element The element
      * @param {Object} eventName The event name
@@ -564,8 +564,8 @@ Ext.EventManager = {
         return eventCache[eventName] || (eventCache[eventName] = []);
     },
 
-    /**
-     * Gets the event cache for the object
+<span id='Ext-EventManager-method-getElementEventCache'>    /**
+</span>     * Gets the event cache for the object
      * @private
      * @param {HTMLElement} element The element
      * @return {Object} The event cache for the object
@@ -579,8 +579,8 @@ Ext.EventManager = {
     mouseLeaveRe: /(mouseout|mouseleave)/,
     mouseEnterRe: /(mouseover|mouseenter)/,
 
-    <a name="method-Ext.EventManager-stopEvent"></a>/**
-     * Stop the event (preventDefault and stopPropagation)
+<span id='Ext-EventManager-method-stopEvent'>    /**
+</span>     * Stop the event (preventDefault and stopPropagation)
      * @param {Event} The event to stop
      */
     stopEvent: function(event) {
@@ -588,8 +588,8 @@ Ext.EventManager = {
         this.preventDefault(event);
     },
 
-    <a name="method-Ext.EventManager-stopPropagation"></a>/**
-     * Cancels bubbling of the event.
+<span id='Ext-EventManager-method-stopPropagation'>    /**
+</span>     * Cancels bubbling of the event.
      * @param {Event} The event to stop bubbling.
      */
     stopPropagation: function(event) {
@@ -601,8 +601,8 @@ Ext.EventManager = {
         }
     },
 
-    <a name="method-Ext.EventManager-preventDefault"></a>/**
-     * Prevents the browsers default handling of the event.
+<span id='Ext-EventManager-method-preventDefault'>    /**
+</span>     * Prevents the browsers default handling of the event.
      * @param {Event} The event to prevent the default
      */
     preventDefault: function(event) {
@@ -613,8 +613,8 @@ Ext.EventManager = {
             event.returnValue = false;
             // Some keys events require setting the keyCode to -1 to be prevented
             try {
-              // all ctrl + X and F1 -> F12
-              if (event.ctrlKey || event.keyCode > 111 && event.keyCode < 124) {
+              // all ctrl + X and F1 -&gt; F12
+              if (event.ctrlKey || event.keyCode &gt; 111 &amp;&amp; event.keyCode &lt; 124) {
                   event.keyCode = -1;
               }
             } catch (e) {
@@ -623,8 +623,8 @@ Ext.EventManager = {
         }
     },
 
-    <a name="method-Ext.EventManager-getRelatedTarget"></a>/**
-     * Gets the related target from the event.
+<span id='Ext-EventManager-method-getRelatedTarget'>    /**
+</span>     * Gets the related target from the event.
      * @param {Object} event The event
      * @return {HTMLElement} The related target.
      */
@@ -641,8 +641,8 @@ Ext.EventManager = {
         return this.resolveTextNode(target);
     },
 
-    <a name="method-Ext.EventManager-getPageX"></a>/**
-     * Gets the x coordinate from the event
+<span id='Ext-EventManager-method-getPageX'>    /**
+</span>     * Gets the x coordinate from the event
      * @param {Object} event The event
      * @return {Number} The x coordinate
      */
@@ -650,8 +650,8 @@ Ext.EventManager = {
         return this.getXY(event)[0];
     },
 
-    <a name="method-Ext.EventManager-getPageY"></a>/**
-     * Gets the y coordinate from the event
+<span id='Ext-EventManager-method-getPageY'>    /**
+</span>     * Gets the y coordinate from the event
      * @param {Object} event The event
      * @return {Number} The y coordinate
      */
@@ -659,8 +659,8 @@ Ext.EventManager = {
         return this.getXY(event)[1];
     },
 
-    <a name="method-Ext.EventManager-getPageXY"></a>/**
-     * Gets the x & ycoordinate from the event
+<span id='Ext-EventManager-method-getPageXY'>    /**
+</span>     * Gets the x &amp; ycoordinate from the event
      * @param {Object} event The event
      * @return {Array} The x/y coordinate
      */
@@ -672,15 +672,15 @@ Ext.EventManager = {
             body = document.body;
 
         // pageX/pageY not available (undefined, not null), use clientX/clientY instead
-        if (!x && x !== 0) {
-            x = event.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);
-            y = event.clientY + (doc && doc.scrollTop  || body && body.scrollTop  || 0) - (doc && doc.clientTop  || body && body.clientTop  || 0);
+        if (!x &amp;&amp; x !== 0) {
+            x = event.clientX + (doc &amp;&amp; doc.scrollLeft || body &amp;&amp; body.scrollLeft || 0) - (doc &amp;&amp; doc.clientLeft || body &amp;&amp; body.clientLeft || 0);
+            y = event.clientY + (doc &amp;&amp; doc.scrollTop  || body &amp;&amp; body.scrollTop  || 0) - (doc &amp;&amp; doc.clientTop  || body &amp;&amp; body.clientTop  || 0);
         }
         return [x, y];
     },
 
-    <a name="method-Ext.EventManager-getTarget"></a>/**
-     * Gets the target of the event.
+<span id='Ext-EventManager-method-getTarget'>    /**
+</span>     * Gets the target of the event.
      * @param {Object} event The event
      * @return {HTMLElement} target
      */
@@ -689,8 +689,8 @@ Ext.EventManager = {
         return this.resolveTextNode(event.target || event.srcElement);
     },
 
-    /**
-     * Resolve any text nodes accounting for browser differences.
+<span id='Ext-EventManager-property-resolveTextNode'>    /**
+</span>     * Resolve any text nodes accounting for browser differences.
      * @private
      * @param {HTMLElement} node The node
      * @return {HTMLElement} The resolved node
@@ -708,7 +708,7 @@ Ext.EventManager = {
             }
                 return node.nodeType == 3 ? node.parentNode: node;
             }: function(node) {
-                return node && node.nodeType == 3 ? node.parentNode: node;
+                return node &amp;&amp; node.nodeType == 3 ? node.parentNode: node;
             },
 
     // --------------------- custom event binding ---------------------
@@ -717,11 +717,11 @@ Ext.EventManager = {
     curWidth: 0,
     curHeight: 0,
 
-    <a name="method-Ext.EventManager-onWindowResize"></a>/**
-     * Adds a listener to be notified when the browser window is resized and provides resize event buffering (100 milliseconds),
+<span id='Ext-EventManager-method-onWindowResize'>    /**
+</span>     * Adds a listener to be notified when the browser window is resized and provides resize event buffering (100 milliseconds),
      * passes new viewport width and height to handlers.
      * @param {Function} fn      The handler function the window resize event invokes.
-     * @param {Object}   scope   The scope (<code>this</code> reference) in which the handler function executes. Defaults to the browser window.
+     * @param {Object}   scope   The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the handler function executes. Defaults to the browser window.
      * @param {boolean}  options Options object as passed to {@link Ext.core.Element#addListener}
      */
     onWindowResize: function(fn, scope, options){
@@ -733,8 +733,8 @@ Ext.EventManager = {
         resize.addListener(fn, scope, options);
     },
 
-    /**
-     * Fire the resize event.
+<span id='Ext-EventManager-method-fireResize'>    /**
+</span>     * Fire the resize event.
      * @private
      */
     fireResize: function(){
@@ -750,8 +750,8 @@ Ext.EventManager = {
          }
     },
 
-    <a name="method-Ext.EventManager-removeResizeListener"></a>/**
-     * Removes the passed window resize listener.
+<span id='Ext-EventManager-method-removeResizeListener'>    /**
+</span>     * Removes the passed window resize listener.
      * @param {Function} fn        The method the event invokes
      * @param {Object}   scope    The scope of handler
      */
@@ -769,8 +769,8 @@ Ext.EventManager = {
         }
     },
 
-    /**
-     * Fires the unload event for items bound with onWindowUnload
+<span id='Ext-EventManager-method-fireUnload'>    /**
+</span>     * Fires the unload event for items bound with onWindowUnload
      * @private
      */
     fireUnload: function() {
@@ -782,7 +782,7 @@ Ext.EventManager = {
                 var gridviews = Ext.ComponentQuery.query('gridview'),
                     i = 0,
                     ln = gridviews.length;
-                for (; i < ln; i++) {
+                for (; i &lt; ln; i++) {
                     gridviews[i].scrollToTop();
                 }
             }
@@ -798,8 +798,8 @@ Ext.EventManager = {
         }
     },
 
-    <a name="method-Ext.EventManager-removeUnloadListener"></a>/**
-     * Removes the passed window unload listener.
+<span id='Ext-EventManager-method-removeUnloadListener'>    /**
+</span>     * Removes the passed window unload listener.
      * @param {Function} fn        The method the event invokes
      * @param {Object}   scope    The scope of handler
      */
@@ -809,18 +809,18 @@ Ext.EventManager = {
         }
     },
 
-    /**
-     * note 1: IE fires ONLY the keydown event on specialkey autorepeat
-     * note 2: Safari < 3.1, Gecko (Mac/Linux) & Opera fire only the keypress event on specialkey autorepeat
+<span id='Ext-EventManager-property-useKeyDown'>    /**
+</span>     * note 1: IE fires ONLY the keydown event on specialkey autorepeat
+     * note 2: Safari &lt; 3.1, Gecko (Mac/Linux) &amp; Opera fire only the keypress event on specialkey autorepeat
      * (research done by @Jan Wolter at http://unixpapa.com/js/key.html)
      * @private
      */
     useKeyDown: Ext.isWebKit ?
-                   parseInt(navigator.userAgent.match(/AppleWebKit\/(\d+)/)[1], 10) >= 525 :
-                   !((Ext.isGecko && !Ext.isWindows) || Ext.isOpera),
+                   parseInt(navigator.userAgent.match(/AppleWebKit\/(\d+)/)[1], 10) &gt;= 525 :
+                   !((Ext.isGecko &amp;&amp; !Ext.isWindows) || Ext.isOpera),
 
-    <a name="method-Ext.EventManager-getKeyEvent"></a>/**
-     * Indicates which event to use for getting key presses.
+<span id='Ext-EventManager-method-getKeyEvent'>    /**
+</span>     * Indicates which event to use for getting key presses.
      * @return {String} The appropriate event name.
      */
     getKeyEvent: function(){
@@ -828,8 +828,8 @@ Ext.EventManager = {
     }
 };
 
-<a name="method-Ext-onReady"></a>/**
- * Alias for {@link Ext.Loader#onReady Ext.Loader.onReady} with withDomReady set to true
+<span id='Ext-method-onReady'>/**
+</span> * Alias for {@link Ext.Loader#onReady Ext.Loader.onReady} with withDomReady set to true
  * @member Ext
  * @method onReady
  */
@@ -837,22 +837,22 @@ Ext.onReady = function(fn, scope, options) {
     Ext.Loader.onReady(fn, scope, true, options);
 };
 
-<a name="method-Ext-onDocumentReady"></a>/**
- * Alias for {@link Ext.EventManager#onDocumentReady Ext.EventManager.onDocumentReady}
+<span id='Ext-method-onDocumentReady'>/**
+</span> * Alias for {@link Ext.EventManager#onDocumentReady Ext.EventManager.onDocumentReady}
  * @member Ext
  * @method onDocumentReady
  */
 Ext.onDocumentReady = Ext.EventManager.onDocumentReady;
 
-<a name="method-Ext.EventManager-on"></a>/**
- * Alias for {@link Ext.EventManager#addListener Ext.EventManager.addListener}
+<span id='Ext-EventManager-method-on'>/**
+</span> * Alias for {@link Ext.EventManager#addListener Ext.EventManager.addListener}
  * @member Ext.EventManager
  * @method on
  */
 Ext.EventManager.on = Ext.EventManager.addListener;
 
-<a name="method-Ext.EventManager-un"></a>/**
- * Alias for {@link Ext.EventManager#removeListener Ext.EventManager.removeListener}
+<span id='Ext-EventManager-method-un'>/**
+</span> * Alias for {@link Ext.EventManager#removeListener Ext.EventManager.removeListener}
  * @member Ext.EventManager
  * @method un
  */
@@ -937,7 +937,7 @@ Ext.EventManager.un = Ext.EventManager.removeListener;
 
         // add to the parent to allow for selectors x-strict x-border-box, also set the isBorderBox property correctly
         if (html) {
-            if (Ext.isStrict && (Ext.isIE6 || Ext.isIE7)) {
+            if (Ext.isStrict &amp;&amp; (Ext.isIE6 || Ext.isIE7)) {
                 Ext.isBorderBox = false;
             }
             else {
@@ -947,7 +947,7 @@ Ext.EventManager.un = Ext.EventManager.removeListener;
             htmlCls.push(baseCSSPrefix + (Ext.isBorderBox ? 'border-box' : 'strict'));
             if (!Ext.isStrict) {
                 htmlCls.push(baseCSSPrefix + 'quirks');
-                if (Ext.isIE && !Ext.isStrict) {
+                if (Ext.isIE &amp;&amp; !Ext.isStrict) {
                     Ext.isIEQuirks = true;
                 }
             }
@@ -960,4 +960,4 @@ Ext.EventManager.un = Ext.EventManager.removeListener;
 
     Ext.onReady(initExtCss);
 })();
-￿</pre></pre></body></html>
+</pre></pre></body></html>

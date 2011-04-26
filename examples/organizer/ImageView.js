@@ -1,5 +1,15 @@
+/**
+ * @class Ext.org.ImageView
+ * @extends Ext.view.View
+ * @xtype imageview
+ *
+ * This class implements the "My Images" view (the images in the organizer). This class
+ * incorporates {@link Ext.ux.DataView.Draggable Draggable} to enable dragging items as
+ * well as {@link Ext.ux.DataView.DragSelector DragSelector} to allow multiple selection
+ * by simply clicking and dragging the mouse.
+ */
 Ext.define('Ext.org.ImageView', {
-    extend: 'Ext.DataView',
+    extend: 'Ext.view.View',
     alias : 'widget.imageview',
     requires: ['Ext.data.Store'],
     mixins: {

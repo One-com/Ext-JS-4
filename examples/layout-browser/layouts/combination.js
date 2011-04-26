@@ -209,10 +209,9 @@ function getCombinationLayouts() {
                 layout: 'fit',
                 items: {
                     xtype: 'form',
-                    frame: true,
-                    bodyMargin: 10,
                     layout:'absolute',
                     url:'save-form.php',
+                    padding: '5 5 0 5',
                     border: false,
                     defaultType: 'textfield',
                     items: [{

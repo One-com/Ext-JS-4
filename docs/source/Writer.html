@@ -1,19 +1,19 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.writer.Writer"></a>/**
- * @author Ed Spencer
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-data.writer.Writer-method-constructor'><span id='Ext-data.writer.Writer'>/**
+</span></span> * @author Ed Spencer
  * @class Ext.data.writer.Writer
  * @extends Object
  * 
- * <p>Base Writer class used by most subclasses of {@link Ext.data.proxy.Server}. This class is
+ * &lt;p&gt;Base Writer class used by most subclasses of {@link Ext.data.proxy.Server}. This class is
  * responsible for taking a set of {@link Ext.data.Operation} objects and a {@link Ext.data.Request}
- * object and modifying that request based on the Operations.</p>
+ * object and modifying that request based on the Operations.&lt;/p&gt;
  * 
- * <p>For example a Ext.data.writer.Json would format the Operations and their {@link Ext.data.Model} 
- * instances based on the config options passed to the JsonWriter's constructor.</p>
+ * &lt;p&gt;For example a Ext.data.writer.Json would format the Operations and their {@link Ext.data.Model} 
+ * instances based on the config options passed to the JsonWriter's constructor.&lt;/p&gt;
  * 
- * <p>Writers are not needed for any kind of local storage - whether via a
+ * &lt;p&gt;Writers are not needed for any kind of local storage - whether via a
  * {@link Ext.data.proxy.WebStorage Web Storage proxy} (see {@link Ext.data.proxy.LocalStorage localStorage}
  * and {@link Ext.data.proxy.SessionStorage sessionStorage}) or just in memory via a
- * {@link Ext.data.proxy.Memory MemoryProxy}.</p>
+ * {@link Ext.data.proxy.Memory MemoryProxy}.&lt;/p&gt;
  * 
  * @constructor
  * @param {Object} config Optional config object
@@ -22,17 +22,19 @@ Ext.define('Ext.data.writer.Writer', {
     alias: 'writer.base',
     alternateClassName: ['Ext.data.DataWriter', 'Ext.data.Writer'],
     
-    <a name="cfg-Ext.data.writer.Writer-writeAllFields"></a>/**
-     * @cfg {Boolean} writeAllFields True to write all fields from the record to the server. If set to false it
-     * will only send the fields that were modified. Defaults to <tt>true</tt>.
+<span id='Ext-data.writer.Writer-cfg-writeAllFields'>    /**
+</span>     * @cfg {Boolean} writeAllFields True to write all fields from the record to the server. If set to false it
+     * will only send the fields that were modified. Defaults to &lt;tt&gt;true&lt;/tt&gt;. Note that any fields that have
+     * {@link Ext.data.Field#persist} set to false will still be ignored.
      */
     writeAllFields: true,
     
-    <a name="cfg-Ext.data.writer.Writer-nameProperty"></a>/**
-     * @cfg {String} nameProperty This property is used to read the key for each value that will be sent to the server.
+<span id='Ext-data.writer.Writer-cfg-nameProperty'>    /**
+</span>     * @cfg {String} nameProperty This property is used to read the key for each value that will be sent to the server.
      * For example:
-     * <pre><code>
-Ext.regModel('Person', {
+     * &lt;pre&gt;&lt;code&gt;
+Ext.define('Person', {
+    extend: 'Ext.data.Model',
     fields: [{
         name: 'first',
         mapping: 'firstName'
@@ -55,8 +57,8 @@ new Ext.data.writer.Writer({
     age: 1
 }
 
-     * </code></pre>
-     * Defaults to <tt>name</tt>. If the value is not present, the field name will always be used.
+     * &lt;/code&gt;&lt;/pre&gt;
+     * Defaults to &lt;tt&gt;name&lt;/tt&gt;. If the value is not present, the field name will always be used.
      */
     nameProperty: 'name',
 
@@ -64,8 +66,8 @@ new Ext.data.writer.Writer({
         Ext.apply(this, config);
     },
 
-    <a name="method-Ext.data.writer.Writer-write"></a>/**
-     * Prepares a Proxy's Ext.data.Request object
+<span id='Ext-data.writer.Writer-method-write'>    /**
+</span>     * Prepares a Proxy's Ext.data.Request object
      * @param {Ext.data.Request} request The request object
      * @return {Ext.data.Request} The modified request object
      */
@@ -76,14 +78,14 @@ new Ext.data.writer.Writer({
             i         = 0,
             data      = [];
 
-        for (; i < len; i++) {
+        for (; i &lt; len; i++) {
             data.push(this.getRecordData(records[i]));
         }
         return this.writeRecords(request, data);
     },
 
-    <a name="method-Ext.data.writer.Writer-getRecordData"></a>/**
-     * Formats the data for each record before sending it to the server. This
+<span id='Ext-data.writer.Writer-method-getRecordData'>    /**
+</span>     * Formats the data for each record before sending it to the server. This
      * method should be overridden to format the data in a way that differs from the default.
      * @param {Object} record The record that we are writing to the server.
      * @return {Object} An object literal of name/value keys to be written to the server.
@@ -102,8 +104,10 @@ new Ext.data.writer.Writer({
         
         if (writeAll) {
             fields.each(function(field){
-                name = field[nameProperty] || field.name;
-                data[name] = record.get(field.name);
+                if (field.persist) {
+                    name = field[nameProperty] || field.name;
+                    data[name] = record.get(field.name);
+                }
             });
         } else {
             // Only write the changes
@@ -123,4 +127,4 @@ new Ext.data.writer.Writer({
         return data;
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

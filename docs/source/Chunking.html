@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.grid.feature.Chunking"></a>/**
- * @class Ext.grid.feature.Chunking
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-grid.feature.Chunking'>/**
+</span> * @class Ext.grid.feature.Chunking
  * @extends Ext.grid.feature.Feature
  */
 Ext.define('Ext.grid.feature.Chunking', {
@@ -46,14 +46,14 @@ Ext.define('Ext.grid.feature.Chunking', {
         rows,
         chunkLength;
 
-        for (; start < recordCount; start+=this.chunkSize, i++) {
-            if (start+this.chunkSize > recordCount) {
+        for (; start &lt; recordCount; start+=this.chunkSize, i++) {
+            if (start+this.chunkSize &gt; recordCount) {
                 chunkLength = recordCount - start;
             } else {
                 chunkLength = this.chunkSize;
             }
             
-            if (i >= visibleChunk - 1 && i <= visibleChunk + 1) {
+            if (i &gt;= visibleChunk - 1 &amp;&amp; i &lt;= visibleChunk + 1) {
                 rows = orig.rows.slice(start, start+this.chunkSize);
             } else {
                 rows = [];
@@ -72,12 +72,12 @@ Ext.define('Ext.grid.feature.Chunking', {
     getTableFragments: function() {
         return {
             openTableWrap: function() {
-                return '<tpl for="chunks"><div class="' + Ext.baseCSSPrefix + 'grid-chunk" style="height: {chunkHeight}px;">';
+                return '&lt;tpl for=&quot;chunks&quot;&gt;&lt;div class=&quot;' + Ext.baseCSSPrefix + 'grid-chunk&quot; style=&quot;height: {chunkHeight}px;&quot;&gt;';
             },
             closeTableWrap: function() {
-                return '</div></tpl>';
+                return '&lt;/div&gt;&lt;/tpl&gt;';
             }
         };
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

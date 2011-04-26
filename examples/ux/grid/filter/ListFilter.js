@@ -171,6 +171,7 @@ filter : [{"type":"list","value":"small,medium","field":"size"}]
      * of the filter, false otherwise.
      */
     validateRecord : function (record) {
-        return this.getValue().indexOf(record.get(this.dataIndex)) > -1;
+        var valuesArray = this.getValue();
+        return Ext.Array.indexOf(valuesArray, record.get(this.dataIndex)) > -1;
     }
 });

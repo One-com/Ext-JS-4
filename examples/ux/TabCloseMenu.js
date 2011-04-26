@@ -1,6 +1,5 @@
 /**
  * @class Ext.ux.TabCloseMenu
- * @extends Object
  * Plugin (ptype = 'tabclosemenu') for adding a close context menu to tabs. Note that the menu respects
  * the closable configuration on the tab. As such, commands like remove others and remove all will not
  * remove items that are not closable.
@@ -12,7 +11,11 @@
 Ext.define('Ext.tab.TabCloseMenu', {
     alias: 'plugin.tabclosemenu',
     alternateClassName: 'Ext.ux.TabCloseMenu',
-    extend: 'Ext.util.Observable',
+
+    mixins: {
+        observable: 'Ext.util.Observable'
+    },
+
     /**
      * @cfg {String} closeTabText
      * The text for closing the current tab. Defaults to <tt>'Close Tab'</tt>.
@@ -43,7 +46,27 @@ Ext.define('Ext.tab.TabCloseMenu', {
      */
     closeAllTabsText: 'Close All Tabs',
 
+    /**
+     * @cfg {Array} extraItemsHead
+     * An array of additional context menu items to add to the front of the context menu.
+     */
+    extraItemsHead: null,
+
+    /**
+     * @cfg {Array} extraItemsTail
+     * An array of additional context menu items to add to the end of the context menu.
+     */
+    extraItemsTail: null,
+
     //public
+    constructor: function (config) {
+        this.addEvents(
+            'aftermenu',
+            'beforemenu');
+
+        this.mixins.observable.constructor.call(this, config);
+    },
+
     init : function(tabpanel){
         this.tabPanel = tabpanel;
         this.tabBar = tabpanel.down("tabbar");
@@ -74,61 +97,94 @@ Ext.define('Ext.tab.TabCloseMenu', {
             menu = me.createMenu(),
             disableAll = true,
             disableOthers = true,
-            closeAll = menu.child('*[text="' + me.closeAllTabsText + '"]'),
             tab = me.tabBar.getChildByElement(target),
             index = me.tabBar.items.indexOf(tab);
 
         me.item = me.tabPanel.getComponent(index);
         menu.child('*[text="' + me.closeTabText + '"]').setDisabled(!me.item.closable);
 
-        me.tabPanel.items.each(function(item){
-            if (item.closable) {
-                disableAll = false;
-                if(item != me.item){
-                    disableOthers = false;
-                    return false;
+        if (me.showCloseAll || me.showCloseOthers) {
+            me.tabPanel.items.each(function(item) {
+                if (item.closable) {
+                    disableAll = false;
+                    if (item != me.item) {
+                        disableOthers = false;
+                        return false;
+                    }
                 }
-            }
-        });
+                return true;
+            });
 
-        menu.child('*[text="' + me.closeOthersTabsText + '"]').setDisabled(disableOthers);
-        if(closeAll){
-            closeAll.setDisabled(disableAll);
+            if (me.showCloseAll) {
+                menu.child('*[text="' + me.closeAllTabsText + '"]').setDisabled(disableAll);
+            }
+
+            if (me.showCloseOthers) {
+                menu.child('*[text="' + me.closeOthersTabsText + '"]').setDisabled(disableOthers);
+            }
         }
 
         event.preventDefault();
+        me.fireEvent('beforemenu', menu, me.item, me);
+
         menu.showAt(event.getXY());
     },
 
-    createMenu : function(){
-        if(!this.menu){
+    createMenu : function() {
+        var me = this;
+
+        if (!me.menu) {
             var items = [{
-                text: this.closeTabText,
-                scope: this,
-                handler: this.onClose
+                text: me.closeTabText,
+                scope: me,
+                handler: me.onClose
             }];
-            if (this.showCloseAll || this.showCloseOthers) {
+
+            if (me.showCloseAll || me.showCloseOthers) {
                 items.push('-');
             }
-            if (this.showCloseOthers) {
+
+            if (me.showCloseOthers) {
                 items.push({
-                    text: this.closeOthersTabsText,
-                    scope: this,
-                    handler: this.onCloseOthers
+                    text: me.closeOthersTabsText,
+                    scope: me,
+                    handler: me.onCloseOthers
                 });
             }
-            if (this.showCloseAll) {
+
+            if (me.showCloseAll) {
                 items.push({
-                    text: this.closeAllTabsText,
-                    scope: this,
-                    handler: this.onCloseAll
+                    text: me.closeAllTabsText,
+                    scope: me,
+                    handler: me.onCloseAll
                 });
             }
-            this.menu = Ext.create('Ext.menu.Menu', {
-                items: items
+
+            if (me.extraItemsHead) {
+                items = me.extraItemsHead.concat(items);
+            }
+
+            if (me.extraItemsTail) {
+                items = items.concat(me.extraItemsTail);
+            }
+
+            me.menu = Ext.create('Ext.menu.Menu', {
+                items: items,
+                listeners: {
+                    hide: me.onHideMenu,
+                    scope: me
+                }
             });
         }
-        return this.menu;
+
+        return me.menu;
+    },
+
+    onHideMenu: function () {
+        var me = this;
+
+        me.item = null;
+        me.fireEvent('aftermenu', me.menu, me);
     },
 
     onClose : function(){

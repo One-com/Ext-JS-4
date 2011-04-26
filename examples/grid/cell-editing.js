@@ -81,6 +81,7 @@ Ext.onReady(function(){
                 xtype: 'combobox',
                 typeAhead: true,
                 triggerAction: 'all',
+                selectOnTab: true,
                 store: [
                     ['Shade','Shade'],
                     ['Mostly Shady','Mostly Shady'],

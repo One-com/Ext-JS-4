@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre>/**
- * @class Ext.chart.series.Pie
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-chart.series.Pie'>/**
+</span> * @class Ext.chart.series.Pie
  * @extends Ext.chart.series.Series
  * 
  * Creates a Pie Chart. A Pie Chart is a useful visualization technique to display quantitative information for different 
@@ -7,25 +7,56 @@
  * As with all other series, the Pie Series must be appended in the *series* Chart array configuration. See the Chart 
  * documentation for more information. A typical configuration object for the pie series could be:
  * 
-  <pre><code>
-    series: [{
-        type: 'pie',
-        field: 'data1',
-        showInLegend: true,
-        highlight: {
-          segment: {
-            margin: 20
-          }
-        },
-        label: {
-            field: 'name',
-            display: 'rotate',
-            contrast: true,
-            font: '18px Arial'
-        }
-    }]
-   </code></pre>
- 
+ * {@img Ext.chart.series.Pie/Ext.chart.series.Pie.png Ext.chart.series.Pie chart series}
+ *
+ *     var store = Ext.create('Ext.data.JsonStore', {
+ *         fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
+ *         data: [
+ *             {'name':'metric one', 'data1':10, 'data2':12, 'data3':14, 'data4':8, 'data5':13},
+ *             {'name':'metric two', 'data1':7, 'data2':8, 'data3':16, 'data4':10, 'data5':3},
+ *             {'name':'metric three', 'data1':5, 'data2':2, 'data3':14, 'data4':12, 'data5':7},
+ *             {'name':'metric four', 'data1':2, 'data2':14, 'data3':6, 'data4':1, 'data5':23},
+ *             {'name':'metric five', 'data1':27, 'data2':38, 'data3':36, 'data4':13, 'data5':33}                                                
+ *         ]
+ *     });
+ *     
+ *     Ext.create('Ext.chart.Chart', {
+ *         renderTo: Ext.getBody(),
+ *         width: 500,
+ *         height: 300,
+ *         animate: true,
+ *         store: store,
+ *         theme: 'Base:gradients',
+ *         series: [{
+ *             type: 'pie',
+ *             field: 'data1',
+ *             showInLegend: true,
+ *             tips: {
+ *               trackMouse: true,
+ *               width: 140,
+ *               height: 28,
+ *               renderer: function(storeItem, item) {
+ *                 //calculate and display percentage on hover
+ *                 var total = 0;
+ *                 store.each(function(rec) {
+ *                     total += rec.get('data1');
+ *                 });
+ *                 this.setTitle(storeItem.get('name') + ': ' + Math.round(storeItem.get('data1') / total * 100) + '%');
+ *               }
+ *             },
+ *             highlight: {
+ *               segment: {
+ *                 margin: 20
+ *               }
+ *             },
+ *             label: {
+ *                 field: 'name',
+ *                 display: 'rotate',
+ *                 contrast: true,
+ *                 font: '18px Arial'
+ *             }
+ *         }]    
+ *     });
  * 
  * In this configuration we set `pie` as the type for the series, set an object with specific style properties for highlighting options 
  * (triggered when hovering elements). We also set true to `showInLegend` so all the pie slices can be represented by a legend item. 
@@ -35,65 +66,66 @@
  * and size through the `font` parameter. 
  * 
  * @xtype pie
- *
  */
 Ext.define('Ext.chart.series.Pie', {
 
     /* Begin Definitions */
 
+    alternateClassName: ['Ext.chart.PieSeries', 'Ext.chart.PieChart'],
+
     extend: 'Ext.chart.series.Series',
 
     /* End Definitions */
 
-    type: "pie",
+    type: &quot;pie&quot;,
     
     alias: 'series.pie',
 
     rad: Math.PI / 180,
 
-    <a name="cfg-Ext.chart.series.Pie-highlightDuration"></a>/**
-     * @cfg {Number} highlightDuration
+<span id='Ext-chart.series.Pie-cfg-highlightDuration'>    /**
+</span>     * @cfg {Number} highlightDuration
      * The duration for the pie slice highlight effect.
      */
     highlightDuration: 150,
 
-    <a name="cfg-Ext.chart.series.Pie-angleField"></a>/**
-     * @cfg {String} angleField
+<span id='Ext-chart.series.Pie-cfg-angleField'>    /**
+</span>     * @cfg {String} angleField
      * The store record field name to be used for the pie angles.
      * The values bound to this field name must be positive real numbers.
      * This parameter is required.
      */
     angleField: false,
 
-    <a name="cfg-Ext.chart.series.Pie-lengthField"></a>/**
-     * @cfg {String} lengthField
+<span id='Ext-chart.series.Pie-cfg-lengthField'>    /**
+</span>     * @cfg {String} lengthField
      * The store record field name to be used for the pie slice lengths.
      * The values bound to this field name must be positive real numbers.
      * This parameter is optional.
      */
     lengthField: false,
 
-    <a name="cfg-Ext.chart.series.Pie-donut"></a>/**
-     * @cfg {Boolean|Number} donut
+<span id='Ext-chart.series.Pie-cfg-donut'>    /**
+</span>     * @cfg {Boolean|Number} donut
      * Whether to set the pie chart as donut chart.
      * Default's false. Can be set to a particular percentage to set the radius
      * of the donut chart.
      */
     donut: false,
 
-    <a name="cfg-Ext.chart.series.Pie-showInLegend"></a>/**
-     * @cfg {Boolean} showInLegend
+<span id='Ext-chart.series.Pie-cfg-showInLegend'>    /**
+</span>     * @cfg {Boolean} showInLegend
      * Whether to add the pie chart elements as legend items. Default's false.
      */
     showInLegend: false,
 
-    <a name="cfg-Ext.chart.series.Pie-colorSet"></a>/**
-     * @cfg {Array} colorSet
+<span id='Ext-chart.series.Pie-cfg-colorSet'>    /**
+</span>     * @cfg {Array} colorSet
      * An array of color values which will be used, in order, as the pie slice fill colors.
      */
     
-    <a name="cfg-Ext.chart.series.Pie-style"></a>/**
-     * @cfg {Object} style
+<span id='Ext-chart.series.Pie-cfg-style'>    /**
+</span>     * @cfg {Object} style
      * An object containing styles for overriding series styles from Theming.
      */
     style: {},
@@ -114,8 +146,8 @@ Ext.define('Ext.chart.series.Pie', {
         });
         Ext.apply(me, config, {            
             shadowAttributes: [{
-                "stroke-width": 6,
-                "stroke-opacity": 1,
+                &quot;stroke-width&quot;: 6,
+                &quot;stroke-opacity&quot;: 1,
                 stroke: 'rgb(200, 200, 200)',
                 translate: {
                     x: 1.2,
@@ -123,8 +155,8 @@ Ext.define('Ext.chart.series.Pie', {
                 }
             },
             {
-                "stroke-width": 4,
-                "stroke-opacity": 1,
+                &quot;stroke-width&quot;: 4,
+                &quot;stroke-opacity&quot;: 1,
                 stroke: 'rgb(150, 150, 150)',
                 translate: {
                     x: 0.9,
@@ -132,8 +164,8 @@ Ext.define('Ext.chart.series.Pie', {
                 }
             },
             {
-                "stroke-width": 2,
-                "stroke-opacity": 1,
+                &quot;stroke-width&quot;: 2,
+                &quot;stroke-opacity&quot;: 1,
                 stroke: 'rgb(100, 100, 100)',
                 translate: {
                     x: 0.6,
@@ -143,7 +175,7 @@ Ext.define('Ext.chart.series.Pie', {
         });
         me.group = surface.getGroup(me.seriesId);
         if (shadow) {
-            for (i = 0, l = me.shadowAttributes.length; i < l; i++) {
+            for (i = 0, l = me.shadowAttributes.length; i &lt; l; i++) {
                 me.shadowGroups.push(surface.getGroup(me.seriesId + '-shadows' + i));
             }
         }
@@ -182,7 +214,7 @@ Ext.define('Ext.chart.series.Pie', {
             endAngle = opt.endAngle,
             midAngle = (startAngle + endAngle) / 2 * rad,
             margin = opt.margin || 0,
-            flag = abs(endAngle - startAngle) > 180,
+            flag = abs(endAngle - startAngle) &gt; 180,
             a1 = Math.min(startAngle, endAngle) * rad,
             a2 = Math.max(startAngle, endAngle) * rad,
             singleSlice = false;
@@ -202,27 +234,27 @@ Ext.define('Ext.chart.series.Pie', {
         x4 = x + opt.endRho * cos(a2);
         y4 = y + opt.endRho * sin(a2);
 
-        if (abs(x1 - x3) <= delta && abs(y1 - y3) <= delta) {
+        if (abs(x1 - x3) &lt;= delta &amp;&amp; abs(y1 - y3) &lt;= delta) {
             singleSlice = true;
         }
         //Solves mysterious clipping bug with IE
         if (singleSlice) {
             return {
                 path: [
-                ["M", x1, y1],
-                ["L", x2, y2],
-                ["A", opt.endRho, opt.endRho, 0, +flag, 1, x4, y4],
-                ["Z"]]
+                [&quot;M&quot;, x1, y1],
+                [&quot;L&quot;, x2, y2],
+                [&quot;A&quot;, opt.endRho, opt.endRho, 0, +flag, 1, x4, y4],
+                [&quot;Z&quot;]]
             };
         } else {
             return {
                 path: [
-                ["M", x1, y1],
-                ["L", x2, y2],
-                ["A", opt.endRho, opt.endRho, 0, +flag, 1, x4, y4],
-                ["L", x3, y3],
-                ["A", opt.startRho, opt.startRho, 0, +flag, 0, x1, y1],
-                ["Z"]]
+                [&quot;M&quot;, x1, y1],
+                [&quot;L&quot;, x2, y2],
+                [&quot;A&quot;, opt.endRho, opt.endRho, 0, +flag, 1, x4, y4],
+                [&quot;L&quot;, x3, y3],
+                [&quot;A&quot;, opt.startRho, opt.startRho, 0, +flag, 0, x1, y1],
+                [&quot;Z&quot;]]
             };
         }
     },
@@ -236,7 +268,6 @@ Ext.define('Ext.chart.series.Pie', {
             y = me.centerY,
             startAngle = slice.startAngle,
             endAngle = slice.endAngle,
-            radius = Math.max(('rho' in slice) ? slice.rho: me.radius, me.label.minMargin),
             donut = +me.donut,
             a1 = Math.min(startAngle, endAngle) * rad,
             a2 = Math.max(startAngle, endAngle) * rad,
@@ -250,8 +281,8 @@ Ext.define('Ext.chart.series.Pie', {
         };
     },
 
-    <a name="method-Ext.chart.series.Pie-drawSeries"></a>/**
-     * Draws the series for the current chart.
+<span id='Ext-chart.series.Pie-method-drawSeries'>    /**
+</span>     * Draws the series for the current chart.
      */
     drawSeries: function() {
         var me = this,
@@ -286,7 +317,7 @@ Ext.define('Ext.chart.series.Pie', {
             seriesStyle = me.seriesStyle,
             seriesLabelStyle = me.seriesLabelStyle,
             colorArrayStyle = me.colorArrayStyle,
-            colorArrayLength = colorArrayStyle && colorArrayStyle.length || 0,
+            colorArrayLength = colorArrayStyle &amp;&amp; colorArrayStyle.length || 0,
             gutterX = chart.maxGutter[0],
             gutterY = chart.maxGutter[1],
             rendererAttributes,
@@ -343,13 +374,13 @@ Ext.define('Ext.chart.series.Pie', {
         me.items = items = [];
 
         store.each(function(record, i) {
-            if (this.__excludes && this.__excludes[i]) {
+            if (this.__excludes &amp;&amp; this.__excludes[i]) {
                 //hidden series
                 return;
             }
             totalField += +record.get(field);
             if (lenField[0]) {
-                for (j = 0, totalLenField = 0; j < layers; j++) {
+                for (j = 0, totalLenField = 0; j &lt; layers; j++) {
                     totalLenField += +record.get(lenField[j]);
                 }
                 layerTotals[i] = totalLenField;
@@ -358,12 +389,18 @@ Ext.define('Ext.chart.series.Pie', {
         }, this);
 
         store.each(function(record, i) {
-            if (this.__excludes && this.__excludes[i]) {
+            if (this.__excludes &amp;&amp; this.__excludes[i]) {
                 //hidden series
                 return;
             } 
             value = record.get(field);
             middleAngle = angle - 360 * value / totalField / 2;
+            // TODO - Put up an empty circle
+            if (isNaN(middleAngle)) {
+                middleAngle = 360;
+                value = 1;
+                totalField = 1;
+            }
             // First slice
             if (!i || first == 0) {
                 angle = 360 - middleAngle;
@@ -394,14 +431,14 @@ Ext.define('Ext.chart.series.Pie', {
         
         //do all shadows first.
         if (enableShadows) {
-            for (i = 0, ln = slices.length; i < ln; i++) {
-                if (this.__excludes && this.__excludes[i]) {
+            for (i = 0, ln = slices.length; i &lt; ln; i++) {
+                if (this.__excludes &amp;&amp; this.__excludes[i]) {
                     //hidden series
                     continue;
                 }
                 slice = slices[i];
                 slice.shadowAttrs = [];
-                for (j = 0, rhoAcum = 0, shadows = []; j < layers; j++) {
+                for (j = 0, rhoAcum = 0, shadows = []; j &lt; layers; j++) {
                     sprite = group.getAt(i * layers + j);
                     deltaRho = lenField[j] ? store.getAt(i).get(lenField[j]) / layerTotals[i] * slice.rho: slice.rho;
                     //set pie slice properties
@@ -416,7 +453,7 @@ Ext.define('Ext.chart.series.Pie', {
                         }
                     };
                     //create shadows
-                    for (shindex = 0, shadows = []; shindex < lnsh; shindex++) {
+                    for (shindex = 0, shadows = []; shindex &lt; lnsh; shindex++) {
                         shadowAttr = shadowAttributes[shindex];
                         shadow = shadowGroups[shindex].getAt(i);
                         if (!shadow) {
@@ -424,7 +461,7 @@ Ext.define('Ext.chart.series.Pie', {
                             {
                                 type: 'path',
                                 group: shadowGroups[shindex],
-                                strokeLinejoin: "round"
+                                strokeLinejoin: &quot;round&quot;
                             },
                             rendererAttributes, shadowAttr));
                         }
@@ -447,13 +484,13 @@ Ext.define('Ext.chart.series.Pie', {
             }
         }
         //do pie slices after.
-        for (i = 0, ln = slices.length; i < ln; i++) {
-            if (this.__excludes && this.__excludes[i]) {
+        for (i = 0, ln = slices.length; i &lt; ln; i++) {
+            if (this.__excludes &amp;&amp; this.__excludes[i]) {
                 //hidden series
                 continue;
             }
             slice = slices[i];
-            for (j = 0, rhoAcum = 0; j < layers; j++) {
+            for (j = 0, rhoAcum = 0; j &lt; layers; j++) {
                 sprite = group.getAt(i * layers + j);
                 deltaRho = lenField[j] ? store.getAt(i).get(lenField[j]) / layerTotals[i] * slice.rho: slice.rho;
                 //set pie slice properties
@@ -466,7 +503,7 @@ Ext.define('Ext.chart.series.Pie', {
                         startRho: rhoAcum + (deltaRho * donut / 100),
                         endRho: rhoAcum + deltaRho
                     } 
-                }, Ext.apply(seriesStyle, colorArrayStyle && { fill: colorArrayStyle[(layers > 1? j : i) % colorArrayLength] } || {}));
+                }, Ext.apply(seriesStyle, colorArrayStyle &amp;&amp; { fill: colorArrayStyle[(layers &gt; 1? j : i) % colorArrayLength] } || {}));
                 item = Ext.apply({},
                 rendererAttributes.segment, {
                     slice: slice,
@@ -482,10 +519,10 @@ Ext.define('Ext.chart.series.Pie', {
                 // Create a new sprite if needed (no height)
                 if (!sprite) {
                     spriteOptions = Ext.apply({
-                        type: "path",
+                        type: &quot;path&quot;,
                         group: group,
                         middle: item.middle
-                    }, Ext.apply(seriesStyle, colorArrayStyle && { fill: colorArrayStyle[(layers > 1? j : i) % colorArrayLength] } || {}));
+                    }, Ext.apply(seriesStyle, colorArrayStyle &amp;&amp; { fill: colorArrayStyle[(layers &gt; 1? j : i) % colorArrayLength] } || {}));
                     sprite = surface.add(Ext.apply(spriteOptions, rendererAttributes));
                 }
                 slice.sprite = slice.sprite || [];
@@ -519,16 +556,16 @@ Ext.define('Ext.chart.series.Pie', {
         
         // Hide unused bars
         ln = group.getCount();
-        for (i = 0; i < ln; i++) {
-            if (!slices[(i / layers) >> 0] && group.getAt(i)) {
+        for (i = 0; i &lt; ln; i++) {
+            if (!slices[(i / layers) &gt;&gt; 0] &amp;&amp; group.getAt(i)) {
                 group.getAt(i).hide(true);
             }
         }
         if (enableShadows) {
             lnsh = shadowGroups.length;
-            for (shindex = 0; shindex < ln; shindex++) {
-                if (!slices[(shindex / layers) >> 0]) {
-                    for (j = 0; j < lnsh; j++) {
+            for (shindex = 0; shindex &lt; ln; shindex++) {
+                if (!slices[(shindex / layers) &gt;&gt; 0]) {
+                    for (j = 0; j &lt; lnsh; j++) {
                         if (shadowGroups[j].getAt(shindex)) {
                             shadowGroups[j].getAt(shindex).hide(true);
                         }
@@ -581,9 +618,9 @@ Ext.define('Ext.chart.series.Pie', {
             theta = Math.atan2(y, x || 1),
             dg = theta * 180 / Math.PI,
             prevDg;
-
+        
         function fixAngle(a) {
-            if (a < 0) a += 360;
+            if (a &lt; 0) a += 360;
             return a % 360;
         }
 
@@ -601,11 +638,11 @@ Ext.define('Ext.chart.series.Pie', {
 
         case 'rotate':
             dg = fixAngle(dg);
-            dg = (dg > 90 && dg < 270) ? dg + 180: dg;
+            dg = (dg &gt; 90 &amp;&amp; dg &lt; 270) ? dg + 180: dg;
 
             prevDg = label.attr.rotation.degrees;
-            if (prevDg != null && Math.abs(prevDg - dg) > 180) {
-                if (dg > prevDg) {
+            if (prevDg != null &amp;&amp; Math.abs(prevDg - dg) &gt; 180) {
+                if (dg &gt; prevDg) {
                     dg -= 360;
                 } else {
                     dg += 360;
@@ -629,7 +666,7 @@ Ext.define('Ext.chart.series.Pie', {
         opt.translate = {
             x: 0, y: 0    
         };
-        if (animate && !resizing && (display != 'rotate' || prevDg != null)) {
+        if (animate &amp;&amp; !resizing &amp;&amp; (display != 'rotate' || prevDg != null)) {
             me.onAnimate(label, {
                 to: opt
             });
@@ -677,14 +714,14 @@ Ext.define('Ext.chart.series.Pie', {
             //set the line from the middle of the pie to the box.
             me.onAnimate(callout.lines, {
                 to: {
-                    path: ["M", x + centerX, y + centerY, "L", opt.x, opt.y, "Z", "M", opt.x, opt.y, "l", x > 0 ? offsetToSide: -offsetToSide, 0, "z"]
+                    path: [&quot;M&quot;, x + centerX, y + centerY, &quot;L&quot;, opt.x, opt.y, &quot;Z&quot;, &quot;M&quot;, opt.x, opt.y, &quot;l&quot;, x &gt; 0 ? offsetToSide: -offsetToSide, 0, &quot;z&quot;]
                 }
             });
             //set box position
             me.onAnimate(callout.box, {
                 to: {
-                    x: opt.x + (x > 0 ? offsetToSide: -(offsetToSide + bbox.width + 2 * offsetBox)),
-                    y: opt.y + (y > 0 ? ( - bbox.height - offsetBox / 2) : ( - bbox.height - offsetBox / 2)),
+                    x: opt.x + (x &gt; 0 ? offsetToSide: -(offsetToSide + bbox.width + 2 * offsetBox)),
+                    y: opt.y + (y &gt; 0 ? ( - bbox.height - offsetBox / 2) : ( - bbox.height - offsetBox / 2)),
                     width: bbox.width + 2 * offsetBox,
                     height: bbox.height + 2 * offsetBox
                 }
@@ -692,28 +729,28 @@ Ext.define('Ext.chart.series.Pie', {
             //set text position
             me.onAnimate(callout.label, {
                 to: {
-                    x: opt.x + (x > 0 ? (offsetToSide + offsetBox) : -(offsetToSide + bbox.width + offsetBox)),
-                    y: opt.y + (y > 0 ? -bbox.height / 4: -bbox.height / 4)
+                    x: opt.x + (x &gt; 0 ? (offsetToSide + offsetBox) : -(offsetToSide + bbox.width + offsetBox)),
+                    y: opt.y + (y &gt; 0 ? -bbox.height / 4: -bbox.height / 4)
                 }
             });
         } else {
             //set the line from the middle of the pie to the box.
             callout.lines.setAttributes({
-                path: ["M", x + centerX, y + centerY, "L", opt.x, opt.y, "Z", "M", opt.x, opt.y, "l", x > 0 ? offsetToSide: -offsetToSide, 0, "z"]
+                path: [&quot;M&quot;, x + centerX, y + centerY, &quot;L&quot;, opt.x, opt.y, &quot;Z&quot;, &quot;M&quot;, opt.x, opt.y, &quot;l&quot;, x &gt; 0 ? offsetToSide: -offsetToSide, 0, &quot;z&quot;]
             },
             true);
             //set box position
             callout.box.setAttributes({
-                x: opt.x + (x > 0 ? offsetToSide: -(offsetToSide + bbox.width + 2 * offsetBox)),
-                y: opt.y + (y > 0 ? ( - bbox.height - offsetBox / 2) : ( - bbox.height - offsetBox / 2)),
+                x: opt.x + (x &gt; 0 ? offsetToSide: -(offsetToSide + bbox.width + 2 * offsetBox)),
+                y: opt.y + (y &gt; 0 ? ( - bbox.height - offsetBox / 2) : ( - bbox.height - offsetBox / 2)),
                 width: bbox.width + 2 * offsetBox,
                 height: bbox.height + 2 * offsetBox
             },
             true);
             //set text position
             callout.label.setAttributes({
-                x: opt.x + (x > 0 ? (offsetToSide + offsetBox) : -(offsetToSide + bbox.width + offsetBox)),
-                y: opt.y + (y > 0 ? -bbox.height / 4: -bbox.height / 4)
+                x: opt.x + (x &gt; 0 ? (offsetToSide + offsetBox) : -(offsetToSide + bbox.width + offsetBox)),
+                y: opt.y + (y &gt; 0 ? -bbox.height / 4: -bbox.height / 4)
             },
             true);
         }
@@ -741,11 +778,11 @@ Ext.define('Ext.chart.series.Pie', {
             angle = Math.atan2(y - cy, x - cx) / me.rad + 360;
         
         // normalize to the same range of angles created by drawSeries
-        if (angle > me.firstAngle) {
+        if (angle &gt; me.firstAngle) {
             angle -= 360;
         }
-        return (angle <= startAngle && angle > endAngle
-                && rho >= item.startRho && rho <= item.endRho);
+        return (angle &lt;= startAngle &amp;&amp; angle &gt; endAngle
+                &amp;&amp; rho &gt;= item.startRho &amp;&amp; rho &lt;= item.endRho);
     },
     
     // @private hides all elements in the series.
@@ -755,15 +792,15 @@ Ext.define('Ext.chart.series.Pie', {
             this.__excludes = this.__excludes || [];
             this.__excludes[this._index] = true;
             sprite = this.slices[this._index].sprite;
-            for (sh = 0, lsh = sprite.length; sh < lsh; sh++) {
+            for (sh = 0, lsh = sprite.length; sh &lt; lsh; sh++) {
                 sprite[sh].setAttributes({
                     hidden: true
                 }, true);
             }
             if (this.slices[this._index].shadowAttrs) {
-                for (i = 0, shadows = this.slices[this._index].shadowAttrs, l = shadows.length; i < l; i++) {
+                for (i = 0, shadows = this.slices[this._index].shadowAttrs, l = shadows.length; i &lt; l; i++) {
                     shadow = shadows[i];
-                    for (sh = 0, lsh = shadow.length; sh < lsh; sh++) {
+                    for (sh = 0, lsh = shadow.length; sh &lt; lsh; sh++) {
                         shadow[sh].setAttributes({
                             hidden: true
                         }, true);
@@ -782,15 +819,22 @@ Ext.define('Ext.chart.series.Pie', {
         }
     },
 
-    <a name="method-Ext.chart.series.Pie-highlightItem"></a>/**
-     * Highlight the specified item. If no item is provided the whole series will be highlighted.
+<span id='Ext-chart.series.Pie-method-highlightItem'>    /**
+</span>     * Highlight the specified item. If no item is provided the whole series will be highlighted.
      * @param item {Object} Info about the item; same format as returned by #getItemForPoint
      */
     highlightItem: function(item) {
         var me = this,
             rad = me.rad;
         item = item || this.items[this._index];
-        if (!item || item.sprite && item.sprite._animating) {
+        
+        //TODO(nico): sometimes in IE itemmouseover is triggered
+        //twice without triggering itemmouseout in between. This
+        //fixes the highlighting bug. Eventually, events should be
+        //changed to trigger one itemmouseout between two itemmouseovers.
+        this.unHighlightItem();
+        
+        if (!item || item.sprite &amp;&amp; item.sprite._animating) {
             return;
         }
         me.callParent([item]);
@@ -811,7 +855,18 @@ Ext.define('Ext.chart.series.Pie', {
                     x = r * Math.cos(middle),
                     y = r * Math.sin(middle);
 
-
+                //TODO(nico): rounding to 1e-10
+                //gives the right translation. Translation
+                //was buggy for very small numbers. In this
+                //case we're not looking to translate to very small
+                //numbers but not to translate at all.
+                if (Math.abs(x) &lt; 1e-10) {
+                    x = 0;
+                }
+                if (Math.abs(y) &lt; 1e-10) {
+                    y = 0;
+                }
+                
                 if (animate) {
                     label.stopAnimation();
                     label.animate({
@@ -834,11 +889,11 @@ Ext.define('Ext.chart.series.Pie', {
                 }
             }
             //animate shadows
-            if (me.chart.shadow && item.shadows) {
+            if (me.chart.shadow &amp;&amp; item.shadows) {
                 i = 0;
                 shadows = item.shadows;
                 ln = shadows.length;
-                for (; i < ln; i++) {
+                for (; i &lt; ln; i++) {
                     shadow = shadows[i];
                     to = {};
                     itemHighlightSegment = item.sprite._from.segment;
@@ -848,7 +903,7 @@ Ext.define('Ext.chart.series.Pie', {
                         }
                     }
                     attrs = {
-                        segment: Ext.apply(to, me.highlightCfg.segment)
+                        segment: Ext.applyIf(to, me.highlightCfg.segment)
                     };
                     if (animate) {
                         shadow.stopAnimation();
@@ -865,8 +920,8 @@ Ext.define('Ext.chart.series.Pie', {
         }
     },
 
-    <a name="method-Ext.chart.series.Pie-unHighlightItem"></a>/**
-     * un-highlights the specified item. If no item is provided it will un-highlight the entire series.
+<span id='Ext-chart.series.Pie-method-unHighlightItem'>    /**
+</span>     * un-highlights the specified item. If no item is provided it will un-highlight the entire series.
      * @param item {Object} Info about the item; same format as returned by #getItemForPoint
      */
     unHighlightItem: function() {
@@ -875,7 +930,7 @@ Ext.define('Ext.chart.series.Pie', {
             return;
         }
 
-        if (('segment' in me.highlightCfg) && me.items) {
+        if (('segment' in me.highlightCfg) &amp;&amp; me.items) {
             var items = me.items,
                 animate = me.chart.animate,
                 shadowsEnabled = !!me.chart.shadow,
@@ -886,13 +941,13 @@ Ext.define('Ext.chart.series.Pie', {
                 display = me.label.display,
                 shadowLen, p, to, ihs, hs, sprite, shadows, shadow, item, label, attrs;
 
-            for (; i < len; i++) {
+            for (; i &lt; len; i++) {
                 item = items[i];
                 if (!item) {
                     continue;
                 }
                 sprite = item.sprite;
-                if (sprite && sprite._highlighted) {
+                if (sprite &amp;&amp; sprite._highlighted) {
                     //animate labels
                     if (group) {
                         label = group.getAt(item.index);
@@ -923,7 +978,7 @@ Ext.define('Ext.chart.series.Pie', {
                     if (shadowsEnabled) {
                         shadows = item.shadows;
                         shadowLen = shadows.length;
-                        for (; j < shadowLen; j++) {
+                        for (; j &lt; shadowLen; j++) {
                             to = {};
                             ihs = item.sprite._to.segment;
                             hs = item.sprite._from.segment;
@@ -934,7 +989,7 @@ Ext.define('Ext.chart.series.Pie', {
                                 }
                             }
                             shadow = shadows[j];
-                            if (shadow) {
+                            if (animate) {
                                 shadow.stopAnimation();
                                 shadow.animate({
                                     to: {
@@ -954,8 +1009,8 @@ Ext.define('Ext.chart.series.Pie', {
         me.callParent(arguments);
     },
     
-    <a name="method-Ext.chart.series.Pie-getLegendColor"></a>/**
-     * Returns the color of the series (to be displayed as color for the series legend item).
+<span id='Ext-chart.series.Pie-method-getLegendColor'>    /**
+</span>     * Returns the color of the series (to be displayed as color for the series legend item).
      * @param item {Object} Info about the item; same format as returned by #getItemForPoint
      */
     getLegendColor: function(index) {
@@ -964,4 +1019,4 @@ Ext.define('Ext.chart.series.Pie', {
     }
 });
 
-￿</pre></pre></body></html>
+</pre></pre></body></html>

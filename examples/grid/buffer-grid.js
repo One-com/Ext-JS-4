@@ -4,7 +4,6 @@ Ext.Loader.setPath('Ext.ux', '../ux/');
 Ext.require([
     'Ext.grid.*',
     'Ext.data.*',
-    'Ext.data.BufferStore',
     'Ext.util.*',
     'Ext.grid.PagingScroller'
 ]);
@@ -52,9 +51,11 @@ Ext.onReady(function(){
 
 
     // create the Data Store
-    var store = Ext.create('Ext.data.BufferStore', {
+    var store = Ext.create('Ext.data.Store', {
         id: 'store',
         pageSize: 50,
+        // allow the grid to interact with the paging scroller by buffering
+        buffered: true,
         // never purge any data, we prefetch all up front
         purgePageCount: 0,
         model: 'ForumThread',

@@ -1,6 +1,6 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.form.Radio"></a>/**
- * @class Ext.form.Radio
- * @extends Ext.form.Checkbox
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-form.field.Radio-method-constructor'><span id='Ext-form.field.Radio'>/**
+</span></span> * @class Ext.form.field.Radio
+ * @extends Ext.form.field.Checkbox
 
 Single radio field. Similar to checkbox, but automatically handles making sure only one radio is checked
 at a time within a group of radios with the same name.
@@ -24,10 +24,10 @@ Any other value will uncheck it.
 In addition to the main boolean value, you may also specify a separate {@link #inputValue}. This will be sent
 as the parameter value when the form is {@link Ext.form.Basic#submit submitted}. You will want to set this
 value if you have multiple radio buttons with the same {@link #name}, as is almost always the case.
-
+{@img Ext.form.Radio/Ext.form.Radio.png Ext.form.Radio component}
 __Example usage:__
 
-    new Ext.form.FormPanel({
+    Ext.create('Ext.form.Panel', {
         title      : 'Order Form',
         width      : 300,
         bodyPadding: 10,
@@ -95,19 +95,19 @@ __Example usage:__
                     var radio1 = Ext.getCmp('radio1'),
                         radio2 = Ext.getCmp('radio2'),
                         radio3 = Ext.getCmp('radio3');
-
+    
                     //if L is selected, change to M
                     if (radio2.getValue()) {
                         radio1.setValue(true);
                         return;
                     }
-
+    
                     //if XL is selected, change to L
                     if (radio3.getValue()) {
                         radio2.setValue(true);
                         return;
                     }
-
+    
                     //if nothing is set, set size to S
                     radio1.setValue(true);
                 }
@@ -118,19 +118,19 @@ __Example usage:__
                     var radio1 = Ext.getCmp('radio1'),
                         radio2 = Ext.getCmp('radio2'),
                         radio3 = Ext.getCmp('radio3');
-
+    
                     //if M is selected, change to L
                     if (radio1.getValue()) {
                         radio2.setValue(true);
                         return;
                     }
-
+    
                     //if L is selected, change to XL
                     if (radio2.getValue()) {
                         radio3.setValue(true);
                         return;
                     }
-
+    
                     //if nothing is set, set size to XL
                     radio3.setValue(true);
                 }
@@ -168,30 +168,32 @@ __Example usage:__
         ]
     });
 
+
  * @constructor
  * Creates a new Radio
  * @param {Object} config Configuration options
  * @xtype radio
- * @docauthor Robert Dougan <rob@sencha.com>
+ * @docauthor Robert Dougan &lt;rob@sencha.com&gt;
  * @markdown
  */
-Ext.define('Ext.form.Radio', {
-    extend:'Ext.form.Checkbox',
+Ext.define('Ext.form.field.Radio', {
+    extend:'Ext.form.field.Checkbox',
     alias: ['widget.radiofield', 'widget.radio'],
+    alternateClassName: 'Ext.form.Radio',
     requires: ['Ext.form.RadioManager'],
 
     isRadio: true,
 
-    <a name="cfg-Ext.form.Radio-uncheckedValue"></a>/**
-     * @cfg {String} uncheckedValue @hide
+<span id='Ext-form.field.Radio-cfg-uncheckedValue'>    /**
+</span>     * @cfg {String} uncheckedValue @hide
      */
 
     // private
     inputType: 'radio',
     ariaRole: 'radio',
 
-    <a name="method-Ext.form.Radio-getGroupValue"></a>/**
-     * If this radio is part of a group, it will return the selected value
+<span id='Ext-form.field.Radio-method-getGroupValue'>    /**
+</span>     * If this radio is part of a group, it will return the selected value
      * @return {String}
      */
     getGroupValue: function() {
@@ -199,21 +201,21 @@ Ext.define('Ext.form.Radio', {
         return selected ? selected.inputValue : null;
     },
 
-    /**
-     * @private Handle click on the radio button
+<span id='Ext-form.field.Radio-method-onBoxClick'>    /**
+</span>     * @private Handle click on the radio button
      */
     onBoxClick: function(e) {
         var me = this;
-        if (!me.disabled && !me.readOnly) {
+        if (!me.disabled &amp;&amp; !me.readOnly) {
             this.setValue(true);
         }
     },
 
-    <a name="method-Ext.form.Radio-setValue"></a>/**
-     * Sets either the checked/unchecked status of this Radio, or, if a string value
+<span id='Ext-form.field.Radio-method-setValue'>    /**
+</span>     * Sets either the checked/unchecked status of this Radio, or, if a string value
      * is passed, checks a sibling Radio of the same name whose value is the value specified.
      * @param value {String/Boolean} Checked value, or the value of the sibling radio button to check.
-     * @return {Ext.form.Radio} this
+     * @return {Ext.form.field.Radio} this
      */
     setValue: function(v) {
         var me = this,
@@ -230,8 +232,8 @@ Ext.define('Ext.form.Radio', {
         return me;
     },
 
-    <a name="method-Ext.form.Radio-getSubmitValue"></a>/**
-     * Returns the submit value for the checkbox which can be used when submitting forms.
+<span id='Ext-form.field.Radio-method-getSubmitValue'>    /**
+</span>     * Returns the submit value for the checkbox which can be used when submitting forms.
      * @return {Boolean/null} True if checked, null if not.
      */
     getSubmitValue: function() {
@@ -255,7 +257,7 @@ Ext.define('Ext.form.Radio', {
     // inherit docs
     beforeDestroy: function(){
         this.callParent();
-        this.getManager().removeByKey(this.id);
+        this.getManager().removeAtKey(this.id);
     },
 
     // inherit docs
@@ -263,4 +265,4 @@ Ext.define('Ext.form.Radio', {
         return Ext.form.RadioManager;
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

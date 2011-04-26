@@ -16,7 +16,7 @@ Ext.define('Ext.ux.grid.TransformGrid', {
     
     constructor: function(table, config) {
         config = Ext.apply({}, config);
-        table = Ext.get(table);
+        table = this.table = Ext.get(table);
     
         var configFields = config.fields || [], 
             configColumns = config.columns || [],
@@ -65,7 +65,9 @@ Ext.define('Ext.ux.grid.TransformGrid', {
         }
     
         if (config.remove !== false) {
-            table.remove();
+            // Don't use table.remove() as that destroys the row/cell data in the table in
+            // IE6-7 so it cannot be read by the data reader.
+            data.parentNode.removeChild(data);
         }
         
     
@@ -88,5 +90,11 @@ Ext.define('Ext.ux.grid.TransformGrid', {
             el: ct
         });
         this.callParent([config]);    
-    }    
+    },
+
+    onDestroy: function() {
+        this.callParent();
+        this.table.remove();
+        delete this.table;
+    }
 });

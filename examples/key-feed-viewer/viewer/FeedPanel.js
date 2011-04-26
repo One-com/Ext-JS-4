@@ -54,7 +54,7 @@ Ext.define('FeedViewer.FeedPanel', {
     /**
      * Create the DataView to be used for the feed list.
      * @private
-     * @return {Ext.DataView}
+     * @return {Ext.view.View}
      */
     createView: function(){
         var view = this.view = Ext.create('widget.dataview', {

@@ -37,7 +37,9 @@ Ext.define('Writer.Form', {
                 ui: 'footer',
                 items: ['->', {
                     iconCls: 'icon-save',
+                    itemId: 'save',
                     text: 'Save',
+                    disabled: true,
                     scope: this,
                     handler: this.onSave
                 }, {
@@ -58,7 +60,13 @@ Ext.define('Writer.Form', {
 
     setActiveRecord: function(record){
         this.activeRecord = record;
-        this.getForm().loadRecord(record);
+        if (record) {
+            this.down('#save').enable();
+            this.getForm().loadRecord(record);
+        } else {
+            this.down('#save').disable();
+            this.getForm().reset();
+        }
     },
 
     onSave: function(){
@@ -70,6 +78,7 @@ Ext.define('Writer.Form', {
         }
         if (form.isValid()) {
             form.updateRecord(active);
+            this.onReset();
         }
     },
 
@@ -84,6 +93,7 @@ Ext.define('Writer.Form', {
     },
 
     onReset: function(){
+        this.setActiveRecord(null);
         this.getForm().reset();
     }
 });
@@ -116,6 +126,8 @@ Ext.define('Writer.Grid', {
                 }, {
                     iconCls: 'icon-delete',
                     text: 'Delete',
+                    disabled: true,
+                    itemId: 'delete',
                     scope: this,
                     handler: this.onDeleteClick
                 }]
@@ -170,13 +182,7 @@ Ext.define('Writer.Grid', {
                 text: 'ID',
                 width: 40,
                 sortable: true,
-                dataIndex: 'id',
-                renderer: function(v){
-                    if (Ext.isEmpty(v)) {
-                        v = '&#160;'
-                    }
-                    return v;
-                }
+                dataIndex: 'id'
             }, {
                 header: 'Email',
                 flex: 1,
@@ -204,6 +210,11 @@ Ext.define('Writer.Grid', {
             }]
         });
         this.callParent();
+        this.getSelectionModel().on('selectionchange', this.onSelectChange, this);
+    },
+    
+    onSelectChange: function(selModel, selections){
+        this.down('#delete').setDisabled(selections.length === 0);
     },
 
     onSync: function(){
@@ -299,6 +310,9 @@ Ext.onReady(function(){
         },
         listeners: {
             write: function(proxy, operation){
+                if (operation.action == 'destroy') {
+                    main.child('#form').setActiveRecord(null);
+                }
                 Ext.example.msg(operation.action, operation.resultSet.message);
             }
         }
@@ -307,7 +321,7 @@ Ext.onReady(function(){
     var main = Ext.create('Ext.container.Container', {
         padding: '0 0 0 20',
         width: 500,
-        height: 400,
+        height: 450,
         renderTo: document.body,
         layout: {
             type: 'vbox',
@@ -317,21 +331,21 @@ Ext.onReady(function(){
             itemId: 'form',
             xtype: 'writerform',
             height: 150,
+            margins: '0 0 10 0',
             listeners: {
-                create: function(data){
+                create: function(form, data){
                     store.insert(0, data);
                 }
             }
         }, {
             itemId: 'grid',
             xtype: 'writergrid',
+            title: 'User List',
             flex: 1,
             store: store,
-            viewConfig: {
-                listeners: {
-                    itemclick: function(view, rec){
-                        main.child('#form').setActiveRecord(rec);
-                    }
+            listeners: {
+                selectionchange: function(selModel, selected) {
+                    main.child('#form').setActiveRecord(selected[0] || null);
                 }
             }
         }]

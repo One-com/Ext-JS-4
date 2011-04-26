@@ -16,7 +16,7 @@
     height: 17px;
     border: none;
     border-top: 1px solid #fff;
-    background: transparent url(images/custom-bar.gif) repeat-x;
+    background: transparent url(images/custom-bar.gif) repeat-x !important;
 }
 
 .ext-strict .custom .x-progress-bar {

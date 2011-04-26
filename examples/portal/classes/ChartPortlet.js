@@ -3,7 +3,13 @@ Ext.define('Ext.app.ChartPortlet', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.chartportlet',
 
-    requires: ['Ext.chart.theme.Base', 'Ext.chart.series.Series'],
+    requires: [
+        'Ext.data.JsonStore',
+        'Ext.chart.theme.Base',
+        'Ext.chart.series.Series',
+        'Ext.chart.series.Line',
+        'Ext.chart.axis.Numeric'
+    ],
 
     generateData: function(){
         var data = [{

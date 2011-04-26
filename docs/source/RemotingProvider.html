@@ -1,18 +1,18 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.direct.RemotingProvider"></a>/**
- * @class Ext.direct.RemotingProvider
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-direct.RemotingProvider'>/**
+</span> * @class Ext.direct.RemotingProvider
  * @extends Ext.direct.JsonProvider
  * 
- * <p>The {@link Ext.direct.RemotingProvider RemotingProvider} exposes access to
+ * &lt;p&gt;The {@link Ext.direct.RemotingProvider RemotingProvider} exposes access to
  * server side methods on the client (a remote procedure call (RPC) type of
- * connection where the client can initiate a procedure on the server).</p>
+ * connection where the client can initiate a procedure on the server).&lt;/p&gt;
  * 
- * <p>This allows for code to be organized in a fashion that is maintainable,
+ * &lt;p&gt;This allows for code to be organized in a fashion that is maintainable,
  * while providing a clear path between client and server, something that is
- * not always apparent when using URLs.</p>
+ * not always apparent when using URLs.&lt;/p&gt;
  * 
- * <p>To accomplish this the server-side needs to describe what classes and methods
+ * &lt;p&gt;To accomplish this the server-side needs to describe what classes and methods
  * are available on the client-side. This configuration will typically be
- * outputted by the server-side Ext.Direct stack when the API description is built.</p>
+ * outputted by the server-side Ext.Direct stack when the API description is built.&lt;/p&gt;
  */
 Ext.define('Ext.direct.RemotingProvider', {
     
@@ -31,32 +31,32 @@ Ext.define('Ext.direct.RemotingProvider', {
    
     /* End Definitions */
    
-   <a name="cfg-Ext.direct.RemotingProvider-actions"></a>/**
-     * @cfg {Object} actions
+<span id='Ext-direct.RemotingProvider-cfg-actions'>   /**
+</span>     * @cfg {Object} actions
      * Object literal defining the server side actions and methods. For example, if
      * the Provider is configured with:
-     * <pre><code>
-"actions":{ // each property within the 'actions' object represents a server side Class 
-    "TestAction":[ // array of methods within each server side Class to be   
+     * &lt;pre&gt;&lt;code&gt;
+&quot;actions&quot;:{ // each property within the 'actions' object represents a server side Class 
+    &quot;TestAction&quot;:[ // array of methods within each server side Class to be   
     {              // stubbed out on client
-        "name":"doEcho", 
-        "len":1            
+        &quot;name&quot;:&quot;doEcho&quot;, 
+        &quot;len&quot;:1            
     },{
-        "name":"multiply",// name of method
-        "len":2           // The number of parameters that will be used to create an
+        &quot;name&quot;:&quot;multiply&quot;,// name of method
+        &quot;len&quot;:2           // The number of parameters that will be used to create an
                           // array of data to send to the server side function.
                           // Ensure the server sends back a Number, not a String. 
     },{
-        "name":"doForm",
-        "formHandler":true, // direct the client to use specialized form handling method 
-        "len":1
+        &quot;name&quot;:&quot;doForm&quot;,
+        &quot;formHandler&quot;:true, // direct the client to use specialized form handling method 
+        &quot;len&quot;:1
     }]
 }
-     * </code></pre>
-     * <p>Note that a Store is not required, a server method can be called at any time.
-     * In the following example a <b>client side</b> handler is used to call the
-     * server side method "multiply" in the server-side "TestAction" Class:</p>
-     * <pre><code>
+     * &lt;/code&gt;&lt;/pre&gt;
+     * &lt;p&gt;Note that a Store is not required, a server method can be called at any time.
+     * In the following example a &lt;b&gt;client side&lt;/b&gt; handler is used to call the
+     * server side method &quot;multiply&quot; in the server-side &quot;TestAction&quot; Class:&lt;/p&gt;
+     * &lt;pre&gt;&lt;code&gt;
 TestAction.multiply(
     2, 4, // pass two arguments to server, so specify len=2
     // callback function after the server is called
@@ -74,51 +74,51 @@ TestAction.multiply(
         }
     }
 );
-     * </code></pre>
-     * In the example above, the server side "multiply" function will be passed two
-     * arguments (2 and 4).  The "multiply" method should return the value 8 which will be
-     * available as the <tt>result</tt> in the example above. 
+     * &lt;/code&gt;&lt;/pre&gt;
+     * In the example above, the server side &quot;multiply&quot; function will be passed two
+     * arguments (2 and 4).  The &quot;multiply&quot; method should return the value 8 which will be
+     * available as the &lt;tt&gt;result&lt;/tt&gt; in the example above. 
      */
     
-    <a name="cfg-Ext.direct.RemotingProvider-namespace"></a>/**
-     * @cfg {String/Object} namespace
-     * Namespace for the Remoting Provider (defaults to the browser global scope of <i>window</i>).
+<span id='Ext-direct.RemotingProvider-cfg-namespace'>    /**
+</span>     * @cfg {String/Object} namespace
+     * Namespace for the Remoting Provider (defaults to the browser global scope of &lt;i&gt;window&lt;/i&gt;).
      * Explicitly specify the namespace Object, or specify a String to have a
      * {@link Ext#namespace namespace created} implicitly.
      */
     
-    <a name="cfg-Ext.direct.RemotingProvider-url"></a>/**
-     * @cfg {String} url
-     * <b>Required<b>. The url to connect to the {@link Ext.direct.Manager} server-side router. 
+<span id='Ext-direct.RemotingProvider-cfg-url'>    /**
+</span>     * @cfg {String} url
+     * &lt;b&gt;Required&lt;b&gt;. The url to connect to the {@link Ext.direct.Manager} server-side router. 
      */
     
-    <a name="cfg-Ext.direct.RemotingProvider-enableUrlEncode"></a>/**
-     * @cfg {String} enableUrlEncode
+<span id='Ext-direct.RemotingProvider-cfg-enableUrlEncode'>    /**
+</span>     * @cfg {String} enableUrlEncode
      * Specify which param will hold the arguments for the method.
-     * Defaults to <tt>'data'</tt>.
+     * Defaults to &lt;tt&gt;'data'&lt;/tt&gt;.
      */
     
-    <a name="cfg-Ext.direct.RemotingProvider-enableBuffer"></a>/**
-     * @cfg {Number/Boolean} enableBuffer
-     * <p><tt>true</tt> or <tt>false</tt> to enable or disable combining of method
+<span id='Ext-direct.RemotingProvider-cfg-enableBuffer'>    /**
+</span>     * @cfg {Number/Boolean} enableBuffer
+     * &lt;p&gt;&lt;tt&gt;true&lt;/tt&gt; or &lt;tt&gt;false&lt;/tt&gt; to enable or disable combining of method
      * calls. If a number is specified this is the amount of time in milliseconds
-     * to wait before sending a batched request (defaults to <tt>10</tt>).</p>
-     * <br><p>Calls which are received within the specified timeframe will be
+     * to wait before sending a batched request (defaults to &lt;tt&gt;10&lt;/tt&gt;).&lt;/p&gt;
+     * &lt;br&gt;&lt;p&gt;Calls which are received within the specified timeframe will be
      * concatenated together and sent in a single request, optimizing the
      * application by reducing the amount of round trips that have to be made
-     * to the server.</p>
+     * to the server.&lt;/p&gt;
      */
     enableBuffer: 10,
     
-    <a name="cfg-Ext.direct.RemotingProvider-maxRetries"></a>/**
-     * @cfg {Number} maxRetries
-     * Number of times to re-attempt delivery on failure of a call. Defaults to <tt>1</tt>.
+<span id='Ext-direct.RemotingProvider-cfg-maxRetries'>    /**
+</span>     * @cfg {Number} maxRetries
+     * Number of times to re-attempt delivery on failure of a call. Defaults to &lt;tt&gt;1&lt;/tt&gt;.
      */
     maxRetries: 1,
     
-    <a name="cfg-Ext.direct.RemotingProvider-timeout"></a>/**
-     * @cfg {Number} timeout
-     * The timeout to use for each request. Defaults to <tt>undefined</tt>.
+<span id='Ext-direct.RemotingProvider-cfg-timeout'>    /**
+</span>     * @cfg {Number} timeout
+     * The timeout to use for each request. Defaults to &lt;tt&gt;undefined&lt;/tt&gt;.
      */
     timeout: undefined,
     
@@ -126,8 +126,8 @@ TestAction.multiply(
         var me = this;
         me.callParent(arguments);
         me.addEvents(
-            <a name="event-Ext.direct.RemotingProvider-beforecall"></a>/**
-             * @event beforecall
+<span id='Ext-direct.RemotingProvider-event-beforecall'>            /**
+</span>             * @event beforecall
              * Fires immediately before the client-side sends off the RPC call.
              * By returning false from an event handler you can prevent the call from
              * executing.
@@ -136,8 +136,8 @@ TestAction.multiply(
              * @param {Object} meta The meta data
              */            
             'beforecall',            
-            <a name="event-Ext.direct.RemotingProvider-call"></a>/**
-             * @event call
+<span id='Ext-direct.RemotingProvider-event-call'>            /**
+</span>             * @event call
              * Fires immediately after the request to the server-side is sent. This does
              * NOT fire after the response has come back from the call.
              * @param {Ext.direct.RemotingProvider} provider
@@ -151,8 +151,8 @@ TestAction.multiply(
         me.callBuffer = [];
     },
     
-    /**
-     * Initialize the API
+<span id='Ext-direct.RemotingProvider-method-initAPI'>    /**
+</span>     * Initialize the API
      * @private
      */
     initAPI : function(){
@@ -172,15 +172,15 @@ TestAction.multiply(
             }
             methods = actions[action];
             
-            for (i = 0, len = methods.length; i < len; ++i) {
+            for (i = 0, len = methods.length; i &lt; len; ++i) {
                 method = Ext.create('Ext.direct.RemotingMethod', methods[i]);
                 cls[method.name] = this.createHandler(action, method);
             }
         }
     },
     
-    /**
-     * Create a handler function for a direct call.
+<span id='Ext-direct.RemotingProvider-method-createHandler'>    /**
+</span>     * Create a handler function for a direct call.
      * @private
      * @param {String} action The action the call is for
      * @param {Object} method The details of the method
@@ -220,9 +220,9 @@ TestAction.multiply(
             me.connected = true;
             me.fireEvent('connect', me);
         } else if(!me.url) {
-            //<debug>
+            //&lt;debug&gt;
             Ext.Error.raise('Error initializing RemotingProvider, no url configured.');
-            //</debug>
+            //&lt;/debug&gt;
         }
     },
 
@@ -236,8 +236,8 @@ TestAction.multiply(
         }
     },
     
-    /**
-     * Run any callbacks related to the transaction.
+<span id='Ext-direct.RemotingProvider-method-runCallback'>    /**
+</span>     * Run any callbacks related to the transaction.
      * @private
      * @param {Ext.direct.Transaction} transaction The transaction
      * @param {Ext.direct.Event} event The event
@@ -247,7 +247,7 @@ TestAction.multiply(
             callback,
             result;
         
-        if (transaction && transaction.callback) {
+        if (transaction &amp;&amp; transaction.callback) {
             callback = transaction.callback;
             result = Ext.isDefined(event.result) ? event.result : event.data;
         
@@ -260,8 +260,8 @@ TestAction.multiply(
         }
     },
     
-    /**
-     * React to the ajax request being completed
+<span id='Ext-direct.RemotingProvider-method-onData'>    /**
+</span>     * React to the ajax request being completed
      * @private
      */
     onData: function(options, success, response){
@@ -275,7 +275,7 @@ TestAction.multiply(
             
         if (success) {
             events = me.createEvents(response);
-            for (len = events.length; i < len; ++i) {
+            for (len = events.length; i &lt; len; ++i) {
                 event = events[i];
                 transaction = me.getTransaction(event);
                 me.fireEvent('data', me, event);
@@ -286,9 +286,9 @@ TestAction.multiply(
             }
         } else {
             transactions = [].concat(options.transaction);
-            for (len = transactions.length; i < len; ++i) {
+            for (len = transactions.length; i &lt; len; ++i) {
                 transaction = me.getTransaction(transactions[i]);
-                if (transaction && transaction.retryCount < me.maxRetries) {
+                if (transaction &amp;&amp; transaction.retryCount &lt; me.maxRetries) {
                     transaction.retry();
                 } else {
                     event = Ext.create('Ext.direct.ExceptionEvent', {
@@ -308,18 +308,18 @@ TestAction.multiply(
         }
     },
     
-    /**
-     * Get transaction from XHR options
+<span id='Ext-direct.RemotingProvider-method-getTransaction'>    /**
+</span>     * Get transaction from XHR options
      * @private
      * @param {Object} options The options sent to the Ajax request
      * @return {Ext.direct.Transaction} The transaction, null if not found
      */
     getTransaction: function(options){
-        return options && options.tid ? Ext.direct.Manager.getTransaction(options.tid) : null;
+        return options &amp;&amp; options.tid ? Ext.direct.Manager.getTransaction(options.tid) : null;
     },
     
-    /**
-     * Configure a direct request
+<span id='Ext-direct.RemotingProvider-method-configureRequest'>    /**
+</span>     * Configure a direct request
      * @private
      * @param {String} action The action being executed
      * @param {Object} method The being executed
@@ -338,7 +338,7 @@ TestAction.multiply(
             action: action,
             method: method.name,
             data: data,
-            callback: scope && Ext.isFunction(callback) ? Ext.Function.bind(callback, scope) : callback
+            callback: scope &amp;&amp; Ext.isFunction(callback) ? Ext.Function.bind(callback, scope) : callback
         });
 
         if (me.fireEvent('beforecall', me, transaction, method) !== false) {
@@ -348,8 +348,8 @@ TestAction.multiply(
         }
     },
     
-    /**
-     * Gets the Ajax call info for a transaction
+<span id='Ext-direct.RemotingProvider-method-getCallData'>    /**
+</span>     * Gets the Ajax call info for a transaction
      * @private
      * @param {Ext.direct.Transaction} transaction The transaction
      * @return {Object} The call params
@@ -364,8 +364,8 @@ TestAction.multiply(
         };
     },
     
-    /**
-     * Sends a request to the server
+<span id='Ext-direct.RemotingProvider-method-sendRequest'>    /**
+</span>     * Sends a request to the server
      * @private
      * @param {Object/Array} data The data to send
      */
@@ -386,7 +386,7 @@ TestAction.multiply(
 
         if (Ext.isArray(data)) {
             callData = [];
-            for (len = data.length; i < len; ++i) {
+            for (len = data.length; i &lt; len; ++i) {
                 callData.push(me.getCallData(data[i]));
             }
         } else {
@@ -403,8 +403,8 @@ TestAction.multiply(
         Ext.Ajax.request(request);
     },
     
-    /**
-     * Add a new transaction to the queue
+<span id='Ext-direct.RemotingProvider-method-queueTransaction'>    /**
+</span>     * Add a new transaction to the queue
      * @private
      * @param {Ext.direct.Transaction} transaction The transaction
      */
@@ -428,22 +428,22 @@ TestAction.multiply(
         }
     },
     
-    /**
-     * Combine any buffered requests and send them off
+<span id='Ext-direct.RemotingProvider-method-combineAndSend'>    /**
+</span>     * Combine any buffered requests and send them off
      * @private
      */
     combineAndSend : function(){
         var buffer = this.callBuffer,
             len = buffer.length;
             
-        if (len > 0) {
+        if (len &gt; 0) {
             this.sendRequest(len == 1 ? buffer[0] : buffer);
             this.callBuffer = [];
         }
     },
     
-    /**
-     * Configure a form submission request
+<span id='Ext-direct.RemotingProvider-method-configureFormRequest'>    /**
+</span>     * Configure a form submission request
      * @private
      * @param {String} action The action being executed
      * @param {Object} method The method being executed
@@ -458,7 +458,7 @@ TestAction.multiply(
                 action: action,
                 method: method.name,
                 args: [form, callback, scope],
-                callback: scope && Ext.isFunction(callback) ? Ext.Function.bind(callback, scope) : callback,
+                callback: scope &amp;&amp; Ext.isFunction(callback) ? Ext.Function.bind(callback, scope) : callback,
                 isForm: true
             }),
             isUpload,
@@ -466,7 +466,7 @@ TestAction.multiply(
 
         if (me.fireEvent('beforecall', me, transaction, method) !== false) {
             Ext.direct.Manager.addTransaction(transaction);
-            isUpload = String(form.getAttribute("enctype")).toLowerCase() == 'multipart/form-data';
+            isUpload = String(form.getAttribute(&quot;enctype&quot;)).toLowerCase() == 'multipart/form-data';
             
             params = {
                 extTID: transaction.id,
@@ -481,15 +481,15 @@ TestAction.multiply(
             Ext.apply(transaction, {
                 form: Ext.getDom(form),
                 isUpload: isUpload,
-                params: callback && Ext.isObject(callback.params) ? Ext.apply(params, callback.params) : params
+                params: callback &amp;&amp; Ext.isObject(callback.params) ? Ext.apply(params, callback.params) : params
             });
             me.fireEvent('call', me, transaction, method);
             me.sendFormRequest(transaction);
         }
     },
     
-    /**
-     * Sends a form request
+<span id='Ext-direct.RemotingProvider-method-sendFormRequest'>    /**
+</span>     * Sends a form request
      * @private
      * @param {Ext.direct.Transaction} transaction The transaction to send
      */
@@ -506,4 +506,4 @@ TestAction.multiply(
     }
     
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

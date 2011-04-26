@@ -3,7 +3,7 @@ Ext.ns('Ext.samples');
 (function() {
 
     Ext.define('Ext.samples.SamplePanel', {
-        extend: 'Ext.DataView',
+        extend: 'Ext.view.View',
         alias: 'widget.samplepanel',
         autoHeight   : true,
         frame        : false,
@@ -45,18 +45,22 @@ Ext.ns('Ext.samples');
              }
         }),
 
-
-        onItemClick : function(record, item, index, e){
+        onContainerClick: function(e) {
             var group = e.getTarget('h2', 3, true);
-            if(group){
+            
+            if (group) {
                 group.up('div').toggleCls('collapsed');
-            }else {
-                var t = e.getTarget('dd', 5, true);
-                if(t && !e.getTarget('a', 2)){
-                    var url = t.getAttributeNS('ext', 'url');
-                    window.open(url);
-                }
             }
+        },
+        
+        onItemClick : function(record, item, index, e){
+            var t = e.getTarget('dd', 5, true);
+            
+            if (t && !e.getTarget('a', 2)) {
+                var url = t.getAttributeNS('ext', 'url');
+                window.open(url);
+            }
+            
             return this.callParent(arguments);
         }
     });

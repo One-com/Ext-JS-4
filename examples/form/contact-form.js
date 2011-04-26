@@ -13,7 +13,7 @@ Ext.onReady(function() {
                     type: 'vbox',
                     align: 'stretch'
                 },
-                bodyBorder: 0,
+                border: false,
                 bodyPadding: 10,
 
                 fieldDefaults: {

@@ -99,7 +99,7 @@ Ext.define('Ext.ux.BoxReorderer', {
             reorderer: me,
             container: me.container,
             getDragCmp: this.getDragCmp,
-            clickValidator: Ext.Function.createInterceptor(me.dd.clickValidator, me.clickValidator, me.dd, false),
+            clickValidator: Ext.Function.createInterceptor(me.dd.clickValidator, me.clickValidator, me, false),
             onMouseDown: me.onMouseDown,
             startDrag: me.startDrag,
             onDrag: me.onDrag,
@@ -123,7 +123,9 @@ Ext.define('Ext.ux.BoxReorderer', {
     // check if the clicked component is reorderable
     clickValidator: function(e) {
         var cmp = this.getDragCmp(e);
-        return (cmp && cmp.reorderable !== false);
+
+        // If cmp is null, this expression MUST be coerced to boolean so that createInterceptor is able to test it against false
+        return !!(cmp && cmp.reorderable !== false);
     },
 
     onMouseDown: function(e) {

@@ -2,7 +2,7 @@ Ext.require('Ext.chart.*');
 Ext.require(['Ext.Window', 'Ext.fx.target.Sprite', 'Ext.layout.container.Fit']);
 
 Ext.onReady(function () {
-    store1.loadData(generateData(Math.random() *  8 + 4));
+    store1.loadData(generateData(8));
     
     var win = Ext.create('Ext.Window', {
         width: 800,
@@ -15,7 +15,7 @@ Ext.onReady(function () {
         tbar: [{
             text: 'Reload Data',
             handler: function() {
-                store1.loadData(generateData(Math.random() *  8 + 4));
+                store1.loadData(generateData(8));
             }
         }],
         items: {

@@ -363,7 +363,7 @@ Ext.onReady(function () {
     });
 
     var radiusMenu = Ext.create('Ext.menu.Menu', {
-        id: 'yAxisMenu',
+        id: 'radiusMenu',
         style: {
             overflow: 'visible'     // For the Combo popup
         },

@@ -176,7 +176,7 @@ Ext.onReady(function(){
     // Create these explicitly so we can manipulate them later
     var wordCount = Ext.create('Ext.toolbar.TextItem', {text: 'Words: 0'});
     var charCount = Ext.create('Ext.toolbar.TextItem', {text: 'Chars: 0'}); 
-    var clock = Ext.create('Ext.toolbar.TextItem', {text: ''});
+    var clock = Ext.create('Ext.toolbar.TextItem', {text: Ext.Date.format(new Date(), 'g:i:s A')});
 
     Ext.create('Ext.Panel', {
         title: 'Ext Word Processor',
@@ -211,7 +211,7 @@ Ext.onReady(function(){
                             wc = v.match(/\b/g);
                             wc = wc ? wc.length / 2 : 0;
                         }
-                     Ext.fly(wordCount.getEl()).update('Words: '+wc);
+                        Ext.fly(wordCount.getEl()).update('Words: '+wc);
                         Ext.fly(charCount.getEl()).update('Chars: '+cc);
                  },
                     buffer: 1 // buffer to allow the value to update first

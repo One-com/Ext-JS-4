@@ -1,14 +1,15 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.proxy.Rest"></a>/**
- * @author Ed Spencer
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-data.proxy.Rest'>/**
+</span> * @author Ed Spencer
  * @class Ext.data.proxy.Rest
  * @extends Ext.data.proxy.Ajax
  * 
- * <p>RestProxy is a specialization of the {@link Ext.data.proxy.Ajax AjaxProxy} which simply maps the four actions 
+ * &lt;p&gt;RestProxy is a specialization of the {@link Ext.data.proxy.Ajax AjaxProxy} which simply maps the four actions 
  * (create, read, update and destroy) to RESTful HTTP verbs. For example, let's set up a {@link Ext.data.Model Model}
- * with an inline RestProxy</p>
+ * with an inline RestProxy&lt;/p&gt;
  * 
-<pre><code>
-Ext.regModel('User', {
+&lt;pre&gt;&lt;code&gt;
+Ext.define('User', {
+    extend: 'Ext.data.Model',
     fields: ['id', 'name', 'email'],
 
     proxy: {
@@ -16,22 +17,22 @@ Ext.regModel('User', {
         url : '/users'
     }
 });
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>Now we can create a new User instance and save it via the RestProxy. Doing this will cause the Proxy to send a
+ * &lt;p&gt;Now we can create a new User instance and save it via the RestProxy. Doing this will cause the Proxy to send a
  * POST request to '/users':
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 var user = Ext.ModelManager.create({name: 'Ed Spencer', email: 'ed@sencha.com'}, 'User');
 
 user.save(); //POST /users
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>Let's expand this a little and provide a callback for the {@link Ext.data.Model#save} call to update the Model
+ * &lt;p&gt;Let's expand this a little and provide a callback for the {@link Ext.data.Model#save} call to update the Model
  * once it has been created. We'll assume the creation went successfully and that the server gave this user an ID of 
- * 123:</p>
+ * 123:&lt;/p&gt;
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 user.save({
     success: function(user) {
         user.set('name', 'Khan Noonien Singh');
@@ -39,18 +40,18 @@ user.save({
         user.save(); //PUT /users/123
     }
 });
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>Now that we're no longer creating a new Model instance, the request method is changed to an HTTP PUT, targeting
- * the relevant url for that user. Now let's delete this user, which will use the DELETE method:</p>
+ * &lt;p&gt;Now that we're no longer creating a new Model instance, the request method is changed to an HTTP PUT, targeting
+ * the relevant url for that user. Now let's delete this user, which will use the DELETE method:&lt;/p&gt;
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
     user.destroy(); //DELETE /users/123
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>Finally, when we perform a load of a Model or Store, RestProxy will use the GET method:</p>
+ * &lt;p&gt;Finally, when we perform a load of a Model or Store, RestProxy will use the GET method:&lt;/p&gt;
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 //1. Load via Store
 
 //the Store automatically picks up the Proxy from the User model
@@ -68,18 +69,18 @@ Ext.ModelManager.getModel('User').load(123, {
         console.log(user.getId()); //outputs 123
     }
 });
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p><u>Url generation</u></p>
+ * &lt;p&gt;&lt;u&gt;Url generation&lt;/u&gt;&lt;/p&gt;
  * 
- * <p>RestProxy is able to automatically generate the urls above based on two configuration options - {@link #appendId}
+ * &lt;p&gt;RestProxy is able to automatically generate the urls above based on two configuration options - {@link #appendId}
  * and {@link #format}. If appendId is true (it is by default) then RestProxy will automatically append the ID of the 
- * Model instance in question to the configured url, resulting in the '/users/123' that we saw above.</p>
+ * Model instance in question to the configured url, resulting in the '/users/123' that we saw above.&lt;/p&gt;
  * 
- * <p>If the request is not for a specific Model instance (e.g. loading a Store), the url is not appended with an id. 
- * RestProxy will automatically insert a '/' before the ID if one is not already present.</p>
+ * &lt;p&gt;If the request is not for a specific Model instance (e.g. loading a Store), the url is not appended with an id. 
+ * RestProxy will automatically insert a '/' before the ID if one is not already present.&lt;/p&gt;
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 new Ext.data.proxy.Rest({
     url: '/users',
     appendId: true //default
@@ -87,11 +88,11 @@ new Ext.data.proxy.Rest({
 
 // Collection url: /users
 // Instance url  : /users/123
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>RestProxy can also optionally append a format string to the end of any generated url:</p>
+ * &lt;p&gt;RestProxy can also optionally append a format string to the end of any generated url:&lt;/p&gt;
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 new Ext.data.proxy.Rest({
     url: '/users',
     format: 'json'
@@ -99,53 +100,54 @@ new Ext.data.proxy.Rest({
 
 // Collection url: /users.json
 // Instance url  : /users/123.json
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>If further customization is needed, simply implement the {@link #buildUrl} method and add your custom generated
+ * &lt;p&gt;If further customization is needed, simply implement the {@link #buildUrl} method and add your custom generated
  * url onto the {@link Ext.data.Request Request} object that is passed to buildUrl. See 
- * <a href="http://localhost:3000/new/ext-js/4-0/source/source/RestProxy.html#method-Ext.data.proxy.Rest-buildUrl">RestProxy's implementation</a> for an example of
- * how to achieve this.</p>
+ * &lt;a href=&quot;source/RestProxy.html#method-Ext.data.proxy.Rest-buildUrl&quot;&gt;RestProxy's implementation&lt;/a&gt; for an example of
+ * how to achieve this.&lt;/p&gt;
  * 
- * <p>Note that RestProxy inherits from {@link Ext.data.proxy.Ajax AjaxProxy}, which already injects all of the sorter,
+ * &lt;p&gt;Note that RestProxy inherits from {@link Ext.data.proxy.Ajax AjaxProxy}, which already injects all of the sorter,
  * filter, group and paging options into the generated url. See the {@link Ext.data.proxy.Ajax AjaxProxy docs} for more
- * details.</p>
+ * details.&lt;/p&gt;
  */
 Ext.define('Ext.data.proxy.Rest', {
     extend: 'Ext.data.proxy.Ajax',
     alternateClassName: 'Ext.data.RestProxy',
     alias : 'proxy.rest',
     
-    <a name="cfg-Ext.data.proxy.Rest-appendId"></a>/**
-     * @cfg {Boolean} appendId True to automatically append the ID of a Model instance when performing a request based
+<span id='Ext-data.proxy.Rest-cfg-appendId'>    /**
+</span>     * @cfg {Boolean} appendId True to automatically append the ID of a Model instance when performing a request based
      * on that single instance. See RestProxy intro docs for more details. Defaults to true.
      */
     appendId: true,
     
-    <a name="cfg-Ext.data.proxy.Rest-format"></a>/**
-     * @cfg {String} format Optional data format to send to the server when making any request (e.g. 'json'). See the
+<span id='Ext-data.proxy.Rest-cfg-format'>    /**
+</span>     * @cfg {String} format Optional data format to send to the server when making any request (e.g. 'json'). See the
      * RestProxy intro docs for full details. Defaults to undefined.
      */
     
-    <a name="cfg-Ext.data.proxy.Rest-batchActions"></a>/**
-     * @cfg {Boolean} batchActions True to batch actions of a particular type when synchronizing the store.
-     * Defaults to <tt>false</tt>.
+<span id='Ext-data.proxy.Rest-cfg-batchActions'>    /**
+</span>     * @cfg {Boolean} batchActions True to batch actions of a particular type when synchronizing the store.
+     * Defaults to &lt;tt&gt;false&lt;/tt&gt;.
      */
     batchActions: false,
     
-    <a name="method-Ext.data.proxy.Rest-buildUrl"></a>/**
-     * Specialized version of buildUrl that incorporates the {@link #appendId} and {@link #format} options into the
+<span id='Ext-data.proxy.Rest-method-buildUrl'>    /**
+</span>     * Specialized version of buildUrl that incorporates the {@link #appendId} and {@link #format} options into the
      * generated url. Override this to provide further customizations, but remember to call the superclass buildUrl
      * so that additional parameters like the cache buster string are appended
      */
     buildUrl: function(request) {
-        var operation = request.operation,
+        var me        = this,
+            operation = request.operation,
             records   = operation.records || [],
             record    = records[0],
-            format    = this.format,
-            url       = request.url || this.url,
+            format    = me.format,
+            url       = me.getUrl(request),
             id        = record ? record.getId() : operation.id;
         
-        if (this.appendId && id) {
+        if (me.appendId &amp;&amp; id) {
             if (!url.match(/\/$/)) {
                 url += '/';
             }
@@ -163,12 +165,12 @@ Ext.define('Ext.data.proxy.Rest', {
         
         request.url = url;
         
-        return this.callParent(arguments);
+        return me.callParent(arguments);
     }
 }, function() {
     Ext.apply(this.prototype, {
-        <a name="prop-Ext.data.proxy.Rest-actionMethods"></a>/**
-         * Mapping of action name to HTTP request method. These default to RESTful conventions for the 'create', 'read',
+<span id='Ext-data.proxy.Rest-property-actionMethods'>        /**
+</span>         * Mapping of action name to HTTP request method. These default to RESTful conventions for the 'create', 'read',
          * 'update' and 'destroy' actions (which map to 'POST', 'GET', 'PUT' and 'DELETE' respectively). This object should
          * not be changed except globally via {@link Ext#override Ext.override} - the {@link #getMethod} function can be overridden instead.
          * @property actionMethods
@@ -182,4 +184,4 @@ Ext.define('Ext.data.proxy.Rest', {
         }
     });
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

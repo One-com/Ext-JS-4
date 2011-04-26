@@ -9,7 +9,7 @@ Ext.define('Ext.ux.Spotlight', {
      * @private
      * The baseCls for the spotlight elements
      */
-    baseCls : 'x-spotlight',
+    baseCls: 'x-spotlight',
 
     /**
      * @cfg animate {Boolean} True to animate the spotlight change
@@ -41,10 +41,18 @@ Ext.define('Ext.ux.Spotlight', {
     createElements: function() {
         var body = Ext.getBody();
 
-        this.right  = body.createChild({cls: this.baseCls});
-        this.left   = body.createChild({cls: this.baseCls});
-        this.top    = body.createChild({cls: this.baseCls});
-        this.bottom = body.createChild({cls: this.baseCls});
+        this.right = body.createChild({
+            cls: this.baseCls
+        });
+        this.left = body.createChild({
+            cls: this.baseCls
+        });
+        this.top = body.createChild({
+            cls: this.baseCls
+        });
+        this.bottom = body.createChild({
+            cls: this.baseCls
+        });
 
         this.all = Ext.create('Ext.CompositeElement', [this.right, this.left, this.top, this.bottom]);
     },
@@ -85,7 +93,7 @@ Ext.define('Ext.ux.Spotlight', {
     /**
      * Resizes the spotlight with the window size.
      */
-    syncSize: function(){
+    syncSize: function() {
         this.applyBounds(false, false);
     },
 
@@ -95,38 +103,78 @@ Ext.define('Ext.ux.Spotlight', {
      * @param {Boolean} animate True to reverse the animation
      */
     applyBounds: function(animate, reverse) {
-        var me  = this,
+        var me = this,
             box = me.el.getBox();
 
         //get the current view width and height
-        var viewWidth  = Ext.core.Element.getViewWidth(true);
+        var viewWidth = Ext.core.Element.getViewWidth(true);
         var viewHeight = Ext.core.Element.getViewHeight(true);
 
-        var i      = 0,
+        var i = 0,
             config = false,
             from, to;
 
         //where the element should start (if animation)
         from = {
-            right : {x: box.right, y: viewHeight,           width: (viewWidth - box.right), height: 0},
-            left  : {x: 0,         y: 0,                    width: box.x,                   height: 0},
-            top   : {x: viewWidth, y: 0,                    width: 0,                       height: box.y},
-            bottom: {x: 0,         y: (box.y + box.height), width: 0,                       height: (viewHeight - (box.y + box.height)) + 'px'}
+            right: {
+                x: box.right,
+                y: viewHeight,
+                width: (viewWidth - box.right),
+                height: 0
+            },
+            left: {
+                x: 0,
+                y: 0,
+                width: box.x,
+                height: 0
+            },
+            top: {
+                x: viewWidth,
+                y: 0,
+                width: 0,
+                height: box.y
+            },
+            bottom: {
+                x: 0,
+                y: (box.y + box.height),
+                width: 0,
+                height: (viewHeight - (box.y + box.height)) + 'px'
+            }
         };
 
         //where the element needs to finish
         to = {
-            right : {x: box.right, y: box.y,                width: (viewWidth - box.right) + 'px', height: (viewHeight - box.y) + 'px'},
-            left  : {x: 0,         y: 0,                    width: box.x + 'px',                   height: (box.y + box.height) + 'px'},
-            top   : {x: box.x,     y: 0,                    width: (viewWidth - box.x) + 'px',     height: box.y + 'px'},
-            bottom: {x: 0,         y: (box.y + box.height), width: (box.x + box.width) + 'px',     height: (viewHeight - (box.y + box.height)) + 'px'}
+            right: {
+                x: box.right,
+                y: box.y,
+                width: (viewWidth - box.right) + 'px',
+                height: (viewHeight - box.y) + 'px'
+            },
+            left: {
+                x: 0,
+                y: 0,
+                width: box.x + 'px',
+                height: (box.y + box.height) + 'px'
+            },
+            top: {
+                x: box.x,
+                y: 0,
+                width: (viewWidth - box.x) + 'px',
+                height: box.y + 'px'
+            },
+            bottom: {
+                x: 0,
+                y: (box.y + box.height),
+                width: (box.x + box.width) + 'px',
+                height: (viewHeight - (box.y + box.height)) + 'px'
+            }
         };
 
         //reverse the objects
         if (reverse) {
             var clone = Ext.clone(from);
             from = to;
-            to   = clone;
+            to = clone;
 
             delete clone;
         }
@@ -136,14 +184,16 @@ Ext.define('Ext.ux.Spotlight', {
                 me[side].setBox(from[side]);
                 me[side].animate({
                     duration: me.duration,
-                    easing  : me.easing,
-                    to      : to[side]
+                    easing: me.easing,
+                    to: to[side]
                 });
-            }, this);
+            },
+            this);
         } else {
             Ext.each(['right', 'left', 'top', 'bottom'], function(side) {
                 me[side].setBox(Ext.apply(from[side], to[side]));
-            }, this);
+            },
+            this);
         }
     },
 

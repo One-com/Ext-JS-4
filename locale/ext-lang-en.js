@@ -14,8 +14,8 @@ Ext.onReady(function() {
         Ext.data.Types.stripRe = /[\$,%]/g;
     }
 
-    if(Ext.DataView){
-      Ext.DataView.prototype.emptyText = "";
+    if(Ext.view.View){
+      Ext.view.View.prototype.emptyText = "";
     }
 
     if(Ext.grid.Panel){

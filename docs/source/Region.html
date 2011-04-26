@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.Region"></a>/**
- * @class Ext.util.Region
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-util.Region'>/**
+</span> * @class Ext.util.Region
  * @extends Object
  *
  * Represents a rectangular region and provides a number of utility methods
@@ -13,8 +13,8 @@ Ext.define('Ext.util.Region', {
     requires: ['Ext.util.Offset'],
 
     statics: {
-        <a name="method-Ext.util.Region-Ext.util.Region.getRegion"></a>/**
-         * @static
+<span id='Ext-util.Region-method-getRegion'>        /**
+</span>         * @static
          * @param {Mixed} el A string, DomElement or Ext.core.Element representing an element
          * on the page.
          * @returns {Ext.util.Region} region
@@ -24,8 +24,8 @@ Ext.define('Ext.util.Region', {
             return Ext.fly(el).getPageBox(true);
         },
 
-        <a name="method-Ext.util.Region-Ext.util.Region.from"></a>/**
-         * @static
+<span id='Ext-util.Region-method-from'>        /**
+</span>         * @static
          * @param {Object} o An object with top, right, bottom, left properties
          * @return {Ext.util.Region} region The region constructed based on the passed object
          */
@@ -36,8 +36,8 @@ Ext.define('Ext.util.Region', {
 
     /* End Definitions */
 
-    <a name="method-Ext.util.Region-constructor"></a>/**
-     * @constructor
+<span id='Ext-util.Region-method-constructor'>    /**
+</span>     * @constructor
      * @param {Number} top Top
      * @param {Number} right Right
      * @param {Number} bottom Bottom
@@ -51,21 +51,21 @@ Ext.define('Ext.util.Region', {
         me.x = me.left = me[0] = l;
     },
 
-    <a name="method-Ext.util.Region-contains"></a>/**
-     * Checks if this region completely contains the region that is passed in.
+<span id='Ext-util.Region-method-contains'>    /**
+</span>     * Checks if this region completely contains the region that is passed in.
      * @param {Ext.util.Region} region
      */
     contains : function(region) {
         var me = this;
-        return (region.x >= me.x &&
-                region.right <= me.right &&
-                region.y >= me.y &&
-                region.bottom <= me.bottom);
+        return (region.x &gt;= me.x &amp;&amp;
+                region.right &lt;= me.right &amp;&amp;
+                region.y &gt;= me.y &amp;&amp;
+                region.bottom &lt;= me.bottom);
 
     },
 
-    <a name="method-Ext.util.Region-intersect"></a>/**
-     * Checks if this region intersects the region passed in.
+<span id='Ext-util.Region-method-intersect'>    /**
+</span>     * Checks if this region intersects the region passed in.
      * @param {Ext.util.Region} region
      * @return {Ext.util.Region/Boolean} Returns the intersected region or false if there is no intersection.
      */
@@ -76,7 +76,7 @@ Ext.define('Ext.util.Region', {
             b = Math.min(me.bottom, region.bottom),
             l = Math.max(me.x, region.x);
 
-        if (b > t && r > l) {
+        if (b &gt; t &amp;&amp; r &gt; l) {
             return new this.self(t, r, b, l);
         }
         else {
@@ -84,8 +84,8 @@ Ext.define('Ext.util.Region', {
         }
     },
 
-    <a name="method-Ext.util.Region-union"></a>/**
-     * Returns the smallest region that contains the current AND targetRegion.
+<span id='Ext-util.Region-method-union'>    /**
+</span>     * Returns the smallest region that contains the current AND targetRegion.
      * @param {Ext.util.Region} region
      */
     union : function(region) {
@@ -98,8 +98,8 @@ Ext.define('Ext.util.Region', {
         return new this.self(t, r, b, l);
     },
 
-    <a name="method-Ext.util.Region-constrainTo"></a>/**
-     * Modifies the current region to be constrained to the targetRegion.
+<span id='Ext-util.Region-method-constrainTo'>    /**
+</span>     * Modifies the current region to be constrained to the targetRegion.
      * @param {Ext.util.Region} targetRegion
      */
     constrainTo : function(r) {
@@ -112,8 +112,8 @@ Ext.define('Ext.util.Region', {
         return me;
     },
 
-    <a name="method-Ext.util.Region-adjust"></a>/**
-     * Modifies the current region to be adjusted by offsets.
+<span id='Ext-util.Region-method-adjust'>    /**
+</span>     * Modifies the current region to be adjusted by offsets.
      * @param {Number} top top offset
      * @param {Number} right right offset
      * @param {Number} bottom bottom offset
@@ -128,8 +128,8 @@ Ext.define('Ext.util.Region', {
         return me;
     },
 
-    <a name="method-Ext.util.Region-getOutOfBoundOffset"></a>/**
-     * Get the offset amount of a point outside the region
+<span id='Ext-util.Region-method-getOutOfBoundOffset'>    /**
+</span>     * Get the offset amount of a point outside the region
      * @param {String} axis optional
      * @param {Ext.util.Point} p the point
      * @return {Ext.util.Offset}
@@ -151,38 +151,38 @@ Ext.define('Ext.util.Region', {
 
     },
 
-    <a name="method-Ext.util.Region-getOutOfBoundOffsetX"></a>/**
-     * Get the offset amount on the x-axis
+<span id='Ext-util.Region-method-getOutOfBoundOffsetX'>    /**
+</span>     * Get the offset amount on the x-axis
      * @param {Number} p the offset
      * @return {Number}
      */
     getOutOfBoundOffsetX: function(p) {
-        if (p <= this.x) {
+        if (p &lt;= this.x) {
             return this.x - p;
-        } else if (p >= this.right) {
+        } else if (p &gt;= this.right) {
             return this.right - p;
         }
 
         return 0;
     },
 
-    <a name="method-Ext.util.Region-getOutOfBoundOffsetY"></a>/**
-     * Get the offset amount on the y-axis
+<span id='Ext-util.Region-method-getOutOfBoundOffsetY'>    /**
+</span>     * Get the offset amount on the y-axis
      * @param {Number} p the offset
      * @return {Number}
      */
     getOutOfBoundOffsetY: function(p) {
-        if (p <= this.y) {
+        if (p &lt;= this.y) {
             return this.y - p;
-        } else if (p >= this.bottom) {
+        } else if (p &gt;= this.bottom) {
             return this.bottom - p;
         }
 
         return 0;
     },
 
-    <a name="method-Ext.util.Region-isOutOfBound"></a>/**
-     * Check whether the point / offset is out of bound
+<span id='Ext-util.Region-method-isOutOfBound'>    /**
+</span>     * Check whether the point / offset is out of bound
      * @param {String} axis optional
      * @param {Ext.util.Point/Number} p the point / offset
      * @return {Boolean}
@@ -200,22 +200,22 @@ Ext.define('Ext.util.Region', {
         }
     },
 
-    <a name="method-Ext.util.Region-isOutOfBoundX"></a>/**
-     * Check whether the offset is out of bound in the x-axis
+<span id='Ext-util.Region-method-isOutOfBoundX'>    /**
+</span>     * Check whether the offset is out of bound in the x-axis
      * @param {Number} p the offset
      * @return {Boolean}
      */
     isOutOfBoundX: function(p) {
-        return (p < this.x || p > this.right);
+        return (p &lt; this.x || p &gt; this.right);
     },
 
-    <a name="method-Ext.util.Region-isOutOfBoundY"></a>/**
-     * Check whether the offset is out of bound in the y-axis
+<span id='Ext-util.Region-method-isOutOfBoundY'>    /**
+</span>     * Check whether the offset is out of bound in the y-axis
      * @param {Number} p the offset
      * @return {Boolean}
      */
     isOutOfBoundY: function(p) {
-        return (p < this.y || p > this.bottom);
+        return (p &lt; this.y || p &gt; this.bottom);
     },
 
     /*
@@ -265,10 +265,10 @@ Ext.define('Ext.util.Region', {
             factor = 1;
         }
 
-        if (p <= this.x) {
+        if (p &lt;= this.x) {
             p -= (p - this.x) * factor;
         }
-        else if (p >= this.right) {
+        else if (p &gt;= this.right) {
             p -= (p - this.right) * factor;
         }
         return p;
@@ -284,10 +284,10 @@ Ext.define('Ext.util.Region', {
             factor = 1;
         }
 
-        if (p <= this.y) {
+        if (p &lt;= this.y) {
             p -= (p - this.y) * factor;
         }
-        else if (p >= this.bottom) {
+        else if (p &gt;= this.bottom) {
             p -= (p - this.bottom) * factor;
         }
         return p;
@@ -304,16 +304,16 @@ Ext.define('Ext.util.Region', {
         };
     },
 
-    <a name="method-Ext.util.Region-copy"></a>/**
-     * Copy a new instance
+<span id='Ext-util.Region-method-copy'>    /**
+</span>     * Copy a new instance
      * @return {Ext.util.Region}
      */
     copy: function() {
         return new this.self(this.y, this.right, this.bottom, this.x);
     },
 
-    <a name="method-Ext.util.Region-copyFrom"></a>/**
-     * Copy the values of another Region to this Region
+<span id='Ext-util.Region-method-copyFrom'>    /**
+</span>     * Copy the values of another Region to this Region
      * @param {Region} The region to copy from.
      * @return {Ext.util.Point} this This point
      */
@@ -327,18 +327,18 @@ Ext.define('Ext.util.Region', {
         return this;
     },
 
-    <a name="method-Ext.util.Region-toString"></a>/**
-     * Dump this to an eye-friendly string, great for debugging
+<span id='Ext-util.Region-method-toString'>    /**
+</span>     * Dump this to an eye-friendly string, great for debugging
      * @return {String}
      */
     toString: function() {
-        return "Region[" + this.top + "," + this.right + "," + this.bottom + "," + this.left + "]";
+        return &quot;Region[&quot; + this.top + &quot;,&quot; + this.right + &quot;,&quot; + this.bottom + &quot;,&quot; + this.left + &quot;]&quot;;
     },
 
 
-    <a name="method-Ext.util.Region-translateBy"></a>/**
-     * Translate this region by the given offset amount
-     * @param {Ext.util.Offset/Object} offset Object containing the <code>x</code> and <code>y</code> properties.
+<span id='Ext-util.Region-method-translateBy'>    /**
+</span>     * Translate this region by the given offset amount
+     * @param {Ext.util.Offset/Object} offset Object containing the &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; properties.
      * Or the x value is using the two argument form.
      * @param {Number} The y value unless using an Offset object.
      * @return {Ext.util.Region} this This Region
@@ -357,8 +357,8 @@ Ext.define('Ext.util.Region', {
         return me;
     },
 
-    <a name="method-Ext.util.Region-round"></a>/**
-     * Round all the properties of this region
+<span id='Ext-util.Region-method-round'>    /**
+</span>     * Round all the properties of this region
      * @return {Ext.util.Region} this This Region
      */
     round: function() {
@@ -371,13 +371,13 @@ Ext.define('Ext.util.Region', {
         return me;
     },
 
-    <a name="method-Ext.util.Region-equals"></a>/**
-     * Check whether this region is equivalent to the given region
+<span id='Ext-util.Region-method-equals'>    /**
+</span>     * Check whether this region is equivalent to the given region
      * @param {Ext.util.Region} region The region to compare with
      * @return {Boolean}
      */
     equals: function(region) {
-        return (this.top == region.top && this.right == region.right && this.bottom == region.bottom && this.left == region.left);
+        return (this.top == region.top &amp;&amp; this.right == region.right &amp;&amp; this.bottom == region.bottom &amp;&amp; this.left == region.left);
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

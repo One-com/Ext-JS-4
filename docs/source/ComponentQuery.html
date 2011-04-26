@@ -1,38 +1,38 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.ComponentQuery"></a>/**
- * @class Ext.ComponentQuery
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-ComponentQuery'>/**
+</span> * @class Ext.ComponentQuery
  * @extends Object
  *
  * Provides searching of Components within Ext.ComponentManager (globally) or a specific
  * Ext.container.Container on the document with a similar syntax to a CSS selector.
  *
  * Components can be retrieved by using their {@link Ext.Component xtype} with an optional . prefix
-<ul>
-    <li>component or .component</li>
-    <li>gridpanel or .gridpanel</li>
-</ul>
+&lt;ul&gt;
+    &lt;li&gt;component or .component&lt;/li&gt;
+    &lt;li&gt;gridpanel or .gridpanel&lt;/li&gt;
+&lt;/ul&gt;
  *
  * An itemId or id must be prefixed with a #
-<ul>
-    <li>#myContainer</li>
-</ul>
+&lt;ul&gt;
+    &lt;li&gt;#myContainer&lt;/li&gt;
+&lt;/ul&gt;
  *
  *
  * Attributes must be wrapped in brackets
-<ul>
-    <li>component[autoScroll]</li>
-    <li>panel[title="Test"]</li>
-</ul>
+&lt;ul&gt;
+    &lt;li&gt;component[autoScroll]&lt;/li&gt;
+    &lt;li&gt;panel[title=&quot;Test&quot;]&lt;/li&gt;
+&lt;/ul&gt;
  *
- * Member expressions from candidate Components may be tested. If the expression returns a <i>truthy</i> value,
- * the candidate Component will be included in the query:<pre><code>
-var disabledFields = myFormPanel.query("{isDisabled()}");
-</code></pre>
+ * Member expressions from candidate Components may be tested. If the expression returns a &lt;i&gt;truthy&lt;/i&gt; value,
+ * the candidate Component will be included in the query:&lt;pre&gt;&lt;code&gt;
+var disabledFields = myFormPanel.query(&quot;{isDisabled()}&quot;);
+&lt;/code&gt;&lt;/pre&gt;
  *
- * Pseudo classes may be used to filter results in the same way as in {@link Ext.DomQuery DomQuery}:<code><pre>
+ * Pseudo classes may be used to filter results in the same way as in {@link Ext.DomQuery DomQuery}:&lt;code&gt;&lt;pre&gt;
 // Function receives array and returns a filtered array.
 Ext.ComponentQuery.pseudos.invalid = function(items) {
     var i = 0, l = items.length, c, result = [];
-    for (; i < l; i++) {
+    for (; i &lt; l; i++) {
         if (!(c = items[i]).isValid()) {
             result.push(c);
         }
@@ -43,19 +43,19 @@ Ext.ComponentQuery.pseudos.invalid = function(items) {
 var invalidFields = myFormPanel.query('field:invalid');
 if (invalidFields.length) {
     invalidFields[0].getEl().scrollIntoView(myFormPanel.body);
-    for (var i = 0, l = invalidFields.length; i < l; i++) {
-        invalidFields[i].getEl().frame("red");
+    for (var i = 0, l = invalidFields.length; i &lt; l; i++) {
+        invalidFields[i].getEl().frame(&quot;red&quot;);
     }
 }
-</pre></code>
- * <p>
- * Default pseudos include:<br />
+&lt;/pre&gt;&lt;/code&gt;
+ * &lt;p&gt;
+ * Default pseudos include:&lt;br /&gt;
  * - not
- * </p>
+ * &lt;/p&gt;
  *
  * Queries return an array of components.
  * Here are some example queries.
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
     // retrieve all Ext.Panels in the document by xtype
     var panelsArray = Ext.ComponentQuery.query('panel');
 
@@ -63,11 +63,11 @@ if (invalidFields.length) {
     var panelsWithinmyCt = Ext.ComponentQuery.query('#myCt panel');
 
     // retrieve all direct children which are Ext.Panels within myCt
-    var directChildPanel = Ext.ComponentQuery.query('#myCt > panel');
+    var directChildPanel = Ext.ComponentQuery.query('#myCt &gt; panel');
 
     // retrieve all gridpanels and listviews
     var gridsAndLists = Ext.ComponentQuery.query('gridpanel, listview');
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
 For easy access to queries based from a particular Container see the {@link Ext.container.Container#query},
 {@link Ext.container.Container#down} and {@link Ext.container.Container#child} methods. Also see
@@ -89,7 +89,7 @@ Ext.define('Ext.ComponentQuery', {
                 'it = items,',
                 'l = it.length,',
                 'c;',
-            'for (; i < l; i++) {',
+            'for (; i &lt; l; i++) {',
                 'c = it[i];',
                 'if (c.{0}) {',
                    'r.push(c);',
@@ -110,9 +110,9 @@ Ext.define('Ext.ComponentQuery', {
                 i = 0,
                 length = items.length,
                 candidate,
-                deep = mode !== '>';
+                deep = mode !== '&gt;';
                 
-            for (; i < length; i++) {
+            for (; i &lt; length; i++) {
                 candidate = items[i];
                 if (candidate.getRefItems) {
                     result = result.concat(candidate.getRefItems(deep));
@@ -126,7 +126,7 @@ Ext.define('Ext.ComponentQuery', {
                 i = 0,
                 length = items.length,
                 candidate;
-            for (; i < length; i++) {
+            for (; i &lt; length; i++) {
                 candidate = items[i];
                 while (!!(candidate = (candidate.ownerCt || candidate.floatParent))) {
                     result.push(candidate);
@@ -145,7 +145,7 @@ Ext.define('Ext.ComponentQuery', {
                     i = 0,
                     length = items.length,
                     candidate;
-                for (; i < length; i++) {
+                for (; i &lt; length; i++) {
                     candidate = items[i];
                     if (candidate.isXType(xtype, shallow)) {
                         result.push(candidate);
@@ -162,7 +162,7 @@ Ext.define('Ext.ComponentQuery', {
                 i = 0,
                 length = items.length,
                 candidate;
-            for (; i < length; i++) {
+            for (; i &lt; length; i++) {
                 candidate = items[i];
                 if (candidate.el ? candidate.el.hasCls(className) : EA.contains(candidate.initCls(), className)) {
                     result.push(candidate);
@@ -177,7 +177,7 @@ Ext.define('Ext.ComponentQuery', {
                 i = 0,
                 length = items.length,
                 candidate;
-            for (; i < length; i++) {
+            for (; i &lt; length; i++) {
                 candidate = items[i];
                 if (!value ? !!candidate[property] : (String(candidate[property]) === value)) {
                     result.push(candidate);
@@ -192,7 +192,7 @@ Ext.define('Ext.ComponentQuery', {
                 i = 0,
                 length = items.length,
                 candidate;
-            for (; i < length; i++) {
+            for (; i &lt; length; i++) {
                 candidate = items[i];
                 if (candidate.getItemId() === id) {
                     result.push(candidate);
@@ -207,36 +207,36 @@ Ext.define('Ext.ComponentQuery', {
         },
 
         // Determines leading mode
-        // > for direct child, and ^ to switch to ownerCt axis
-        modeRe = /^(\s?([>\^])\s?|\s|$)/,
+        // &gt; for direct child, and ^ to switch to ownerCt axis
+        modeRe = /^(\s?([&gt;\^])\s?|\s|$)/,
 
-        // Matches a token with possibly (true|false) appended for the "shallow" parameter
+        // Matches a token with possibly (true|false) appended for the &quot;shallow&quot; parameter
         tokenRe = /^(#)?([\w\-]+|\*)(?:\((true|false)\))?/,
 
         matchers = [{
-            // Checks for .xtype with possibly (true|false) appended for the "shallow" parameter
+            // Checks for .xtype with possibly (true|false) appended for the &quot;shallow&quot; parameter
             re: /^\.([\w\-]+)(?:\((true|false)\))?/,
             method: filterByXType
         },{
             // checks for [attribute=value]
-            re: /^(?:[\[](?:@)?([\w\-]+)\s?(?:(=|.=)\s?['"]?(.*?)["']?)?[\]])/,
+            re: /^(?:[\[](?:@)?([\w\-]+)\s?(?:(=|.=)\s?['&quot;]?(.*?)[&quot;']?)?[\]])/,
             method: filterByAttribute
         }, {
             // checks for #cmpItemId
             re: /^#([\w\-]+)/,
             method: filterById
         }, {
-            // checks for :<pseudo_class>(<selector>)
-            re: /^\:([\w\-]+)(?:\(((?:\{[^\}]+\})|(?:(?!\{)[^\s>\/]*?(?!\})))\))?/,
+            // checks for :&lt;pseudo_class&gt;(&lt;selector&gt;)
+            re: /^\:([\w\-]+)(?:\(((?:\{[^\}]+\})|(?:(?!\{)[^\s&gt;\/]*?(?!\})))\))?/,
             method: filterByPseudo
         }, {
-            // checks for {<member_expression>}
+            // checks for {&lt;member_expression&gt;}
             re: /^(?:\{([^\}]+)\})/,
             method: filterFnPattern
         }];
 
-    <a name="cls-Ext.ComponentQuery.Query"></a>/**
-     * @class Ext.ComponentQuery.Query
+<span id='Ext-ComponentQuery.Query'>    /**
+</span>     * @class Ext.ComponentQuery.Query
      * @extends Object
      * @private
      */
@@ -246,8 +246,8 @@ Ext.define('Ext.ComponentQuery', {
             Ext.apply(this, cfg);
         },
 
-        /**
-         * @private
+<span id='Ext-ComponentQuery.Query-method-execute'>        /**
+</span>         * @private
          * Executes this Query upon the selected root.
          * The root provides the initial source of candidate Component matches which are progressively
          * filtered by iterating through this Query's operations cache.
@@ -275,7 +275,7 @@ Ext.define('Ext.ComponentQuery', {
 
             // We are going to loop over our operations and take care of them
             // one by one.
-            for (; i < length; i++) {
+            for (; i &lt; length; i++) {
                 operation = operations[i];
 
                 // The mode operation requires some custom handling.
@@ -283,7 +283,7 @@ Ext.define('Ext.ComponentQuery', {
                 // working items, while mode replaces our current working
                 // items by getting children from each one of our current
                 // working items. The type of mode determines the type of
-                // children we get. (e.g. > only gets direct children)
+                // children we get. (e.g. &gt; only gets direct children)
                 if (operation.mode === '^') {
                     workingItems = getAncestors(workingItems || [root]);
                 }
@@ -312,8 +312,8 @@ Ext.define('Ext.ComponentQuery', {
 
             components = filterItems(components, lastOperation);
             if (components.length === originalLength) {
-                if (operations.length > 1) {
-                    for (i = 0, ln = components.length; i < ln; i++) {
+                if (operations.length &gt; 1) {
+                    for (i = 0, ln = components.length; i &lt; ln; i++) {
                         if (Ext.Array.indexOf(this.execute(), components[i]) === -1) {
                             return false;
                         }
@@ -340,7 +340,7 @@ Ext.define('Ext.ComponentQuery', {
                     index = -1,
                     component;
                 
-                for(; i < length; ++i) {
+                for(; i &lt; length; ++i) {
                     component = components[i];
                     if (!CQ.is(component, selector)) {
                         results[++index] = component;
@@ -350,15 +350,15 @@ Ext.define('Ext.ComponentQuery', {
             }
         },
 
-        /**
-         * <p>Returns an array of matched Components from within the passed root object.</p>
-         * <p>This method filters returned Components in a similar way to how CSS selector based DOM
-         * queries work using a textual selector string.</p>
-         * <p>See class summary for details.</p>
+<span id='Ext-ComponentQuery-method-query'>        /**
+</span>         * &lt;p&gt;Returns an array of matched Components from within the passed root object.&lt;/p&gt;
+         * &lt;p&gt;This method filters returned Components in a similar way to how CSS selector based DOM
+         * queries work using a textual selector string.&lt;/p&gt;
+         * &lt;p&gt;See class summary for details.&lt;/p&gt;
          * @param selector The selector string to filter returned Components
-         * @param root <p>The Container within which to perform the query. If omitted, all Components
-         * within the document are included in the search.</p>
-         * <p>This parameter may also be an array of Components to filter according to the selector.</p>
+         * @param root &lt;p&gt;The Container within which to perform the query. If omitted, all Components
+         * within the document are included in the search.&lt;/p&gt;
+         * &lt;p&gt;This parameter may also be an array of Components to filter according to the selector.&lt;/p&gt;
          * @returns {Array} The matched Components.
          * @member Ext.ComponentQuery
          * @method query
@@ -372,7 +372,7 @@ Ext.define('Ext.ComponentQuery', {
                 dupMatcher = {}, 
                 query, resultsLn, cmp;
 
-            for (; i < length; i++) {
+            for (; i &lt; length; i++) {
                 selector = Ext.String.trim(selectors[i]);
                 query = this.cache[selector];
                 if (!query) {
@@ -383,9 +383,9 @@ Ext.define('Ext.ComponentQuery', {
 
             // multiple selectors, potential to find duplicates
             // lets filter them out.
-            if (length > 1) {
+            if (length &gt; 1) {
                 resultsLn = results.length;
-                for (i = 0; i < resultsLn; i++) {
+                for (i = 0; i &lt; resultsLn; i++) {
                     cmp = results[i];
                     if (!dupMatcher[cmp.id]) {
                         noDupResults.push(cmp);
@@ -397,8 +397,8 @@ Ext.define('Ext.ComponentQuery', {
             return results;
         },
 
-        <a name="method-Ext.ComponentQuery-query"></a>/**
-         * Tests whether the passed Component matches the selector string.
+<span id='Ext-ComponentQuery-method-query'>        /**
+</span>         * Tests whether the passed Component matches the selector string.
          * @param component The Component to test
          * @param selector The selector string to test against.
          * @return {Boolean} True if the Component matches the selector.
@@ -429,7 +429,7 @@ Ext.define('Ext.ComponentQuery', {
             // We are going to parse the beginning of the selector over and
             // over again, slicing off the selector any portions we converted into an
             // operation, until it is an empty string.
-            while (selector && lastSelector !== selector) {
+            while (selector &amp;&amp; lastSelector !== selector) {
                 lastSelector = selector;
 
                 // First we check if we are dealing with a token like #, * or an xtype
@@ -466,13 +466,13 @@ Ext.define('Ext.ComponentQuery', {
                     selector = selector.replace(tokenMatch[0], '');
                 }
 
-                // If the next part of the query is not a space or > or ^, it means we
+                // If the next part of the query is not a space or &gt; or ^, it means we
                 // are going to check for more things that our current selection
                 // has to comply to.
                 while (!(modeMatch = selector.match(modeRe))) {
                     // Lets loop over each type of matcher and execute it
                     // on our current selector.
-                    for (i = 0; selector && i < length; i++) {
+                    for (i = 0; selector &amp;&amp; i &lt; length; i++) {
                         matcher = matchers[i];
                         selectorMatch = selector.match(matcher.re);
                         method = matcher.method;
@@ -493,17 +493,17 @@ Ext.define('Ext.ComponentQuery', {
                             selector = selector.replace(selectorMatch[0], '');
                             break; // Break on match
                         }
-                        //<debug>
+                        //&lt;debug&gt;
                         // Exhausted all matches: It's an error
                         if (i === (length - 1)) {
-                            Ext.Error.raise('Invalid ComponentQuery selector: "' + arguments[0] + '"');
+                            Ext.Error.raise('Invalid ComponentQuery selector: &quot;' + arguments[0] + '&quot;');
                         }
-                        //</debug>
+                        //&lt;/debug&gt;
                     }
                 }
 
                 // Now we are going to check for a mode change. This means a space
-                // or a > to determine if we are going to select all the children
+                // or a &gt; to determine if we are going to select all the children
                 // of the currently matched items, or a ^ if we are going to use the
                 // ownerCt axis as the candidate source.
                 if (modeMatch[1]) { // Assignment, and test for truthiness!
@@ -521,4 +521,4 @@ Ext.define('Ext.ComponentQuery', {
             });
         }
     });
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

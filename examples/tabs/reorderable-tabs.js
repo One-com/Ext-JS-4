@@ -10,7 +10,7 @@ Ext.require([
 Ext.onReady(function() {
     var tabCount = 4;
 
-    var tabPanel = Ext.create('Ext.tab.TabPanel', {
+    var tabPanel = Ext.create('Ext.tab.Panel', {
         renderTo: Ext.getBody(),
         width: 600,
         height: 400,

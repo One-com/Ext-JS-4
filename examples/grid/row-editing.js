@@ -13,150 +13,175 @@ Ext.require([
 ]);
 
 Ext.onReady(function(){
-
-    function formatDate(value){
-        return value ? Ext.Date.dateFormat(value, 'M d, Y') : '';
-    }
-
-    Ext.define('Plant', {
+    // Define our data model
+    Ext.define('Employee', {
         extend: 'Ext.data.Model',
         fields: [
-            // the 'name' below matches the tag name to read, except 'availDate'
-            // which is mapped to the tag 'availability'
-            {name: 'common', type: 'string'},
-            {name: 'botanical', type: 'string'},
-            {name: 'light'},
-            {name: 'price', type: 'float'},
-            // dates can be automatically converted by specifying dateFormat
-            {name: 'availDate', mapping: 'availability', type: 'date', dateFormat: 'm/d/Y'},
-            {name: 'indoor', type: 'bool'}
+            'name',
+            'email',
+            { name: 'start', type: 'date', dateFormat: 'n/j/Y' },
+            { name: 'salary', type: 'float' },
+            { name: 'active', type: 'bool' }
         ]
     });
 
+    // Generate mock employee data
+    var data = (function() {
+        var lasts = ['Jones', 'Smith', 'Lee', 'Wilson', 'Black', 'Williams', 'Lewis', 'Johnson', 'Foot', 'Little', 'Vee', 'Train', 'Hot', 'Mutt'],
+            firsts = ['Fred', 'Julie', 'Bill', 'Ted', 'Jack', 'John', 'Mark', 'Mike', 'Chris', 'Bob', 'Travis', 'Kelly', 'Sara'],
+            lastLen = lasts.length,
+            firstLen = firsts.length,
+            usedNames = {},
+            data = [],
+            s = new Date(2007, 0, 1),
+            now = new Date(),
+
+            getRandomInt = function(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            },
+
+            generateName = function() {
+                var name = firsts[getRandomInt(0, firstLen - 1)] + ' ' + lasts[getRandomInt(0, lastLen - 1)];
+                if (usedNames[name]) {
+                    return generateName();
+                }
+                usedNames[name] = true;
+                return name;
+            };
+
+        while (s.getTime() < now.getTime()) {
+            var ecount = getRandomInt(0, 3);
+            for (var i = 0; i < ecount; i++) {
+                var name = generateName();
+                data.push({
+                    start : Ext.Date.add(Ext.Date.clearTime(s, true), Ext.Date.DAY, getRandomInt(0, 27)),
+                    name : name,
+                    email: name.toLowerCase().replace(' ', '.') + '@sencha-test.com',
+                    active: getRandomInt(0, 1),
+                    salary: Math.floor(getRandomInt(35000, 85000) / 1000) * 1000
+                });
+            }
+            s = Ext.Date.add(s, Ext.Date.MONTH, 1);
+        }
+
+        return data;
+    })();
 
     // create the Data Store
     var store = Ext.create('Ext.data.Store', {
         // destroy the store if the grid is destroyed
         autoDestroy: true,
-        model: 'Plant',
+        model: 'Employee',
         proxy: {
-            type: 'ajax',
-            // load remote data using HTTP
-            url: 'plants.xml',
-            // specify a XmlReader (coincides with the XML format of the returned data)
-            reader: {
-                type: 'xml',
-                // records will have a 'plant' tag
-                record: 'plant'
-            }
+            type: 'memory'
         },
+        data: data,
         sorters: [{
-            property: 'common',
-            direction:'ASC'
+            property: 'start',
+            direction: 'ASC'
         }]
     });
 
-    var rowEditing = Ext.create('Ext.grid.plugin.RowEditing');
+    var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
+        clicksToMoveEditor: 1,
+        autoCancel: false
+    });
 
     // create the grid and specify what field you want
-    // to use for the editor at each header.
+    // to use for the editor at each column.
     var grid = Ext.create('Ext.grid.Panel', {
         store: store,
         columns: [{
-            id: 'common',
-            header: 'Common Name',
-            dataIndex: 'common',
+            header: 'Name',
+            dataIndex: 'name',
             flex: 1,
-            field: {
-                xtype: 'textfield',
+            editor: {
+                // defaults to textfield if no xtype is supplied
                 allowBlank: false
             }
         }, {
-            header: 'Light',
-            dataIndex: 'light',
-            width: 130,
-            field: {
-                xtype: 'combobox',
-                typeAhead: true,
-                triggerAction: 'all',
-                store: [
-                    ['Shade','Shade'],
-                    ['Mostly Shady','Mostly Shady'],
-                    ['Sun or Shade','Sun or Shade'],
-                    ['Mostly Sunny','Mostly Sunny'],
-                    ['Sunny','Sunny']
-                ],
-                lazyRender: true,
-                listClass: 'x-combo-list-small'
-            }
-        }, {
-            header: 'Price',
-            dataIndex: 'price',
-            width: 70,
-            align: 'right',
-            renderer: 'usMoney',
-            field: {
-                xtype: 'numberfield',
+            header: 'Email',
+            dataIndex: 'email',
+            width: 160,
+            editor: {
                 allowBlank: false,
-                minValue: 0,
-                maxValue: 100000
+                vtype: 'email'
             }
         }, {
-            header: 'Available',
-            dataIndex: 'availDate',
-            width: 95,
-            renderer: formatDate,
+            xtype: 'datecolumn',
+            header: 'Start Date',
+            dataIndex: 'start',
+            width: 90,
             field: {
                 xtype: 'datefield',
-                format: 'm/d/y',
-                minValue: '01/01/06',
-                disabledDays: [0, 6],
-                disabledDaysText: 'Plants are not available on the weekends'
+                allowBlank: false,
+                format: 'm/d/Y',
+                minValue: '01/01/2006',
+                minText: 'Cannot have a start date before the company existed!',
+                maxValue: Ext.Date.format(new Date(), 'm/d/Y')
+            }
+        }, {
+            xtype: 'numbercolumn',
+            header: 'Salary',
+            dataIndex: 'salary',
+            format: '$0,0',
+            width: 90,
+            editor: {
+                xtype: 'numberfield',
+                allowBlank: false,
+                minValue: 1,
+                maxValue: 150000
             }
         }, {
             xtype: 'checkcolumn',
-            header: 'Indoor?',
-            dataIndex: 'indoor',
-            width: 55,
-            field: {
+            header: 'Active?',
+            dataIndex: 'active',
+            width: 60,
+            editor: {
                 xtype: 'checkbox',
                 cls: 'x-grid-checkheader-editor'
             }
         }],
         renderTo: 'editor-grid',
         width: 600,
-        height: 300,
-        title: 'Edit Plants?',
+        height: 400,
+        title: 'Employee Salaries',
         frame: true,
         tbar: [{
-            text: 'Add Plant',
-            handler : function(){
+            text: 'Add Employee',
+            iconCls: 'employee-add',
+            handler : function() {
+                rowEditing.cancelEdit();
+
                 // Create a record instance through the ModelManager
                 var r = Ext.ModelManager.create({
-                    common: 'New Plant 1',
-                    light: 'Mostly Shady',
-                    price: 0,
-                    availDate: Ext.Date.clearTime(new Date()),
-                    indoor: false
-                }, 'Plant');
+                    name: 'New Guy',
+                    email: 'new@sencha-test.com',
+                    start: new Date(),
+                    salary: 50000,
+                    active: true
+                }, 'Employee');
+
                 store.insert(0, r);
                 rowEditing.startEdit(0, 0);
             }
+        }, {
+            itemId: 'removeEmployee',
+            text: 'Remove Employee',
+            iconCls: 'employee-remove',
+            handler: function() {
+                var sm = grid.getSelectionModel();
+                rowEditing.cancelEdit();
+                store.remove(sm.getSelection());
+                sm.select(0);
+            },
+            disabled: true
         }],
-        plugins: [rowEditing]
-    });
-
-    // manually trigger the data store load
-    store.load({
-        // store loading is asynchronous, use a load listener or callback to handle results
-        callback: function(){
-            Ext.Msg.show({
-                title: 'Store Load Callback',
-                msg: 'store was loaded, data available for processing',
-                modal: false,
-                icon: Ext.Msg.INFO,
-                buttons: Ext.Msg.OK
-            });
+        plugins: [rowEditing],
+        listeners: {
+            'selectionchange': function(view, records) {
+                grid.down('#removeEmployee').setDisabled(!records.length);
+            }
         }
     });
 });

@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.Function"></a>/**
- * @class Ext.Function
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-Function'>/**
+</span> * @class Ext.Function
  *
  * A collection of useful static methods to deal with function callbacks
  * @singleton
@@ -7,18 +7,18 @@
 
 Ext.Function = {
 
-    <a name="method-Ext.Function-flexSetter"></a>/**
-     * A very commonly used method throughout the framework. It acts as a wrapper around another method
-     * which originally accepts 2 arguments for <code>name</code> and <code>value</code>.
-     * The wrapped function then allows "flexible" value setting of either:
+<span id='Ext-Function-method-flexSetter'>    /**
+</span>     * A very commonly used method throughout the framework. It acts as a wrapper around another method
+     * which originally accepts 2 arguments for &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;value&lt;/code&gt;.
+     * The wrapped function then allows &quot;flexible&quot; value setting of either:
      *
-     * <ul>
-     *      <li><code>name</code> and <code>value</code> as 2 arguments</li>
-     *      <li>one single object argument with multiple key - value pairs</li>
-     * </ul>
+     * &lt;ul&gt;
+     *      &lt;li&gt;&lt;code&gt;name&lt;/code&gt; and &lt;code&gt;value&lt;/code&gt; as 2 arguments&lt;/li&gt;
+     *      &lt;li&gt;one single object argument with multiple key - value pairs&lt;/li&gt;
+     * &lt;/ul&gt;
      *
      * For example:
-     * <pre><code>
+     * &lt;pre&gt;&lt;code&gt;
 var setValue = Ext.Function.flexSetter(function(name, value) {
     this[name] = value;
 });
@@ -33,7 +33,7 @@ setValue({
     name2: 'value2',
     name3: 'value3'
 });
-     * </code></pre>
+     * &lt;/code&gt;&lt;/pre&gt;
      * @param {Function} setter
      * @returns {Function} flexSetter
      */
@@ -68,13 +68,13 @@ setValue({
         };
     },
 
-   <a name="method-Ext.Function-bind"></a>/**
-     * Create a new function from the provided <code>fn</code>, change <code>this</code> to the provided scope, optionally
+<span id='Ext-Function-method-bind'>   /**
+</span>     * Create a new function from the provided &lt;code&gt;fn&lt;/code&gt;, change &lt;code&gt;this&lt;/code&gt; to the provided scope, optionally
      * overrides arguments for the call. (Defaults to the arguments passed by the caller)
      *
      * @param {Function} fn The function to delegate.
-     * @param {Object} scope (optional) The scope (<code><b>this</b></code> reference) in which the function is executed.
-     * <b>If omitted, defaults to the browser window.</b>
+     * @param {Object} scope (optional) The scope (&lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which the function is executed.
+     * &lt;b&gt;If omitted, defaults to the browser window.&lt;/b&gt;
      * @param {Array} args (optional) Overrides arguments for the call. (Defaults to the arguments passed by the caller)
      * @param {Boolean/Number} appendArgs (optional) if True args are appended to call args instead of overriding,
      * if a number the args are inserted at the specified position
@@ -101,8 +101,8 @@ setValue({
         };
     },
 
-    <a name="method-Ext.Function-pass"></a>/**
-     * Create a new function from the provided <code>fn</code>, the arguments of which are pre-set to `args`.
+<span id='Ext-Function-method-pass'>    /**
+</span>     * Create a new function from the provided &lt;code&gt;fn&lt;/code&gt;, the arguments of which are pre-set to `args`.
      * New arguments passed to the newly created callback when it's invoked are appended after the pre-set ones.
      * This is especially useful when creating callbacks.
      * For example:
@@ -118,7 +118,7 @@ setValue({
 
      * @param {Function} fn The original function
      * @param {Array} args The arguments to pass to new callback
-     * @param {Object} scope (optional) The scope (<code><b>this</b></code> reference) in which the function is executed.
+     * @param {Object} scope (optional) The scope (&lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which the function is executed.
      * @return {Function} The new callback function
      */
     pass: function(fn, args, scope) {
@@ -131,9 +131,9 @@ setValue({
         };
     },
 
-    <a name="method-Ext.Function-alias"></a>/**
-     * Create an alias to the provided method property with name <code>methodName</code> of <code>object</code>.
-     * Note that the execution scope will still be bound to the provided <code>object</code> itself.
+<span id='Ext-Function-method-alias'>    /**
+</span>     * Create an alias to the provided method property with name &lt;code&gt;methodName&lt;/code&gt; of &lt;code&gt;object&lt;/code&gt;.
+     * Note that the execution scope will still be bound to the provided &lt;code&gt;object&lt;/code&gt; itself.
      *
      * @param {Object/Function} object
      * @param {String} methodName
@@ -145,16 +145,16 @@ setValue({
         };
     },
 
-    <a name="method-Ext.Function-createInterceptor"></a>/**
-     * Creates an interceptor function. The passed function is called before the original one. If it returns false,
+<span id='Ext-Function-method-createInterceptor'>    /**
+</span>     * Creates an interceptor function. The passed function is called before the original one. If it returns false,
      * the original one is not called. The resulting function returns the results of the original function.
      * The passed function is called with the parameters of the original function. Example usage:
-     * <pre><code>
+     * &lt;pre&gt;&lt;code&gt;
 var sayHi = function(name){
     alert('Hi, ' + name);
 }
 
-sayHi('Fred'); // alerts "Hi, Fred"
+sayHi('Fred'); // alerts &quot;Hi, Fred&quot;
 
 // create a new function that validates input without
 // directly modifying the original function:
@@ -163,12 +163,12 @@ var sayHiToFriend = Ext.Function.createInterceptor(sayHi, function(name){
 });
 
 sayHiToFriend('Fred');  // no alert
-sayHiToFriend('Brian'); // alerts "Hi, Brian"
-     </code></pre>
+sayHiToFriend('Brian'); // alerts &quot;Hi, Brian&quot;
+     &lt;/code&gt;&lt;/pre&gt;
      * @param {Function} origFn The original function.
      * @param {Function} newFn The function to call before the original
-     * @param {Object} scope (optional) The scope (<code><b>this</b></code> reference) in which the passed function is executed.
-     * <b>If omitted, defaults to the scope in which the original function is called or the browser window.</b>
+     * @param {Object} scope (optional) The scope (&lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which the passed function is executed.
+     * &lt;b&gt;If omitted, defaults to the scope in which the original function is called or the browser window.&lt;/b&gt;
      * @param {Mixed} returnValue (optional) The value to return if the passed function return false (defaults to null).
      * @return {Function} The new function
      */
@@ -188,12 +188,12 @@ sayHiToFriend('Brian'); // alerts "Hi, Brian"
         }
     },
 
-    <a name="method-Ext.Function-createDelayed"></a>/**
-    * Creates a delegate (callback) which, when called, executes after a specific delay.
+<span id='Ext-Function-method-createDelayed'>    /**
+</span>    * Creates a delegate (callback) which, when called, executes after a specific delay.
     * @param {Function} fn The function which will be called on a delay when the returned function is called.
     * Optionally, a replacement (or additional) argument list may be specified.
     * @param {Number} delay The number of milliseconds to defer execution by whenever called.
-    * @param {Object} scope (optional) The scope (<code>this</code> reference) used by the function at execution time.
+    * @param {Object} scope (optional) The scope (&lt;code&gt;this&lt;/code&gt; reference) used by the function at execution time.
     * @param {Array} args (optional) Override arguments for the call. (Defaults to the arguments passed by the caller)
     * @param {Boolean/Number} appendArgs (optional) if True args are appended to call args instead of overriding,
     * if a number the args are inserted at the specified position.
@@ -211,9 +211,9 @@ sayHiToFriend('Brian'); // alerts "Hi, Brian"
         };
     },
 
-    <a name="method-Ext.Function-defer"></a>/**
-     * Calls this function after the number of millseconds specified, optionally in a specific scope. Example usage:
-     * <pre><code>
+<span id='Ext-Function-method-defer'>    /**
+</span>     * Calls this function after the number of millseconds specified, optionally in a specific scope. Example usage:
+     * &lt;pre&gt;&lt;code&gt;
 var sayHi = function(name){
     alert('Hi, ' + name);
 }
@@ -229,11 +229,11 @@ Ext.Function.defer(sayHi, 2000, this, ['Fred']);
 Ext.Function.defer(function(){
     alert('Anonymous');
 }, 100);
-     </code></pre>
+     &lt;/code&gt;&lt;/pre&gt;
      * @param {Function} fn The function to defer.
      * @param {Number} millis The number of milliseconds for the setTimeout call (if less than or equal to 0 the function is executed immediately)
-     * @param {Object} scope (optional) The scope (<code><b>this</b></code> reference) in which the function is executed.
-     * <b>If omitted, defaults to the browser window.</b>
+     * @param {Object} scope (optional) The scope (&lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which the function is executed.
+     * &lt;b&gt;If omitted, defaults to the browser window.&lt;/b&gt;
      * @param {Array} args (optional) Overrides arguments for the call. (Defaults to the arguments passed by the caller)
      * @param {Boolean/Number} appendArgs (optional) if True args are appended to call args instead of overriding,
      * if a number the args are inserted at the specified position
@@ -241,31 +241,31 @@ Ext.Function.defer(function(){
      */
     defer: function(fn, millis, obj, args, appendArgs) {
         fn = Ext.Function.bind(fn, obj, args, appendArgs);
-        if (millis > 0) {
+        if (millis &gt; 0) {
             return setTimeout(fn, millis);
         }
         fn();
         return 0;
     },
 
-    <a name="method-Ext.Function-createSequence"></a>/**
-     * Create a combined function call sequence of the original function + the passed function.
+<span id='Ext-Function-method-createSequence'>    /**
+</span>     * Create a combined function call sequence of the original function + the passed function.
      * The resulting function returns the results of the original function.
      * The passed function is called with the parameters of the original function. Example usage:
      *
-     * <pre><code>
+     * &lt;pre&gt;&lt;code&gt;
 var sayHi = function(name){
     alert('Hi, ' + name);
 }
 
-sayHi('Fred'); // alerts "Hi, Fred"
+sayHi('Fred'); // alerts &quot;Hi, Fred&quot;
 
 var sayGoodbye = Ext.Function.createSequence(sayHi, function(name){
     alert('Bye, ' + name);
 });
 
 sayGoodbye('Fred'); // both alerts show
-     * </code></pre>
+     * &lt;/code&gt;&lt;/pre&gt;
      *
      * @param {Function} origFn The original function.
      * @param {Function} newFn The function to sequence
@@ -286,43 +286,48 @@ sayGoodbye('Fred'); // both alerts show
         }
     },
 
-    <a name="method-Ext.Function-createBuffered"></a>/**
-     * <p>Creates a delegate function, optionally with a bound scope which, when called, buffers
+<span id='Ext-Function-method-createBuffered'>    /**
+</span>     * &lt;p&gt;Creates a delegate function, optionally with a bound scope which, when called, buffers
      * the execution of the passed function for the configured number of milliseconds.
      * If called again within that period, the impending invocation will be canceled, and the
-     * timeout period will begin again.</p>
-     *
-     * <p>The resulting function is also an instance of {@link Ext.util.DelayedTask}, and so
-     * therefore implements the <code>{@link Ext.util.DelayedTask#cancel cancel}</code> and
-     * <code>{@link Ext.util.DelayedTask#delay delay}</code> methods.</p>
+     * timeout period will begin again.&lt;/p&gt;
      *
      * @param {Function} fn The function to invoke on a buffered timer.
      * @param {Number} buffer The number of milliseconds by which to buffer the invocation of the
      * function.
-     * @param {Object} scope (optional) The scope (<code><b>this</b></code> reference) in which
+     * @param {Object} scope (optional) The scope (&lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which
      * the passed function is executed. If omitted, defaults to the scope specified by the caller.
      * @param {Array} args (optional) Override arguments for the call. Defaults to the arguments
      * passed by the caller.
      * @return {Function} A function which invokes the passed function after buffering for the specified time.
      */
     createBuffered: function(fn, buffer, scope, args) {
-        var task = fn.task || (fn.task = Ext.create('Ext.util.DelayedTask'));
-        return Ext.apply(function() {
-            task.delay(buffer, fn, scope || this, args || Ext.toArray(arguments));
-        }, task);
+        return function(){
+            var timerId;
+            return function() {
+                var me = this;
+                if (timerId) {
+                    clearInterval(timerId);
+                    timerId = null;
+                }
+                timerId = setTimeout(function(){
+                    fn.apply(scope || me, args || arguments);
+                }, buffer);
+            };
+        }();
     },
 
-    <a name="method-Ext.Function-createThrottled"></a>/**
-     * <p>Creates a throttled version of the passed function which, when called repeatedly and
+<span id='Ext-Function-method-createThrottled'>    /**
+</span>     * &lt;p&gt;Creates a throttled version of the passed function which, when called repeatedly and
      * rapidly, invokes the passed function only after a certain interval has elapsed since the
-     * previous invocation.</p>
+     * previous invocation.&lt;/p&gt;
      *
-     * <p>This is useful for wrapping functions which may be called repeatedly, such as
-     * a handler of a mouse move event when the processing is expensive.</p>
+     * &lt;p&gt;This is useful for wrapping functions which may be called repeatedly, such as
+     * a handler of a mouse move event when the processing is expensive.&lt;/p&gt;
      *
      * @param fn {Function} The function to execute at a regular time interval.
-     * @param interval {Number} The interval <b>in milliseconds</b> on which the passed function is executed.
-     * @param scope (optional) The scope (<code><b>this</b></code> reference) in which
+     * @param interval {Number} The interval &lt;b&gt;in milliseconds&lt;/b&gt; on which the passed function is executed.
+     * @param scope (optional) The scope (&lt;code&gt;&lt;b&gt;this&lt;/b&gt;&lt;/code&gt; reference) in which
      * the passed function is executed. If omitted, defaults to the scope specified by the caller.
      * @returns {Function} A function which invokes the passed function at the specified interval.
      */
@@ -337,7 +342,7 @@ sayGoodbye('Fred'); // both alerts show
             lastArgs = arguments;
 
             clearTimeout(timer);
-            if (!lastCallTime || (elapsed >= interval)) {
+            if (!lastCallTime || (elapsed &gt;= interval)) {
                 execute();
             } else {
                 timer = setTimeout(execute, interval - elapsed);
@@ -346,24 +351,24 @@ sayGoodbye('Fred'); // both alerts show
     }
 };
 
-<a name="method-Ext-defer"></a>/**
- * Shorthand for {@link Ext.Function#defer}
+<span id='Ext-method-defer'>/**
+</span> * Shorthand for {@link Ext.Function#defer}
  * @member Ext
  * @method defer
  */
 Ext.defer = Ext.Function.alias(Ext.Function, 'defer');
 
-<a name="method-Ext-pass"></a>/**
- * Shorthand for {@link Ext.Function#pass}
+<span id='Ext-method-pass'>/**
+</span> * Shorthand for {@link Ext.Function#pass}
  * @member Ext
  * @method pass
  */
 Ext.pass = Ext.Function.alias(Ext.Function, 'pass');
 
-<a name="method-Ext-bind"></a>/**
- * Shorthand for {@link Ext.Function#bind}
+<span id='Ext-method-bind'>/**
+</span> * Shorthand for {@link Ext.Function#bind}
  * @member Ext
  * @method bind
  */
 Ext.bind = Ext.Function.alias(Ext.Function, 'bind');
-￿</pre></pre></body></html>
+</pre></pre></body></html>

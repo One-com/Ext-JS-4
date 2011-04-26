@@ -5,7 +5,7 @@ Ext.require([
 
 Ext.onReady(function() {
     var form = Ext.create('Ext.form.Panel', {
-        bodyBorder: 0,
+        border: false,
         fieldDefaults: {
             labelWidth: 55
         },

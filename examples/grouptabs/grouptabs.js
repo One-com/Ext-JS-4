@@ -5,7 +5,7 @@ Ext.Loader.setPath('Ext.ux', '../ux/');
 Ext.require([
     'Ext.Viewport',
     'Ext.tip.QuickTipManager',
-    'Ext.tab.TabPanel',
+    'Ext.tab.Panel',
     'Ext.ux.GroupTabPanel',
     'Ext.grid.*'
 ]);
@@ -15,12 +15,12 @@ Ext.onReady(function() {
     
     // create some portlet tools using built in Ext tool ids
     var tools = [{
-        id:'gear',
+        type:'gear',
         handler: function(){
             Ext.Msg.alert('Message', 'The Settings tool was clicked.');
         }
     },{
-        id:'close',
+        type:'close',
         handler: function(e, target, panel){
             panel.ownerCt.remove(panel, true);
         }

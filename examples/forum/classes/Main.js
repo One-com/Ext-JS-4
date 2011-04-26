@@ -10,11 +10,17 @@ Ext.define('ForumBrowser.Main', {
                 region: 'west',
                 width: 300,
                 title: 'Forums',
-                split: true
-                //collapsible: true
+                split: true,
+                margins: '5 0 5 5'
             }, {
                 region: 'center',
                 xtype: 'tabpanel',
+                margins: '5 5 5 0',
+                minWidth: 400,
+                border: false,
+                tabBar: {
+                    border: true
+                },
                 items: {
                     itemId: 'topic',
                     xtype: 'topiccontainer'

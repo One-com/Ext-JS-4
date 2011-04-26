@@ -35,6 +35,7 @@ Ext.onReady(function() {
         height: 300,
         width: 250,
         title: 'Files',
+        useArrows: true,
         dockedItems: [{
             xtype: 'toolbar',
             items: [{

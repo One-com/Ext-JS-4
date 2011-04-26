@@ -30,23 +30,22 @@
         
         /* IE6/7/8 bugs */
         
-        .x-strict .x-ie6 .square, .x-strict .x-ie7 .square {
+        .x-strict #board {
+            width: 400px;
+            height: 400px;
+        }
+        
+        .x-strict .square {
             width: 98px;
             padding-top: 0;
             line-height: 100px;
         }
         
-        .x-strict .x-ie6 #board {
-            width: 400px;
+        .x-quirks .x-ie .x-clear {
+            margin-top: -1px;
         }
-        
-        .x-strict .x-ie7 #board {
-            height: 408px;
-            width: 400px;
-        }
-        
-        .x-quirks .x-ie8 .x-clear {
-            height: auto;
+        .x-quirks .x-ie6 .x-clear {
+            margin-top: 0px;
         }
     </style>
     <script type="text/javascript" src="../../bootstrap.js"></script>

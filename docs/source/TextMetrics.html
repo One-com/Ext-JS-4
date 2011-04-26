@@ -1,23 +1,23 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.TextMetrics"></a>/**
- * @class Ext.util.TextMetrics
- * <p>
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-util.TextMetrics'>/**
+</span> * @class Ext.util.TextMetrics
+ * &lt;p&gt;
  * Provides precise pixel measurements for blocks of text so that you can determine exactly how high and
  * wide, in pixels, a given block of text will be. Note that when measuring text, it should be plain text and
- * should not contain any HTML, otherwise it may not be measured correctly.</p> 
- * <p>The measurement works by copying the relevant CSS styles that can affect the font related display, 
+ * should not contain any HTML, otherwise it may not be measured correctly.&lt;/p&gt; 
+ * &lt;p&gt;The measurement works by copying the relevant CSS styles that can affect the font related display, 
  * then checking the size of an element that is auto-sized. Note that if the text is multi-lined, you must 
- * provide a <b>fixed width</b> when doing the measurement.</p>
+ * provide a &lt;b&gt;fixed width&lt;/b&gt; when doing the measurement.&lt;/p&gt;
  * 
- * <p>
+ * &lt;p&gt;
  * If multiple measurements are being done on the same element, you create a new instance to initialize 
  * to avoid the overhead of copying the styles to the element repeatedly.
- * </p>
+ * &lt;/p&gt;
  */
 Ext.define('Ext.util.TextMetrics', {
     statics: {
         shared: null,
-        <a name="method-Ext.util.TextMetrics-measure"></a>/**
-         * Measures the size of the specified text
+<span id='Ext-util.TextMetrics-method-measure'>        /**
+</span>         * Measures the size of the specified text
          * @param {String/HTMLElement} el The element, dom node or id from which to copy existing CSS styles
          * that can affect the size of the rendered text
          * @param {String} text The text to measure
@@ -37,8 +37,8 @@ Ext.define('Ext.util.TextMetrics', {
             return shared.getSize(text);
         },
         
-        /**
-          * Destroy the TextMetrics instance created by {@link #measure}.
+<span id='Ext-util.TextMetrics-method-destroy'>        /**
+</span>          * Destroy the TextMetrics instance created by {@link #measure}.
           */
          destroy: function(){
              var me = this;
@@ -47,8 +47,8 @@ Ext.define('Ext.util.TextMetrics', {
          }
     },
     
-    <a name="method-Ext.util.TextMetrics-constructor"></a>/**
-     * @constructor
+<span id='Ext-util.TextMetrics-method-constructor'>    /**
+</span>     * @constructor
      * @param {Mixed} bindTo The element to bind to.
      * @param {Number} fixedWidth A fixed width to apply to the measuring element.
      */
@@ -67,8 +67,8 @@ Ext.define('Ext.util.TextMetrics', {
         }
     },
     
-    <a name="method-Ext.util.TextMetrics-getSize"></a>/**
-     * <p><b>Only available on the instance returned from {@link #createInstance}, <u>not</u> on the singleton.</b></p>
+<span id='Ext-util.TextMetrics-method-getSize'>    /**
+</span>     * &lt;p&gt;&lt;b&gt;Only available on the instance returned from {@link #createInstance}, &lt;u&gt;not&lt;/u&gt; on the singleton.&lt;/b&gt;&lt;/p&gt;
      * Returns the size of the specified text based on the internal element's style and width properties
      * @param {String} text The text to measure
      * @return {Object} An object containing the text's size {width: (width), height: (height)}
@@ -83,8 +83,8 @@ Ext.define('Ext.util.TextMetrics', {
         return size;
     },
     
-    <a name="method-Ext.util.TextMetrics-bind"></a>/**
-     * Binds this TextMetrics instance to a new element
+<span id='Ext-util.TextMetrics-method-bind'>    /**
+</span>     * Binds this TextMetrics instance to a new element
      * @param {Mixed} el The element
      */
     bind: function(el){
@@ -96,8 +96,8 @@ Ext.define('Ext.util.TextMetrics', {
         );
     },
     
-    <a name="method-Ext.util.TextMetrics-setFixedWidth"></a>/**
-     * Sets a fixed width on the internal measurement element.  If the text will be multiline, you have
+<span id='Ext-util.TextMetrics-method-setFixedWidth'>    /**
+</span>     * Sets a fixed width on the internal measurement element.  If the text will be multiline, you have
      * to set a fixed width in order to accurately measure the text height.
      * @param {Number} width The width to set on the element
      */
@@ -105,8 +105,8 @@ Ext.define('Ext.util.TextMetrics', {
          this.measure.setWidth(width);
      },
      
-     <a name="method-Ext.util.TextMetrics-getWidth"></a>/**
-      * Returns the measured width of the specified text
+<span id='Ext-util.TextMetrics-method-getWidth'>     /**
+</span>      * Returns the measured width of the specified text
       * @param {String} text The text to measure
       * @return {Number} width The width in pixels
       */
@@ -115,8 +115,8 @@ Ext.define('Ext.util.TextMetrics', {
          return this.getSize(text).width;
      },
      
-     <a name="method-Ext.util.TextMetrics-getHeight"></a>/**
-      * Returns the measured height of the specified text
+<span id='Ext-util.TextMetrics-method-getHeight'>     /**
+</span>      * Returns the measured height of the specified text
       * @param {String} text The text to measure
       * @return {Number} height The height in pixels
       */
@@ -124,8 +124,8 @@ Ext.define('Ext.util.TextMetrics', {
          return this.getSize(text).height;
      },
      
-     <a name="method-Ext.util.TextMetrics-destroy"></a>/**
-      * Destroy this instance
+<span id='Ext-util.TextMetrics-method-destroy'>     /**
+</span>      * Destroy this instance
       */
      destroy: function(){
          var me = this;
@@ -135,8 +135,8 @@ Ext.define('Ext.util.TextMetrics', {
      }
 }, function(){
     Ext.core.Element.addMethods({
-        <a name="method-Ext.core.Element-getTextWidth"></a>/**
-         * Returns the width in pixels of the passed text, or the width of the text in this Element.
+<span id='Ext-core.Element-method-getTextWidth'>        /**
+</span>         * Returns the width in pixels of the passed text, or the width of the text in this Element.
          * @param {String} text The text to measure. Defaults to the innerHTML of the element.
          * @param {Number} min (Optional) The minumum value to return.
          * @param {Number} max (Optional) The maximum value to return.
@@ -148,4 +148,4 @@ Ext.define('Ext.util.TextMetrics', {
         }
     });
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

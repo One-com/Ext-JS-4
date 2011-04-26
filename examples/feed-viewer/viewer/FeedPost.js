@@ -14,7 +14,8 @@ Ext.define('FeedViewer.FeedPost', {
     alias: 'widget.feedpost',
     cls: 'preview',
     autoScroll: true,
-
+    border: true,
+    
     initComponent: function(){
         Ext.apply(this, {
             dockedItems: [this.createToolbar()],
@@ -61,7 +62,8 @@ Ext.define('FeedViewer.FeedPost', {
      * @return {Ext.toolbar.Toolbar} toolbar
      */
     createToolbar: function(){
-        var items = [];
+        var items = [],
+            config = {};
         if (!this.inTab) {
             items.push({
                 scope: this,
@@ -70,15 +72,17 @@ Ext.define('FeedViewer.FeedPost', {
                 iconCls: 'tab-new'
             }, '-');
         }
+        else {
+            config.cls = 'x-docked-noborder-top';
+        }
         items.push({
             scope: this,
             handler: this.goToPost,
             text: 'Go to post',
             iconCls: 'post-go'
         });
-        return Ext.create('widget.toolbar', {
-            items: items
-        });
+        config.items = items;
+        return Ext.create('widget.toolbar', config);
     },
 
     /**

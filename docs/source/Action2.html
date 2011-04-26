@@ -1,204 +1,315 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.grid.column.Action"></a>/**
- * @class Ext.grid.column.Action
- * @extends Ext.grid.column.Column
- * <p>A Grid header type which renders an icon, or a series of icons in a grid cell, and offers a scoped click
- * handler for each icon. Example usage:</p>
-<pre><code>
-new Ext.grid.GridPanel({
-    store: myStore,
-    columns: [
-        {
-            xtype: 'ActionColumn',
-            width: 50,
-            items: [
-                {
-                    icon   : 'sell.gif',                // Use a URL in the icon config
-                    tooltip: 'Sell stock',
-                    handler: function(grid, rowIndex, colIndex) {
-                        var rec = store.getAt(rowIndex);
-                        alert("Sell " + rec.get('company'));
-                    }
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-form.action.Action-method-constructor'><span id='Ext-form.action.Action'>/**
+</span></span> * @class Ext.form.action.Action
+ * @extends Ext.Base
+ * &lt;p&gt;The subclasses of this class provide actions to perform upon {@link Ext.form.Basic Form}s.&lt;/p&gt;
+ * &lt;p&gt;Instances of this class are only created by a {@link Ext.form.Basic Form} when
+ * the Form needs to perform an action such as submit or load. The Configuration options
+ * listed for this class are set through the Form's action methods: {@link Ext.form.Basic#submit submit},
+ * {@link Ext.form.Basic#load load} and {@link Ext.form.Basic#doAction doAction}&lt;/p&gt;
+ * &lt;p&gt;The instance of Action which performed the action is passed to the success
+ * and failure callbacks of the Form's action methods ({@link Ext.form.Basic#submit submit},
+ * {@link Ext.form.Basic#load load} and {@link Ext.form.Basic#doAction doAction}),
+ * and to the {@link Ext.form.Basic#actioncomplete actioncomplete} and
+ * {@link Ext.form.Basic#actionfailed actionfailed} event handlers.&lt;/p&gt;
+ * @constructor
+ * @param {Object} config The configuration for this instance.
+ */
+Ext.define('Ext.form.action.Action', {
+    alternateClassName: 'Ext.form.Action',
+
+<span id='Ext-form.action.Action-cfg-form'>    /**
+</span>     * @cfg {Ext.form.Basic} form The {@link Ext.form.Basic BasicForm} instance that
+     * is invoking this Action. Required.
+     */
+
+<span id='Ext-form.action.Action-cfg-url'>    /**
+</span>     * @cfg {String} url The URL that the Action is to invoke. Will default to the {@link Ext.form.Basic#url url}
+     * configured on the {@link #form}.
+     */
+
+<span id='Ext-form.action.Action-cfg-reset'>    /**
+</span>     * @cfg {Boolean} reset When set to &lt;tt&gt;&lt;b&gt;true&lt;/b&gt;&lt;/tt&gt;, causes the Form to be
+     * {@link Ext.form.Basic#reset reset} on Action success. If specified, this happens
+     * before the {@link #success} callback is called and before the Form's
+     * {@link Ext.form.Basic#actioncomplete actioncomplete} event fires.
+     */
+
+<span id='Ext-form.action.Action-cfg-method'>    /**
+</span>     * @cfg {String} method The HTTP method to use to access the requested URL. Defaults to the
+     * {@link Ext.form.Basic#method BasicForm's method}, or 'POST' if not specified.
+     */
+
+<span id='Ext-form.action.Action-cfg-params'>    /**
+</span>     * @cfg {Object/String} params &lt;p&gt;Extra parameter values to pass. These are added to the Form's
+     * {@link Ext.form.Basic#baseParams} and passed to the specified URL along with the Form's
+     * input fields.&lt;/p&gt;
+     * &lt;p&gt;Parameters are encoded as standard HTTP parameters using {@link Ext#urlEncode Ext.Object.toQueryString}.&lt;/p&gt;
+     */
+
+<span id='Ext-form.action.Action-cfg-headers'>    /**
+</span>     * @cfg {Object} headers &lt;p&gt;Extra headers to be sent in the AJAX request for submit and load actions. See
+     * {@link Ext.data.Connection#headers}.&lt;/p&gt;
+     */
+
+<span id='Ext-form.action.Action-cfg-timeout'>    /**
+</span>     * @cfg {Number} timeout The number of seconds to wait for a server response before
+     * failing with the {@link #failureType} as {@link Ext.form.action.Action#CONNECT_FAILURE}. If not specified,
+     * defaults to the configured &lt;tt&gt;{@link Ext.form.Basic#timeout timeout}&lt;/tt&gt; of the
+     * {@link #form}.
+     */
+
+<span id='Ext-form.action.Action-cfg-success'>    /**
+</span>     * @cfg {Function} success The function to call when a valid success return packet is received.
+     * The function is passed the following parameters:&lt;ul class=&quot;mdetail-params&quot;&gt;
+     * &lt;li&gt;&lt;b&gt;form&lt;/b&gt; : Ext.form.Basic&lt;div class=&quot;sub-desc&quot;&gt;The form that requested the action&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;action&lt;/b&gt; : Ext.form.action.Action&lt;div class=&quot;sub-desc&quot;&gt;The Action class. The {@link #result}
+     * property of this object may be examined to perform custom postprocessing.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;
+     */
+
+<span id='Ext-form.action.Action-cfg-failure'>    /**
+</span>     * @cfg {Function} failure The function to call when a failure packet was received, or when an
+     * error ocurred in the Ajax communication.
+     * The function is passed the following parameters:&lt;ul class=&quot;mdetail-params&quot;&gt;
+     * &lt;li&gt;&lt;b&gt;form&lt;/b&gt; : Ext.form.Basic&lt;div class=&quot;sub-desc&quot;&gt;The form that requested the action&lt;/div&gt;&lt;/li&gt;
+     * &lt;li&gt;&lt;b&gt;action&lt;/b&gt; : Ext.form.action.Action&lt;div class=&quot;sub-desc&quot;&gt;The Action class. If an Ajax
+     * error ocurred, the failure type will be in {@link #failureType}. The {@link #result}
+     * property of this object may be examined to perform custom postprocessing.&lt;/div&gt;&lt;/li&gt;
+     * &lt;/ul&gt;
+     */
+
+<span id='Ext-form.action.Action-cfg-scope'>    /**
+</span>     * @cfg {Object} scope The scope in which to call the configured &lt;tt&gt;success&lt;/tt&gt; and &lt;tt&gt;failure&lt;/tt&gt;
+     * callback functions (the &lt;tt&gt;this&lt;/tt&gt; reference for the callback functions).
+     */
+
+<span id='Ext-form.action.Action-cfg-waitMsg'>    /**
+</span>     * @cfg {String} waitMsg The message to be displayed by a call to {@link Ext.window.MessageBox#wait}
+     * during the time the action is being processed.
+     */
+
+<span id='Ext-form.action.Action-cfg-waitTitle'>    /**
+</span>     * @cfg {String} waitTitle The title to be displayed by a call to {@link Ext.window.MessageBox#wait}
+     * during the time the action is being processed.
+     */
+
+<span id='Ext-form.action.Action-cfg-submitEmptyText'>    /**
+</span>     * @cfg {Boolean} submitEmptyText If set to &lt;tt&gt;true&lt;/tt&gt;, the emptyText value will be sent with the form
+     * when it is submitted. Defaults to &lt;tt&gt;true&lt;/tt&gt;.
+     */
+
+<span id='Ext-form.action.Action-property-type'>    /**
+</span>     * @property type
+     * The type of action this Action instance performs.
+     * Currently only &quot;submit&quot; and &quot;load&quot; are supported.
+     * @type {String}
+     */
+
+<span id='Ext-form.action.Action-property-failureType'>    /**
+</span>     * The type of failure detected will be one of these: {@link Ext.form.action.Action#CLIENT_INVALID},
+     * {@link Ext.form.action.Action#SERVER_INVALID}, {@link Ext.form.action.Action#CONNECT_FAILURE}, or
+     * {@link Ext.form.action.Action#LOAD_FAILURE}.  Usage:
+     * &lt;pre&gt;&lt;code&gt;
+var fp = new Ext.form.Panel({
+...
+buttons: [{
+    text: 'Save',
+    formBind: true,
+    handler: function(){
+        if(fp.getForm().isValid()){
+            fp.getForm().submit({
+                url: 'form-submit.php',
+                waitMsg: 'Submitting your data...',
+                success: function(form, action){
+                    // server responded with success = true
+                    var result = action.{@link #result};
                 },
-                {
-                    getClass: function(v, meta, rec) {  // Or return a class from a function
-                        if (rec.get('change') < 0) {
-                            this.items[1].tooltip = 'Do not buy!';
-                            return 'alert-col';
-                        } else {
-                            this.items[1].tooltip = 'Buy stock';
-                            return 'buy-col';
-                        }
-                    },
-                    handler: function(grid, rowIndex, colIndex) {
-                        var rec = store.getAt(rowIndex);
-                        alert("Buy " + rec.get('company'));
+                failure: function(form, action){
+                    if (action.{@link #failureType} === {@link Ext.form.action.Action#CONNECT_FAILURE}) {
+                        Ext.Msg.alert('Error',
+                            'Status:'+action.{@link #response}.status+': '+
+                            action.{@link #response}.statusText);
+                    }
+                    if (action.failureType === {@link Ext.form.action.Action#SERVER_INVALID}){
+                        // server responded with success = false
+                        Ext.Msg.alert('Invalid', action.{@link #result}.errormsg);
                     }
                 }
-            ]
+            });
         }
-        //any other columns here
-    ]
-});
-</pre></code>
- * <p>The action column can be at any index in the columns array, and a grid can have any number of
- * action columns. </p>
- */
-Ext.define('Ext.grid.column.Action', {
-    extend: 'Ext.grid.column.Column',
-    alias: ['widget.actioncolumn'],
-    alternateClassName: 'Ext.grid.ActionColumn',
+    }
+},{
+    text: 'Reset',
+    handler: function(){
+        fp.getForm().reset();
+    }
+}]
+     * &lt;/code&gt;&lt;/pre&gt;
+     * @property failureType
+     * @type {String}
+     */
 
-    <a name="cfg-Ext.grid.column.Action-icon"></a>/**
-     * @cfg {String} icon
-     * The URL of an image to display as the clickable element in the column. 
-     * Optional - defaults to <code>{@link Ext#BLANK_IMAGE_URL Ext.BLANK_IMAGE_URL}</code>.
+<span id='Ext-form.action.Action-property-response'>    /**
+</span>     * The raw XMLHttpRequest object used to perform the action.
+     * @property response
+     * @type {Object}
      */
-    <a name="cfg-Ext.grid.column.Action-iconCls"></a>/**
-     * @cfg {String} iconCls
-     * A CSS class to apply to the icon image. To determine the class dynamically, configure the Column with a <code>{@link #getClass}</code> function.
-     */
-    <a name="cfg-Ext.grid.column.Action-handler"></a>/**
-     * @cfg {Function} handler A function called when the icon is clicked.
-     * The handler is passed the following parameters:<div class="mdetail-params"><ul>
-     * <li><code>view</code> : TableView<div class="sub-desc">The owning TableView.</div></li>
-     * <li><code>rowIndex</code> : Number<div class="sub-desc">The row index clicked on.</div></li>
-     * <li><code>colIndex</code> : Number<div class="sub-desc">The column index clicked on.</div></li>
-     * <li><code>item</code> : Object<div class="sub-desc">The clicked item (or this Column if multiple 
-     * {@link #items} were not configured).</div></li>
-     * <li><code>e</code> : Event<div class="sub-desc">The click event.</div></li>
-     * </ul></div>
-     */
-    <a name="cfg-Ext.grid.column.Action-scope"></a>/**
-     * @cfg {Object} scope The scope (<tt><b>this</b></tt> reference) in which the <code>{@link #handler}</code>
-     * and <code>{@link #getClass}</code> fuctions are executed. Defaults to this Column.
-     */
-    <a name="cfg-Ext.grid.column.Action-tooltip"></a>/**
-     * @cfg {String} tooltip A tooltip message to be displayed on hover. {@link Ext.tip.QuickTips#init Ext.tip.QuickTips} must have 
-     * been initialized.
-     */
-    <a name="cfg-Ext.grid.column.Action-stopSelection"></a>/**
-     * @cfg {Boolean} stopSelection Defaults to <code>true</code>. Prevent grid <i>row</i> selection upon mousedown.
-     */
-    <a name="cfg-Ext.grid.column.Action-getClass"></a>/**
-     * @cfg {Function} getClass A function which returns the CSS class to apply to the icon image.
-     * The function is passed the following parameters:<ul>
-     *     <li><b>v</b> : Object<p class="sub-desc">The value of the column's configured field (if any).</p></li>
-     *     <li><b>metadata</b> : Object<p class="sub-desc">An object in which you may set the following attributes:<ul>
-     *         <li><b>css</b> : String<p class="sub-desc">A CSS class name to add to the cell's TD element.</p></li>
-     *         <li><b>attr</b> : String<p class="sub-desc">An HTML attribute definition string to apply to the data container element <i>within</i> the table cell
-     *         (e.g. 'style="color:red;"').</p></li>
-     *     </ul></p></li>
-     *     <li><b>r</b> : Ext.data.Record<p class="sub-desc">The Record providing the data.</p></li>
-     *     <li><b>rowIndex</b> : Number<p class="sub-desc">The row index..</p></li>
-     *     <li><b>colIndex</b> : Number<p class="sub-desc">The column index.</p></li>
-     *     <li><b>store</b> : Ext.data.Store<p class="sub-desc">The Store which is providing the data Model.</p></li>
-     * </ul>
-     */
-    <a name="cfg-Ext.grid.column.Action-items"></a>/**
-     * @cfg {Array} items An Array which may contain multiple icon definitions, each element of which may contain:
-     * <div class="mdetail-params"><ul>
-     * <li><code>icon</code> : String<div class="sub-desc">The url of an image to display as the clickable element 
-     * in the column.</div></li>
-     * <li><code>iconCls</code> : String<div class="sub-desc">A CSS class to apply to the icon image.
-     * To determine the class dynamically, configure the item with a <code>getClass</code> function.</div></li>
-     * <li><code>getClass</code> : Function<div class="sub-desc">A function which returns the CSS class to apply to the icon image.
-     * The function is passed the following parameters:<ul>
-     *     <li><b>v</b> : Object<p class="sub-desc">The value of the column's configured field (if any).</p></li>
-     *     <li><b>metadata</b> : Object<p class="sub-desc">An object in which you may set the following attributes:<ul>
-     *         <li><b>css</b> : String<p class="sub-desc">A CSS class name to add to the cell's TD element.</p></li>
-     *         <li><b>attr</b> : String<p class="sub-desc">An HTML attribute definition string to apply to the data container element <i>within</i> the table cell
-     *         (e.g. 'style="color:red;"').</p></li>
-     *     </ul></p></li>
-     *     <li><b>r</b> : Ext.data.Record<p class="sub-desc">The Record providing the data.</p></li>
-     *     <li><b>rowIndex</b> : Number<p class="sub-desc">The row index..</p></li>
-     *     <li><b>colIndex</b> : Number<p class="sub-desc">The column index.</p></li>
-     *     <li><b>store</b> : Ext.data.Store<p class="sub-desc">The Store which is providing the data Model.</p></li>
-     * </ul></div></li>
-     * <li><code>handler</code> : Function<div class="sub-desc">A function called when the icon is clicked.</div></li>
-     * <li><code>scope</code> : Scope<div class="sub-desc">The scope (<code><b>this</b></code> reference) in which the 
-     * <code>handler</code> and <code>getClass</code> functions are executed. Fallback defaults are this Column's
-     * configured scope, then this Column.</div></li>
-     * <li><code>tooltip</code> : String<div class="sub-desc">A tooltip message to be displayed on hover. 
-     * {@link Ext.tip.QuickTips#init Ext.tip.QuickTips} must have been initialized.</div></li>
-     * </ul></div>
-     */
-    header: '&#160;',
 
-    actionIdRe: /x-action-col-(\d+)/,
-
-    <a name="cfg-Ext.grid.column.Action-altText"></a>/**
-     * @cfg {String} altText The alt text to use for the image element. Defaults to <tt>''</tt>.
+<span id='Ext-form.action.Action-property-result'>    /**
+</span>     * The decoded response object containing a boolean &lt;tt&gt;success&lt;/tt&gt; property and
+     * other, action-specific properties.
+     * @property result
+     * @type {Object}
      */
-    altText: '',
-    
-    sortable: false,
+
+
 
     constructor: function(config) {
+        if (config) {
+            Ext.apply(this, config);
+        }
+
+        // Normalize the params option to an Object
+        var params = config.params;
+        if (Ext.isString(params)) {
+            this.params = Ext.Object.fromQueryString(params);
+        }
+    },
+
+<span id='Ext-form.action.Action-property-run'>    /**
+</span>     * Invokes this action using the current configuration.
+     */
+    run: Ext.emptyFn,
+
+<span id='Ext-form.action.Action-method-onSuccess'>    /**
+</span>     * @private
+     * @method onSuccess
+     * Callback method that gets invoked when the action completes successfully. Must be implemented by subclasses.
+     * @param {Object} response
+     */
+
+<span id='Ext-form.action.Action-method-handleResponse'>    /**
+</span>     * @private
+     * @method handleResponse
+     * Handles the raw response and builds a result object from it. Must be implemented by subclasses.
+     * @param {Object} response
+     */
+
+<span id='Ext-form.action.Action-method-onFailure'>    /**
+</span>     * @private
+     * Handles a failure response.
+     * @param {Object} response
+     */
+    onFailure : function(response){
+        this.response = response;
+        this.failureType = Ext.form.action.Action.CONNECT_FAILURE;
+        this.form.afterAction(this, false);
+    },
+
+<span id='Ext-form.action.Action-method-processResponse'>    /**
+</span>     * @private
+     * Validates that a response contains either responseText or responseXML and invokes
+     * {@link #handleResponse} to build the result object.
+     * @param {Object} response The raw response object.
+     * @return {Object/Boolean} result The result object as built by handleResponse, or &lt;tt&gt;true&lt;/tt&gt; if
+     *                         the response had empty responseText and responseXML.
+     */
+    processResponse : function(response){
+        this.response = response;
+        if (!response.responseText &amp;&amp; !response.responseXML) {
+            return true;
+        }
+        return (this.result = this.handleResponse(response));
+    },
+
+<span id='Ext-form.action.Action-method-getUrl'>    /**
+</span>     * @private
+     * Build the URL for the AJAX request. Used by the standard AJAX submit and load actions.
+     * @return {String} The URL.
+     */
+    getUrl: function() {
+        return this.url || this.form.url;
+    },
+
+<span id='Ext-form.action.Action-method-getMethod'>    /**
+</span>     * @private
+     * Determine the HTTP method to be used for the request.
+     * @return {String} The HTTP method
+     */
+    getMethod: function() {
+        return (this.method || this.form.method || 'POST').toUpperCase();
+    },
+
+<span id='Ext-form.action.Action-method-getParams'>    /**
+</span>     * @private
+     * Get the set of parameters specified in the BasicForm's baseParams and/or the params option.
+     * Items in params override items of the same name in baseParams.
+     * @return {Object} the full set of parameters
+     */
+    getParams: function() {
+        return Ext.apply({}, this.params, this.form.baseParams);
+    },
+
+<span id='Ext-form.action.Action-method-createCallback'>    /**
+</span>     * @private
+     * Creates a callback object.
+     */
+    createCallback: function() {
         var me = this,
-            cfg = Ext.apply({}, config),
-            items = cfg.items || [me],
-            l = items.length,
-            i,
-            item;
-
-        // This is a Container. Delete the items config to be reinstated after construction.
-        delete cfg.items;
-        this.callParent([cfg]);
-
-        // Items is an array property of ActionColumns
-        me.items = items;
-
-//      Renderer closure iterates through items creating an <img> element for each and tagging with an identifying 
-//      class name x-action-col-{n}
-        me.renderer = function(v, meta) {
-//          Allow a configured renderer to create initial value (And set the other values in the "metadata" argument!)
-            v = Ext.isFunction(cfg.renderer) ? cfg.renderer.apply(this, arguments)||'' : '';
-
-            meta.tdCls += ' ' + Ext.baseCSSPrefix + 'action-col-cell';
-            for (i = 0; i < l; i++) {
-                item = items[i];
-                v += '<img alt="' + me.altText + '" src="http://localhost:3000/new/ext-js/4-0/source/'&#32;+&#32;(item.icon&#32;||&#32;Ext.BLANK_IMAGE_URL)&#32;+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;'" class="' + Ext.baseCSSPrefix + 'action-col-icon ' + Ext.baseCSSPrefix + 'action-col-' + String(i) + ' ' + (item.iconCls || '') +
-                    ' ' + (Ext.isFunction(item.getClass) ? item.getClass.apply(item.scope||me.scope||me, arguments) : '') + '"' +
-                    ((item.tooltip) ? ' ext:qtip="' + item.tooltip + '"' : '') + ' />';
-            }
-            return v;
+            undef,
+            form = me.form;
+        return {
+            success: me.onSuccess,
+            failure: me.onFailure,
+            scope: me,
+            timeout: (this.timeout * 1000) || (form.timeout * 1000),
+            upload: form.fileUpload ? me.onSuccess : undef
         };
     },
 
-    destroy: function() {
-        delete this.items;
-        delete this.renderer;
-        return this.callParent(arguments);
-    },
+    statics: {
+<span id='Ext-form.action.Action-property-CLIENT_INVALID'>        /**
+</span>         * @property CLIENT_INVALID
+         * Failure type returned when client side validation of the Form fails
+         * thus aborting a submit action. Client side validation is performed unless
+         * {@link Ext.form.action.Submit#clientValidation} is explicitly set to &lt;tt&gt;false&lt;/tt&gt;.
+         * @type {String}
+         * @static
+         */
+        CLIENT_INVALID: 'client',
 
-    /**
-     * @private
-     * Process and refire events routed from the GridView's processEvent method.
-     * Also fires any configured click handlers. By default, cancels the mousedown event to prevent selection.
-     * Returns the event handler's status to allow canceling of GridView's bubbling process.
-     */
-    processEvent : function(type, view, cell, recordIndex, cellIndex, e){
-        var m = e.getTarget().className.match(this.actionIdRe),
-            item, fn;
-        if (m && (item = this.items[parseInt(m[1], 10)])) {
-            if (type == 'click') {
-                fn = item.handler;
-                if (fn || this.handler) {
-                    fn.call(item.scope||this.scope||this, view, recordIndex, cellIndex, item, e);
-                }
-            } else if ((type == 'mousedown') && (item.stopSelection !== false)) {
-                return false;
-            }
-        }
-        return this.callParent(arguments);
-    },
+<span id='Ext-form.action.Action-property-SERVER_INVALID'>        /**
+</span>         * @property SERVER_INVALID
+         * &lt;p&gt;Failure type returned when server side processing fails and the {@link #result}'s
+         * &lt;tt&gt;success&lt;/tt&gt; property is set to &lt;tt&gt;false&lt;/tt&gt;.&lt;/p&gt;
+         * &lt;p&gt;In the case of a form submission, field-specific error messages may be returned in the
+         * {@link #result}'s &lt;tt&gt;errors&lt;/tt&gt; property.&lt;/p&gt;
+         * @type {String}
+         * @static
+         */
+        SERVER_INVALID: 'server',
 
-    cascade: function(fn, scope) {
-        fn.call(scope||this, this);
-    },
+<span id='Ext-form.action.Action-property-CONNECT_FAILURE'>        /**
+</span>         * @property CONNECT_FAILURE
+         * Failure type returned when a communication error happens when attempting
+         * to send a request to the remote server. The {@link #response} may be examined to
+         * provide further information.
+         * @type {String}
+         * @static
+         */
+        CONNECT_FAILURE: 'connect',
 
-    // Private override because this cannot function as a Container, and it has an items property which is an Array, NOT a MixedCollection.
-    getRefItems: function() {
-        return [];
+<span id='Ext-form.action.Action-property-LOAD_FAILURE'>        /**
+</span>         * @property LOAD_FAILURE
+         * Failure type returned when the response's &lt;tt&gt;success&lt;/tt&gt;
+         * property is set to &lt;tt&gt;false&lt;/tt&gt;, or no field values are returned in the response's
+         * &lt;tt&gt;data&lt;/tt&gt; property.
+         * @type {String}
+         * @static
+         */
+        LOAD_FAILURE: 'load'
+
+
     }
-});￿</pre></pre></body></html>
+});
+</pre></pre></body></html>

@@ -1,27 +1,27 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.Types"></a>/**
- * @class Ext.data.Types
- * <p>This is s static class containing the system-supplied data types which may be given to a {@link Ext.data.Field Field}.<p/>
- * <p>The properties in this class are used as type indicators in the {@link Ext.data.Field Field} class, so to
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-data.Types'>/**
+</span> * @class Ext.data.Types
+ * &lt;p&gt;This is s static class containing the system-supplied data types which may be given to a {@link Ext.data.Field Field}.&lt;p/&gt;
+ * &lt;p&gt;The properties in this class are used as type indicators in the {@link Ext.data.Field Field} class, so to
  * test whether a Field is of a certain type, compare the {@link Ext.data.Field#type type} property against properties
- * of this class.</p>
- * <p>Developers may add their own application-specific data types to this class. Definition names must be UPPERCASE.
- * each type definition must contain three properties:</p>
- * <div class="mdetail-params"><ul>
- * <li><code>convert</code> : <i>Function</i><div class="sub-desc">A function to convert raw data values from a data block into the data
+ * of this class.&lt;/p&gt;
+ * &lt;p&gt;Developers may add their own application-specific data types to this class. Definition names must be UPPERCASE.
+ * each type definition must contain three properties:&lt;/p&gt;
+ * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;&lt;code&gt;convert&lt;/code&gt; : &lt;i&gt;Function&lt;/i&gt;&lt;div class=&quot;sub-desc&quot;&gt;A function to convert raw data values from a data block into the data
  * to be stored in the Field. The function is passed the collowing parameters:
- * <div class="mdetail-params"><ul>
- * <li><b>v</b> : Mixed<div class="sub-desc">The data value as read by the Reader, if undefined will use
- * the configured <tt>{@link Ext.data.Field#defaultValue defaultValue}</tt>.</div></li>
- * <li><b>rec</b> : Mixed<div class="sub-desc">The data object containing the row as read by the Reader.
+ * &lt;div class=&quot;mdetail-params&quot;&gt;&lt;ul&gt;
+ * &lt;li&gt;&lt;b&gt;v&lt;/b&gt; : Mixed&lt;div class=&quot;sub-desc&quot;&gt;The data value as read by the Reader, if undefined will use
+ * the configured &lt;tt&gt;{@link Ext.data.Field#defaultValue defaultValue}&lt;/tt&gt;.&lt;/div&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;rec&lt;/b&gt; : Mixed&lt;div class=&quot;sub-desc&quot;&gt;The data object containing the row as read by the Reader.
  * Depending on the Reader type, this could be an Array ({@link Ext.data.reader.Array ArrayReader}), an object
- * ({@link Ext.data.reader.Json JsonReader}), or an XML element.</div></li>
- * </ul></div></div></li>
- * <li><code>sortType</code> : <i>Function</i> <div class="sub-desc">A function to convert the stored data into comparable form, as defined by {@link Ext.data.SortTypes}.</div></li>
- * <li><code>type</code> : <i>String</i> <div class="sub-desc">A textual data type name.</div></li>
- * </ul></div>
- * <p>For example, to create a VELatLong field (See the Microsoft Bing Mapping API) containing the latitude/longitude value of a datapoint on a map from a JsonReader data block
- * which contained the properties <code>lat</code> and <code>long</code>, you would define a new data type like this:</p>
- *<pre><code>
+ * ({@link Ext.data.reader.Json JsonReader}), or an XML element.&lt;/div&gt;&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;sortType&lt;/code&gt; : &lt;i&gt;Function&lt;/i&gt; &lt;div class=&quot;sub-desc&quot;&gt;A function to convert the stored data into comparable form, as defined by {@link Ext.data.SortTypes}.&lt;/div&gt;&lt;/li&gt;
+ * &lt;li&gt;&lt;code&gt;type&lt;/code&gt; : &lt;i&gt;String&lt;/i&gt; &lt;div class=&quot;sub-desc&quot;&gt;A textual data type name.&lt;/div&gt;&lt;/li&gt;
+ * &lt;/ul&gt;&lt;/div&gt;
+ * &lt;p&gt;For example, to create a VELatLong field (See the Microsoft Bing Mapping API) containing the latitude/longitude value of a datapoint on a map from a JsonReader data block
+ * which contained the properties &lt;code&gt;lat&lt;/code&gt; and &lt;code&gt;long&lt;/code&gt;, you would define a new data type like this:&lt;/p&gt;
+ *&lt;pre&gt;&lt;code&gt;
 // Add a new Field data type which stores a VELatLong object in the Record.
 Ext.data.Types.VELATLONG = {
     convert: function(v, data) {
@@ -32,10 +32,11 @@ Ext.data.Types.VELATLONG = {
     },
     type: 'VELatLong'
 };
-</code></pre>
- * <p>Then, when declaring a Model, use <pre><code>
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;Then, when declaring a Model, use &lt;pre&gt;&lt;code&gt;
 var types = Ext.data.Types; // allow shorthand type access
-UnitModel = Ext.regModel('Unit', 
+Ext.define('Unit',
+    extend: 'Ext.data.Model', 
     fields: [
         { name: 'unitName', mapping: 'UnitName' },
         { name: 'curSpeed', mapping: 'CurSpeed', type: types.INT },
@@ -44,7 +45,7 @@ UnitModel = Ext.regModel('Unit',
         { name: 'position', type: types.VELATLONG }
     ]
 });
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * @singleton
  */
 Ext.define('Ext.data.Types', {
@@ -54,16 +55,16 @@ Ext.define('Ext.data.Types', {
     var st = Ext.data.SortTypes;
     
     Ext.apply(Ext.data.Types, {
-        <a name="prop-Ext.data.Types-stripRe"></a>/**
-         * @type Regexp
+<span id='Ext-data.Types-property-stripRe'>        /**
+</span>         * @type Regexp
          * @property stripRe
-         * A regular expression for stripping non-numeric characters from a numeric value. Defaults to <tt>/[\$,%]/g</tt>.
+         * A regular expression for stripping non-numeric characters from a numeric value. Defaults to &lt;tt&gt;/[\$,%]/g&lt;/tt&gt;.
          * This should be overridden for localization.
          */
         stripRe: /[\$,%]/g,
         
-        <a name="prop-Ext.data.Types-AUTO"></a>/**
-         * @type Object.
+<span id='Ext-data.Types-property-AUTO'>        /**
+</span>         * @type Object.
          * @property AUTO
          * This data type means that no conversion is applied to the raw data before it is placed into a Record.
          */
@@ -75,8 +76,8 @@ Ext.define('Ext.data.Types', {
             type: 'auto'
         },
 
-        <a name="prop-Ext.data.Types-STRING"></a>/**
-         * @type Object.
+<span id='Ext-data.Types-property-STRING'>        /**
+</span>         * @type Object.
          * @property STRING
          * This data type means that the raw data is converted into a String before it is placed into a Record.
          */
@@ -89,46 +90,46 @@ Ext.define('Ext.data.Types', {
             type: 'string'
         },
 
-        <a name="prop-Ext.data.Types-INT"></a>/**
-         * @type Object.
+<span id='Ext-data.Types-property-INT'>        /**
+</span>         * @type Object.
          * @property INT
          * This data type means that the raw data is converted into an integer before it is placed into a Record.
-         * <p>The synonym <code>INTEGER</code> is equivalent.</p>
+         * &lt;p&gt;The synonym &lt;code&gt;INTEGER&lt;/code&gt; is equivalent.&lt;/p&gt;
          */
         INT: {
             convert: function(v) {
-                return v !== undefined && v !== null && v !== '' ?
+                return v !== undefined &amp;&amp; v !== null &amp;&amp; v !== '' ?
                     parseInt(String(v).replace(Ext.data.Types.stripRe, ''), 10) : (this.useNull ? null : 0);
             },
             sortType: st.none,
             type: 'int'
         },
         
-        <a name="prop-Ext.data.Types-FLOAT"></a>/**
-         * @type Object.
+<span id='Ext-data.Types-property-FLOAT'>        /**
+</span>         * @type Object.
          * @property FLOAT
          * This data type means that the raw data is converted into a number before it is placed into a Record.
-         * <p>The synonym <code>NUMBER</code> is equivalent.</p>
+         * &lt;p&gt;The synonym &lt;code&gt;NUMBER&lt;/code&gt; is equivalent.&lt;/p&gt;
          */
         FLOAT: {
             convert: function(v) {
-                return v !== undefined && v !== null && v !== '' ?
+                return v !== undefined &amp;&amp; v !== null &amp;&amp; v !== '' ?
                     parseFloat(String(v).replace(Ext.data.Types.stripRe, ''), 10) : (this.useNull ? null : 0);
             },
             sortType: st.none,
             type: 'float'
         },
         
-        <a name="prop-Ext.data.Types-BOOL"></a>/**
-         * @type Object.
+<span id='Ext-data.Types-property-BOOL'>        /**
+</span>         * @type Object.
          * @property BOOL
-         * <p>This data type means that the raw data is converted into a boolean before it is placed into
-         * a Record. The string "true" and the number 1 are converted to boolean <code>true</code>.</p>
-         * <p>The synonym <code>BOOLEAN</code> is equivalent.</p>
+         * &lt;p&gt;This data type means that the raw data is converted into a boolean before it is placed into
+         * a Record. The string &quot;true&quot; and the number 1 are converted to boolean &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
+         * &lt;p&gt;The synonym &lt;code&gt;BOOLEAN&lt;/code&gt; is equivalent.&lt;/p&gt;
          */
         BOOL: {
             convert: function(v) {
-                if (this.useNull && v === undefined || v === null || v === '') {
+                if (this.useNull &amp;&amp; v === undefined || v === null || v === '') {
                     return null;
                 }
                 return v === true || v === 'true' || v == 1;
@@ -137,8 +138,8 @@ Ext.define('Ext.data.Types', {
             type: 'bool'
         },
         
-        <a name="prop-Ext.data.Types-DATE"></a>/**
-         * @type Object.
+<span id='Ext-data.Types-property-DATE'>        /**
+</span>         * @type Object.
          * @property DATE
          * This data type means that the raw data is converted into a Date before it is placed into a Record.
          * The date format is specified in the constructor of the {@link Ext.data.Field} to which this type is
@@ -172,30 +173,30 @@ Ext.define('Ext.data.Types', {
     });
     
     Ext.apply(Ext.data.Types, {
-        <a name="prop-Ext.data.Types-BOOLEAN"></a>/**
-         * @type Object.
+<span id='Ext-data.Types-property-BOOLEAN'>        /**
+</span>         * @type Object.
          * @property BOOLEAN
-         * <p>This data type means that the raw data is converted into a boolean before it is placed into
-         * a Record. The string "true" and the number 1 are converted to boolean <code>true</code>.</p>
-         * <p>The synonym <code>BOOL</code> is equivalent.</p>
+         * &lt;p&gt;This data type means that the raw data is converted into a boolean before it is placed into
+         * a Record. The string &quot;true&quot; and the number 1 are converted to boolean &lt;code&gt;true&lt;/code&gt;.&lt;/p&gt;
+         * &lt;p&gt;The synonym &lt;code&gt;BOOL&lt;/code&gt; is equivalent.&lt;/p&gt;
          */
         BOOLEAN: this.BOOL,
         
-        <a name="prop-Ext.data.Types-INTEGER"></a>/**
-         * @type Object.
+<span id='Ext-data.Types-property-INTEGER'>        /**
+</span>         * @type Object.
          * @property INTEGER
          * This data type means that the raw data is converted into an integer before it is placed into a Record.
-         * <p>The synonym <code>INT</code> is equivalent.</p>
+         * &lt;p&gt;The synonym &lt;code&gt;INT&lt;/code&gt; is equivalent.&lt;/p&gt;
          */
         INTEGER: this.INT,
         
-        <a name="prop-Ext.data.Types-NUMBER"></a>/**
-         * @type Object.
+<span id='Ext-data.Types-property-NUMBER'>        /**
+</span>         * @type Object.
          * @property NUMBER
          * This data type means that the raw data is converted into a number before it is placed into a Record.
-         * <p>The synonym <code>FLOAT</code> is equivalent.</p>
+         * &lt;p&gt;The synonym &lt;code&gt;FLOAT&lt;/code&gt; is equivalent.&lt;/p&gt;
          */
         NUMBER: this.FLOAT    
     });
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

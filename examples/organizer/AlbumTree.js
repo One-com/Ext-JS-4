@@ -1,3 +1,11 @@
+/**
+ * @class Ext.org.AlbumTree
+ * @extends Ext.tree.Panel
+ * @xtype albumtree
+ *
+ * This class implements the "My Albums" tree. In addition, this class provides the ability
+ * to add new albums and accept dropped items from the {@link Ext.org.ImageView}.
+ */
 Ext.define('Ext.org.AlbumTree', {
     extend: 'Ext.tree.Panel',
     alias : 'widget.albumtree',
@@ -37,7 +45,8 @@ Ext.define('Ext.org.AlbumTree', {
                 children: [
                     {
                         name   : 'Album 1',
-                        iconCls: 'album-btn'
+                        iconCls: 'album-btn',
+                        children: []
                     }
                 ]
             }
@@ -53,6 +62,10 @@ Ext.define('Ext.org.AlbumTree', {
         var root = this.store.getRootNode();
         this.count++;
         
-        root.appendChild({name: 'Album ' + this.count, iconCls: 'album-btn'});
+        root.appendChild({
+            name: 'Album ' + this.count,
+            iconCls: 'album-btn',
+            children: []
+        });
     }
 });

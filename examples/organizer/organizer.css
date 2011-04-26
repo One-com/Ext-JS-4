@@ -26,9 +26,7 @@ select{
 .x-image-view .thumb{
     padding:3px;
 }
-.x-image-view .thumb img{
-    border:1px solid white;
-}
+
 .x-image-view .thumb-wrap{
     float: left;
     margin: 4px;
@@ -39,6 +37,7 @@ select{
     display: block;
     overflow: hidden;
     text-align: center;
+    width: 76px; // for ie to ensure that the text is centered
 }
 .x-image-view .x-item-selected .thumb {
     background:#8db2e3;

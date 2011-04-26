@@ -1,10 +1,10 @@
 /**
  * The sidebar view for the application. Used to display a list of books.
- * @extends Ext.DataView
+ * @extends Ext.view.View
  */
 Ext.define('Books.view.book.SideBar', {
     alias: 'widget.booksidebar',
-    extend: 'Ext.DataView',
+    extend: 'Ext.view.View',
     
     initComponent: function() {
         Ext.apply(this, {

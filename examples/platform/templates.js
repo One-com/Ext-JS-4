@@ -3,19 +3,19 @@ Ext.require('widget.panel');
 Ext.onReady(function(){
     var data = {
         name: 'Abe Elias',
-        company: 'Ext JS, LLC',
-        address: '4 Red Bulls Drive',
-        city: 'Cleveland',
-        state: 'Ohio',
+        company: 'Sencha Inc',
+        address: '525 University Ave',
+        city: 'Palo Alto',
+        state: 'California',
         zip: '44102',
         kids: [{
-            name: 'Soloman',
+            name: 'Solomon',
             age:3
         },{
-            name: 'Zachary',
+            name: 'Rebecca',
             age:2
         },{
-            name: 'Rebecca',
+            name: 'Rebecca 1',
             age:0
         }]
     };

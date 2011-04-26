@@ -1,4 +1,4 @@
-<?
+<?php
 $orders = array(array(
         'id'=>1,
         'date'=>'2010-08-13',

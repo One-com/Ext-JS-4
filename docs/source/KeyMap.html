@@ -1,48 +1,48 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.util.KeyMap"></a>/**
- * @class Ext.util.KeyMap
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-util.KeyMap-method-constructor'><span id='Ext-util.KeyMap'>/**
+</span></span> * @class Ext.util.KeyMap
  * Handles mapping keys to actions for an element. One key map can be used for multiple actions.
  * The constructor accepts the same config object as defined by {@link #addBinding}.
  * If you bind a callback function to a KeyMap, anytime the KeyMap handles an expected key
  * combination it will call the function with this signature (if the match is a multi-key
  * combination the callback will still be called only once): (String key, Ext.EventObject e)
- * A KeyMap can also handle a string representation of keys.<br />
+ * A KeyMap can also handle a string representation of keys.&lt;br /&gt;
  * Usage:
- <pre><code>
+ &lt;pre&gt;&lt;code&gt;
 // map one key by key code
-var map = new Ext.util.KeyMap("my-element", {
+var map = new Ext.util.KeyMap(&quot;my-element&quot;, {
     key: 13, // or Ext.EventObject.ENTER
     fn: myHandler,
     scope: myObject
 });
 
 // map multiple keys to one action by string
-var map = new Ext.util.KeyMap("my-element", {
-    key: "a\r\n\t",
+var map = new Ext.util.KeyMap(&quot;my-element&quot;, {
+    key: &quot;a\r\n\t&quot;,
     fn: myHandler,
     scope: myObject
 });
 
 // map multiple keys to multiple actions by strings and array of codes
-var map = new Ext.util.KeyMap("my-element", [
+var map = new Ext.util.KeyMap(&quot;my-element&quot;, [
     {
         key: [10,13],
-        fn: function(){ alert("Return was pressed"); }
+        fn: function(){ alert(&quot;Return was pressed&quot;); }
     }, {
-        key: "abc",
+        key: &quot;abc&quot;,
         fn: function(){ alert('a, b or c was pressed'); }
     }, {
-        key: "\t",
+        key: &quot;\t&quot;,
         ctrl:true,
         shift:true,
         fn: function(){ alert('Control + shift + tab was pressed.'); }
     }
 ]);
-</code></pre>
- * <b>Note: A KeyMap starts enabled</b>
+&lt;/code&gt;&lt;/pre&gt;
+ * &lt;b&gt;Note: A KeyMap starts enabled&lt;/b&gt;
  * @constructor
  * @param {Mixed} el The element to bind to
  * @param {Object} binding The binding (see {@link #addBinding})
- * @param {String} eventName (optional) The event to bind to (defaults to "keydown")
+ * @param {String} eventName (optional) The event to bind to (defaults to &quot;keydown&quot;)
  */
 Ext.define('Ext.util.KeyMap', {
     alternateClassName: 'Ext.KeyMap',
@@ -63,9 +63,9 @@ Ext.define('Ext.util.KeyMap', {
     
     eventName: 'keydown',
 
-    <a name="method-Ext.util.KeyMap-addBinding"></a>/**
-     * Add a new binding to this KeyMap. The following config object properties are supported:
-     * <pre>
+<span id='Ext-util.KeyMap-method-addBinding'>    /**
+</span>     * Add a new binding to this KeyMap. The following config object properties are supported:
+     * &lt;pre&gt;
 Property            Type             Description
 ----------          ---------------  ----------------------------------------------------------------------
 key                 String/Array     A single keycode or an array of keycodes to handle
@@ -76,10 +76,10 @@ handler             Function         The function to call when KeyMap finds the 
 fn                  Function         Alias of handler (for backwards-compatibility)
 scope               Object           The scope of the callback function
 defaultEventAction  String           A default action to apply to the event. Possible values are: stopEvent, stopPropagation, preventDefault. If no value is set no action is performed. 
-</pre>
+&lt;/pre&gt;
      *
      * Usage:
-     * <pre><code>
+     * &lt;pre&gt;&lt;code&gt;
 // Create a KeyMap
 var map = new Ext.util.KeyMap(document, {
     key: Ext.EventObject.ENTER,
@@ -94,7 +94,7 @@ map.addBinding({
     fn: handleKey,
     scope: this
 });
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
      * @param {Object/Array} binding A single KeyMap config or an array of configs
      */
     addBinding : function(binding){
@@ -115,7 +115,7 @@ map.addBinding({
             keys = [];
             keyString = keyCode.toLowerCase();
             
-            for (i = 0, len = keyString.length; i < len; ++i){
+            for (i = 0, len = keyString.length; i &lt; len; ++i){
                 keys.push(keyString.charCodeAt(i));
             }
             keyCode = keys;
@@ -127,7 +127,7 @@ map.addBinding({
         }
         
         if (!processed) {
-            for (i = 0, len = keyCode.length; i < len; ++i) {
+            for (i = 0, len = keyCode.length; i &lt; len; ++i) {
                 key = keyCode[i];
                 if (Ext.isString(key)) {
                     keyCode[i] = key.toLowerCase().charCodeAt(0);
@@ -140,8 +140,8 @@ map.addBinding({
         }, binding));
     },
     
-    /**
-     * Process any keydown events on the element
+<span id='Ext-util.KeyMap-method-handleKeyDown'>    /**
+</span>     * Process any keydown events on the element
      * @private
      * @param {Ext.EventObject} event
      */
@@ -152,14 +152,14 @@ map.addBinding({
                 len = bindings.length;
                 
             event = this.processEvent(event);
-            for(; i < len; ++i){
+            for(; i &lt; len; ++i){
                 this.processBinding(bindings[i], event);
             }
         }
     },
     
-    /**
-     * Ugly hack to allow this class to be tested. Currently WebKit gives
+<span id='Ext-util.KeyMap-method-processEvent'>    /**
+</span>     * Ugly hack to allow this class to be tested. Currently WebKit gives
      * no way to raise a key event properly with both
      * a) A keycode
      * b) The alt/ctrl/shift modifiers
@@ -172,8 +172,8 @@ map.addBinding({
         return event;
     },
     
-    /**
-     * Process a particular binding and fire the handler if necessary.
+<span id='Ext-util.KeyMap-method-processBinding'>    /**
+</span>     * Process a particular binding and fire the handler if necessary.
      * @private
      * @param {Object} binding The binding information
      * @param {Ext.EventObject} event
@@ -190,9 +190,9 @@ map.addBinding({
                 keydownEvent = new Ext.EventObjectImpl(event);
                 
             
-            for (i = 0, len = keyCode.length; i < len; ++i) {
+            for (i = 0, len = keyCode.length; i &lt; len; ++i) {
                 if (key === keyCode[i]) {
-                    if (handler.call(scope, key, event) !== true && defaultEventAction) {
+                    if (handler.call(scope, key, event) !== true &amp;&amp; defaultEventAction) {
                         keydownEvent[defaultEventAction]();
                     }
                     break;
@@ -201,8 +201,8 @@ map.addBinding({
         }
     },
     
-    /**
-     * Check if the modifiers on the event match those on the binding
+<span id='Ext-util.KeyMap-method-checkModifiers'>    /**
+</span>     * Check if the modifiers on the event match those on the binding
      * @private
      * @param {Object} binding
      * @param {Ext.EventObject} event
@@ -214,7 +214,7 @@ map.addBinding({
             len = keys.length,
             val, key;
             
-        for (; i < len; ++i){
+        for (; i &lt; len; ++i){
             key = keys[i];
             val = binding[key];
             if (!(val === undefined || (val === e[key + 'Key']))) {
@@ -224,17 +224,17 @@ map.addBinding({
         return true;
     },
 
-    <a name="method-Ext.util.KeyMap-on"></a>/**
-     * Shorthand for adding a single key listener
+<span id='Ext-util.KeyMap-method-on'>    /**
+</span>     * Shorthand for adding a single key listener
      * @param {Number/Array/Object} key Either the numeric key code, array of key codes or an object with the
      * following options:
      * {key: (number or array), shift: (true/false), ctrl: (true/false), alt: (true/false)}
      * @param {Function} fn The function to call
-     * @param {Object} scope (optional) The scope (<code>this</code> reference) in which the function is executed. Defaults to the browser window.
+     * @param {Object} scope (optional) The scope (&lt;code&gt;this&lt;/code&gt; reference) in which the function is executed. Defaults to the browser window.
      */
     on: function(key, fn, scope) {
         var keyCode, shift, ctrl, alt;
-        if (Ext.isObject(key) && !Ext.isArray(key)) {
+        if (Ext.isObject(key) &amp;&amp; !Ext.isArray(key)) {
             keyCode = key.key;
             shift = key.shift;
             ctrl = key.ctrl;
@@ -252,16 +252,16 @@ map.addBinding({
         });
     },
 
-    <a name="method-Ext.util.KeyMap-isEnabled"></a>/**
-     * Returns true if this KeyMap is enabled
+<span id='Ext-util.KeyMap-method-isEnabled'>    /**
+</span>     * Returns true if this KeyMap is enabled
      * @return {Boolean}
      */
     isEnabled : function(){
         return this.enabled;
     },
 
-    <a name="method-Ext.util.KeyMap-enable"></a>/**
-     * Enables this KeyMap
+<span id='Ext-util.KeyMap-method-enable'>    /**
+</span>     * Enables this KeyMap
      */
     enable: function(){
         if(!this.enabled){
@@ -270,8 +270,8 @@ map.addBinding({
         }
     },
 
-    <a name="method-Ext.util.KeyMap-disable"></a>/**
-     * Disable this KeyMap
+<span id='Ext-util.KeyMap-method-disable'>    /**
+</span>     * Disable this KeyMap
      */
     disable: function(){
         if(this.enabled){
@@ -280,8 +280,8 @@ map.addBinding({
         }
     },
 
-    <a name="method-Ext.util.KeyMap-setDisabled"></a>/**
-     * Convenience function for setting disabled/enabled by boolean.
+<span id='Ext-util.KeyMap-method-setDisabled'>    /**
+</span>     * Convenience function for setting disabled/enabled by boolean.
      * @param {Boolean} disabled
      */
     setDisabled : function(disabled){
@@ -292,8 +292,8 @@ map.addBinding({
         }
     },
     
-    <a name="method-Ext.util.KeyMap-destroy"></a>/**
-     * Destroys the KeyMap instance and removes all handlers.
+<span id='Ext-util.KeyMap-method-destroy'>    /**
+</span>     * Destroys the KeyMap instance and removes all handlers.
      * @param {Boolean} removeEl True to also remove the attached element
      */
     destroy: function(removeEl){
@@ -306,4 +306,4 @@ map.addBinding({
         }
         delete me.el;
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

@@ -26,12 +26,12 @@ Ext.onReady(function() {
             html: 'west<br>I am floatable'
         },{
             region: 'center',
-            title: 'Center',
             layout: 'border',
             border: false,
             items: [{
                 region: 'center',
                 html: 'center center',
+                title: 'Center',
                 items: [cw = Ext.create('Ext.Window', {
                     xtype: 'window',
                     closable: false,
@@ -65,7 +65,6 @@ Ext.onReady(function() {
                 split: true,
                 collapsible: true,
                 title: 'Splitter above me',
-                margins: '0 0 0 0',
                 html: 'center south'
             }]
         },{

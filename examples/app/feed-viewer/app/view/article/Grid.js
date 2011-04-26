@@ -6,9 +6,9 @@ Ext.define('FV.view.article.Grid', {
 	disabled: true,
 
     requires: ['Ext.ux.PreviewPlugin', 'Ext.toolbar.Toolbar'],
-
-    padding: '5',
-
+    
+    border: false,
+    
 	initComponent: function() {
 		Ext.apply(this, {
 		    store: 'Articles',

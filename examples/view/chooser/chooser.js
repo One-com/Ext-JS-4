@@ -43,6 +43,7 @@ Ext.onReady(function() {
      */
     var win = Ext.create('Ext.chooser.Window', {
         id: 'img-chooser-dlg',
+        animateTarget: insertButton.getEl(),
         listeners: {
             selected: insertSelectedImage
         }
@@ -55,9 +56,16 @@ Ext.onReady(function() {
      * to the user that the image has been inserted
      */
     function insertSelectedImage(image) {
-        Ext.fly('images').createChild({
+        //create the new image tag
+        var image = Ext.fly('images').createChild({
             tag: 'img',
             src: 'icons/' + image.get('thumb')
-        }).hide().show({duration: 500}).frame();
+        });
+        
+        //hide it straight away then fade it in over 500ms, finally use the frame animation to give emphasis
+        image.hide().show({duration: 500}).frame();
+        
+        //this will make the window animate back to the newly inserted image element
+        win.animateTarget = image;
     }
 });

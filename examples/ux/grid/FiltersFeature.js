@@ -187,7 +187,7 @@ Ext.define('Ext.ux.grid.FiltersFeature', {
         me.filters = Ext.create('Ext.util.MixedCollection', false, function (o) {
             return o ? o.dataIndex : null;
         });
-        me.addFilters(config.filters);
+        me.filterConfigs = config.filters;
     },
 
 
@@ -199,13 +199,8 @@ Ext.define('Ext.ux.grid.FiltersFeature', {
 
         me.bindStore(view.getStore(), true);
 
-        // assumes no filters were passed in the constructor, so try and use ones from the colModel
-        if (me.filters.getCount() < 1) {
-            me.addFilters(headerCt.items.items);
-        }
-
-        // Listen for header menu being shown
-        headerCt.getMenu().on('beforeshow', me.onMenuBeforeShow, me);
+        // Listen for header menu being created
+        headerCt.on('menucreate', me.onMenuCreate, me);
 
         view.on('refresh', me.onRefresh, me);
         grid.on({
@@ -220,16 +215,49 @@ Ext.define('Ext.ux.grid.FiltersFeature', {
         grid.addEvents('filterupdate');
     },
 
+    /**
+     * @private Create the Filter objects for the current configuration, destroying any existing ones first.
+     */
+    createFilters: function() {
+        var me = this,
+            filterConfigs = me.filterConfigs,
+            hadFilters = me.filters.getCount(),
+            state;
+        if (hadFilters) {
+            state = {};
+            me.saveState(null, state);
+        }
+        me.removeAll();
+        me.addFilters(Ext.isEmpty(filterConfigs) ? me.view.headerCt.items.items : filterConfigs);
+        if (hadFilters) {
+            me.applyState(null, state);
+        }
+    },
 
+    /**
+     * @private Handle creation of the grid's header menu. Initializes the filters and listens
+     * for the menu being shown.
+     */
+    onMenuCreate: function(headerCt, menu) {
+        var me = this;
+        me.createFilters();
+        menu.on('beforeshow', me.onMenuBeforeShow, me);
+    },
+
+    /**
+     * @private Handle showing of the grid's header menu. Sets up the filter item and menu
+     * appropriate for the target column.
+     */
     onMenuBeforeShow: function(menu) {
         var me = this,
             menuItem, filter;
 
         if (me.showMenu) {
-            if (!me.menuItem) {
-                me.createMenuItem(menu);
-            }
             menuItem = me.menuItem;
+            if (!menuItem || menuItem.isDestroyed) {
+                me.createMenuItem(menu);
+                menuItem = me.menuItem;
+            }
 
             filter = me.getMenuFilter();
 

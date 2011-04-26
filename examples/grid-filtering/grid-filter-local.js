@@ -50,7 +50,7 @@ Ext.onReady(function(){
             { name: 'id' },
             { name: 'company' }, 
             { name: 'price', type: 'float' },
-            { name: 'date', type: 'date', dateFormat: 'Y-m-d H:i:s' },
+            { name: 'date', type: 'date', dateFormat: 'Y-m-d' },
             { name: 'visible', type: 'boolean' },
             { name: 'size' }
         ]
@@ -167,7 +167,6 @@ Ext.onReady(function(){
                 button.setText(text);
             } 
         },
-        /* remote filtering disabled by default due to the difficulty of installing the required SQL database
         {
             text: 'Local Filtering: ' + (local ? 'On' : 'Off'),
             tooltip: 'Toggle Filtering between remote/local',
@@ -189,7 +188,6 @@ Ext.onReady(function(){
                 store.load();
             } 
         },
-        */
         {
             text: 'All Filter Data',
             tooltip: 'Get Filter Data for Grid',

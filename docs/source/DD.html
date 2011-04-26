@@ -7,8 +7,8 @@
  */
 
 
-<a name="cls-Ext.dd.DD"></a>/**
- * @class Ext.dd.DD
+<span id='Ext-dd.DD-method-constructor'><span id='Ext-dd.DD'>/**
+</span></span> * @class Ext.dd.DD
  * A DragDrop implementation where the linked element follows the
  * mouse cursor during a drag.
  * @extends Ext.dd.DragDrop
@@ -29,8 +29,8 @@ Ext.define('Ext.dd.DD', {
         }
     },
 
-    <a name="prop-Ext.dd.DD-scroll"></a>/**
-     * When set to true, the utility automatically tries to scroll the browser
+<span id='Ext-dd.DD-property-scroll'>    /**
+</span>     * When set to true, the utility automatically tries to scroll the browser
      * window when a drag and drop element is dragged near the viewport boundary.
      * Defaults to true.
      * @property scroll
@@ -38,8 +38,8 @@ Ext.define('Ext.dd.DD', {
      */
     scroll: true,
 
-    <a name="method-Ext.dd.DD-autoOffset"></a>/**
-     * Sets the pointer offset to the distance between the linked element's top
+<span id='Ext-dd.DD-method-autoOffset'>    /**
+</span>     * Sets the pointer offset to the distance between the linked element's top
      * left corner and the location the element was clicked
      * @method autoOffset
      * @param {int} iPageX the X coordinate of the click
@@ -51,8 +51,8 @@ Ext.define('Ext.dd.DD', {
         this.setDelta(x, y);
     },
 
-    <a name="method-Ext.dd.DD-setDelta"></a>/**
-     * Sets the pointer offset.  You can call this directly to force the
+<span id='Ext-dd.DD-method-setDelta'>    /**
+</span>     * Sets the pointer offset.  You can call this directly to force the
      * offset to be in a particular location (e.g., pass in 0,0 to set it
      * to the center of the object)
      * @method setDelta
@@ -64,8 +64,8 @@ Ext.define('Ext.dd.DD', {
         this.deltaY = iDeltaY;
     },
 
-    <a name="method-Ext.dd.DD-setDragElPos"></a>/**
-     * Sets the drag element to the location of the mousedown or click event,
+<span id='Ext-dd.DD-method-setDragElPos'>    /**
+</span>     * Sets the drag element to the location of the mousedown or click event,
      * maintaining the cursor location relative to the location on the element
      * that was clicked.  Override this if you want to place the element in a
      * location other than where the cursor is.
@@ -81,8 +81,8 @@ Ext.define('Ext.dd.DD', {
         this.alignElWithMouse(el, iPageX, iPageY);
     },
 
-    <a name="method-Ext.dd.DD-alignElWithMouse"></a>/**
-     * Sets the element to the location of the mousedown or click event,
+<span id='Ext-dd.DD-method-alignElWithMouse'>    /**
+</span>     * Sets the element to the location of the mousedown or click event,
      * maintaining the cursor location relative to the location on the element
      * that was clicked.  Override this if you want to place the element in a
      * location other than where the cursor is.
@@ -92,16 +92,28 @@ Ext.define('Ext.dd.DD', {
      * @param {int} iPageY the Y coordinate of the mousedown or drag event
      */
     alignElWithMouse: function(el, iPageX, iPageY) {
-        var oCoord = this.getTargetCoord(iPageX, iPageY);
-        var fly = el.dom ? el : Ext.fly(el, '_dd');
+        var oCoord = this.getTargetCoord(iPageX, iPageY),
+            fly = el.dom ? el : Ext.fly(el, '_dd'),
+            elSize = fly.getSize(),
+            EL = Ext.core.Element,
+            vpSize;
+
         if (!this.deltaSetXY) {
-            var aCoord = [oCoord.x, oCoord.y];
+            vpSize = this.cachedViewportSize = { width: EL.getDocumentWidth(), height: EL.getDocumentHeight() };
+            var aCoord = [
+                Math.max(0, Math.min(oCoord.x, vpSize.width - elSize.width)),
+                Math.max(0, Math.min(oCoord.y, vpSize.height - elSize.height))
+            ];
             fly.setXY(aCoord);
             var newLeft = fly.getLeft(true);
             var newTop  = fly.getTop(true);
             this.deltaSetXY = [newLeft - oCoord.x, newTop - oCoord.y];
         } else {
-            fly.setLeftTop(oCoord.x + this.deltaSetXY[0], oCoord.y + this.deltaSetXY[1]);
+            vpSize = this.cachedViewportSize;
+            fly.setLeftTop(
+                Math.max(0, Math.min(oCoord.x + this.deltaSetXY[0], vpSize.width - elSize.width)),
+                Math.max(0, Math.min(oCoord.y + this.deltaSetXY[1], vpSize.height - elSize.height))
+            );
         }
 
         this.cachePosition(oCoord.x, oCoord.y);
@@ -109,8 +121,8 @@ Ext.define('Ext.dd.DD', {
         return oCoord;
     },
 
-    <a name="method-Ext.dd.DD-cachePosition"></a>/**
-     * Saves the most recent position so that we can reset the constraints and
+<span id='Ext-dd.DD-method-cachePosition'>    /**
+</span>     * Saves the most recent position so that we can reset the constraints and
      * tick marks on-demand.  We need to know this so that we can calculate the
      * number of pixels the element is offset from its original position.
      * @method cachePosition
@@ -130,8 +142,8 @@ Ext.define('Ext.dd.DD', {
         }
     },
 
-    /**
-     * Auto-scroll the window if the dragged object has been moved beyond the
+<span id='Ext-dd.DD-method-autoScroll'>    /**
+</span>     * Auto-scroll the window if the dragged object has been moved beyond the
      * visible window boundary.
      * @method autoScroll
      * @param {int} x the drag element's x position
@@ -181,32 +193,32 @@ Ext.define('Ext.dd.DD', {
 
             // Scroll down if we are near the bottom of the visible page and the
             // obj extends below the crease
-            if ( bot > clientH && toBot < thresh ) {
+            if ( bot &gt; clientH &amp;&amp; toBot &lt; thresh ) {
                 window.scrollTo(sl, st + scrAmt);
             }
 
             // Scroll up if the window is scrolled down and the top of the object
             // goes above the top border
-            if ( y < st && st > 0 && y - st < thresh ) {
+            if ( y &lt; st &amp;&amp; st &gt; 0 &amp;&amp; y - st &lt; thresh ) {
                 window.scrollTo(sl, st - scrAmt);
             }
 
             // Scroll right if the obj is beyond the right border and the cursor is
             // near the border.
-            if ( right > clientW && toRight < thresh ) {
+            if ( right &gt; clientW &amp;&amp; toRight &lt; thresh ) {
                 window.scrollTo(sl + scrAmt, st);
             }
 
             // Scroll left if the window has been scrolled to the right and the obj
             // extends past the left border
-            if ( x < sl && sl > 0 && x - sl < thresh ) {
+            if ( x &lt; sl &amp;&amp; sl &gt; 0 &amp;&amp; x - sl &lt; thresh ) {
                 window.scrollTo(sl - scrAmt, st);
             }
         }
     },
 
-    /**
-     * Finds the location the element should be placed if we want to move
+<span id='Ext-dd.DD-method-getTargetCoord'>    /**
+</span>     * Finds the location the element should be placed if we want to move
      * it to where the mouse location less the click offset would place us.
      * @method getTargetCoord
      * @param {int} iPageX the X coordinate of the click
@@ -219,19 +231,19 @@ Ext.define('Ext.dd.DD', {
         var y = iPageY - this.deltaY;
 
         if (this.constrainX) {
-            if (x < this.minX) {
+            if (x &lt; this.minX) {
                 x = this.minX;
             }
-            if (x > this.maxX) {
+            if (x &gt; this.maxX) {
                 x = this.maxX;
             }
         }
 
         if (this.constrainY) {
-            if (y < this.minY) {
+            if (y &lt; this.minY) {
                 y = this.minY;
             }
-            if (y > this.maxY) {
+            if (y &gt; this.maxY) {
                 y = this.maxY;
             }
         }
@@ -243,8 +255,8 @@ Ext.define('Ext.dd.DD', {
         return {x: x, y: y};
     },
 
-    <a name="method-Ext.dd.DD-applyConfig"></a>/**
-     * Sets up config options specific to this class. Overrides
+<span id='Ext-dd.DD-method-applyConfig'>    /**
+</span>     * Sets up config options specific to this class. Overrides
      * Ext.dd.DragDrop, but all versions of this method through the
      * inheritance chain are called
      */
@@ -253,8 +265,8 @@ Ext.define('Ext.dd.DD', {
         this.scroll = (this.config.scroll !== false);
     },
 
-    <a name="method-Ext.dd.DD-b4MouseDown"></a>/**
-     * Event that fires prior to the onMouseDown event.  Overrides
+<span id='Ext-dd.DD-method-b4MouseDown'>    /**
+</span>     * Event that fires prior to the onMouseDown event.  Overrides
      * Ext.dd.DragDrop.
      */
     b4MouseDown: function(e) {
@@ -262,8 +274,8 @@ Ext.define('Ext.dd.DD', {
         this.autoOffset(e.getPageX(), e.getPageY());
     },
 
-    <a name="method-Ext.dd.DD-b4Drag"></a>/**
-     * Event that fires prior to the onDrag event.  Overrides
+<span id='Ext-dd.DD-method-b4Drag'>    /**
+</span>     * Event that fires prior to the onDrag event.  Overrides
      * Ext.dd.DragDrop.
      */
     b4Drag: function(e) {
@@ -271,7 +283,7 @@ Ext.define('Ext.dd.DD', {
     },
 
     toString: function() {
-        return ("DD " + this.id);
+        return (&quot;DD &quot; + this.id);
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -302,4 +314,4 @@ Ext.define('Ext.dd.DD', {
     */
 
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

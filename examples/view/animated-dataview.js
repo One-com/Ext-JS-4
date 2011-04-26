@@ -4,7 +4,7 @@ Ext.Loader.setPath('Ext.ux.DataView', '../ux/DataView/');
 Ext.require([
     'Ext.data.*',
     'Ext.util.*',
-    'Ext.DataView',
+    'Ext.view.View',
     'Ext.ux.DataView.Animated',
     'Ext.XTemplate',
     'Ext.panel.Panel',
@@ -63,7 +63,7 @@ Ext.onReady(function() {
         data: data
     });
 
-    var dataview = Ext.create('Ext.DataView', {
+    var dataview = Ext.create('Ext.view.View', {
         store: store,
         tpl  : Ext.create('Ext.XTemplate',
             '<tpl for=".">',

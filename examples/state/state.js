@@ -22,11 +22,13 @@ Ext.onReady(function(){
 
     Ext.create('Ext.container.Viewport', {
         layout: 'border',
+        padding: '5',
         items: [{
             region: 'north',
             styleHtmlContent: true,
             height: 150,
             bodyPadding: 5,
+            split: true,
             html: [
                 'Between refreshes, the grid below will remember',
                 '<ul>',

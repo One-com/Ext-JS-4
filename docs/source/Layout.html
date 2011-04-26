@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.layout.Layout"></a>/**
- * @class Ext.layout.Layout
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-layout.Layout'>/**
+</span> * @class Ext.layout.Layout
  * @extends Object
  * @private
  * Base Layout class - extended by ComponentLayout and ContainerLayout
@@ -15,19 +15,20 @@ Ext.define('Ext.layout.Layout', {
     initialized: false,
 
     statics: {
-        factory: function(config, defaultType) {
-            if (config instanceof Ext.layout.Layout) {
-                return config;
+        create: function(layout, defaultType) {
+            var type;
+            if (layout instanceof Ext.layout.Layout) {
+                return Ext.createByAlias('layout.' + layout);
+            } else {
+                if (Ext.isObject(layout)) {
+                    type = layout.type;
+                }
+                else {
+                    type = layout || defaultType;
+                    layout = {};
+                }
+                return Ext.createByAlias('layout.' + type, layout || {});
             }
-            var type, options = {};
-            if (Ext.isString(config)) {
-                type = config;
-            }
-            else {
-                type = config.type || defaultType;
-                options = config;
-            }
-            return Ext.create('layout.' + type, options);
         }
     },
 
@@ -36,8 +37,8 @@ Ext.define('Ext.layout.Layout', {
         Ext.apply(this, config);
     },
 
-    /**
-     * @private
+<span id='Ext-layout.Layout-method-layout'>    /**
+</span>     * @private
      */
     layout : function() {
         var me = this;
@@ -47,6 +48,7 @@ Ext.define('Ext.layout.Layout', {
         if (me.beforeLayout.apply(me, arguments) !== false) {
             me.layoutCancelled = false;
             me.onLayout.apply(me, arguments);
+            me.childrenChanged = false;
             me.owner.needsLayout = false;
             me.layoutBusy = false;
             me.afterLayout.apply(me, arguments);
@@ -63,8 +65,8 @@ Ext.define('Ext.layout.Layout', {
         return true;
     },
 
-    /**
-     * @private
+<span id='Ext-layout.Layout-method-renderItems'>    /**
+</span>     * @private
      * Iterates over all passed items, ensuring they are rendered.  If the items are already rendered,
      * also determines if the items are in the proper place dom.
      */
@@ -73,9 +75,9 @@ Ext.define('Ext.layout.Layout', {
             i = 0,
             item;
 
-        for (; i < ln; i++) {
+        for (; i &lt; ln; i++) {
             item = items[i];
-            if (item && !item.rendered) {
+            if (item &amp;&amp; !item.rendered) {
                 this.renderItem(item, target, i);
             }
             else if (!this.isValidParent(item, target, i)) {
@@ -87,8 +89,8 @@ Ext.define('Ext.layout.Layout', {
     // @private - Validates item is in the proper place in the dom.
     isValidParent : function(item, target, position) {
         var dom = item.el ? item.el.dom : Ext.getDom(item);
-        if (dom && target && target.dom) {
-            if (Ext.isNumber(position) && dom !== target.dom.childNodes[position]) {
+        if (dom &amp;&amp; target &amp;&amp; target.dom) {
+            if (Ext.isNumber(position) &amp;&amp; dom !== target.dom.childNodes[position]) {
                 return false;
             }
             return (dom.parentNode == (target.dom || target));
@@ -96,8 +98,8 @@ Ext.define('Ext.layout.Layout', {
         return false;
     },
 
-    /**
-     * @private
+<span id='Ext-layout.Layout-method-renderItem'>    /**
+</span>     * @private
      * Renders the given Component into the target Element.
      * @param {Ext.Component} item The Component to render
      * @param {Ext.core.Element} target The target Element
@@ -111,8 +113,8 @@ Ext.define('Ext.layout.Layout', {
         }
     },
 
-    /**
-     * @private
+<span id='Ext-layout.Layout-method-moveItem'>    /**
+</span>     * @private
      * Moved Component to the provided target instead.
      */
     moveItem : function(item, target, position) {
@@ -127,13 +129,13 @@ Ext.define('Ext.layout.Layout', {
         this.childrenChanged = true;
     },
 
-    /**
-     * @private
+<span id='Ext-layout.Layout-method-initLayout'>    /**
+</span>     * @private
      * Adds the layout's targetCls if necessary and sets
      * initialized flag when complete.
      */
     initLayout : function() {
-        if (!this.initialized && !Ext.isEmpty(this.targetCls)) {
+        if (!this.initialized &amp;&amp; !Ext.isEmpty(this.targetCls)) {
             this.getTarget().addCls(this.targetCls);
         }
         this.initialized = true;
@@ -149,13 +151,20 @@ Ext.define('Ext.layout.Layout', {
         return [];
     },
 
-    /**
-     * @private
+<span id='Ext-layout.Layout-method-configureItem'>    /**
+</span>     * @private
      * Applies itemCls
      */
     configureItem: function(item) {
-        if (this.itemCls) {
-            item.el.addCls(this.itemCls);
+        var me = this,
+            el = item.el,
+            owner = me.owner;
+            
+        if (me.itemCls) {
+            el.addCls(me.itemCls);
+        }
+        if (owner.itemCls) {
+            el.addCls(owner.itemCls);
         }
     },
     
@@ -166,13 +175,22 @@ Ext.define('Ext.layout.Layout', {
     onDestroy : Ext.emptyFn,
     doOwnerCtLayouts : Ext.emptyFn,
 
-    /**
-     * @private
+<span id='Ext-layout.Layout-method-afterRemove'>    /**
+</span>     * @private
      * Removes itemCls
      */
     afterRemove : function(item) {
-        if (this.itemCls && item.rendered) {
-            item.el.removeCls(this.itemCls);
+        var me = this,
+            el = item.el,
+            owner = me.owner;
+            
+        if (item.rendered) {
+            if (me.itemCls) {
+                el.removeCls(me.itemCls);
+            }
+            if (owner.itemCls) {
+                el.removeCls(owner.itemCls);
+            }
         }
     },
 
@@ -190,4 +208,4 @@ Ext.define('Ext.layout.Layout', {
         }
         this.onDestroy();
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

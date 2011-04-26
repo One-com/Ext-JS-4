@@ -1,6 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.SortTypes"></a>/**
- * @class Ext.data.SortTypes
- * @singleton
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-data.SortTypes'>/**
+</span> * @class Ext.data.SortTypes
  * This class defines a series of static methods that are used on a
  * {@link Ext.data.Field} for performing sorting. The methods cast the 
  * underlying values into a data type that is appropriate for sorting on
@@ -8,18 +7,18 @@
  * the sortType will be set to a sane default if the sortType is not 
  * explicitly defined on the field. The sortType will make any necessary
  * modifications to the value and return it.
- * <ul>
- * <li><b>asText</b> - Removes any tags and converts the value to a string</li>
- * <li><b>asUCText</b> - Removes any tags and converts the value to an uppercase string</li>
- * <li><b>asUCText</b> - Converts the value to an uppercase string</li>
- * <li><b>asDate</b> - Converts the value into Unix epoch time</li>
- * <li><b>asFloat</b> - Converts the value to a floating point number</li>
- * <li><b>asInt</b> - Converts the value to an integer number</li>
- * </ul>
- * <p>
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;b&gt;asText&lt;/b&gt; - Removes any tags and converts the value to a string&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;asUCText&lt;/b&gt; - Removes any tags and converts the value to an uppercase string&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;asUCText&lt;/b&gt; - Converts the value to an uppercase string&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;asDate&lt;/b&gt; - Converts the value into Unix epoch time&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;asFloat&lt;/b&gt; - Converts the value to a floating point number&lt;/li&gt;
+ * &lt;li&gt;&lt;b&gt;asInt&lt;/b&gt; - Converts the value to an integer number&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;p&gt;
  * It is also possible to create a custom sortType that can be used throughout
  * an application.
- * <pre><code>
+ * &lt;pre&gt;&lt;code&gt;
 Ext.apply(Ext.data.SortTypes, {
     asPerson: function(person){
         // expects an object with a first and last name property
@@ -27,7 +26,8 @@ Ext.apply(Ext.data.SortTypes, {
     }    
 });
 
-Ext.regModel('Employee', {
+Ext.define('Employee', {
+    extend: 'Ext.data.Model',
     fields: [{
         name: 'person',
         sortType: 'asPerson'
@@ -36,16 +36,17 @@ Ext.regModel('Employee', {
         type: 'float' // sortType set to asFloat
     }]
 });
- * </code></pre>
- * </p>
- * @docauthor Evan Trimboli <evan@sencha.com>
+ * &lt;/code&gt;&lt;/pre&gt;
+ * &lt;/p&gt;
+ * @singleton
+ * @docauthor Evan Trimboli &lt;evan@sencha.com&gt;
  */
 Ext.define('Ext.data.SortTypes', {
     
     singleton: true,
     
-    <a name="method-Ext.data.SortTypes-none"></a>/**
-     * Default sort that does nothing
+<span id='Ext-data.SortTypes-method-none'>    /**
+</span>     * Default sort that does nothing
      * @param {Mixed} s The value being converted
      * @return {Mixed} The comparison value
      */
@@ -53,33 +54,33 @@ Ext.define('Ext.data.SortTypes', {
         return s;
     },
 
-    <a name="prop-Ext.data.SortTypes-stripTagsRE"></a>/**
-     * The regular expression used to strip tags
+<span id='Ext-data.SortTypes-property-stripTagsRE'>    /**
+</span>     * The regular expression used to strip tags
      * @type {RegExp}
      * @property
      */
-    stripTagsRE : /<\/?[^>]+>/gi,
+    stripTagsRE : /&lt;\/?[^&gt;]+&gt;/gi,
 
-    <a name="method-Ext.data.SortTypes-asText"></a>/**
-     * Strips all HTML tags to sort on text only
+<span id='Ext-data.SortTypes-method-asText'>    /**
+</span>     * Strips all HTML tags to sort on text only
      * @param {Mixed} s The value being converted
      * @return {String} The comparison value
      */
     asText : function(s) {
-        return String(s).replace(this.stripTagsRE, "");
+        return String(s).replace(this.stripTagsRE, &quot;&quot;);
     },
 
-    <a name="method-Ext.data.SortTypes-asUCText"></a>/**
-     * Strips all HTML tags to sort on text only - Case insensitive
+<span id='Ext-data.SortTypes-method-asUCText'>    /**
+</span>     * Strips all HTML tags to sort on text only - Case insensitive
      * @param {Mixed} s The value being converted
      * @return {String} The comparison value
      */
     asUCText : function(s) {
-        return String(s).toUpperCase().replace(this.stripTagsRE, "");
+        return String(s).toUpperCase().replace(this.stripTagsRE, &quot;&quot;);
     },
 
-    <a name="method-Ext.data.SortTypes-asUCString"></a>/**
-     * Case insensitive string
+<span id='Ext-data.SortTypes-method-asUCString'>    /**
+</span>     * Case insensitive string
      * @param {Mixed} s The value being converted
      * @return {String} The comparison value
      */
@@ -87,8 +88,8 @@ Ext.define('Ext.data.SortTypes', {
         return String(s).toUpperCase();
     },
 
-    <a name="method-Ext.data.SortTypes-asDate"></a>/**
-     * Date sorting
+<span id='Ext-data.SortTypes-method-asDate'>    /**
+</span>     * Date sorting
      * @param {Mixed} s The value being converted
      * @return {Number} The comparison value
      */
@@ -102,23 +103,23 @@ Ext.define('Ext.data.SortTypes', {
         return Date.parse(String(s));
     },
 
-    <a name="method-Ext.data.SortTypes-asFloat"></a>/**
-     * Float sorting
+<span id='Ext-data.SortTypes-method-asFloat'>    /**
+</span>     * Float sorting
      * @param {Mixed} s The value being converted
      * @return {Float} The comparison value
      */
     asFloat : function(s) {
-        var val = parseFloat(String(s).replace(/,/g, ""));
+        var val = parseFloat(String(s).replace(/,/g, &quot;&quot;));
         return isNaN(val) ? 0 : val;
     },
 
-    <a name="method-Ext.data.SortTypes-asInt"></a>/**
-     * Integer sorting
+<span id='Ext-data.SortTypes-method-asInt'>    /**
+</span>     * Integer sorting
      * @param {Mixed} s The value being converted
      * @return {Number} The comparison value
      */
     asInt : function(s) {
-        var val = parseInt(String(s).replace(/,/g, ""), 10);
+        var val = parseInt(String(s).replace(/,/g, &quot;&quot;), 10);
         return isNaN(val) ? 0 : val;
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

@@ -9,6 +9,7 @@ Ext.define('Ext.app.PortalPanel', {
     cls: 'x-portal',
     bodyCls: 'x-portal-body',
     defaultType: 'portalcolumn',
+    componentLayout: 'body',
     autoScroll: true,
 
     initComponent : function() {
@@ -16,10 +17,6 @@ Ext.define('Ext.app.PortalPanel', {
 
         // Implement a Container beforeLayout call from the layout to this Container
         this.layout = {
-            beforeLayout: function() {
-                me.beforeLayout();
-                Ext.layout.container.Column.prototype.beforeLayout.apply(this, arguments);
-            },
             type : 'column'
         };
         this.callParent();
@@ -48,6 +45,7 @@ Ext.define('Ext.app.PortalPanel', {
         }
         items[0].addCls('x-portal-column-first');
         items[len - 1].addCls('x-portal-column-last');
+        return this.callParent(arguments);
     },
 
     // private

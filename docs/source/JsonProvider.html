@@ -1,7 +1,11 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.direct.JsonProvider"></a>/**
- * A base provider for communicating using JSON.
- * @class Ext.direct.JsonProvider
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-direct.JsonProvider'>/**
+</span> * @class Ext.direct.JsonProvider
  * @extends Ext.direct.Provider
+
+A base provider for communicating using JSON. This is an abstract class
+and should not be instanced directly.
+
+ * @markdown
  * @abstract
  */
 
@@ -17,8 +21,8 @@ Ext.define('Ext.direct.JsonProvider', {
     
     /* End Definitions */
    
-   /**
-    * Parse the JSON response
+<span id='Ext-direct.JsonProvider-method-parseResponse'>   /**
+</span>    * Parse the JSON response
     * @private
     * @param {Object} response The XHR response object
     * @return {Object} The data in the response.
@@ -33,8 +37,8 @@ Ext.define('Ext.direct.JsonProvider', {
         return null;
     },
 
-    /**
-     * Creates a set of events based on the XHR response
+<span id='Ext-direct.JsonProvider-method-createEvents'>    /**
+</span>     * Creates a set of events based on the XHR response
      * @private
      * @param {Object} response The XHR response
      * @return {Array} An array of Ext.direct.Event
@@ -59,7 +63,7 @@ Ext.define('Ext.direct.JsonProvider', {
         }
         
         if (Ext.isArray(data)) {
-            for (len = data.length; i < len; ++i) {
+            for (len = data.length; i &lt; len; ++i) {
                 events.push(this.createEvent(data[i]));
             }
         } else {
@@ -68,12 +72,12 @@ Ext.define('Ext.direct.JsonProvider', {
         return events;
     },
     
-    <a name="method-Ext.direct.JsonProvider-createEvent"></a>/**
-     * Create an event from a response object
+<span id='Ext-direct.JsonProvider-method-createEvent'>    /**
+</span>     * Create an event from a response object
      * @param {Object} response The XHR response object
      * @return {Ext.direct.Event} The event
      */
     createEvent: function(response){
         return Ext.create('direct.' + response.type, response);
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

@@ -11,8 +11,8 @@ Ext.onReady(function(){
     if(Ext.Updater){
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Завантаження...</div>';
     }
-    if(Ext.DataView){
-       Ext.DataView.prototype.emptyText = "<Порожньо>";
+    if(Ext.view.View){
+       Ext.view.View.prototype.emptyText = "<Порожньо>";
     }
 
     if(Ext.grid.Panel){

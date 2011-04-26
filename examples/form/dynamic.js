@@ -1,7 +1,7 @@
 Ext.require([
     'Ext.form.*',
     'Ext.layout.container.Column',
-    'Ext.tab.TabPanel'
+    'Ext.tab.Panel'
 ]);
 
 
@@ -226,8 +226,9 @@ Ext.onReady(function(){
 
 
     var tabs = Ext.create('Ext.form.Panel', {
-        border:false,
         width: 350,
+        border: false,
+        bodyBorder: false,
         fieldDefaults: {
             labelWidth: 75,
             msgTarget: 'side'

@@ -11,7 +11,8 @@ Ext.require([
     'Ext.grid.*',
     'Ext.data.*',
     'Ext.tree.*',
-    'Ext.tab.TabPanel',
+    'Ext.selection.*',
+    'Ext.tab.Panel',
     'Ext.ux.layout.Center'  
 ]);
 

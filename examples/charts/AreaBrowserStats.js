@@ -272,6 +272,7 @@ Ext.onReady(function () {
                 fields: fields,
                 title: 'Usage %',
                 grid: true,
+                decimals: 0,
                 minimum: 0,
                 maximum: 100
             }, {
@@ -294,12 +295,9 @@ Ext.onReady(function () {
                   width: 170,
                   height: 28,
                   renderer: function(storeItem, item) {
-                      for (var i = 1, total = 0, l = fields.length; i < l; i++) {
-                          total += storeItem.get(fields[i]);
-                      }
                       this.setTitle(item.storeField + ' - '
                               + Ext.Date.format(new Date(storeItem.get('date')), 'M y')
-                              + ' - ' + Math.round(storeItem.get(item.storeField) / total * 100) + '%');
+                              + ' - ' + storeItem.get(item.storeField) + '%');
                   }
                 },
                 xField: 'name',

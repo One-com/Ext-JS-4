@@ -8,16 +8,20 @@
     <script type="text/javascript" src="../../bootstrap.js"></script>
 
     <script type="text/javascript" src="row-editing.js"></script>
+
     <style type="text/css">
-    .x-grid-section .x-grid-row .x-grid-cell-selected {
-        background: none;
-        background-color: #B8CFEE !important;
-    }
+        .employee-add {
+            background-image: url('../shared/icons/fam/user_add.gif') !important;
+        }
+
+        .employee-remove {
+            background-image: url('../shared/icons/fam/user_delete.gif') !important;
+        }
     </style>
 </head>
 <body>
     <h1>Row Editing Grid Example</h1>
-    <p>This example shows how to enable users to edit the grid an entire row at a time.</p>
+    <p>This example shows how to create a grid with inline row based editing using the row editing plugin.</p>
     <p>Note that the js is not minified so it is readable. See <a href="row-editing.js">row-editing.js</a>.</p>
     <div id="editor-grid"></div>
 </body>

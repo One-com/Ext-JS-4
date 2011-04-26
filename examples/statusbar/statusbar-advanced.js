@@ -16,11 +16,14 @@ Ext.require([
 Ext.onReady(function(){
     Ext.tip.QuickTipManager.init();
     var fp = Ext.create('Ext.FormPanel', {
+        title: 'StatusBar with Integrated Form Validation',
+        renderTo: Ext.getBody(),
+        width: 350,
+        autoHeight: true,
+        layout: 'fit',
         id: 'status-form',
         renderTo: Ext.getBody(),
         labelWidth: 75,
-        width: 350,
-        border: false,
         bodyPadding: 10,
         defaults: {
             anchor: '95%',
@@ -37,7 +40,7 @@ Ext.onReady(function(){
             fieldLabel: 'Birthdate',
             blankText: 'Birthdate is required'
         }],
-        dockedItems: {
+        dockedItems: [{
             xtype: 'toolbar',
             dock: 'bottom',
             ui: 'footer',
@@ -62,21 +65,12 @@ Ext.onReady(function(){
                     }
                 }
             }]
-        }
+        }, 
+            Ext.create('Ext.ux.StatusBar', {
+                dock: 'bottom',
+                id: 'form-statusbar',
+                defaultText: 'Ready',
+                plugins: Ext.create('Ext.ux.statusbar.ValidationStatus', {form:'status-form'})
+            })]
     });
-
-    Ext.create('Ext.Panel', {
-        title: 'StatusBar with Integrated Form Validation',
-        renderTo: Ext.getBody(),
-        width: 350,
-        autoHeight: true,
-        layout: 'fit',
-        items: fp,
-        bbar: Ext.create('Ext.ux.StatusBar', {
-            id: 'form-statusbar',
-            defaultText: 'Ready',
-            plugins: Ext.create('Ext.ux.statusbar.ValidationStatus', {form:'status-form'})
-        })
-    });
-
 });

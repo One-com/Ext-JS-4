@@ -13,6 +13,8 @@ Ext.define('FeedViewer.FeedDetail', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.feeddetail',
 
+    border: false,
+    
     initComponent: function(){
         this.display = Ext.create('widget.feedpost', {});
         Ext.apply(this, {
@@ -68,6 +70,7 @@ Ext.define('FeedViewer.FeedDetail', {
      */
     createTopToolbar: function(){
         this.toolbar = Ext.create('widget.toolbar', {
+            cls: 'x-docked-noborder-top',
             items: [{
                 iconCls: 'open-all',
                 text: 'Open All',
@@ -76,7 +79,6 @@ Ext.define('FeedViewer.FeedDetail', {
             }, '-', {
                 xtype: 'cycle',
                 text: 'Reading Pane',
-                width: 130,
                 prependText: 'Preview: ',
                 showText: true,
                 scope: this,

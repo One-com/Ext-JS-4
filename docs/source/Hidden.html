@@ -1,15 +1,15 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.form.Hidden"></a>/**
- * @class Ext.form.Hidden
- * @extends Ext.form.BaseField
- * <p>A basic hidden field for storing hidden values in forms that need to be passed in the form submit.</p>
- * <p>This creates an actual input element with type="submit" in the DOM. While its label is
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-form.field.Hidden-method-constructor'><span id='Ext-form.field.Hidden'>/**
+</span></span> * @class Ext.form.field.Hidden
+ * @extends Ext.form.field.Base
+ * &lt;p&gt;A basic hidden field for storing hidden values in forms that need to be passed in the form submit.&lt;/p&gt;
+ * &lt;p&gt;This creates an actual input element with type=&quot;submit&quot; in the DOM. While its label is
  * {@link #hideLabel not rendered} by default, it is still a real component and may be sized according to
- * its owner container's layout.</p>
- * <p>Because of this, in most cases it is more convenient and less problematic to simply
+ * its owner container's layout.&lt;/p&gt;
+ * &lt;p&gt;Because of this, in most cases it is more convenient and less problematic to simply
  * {@link Ext.form.action.Action#params pass hidden parameters} directly when
- * {@link Ext.form.Basic#submit submitting the form}.</p>
- * <p>Example:</p>
- * <pre><code>new Ext.form.FormPanel({
+ * {@link Ext.form.Basic#submit submitting the form}.&lt;/p&gt;
+ * &lt;p&gt;Example:&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;new Ext.form.Panel({
     title: 'My Form',
     items: [{
         xtype: 'textfield',
@@ -32,9 +32,9 @@
             });
         }
     }]
-});</code></pre>
- * <p>Submitting the above form will result in three values sent to the server:
- * <code>text_field=value+from+text+field&hidden_field_1=value+from+hidden+field&<br>hidden_field_2=value+from+submit+call</code></p>
+});&lt;/code&gt;&lt;/pre&gt;
+ * &lt;p&gt;Submitting the above form will result in three values sent to the server:
+ * &lt;code&gt;text_field=value+from+text+field&amp;hidden_field_1=value+from+hidden+field&amp;&lt;br&gt;hidden_field_2=value+from+submit+call&lt;/code&gt;&lt;/p&gt;
  *
  * @constructor
  * Create a new Hidden field.
@@ -42,9 +42,10 @@
  * 
  * @xtype hiddenfield
  */
-Ext.define('Ext.form.Hidden', {
-    extend:'Ext.form.BaseField',
+Ext.define('Ext.form.field.Hidden', {
+    extend:'Ext.form.field.Base',
     alias: ['widget.hiddenfield', 'widget.hidden'],
+    alternateClassName: 'Ext.form.Hidden',
 
     // private
     inputType : 'hidden',
@@ -65,4 +66,4 @@ Ext.define('Ext.form.Hidden', {
     markInvalid : Ext.emptyFn,
     clearInvalid : Ext.emptyFn
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

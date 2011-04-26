@@ -1,10 +1,10 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.form.action.DirectLoad"></a>/**
- * @class Ext.form.action.DirectLoad
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-form.action.DirectLoad'>/**
+</span> * @class Ext.form.action.DirectLoad
  * @extends Ext.form.action.Load
- * <p>Provides {@link Ext.direct.Manager} support for loading form data.</p>
- * <p>This example illustrates usage of Ext.direct.Direct to <b>load</b> a form through Ext.Direct.</p>
- * <pre><code>
-var myFormPanel = new Ext.form.FormPanel({
+ * &lt;p&gt;Provides {@link Ext.direct.Manager} support for loading form data.&lt;/p&gt;
+ * &lt;p&gt;This example illustrates usage of Ext.direct.Direct to &lt;b&gt;load&lt;/b&gt; a form through Ext.Direct.&lt;/p&gt;
+ * &lt;pre&gt;&lt;code&gt;
+var myFormPanel = new Ext.form.Panel({
     // configs for FormPanel
     title: 'Basic Information',
     renderTo: document.body,
@@ -44,33 +44,33 @@ myFormPanel.getForm().load({
         uid: 34
     }
 });
- * </code></pre>
+ * &lt;/code&gt;&lt;/pre&gt;
  * The data packet sent to the server will resemble something like:
- * <pre><code>
+ * &lt;pre&gt;&lt;code&gt;
 [
     {
-        "action":"Profile","method":"getBasicInfo","type":"rpc","tid":2,
-        "data":[34,"bar"] // note the order of the params
+        &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;getBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:2,
+        &quot;data&quot;:[34,&quot;bar&quot;] // note the order of the params
     }
 ]
- * </code></pre>
+ * &lt;/code&gt;&lt;/pre&gt;
  * The form will process a data packet returned by the server that is similar
  * to the following format:
- * <pre><code>
+ * &lt;pre&gt;&lt;code&gt;
 [
     {
-        "action":"Profile","method":"getBasicInfo","type":"rpc","tid":2,
-        "result":{
-            "success":true,
-            "data":{
-                "name":"Fred Flintstone",
-                "company":"Slate Rock and Gravel",
-                "email":"fred.flintstone@slaterg.com"
+        &quot;action&quot;:&quot;Profile&quot;,&quot;method&quot;:&quot;getBasicInfo&quot;,&quot;type&quot;:&quot;rpc&quot;,&quot;tid&quot;:2,
+        &quot;result&quot;:{
+            &quot;success&quot;:true,
+            &quot;data&quot;:{
+                &quot;name&quot;:&quot;Fred Flintstone&quot;,
+                &quot;company&quot;:&quot;Slate Rock and Gravel&quot;,
+                &quot;email&quot;:&quot;fred.flintstone@slaterg.com&quot;
             }
         }
     }
 ]
- * </code></pre>
+ * &lt;/code&gt;&lt;/pre&gt;
  */
 Ext.define('Ext.form.action.DirectLoad', {
     extend:'Ext.form.action.Load',
@@ -84,21 +84,22 @@ Ext.define('Ext.form.action.DirectLoad', {
         this.form.api.load.apply(window, this.getArgs());
     },
 
-    /**
-     * @private
+<span id='Ext-form.action.DirectLoad-method-getArgs'>    /**
+</span>     * @private
      * Build the arguments to be sent to the Direct call.
      * @return Array
      */
     getArgs: function() {
-        var args = [],
-            form = this.form,
+        var me = this,
+            args = [],
+            form = me.form,
             paramOrder = form.paramOrder,
-            params = this.getParams(),
+            params = me.getParams(),
             i, len;
 
         // If a paramOrder was specified, add the params into the argument list in that order.
         if (paramOrder) {
-            for (i = 0, len = paramOrder.length; i < len; i++) {
+            for (i = 0, len = paramOrder.length; i &lt; len; i++) {
                 args.push(params[paramOrder[i]]);
             }
         }
@@ -108,7 +109,7 @@ Ext.define('Ext.form.action.DirectLoad', {
         }
 
         // Add the callback and scope to the end of the arguments list
-        args.push(this.onSuccess, this);
+        args.push(me.onSuccess, me);
 
         return args;
     },
@@ -125,9 +126,8 @@ Ext.define('Ext.form.action.DirectLoad', {
             result = {};
         }
         this.callParent([result]);
-        this.callParent([result]);
     }
 });
 
 
-￿</pre></pre></body></html>
+</pre></pre></body></html>

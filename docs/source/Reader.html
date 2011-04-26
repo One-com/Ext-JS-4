@@ -1,20 +1,21 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.data.reader.Reader"></a>/**
- * @author Ed Spencer
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-data.reader.Reader-method-constructor'><span id='Ext-data.reader.Reader'>/**
+</span></span> * @author Ed Spencer
  * @class Ext.data.reader.Reader
  * @extends Object
  * 
- * <p>Readers are used to interpret data to be loaded into a {@link Ext.data.Model Model} instance or a {@link Ext.data.Store Store}
+ * &lt;p&gt;Readers are used to interpret data to be loaded into a {@link Ext.data.Model Model} instance or a {@link Ext.data.Store Store}
  * - usually in response to an AJAX request. This is normally handled transparently by passing some configuration to either the 
- * {@link Ext.data.Model Model} or the {@link Ext.data.Store Store} in question - see their documentation for further details.</p>
+ * {@link Ext.data.Model Model} or the {@link Ext.data.Store Store} in question - see their documentation for further details.&lt;/p&gt;
  * 
- * <p><u>Loading Nested Data</u></p>
+ * &lt;p&gt;&lt;u&gt;Loading Nested Data&lt;/u&gt;&lt;/p&gt;
  * 
- * <p>Readers have the ability to automatically load deeply-nested data objects based on the {@link Ext.data.Association associations}
+ * &lt;p&gt;Readers have the ability to automatically load deeply-nested data objects based on the {@link Ext.data.Association associations}
  * configured on each Model. Below is an example demonstrating the flexibility of these associations in a fictional CRM system which
  * manages a User, their Orders, OrderItems and Products. First we'll define the models:
  * 
-<pre><code>
-Ext.regModel("User", {
+&lt;pre&gt;&lt;code&gt;
+Ext.define(&quot;User&quot;, {
+    extend: 'Ext.data.Model',
     fields: [
         'id', 'name'
     ],
@@ -31,7 +32,8 @@ Ext.regModel("User", {
     }
 });
 
-Ext.regModel("Order", {
+Ext.define(&quot;Order&quot;, {
+    extend: 'Ext.data.Model',
     fields: [
         'id', 'total'
     ],
@@ -40,7 +42,8 @@ Ext.regModel("Order", {
     belongsTo: 'User'
 });
 
-Ext.regModel("OrderItem", {
+Ext.define(&quot;OrderItem&quot;, {
+    extend: 'Ext.data.Model',
     fields: [
         'id', 'price', 'quantity', 'order_id', 'product_id'
     ],
@@ -48,45 +51,46 @@ Ext.regModel("OrderItem", {
     belongsTo: ['Order', {model: 'Product', associationKey: 'product'}]
 });
 
-Ext.regModel("Product", {
+Ext.define(&quot;Product&quot;, {
+    extend: 'Ext.data.Model',
     fields: [
         'id', 'name'
     ],
 
     hasMany: 'OrderItem'
 });
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>This may be a lot to take in - basically a User has many Orders, each of which is composed of several OrderItems. Finally,
- * each OrderItem has a single Product. This allows us to consume data like this:</p>
+ * &lt;p&gt;This may be a lot to take in - basically a User has many Orders, each of which is composed of several OrderItems. Finally,
+ * each OrderItem has a single Product. This allows us to consume data like this:&lt;/p&gt;
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 {
-    "users": [
+    &quot;users&quot;: [
         {
-            "id": 123,
-            "name": "Ed",
-            "orders": [
+            &quot;id&quot;: 123,
+            &quot;name&quot;: &quot;Ed&quot;,
+            &quot;orders&quot;: [
                 {
-                    "id": 50,
-                    "total": 100,
-                    "order_items": [
+                    &quot;id&quot;: 50,
+                    &quot;total&quot;: 100,
+                    &quot;order_items&quot;: [
                         {
-                            "id"      : 20,
-                            "price"   : 40,
-                            "quantity": 2,
-                            "product" : {
-                                "id": 1000,
-                                "name": "MacBook Pro"
+                            &quot;id&quot;      : 20,
+                            &quot;price&quot;   : 40,
+                            &quot;quantity&quot;: 2,
+                            &quot;product&quot; : {
+                                &quot;id&quot;: 1000,
+                                &quot;name&quot;: &quot;MacBook Pro&quot;
                             }
                         },
                         {
-                            "id"      : 21,
-                            "price"   : 20,
-                            "quantity": 3,
-                            "product" : {
-                                "id": 1001,
-                                "name": "iPhone"
+                            &quot;id&quot;      : 21,
+                            &quot;price&quot;   : 20,
+                            &quot;quantity&quot;: 3,
+                            &quot;product&quot; : {
+                                &quot;id&quot;: 1001,
+                                &quot;name&quot;: &quot;iPhone&quot;
                             }
                         }
                     ]
@@ -95,15 +99,15 @@ Ext.regModel("Product", {
         }
     ]
 }
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>The JSON response is deeply nested - it returns all Users (in this case just 1 for simplicity's sake), all of the Orders
+ * &lt;p&gt;The JSON response is deeply nested - it returns all Users (in this case just 1 for simplicity's sake), all of the Orders
  * for each User (again just 1 in this case), all of the OrderItems for each Order (2 order items in this case), and finally
  * the Product associated with each OrderItem. Now we can read the data and use it as follows:
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 var store = new Ext.data.Store({
-    model: "User"
+    model: &quot;User&quot;
 });
 
 store.load({
@@ -111,11 +115,11 @@ store.load({
         //the user that was loaded
         var user = store.first();
 
-        console.log("Orders for " + user.get('name') + ":")
+        console.log(&quot;Orders for &quot; + user.get('name') + &quot;:&quot;)
 
         //iterate over the Orders for each User
         user.orders().each(function(order) {
-            console.log("Order ID: " + order.getId() + ", which contains items:");
+            console.log(&quot;Order ID: &quot; + order.getId() + &quot;, which contains items:&quot;);
 
             //iterate over the OrderItems for each Order
             order.orderItems().each(function(orderItem) {
@@ -128,16 +132,16 @@ store.load({
         });
     }
 });
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
- * <p>Running the code above results in the following:</p>
+ * &lt;p&gt;Running the code above results in the following:&lt;/p&gt;
  * 
-<pre><code>
+&lt;pre&gt;&lt;code&gt;
 Orders for Ed:
 Order ID: 50, which contains items:
 2 orders of MacBook Pro
 3 orders of iPhone
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
  * 
  * @constructor
  * @param {Object} config Optional config object
@@ -146,45 +150,45 @@ Ext.define('Ext.data.reader.Reader', {
     requires: ['Ext.data.ResultSet'],
     alternateClassName: ['Ext.data.Reader', 'Ext.data.DataReader'],
     
-    <a name="cfg-Ext.data.reader.Reader-idProperty"></a>/**
-     * @cfg {String} idProperty Name of the property within a row object
-     * that contains a record identifier value.  Defaults to <tt>The id of the model</tt>.
+<span id='Ext-data.reader.Reader-cfg-idProperty'>    /**
+</span>     * @cfg {String} idProperty Name of the property within a row object
+     * that contains a record identifier value.  Defaults to &lt;tt&gt;The id of the model&lt;/tt&gt;.
      * If an idProperty is explicitly specified it will override that of the one specified
      * on the model
      */
 
-    <a name="cfg-Ext.data.reader.Reader-totalProperty"></a>/**
-     * @cfg {String} totalProperty Name of the property from which to
+<span id='Ext-data.reader.Reader-cfg-totalProperty'>    /**
+</span>     * @cfg {String} totalProperty Name of the property from which to
      * retrieve the total number of records in the dataset. This is only needed
      * if the whole dataset is not passed in one go, but is being paged from
-     * the remote server.  Defaults to <tt>total</tt>.
+     * the remote server.  Defaults to &lt;tt&gt;total&lt;/tt&gt;.
      */
     totalProperty: 'total',
 
-    <a name="cfg-Ext.data.reader.Reader-successProperty"></a>/**
-     * @cfg {String} successProperty Name of the property from which to
-     * retrieve the success attribute. Defaults to <tt>success</tt>.  See
-     * {@link Ext.data.Proxy}.{@link Ext.data.Proxy#exception exception}
+<span id='Ext-data.reader.Reader-cfg-successProperty'>    /**
+</span>     * @cfg {String} successProperty Name of the property from which to
+     * retrieve the success attribute. Defaults to &lt;tt&gt;success&lt;/tt&gt;.  See
+     * {@link Ext.data.proxy.Proxy}.{@link Ext.data.proxy.Proxy#exception exception}
      * for additional information.
      */
     successProperty: 'success',
 
-    <a name="cfg-Ext.data.reader.Reader-root"></a>/**
-     * @cfg {String} root <b>Required</b>.  The name of the property
-     * which contains the Array of row objects.  Defaults to <tt>undefined</tt>.
+<span id='Ext-data.reader.Reader-cfg-root'>    /**
+</span>     * @cfg {String} root &lt;b&gt;Required&lt;/b&gt;.  The name of the property
+     * which contains the Array of row objects.  Defaults to &lt;tt&gt;undefined&lt;/tt&gt;.
      * An exception will be thrown if the root property is undefined. The data
      * packet value for this property should be an empty array to clear the data
      * or show no data.
      */
     root: '',
     
-    <a name="cfg-Ext.data.reader.Reader-messageProperty"></a>/**
-     * @cfg {String} messageProperty The name of the property which contains a response message.
+<span id='Ext-data.reader.Reader-cfg-messageProperty'>    /**
+</span>     * @cfg {String} messageProperty The name of the property which contains a response message.
      * This property is optional.
      */
     
-    <a name="cfg-Ext.data.reader.Reader-implicitIncludes"></a>/**
-     * @cfg {Boolean} implicitIncludes True to automatically parse models nested within other models in a response
+<span id='Ext-data.reader.Reader-cfg-implicitIncludes'>    /**
+</span>     * @cfg {Boolean} implicitIncludes True to automatically parse models nested within other models in a response
      * object. See the Ext.data.reader.Reader intro docs for full explanation. Defaults to true.
      */
     implicitIncludes: true,
@@ -202,8 +206,8 @@ Ext.define('Ext.data.reader.Reader', {
         }
     },
 
-    /**
-     * Sets a new model for the reader.
+<span id='Ext-data.reader.Reader-method-setModel'>    /**
+</span>     * Sets a new model for the reader.
      * @private
      * @param {Object} model The model to set.
      * @param {Boolean} setOnProxy True to also set on the Proxy, if one is configured
@@ -214,13 +218,13 @@ Ext.define('Ext.data.reader.Reader', {
         me.model = Ext.ModelManager.getModel(model);
         me.buildExtractors(true);
         
-        if (setOnProxy && me.proxy) {
+        if (setOnProxy &amp;&amp; me.proxy) {
             me.proxy.setModel(me.model, true);
         }
     },
 
-    <a name="method-Ext.data.reader.Reader-read"></a>/**
-     * Reads the given response object. This method normalizes the different types of response object that may be passed
+<span id='Ext-data.reader.Reader-method-read'>    /**
+</span>     * Reads the given response object. This method normalizes the different types of response object that may be passed
      * to it, before handing off the reading of records to the {@link #readRecords} function.
      * @param {Object} response The response object. This may be either an XMLHttpRequest object or a plain JS object
      * @return {Ext.data.ResultSet} The parsed ResultSet object
@@ -228,7 +232,7 @@ Ext.define('Ext.data.reader.Reader', {
     read: function(response) {
         var data = response;
         
-        if (response && response.responseText) {
+        if (response &amp;&amp; response.responseText) {
             data = this.getResponseData(response);
         }
         
@@ -239,8 +243,8 @@ Ext.define('Ext.data.reader.Reader', {
         }
     },
 
-    <a name="method-Ext.data.reader.Reader-readRecords"></a>/**
-     * Abstracts common functionality used by all Reader subclasses. Each subclass is expected to call
+<span id='Ext-data.reader.Reader-method-readRecords'>    /**
+</span>     * Abstracts common functionality used by all Reader subclasses. Each subclass is expected to call
      * this function before running its own logic and returning the Ext.data.ResultSet instance. For most
      * Readers additional processing should not be needed.
      * @param {Mixed} data The raw data object
@@ -259,8 +263,8 @@ Ext.define('Ext.data.reader.Reader', {
             me.buildExtractors(true);
         }
         
-        <a name="prop-Ext.data.reader.Reader-rawData"></a>/**
-         * The raw data object that was last passed to readRecords. Stored for further processing if needed
+<span id='Ext-data.reader.Reader-property-rawData'>        /**
+</span>         * The raw data object that was last passed to readRecords. Stored for further processing if needed
          * @property rawData
          * @type Mixed
          */
@@ -314,8 +318,8 @@ Ext.define('Ext.data.reader.Reader', {
         });
     },
 
-    /**
-     * Returns extracted, type-cast rows of data.  Iterates to call #extractValues for each row
+<span id='Ext-data.reader.Reader-method-extractData'>    /**
+</span>     * Returns extracted, type-cast rows of data.  Iterates to call #extractValues for each row
      * @param {Object[]/Object} data-root from server response
      * @private
      */
@@ -326,15 +330,15 @@ Ext.define('Ext.data.reader.Reader', {
             Model   = me.model,
             i       = 0,
             length  = root.length,
-            idProp  = me.idProperty || Model.prototype.idProperty,
+            idProp  = me.getIdProperty(),
             node, id, record;
             
-        if (!root.length && Ext.isObject(root)) {
+        if (!root.length &amp;&amp; Ext.isObject(root)) {
             root = [root];
             length = 1;
         }
 
-        for (; i < length; i++) {
+        for (; i &lt; length; i++) {
             node   = root[i];
             values = me.extractValues(node);
             id     = me.getId(node);
@@ -352,8 +356,8 @@ Ext.define('Ext.data.reader.Reader', {
         return records;
     },
     
-    /**
-     * @private
+<span id='Ext-data.reader.Reader-method-readAssociated'>    /**
+</span>     * @private
      * Loads a record's associations from the data object. This prepopulates hasMany and belongsTo associations
      * on the record provided.
      * @param {Ext.data.Model} record The record to load associations for
@@ -366,7 +370,7 @@ Ext.define('Ext.data.reader.Reader', {
             length       = associations.length,
             association, associationData, proxy, reader;
         
-        for (; i < length; i++) {
+        for (; i &lt; length; i++) {
             association     = associations[i];
             associationData = this.getAssociatedDataRoot(data, association.associationKey || association.name);
             
@@ -388,8 +392,8 @@ Ext.define('Ext.data.reader.Reader', {
         }
     },
     
-    /**
-     * @private
+<span id='Ext-data.reader.Reader-method-getAssociatedDataRoot'>    /**
+</span>     * @private
      * Used internally by {@link #readAssociated}. Given a data object (which could be json, xml etc) for a specific
      * record, this should return the relevant part of that data for the given association name. This is only really
      * needed to support the XML Reader, which has to do a query to get the associated data object
@@ -405,8 +409,8 @@ Ext.define('Ext.data.reader.Reader', {
         return this.model.prototype.fields.items;
     },
 
-    /**
-     * @private
+<span id='Ext-data.reader.Reader-method-extractValues'>    /**
+</span>     * @private
      * Given an object representing a single model instance's data, iterates over the model's fields and
      * builds an object with the value for each field.
      * @param {Object} data The data object to convert
@@ -419,7 +423,7 @@ Ext.define('Ext.data.reader.Reader', {
             output = {},
             field, value;
 
-        for (; i < length; i++) {
+        for (; i &lt; length; i++) {
             field = fields[i];
             value = this.extractorFunctions[i](data);
 
@@ -429,8 +433,8 @@ Ext.define('Ext.data.reader.Reader', {
         return output;
     },
 
-    /**
-     * @private
+<span id='Ext-data.reader.Reader-method-getData'>    /**
+</span>     * @private
      * By default this function just returns what is passed to it. It can be overridden in a subclass
      * to return something else. See XmlReader for an example.
      * @param {Object} data The data object
@@ -440,8 +444,8 @@ Ext.define('Ext.data.reader.Reader', {
         return data;
     },
 
-    /**
-     * @private
+<span id='Ext-data.reader.Reader-method-getRoot'>    /**
+</span>     * @private
      * This will usually need to be implemented in a subclass. Given a generic data object (the type depends on the type
      * of data we are reading), this function should return the object as configured by the Reader's 'root' meta data config.
      * See XmlReader's getRoot implementation for an example. By default the same data object will simply be returned.
@@ -452,19 +456,19 @@ Ext.define('Ext.data.reader.Reader', {
         return data;
     },
 
-    <a name="method-Ext.data.reader.Reader-getResponseData"></a>/**
-     * Takes a raw response object (as passed to this.read) and returns the useful data segment of it. This must be implemented by each subclass
+<span id='Ext-data.reader.Reader-method-getResponseData'>    /**
+</span>     * Takes a raw response object (as passed to this.read) and returns the useful data segment of it. This must be implemented by each subclass
      * @param {Object} response The responce object
      * @return {Object} The useful data from the response
      */
     getResponseData: function(response) {
-        //<debug>
-        Ext.Error.raise("getResponseData must be implemented in the Ext.data.reader.Reader subclass");
-        //</debug>
+        //&lt;debug&gt;
+        Ext.Error.raise(&quot;getResponseData must be implemented in the Ext.data.reader.Reader subclass&quot;);
+        //&lt;/debug&gt;
     },
 
-    /**
-     * @private
+<span id='Ext-data.reader.Reader-method-onMetaChange'>    /**
+</span>     * @private
      * Reconfigures the meta data tied to this Reader
      */
     onMetaChange : function(meta) {
@@ -474,22 +478,38 @@ Ext.define('Ext.data.reader.Reader', {
         Ext.apply(this, meta);
         
         if (fields) {
-            newModel = Ext.regModel("Ext.data.reader.Json-Model" + Ext.id(), {fields: fields});
+            newModel = Ext.define(&quot;Ext.data.reader.Json-Model&quot; + Ext.id(), {
+                extend: 'Ext.data.Model',
+                fields: fields
+            });
             this.setModel(newModel, true);
         } else {
             this.buildExtractors(true);
         }
     },
-
-    /**
+    
+<span id='Ext-data.reader.Reader-method-getIdProperty'>    /**
+</span>     * Get the idProperty to use for extracting data
      * @private
+     * @return {String} The id property
+     */
+    getIdProperty: function(){
+        var prop = this.idProperty;
+        if (Ext.isEmpty(prop)) {
+            prop = this.model.prototype.idProperty;
+        }
+        return prop;
+    },
+
+<span id='Ext-data.reader.Reader-method-buildExtractors'>    /**
+</span>     * @private
      * This builds optimized functions for retrieving record data and meta data from an object.
      * Subclasses may need to implement their own getRoot function.
      * @param {Boolean} force True to automatically remove existing extractor functions first (defaults to false)
      */
     buildExtractors: function(force) {
         var me          = this,
-            idProp      = me.idProperty || me.model.prototype.idProperty,
+            idProp      = me.getIdProperty(),
             totalProp   = me.totalProperty,
             successProp = me.successProperty,
             messageProp = me.messageProperty,
@@ -531,8 +551,8 @@ Ext.define('Ext.data.reader.Reader', {
         me.buildFieldExtractors();
     },
 
-    /**
-     * @private
+<span id='Ext-data.reader.Reader-method-buildFieldExtractors'>    /**
+</span>     * @private
      */
     buildFieldExtractors: function() {
         //now build the extractors for all the fields
@@ -543,9 +563,9 @@ Ext.define('Ext.data.reader.Reader', {
             extractorFunctions = [],
             field, map;
 
-        for (; i < ln; i++) {
+        for (; i &lt; ln; i++) {
             field = fields[i];
-            map   = (field.mapping !== undefined && field.mapping !== null) ? field.mapping : field.name;
+            map   = (field.mapping !== undefined &amp;&amp; field.mapping !== null) ? field.mapping : field.name;
 
             extractorFunctions.push(me.createAccessor(map));
         }
@@ -563,4 +583,4 @@ Ext.define('Ext.data.reader.Reader', {
             success: true
         })
     });
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

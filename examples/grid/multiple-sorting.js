@@ -189,11 +189,11 @@ Ext.onReady(function() {
 
     //create the toolbar with the 2 plugins
     var tbar = Ext.create('Ext.toolbar.Toolbar', {
-        items  : {
+        items  : [{
             xtype: 'tbtext',
             text: 'Sorting order:',
             reorderable: false
-        },
+        }, '-'],
         plugins: [reorderer, droppable]
     });
 

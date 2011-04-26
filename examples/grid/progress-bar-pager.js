@@ -130,10 +130,10 @@ Ext.onReady(function(){
         height:320,
         width:600,
         frame:true,
-        resizable: {
-           handles: 's',
-           minHeight: 100
-        },
+        //resizable: {
+        //   handles: 's',
+        //   minHeight: 100
+        //},
         bbar: Ext.create('Ext.PagingToolbar', {
             pageSize: 10,
             store: store,

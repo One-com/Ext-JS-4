@@ -25,6 +25,15 @@ Ext.define('ForumBrowser.TopicContainer', {
         });
         this.callParent();
     },
+
+    afterLayout: function() {
+        this.callParent();
+
+        // IE6 likes to make the content disappear, hack around it...
+        if (Ext.isIE6) {
+            this.el.repaint();
+        }
+    },
     
     loadForum: function(rec) {
         this.tab.setText(rec.get('text'));

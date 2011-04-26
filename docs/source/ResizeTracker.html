@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.resizer.ResizeTracker"></a>/**
- * @class Ext.resizer.ResizeTracker
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-resizer.ResizeTracker'>/**
+</span> * @class Ext.resizer.ResizeTracker
  * @extends Ext.dd.DragTracker
  */
 Ext.define('Ext.resizer.ResizeTracker', {
@@ -23,14 +23,14 @@ Ext.define('Ext.resizer.ResizeTracker', {
         this.callParent(arguments);
 
         // Ensure that if we are preserving aspect ratio, the largest minimum is honoured
-        if (me.preserveRatio && me.minWidth && me.minHeight) {
+        if (me.preserveRatio &amp;&amp; me.minWidth &amp;&amp; me.minHeight) {
             var widthRatio = me.minWidth / me.el.getWidth(),
                 heightRatio = me.minHeight / me.el.getHeight();
 
             // largest ratio of minimum:size must be preserved.
             // So if a 400x200 pixel image has
             // minWidth: 50, maxWidth: 50, the maxWidth will be 400 * (50/200)... that is 100
-            if (heightRatio > widthRatio) {
+            if (heightRatio &gt; widthRatio) {
                 me.minWidth = me.el.getWidth() * heightRatio;
             } else {
                 me.minHeight = me.el.getHeight() * widthRatio;
@@ -59,8 +59,8 @@ Ext.define('Ext.resizer.ResizeTracker', {
         this.startBox = this.el.getBox();
     },
 
-    /**
-     * @private
+<span id='Ext-resizer.ResizeTracker-method-getDynamicTarget'>    /**
+</span>     * @private
      * Returns the object that will be resized on every mousemove event.
      * If dynamic is false, this will be a proxy, otherwise it will be our actual target.
      */
@@ -107,8 +107,8 @@ Ext.define('Ext.resizer.ResizeTracker', {
             adjustX = 0,
             adjustY = 0,
             dragRatio,
-            horizDir = offset[0] < 0 ? 'right' : 'left',
-            vertDir = offset[1] < 0 ? 'down' : 'up',
+            horizDir = offset[0] &lt; 0 ? 'right' : 'left',
+            vertDir = offset[1] &lt; 0 ? 'down' : 'up',
             oppositeCorner,
             axis; // 1 = x, 2 = y, 3 = x and y.
 
@@ -169,13 +169,13 @@ Ext.define('Ext.resizer.ResizeTracker', {
         };
 
         // out of bounds
-        if (newBox.width < me.minWidth || newBox.width > me.maxWidth) {
+        if (newBox.width &lt; me.minWidth || newBox.width &gt; me.maxWidth) {
             newBox.width = Ext.Number.constrain(newBox.width, me.minWidth, me.maxWidth);
             newBox.x = me.lastX || newBox.x;
         } else {
             me.lastX = newBox.x;
         }
-        if (newBox.height < me.minHeight || newBox.height > me.maxHeight) {
+        if (newBox.height &lt; me.minHeight || newBox.height &gt; me.maxHeight) {
             newBox.height = Ext.Number.constrain(newBox.height, me.minHeight, me.maxHeight);
             newBox.y = me.lastY || newBox.y;
         } else {
@@ -209,8 +209,8 @@ Ext.define('Ext.resizer.ResizeTracker', {
                 // Basically what edge we are dragging, a horizontal edge or a vertical edge.
                 dragRatio = Math.abs(oppositeCorner[0] - this.lastXY[0]) / Math.abs(oppositeCorner[1] - this.lastXY[1]);
 
-                // If drag ratio > aspect ratio then width is dominant and height must obey
-                if (dragRatio > ratio) {
+                // If drag ratio &gt; aspect ratio then width is dominant and height must obey
+                if (dragRatio &gt; ratio) {
                     newBox.height = newHeight;
                 } else {
                     newBox.width = newWidth;
@@ -267,4 +267,4 @@ Ext.define('Ext.resizer.ResizeTracker', {
         }
     }
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

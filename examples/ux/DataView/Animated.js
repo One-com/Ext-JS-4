@@ -27,12 +27,12 @@ Ext.define('Ext.ux.DataView.Animated', {
 
     /**
      * Initializes the transition plugin. Overrides the dataview's default refresh function
-     * @param {Ext.DataView} dataview The dataview
+     * @param {Ext.view.View} dataview The dataview
      */
     init: function(dataview) {
         /**
          * @property dataview
-         * @type Ext.DataView
+         * @type Ext.view.View
          * Reference to the DataView this instance is bound to
          */
         this.dataview = dataview;

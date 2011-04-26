@@ -46,7 +46,6 @@ if (is_dir($directory)){
             $nodes[] = array(
                 'text' => $f,
                 'id'   => $node.'/'.$f,
-                'qtip' => $qtip,
                 'cls'  => 'folder'
             );
         } else {
@@ -56,8 +55,6 @@ if (is_dir($directory)){
                 'text' => $f,
                 'id'   => $node.'/'.$f,
                 'leaf' => true,
-                'qtip' => $qtip,
-                'qtitle' => $f,
                 'cls'  => 'file'
             );
         }

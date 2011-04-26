@@ -8,6 +8,8 @@ Ext.define('ForumBrowser.ForumList', {
     lines: false,
     defaultForum: 40,
     
+    minWidth: 200,
+    
     initComponent: function(){
         Ext.apply(this, {
             viewConfig: {

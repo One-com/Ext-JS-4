@@ -1,15 +1,15 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.resizer.Splitter"></a>/**
- * @class Ext.resizer.Splitter
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-resizer.Splitter'>/**
+</span> * @class Ext.resizer.Splitter
  * @extends Ext.Component
- * <p>This class functions <b>between siblings of a {@link Ext.layout.container.VBox VBox} or {@link Ext.layout.container.HBox HBox}
- * layout</b> to resize both immediate siblings.</p>
- * <p>By default it will set the size of both siblings. <b>One</b> of the siblings may be configured with
- * <code>{@link Ext.Component#maintainFlex maintainFlex}: true</code> which will cause it not to receive a new size explicitly, but to be resized
- * by the layout.</p>
- * <p>A Splitter may be configured to show a centered mini-collapse tool orientated to collapse the {@link #collapseTarget}.
+ * &lt;p&gt;This class functions &lt;b&gt;between siblings of a {@link Ext.layout.container.VBox VBox} or {@link Ext.layout.container.HBox HBox}
+ * layout&lt;/b&gt; to resize both immediate siblings.&lt;/p&gt;
+ * &lt;p&gt;By default it will set the size of both siblings. &lt;b&gt;One&lt;/b&gt; of the siblings may be configured with
+ * &lt;code&gt;{@link Ext.Component#maintainFlex maintainFlex}: true&lt;/code&gt; which will cause it not to receive a new size explicitly, but to be resized
+ * by the layout.&lt;/p&gt;
+ * &lt;p&gt;A Splitter may be configured to show a centered mini-collapse tool orientated to collapse the {@link #collapseTarget}.
  * The Splitter will then call that sibling Panel's {@link Ext.panel.Panel#collapse collapse} or {@link Ext.panel.Panel#expand expand} method
  * to perform the appropriate operation (depending on the sibling collapse state). To create the mini-collapse tool but take care
- * of collapsing yourself, configure the splitter with <code>{@link #performCollapse} false</code>.</p>
+ * of collapsing yourself, configure the splitter with &lt;code&gt;{@link #performCollapse} false&lt;/code&gt;.&lt;/p&gt;
  *
  * @xtype splitter
  */
@@ -18,37 +18,42 @@ Ext.define('Ext.resizer.Splitter', {
     requires: ['Ext.XTemplate'],
     uses: ['Ext.resizer.SplitterTracker'],
     alias: 'widget.splitter',
+
+    renderTpl: [
+        '&lt;tpl if=&quot;collapsible===true&quot;&gt;&lt;div class=&quot;' + Ext.baseCSSPrefix + 'collapse-el ' + Ext.baseCSSPrefix + 'layout-split-{collapseDir}&quot;&gt;&amp;nbsp;&lt;/div&gt;&lt;/tpl&gt;'
+    ],
+
     baseCls: Ext.baseCSSPrefix + 'splitter',
     collapsedCls: Ext.baseCSSPrefix + 'splitter-collapsed',
 
-    <a name="cfg-Ext.resizer.Splitter-collapsible"></a>/**
-     * @cfg {Boolean} collapsible
-     * <code>true</code> to show a mini-collapse tool in the Splitter to toggle expand and collapse on the {@link #collapseTarget} Panel.
+<span id='Ext-resizer.Splitter-cfg-collapsible'>    /**
+</span>     * @cfg {Boolean} collapsible
+     * &lt;code&gt;true&lt;/code&gt; to show a mini-collapse tool in the Splitter to toggle expand and collapse on the {@link #collapseTarget} Panel.
      * Defaults to the {@link Ext.panel.Panel#collapsible collapsible} setting of the Panel.
      */
     collapsible: false,
 
-    <a name="cfg-Ext.resizer.Splitter-performCollapse"></a>/**
-     * @cfg {Boolean} performCollapse
-     * <p>Set to <code>false</code> to prevent this Splitter's mini-collapse tool from managing the collapse
-     * state of the {@link #collapseTarget}.</p>
+<span id='Ext-resizer.Splitter-cfg-performCollapse'>    /**
+</span>     * @cfg {Boolean} performCollapse
+     * &lt;p&gt;Set to &lt;code&gt;false&lt;/code&gt; to prevent this Splitter's mini-collapse tool from managing the collapse
+     * state of the {@link #collapseTarget}.&lt;/p&gt;
      */
 
-    <a name="cfg-Ext.resizer.Splitter-collapseOnDblClick"></a>/**
-     * @cfg {Boolean} collapseOnDblClick
-     * <code>true</code> to enable dblclick to toggle expand and collapse on the {@link #collapseTarget} Panel.
+<span id='Ext-resizer.Splitter-cfg-collapseOnDblClick'>    /**
+</span>     * @cfg {Boolean} collapseOnDblClick
+     * &lt;code&gt;true&lt;/code&gt; to enable dblclick to toggle expand and collapse on the {@link #collapseTarget} Panel.
      */
     collapseOnDblClick: true,
 
-    <a name="cfg-Ext.resizer.Splitter-defaultSplitMin"></a>/**
-     * @cfg {Number} defaultSplitMin
+<span id='Ext-resizer.Splitter-cfg-defaultSplitMin'>    /**
+</span>     * @cfg {Number} defaultSplitMin
      * Provides a default minimum width or height for the two components
      * that the splitter is between.
      */
     defaultSplitMin: 40,
 
-    <a name="cfg-Ext.resizer.Splitter-defaultSplitMax"></a>/**
-     * @cfg {Number} defaultSplitMax
+<span id='Ext-resizer.Splitter-cfg-defaultSplitMax'>    /**
+</span>     * @cfg {Number} defaultSplitMax
      * Provides a default maximum width or height for the two components
      * that the splitter is between.
      */
@@ -57,19 +62,19 @@ Ext.define('Ext.resizer.Splitter', {
     width: 5,
     height: 5,
 
-    <a name="cfg-Ext.resizer.Splitter-collapseTarget"></a>/**
-     * @cfg {Mixed} collapseTarget
-     * <p>A string describing the relative position of the immediate sibling Panel to collapse. May be 'prev' or 'next' (Defaults to 'next')</p>
-     * <p>Or the immediate sibling Panel to collapse.</p>
-     * <p>The orientation of the mini-collapse tool will be inferred from this setting.</p>
-     * <p><b>Note that only Panels may be collapsed.</b></p>
+<span id='Ext-resizer.Splitter-cfg-collapseTarget'>    /**
+</span>     * @cfg {Mixed} collapseTarget
+     * &lt;p&gt;A string describing the relative position of the immediate sibling Panel to collapse. May be 'prev' or 'next' (Defaults to 'next')&lt;/p&gt;
+     * &lt;p&gt;Or the immediate sibling Panel to collapse.&lt;/p&gt;
+     * &lt;p&gt;The orientation of the mini-collapse tool will be inferred from this setting.&lt;/p&gt;
+     * &lt;p&gt;&lt;b&gt;Note that only Panels may be collapsed.&lt;/b&gt;&lt;/p&gt;
      */
     collapseTarget: 'next',
 
-    <a name="prop-Ext.resizer.Splitter-orientation"></a>/**
-     * @property orientation
+<span id='Ext-resizer.Splitter-property-orientation'>    /**
+</span>     * @property orientation
      * @type String
-     * Orientation of this Splitter. <code>'vertical'</code> when used in an hbox layout, <code>'horizontal'</code>
+     * Orientation of this Splitter. &lt;code&gt;'vertical'&lt;/code&gt; when used in an hbox layout, &lt;code&gt;'horizontal'&lt;/code&gt;
      * when used in a vbox layout.
      */
 
@@ -123,14 +128,14 @@ Ext.define('Ext.resizer.Splitter', {
         //        1              0             = prev, horizontal
         //        1              1             = prev, vertical
         if (me.collapseTarget.isComponent) {
-            idx = Number(me.ownerCt.items.indexOf(me.collapseTarget) == me.ownerCt.items.indexOf(me) - 1) << 1 | Number(type == 'hbox');
+            idx = Number(me.ownerCt.items.indexOf(me.collapseTarget) == me.ownerCt.items.indexOf(me) - 1) &lt;&lt; 1 | Number(type == 'hbox');
         } else {
-            idx = Number(me.collapseTarget == 'prev') << 1 | Number(type == 'hbox');
+            idx = Number(me.collapseTarget == 'prev') &lt;&lt; 1 | Number(type == 'hbox');
         }
 
         // Read the data out the truth table
-        me.orientation = ['horizontal', 'vertical'][idx & 1];
-        return ['down', 'right', 'up', 'left'][idx];
+        me.orientation = ['horizontal', 'vertical'][idx &amp; 1];
+        return ['bottom', 'right', 'top', 'left'][idx];
     },
 
     getCollapseTarget: function() {
@@ -169,9 +174,5 @@ Ext.define('Ext.resizer.Splitter', {
             me.el.repaint();
         }
     }
-}, function() {
-    this.prototype.renderTpl = Ext.create('Ext.XTemplate',
-        '<tpl if="collapsible===true"><div class="' + Ext.baseCSSPrefix + 'collapse-el ' + Ext.baseCSSPrefix + 'layout-split-{collapseDir}">&nbsp;</div></tpl>'
-    );
 });
-￿</pre></pre></body></html>
+</pre></pre></body></html>

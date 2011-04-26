@@ -85,7 +85,7 @@ Ext.onReady(function() {
         data: hospitals
     });
 
-    var patientView = Ext.create('Ext.DataView', {
+    var patientView = Ext.create('Ext.view.View', {
         cls: 'patient-view',
         tpl: '<tpl for=".">' +
                 '<div class="patient-source"><table><tbody>' +
@@ -134,6 +134,7 @@ Ext.onReady(function() {
                 helpWindow.show();
             }
         }],
+        sortableColumns: false,
         columns: [{
             dataIndex: 'name',
             header: 'Name',

@@ -1,4 +1,4 @@
-<?
+<?php
 $customers = array(array(
         'id'=>1,
         'name'=>'Bread Barn',

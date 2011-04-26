@@ -8,12 +8,12 @@ Ext.onReady(function(){
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Kraunasi...</div>';
     }
 
-    if(Ext.DataView){
-        Ext.DataView.prototype.emptyText = "";
+    if(Ext.view.View){
+        Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.DataView){
-        Ext.DataView.prototype.emptyText = "";
+    if(Ext.view.View){
+        Ext.view.View.prototype.emptyText = "";
     }
     if(Ext.grid.Panel){
         Ext.grid.Panel.prototype.ddText = "{0} pažymėtų eilučių";

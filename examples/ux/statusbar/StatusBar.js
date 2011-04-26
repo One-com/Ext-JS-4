@@ -206,6 +206,7 @@ sb.setStatus({
             this.insert(0, this.statusEl);
             this.insert(1, '->');
         }
+        this.height = 27;
         this.doLayout();
     },
 
@@ -291,6 +292,7 @@ statusBar.setStatus({
             c.threadId = this.activeThreadId;
             Ext.defer(this.clearStatus, wait, this, [c]);
         }
+        this.doLayout();
         return this;
     },
 
@@ -342,6 +344,7 @@ statusBar.setStatus({
              });
              this.statusEl.show();
         }
+        this.doLayout();
         return this;
     },
 

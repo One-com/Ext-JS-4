@@ -1,4 +1,4 @@
-<?
+<?php
 $items = array(array(
         'id'=>1,
         'order_id'=>1,

@@ -104,7 +104,7 @@ Ext.onReady(function () {
                 tips: {
                     trackMouse: true,
                     width: 580,
-                    height: 160,
+                    height: 170,
                     layout: 'fit',
                     items: {
                         xtype: 'container',

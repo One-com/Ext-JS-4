@@ -189,7 +189,6 @@ Ext.onReady(function(){
         flex: 0.60,
         store: ds,
         title:'Company Data',
-        border: false,
 
         columns: [
             {
@@ -305,7 +304,6 @@ Ext.onReady(function(){
                      
                      selectedStoreItem = item.storeItem;
                      selectionModel.select(index);
-                     selectItem(selectedStoreItem);
                 }
             },
             xField: 'name',
@@ -360,14 +358,16 @@ Ext.onReady(function(){
             
             layout: {type: 'hbox', align: 'stretch'},
             flex: 3,
-
+            border: false,
+            bodyStyle: 'background-color: transparent',
+            
             items: [gridPanel, {
                 flex: 0.4,
-                border: false,
                 layout: {
                     type: 'vbox',
                     align:'stretch'
                 },
+                margin: '0 0 0 5',
                 title: 'Company Details',
                 items: [{
                     margin: '5',

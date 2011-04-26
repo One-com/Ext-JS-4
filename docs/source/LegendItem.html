@@ -1,6 +1,6 @@
-<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><a name="cls-Ext.chart.LegendItem"></a>/**
- * @class Ext.chart.LegendItem
- * @extends Ext.draw.SpriteGroup
+<!DOCTYPE html><html><head><title>Sencha Documentation Project</title><link rel="stylesheet" href="../reset.css" type="text/css"><link rel="stylesheet" href="../prettify.css" type="text/css"><link rel="stylesheet" href="../prettify_sa.css" type="text/css"><script type="text/javascript" src="../prettify.js"></script></head><body onload="prettyPrint()"><pre class="prettyprint"><pre><span id='Ext-chart.LegendItem-method-constructor'><span id='Ext-chart.LegendItem'>/**
+</span></span> * @class Ext.chart.LegendItem
+ * @extends Ext.draw.CompositeSprite
  * A single item of a legend (marker plus label)
  * @constructor
  */
@@ -8,9 +8,9 @@ Ext.define('Ext.chart.LegendItem', {
 
     /* Begin Definitions */
 
-    extend: 'Ext.draw.SpriteGroup',
+    extend: 'Ext.draw.CompositeSprite',
 
-    requires: ['Ext.chart.Shapes'],
+    requires: ['Ext.chart.Shape'],
 
     /* End Definitions */
 
@@ -21,13 +21,13 @@ Ext.define('Ext.chart.LegendItem', {
 
     constructor: function(config) {
         this.callParent(arguments);
-        this.createSprites(config);
+        this.createLegend(config);
     },
 
-    <a name="method-Ext.chart.LegendItem-createSprites"></a>/**
-     * Creates all the individual sprites for this legend item
+<span id='Ext-chart.LegendItem-method-createLegend'>    /**
+</span>     * Creates all the individual sprites for this legend item
      */
-    createSprites: function(config) {
+    createLegend: function(config) {
         var me = this,
             index = config.yFieldIndex,
             series = me.series,
@@ -38,7 +38,7 @@ Ext.define('Ext.chart.LegendItem', {
             refX = legend.x + me.x,
             refY = legend.y + me.y,
             bbox, z = me.zIndex,
-            markerCfg, label, mask,
+            markerConfig, label, mask,
             radius, toggle = false,
             seriesStyle = Ext.apply(series.seriesStyle, series.style);
 
@@ -63,9 +63,9 @@ Ext.define('Ext.chart.LegendItem', {
                     type: 'path',
                     path: 'M0.5,0.5L16.5,0.5',
                     zIndex: z,
-                    "stroke-width": series.lineWidth,
-                    "stroke-linejoin": "round",
-                    "stroke-dasharray": series.dash,
+                    &quot;stroke-width&quot;: series.lineWidth,
+                    &quot;stroke-linejoin&quot;: &quot;round&quot;,
+                    &quot;stroke-dasharray&quot;: series.dash,
                     stroke: seriesStyle.stroke || '#000',
                     style: {
                         cursor: 'pointer'
@@ -73,13 +73,13 @@ Ext.define('Ext.chart.LegendItem', {
                 }));
             }
             if (series.showMarkers || seriesType === 'scatter') {
-                markerCfg = Ext.apply(series.markerStyle, series.markerCfg || {});
-                me.add('marker', Ext.chart.Shapes[markerCfg.type](surface, {
-                    fill: markerCfg.fill,
+                markerConfig = Ext.apply(series.markerStyle, series.markerConfig || {});
+                me.add('marker', Ext.chart.Shape[markerConfig.type](surface, {
+                    fill: markerConfig.fill,
                     x: 8.5,
                     y: 0.5,
                     zIndex: z,
-                    radius: markerCfg.radius || markerCfg.size,
+                    radius: markerConfig.radius || markerConfig.size,
                     style: {
                         cursor: 'pointer'
                     }
@@ -166,8 +166,8 @@ Ext.define('Ext.chart.LegendItem', {
         me.updatePosition({x:0, y:0}); //Relative to 0,0 at first so that the bbox is calculated correctly
     },
 
-    <a name="method-Ext.chart.LegendItem-updatePosition"></a>/**
-     * Update the positions of all this item's sprites to match the root position
+<span id='Ext-chart.LegendItem-method-updatePosition'>    /**
+</span>     * Update the positions of all this item's sprites to match the root position
      * of the legend box.
      * @param {Object} relativeTo (optional) If specified, this object's 'x' and 'y' values will be used
      *                 as the reference point for the relative positioning. Defaults to the Legend.
@@ -181,7 +181,7 @@ Ext.define('Ext.chart.LegendItem', {
         if (!relativeTo) {
             relativeTo = me.legend;
         }
-        for (; i < ln; i++) {
+        for (; i &lt; ln; i++) {
             item = items[i];
             switch (item.type) {
                 case 'text':
@@ -208,4 +208,4 @@ Ext.define('Ext.chart.LegendItem', {
             }
         }
     }
-});￿</pre></pre></body></html>
+});</pre></pre></body></html>

@@ -13,7 +13,9 @@ Ext.define('FeedViewer.FeedWindow', {
     extend: 'Ext.window.Window',
     
     alias: 'widget.feedwindow',
-    
+
+    plain: true,
+
     defaultFeeds: [
         ['http://rss.cnn.com/rss/edition.rss', 'CNN Top Stories'],
         ['http://sports.espn.go.com/espn/rss/news', 'ESPN Top News'],
@@ -34,9 +36,11 @@ Ext.define('FeedViewer.FeedWindow', {
         );
         
         this.form = Ext.create('widget.form', {
-            bodyStyle: 'padding: 10px;',
-            // border: false,
+            bodyPadding: '12 10 10',
+            border: false,
+            unstyled: true,
             items: [{
+                anchor: '100%',
                 itemId: 'feed',
                 fieldLabel: 'Enter the URL of the feed to add',
                 labelAlign: 'top',
@@ -49,29 +53,21 @@ Ext.define('FeedViewer.FeedWindow', {
             }]
         });
         Ext.apply(this, {
-            width: 600,
-            height: 150,
+            width: 500,
             title: 'Add Feed',
-            iconCls: 'rss',
+            iconCls: 'feed',
             layout: 'fit',
             items: this.form,
-            dockedItems: [{
-                dock: 'bottom',
-                xtype: 'toolbar',
-                ui: 'footer',
-                items: [{
-                    xtype: 'tbspacer'
-                }, {
-                    xtype: 'button',
-                    text: 'Add feed',
-                    scope: this,
-                    handler: this.onAddClick
-                }, {
-                    xtype: 'button',
-                    text: 'Cancel',
-                    scope: this,
-                    handler: this.destroy
-                }]
+            buttons: [{
+                xtype: 'button',
+                text: 'Add Feed',
+                scope: this,
+                handler: this.onAddClick
+            }, {
+                xtype: 'button',
+                text: 'Cancel',
+                scope: this,
+                handler: this.destroy
             }]
         });
         this.callParent(arguments);

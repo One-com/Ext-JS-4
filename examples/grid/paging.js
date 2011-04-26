@@ -72,12 +72,12 @@ Ext.onReady(function(){
         height: 500,
         title: 'ExtJS.com - Browse Forums',
         store: store,
-        trackMouseOver: false,
         disableSelection: true,
         loadMask: true,
         viewConfig: {
             id: 'gv',
             trackOver: false,
+            stripeRows: false,
             plugins: [{
                 ptype: 'preview',
                 bodyField: 'excerpt',

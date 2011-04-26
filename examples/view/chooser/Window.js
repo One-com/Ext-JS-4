@@ -23,8 +23,9 @@ Ext.define('Ext.chooser.Window', {
     closeAction: 'hide',
     layout: 'border',
     // modal: true,
-    // border: false,
-
+    border: false,
+    bodyBorder: false,
+    
     /**
      * initComponent is a great place to put any code that needs to be run when a new instance of a component is
      * created. Here we just specify the items that will go into our Window, plus the Buttons that we want to appear

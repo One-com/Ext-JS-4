@@ -10,8 +10,8 @@ Ext.onReady(function(){
     var floater, constrainedWin, constrainedWin2;
 
     Ext.util.Region.override({
-        colours: ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
-        nextColour: 0,
+        colors: ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
+        nextColor: 0,
         show: function(){
             var style = {
                 display: 'block',
@@ -25,13 +25,13 @@ Ext.onReady(function(){
                 'z-index': 9999999
             };
             if (!this.highlightEl) {
-                style['background-color'] = this.colours[this.nextColour];
-                Ext.util.Region.prototype.nextColour++;
+                style['background-color'] = this.colors[this.nextColor];
+                Ext.util.Region.prototype.nextColor++;
                 this.highlightEl = Ext.getBody().createChild({
                     style: style
                 });
-                if (this.nextColour >= this.colours.length) {
-                    this.nextColour = 0;
+                if (this.nextColor >= this.colors.length) {
+                    this.nextColor = 0;
                 }
             } else {
                 this.highlightEl.setStyle(style);

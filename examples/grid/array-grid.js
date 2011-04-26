@@ -7,6 +7,9 @@ Ext.require([
 
 Ext.onReady(function() {
     Ext.QuickTips.init();
+    
+    // setup the state provider, all state information will be saved to a cookie
+    Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
 
     // sample static data for the store
     var myData = [
@@ -82,7 +85,8 @@ Ext.onReady(function() {
     // create the Grid
     var grid = Ext.create('Ext.grid.Panel', {
         store: store,
-        columnLines: true,
+        stateful: true,
+        stateId: 'stateGrid',
         columns: [
             {
                 text     : 'Company',

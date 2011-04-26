@@ -14,6 +14,8 @@ Ext.require([
 ]);
 
 Ext.onReady(function() {
+    Ext.QuickTips.init();
+    
     var items = [];
 
     /**
@@ -28,7 +30,7 @@ Ext.onReady(function() {
         height: 150,
 
         title: 'Basic Panel',
-
+        animCollapse: true,
         bodyPadding: 5,
         html       : 'Some content',
         collapsible: true
@@ -49,6 +51,7 @@ Ext.onReady(function() {
 
         bodyPadding: 5,
         html       : 'Some content',
+        animCollapse: true,
         collapsible: true,
 
         listeners: {
@@ -71,7 +74,28 @@ Ext.onReady(function() {
         height: 150,
 
         title: 'Framed Panel',
-
+        animCollapse: true,
+        
+        dockedItems: [{
+            dock: 'top',
+            xtype: 'toolbar',
+            items: [{
+                text: 'test'
+            }]
+        }, {
+            dock: 'right',
+            xtype: 'toolbar',
+            items: [{
+                text: 'test'
+            }]
+        }, {
+            dock: 'left',
+            xtype: 'toolbar',
+            items: [{
+                text: 'test'
+            }]
+        }],
+        
         html       : 'Some content',
         frame      : true,
         collapsible: true
@@ -96,6 +120,7 @@ Ext.onReady(function() {
         closable   : false,
         draggable  : false,
         resizable: false,
+        animCollapse: true,
 
         tbar: [
             {text: 'Toolbar'}
@@ -191,27 +216,27 @@ Ext.onReady(function() {
         width : 630,
         height: 700,
         frame: true,
-
+                
         tools: [
-            {id:'toggle'},
-            {id:'close'},
-            {id:'minimize'},
-            {id:'maximize'},
-            {id:'restore'},
-            {id:'gear'},
-            {id:'pin'},
-            {id:'unpin'},
-            {id:'right'},
-            {id:'left'},
-            {id:'up'},
-            {id:'down'},
-            {id:'refresh'},
-            {id:'minus'},
-            {id:'plus'},
-            {id:'help'},
-            {id:'search'},
-            {id:'save'},
-            {id:'print'}
+            {type:'toggle'},
+            {type:'close'},
+            {type:'minimize'},
+            {type:'maximize'},
+            {type:'restore'},
+            {type:'gear'},
+            {type:'pin'},
+            {type:'unpin'},
+            {type:'right'},
+            {type:'left'},
+            {type:'up'},
+            {type:'down'},
+            {type:'refresh'},
+            {type:'minus'},
+            {type:'plus'},
+            {type:'help'},
+            {type:'search'},
+            {type:'save'},
+            {type:'print'}
         ],
 
         bodyPadding: '10 20',
@@ -231,38 +256,33 @@ Ext.onReady(function() {
                 fieldLabel: 'TextField',
                 xtype     : 'textfield',
                 name      : 'someField',
-                emptyText : 'Enter a value',
-                itemCls   : 'x-form-required'
+                emptyText : 'Enter a value'
             },
-            // {
-            //     fieldLabel: 'ComboBox',
-            //     xtype: 'combo',
-            //     store: ['Foo', 'Bar'],
-            //     itemCls: 'x-form-required'
-            // },
+            {
+                fieldLabel: 'ComboBox',
+                xtype: 'combo',
+                store: ['Foo', 'Bar']
+            },
             {
                 fieldLabel: 'DateField',
                 xtype     : 'datefield',
-                name      : 'date',
-                itemCls   : 'x-form-required'
+                name      : 'date'
             },
-            // {
-            //     fieldLabel: 'TimeField',
-            //     name: 'time',
-            //     itemCls: 'x-form-required',
-            //     xtype: 'textfield'
-            // },
-            // {
-            //     fieldLabel: 'NumberField',
-            //     xtype     : 'numberfield',
-            //     name      : 'number',
-            //     emptyText : '(This field is optional)',
-            //     allowBlank: true
-            // },
+            {
+                fieldLabel: 'TimeField',
+                name: 'time',
+                xtype: 'timefield'
+            },
+            {
+                fieldLabel: 'NumberField',
+                xtype     : 'numberfield',
+                name      : 'number',
+                emptyText : '(This field is optional)',
+                allowBlank: true
+            },
             {
                 fieldLabel: 'TextArea',
                 xtype     : 'textareafield',
-                itemCls   : 'x-form-required',
                 name      : 'message',
                 cls       : 'x-form-valid',
                 value     : 'This field is hard-coded to have the "valid" style (it will require some code changes to add/remove this style dynamically)'
@@ -290,20 +310,17 @@ Ext.onReady(function() {
             },
             {
                 xtype : 'fieldset',
-                title : 'Plain Fieldset',
-                height: 50
+                title : 'Plain Fieldset'
             },
             {
                 xtype      : 'fieldset',
                 title      : 'Collapsible Fieldset',
-                collapsible: true,
-                height     : 50
+                collapsible: true
             },
             {
                 xtype         : 'fieldset',
                 title         : 'Checkbox Fieldset',
-                checkboxToggle: true,
-                height        : 50
+                checkboxToggle: true
             }
         ],
 
@@ -311,7 +328,7 @@ Ext.onReady(function() {
             {
                 text   :'Toggle Enabled',
                 handler: function() {
-                    Ext.each(Ext.getCmp('form-widgets').getForm()._fields.items, function(item) {
+                    this.up('form').items.each(function(item) {
                         item.setDisabled(!item.disabled);
                     });
                 }
@@ -394,29 +411,36 @@ Ext.onReady(function() {
     /**
      * Grid
      */
-    var myData = [
-        ['3m Co',                               71.72, 0.02,  0.03],
-        ['Alcoa Inc',                           29.01, 0.42,  1.47],
-        ['Altria Group Inc',                    83.81, 0.28,  0.34],
-        ['Citigroup, Inc.',                     49.37, 0.02,  0.04]
-    ];
+     var myData = [
+         ['3m Co',71.72,0.02,0.03,'9/1 12:00am'],
+         ['Alcoa Inc',29.01,0.42,1.47,'9/1 12:00am'],
+         ['Altria Group Inc',83.81,0.28,0.34,'9/1 12:00am'],
+         ['American Express Company',52.55,0.01,0.02,'9/1 12:00am'],
+         ['American International Group, Inc.',64.13,0.31,0.49,'9/1 12:00am'],
+         ['AT&T Inc.',31.61,-0.48,-1.54,'9/1 12:00am'],
+         ['Boeing Co.',75.43,0.53,0.71,'9/1 12:00am'],
+         ['Caterpillar Inc.',67.27,0.92,1.39,'9/1 12:00am'],
+         ['Citigroup, Inc.',49.37,0.02,0.04,'9/1 12:00am'],
+         ['E.I. du Pont de Nemours and Company',40.48,0.51,1.28,'9/1 12:00am']
+     ];
 
     var store = Ext.create('Ext.data.ArrayStore', {
         fields: [
            {name: 'company'},
            {name: 'price', type: 'float'},
            {name: 'change', type: 'float'},
-           {name: 'pctChange', type: 'float'}
+           {name: 'pctChange', type: 'float'},
+           {name: 'lastChange', type: 'date', dateFormat: 'n/j h:ia'}
         ],
         sorters: {
             property : 'company',
             direction: 'ASC'
         },
-        data: myData
+        data: myData,
+        pageSize: 8
     });
 
     var pagingBar = Ext.createWidget('pagingtoolbar', {
-        pageSize   : 5,
         store      : store,
         displayInfo: true,
         displayMsg : 'Displaying topics {0} - {1} of {2}'
@@ -435,13 +459,12 @@ Ext.onReady(function() {
         store: store,
 
         columns: [
-            {header: "Company",      width: 160, sortable: true, dataIndex: 'company', id:'company'},
+            {header: "Company",      flex: 1, sortable: true, dataIndex: 'company'},
             {header: "Price",        width: 75,  sortable: true, dataIndex: 'price'},
             {header: "Change",       width: 75,  sortable: true, dataIndex: 'change'},
-            {header: "% Change",     width: 75,  sortable: true, dataIndex: 'pctChange'}
+            {header: "% Change",     width: 75,  sortable: true, dataIndex: 'pctChange'},
+            {header: "Last Updated", width: 85,  sortable: true, renderer: Ext.util.Format.dateRenderer('m/d/Y'), dataIndex: 'lastChange'}
         ],
-
-        autoExpandColumn: 'company',
         loadMask        : true,
 
         viewConfig: {
@@ -450,43 +473,39 @@ Ext.onReady(function() {
 
         bbar: pagingBar,
         tbar: [
-            {text: 'Toolbar'}
-         ]
+            {text: 'Toolbar'},
+            '->',
+            {
+                xtype: 'triggerfield',
+                trigger1Cls: Ext.baseCSSPrefix + 'form-clear-trigger',
+                trigger2Cls: Ext.baseCSSPrefix + 'form-search-trigger'
+            }
+        ]
     });
 
     //=============================================================
     // Accordion / Tree
     //=============================================================
-    // Ext.define('TreeItem', {
-    //     extend: 'Ext.data.Model',
-    //     fields: [
-    //         'text'
-    //     ]
-    // });
-    //
-    // var store = Ext.create('Ext.data.TreeStore', {
-    //     model: 'TreeItem'
-    // });
-    //
-    // sto
-    //
-    // var tree = Ext.create('Ext.tree.Panel', {
-    //     title: 'TreePanel'
-    //     //autoScroll: true,
-    //     //enableDD: true
-    // });
-
-    // var root = Ext.create('Ext.tree.TreeNode', {
-    //     text: 'Root Node',
-    //     expanded: true
-    // });
-    // tree.setRootNode(root);
-    //
-    // root.appendChild(Ext.create('Ext.tree.TreeNode', {text: 'Item 1'}));
-    // root.appendChild(Ext.create('Ext.tree.TreeNode', {text: 'Item 2'}));
-    // var node = Ext.create('Ext.tree.TreeNode', {text: 'Folder'});
-    // node.appendChild(Ext.create('Ext.tree.TreeNode', {text: 'Item 3'}));
-    // root.appendChild(node);
+    var tree = Ext.create('Ext.tree.Panel', {
+        title: 'TreePanel',
+        root: {
+            text: 'Root Node',
+            expanded: true,
+            children: [{
+                text: 'Item 1',
+                leaf: true
+            }, {
+                text: 'Item 2',
+                leaf: true
+            }, {
+                text: 'Folder',
+                children: [{
+                    text: 'Item 3',
+                    leaf: true
+                }]
+            }]
+        }
+    });
 
     var accConfig = {
         title : 'Accordion and TreePanel',
@@ -501,20 +520,11 @@ Ext.onReady(function() {
             'background-color': '#eee'
         },
 
-        defaults: {
-            border: false
-        },
-
         items: [
-            {
-                title: 'Item 1',
-                html: 'Some content'
-            },
-            {
+            tree, {
                 title: 'Item 2',
                 html: 'Some content'
-            },
-            {
+            }, {
                 title: 'Item 3',
                 html : 'Some content'
             }
@@ -628,8 +638,7 @@ Ext.onReady(function() {
      * ProgressBar / Slider
      */
     var progressbar = Ext.createWidget('progressbar', {
-        value: 0.5,
-        text : 'Progress text...'
+        value: 0.5
     });
 
     items.push({
@@ -665,29 +674,45 @@ Ext.onReady(function() {
         ]
     });
 
+    items.push({
+        width:250,
+        height:182,
+        x: 430, y: 1130,
+        collapsible: false,
+        xtype: 'gridpanel',
+        title: 'Framed Grid',
+        store: store,
+        multiSelect: true,
+        emptyText: 'No images to display',
+        frame: true,
+        enableColumnMove: false,
+        columns: [
+            {header: "Company",      flex: 1, sortable: true, dataIndex: 'company'},
+            {header: "Price",        width: 75,  sortable: true, dataIndex: 'price'},
+            {header: "Change",       width: 75,  sortable: true, dataIndex: 'change'}
+        ]
+    });
+
     Ext.createWidget('viewport', {
         layout: 'absolute',
         autoScroll: true,
         items: items
     });
 
-    progressbar.wait();
-
+    progressbar.wait({
+        text: 'Progress text...'
+    });
+        
     /**
      * Stylesheet Switcher
      */
     Ext.get('styleswitcher_select').on('change', function(e, select) {
-        var name = select[select.selectedIndex].value;
-        setActiveStyleSheet(name);
-
-        Ext.getBody().addCls('x-hide-visibility');
-        Ext.ComponentManager.each(function(id, c){c.doLayout && c.doLayout();});
-        Ext.getBody().removeCls('x-hide-visibility');
-
-        Ext.getCmp('htmleditor').initEditor();
+        var name = select[select.selectedIndex].value,
+            currentPath = window.location.pathname,
+            isCurrent = currentPath.match(name);
+        
+        if (!isCurrent) {
+            window.location = name;
+        }
     });
-
-    var cookie = readCookie("style");
-    var title = cookie ? cookie : getPreferredStyleSheet();
-    Ext.get('styleswitcher_select').dom.value = title;
 });
