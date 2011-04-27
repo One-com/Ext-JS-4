@@ -106,9 +106,31 @@ new Ext.data.writer.Writer({
             fields.each(function(field){
                 if (field.persist) {
                     name = field[nameProperty] || field.name;
-                    data[name] = record.get(field.name);
+                    var value = record.get(field.name);
+
+                    if (!(fields.map[name] && fields.map[name].optional === true && value === null)) {
+                        data[name] = record.get(field.name);
+                    }
                 }
             });
+
+            // Do deep serialization of inner Records
+            Ext.iterate(record.associations.map, function (name, association) {
+                if (association.inner === true) {
+                    var innerStore = record[name]();
+                    if (innerStore.getCount() > 0) {
+                        data[name] = [];
+                        innerStore.each(function (innerRecord) {
+                            var innerData = this.getRecordData(innerRecord);
+                            // Remove foreign keys that aren't needed with denormalized databases
+                            innerRecord.associations.each(function (association) {
+                                delete innerData[association.foreignKey];
+                            });
+                            data[name].push(innerData);
+                        }, this);
+                    }
+                }
+            }, this);
         } else {
             // Only write the changes
             changes = record.getChanges();
