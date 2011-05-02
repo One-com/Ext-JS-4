@@ -591,8 +591,7 @@ Ext.define('Ext.data.Model', {
 
         me.set(newData || data);
         // clear any dirty/modified since we're initializing
-        me.dirty = false;
-        me.modified = {};
+        me.unsetDirty();
 
         if (me.getId()) {
             me.phantom = false;
@@ -665,8 +664,7 @@ Ext.define('Ext.data.Model', {
             me[me.persistanceProperty][fieldName] = value;
             
             if (field && field.persist && !me.isEqual(currentValue, value)) {
-                me.dirty = true;
-                me.modified[fieldName] = currentValue;
+                me.setDirty();
             }
 
             if (!me.editing) {
@@ -789,6 +787,26 @@ Ext.define('Ext.data.Model', {
                 me.modified[name] = me.get(name);
             }
         }, me);
+
+        if (me.innerOf) {
+            me.innerOf.setDirty();
+        }
+    },
+
+    unsetDirty : function() {
+        var me = this;
+
+        me.dirty = false;
+        me.editing = false;
+        me.modified = {};
+
+        Ext.iterate(me.associations.map, function (key, value, scope) {
+            if (value.inner === true) {
+                this[key]().each(function (record) {
+                    record.unsetDirty();
+                });
+            }
+        }, me);
     },
 
     //<debug>
@@ -822,9 +840,7 @@ Ext.define('Ext.data.Model', {
             }
         }
 
-        me.dirty = false;
-        me.editing = false;
-        me.modified = {};
+        me.unsetDirty();
 
         if (silent !== true) {
             me.afterReject();
@@ -841,11 +857,8 @@ Ext.define('Ext.data.Model', {
      */
     commit : function(silent) {
         var me = this;
-        
-        me.dirty = false;
-        me.editing = false;
 
-        me.modified = {};
+        me.unsetDirty();
 
         if (silent !== true) {
             me.afterCommit();
@@ -957,6 +970,9 @@ Ext.data.Model.id(rec); // automatically generate a unique sequential id
      * @return {Ext.data.Model} The Model instance
      */
     save: function(options) {
+        if (this.innerOf) {
+            return this.innerOf.save(options);
+        }
         options = Ext.apply({}, options);
 
         var me     = this,
@@ -979,7 +995,7 @@ Ext.data.Model.id(rec); // automatically generate a unique sequential id
                 //we need to make sure we've set the updated data here. Ideally this will be redundant once the
                 //ModelCache is in place
                 me.set(record.data);
-                record.dirty = false;
+                record.unsetDirty();
 
                 Ext.callback(options.success, scope, [record, operation]);
             } else {
