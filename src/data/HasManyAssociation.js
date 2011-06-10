@@ -295,5 +295,11 @@ associations: [{
                 associatedRecord[inverse.instanceName] = record;
             });
         }
+
+        if (this.inner) {
+            store.data.each(function(associatedRecord){
+                associatedRecord.innerOf = record;
+            });
+        }
     }
 });
