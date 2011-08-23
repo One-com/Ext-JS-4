@@ -542,6 +542,14 @@ and a property `descEl` referencing the `div` Element which contains the descrip
      */
     rendered: false,
 
+<span id='Ext-AbstractComponent-property-componentLayoutCounter'>    /**
+</span>     * The number of component layout calls made on this object.
+     * @property componentLayoutCounter
+     * @type {Number}
+     * @private
+     */
+    componentLayoutCounter: 0,
+
     weight: 0,
 
     trimRe: /^\s+|\s+$/g,
@@ -798,7 +806,15 @@ and a property `descEl` referencing the `div` Element which contains the descrip
         // If we have flex, only store the perpendicular dimension.
         if (layout &amp;&amp; me.flex) {
             state.flex = me.flex;
-            state[layout.perpendicularPrefix] = me['get' + layout.perpendicularPrefixCap]();
+            if (layout.perpendicularPrefix) {
+                state[layout.perpendicularPrefix] = me['get' + layout.perpendicularPrefixCap]();
+            } else {
+                //&lt;debug&gt;
+                if (Ext.isDefined(Ext.global.console)) {
+                    Ext.global.console.warn('Ext.Component: Specified a flex value on a component not inside a Box layout');
+                }
+                //&lt;/debug&gt;
+            }
         }
         // If we have anchor, only store dimensions which are *not* being anchored
         else if (layout &amp;&amp; me.anchor) {
@@ -1080,6 +1096,12 @@ and a property `descEl` referencing the `div` Element which contains the descrip
         // Set the size if a size is configured, or if this is the outermost Container
         if (!me.ownerCt || (me.height || me.width)) {
             me.setSize(me.width, me.height);
+        } else {
+            // It is expected that child items be rendered before this method returns and
+            // the afterrender event fires. Since we aren't going to do the layout now, we
+            // must render the child items. This is handled implicitly above in the layout
+            // caused by setSize.
+            me.renderChildren();
         }
 
         // For floaters, calculate x and y if they aren't defined by aligning
@@ -1103,6 +1125,15 @@ and a property `descEl` referencing the `div` Element which contains the descrip
         if (me.styleHtmlContent) {
             me.getTargetEl().addCls(me.styleHtmlCls);
         }
+    },
+
+    renderChildren: function () {
+        var me = this,
+            layout = me.getComponentLayout();
+
+        me.suspendLayout = true;
+        layout.renderChildren();
+        delete me.suspendLayout;
     },
 
     frameCls: Ext.baseCSSPrefix + 'frame',
@@ -2720,6 +2751,7 @@ alert(t.getXTypes());  // alerts 'component/field/textfield'
      * @param {Ext.Component} callingContainer Container requesting the layout. Only used when isSetSize is false.
      */
     afterComponentLayout: function(width, height, isSetSize, callingContainer) {
+        ++this.componentLayoutCounter;
         this.fireEvent('resize', this, width, height);
     },
 

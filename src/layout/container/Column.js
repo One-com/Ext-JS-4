@@ -171,9 +171,9 @@ Ext.define('Ext.layout.container.Column', {
             item = items[i];
             if (item.columnWidth) {
                 columnWidth = Math.floor(item.columnWidth * availableWidth) - parallelMargins[i];
-                if (item.getWidth() != columnWidth) {
-                    me.setItemSize(item, columnWidth, item.height);
-                }
+                me.setItemSize(item, columnWidth, item.height);
+            } else {
+                me.layoutItem(item);
             }
         }
 
@@ -198,12 +198,10 @@ Ext.define('Ext.layout.container.Column', {
     },
 
     configureItem: function(item) {
+        this.callParent(arguments);
+
         if (item.columnWidth) {
             item.layoutManagedWidth = 1;
-        } else {
-            item.layoutManagedWidth = 2;
         }
-        item.layoutManagedHeight = 2;
-        this.callParent(arguments);
     }
 });

@@ -1,24 +1,27 @@
 Ext.data.JsonP.Ext_ClassManager({
-  "allMixins": [
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+
+  ],
+  "inheritable": false,
+  "subclasses": [
 
   ],
   "deprecated": null,
-  "docauthor": "Jacky Nguyen <jacky@sencha.com>",
+  "allMixins": [
+
+  ],
+  "href": "ClassManager.html#Ext-ClassManager",
   "members": {
     "cfg": [
 
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-create",
-        "shortDoc": "Defines a class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -39,26 +42,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "createdFn"
           }
         ],
-        "name": "create",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Defines a class.</p>\n\n<pre><code>Ext.ClassManager.create('My.awesome.Class', {\n    someProperty: 'something',\n    someMethod: function() { ... }\n    ...\n\n}, function() {\n    alert('Created!');\n    alert(this === My.awesome.Class); // alerts true\n\n    var myInstance = new this();\n});\n</code></pre>\n\n<p><a href=\"#/api/Ext-method-define\" rel=\"Ext-method-define\" class=\"docClass\">Ext.define</a> is alias for <a href=\"#/api/Ext.ClassManager-method-create\" rel=\"Ext.ClassManager-method-create\" class=\"docClass\">Ext.ClassManager.create</a>.</p>\n",
-        "linenr": 396,
+        "href": "ClassManager.html#Ext-ClassManager-method-create",
         "return": {
           "type": "Ext.Base",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Defines a class. ...",
+        "static": false,
+        "name": "create",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Defines a class.</p>\n\n<pre><code>Ext.ClassManager.create('My.awesome.Class', {\n    someProperty: 'something',\n    someMethod: function() { ... }\n    ...\n\n}, function() {\n    alert('Created!');\n    alert(this === My.awesome.Class); // alerts true\n\n    var myInstance = new this();\n});\n</code></pre>\n\n<p><a href=\"#/api/Ext-method-define\" rel=\"Ext-method-define\" class=\"docClass\">Ext.define</a> is alias for <a href=\"#/api/Ext.ClassManager-method-create\" rel=\"Ext.ClassManager-method-create\" class=\"docClass\">Ext.ClassManager.create</a>.</p>\n",
+        "linenr": 396,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-get",
-        "shortDoc": "Retrieve a class by its name. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -67,26 +71,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "name"
           }
         ],
-        "name": "get",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Retrieve a class by its name.</p>\n",
-        "linenr": 254,
+        "href": "ClassManager.html#Ext-ClassManager-method-get",
         "return": {
           "type": "Class",
           "doc": "<p>class</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Retrieve a class by its name. ...",
+        "static": false,
+        "name": "get",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Retrieve a class by its name.</p>\n",
+        "linenr": 254,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-getAliasesByName",
-        "shortDoc": "Get the aliases of a class by the class name ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -95,26 +100,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "name"
           }
         ],
-        "name": "getAliasesByName",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Get the aliases of a class by the class name</p>\n",
-        "linenr": 355,
+        "href": "ClassManager.html#Ext-ClassManager-method-getAliasesByName",
         "return": {
           "type": "Array",
           "doc": "<p>aliases</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Get the aliases of a class by the class name ...",
+        "static": false,
+        "name": "getAliasesByName",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Get the aliases of a class by the class name</p>\n",
+        "linenr": 355,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-getByAlias",
-        "shortDoc": "Get a reference to the class by its alias. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -123,26 +129,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "alias"
           }
         ],
-        "name": "getByAlias",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Get a reference to the class by its alias.</p>\n",
-        "linenr": 325,
+        "href": "ClassManager.html#Ext-ClassManager-method-getByAlias",
         "return": {
           "type": "Class",
           "doc": "<p>class</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Get a reference to the class by its alias. ...",
+        "static": false,
+        "name": "getByAlias",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Get a reference to the class by its alias.</p>\n",
+        "linenr": 325,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-getClass",
-        "shortDoc": "Get the class of the provided object; returns null if it's not an instance\nof any class created with Ext.define. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -151,26 +158,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "object"
           }
         ],
-        "name": "getClass",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Get the class of the provided object; returns null if it's not an instance\nof any class created with Ext.define.</p>\n\n<pre><code>var component = new Ext.Component();\n\nExt.ClassManager.getClass(component); // returns <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a>\n</code></pre>\n\n<p><a href=\"#/api/Ext-method-getClass\" rel=\"Ext-method-getClass\" class=\"docClass\">Ext.getClass</a> is alias for <a href=\"#/api/Ext.ClassManager-method-getClass\" rel=\"Ext.ClassManager-method-getClass\" class=\"docClass\">Ext.ClassManager.getClass</a>.</p>\n",
-        "linenr": 379,
+        "href": "ClassManager.html#Ext-ClassManager-method-getClass",
         "return": {
           "type": "Class",
           "doc": "<p>class</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Get the class of the provided object; returns null if it's not an instance\nof any class created with Ext.define. ...",
+        "static": false,
+        "name": "getClass",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Get the class of the provided object; returns null if it's not an instance\nof any class created with Ext.define.</p>\n\n<pre><code>var component = new Ext.Component();\n\nExt.ClassManager.getClass(component); // returns <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a>\n</code></pre>\n\n<p><a href=\"#/api/Ext-method-getClass\" rel=\"Ext-method-getClass\" class=\"docClass\">Ext.getClass</a> is alias for <a href=\"#/api/Ext.ClassManager-method-getClass\" rel=\"Ext.ClassManager-method-getClass\" class=\"docClass\">Ext.ClassManager.getClass</a>.</p>\n",
+        "linenr": 379,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-getDisplayName",
-        "shortDoc": " ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "Mixed",
@@ -179,26 +187,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "object"
           }
         ],
-        "name": "getDisplayName",
-        "owner": "Ext.ClassManager",
-        "doc": "\n",
-        "linenr": 1065,
+        "href": "ClassManager.html#Ext-ClassManager-method-getDisplayName",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": " ...",
+        "static": false,
+        "name": "getDisplayName",
+        "owner": "Ext.ClassManager",
+        "doc": "\n",
+        "linenr": 1065,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-getName",
-        "shortDoc": "Get the name of the class by its reference or its instance. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "Class/Object",
@@ -207,26 +216,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "object"
           }
         ],
-        "name": "getName",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Get the name of the class by its reference or its instance.</p>\n\n<pre><code>Ext.ClassManager.getName(Ext.Action); // returns \"Ext.Action\"\n</code></pre>\n\n<p><a href=\"#/api/Ext-method-getClassName\" rel=\"Ext-method-getClassName\" class=\"docClass\">Ext.getClassName</a> is alias for <a href=\"#/api/Ext.ClassManager-method-getName\" rel=\"Ext.ClassManager-method-getName\" class=\"docClass\">Ext.ClassManager.getName</a>.</p>\n",
-        "linenr": 365,
+        "href": "ClassManager.html#Ext-ClassManager-method-getName",
         "return": {
           "type": "String",
           "doc": "<p>className</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Get the name of the class by its reference or its instance. ...",
+        "static": false,
+        "name": "getName",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Get the name of the class by its reference or its instance.</p>\n\n<pre><code>Ext.ClassManager.getName(Ext.Action); // returns \"Ext.Action\"\n</code></pre>\n\n<p><a href=\"#/api/Ext-method-getClassName\" rel=\"Ext-method-getClassName\" class=\"docClass\">Ext.getClassName</a> is alias for <a href=\"#/api/Ext.ClassManager-method-getName\" rel=\"Ext.ClassManager-method-getName\" class=\"docClass\">Ext.ClassManager.getName</a>.</p>\n",
+        "linenr": 365,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-getNameByAlias",
-        "shortDoc": "Get the name of a class by its alias. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -235,26 +245,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "alias"
           }
         ],
-        "name": "getNameByAlias",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Get the name of a class by its alias.</p>\n",
-        "linenr": 335,
+        "href": "ClassManager.html#Ext-ClassManager-method-getNameByAlias",
         "return": {
           "type": "String",
           "doc": "<p>className</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Get the name of a class by its alias. ...",
+        "static": false,
+        "name": "getNameByAlias",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Get the name of a class by its alias.</p>\n",
+        "linenr": 335,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-getNameByAlternate",
-        "shortDoc": "Get the name of a class by its alternate name. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -263,26 +274,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "alternate"
           }
         ],
-        "name": "getNameByAlternate",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Get the name of a class by its alternate name.</p>\n",
-        "linenr": 345,
+        "href": "ClassManager.html#Ext-ClassManager-method-getNameByAlternate",
         "return": {
           "type": "String",
           "doc": "<p>className</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Get the name of a class by its alternate name. ...",
+        "static": false,
+        "name": "getNameByAlternate",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Get the name of a class by its alternate name.</p>\n",
+        "linenr": 345,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-getNamesByExpression",
-        "shortDoc": "Converts a string expression to an array of matching class names. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -291,26 +303,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "expression"
           }
         ],
-        "name": "getNamesByExpression",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Converts a string expression to an array of matching class names. An expression can either refers to class aliases\nor class names. Expressions support wildcards:</p>\n\n<pre><code>// returns ['Ext.window.Window']\nvar window = Ext.ClassManager.getNamesByExpression('widget.window');\n\n// returns ['widget.panel', 'widget.window', ...]\nvar allWidgets = Ext.ClassManager.getNamesByExpression('widget.*');\n\n// returns ['Ext.data.Store', 'Ext.data.ArrayProxy', ...]\nvar allData = Ext.ClassManager.getNamesByExpression('Ext.data.*');\n</code></pre>\n",
-        "linenr": 774,
+        "href": "ClassManager.html#Ext-ClassManager-method-getNamesByExpression",
         "return": {
           "type": "Array",
           "doc": "<p>classNames</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Converts a string expression to an array of matching class names. ...",
+        "static": false,
+        "name": "getNamesByExpression",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Converts a string expression to an array of matching class names. An expression can either refers to class aliases\nor class names. Expressions support wildcards:</p>\n\n<pre><code>// returns ['Ext.window.Window']\nvar window = Ext.ClassManager.getNamesByExpression('widget.window');\n\n// returns ['widget.panel', 'widget.window', ...]\nvar allWidgets = Ext.ClassManager.getNamesByExpression('widget.*');\n\n// returns ['Ext.data.Store', 'Ext.data.ArrayProxy', ...]\nvar allData = Ext.ClassManager.getNamesByExpression('Ext.data.*');\n</code></pre>\n",
+        "linenr": 774,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-instantiate",
-        "shortDoc": "Instantiate a class by either full name, alias or alternate name. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -325,26 +338,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "args"
           }
         ],
-        "name": "instantiate",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Instantiate a class by either full name, alias or alternate name.</p>\n\n<p>If <a href=\"#/api/Ext.Loader\" rel=\"Ext.Loader\" class=\"docClass\">Ext.Loader</a> is <a href=\"#/api/Ext.Loader-method-setConfig\" rel=\"Ext.Loader-method-setConfig\" class=\"docClass\">enabled</a> and the class has not been defined yet, it will\nattempt to load the class via synchronous loading.</p>\n\n<p>For example, all these three lines return the same result:</p>\n\n<pre><code>// alias\nvar window = Ext.ClassManager.instantiate('widget.window', { width: 600, height: 800, ... });\n\n// alternate name\nvar window = Ext.ClassManager.instantiate('Ext.Window', { width: 600, height: 800, ... });\n\n// full class name\nvar window = Ext.ClassManager.instantiate('Ext.window.Window', { width: 600, height: 800, ... });\n</code></pre>\n\n<p><a href=\"#/api/Ext-method-create\" rel=\"Ext-method-create\" class=\"docClass\">Ext.create</a> is alias for <a href=\"#/api/Ext.ClassManager-method-instantiate\" rel=\"Ext.ClassManager-method-instantiate\" class=\"docClass\">Ext.ClassManager.instantiate</a>.</p>\n",
-        "linenr": 555,
+        "href": "ClassManager.html#Ext-ClassManager-method-instantiate",
         "return": {
           "type": "Object",
           "doc": "<p>instance</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Instantiate a class by either full name, alias or alternate name. ...",
+        "static": false,
+        "name": "instantiate",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Instantiate a class by either full name, alias or alternate name.</p>\n\n<p>If <a href=\"#/api/Ext.Loader\" rel=\"Ext.Loader\" class=\"docClass\">Ext.Loader</a> is <a href=\"#/api/Ext.Loader-method-setConfig\" rel=\"Ext.Loader-method-setConfig\" class=\"docClass\">enabled</a> and the class has not been defined yet, it will\nattempt to load the class via synchronous loading.</p>\n\n<p>For example, all these three lines return the same result:</p>\n\n<pre><code>// alias\nvar window = Ext.ClassManager.instantiate('widget.window', { width: 600, height: 800, ... });\n\n// alternate name\nvar window = Ext.ClassManager.instantiate('Ext.Window', { width: 600, height: 800, ... });\n\n// full class name\nvar window = Ext.ClassManager.instantiate('Ext.window.Window', { width: 600, height: 800, ... });\n</code></pre>\n\n<p><a href=\"#/api/Ext-method-create\" rel=\"Ext-method-create\" class=\"docClass\">Ext.create</a> is alias for <a href=\"#/api/Ext.ClassManager-method-instantiate\" rel=\"Ext.ClassManager-method-instantiate\" class=\"docClass\">Ext.ClassManager.instantiate</a>.</p>\n",
+        "linenr": 555,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-instantiateByAlias",
-        "shortDoc": "Instantiate a class by its alias. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -359,26 +373,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "args"
           }
         ],
-        "name": "instantiateByAlias",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Instantiate a class by its alias.</p>\n\n<p>If <a href=\"#/api/Ext.Loader\" rel=\"Ext.Loader\" class=\"docClass\">Ext.Loader</a> is <a href=\"#/api/Ext.Loader-method-setConfig\" rel=\"Ext.Loader-method-setConfig\" class=\"docClass\">enabled</a> and the class has not been defined yet, it will\nattempt to load the class via synchronous loading.</p>\n\n<pre><code>var window = Ext.ClassManager.instantiateByAlias('widget.window', { width: 600, height: 800, ... });\n</code></pre>\n\n<p><a href=\"#/api/Ext-method-createByAlias\" rel=\"Ext-method-createByAlias\" class=\"docClass\">Ext.createByAlias</a> is alias for <a href=\"#/api/Ext.ClassManager-method-instantiateByAlias\" rel=\"Ext.ClassManager-method-instantiateByAlias\" class=\"docClass\">Ext.ClassManager.instantiateByAlias</a>.</p>\n",
-        "linenr": 507,
+        "href": "ClassManager.html#Ext-ClassManager-method-instantiateByAlias",
         "return": {
           "type": "Object",
           "doc": "<p>instance</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Instantiate a class by its alias. ...",
+        "static": false,
+        "name": "instantiateByAlias",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Instantiate a class by its alias.</p>\n\n<p>If <a href=\"#/api/Ext.Loader\" rel=\"Ext.Loader\" class=\"docClass\">Ext.Loader</a> is <a href=\"#/api/Ext.Loader-method-setConfig\" rel=\"Ext.Loader-method-setConfig\" class=\"docClass\">enabled</a> and the class has not been defined yet, it will\nattempt to load the class via synchronous loading.</p>\n\n<pre><code>var window = Ext.ClassManager.instantiateByAlias('widget.window', { width: 600, height: 800, ... });\n</code></pre>\n\n<p><a href=\"#/api/Ext-method-createByAlias\" rel=\"Ext-method-createByAlias\" class=\"docClass\">Ext.createByAlias</a> is alias for <a href=\"#/api/Ext.ClassManager-method-instantiateByAlias\" rel=\"Ext.ClassManager-method-instantiateByAlias\" class=\"docClass\">Ext.ClassManager.instantiateByAlias</a>.</p>\n",
+        "linenr": 507,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-isCreated",
-        "shortDoc": "Checks if a class has already been created. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -387,26 +402,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "className"
           }
         ],
-        "name": "isCreated",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Checks if a class has already been created.</p>\n",
-        "linenr": 68,
+        "href": "ClassManager.html#Ext-ClassManager-method-isCreated",
         "return": {
           "type": "Boolean",
           "doc": "<p>exist</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Checks if a class has already been created. ...",
+        "static": false,
+        "name": "isCreated",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Checks if a class has already been created.</p>\n",
+        "linenr": 68,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-registerPostprocessor",
-        "shortDoc": "Register a post-processor function. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -427,26 +443,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "always"
           }
         ],
-        "name": "registerPostprocessor",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Register a post-processor function.</p>\n",
-        "linenr": 707,
+        "href": "ClassManager.html#Ext-ClassManager-method-registerPostprocessor",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Register a post-processor function. ...",
+        "static": false,
+        "name": "registerPostprocessor",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Register a post-processor function.</p>\n",
+        "linenr": 707,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-set",
-        "shortDoc": "Sets a name reference to a class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -461,26 +478,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "value"
           }
         ],
-        "name": "set",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Sets a name reference to a class.</p>\n",
-        "linenr": 235,
+        "href": "ClassManager.html#Ext-ClassManager-method-set",
         "return": {
           "type": "Ext.ClassManager",
           "doc": "<p>this</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Sets a name reference to a class. ...",
+        "static": false,
+        "name": "set",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Sets a name reference to a class.</p>\n",
+        "linenr": 235,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-setAlias",
-        "shortDoc": "Register the alias for a class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "Class/String",
@@ -495,26 +513,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "alias"
           }
         ],
-        "name": "setAlias",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Register the alias for a class.</p>\n",
-        "linenr": 286,
+        "href": "ClassManager.html#Ext-ClassManager-method-setAlias",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Register the alias for a class. ...",
+        "static": false,
+        "name": "setAlias",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Register the alias for a class.</p>\n",
+        "linenr": 286,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-setDefaultPostprocessorPosition",
-        "shortDoc": "Insert this post-processor at a specific position in the stack, optionally relative to\nany existing post-processor ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -535,26 +554,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "relativeName"
           }
         ],
-        "name": "setDefaultPostprocessorPosition",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Insert this post-processor at a specific position in the stack, optionally relative to\nany existing post-processor</p>\n",
-        "linenr": 735,
+        "href": "ClassManager.html#Ext-ClassManager-method-setDefaultPostprocessorPosition",
         "return": {
           "type": "Ext.ClassManager",
           "doc": "<p>this</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Insert this post-processor at a specific position in the stack, optionally relative to\nany existing post-processor ...",
+        "static": false,
+        "name": "setDefaultPostprocessorPosition",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Insert this post-processor at a specific position in the stack, optionally relative to\nany existing post-processor</p>\n",
+        "linenr": 735,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-setDefaultPostprocessors",
-        "shortDoc": "Set the default post processors array stack which are applied to every class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String/Array",
@@ -563,26 +583,27 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "The"
           }
         ],
-        "name": "setDefaultPostprocessors",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Set the default post processors array stack which are applied to every class.</p>\n",
-        "linenr": 723,
+        "href": "ClassManager.html#Ext-ClassManager-method-setDefaultPostprocessors",
         "return": {
           "type": "Ext.ClassManager",
           "doc": "<p>this</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Set the default post processors array stack which are applied to every class. ...",
+        "static": false,
+        "name": "setDefaultPostprocessors",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Set the default post processors array stack which are applied to every class.</p>\n",
+        "linenr": 723,
         "html_filename": "ClassManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ClassManager.html#Ext-ClassManager-method-setNamespace",
-        "shortDoc": "Creates a namespace and assign the value to the created object\n\nExt.ClassManager.setNamespace('MyCompany.pkg.Example'...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -597,61 +618,80 @@ Ext.data.JsonP.Ext_ClassManager({
             "name": "value"
           }
         ],
-        "name": "setNamespace",
-        "owner": "Ext.ClassManager",
-        "doc": "<p>Creates a namespace and assign the <code>value</code> to the created object</p>\n\n<pre><code>Ext.ClassManager.setNamespace('MyCompany.pkg.Example', someObject);\n\nalert(MyCompany.pkg.Example === someObject); // alerts true\n</code></pre>\n",
-        "linenr": 171,
+        "href": "ClassManager.html#Ext-ClassManager-method-setNamespace",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
+        "private": false,
+        "shortDoc": "Creates a namespace and assign the value to the created object\n\nExt.ClassManager.setNamespace('MyCompany.pkg.Example'...",
+        "static": false,
+        "name": "setNamespace",
+        "owner": "Ext.ClassManager",
+        "doc": "<p>Creates a namespace and assign the <code>value</code> to the created object</p>\n\n<pre><code>Ext.ClassManager.setNamespace('MyCompany.pkg.Example', someObject);\n\nalert(MyCompany.pkg.Example === someObject); // alerts true\n</code></pre>\n",
+        "linenr": 171,
         "html_filename": "ClassManager.html"
       }
     ],
-    "property": [
-
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
 
     ]
   },
   "singleton": true,
-  "alias": null,
-  "superclasses": [
-
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "ClassManager.html#Ext-ClassManager",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": "Jacky Nguyen <jacky@sencha.com>",
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/ClassManager.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.ClassManager",
   "doc": "<p>Ext.ClassManager manages all classes and handles mapping from string class name to\nactual class objects throughout the whole framework. It is not generally accessed directly, rather through\nthese convenient shorthands:</p>\n\n<ul>\n<li><a href=\"#/api/Ext-method-define\" rel=\"Ext-method-define\" class=\"docClass\">Ext.define</a></li>\n<li><a href=\"#/api/Ext-method-create\" rel=\"Ext-method-create\" class=\"docClass\">Ext.create</a></li>\n<li><a href=\"#/api/Ext-method-widget\" rel=\"Ext-method-widget\" class=\"docClass\">Ext.widget</a></li>\n<li><a href=\"#/api/Ext-method-getClass\" rel=\"Ext-method-getClass\" class=\"docClass\">Ext.getClass</a></li>\n<li><a href=\"#/api/Ext-method-getClassName\" rel=\"Ext-method-getClassName\" class=\"docClass\">Ext.getClassName</a></li>\n</ul>\n\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": "Jacky Nguyen <jacky@sencha.com>",
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "ClassManager.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": null
 });

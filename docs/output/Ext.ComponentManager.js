@@ -1,24 +1,27 @@
 Ext.data.JsonP.Ext_ComponentManager({
-  "allMixins": [
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.AbstractManager"
+  ],
+  "inheritable": false,
+  "subclasses": [
 
   ],
   "deprecated": null,
-  "docauthor": null,
+  "allMixins": [
+
+  ],
+  "href": "ComponentManager.html#Ext-ComponentManager",
   "members": {
     "cfg": [
 
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ComponentManager.html#Ext-ComponentManager-method-create",
-        "shortDoc": "Creates a new Component from the specified config object using the\nconfig object's xtype to determine the class to in...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ComponentManager.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -33,26 +36,27 @@ Ext.data.JsonP.Ext_ComponentManager({
             "name": "defaultType"
           }
         ],
-        "name": "create",
-        "owner": "Ext.ComponentManager",
-        "doc": "<p>Creates a new Component from the specified config object using the\nconfig object's xtype to determine the class to instantiate.</p>\n",
-        "linenr": 25,
+        "href": "ComponentManager.html#Ext-ComponentManager-method-create",
         "return": {
           "type": "Ext.Component",
           "doc": "<p>The newly instantiated Component.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ComponentManager.js",
+        "private": false,
+        "shortDoc": "Creates a new Component from the specified config object using the\nconfig object's xtype to determine the class to in...",
+        "static": false,
+        "name": "create",
+        "owner": "Ext.ComponentManager",
+        "doc": "<p>Creates a new Component from the specified config object using the\nconfig object's xtype to determine the class to instantiate.</p>\n",
+        "linenr": 25,
         "html_filename": "ComponentManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractManager.html#Ext-AbstractManager-method-each",
-        "shortDoc": "Executes the specified function once for each item in the collection. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -67,26 +71,27 @@ Ext.data.JsonP.Ext_ComponentManager({
             "name": "scope"
           }
         ],
-        "name": "each",
-        "owner": "Ext.AbstractManager",
-        "doc": "<p>Executes the specified function once for each item in the collection.\nReturning false from the function will cease iteration.</p>\n\n<p>The paramaters passed to the function are:</p>\n\n<div class=\"mdetail-params\"><ul>\n<li><b>key</b> : String<p class=\"sub-desc\">The key of the item</p></li>\n<li><b>value</b> : Number<p class=\"sub-desc\">The value of the item</p></li>\n<li><b>length</b> : Number<p class=\"sub-desc\">The total number of items in the collection</p></li>\n</ul></div>\n\n",
-        "linenr": 116,
+        "href": "AbstractManager.html#Ext-AbstractManager-method-each",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
+        "private": false,
+        "shortDoc": "Executes the specified function once for each item in the collection. ...",
+        "static": false,
+        "name": "each",
+        "owner": "Ext.AbstractManager",
+        "doc": "<p>Executes the specified function once for each item in the collection.\nReturning false from the function will cease iteration.</p>\n\n<p>The paramaters passed to the function are:</p>\n\n<div class=\"mdetail-params\"><ul>\n<li><b>key</b> : String<p class=\"sub-desc\">The key of the item</p></li>\n<li><b>value</b> : Number<p class=\"sub-desc\">The value of the item</p></li>\n<li><b>length</b> : Number<p class=\"sub-desc\">The total number of items in the collection</p></li>\n</ul></div>\n\n",
+        "linenr": 116,
         "html_filename": "AbstractManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractManager.html#Ext-AbstractManager-method-get",
-        "shortDoc": "Returns an item by id. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -95,49 +100,51 @@ Ext.data.JsonP.Ext_ComponentManager({
             "name": "id"
           }
         ],
-        "name": "get",
-        "owner": "Ext.AbstractManager",
-        "doc": "<p>Returns an item by id.\nFor additional details see <a href=\"#/api/Ext.util.HashMap-method-get\" rel=\"Ext.util.HashMap-method-get\" class=\"docClass\">Ext.util.HashMap.get</a>.</p>\n",
-        "linenr": 29,
+        "href": "AbstractManager.html#Ext-AbstractManager-method-get",
         "return": {
           "type": "Mixed",
           "doc": "<p>The item, <code>undefined</code> if not found.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
+        "private": false,
+        "shortDoc": "Returns an item by id. ...",
+        "static": false,
+        "name": "get",
+        "owner": "Ext.AbstractManager",
+        "doc": "<p>Returns an item by id.\nFor additional details see <a href=\"#/api/Ext.util.HashMap-method-get\" rel=\"Ext.util.HashMap-method-get\" class=\"docClass\">Ext.util.HashMap.get</a>.</p>\n",
+        "linenr": 29,
         "html_filename": "AbstractManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractManager.html#Ext-AbstractManager-method-getCount",
-        "shortDoc": "Gets the number of items in the collection. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getCount",
-        "owner": "Ext.AbstractManager",
-        "doc": "<p>Gets the number of items in the collection.</p>\n",
-        "linenr": 133,
+        "href": "AbstractManager.html#Ext-AbstractManager-method-getCount",
         "return": {
           "type": "Number",
           "doc": "<p>The number of items in the collection.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
+        "private": false,
+        "shortDoc": "Gets the number of items in the collection. ...",
+        "static": false,
+        "name": "getCount",
+        "owner": "Ext.AbstractManager",
+        "doc": "<p>Gets the number of items in the collection.</p>\n",
+        "linenr": 133,
         "html_filename": "AbstractManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractManager.html#Ext-AbstractManager-method-isRegistered",
-        "shortDoc": "Checks if an item type is registered. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -146,26 +153,27 @@ Ext.data.JsonP.Ext_ComponentManager({
             "name": "type"
           }
         ],
-        "name": "isRegistered",
-        "owner": "Ext.AbstractManager",
-        "doc": "<p>Checks if an item type is registered.</p>\n",
-        "linenr": 65,
+        "href": "AbstractManager.html#Ext-AbstractManager-method-isRegistered",
         "return": {
           "type": "Boolean",
           "doc": "<p>Whether the type is registered.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
+        "private": false,
+        "shortDoc": "Checks if an item type is registered. ...",
+        "static": false,
+        "name": "isRegistered",
+        "owner": "Ext.AbstractManager",
+        "doc": "<p>Checks if an item type is registered.</p>\n",
+        "linenr": 65,
         "html_filename": "AbstractManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractManager.html#Ext-AbstractManager-method-onAvailable",
-        "shortDoc": "Registers a function that will be called when an item with the specified id is added to the manager. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -186,26 +194,27 @@ Ext.data.JsonP.Ext_ComponentManager({
             "name": "scope"
           }
         ],
-        "name": "onAvailable",
-        "owner": "Ext.AbstractManager",
-        "doc": "<p>Registers a function that will be called when an item with the specified id is added to the manager. This will happen on instantiation.</p>\n",
-        "linenr": 93,
+        "href": "AbstractManager.html#Ext-AbstractManager-method-onAvailable",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
+        "private": false,
+        "shortDoc": "Registers a function that will be called when an item with the specified id is added to the manager. ...",
+        "static": false,
+        "name": "onAvailable",
+        "owner": "Ext.AbstractManager",
+        "doc": "<p>Registers a function that will be called when an item with the specified id is added to the manager. This will happen on instantiation.</p>\n",
+        "linenr": 93,
         "html_filename": "AbstractManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractManager.html#Ext-AbstractManager-method-register",
-        "shortDoc": "Registers an item to be managed ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
-        "private": false,
         "params": [
           {
             "type": "Mixed",
@@ -214,26 +223,27 @@ Ext.data.JsonP.Ext_ComponentManager({
             "name": "item"
           }
         ],
-        "name": "register",
-        "owner": "Ext.AbstractManager",
-        "doc": "<p>Registers an item to be managed</p>\n",
-        "linenr": 39,
+        "href": "AbstractManager.html#Ext-AbstractManager-method-register",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
+        "private": false,
+        "shortDoc": "Registers an item to be managed ...",
+        "static": false,
+        "name": "register",
+        "owner": "Ext.AbstractManager",
+        "doc": "<p>Registers an item to be managed</p>\n",
+        "linenr": 39,
         "html_filename": "AbstractManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractManager.html#Ext-AbstractManager-method-registerType",
-        "shortDoc": "Registers a new item constructor, keyed by a type key. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -248,26 +258,27 @@ Ext.data.JsonP.Ext_ComponentManager({
             "name": "cls"
           }
         ],
-        "name": "registerType",
-        "owner": "Ext.AbstractManager",
-        "doc": "<p>Registers a new item constructor, keyed by a type key.\n\n",
-        "linenr": 55,
+        "href": "AbstractManager.html#Ext-AbstractManager-method-registerType",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
+        "private": false,
+        "shortDoc": "Registers a new item constructor, keyed by a type key. ...",
+        "static": false,
+        "name": "registerType",
+        "owner": "Ext.AbstractManager",
+        "doc": "<p>Registers a new item constructor, keyed by a type key.\n\n",
+        "linenr": 55,
         "html_filename": "AbstractManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractManager.html#Ext-AbstractManager-method-unregister",
-        "shortDoc": "Unregisters an item by removing it from this manager ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
-        "private": false,
         "params": [
           {
             "type": "Mixed",
@@ -276,76 +287,96 @@ Ext.data.JsonP.Ext_ComponentManager({
             "name": "item"
           }
         ],
-        "name": "unregister",
-        "owner": "Ext.AbstractManager",
-        "doc": "<p>Unregisters an item by removing it from this manager</p>\n",
-        "linenr": 47,
+        "href": "AbstractManager.html#Ext-AbstractManager-method-unregister",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
+        "private": false,
+        "shortDoc": "Unregisters an item by removing it from this manager ...",
+        "static": false,
+        "name": "unregister",
+        "owner": "Ext.AbstractManager",
+        "doc": "<p>Unregisters an item by removing it from this manager</p>\n",
+        "linenr": 47,
         "html_filename": "AbstractManager.html"
       }
     ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
     "property": [
       {
+        "inheritable": false,
         "type": "Ext.util.MixedCollection",
         "deprecated": null,
-        "alias": null,
+        "href": "AbstractManager.html#Ext-AbstractManager-property-all",
         "protected": false,
         "tagname": "property",
-        "href": "AbstractManager.html#Ext-AbstractManager-property-all",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/AbstractManager.js",
         "private": false,
+        "static": false,
         "name": "all",
         "owner": "Ext.AbstractManager",
         "doc": "<p>Contains all of the items currently managed</p>\n",
         "linenr": 19,
         "html_filename": "AbstractManager.html"
       }
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
-    "event": [
-
     ]
   },
   "singleton": true,
-  "alias": null,
-  "superclasses": [
-    "Ext.AbstractManager"
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "ComponentManager.html#Ext-ComponentManager",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ComponentManager.js",
   "private": false,
   "alternateClassNames": [
     "Ext.ComponentMgr"
   ],
+  "static": false,
   "name": "Ext.ComponentManager",
   "doc": "<p>Provides a registry of all Components (instances of <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> or any subclass\nthereof) on a page so that they can be easily accessed by <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">component</a>\n<a href=\"#/api/Ext.Component-cfg-id\" rel=\"Ext.Component-cfg-id\" class=\"docClass\">id</a> (see <a href=\"#/api/Ext.ComponentManager-method-get\" rel=\"Ext.ComponentManager-method-get\" class=\"docClass\">get</a>, or the convenience method <a href=\"#/api/Ext-method-getCmp\" rel=\"Ext-method-getCmp\" class=\"docClass\">Ext.getCmp</a>).</p>\n\n\n<p>This object also provides a registry of available Component <i>classes</i>\nindexed by a mnemonic code known as the Component's xtype.\nThe <code>xtype</code> provides a way to avoid instantiating child Components\nwhen creating a full, nested config object for a complete <a href=\"#/api/Ext\" rel=\"Ext\" class=\"docClass\">Ext</a> page.</p>\n\n\n<p>A child Component may be specified simply as a <i>config object</i>\nas long as the correct <code>xtype</code> is specified so that if and when the Component\nneeds rendering, the correct type can be looked up for lazy instantiation.</p>\n\n\n<p>For a list of all available <code>xtypes</code>, see <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a>.</p>\n\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "ComponentManager.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Ext.AbstractManager"
 });

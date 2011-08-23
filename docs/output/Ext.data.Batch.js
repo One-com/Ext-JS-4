@@ -1,22 +1,33 @@
 Ext.data.JsonP.Ext_data_Batch({
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.Base"
+  ],
+  "inheritable": false,
+  "subclasses": [
+
+  ],
+  "deprecated": null,
   "allMixins": [
     "Ext.util.Observable"
   ],
-  "deprecated": null,
-  "docauthor": null,
+  "href": "Batch.html#Ext-data-Batch",
   "members": {
     "cfg": [
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
         "protected": false,
         "tagname": "cfg",
-        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
-        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
+        "static": false,
         "name": "listeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>A config object containing one or more event handlers to be added to this object during initialization. This\nshould be a valid listeners config object as specified in the <a href=\"#/api/Ext.data.Batch-method-addListener\" rel=\"Ext.data.Batch-method-addListener\" class=\"docClass\">addListener</a> example for attaching multiple\nhandlers at once.</p>\n\n<p><strong>DOM events from ExtJS <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Components</a></strong></p>\n\n<p>While <em>some</em> ExtJs Component classes export selected DOM events (e.g. \"click\", \"mouseover\" etc), this is usually\nonly done when extra value can be added. For example the <a href=\"#/api/Ext.view.View\" rel=\"Ext.view.View\" class=\"docClass\">DataView</a>'s <strong><code><a href=\"#/api/Ext.view.View-event-itemclick\" rel=\"Ext.view.View-event-itemclick\" class=\"docClass\">itemclick</a></code></strong> event passing the node clicked on. To access DOM events directly from a\nchild element of a Component, we need to specify the <code>element</code> option to identify the Component property to add a\nDOM listener to:</p>\n\n<pre><code>new Ext.panel.Panel({\n    width: 400,\n    height: 200,\n    dockedItems: [{\n        xtype: 'toolbar'\n    }],\n    listeners: {\n        click: {\n            element: 'el', //bind to the underlying el property on the panel\n            fn: function(){ console.log('click el'); }\n        },\n        dblclick: {\n            element: 'body', //bind to the underlying body property on the panel\n            fn: function(){ console.log('dblclick body'); }\n        }\n    }\n});\n</code></pre>\n",
@@ -26,13 +37,8 @@ Ext.data.JsonP.Ext_data_Batch({
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "href": "Batch.html#Ext-data-Batch-method-constructor",
-        "tagname": "method",
-        "protected": false,
-        "shortDoc": "Creates new Batch object. ...",
-        "static": false,
         "params": [
           {
             "type": "Object",
@@ -41,28 +47,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "config"
           }
         ],
-        "private": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "doc": "<p>Creates new Batch object.</p>\n",
-        "owner": "Ext.data.Batch",
-        "name": "Batch",
-        "html_filename": "Batch.html",
+        "href": "Batch.html#Ext-data-Batch-method-constructor",
         "return": {
           "type": "Object",
           "doc": "\n"
         },
-        "linenr": 66
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Batch.html#Ext-data-Batch-method-add",
-        "shortDoc": "Adds a new operation to this batch ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
         "private": false,
+        "shortDoc": "Creates new Batch object. ...",
+        "static": false,
+        "name": "constructor",
+        "owner": "Ext.data.Batch",
+        "doc": "<p>Creates new Batch object.</p>\n",
+        "linenr": 66,
+        "html_filename": "Batch.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Object",
@@ -71,26 +76,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "operation"
           }
         ],
-        "name": "add",
-        "owner": "Ext.data.Batch",
-        "doc": "<p>Adds a new operation to this batch</p>\n",
-        "linenr": 109,
+        "href": "Batch.html#Ext-data-Batch-method-add",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "shortDoc": "Adds a new operation to this batch ...",
+        "static": false,
+        "name": "add",
+        "owner": "Ext.data.Batch",
+        "doc": "<p>Adds a new operation to this batch</p>\n",
+        "linenr": 109,
         "html_filename": "Batch.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addEvents",
-        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object/String",
@@ -105,26 +111,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "more"
           }
         ],
-        "name": "addEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
-        "linenr": 494,
+        "href": "Observable.html#Ext-util-Observable-method-addEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
+        "static": false,
+        "name": "addEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
+        "linenr": 494,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addListener",
-        "shortDoc": "Appends an event handler to this object. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -151,26 +158,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "options"
           }
         ],
-        "name": "addListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Appends an event handler to this object.</p>\n",
-        "linenr": 278,
+        "href": "Observable.html#Ext-util-Observable-method-addListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Appends an event handler to this object. ...",
+        "static": false,
+        "name": "addListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Appends an event handler to this object.</p>\n",
+        "linenr": 278,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
-        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -203,54 +211,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "opt"
           }
         ],
-        "name": "addManagedListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 156,
+        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
+        "static": false,
+        "name": "addManagedListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 156,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-addStatics",
-        "shortDoc": "Add / override static properties of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "addStatics",
-        "owner": "Ext.Base",
-        "doc": "<p>Add / override static properties of this class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.addStatics({\n    someProperty: 'someValue',      // My.cool.Class.someProperty = 'someValue'\n    method1: function() { ... },    // My.cool.Class.method1 = function() { ... };\n    method2: function() { ... }     // My.cool.Class.method2 = function() { ... };\n});\n</code></pre>\n",
-        "linenr": 388,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callOverridden",
-        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -259,26 +240,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "args"
           }
         ],
-        "name": "callOverridden",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the original method that was previously overridden with <a href=\"#/api/Ext.Base-method-override\" rel=\"Ext.Base-method-override\" class=\"docClass\">Ext.Base.override</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 269,
+        "href": "Base3.html#Ext-Base-method-callOverridden",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result after calling the overridden method</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
+        "static": false,
+        "name": "callOverridden",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the original method that was previously overridden with Ext.Base.override</p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
+        "linenr": 269,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callParent",
-        "shortDoc": "Call the parent's overridden method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -287,169 +269,75 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "args"
           }
         ],
-        "name": "callParent",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
-        "linenr": 124,
+        "href": "Base3.html#Ext-Base-method-callParent",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result from the superclass' method</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the parent's overridden method. ...",
+        "static": false,
+        "name": "callParent",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
+        "linenr": 124,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-capture",
-        "shortDoc": "Starts capture on the specified Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to capture events from.</p>\n",
-            "name": "o"
-          },
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The function to call when an event is fired.</p>\n",
-            "name": "fn"
-          },
-          {
-            "type": "Object",
-            "optional": true,
-            "doc": "<p>(optional) The scope (<code>this</code> reference) in which the function is executed. Defaults to\nthe Observable firing the event.</p>\n",
-            "name": "scope"
-          }
+
         ],
-        "name": "capture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Starts capture on the specified Observable. All events will be passed to the supplied function with the event\nname + standard signature of the event <strong>before</strong> the event is fired. If the supplied function returns false,\nthe event will not fire.</p>\n",
-        "linenr": 54,
+        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
-        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
+        "static": false,
         "name": "clearListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all listeners for this object including the managed listeners</p>\n",
         "linenr": 425,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
-        "shortDoc": "Removes all managed listeners for this object. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all managed listeners for this object. ...",
+        "static": false,
         "name": "clearManagedListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all managed listeners for this object.</p>\n",
         "linenr": 454,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-create",
-        "shortDoc": "Create a new instance of this Class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-
-        ],
-        "name": "create",
-        "owner": "Ext.Base",
-        "doc": "<p>Create a new instance of this Class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.create({\n    someConfig: true\n});\n</code></pre>\n\n<p>All parameters are passed to the constructor of the class.</p>\n",
-        "linenr": 329,
-        "return": {
-          "type": "Object",
-          "doc": "<p>the created instance.</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-createAlias",
-        "shortDoc": "Create aliases for existing prototype methods. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The new method name, or an object to set multiple aliases. See\n<a href=\"#/api/Ext.Function-method-flexSetter\" rel=\"Ext.Function-method-flexSetter\" class=\"docClass\">flexSetter</a></p>\n",
-            "name": "alias"
-          },
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The original method name</p>\n",
-            "name": "origin"
-          }
-        ],
-        "name": "createAlias",
-        "owner": "Ext.Base",
-        "doc": "<p>Create aliases for existing prototype methods. Example:</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    method1: function() { ... },\n    method2: function() { ... }\n});\n\nvar test = new My.cool.Class();\n\nMy.cool.Class.createAlias({\n    method3: 'method1',\n    method4: 'method2'\n});\n\ntest.method3(); // test.method1()\n\nMy.cool.Class.createAlias('method5', 'method3');\n\ntest.method5(); // test.method3() -&gt; test.method1()\n</code></pre>\n",
-        "linenr": 648,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
-        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String/[String]",
@@ -458,26 +346,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "events"
           }
         ],
-        "name": "enableBubble",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
-        "linenr": 609,
+        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
+        "static": false,
+        "name": "enableBubble",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
+        "linenr": 609,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
-        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -492,49 +381,51 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "args"
           }
         ],
-        "name": "fireEvent",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.data.Batch-method-addListener\" rel=\"Ext.data.Batch-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.data.Batch-method-enableBubble\" rel=\"Ext.data.Batch-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
-        "linenr": 233,
+        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
         "return": {
           "type": "Boolean",
           "doc": "<p>returns false if any of the handlers return false otherwise it returns true.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
+        "static": false,
+        "name": "fireEvent",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.data.Batch-method-addListener\" rel=\"Ext.data.Batch-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.data.Batch-method-enableBubble\" rel=\"Ext.data.Batch-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
+        "linenr": 233,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-getName",
-        "shortDoc": "Get the current class' name in string format. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getName",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
-        "linenr": 631,
+        "href": "Base3.html#Ext-Base-method-getName",
         "return": {
           "type": "String",
           "doc": "<p>className</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the current class' name in string format. ...",
+        "static": false,
+        "name": "getName",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
+        "linenr": 631,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-hasListener",
-        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -543,54 +434,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "eventName"
           }
         ],
-        "name": "hasListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
-        "linenr": 530,
+        "href": "Observable.html#Ext-util-Observable-method-hasListener",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the event is being listened for, else false</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
+        "static": false,
+        "name": "hasListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
+        "linenr": 530,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-implement",
-        "shortDoc": "Add methods / properties to the prototype of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "implement",
-        "owner": "Ext.Base",
-        "doc": "<p>Add methods / properties to the prototype of this class.</p>\n\n<pre><code>Ext.define('My.awesome.Cat', {\n    constructor: function() {\n        ...\n    }\n});\n\n My.awesome.Cat.implement({\n     meow: function() {\n        alert('Meowww...');\n     }\n });\n\n var kitty = new My.awesome.Cat;\n kitty.meow();\n</code></pre>\n",
-        "linenr": 415,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-initConfig",
-        "shortDoc": "Initialize configuration for this class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -599,31 +463,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "config"
           }
         ],
-        "name": "initConfig",
-        "owner": "Ext.Base",
-        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
-        "linenr": 63,
+        "href": "Base3.html#Ext-Base-method-initConfig",
         "return": {
           "type": "Object",
           "doc": "<p>mixins The mixin prototypes as key - value pairs</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Initialize configuration for this class. ...",
+        "static": false,
+        "name": "initConfig",
+        "owner": "Ext.Base",
+        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
+        "linenr": 63,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "addManagedListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mon",
-        "shortDoc": "Shorthand for addManagedListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -656,31 +516,32 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "opt"
           }
         ],
-        "name": "mon",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.Batch-method-addManagedListener\" rel=\"Ext.data.Batch-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 681,
+        "href": "Observable.html#Ext-util-Observable-method-mon",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
+        "protected": false,
+        "tagname": "method",
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "removeManagedListener"
+          "owner": "addManagedListener"
         },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mun",
-        "shortDoc": "Shorthand for removeManagedListener. ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "Shorthand for addManagedListener. ...",
+        "static": false,
+        "name": "mon",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.Batch-method-addManagedListener\" rel=\"Ext.data.Batch-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 681,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Observable|Element",
@@ -707,65 +568,32 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "scope"
           }
         ],
-        "name": "mun",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.Batch-method-removeManagedListener\" rel=\"Ext.data.Batch-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.data.Batch-method-mon\" rel=\"Ext.data.Batch-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
-        "linenr": 687,
+        "href": "Observable.html#Ext-util-Observable-method-mun",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-observe",
-        "shortDoc": "Sets observability on the passed class constructor. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The class constructor to make observable.</p>\n",
-            "name": "c"
-          },
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "<p>An object containing a series of listeners to add. See <a href=\"#/api/Ext.data.Batch-method-addListener\" rel=\"Ext.data.Batch-method-addListener\" class=\"docClass\">addListener</a>.</p>\n",
-            "name": "listeners"
-          }
-        ],
-        "name": "observe",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Sets observability on the passed class constructor.</p>\n\n<p>This makes any event fired on any instance of the passed class also fire a single event through\nthe <strong>class</strong> allowing for central handling of events on many instances at once.</p>\n\n<p>Usage:</p>\n\n<pre><code>Ext.util.Observable.observe(Ext.data.Connection);\nExt.data.Connection.on('beforerequest', function(con, options) {\n    console.log('Ajax request made to ' + options.url);\n});\n</code></pre>\n",
-        "linenr": 69,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "addListener"
+          "owner": "removeManagedListener"
         },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-on",
-        "shortDoc": "Shorthand for addListener. ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "Shorthand for removeManagedListener. ...",
+        "static": false,
+        "name": "mun",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.Batch-method-removeManagedListener\" rel=\"Ext.data.Batch-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.data.Batch-method-mon\" rel=\"Ext.data.Batch-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
+        "linenr": 687,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "String",
@@ -792,77 +620,56 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "options"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-on",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "addListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for addListener. ...",
+        "static": false,
         "name": "on",
         "owner": "Ext.util.Observable",
         "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.Batch-method-addListener\" rel=\"Ext.data.Batch-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
         "linenr": 669,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Batch.html#Ext-data-Batch-method-pause",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-override",
-        "shortDoc": "Override prototype members of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "override",
-        "owner": "Ext.Base",
-        "doc": "<p>Override prototype members of this class. Overridden methods can be invoked via\n<a href=\"#/api/Ext.Base-method-callOverridden\" rel=\"Ext.Base-method-callOverridden\" class=\"docClass\">Ext.Base.callOverridden</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 518,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
         "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Batch.html#Ext-data-Batch-method-pause",
-        "shortDoc": "Pauses execution of the batch, but does not cancel the current operation ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Pauses execution of the batch, but does not cancel the current operation ...",
+        "static": false,
         "name": "pause",
         "owner": "Ext.data.Batch",
         "doc": "<p>Pauses execution of the batch, but does not cancel the current operation</p>\n",
         "linenr": 140,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Batch.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
-        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -883,54 +690,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "prefix"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
+        "static": false,
         "name": "relayEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Relays selected events from the specified Observable as if the events were fired by <code>this</code>.</p>\n",
         "linenr": 573,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-releaseCapture",
-        "shortDoc": "Removes all added captures from the Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to release</p>\n",
-            "name": "o"
-          }
-        ],
-        "name": "releaseCapture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes <strong>all</strong> added captures from the Observable.</p>\n",
-        "linenr": 44,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeListener",
-        "shortDoc": "Removes an event handler. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -951,26 +731,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "scope"
           }
         ],
-        "name": "removeListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes an event handler.</p>\n",
-        "linenr": 392,
+        "href": "Observable.html#Ext-util-Observable-method-removeListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes an event handler. ...",
+        "static": false,
+        "name": "removeListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Removes an event handler.</p>\n",
+        "linenr": 392,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
-        "shortDoc": "Removes listeners that were added by the mon method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable|Element",
@@ -997,49 +778,51 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "scope"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes listeners that were added by the mon method. ...",
+        "static": false,
         "name": "removeManagedListener",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes listeners that were added by the <a href=\"#/api/Ext.data.Batch-method-mon\" rel=\"Ext.data.Batch-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
         "linenr": 197,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
-        "shortDoc": "Resumes firing events (see suspendEvents). ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Resumes firing events (see suspendEvents). ...",
+        "static": false,
         "name": "resumeEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Resumes firing events (see <a href=\"#/api/Ext.data.Batch-method-suspendEvents\" rel=\"Ext.data.Batch-method-suspendEvents\" class=\"docClass\">suspendEvents</a>).</p>\n\n<p>If events were suspended using the <code>**queueSuspended**</code> parameter, then all events fired\nduring event suspension will be sent to any listeners now.</p>\n",
         "linenr": 554,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Batch.html#Ext-data-Batch-method-runOperation",
-        "shortDoc": "Executes a operation by its numeric index ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -1048,72 +831,75 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "index"
           }
         ],
+        "href": "Batch.html#Ext-data-Batch-method-runOperation",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "shortDoc": "Executes a operation by its numeric index ...",
+        "static": false,
         "name": "runOperation",
         "owner": "Ext.data.Batch",
         "doc": "<p>Executes a operation by its numeric index</p>\n",
         "linenr": 147,
+        "html_filename": "Batch.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Batch.html#Ext-data-Batch-method-start",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Batch.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Batch.html#Ext-data-Batch-method-start",
-        "shortDoc": "Kicks off the execution of the batch, continuing from the next operation if the previous\noperation encountered an exc...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Kicks off the execution of the batch, continuing from the next operation if the previous\noperation encountered an exc...",
+        "static": false,
         "name": "start",
         "owner": "Ext.data.Batch",
         "doc": "<p>Kicks off the execution of the batch, continuing from the next operation if the previous\noperation encountered an exception, or if execution was paused</p>\n",
         "linenr": 121,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Batch.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-statics",
-        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "statics",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
-        "linenr": 199,
+        "href": "Base3.html#Ext-Base-method-statics",
         "return": {
           "type": "Class",
           "doc": "\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
+        "static": false,
+        "name": "statics",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
+        "linenr": 199,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
-        "shortDoc": "Suspends the firing of all events. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -1122,31 +908,27 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "queueSuspended"
           }
         ],
-        "name": "suspendEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.data.Batch-method-resumeEvents\" rel=\"Ext.data.Batch-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
-        "linenr": 541,
+        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Suspends the firing of all events. ...",
+        "static": false,
+        "name": "suspendEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.data.Batch-method-resumeEvents\" rel=\"Ext.data.Batch-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
+        "linenr": 541,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "removeListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-un",
-        "shortDoc": "Shorthand for removeListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1167,183 +949,34 @@ Ext.data.JsonP.Ext_data_Batch({
             "name": "scope"
           }
         ],
-        "name": "un",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.Batch-method-removeListener\" rel=\"Ext.data.Batch-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
-        "linenr": 675,
+        "href": "Observable.html#Ext-util-Observable-method-un",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "removeListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for removeListener. ...",
+        "static": false,
+        "name": "un",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.Batch-method-removeListener\" rel=\"Ext.data.Batch-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
+        "linenr": 675,
         "html_filename": "Observable.html"
       }
     ],
-    "property": [
-      {
-        "type": "Boolean",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Batch.html#Ext-data-Batch-property-autoStart",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
-        "name": "autoStart",
-        "owner": "Ext.data.Batch",
-        "doc": "<p>True to immediately start processing the batch as soon as it is constructed (defaults to false)</p>\n",
-        "linenr": 17,
-        "html_filename": "Batch.html"
-      },
-      {
-        "type": "Number",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Batch.html#Ext-data-Batch-property-current",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
-        "name": "current",
-        "owner": "Ext.data.Batch",
-        "doc": "<p>The index of the current operation being executed</p>\n",
-        "linenr": 24,
-        "html_filename": "Batch.html"
-      },
-      {
-        "type": "Boolean",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Batch.html#Ext-data-Batch-property-hasException",
-        "shortDoc": "True if this batch has encountered an exception. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
-        "name": "hasException",
-        "owner": "Ext.data.Batch",
-        "doc": "<p>True if this batch has encountered an exception. This is cleared at the start of each operation</p>\n",
-        "linenr": 52,
-        "html_filename": "Batch.html"
-      },
-      {
-        "type": "Boolean",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Batch.html#Ext-data-Batch-property-isComplete",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
-        "name": "isComplete",
-        "owner": "Ext.data.Batch",
-        "doc": "<p>True if this batch has been executed completely</p>\n",
-        "linenr": 45,
-        "html_filename": "Batch.html"
-      },
-      {
-        "type": "Boolean",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Batch.html#Ext-data-Batch-property-isRunning",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
-        "name": "isRunning",
-        "owner": "Ext.data.Batch",
-        "doc": "<p>True if the batch is currently running</p>\n",
-        "linenr": 38,
-        "html_filename": "Batch.html"
-      },
-      {
-        "type": "Array",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Batch.html#Ext-data-Batch-property-operations",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
-        "name": "operations",
-        "owner": "Ext.data.Batch",
-        "doc": "<p>Ordered array of operations that will be executed by this batch</p>\n",
-        "linenr": 101,
-        "html_filename": "Batch.html"
-      },
-      {
-        "type": "Boolean",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Batch.html#Ext-data-Batch-property-pauseOnException",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
-        "name": "pauseOnException",
-        "owner": "Ext.data.Batch",
-        "doc": "<p>True to automatically pause the execution of the batch if any operation encounters an exception (defaults to true)</p>\n",
-        "linenr": 59,
-        "html_filename": "Batch.html"
-      },
-      {
-        "type": "Class",
-        "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "property",
-        "href": "Base3.html#Ext-Base-property-self",
-        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "name": "self",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
-        "linenr": 18,
-        "html_filename": "Base3.html"
-      },
-      {
-        "type": "Number",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Batch.html#Ext-data-Batch-property-total",
-        "shortDoc": "The total number of operations in this batch. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
-        "name": "total",
-        "owner": "Ext.data.Batch",
-        "doc": "<p>The total number of operations in this batch. Read only</p>\n",
-        "linenr": 31,
-        "html_filename": "Batch.html"
-      }
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "Batch.html#Ext-data-Batch-event-complete",
-        "shortDoc": "Fired when all operations of this batch have been completed ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Batch",
@@ -1364,6 +997,14 @@ Ext.data.JsonP.Ext_data_Batch({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "Batch.html#Ext-data-Batch-event-complete",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "shortDoc": "Fired when all operations of this batch have been completed ...",
+        "static": false,
         "name": "complete",
         "owner": "Ext.data.Batch",
         "doc": "<p>Fired when all operations of this batch have been completed</p>\n",
@@ -1371,15 +1012,8 @@ Ext.data.JsonP.Ext_data_Batch({
         "html_filename": "Batch.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "Batch.html#Ext-data-Batch-event-exception",
-        "shortDoc": "Fired when a operation encountered an exception ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Batch",
@@ -1400,6 +1034,14 @@ Ext.data.JsonP.Ext_data_Batch({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "Batch.html#Ext-data-Batch-event-exception",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "shortDoc": "Fired when a operation encountered an exception ...",
+        "static": false,
         "name": "exception",
         "owner": "Ext.data.Batch",
         "doc": "<p>Fired when a operation encountered an exception</p>\n",
@@ -1407,15 +1049,8 @@ Ext.data.JsonP.Ext_data_Batch({
         "html_filename": "Batch.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "Batch.html#Ext-data-Batch-event-operationcomplete",
-        "shortDoc": "Fired when each operation of the batch completes ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Batch",
@@ -1436,45 +1071,228 @@ Ext.data.JsonP.Ext_data_Batch({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "Batch.html#Ext-data-Batch-event-operationcomplete",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "shortDoc": "Fired when each operation of the batch completes ...",
+        "static": false,
         "name": "operationcomplete",
         "owner": "Ext.data.Batch",
         "doc": "<p>Fired when each operation of the batch completes</p>\n",
         "linenr": 90,
         "html_filename": "Batch.html"
       }
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+      {
+        "inheritable": false,
+        "type": "Boolean",
+        "deprecated": null,
+        "href": "Batch.html#Ext-data-Batch-property-autoStart",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "static": false,
+        "name": "autoStart",
+        "owner": "Ext.data.Batch",
+        "doc": "<p>True to immediately start processing the batch as soon as it is constructed (defaults to false)</p>\n",
+        "linenr": 17,
+        "html_filename": "Batch.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Number",
+        "deprecated": null,
+        "href": "Batch.html#Ext-data-Batch-property-current",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "static": false,
+        "name": "current",
+        "owner": "Ext.data.Batch",
+        "doc": "<p>The index of the current operation being executed</p>\n",
+        "linenr": 24,
+        "html_filename": "Batch.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Boolean",
+        "deprecated": null,
+        "href": "Batch.html#Ext-data-Batch-property-hasException",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "shortDoc": "True if this batch has encountered an exception. ...",
+        "static": false,
+        "name": "hasException",
+        "owner": "Ext.data.Batch",
+        "doc": "<p>True if this batch has encountered an exception. This is cleared at the start of each operation</p>\n",
+        "linenr": 52,
+        "html_filename": "Batch.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Boolean",
+        "deprecated": null,
+        "href": "Batch.html#Ext-data-Batch-property-isComplete",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "static": false,
+        "name": "isComplete",
+        "owner": "Ext.data.Batch",
+        "doc": "<p>True if this batch has been executed completely</p>\n",
+        "linenr": 45,
+        "html_filename": "Batch.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Boolean",
+        "deprecated": null,
+        "href": "Batch.html#Ext-data-Batch-property-isRunning",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "static": false,
+        "name": "isRunning",
+        "owner": "Ext.data.Batch",
+        "doc": "<p>True if the batch is currently running</p>\n",
+        "linenr": 38,
+        "html_filename": "Batch.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Array",
+        "deprecated": null,
+        "href": "Batch.html#Ext-data-Batch-property-operations",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "static": false,
+        "name": "operations",
+        "owner": "Ext.data.Batch",
+        "doc": "<p>Ordered array of operations that will be executed by this batch</p>\n",
+        "linenr": 101,
+        "html_filename": "Batch.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Boolean",
+        "deprecated": null,
+        "href": "Batch.html#Ext-data-Batch-property-pauseOnException",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "static": false,
+        "name": "pauseOnException",
+        "owner": "Ext.data.Batch",
+        "doc": "<p>True to automatically pause the execution of the batch if any operation encounters an exception (defaults to true)</p>\n",
+        "linenr": 59,
+        "html_filename": "Batch.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Class",
+        "deprecated": null,
+        "href": "Base3.html#Ext-Base-property-self",
+        "protected": true,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
+        "static": false,
+        "name": "self",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
+        "linenr": 18,
+        "html_filename": "Base3.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Number",
+        "deprecated": null,
+        "href": "Batch.html#Ext-data-Batch-property-total",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
+        "private": false,
+        "shortDoc": "The total number of operations in this batch. ...",
+        "static": false,
+        "name": "total",
+        "owner": "Ext.data.Batch",
+        "doc": "<p>The total number of operations in this batch. Read only</p>\n",
+        "linenr": 31,
+        "html_filename": "Batch.html"
+      }
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-    "Ext.Base"
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
     "Ext.util.Observable"
   ],
-  "href": "Batch.html#Ext-data-Batch",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": "Ed Spencer",
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Batch.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.data.Batch",
   "doc": "<p>Provides a mechanism to run one or more <a href=\"#/api/Ext.data.Operation\" rel=\"Ext.data.Operation\" class=\"docClass\">operations</a> in a given order. Fires the 'operationcomplete' event\nafter the completion of each Operation, and the 'complete' event when all Operations have been successfully executed. Fires an 'exception'\nevent if any of the Operations encounter an exception.</p>\n\n\n\n\n<p>Usually these are only used internally by <a href=\"#/api/Ext.data.proxy.Proxy\" rel=\"Ext.data.proxy.Proxy\" class=\"docClass\">Ext.data.proxy.Proxy</a> classes</p>\n\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "Batch.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Ext.Base"
 });

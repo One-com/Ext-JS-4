@@ -282,7 +282,7 @@ window.undefined = window.undefined;
         document.execCommand("BackgroundImageCache", false, true);
     } catch(e) {}
 
-    Ext.setVersion('extjs', '4.0.2');
+    Ext.setVersion('extjs', '4.0.2a');
     Ext.apply(Ext, {
         /**
          * URL to a blank file used by Ext when in secure mode for iframe src and onReady src to prevent

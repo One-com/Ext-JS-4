@@ -1,22 +1,36 @@
 Ext.data.JsonP.Ext_grid_feature_Summary({
-  "allMixins": [
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.Base",
+    "Ext.util.Observable",
+    "Ext.grid.feature.Feature",
+    "Ext.grid.feature.AbstractSummary"
+  ],
+  "inheritable": false,
+  "subclasses": [
 
   ],
   "deprecated": null,
-  "docauthor": null,
+  "allMixins": [
+
+  ],
+  "href": "Summary.html#Ext-grid-feature-Summary",
   "members": {
     "cfg": [
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
         "protected": false,
         "tagname": "cfg",
-        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
-        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
+        "static": false,
         "name": "listeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>A config object containing one or more event handlers to be added to this object during initialization. This\nshould be a valid listeners config object as specified in the <a href=\"#/api/Ext.grid.feature.Summary-method-addListener\" rel=\"Ext.grid.feature.Summary-method-addListener\" class=\"docClass\">addListener</a> example for attaching multiple\nhandlers at once.</p>\n\n<p><strong>DOM events from ExtJS <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Components</a></strong></p>\n\n<p>While <em>some</em> ExtJs Component classes export selected DOM events (e.g. \"click\", \"mouseover\" etc), this is usually\nonly done when extra value can be added. For example the <a href=\"#/api/Ext.view.View\" rel=\"Ext.view.View\" class=\"docClass\">DataView</a>'s <strong><code><a href=\"#/api/Ext.view.View-event-itemclick\" rel=\"Ext.view.View-event-itemclick\" class=\"docClass\">itemclick</a></code></strong> event passing the node clicked on. To access DOM events directly from a\nchild element of a Component, we need to specify the <code>element</code> option to identify the Component property to add a\nDOM listener to:</p>\n\n<pre><code>new Ext.panel.Panel({\n    width: 400,\n    height: 200,\n    dockedItems: [{\n        xtype: 'toolbar'\n    }],\n    listeners: {\n        click: {\n            element: 'el', //bind to the underlying el property on the panel\n            fn: function(){ console.log('click el'); }\n        },\n        dblclick: {\n            element: 'body', //bind to the underlying body property on the panel\n            fn: function(){ console.log('dblclick body'); }\n        }\n    }\n});\n</code></pre>\n",
@@ -24,16 +38,17 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "AbstractSummary.html#Ext-grid-feature-AbstractSummary-cfg-showSummaryRow",
         "protected": false,
         "tagname": "cfg",
-        "href": "AbstractSummary.html#Ext-grid-feature-AbstractSummary-cfg-showSummaryRow",
-        "shortDoc": "True to show the summary row. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/AbstractSummary.js",
         "private": false,
+        "shortDoc": "True to show the summary row. ...",
+        "static": false,
         "name": "showSummaryRow",
         "owner": "Ext.grid.feature.AbstractSummary",
         "doc": "<p>True to show the summary row. Defaults to <tt>true</tt>.</p>\n",
@@ -43,15 +58,8 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addEvents",
-        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object/String",
@@ -66,26 +74,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "more"
           }
         ],
-        "name": "addEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
-        "linenr": 494,
+        "href": "Observable.html#Ext-util-Observable-method-addEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
+        "static": false,
+        "name": "addEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
+        "linenr": 494,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addListener",
-        "shortDoc": "Appends an event handler to this object. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -112,26 +121,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "options"
           }
         ],
-        "name": "addListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Appends an event handler to this object.</p>\n",
-        "linenr": 278,
+        "href": "Observable.html#Ext-util-Observable-method-addListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Appends an event handler to this object. ...",
+        "static": false,
+        "name": "addListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Appends an event handler to this object.</p>\n",
+        "linenr": 278,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
-        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -164,77 +174,51 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "opt"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
+        "static": false,
         "name": "addManagedListener",
         "owner": "Ext.util.Observable",
         "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
         "linenr": 156,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Feature.html#Ext-grid-feature-Feature-method-attachEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-addStatics",
-        "shortDoc": "Add / override static properties of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "addStatics",
-        "owner": "Ext.Base",
-        "doc": "<p>Add / override static properties of this class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.addStatics({\n    someProperty: 'someValue',      // My.cool.Class.someProperty = 'someValue'\n    method1: function() { ... },    // My.cool.Class.method1 = function() { ... };\n    method2: function() { ... }     // My.cool.Class.method2 = function() { ... };\n});\n</code></pre>\n",
-        "linenr": 388,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
         "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Feature.html#Ext-grid-feature-Feature-method-attachEvents",
-        "shortDoc": "Approriate place to attach events to the view, selectionmodel, headerCt, etc ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Approriate place to attach events to the view, selectionmodel, headerCt, etc ...",
+        "static": false,
         "name": "attachEvents",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Approriate place to attach events to the view, selectionmodel, headerCt, etc</p>\n",
         "linenr": 89,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Feature.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callOverridden",
-        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -243,26 +227,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "args"
           }
         ],
-        "name": "callOverridden",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the original method that was previously overridden with <a href=\"#/api/Ext.Base-method-override\" rel=\"Ext.Base-method-override\" class=\"docClass\">Ext.Base.override</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 269,
+        "href": "Base3.html#Ext-Base-method-callOverridden",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result after calling the overridden method</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
+        "static": false,
+        "name": "callOverridden",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the original method that was previously overridden with Ext.Base.override</p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
+        "linenr": 269,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callParent",
-        "shortDoc": "Call the parent's overridden method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -271,215 +256,123 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "args"
           }
         ],
-        "name": "callParent",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
-        "linenr": 124,
+        "href": "Base3.html#Ext-Base-method-callParent",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result from the superclass' method</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the parent's overridden method. ...",
+        "static": false,
+        "name": "callParent",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
+        "linenr": 124,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-capture",
-        "shortDoc": "Starts capture on the specified Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to capture events from.</p>\n",
-            "name": "o"
-          },
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The function to call when an event is fired.</p>\n",
-            "name": "fn"
-          },
-          {
-            "type": "Object",
-            "optional": true,
-            "doc": "<p>(optional) The scope (<code>this</code> reference) in which the function is executed. Defaults to\nthe Observable firing the event.</p>\n",
-            "name": "scope"
-          }
+
         ],
-        "name": "capture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Starts capture on the specified Observable. All events will be passed to the supplied function with the event\nname + standard signature of the event <strong>before</strong> the event is fired. If the supplied function returns false,\nthe event will not fire.</p>\n",
-        "linenr": 54,
+        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
-        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
+        "static": false,
         "name": "clearListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all listeners for this object including the managed listeners</p>\n",
         "linenr": 425,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
-        "shortDoc": "Removes all managed listeners for this object. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all managed listeners for this object. ...",
+        "static": false,
         "name": "clearManagedListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all managed listeners for this object.</p>\n",
         "linenr": 454,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-create",
-        "shortDoc": "Create a new instance of this Class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "create",
-        "owner": "Ext.Base",
-        "doc": "<p>Create a new instance of this Class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.create({\n    someConfig: true\n});\n</code></pre>\n\n<p>All parameters are passed to the constructor of the class.</p>\n",
-        "linenr": 329,
-        "return": {
-          "type": "Object",
-          "doc": "<p>the created instance.</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-createAlias",
-        "shortDoc": "Create aliases for existing prototype methods. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The new method name, or an object to set multiple aliases. See\n<a href=\"#/api/Ext.Function-method-flexSetter\" rel=\"Ext.Function-method-flexSetter\" class=\"docClass\">flexSetter</a></p>\n",
-            "name": "alias"
-          },
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The original method name</p>\n",
-            "name": "origin"
-          }
-        ],
-        "name": "createAlias",
-        "owner": "Ext.Base",
-        "doc": "<p>Create aliases for existing prototype methods. Example:</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    method1: function() { ... },\n    method2: function() { ... }\n});\n\nvar test = new My.cool.Class();\n\nMy.cool.Class.createAlias({\n    method3: 'method1',\n    method4: 'method2'\n});\n\ntest.method3(); // test.method1()\n\nMy.cool.Class.createAlias('method5', 'method3');\n\ntest.method5(); // test.method3() -&gt; test.method1()\n</code></pre>\n",
-        "linenr": 648,
+        "href": "Feature.html#Ext-grid-feature-Feature-method-disable",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Feature.html#Ext-grid-feature-Feature-method-disable",
-        "shortDoc": "Disable a feature ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Disable a feature ...",
+        "static": false,
         "name": "disable",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Disable a feature</p>\n",
         "linenr": 140,
+        "html_filename": "Feature.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Feature.html#Ext-grid-feature-Feature-method-enable",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Feature.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Feature.html#Ext-grid-feature-Feature-method-enable",
-        "shortDoc": "Enable a feature ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Enable a feature ...",
+        "static": false,
         "name": "enable",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Enable a feature</p>\n",
         "linenr": 133,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Feature.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
-        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String/[String]",
@@ -488,26 +381,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "events"
           }
         ],
-        "name": "enableBubble",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
-        "linenr": 609,
+        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
+        "static": false,
+        "name": "enableBubble",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
+        "linenr": 609,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
-        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -522,26 +416,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "args"
           }
         ],
-        "name": "fireEvent",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.grid.feature.Summary-method-addListener\" rel=\"Ext.grid.feature.Summary-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.grid.feature.Summary-method-enableBubble\" rel=\"Ext.grid.feature.Summary-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
-        "linenr": 233,
+        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
         "return": {
           "type": "Boolean",
           "doc": "<p>returns false if any of the handlers return false otherwise it returns true.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
+        "static": false,
+        "name": "fireEvent",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.grid.feature.Summary-method-addListener\" rel=\"Ext.grid.feature.Summary-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.grid.feature.Summary-method-enableBubble\" rel=\"Ext.grid.feature.Summary-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
+        "linenr": 233,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Feature.html#Ext-grid-feature-Feature-method-getAdditionalData",
-        "shortDoc": "Provide additional data to the prepareData call within the grid view. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -568,26 +463,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "orig"
           }
         ],
-        "name": "getAdditionalData",
-        "owner": "Ext.grid.feature.Feature",
-        "doc": "<p>Provide additional data to the prepareData call within the grid view.</p>\n",
-        "linenr": 122,
+        "href": "Feature.html#Ext-grid-feature-Feature-method-getAdditionalData",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
+        "private": false,
+        "shortDoc": "Provide additional data to the prepareData call within the grid view. ...",
+        "static": false,
+        "name": "getAdditionalData",
+        "owner": "Ext.grid.feature.Feature",
+        "doc": "<p>Provide additional data to the prepareData call within the grid view.</p>\n",
+        "linenr": 122,
         "html_filename": "Feature.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractSummary.html#Ext-grid-feature-AbstractSummary-method-getColumnValue",
-        "shortDoc": "Gets the value for the column from the attached data. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/AbstractSummary.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.grid.column.Column",
@@ -602,26 +498,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "data"
           }
         ],
-        "name": "getColumnValue",
-        "owner": "Ext.grid.feature.AbstractSummary",
-        "doc": "<p>Gets the value for the column from the attached data.</p>\n",
-        "linenr": 71,
+        "href": "AbstractSummary.html#Ext-grid-feature-AbstractSummary-method-getColumnValue",
         "return": {
           "type": "String",
           "doc": "<p>The value to be rendered</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/AbstractSummary.js",
+        "private": false,
+        "shortDoc": "Gets the value for the column from the attached data. ...",
+        "static": false,
+        "name": "getColumnValue",
+        "owner": "Ext.grid.feature.AbstractSummary",
+        "doc": "<p>Gets the value for the column from the attached data.</p>\n",
+        "linenr": 71,
         "html_filename": "AbstractSummary.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Feature.html#Ext-grid-feature-Feature-method-getFireEventArgs",
-        "shortDoc": "Abstract method to be overriden when a feature should add additional\narguments to its event signature. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -648,72 +545,75 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "e"
           }
         ],
+        "href": "Feature.html#Ext-grid-feature-Feature-method-getFireEventArgs",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
+        "private": false,
+        "shortDoc": "Abstract method to be overriden when a feature should add additional\narguments to its event signature. ...",
+        "static": false,
         "name": "getFireEventArgs",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Abstract method to be overriden when a feature should add additional\narguments to its event signature. By default the event will fire:\n- view - The underlying <a href=\"#/api/Ext.view.Table\" rel=\"Ext.view.Table\" class=\"docClass\">Ext.view.Table</a>\n- featureTarget - The matched element by the defined <a href=\"#/api/Ext.grid.feature.Summary-property-eventSelector\" rel=\"Ext.grid.feature.Summary-property-eventSelector\" class=\"docClass\">eventSelector</a></p>\n\n<p>The method must also return the eventName as the first index of the array\nto be passed to fireEvent.</p>\n",
         "linenr": 76,
+        "html_filename": "Feature.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Feature.html#Ext-grid-feature-Feature-method-getMetaRowTplFragments",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Feature.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Feature.html#Ext-grid-feature-Feature-method-getMetaRowTplFragments",
-        "shortDoc": "Allows a feature to inject member methods into the metaRowTpl. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Allows a feature to inject member methods into the metaRowTpl. ...",
+        "static": false,
         "name": "getMetaRowTplFragments",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Allows a feature to inject member methods into the metaRowTpl. This is\nimportant for embedding functionality which will become part of the proper\nrow tpl.</p>\n",
         "linenr": 109,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Feature.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-getName",
-        "shortDoc": "Get the current class' name in string format. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getName",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
-        "linenr": 631,
+        "href": "Base3.html#Ext-Base-method-getName",
         "return": {
           "type": "String",
           "doc": "<p>className</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the current class' name in string format. ...",
+        "static": false,
+        "name": "getName",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
+        "linenr": 631,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-hasListener",
-        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -722,54 +622,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "eventName"
           }
         ],
-        "name": "hasListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
-        "linenr": 530,
+        "href": "Observable.html#Ext-util-Observable-method-hasListener",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the event is being listened for, else false</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
+        "static": false,
+        "name": "hasListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
+        "linenr": 530,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-implement",
-        "shortDoc": "Add methods / properties to the prototype of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "implement",
-        "owner": "Ext.Base",
-        "doc": "<p>Add methods / properties to the prototype of this class.</p>\n\n<pre><code>Ext.define('My.awesome.Cat', {\n    constructor: function() {\n        ...\n    }\n});\n\n My.awesome.Cat.implement({\n     meow: function() {\n        alert('Meowww...');\n     }\n });\n\n var kitty = new My.awesome.Cat;\n kitty.meow();\n</code></pre>\n",
-        "linenr": 415,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-initConfig",
-        "shortDoc": "Initialize configuration for this class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -778,31 +651,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "config"
           }
         ],
-        "name": "initConfig",
-        "owner": "Ext.Base",
-        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
-        "linenr": 63,
+        "href": "Base3.html#Ext-Base-method-initConfig",
         "return": {
           "type": "Object",
           "doc": "<p>mixins The mixin prototypes as key - value pairs</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Initialize configuration for this class. ...",
+        "static": false,
+        "name": "initConfig",
+        "owner": "Ext.Base",
+        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
+        "linenr": 63,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "addManagedListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mon",
-        "shortDoc": "Shorthand for addManagedListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -835,31 +704,32 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "opt"
           }
         ],
-        "name": "mon",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.grid.feature.Summary-method-addManagedListener\" rel=\"Ext.grid.feature.Summary-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 681,
+        "href": "Observable.html#Ext-util-Observable-method-mon",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
+        "protected": false,
+        "tagname": "method",
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "removeManagedListener"
+          "owner": "addManagedListener"
         },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mun",
-        "shortDoc": "Shorthand for removeManagedListener. ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "Shorthand for addManagedListener. ...",
+        "static": false,
+        "name": "mon",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.grid.feature.Summary-method-addManagedListener\" rel=\"Ext.grid.feature.Summary-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 681,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Observable|Element",
@@ -886,26 +756,32 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "scope"
           }
         ],
-        "name": "mun",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.grid.feature.Summary-method-removeManagedListener\" rel=\"Ext.grid.feature.Summary-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.grid.feature.Summary-method-mon\" rel=\"Ext.grid.feature.Summary-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
-        "linenr": 687,
+        "href": "Observable.html#Ext-util-Observable-method-mun",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "removeManagedListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for removeManagedListener. ...",
+        "static": false,
+        "name": "mun",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.grid.feature.Summary-method-removeManagedListener\" rel=\"Ext.grid.feature.Summary-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.grid.feature.Summary-method-mon\" rel=\"Ext.grid.feature.Summary-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
+        "linenr": 687,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Feature.html#Ext-grid-feature-Feature-method-mutateMetaRowTpl",
-        "shortDoc": "Allows a feature to mutate the metaRowTpl. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -914,65 +790,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "metaRowTplArray"
           }
         ],
+        "href": "Feature.html#Ext-grid-feature-Feature-method-mutateMetaRowTpl",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
+        "private": false,
+        "shortDoc": "Allows a feature to mutate the metaRowTpl. ...",
+        "static": false,
         "name": "mutateMetaRowTpl",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Allows a feature to mutate the metaRowTpl.\nThe array received as a single argument can be manipulated to add things\non the end/begining of a particular row.</p>\n",
         "linenr": 100,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Feature.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-observe",
-        "shortDoc": "Sets observability on the passed class constructor. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The class constructor to make observable.</p>\n",
-            "name": "c"
-          },
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "<p>An object containing a series of listeners to add. See <a href=\"#/api/Ext.grid.feature.Summary-method-addListener\" rel=\"Ext.grid.feature.Summary-method-addListener\" class=\"docClass\">addListener</a>.</p>\n",
-            "name": "listeners"
-          }
-        ],
-        "name": "observe",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Sets observability on the passed class constructor.</p>\n\n<p>This makes any event fired on any instance of the passed class also fire a single event through\nthe <strong>class</strong> allowing for central handling of events on many instances at once.</p>\n\n<p>Usage:</p>\n\n<pre><code>Ext.util.Observable.observe(Ext.data.Connection);\nExt.data.Connection.on('beforerequest', function(con, options) {\n    console.log('Ajax request made to ' + options.url);\n});\n</code></pre>\n",
-        "linenr": 69,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "addListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-on",
-        "shortDoc": "Shorthand for addListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -999,54 +837,32 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "options"
           }
         ],
-        "name": "on",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.grid.feature.Summary-method-addListener\" rel=\"Ext.grid.feature.Summary-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
-        "linenr": 669,
+        "href": "Observable.html#Ext-util-Observable-method-on",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "addListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for addListener. ...",
+        "static": false,
+        "name": "on",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.grid.feature.Summary-method-addListener\" rel=\"Ext.grid.feature.Summary-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
+        "linenr": 669,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-override",
-        "shortDoc": "Override prototype members of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "override",
-        "owner": "Ext.Base",
-        "doc": "<p>Override prototype members of this class. Overridden methods can be invoked via\n<a href=\"#/api/Ext.Base-method-callOverridden\" rel=\"Ext.Base-method-callOverridden\" class=\"docClass\">Ext.Base.callOverridden</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 518,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
-        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -1067,54 +883,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "prefix"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
+        "static": false,
         "name": "relayEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Relays selected events from the specified Observable as if the events were fired by <code>this</code>.</p>\n",
         "linenr": 573,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-releaseCapture",
-        "shortDoc": "Removes all added captures from the Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to release</p>\n",
-            "name": "o"
-          }
-        ],
-        "name": "releaseCapture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes <strong>all</strong> added captures from the Observable.</p>\n",
-        "linenr": 44,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeListener",
-        "shortDoc": "Removes an event handler. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1135,26 +924,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "scope"
           }
         ],
-        "name": "removeListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes an event handler.</p>\n",
-        "linenr": 392,
+        "href": "Observable.html#Ext-util-Observable-method-removeListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes an event handler. ...",
+        "static": false,
+        "name": "removeListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Removes an event handler.</p>\n",
+        "linenr": 392,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
-        "shortDoc": "Removes listeners that were added by the mon method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable|Element",
@@ -1181,72 +971,75 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "scope"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes listeners that were added by the mon method. ...",
+        "static": false,
         "name": "removeManagedListener",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes listeners that were added by the <a href=\"#/api/Ext.grid.feature.Summary-method-mon\" rel=\"Ext.grid.feature.Summary-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
         "linenr": 197,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
-        "shortDoc": "Resumes firing events (see suspendEvents). ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Resumes firing events (see suspendEvents). ...",
+        "static": false,
         "name": "resumeEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Resumes firing events (see <a href=\"#/api/Ext.grid.feature.Summary-method-suspendEvents\" rel=\"Ext.grid.feature.Summary-method-suspendEvents\" class=\"docClass\">suspendEvents</a>).</p>\n\n<p>If events were suspended using the <code>**queueSuspended**</code> parameter, then all events fired\nduring event suspension will be sent to any listeners now.</p>\n",
         "linenr": 554,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-statics",
-        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "statics",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
-        "linenr": 199,
+        "href": "Base3.html#Ext-Base-method-statics",
         "return": {
           "type": "Class",
           "doc": "\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
+        "static": false,
+        "name": "statics",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
+        "linenr": 199,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
-        "shortDoc": "Suspends the firing of all events. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -1255,26 +1048,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "queueSuspended"
           }
         ],
-        "name": "suspendEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.grid.feature.Summary-method-resumeEvents\" rel=\"Ext.grid.feature.Summary-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
-        "linenr": 541,
+        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Suspends the firing of all events. ...",
+        "static": false,
+        "name": "suspendEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.grid.feature.Summary-method-resumeEvents\" rel=\"Ext.grid.feature.Summary-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
+        "linenr": 541,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractSummary.html#Ext-grid-feature-AbstractSummary-method-toggleSummaryRow",
-        "shortDoc": "Toggle whether or not to show the summary row. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/AbstractSummary.js",
-        "private": false,
         "params": [
           {
             "type": "Boolan",
@@ -1283,31 +1077,27 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "visible"
           }
         ],
-        "name": "toggleSummaryRow",
-        "owner": "Ext.grid.feature.AbstractSummary",
-        "doc": "<p>Toggle whether or not to show the summary row.</p>\n",
-        "linenr": 25,
+        "href": "AbstractSummary.html#Ext-grid-feature-AbstractSummary-method-toggleSummaryRow",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/AbstractSummary.js",
+        "private": false,
+        "shortDoc": "Toggle whether or not to show the summary row. ...",
+        "static": false,
+        "name": "toggleSummaryRow",
+        "owner": "Ext.grid.feature.AbstractSummary",
+        "doc": "<p>Toggle whether or not to show the summary row.</p>\n",
+        "linenr": 25,
         "html_filename": "AbstractSummary.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "removeListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-un",
-        "shortDoc": "Shorthand for removeListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1328,29 +1118,52 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
             "name": "scope"
           }
         ],
-        "name": "un",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.grid.feature.Summary-method-removeListener\" rel=\"Ext.grid.feature.Summary-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
-        "linenr": 675,
+        "href": "Observable.html#Ext-util-Observable-method-un",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "removeListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for removeListener. ...",
+        "static": false,
+        "name": "un",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.grid.feature.Summary-method-removeListener\" rel=\"Ext.grid.feature.Summary-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
+        "linenr": 675,
         "html_filename": "Observable.html"
       }
     ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
     "property": [
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Feature.html#Ext-grid-feature-Feature-property-collectData",
         "protected": false,
         "tagname": "property",
-        "href": "Feature.html#Ext-grid-feature-Feature-property-collectData",
-        "shortDoc": "Most features will not modify the data returned to the view. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
         "private": false,
+        "shortDoc": "Most features will not modify the data returned to the view. ...",
+        "static": false,
         "name": "collectData",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Most features will not modify the data returned to the view.\nThis is limited to one feature that manipulates the data per grid view.</p>\n",
@@ -1358,16 +1171,17 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
         "html_filename": "Feature.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Feature.html#Ext-grid-feature-Feature-property-eventPrefix",
         "protected": false,
         "tagname": "property",
-        "href": "Feature.html#Ext-grid-feature-Feature-property-eventPrefix",
-        "shortDoc": "Prefix to use when firing events on the view. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
         "private": false,
+        "shortDoc": "Prefix to use when firing events on the view. ...",
+        "static": false,
         "name": "eventPrefix",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Prefix to use when firing events on the view.\nFor example a prefix of group would expose \"groupclick\", \"groupcontextmenu\", \"groupdblclick\".</p>\n",
@@ -1375,15 +1189,16 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
         "html_filename": "Feature.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Feature.html#Ext-grid-feature-Feature-property-eventSelector",
         "protected": false,
         "tagname": "property",
-        "href": "Feature.html#Ext-grid-feature-Feature-property-eventSelector",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
         "private": false,
+        "static": false,
         "name": "eventSelector",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Selector used to determine when to fire the event with the eventPrefix.</p>\n",
@@ -1391,15 +1206,16 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
         "html_filename": "Feature.html"
       },
       {
+        "inheritable": false,
         "type": "Ext.grid.Panel",
         "deprecated": null,
-        "alias": null,
+        "href": "Feature.html#Ext-grid-feature-Feature-property-grid",
         "protected": false,
         "tagname": "property",
-        "href": "Feature.html#Ext-grid-feature-Feature-property-grid",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
         "private": false,
+        "static": false,
         "name": "grid",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Reference to the grid panel</p>\n",
@@ -1407,15 +1223,16 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
         "html_filename": "Feature.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Feature.html#Ext-grid-feature-Feature-property-hasFeatureEvent",
         "protected": false,
         "tagname": "property",
-        "href": "Feature.html#Ext-grid-feature-Feature-property-hasFeatureEvent",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
         "private": false,
+        "static": false,
         "name": "hasFeatureEvent",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Most features will expose additional events, some may not and will\nneed to change this to false.</p>\n",
@@ -1423,16 +1240,17 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
         "html_filename": "Feature.html"
       },
       {
+        "inheritable": false,
         "type": "Class",
         "deprecated": null,
-        "alias": null,
+        "href": "Base3.html#Ext-Base-property-self",
         "protected": true,
         "tagname": "property",
-        "href": "Base3.html#Ext-Base-property-self",
-        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
         "private": false,
+        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
+        "static": false,
         "name": "self",
         "owner": "Ext.Base",
         "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
@@ -1440,66 +1258,66 @@ Ext.data.JsonP.Ext_grid_feature_Summary({
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "type": "Ext.view.Table",
         "deprecated": null,
-        "alias": null,
+        "href": "Feature.html#Ext-grid-feature-Feature-property-view",
         "protected": false,
         "tagname": "property",
-        "href": "Feature.html#Ext-grid-feature-Feature-property-view",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Feature.js",
         "private": false,
+        "static": false,
         "name": "view",
         "owner": "Ext.grid.feature.Feature",
         "doc": "<p>Reference to the TableView.</p>\n",
         "linenr": 54,
         "html_filename": "Feature.html"
       }
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
-    "event": [
-
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-    "Ext.Base",
-    "Ext.util.Observable",
-    "Ext.grid.feature.Feature",
-    "Ext.grid.feature.AbstractSummary"
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "Summary.html#Ext-grid-feature-Summary",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/grid/feature/Summary.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.grid.feature.Summary",
   "doc": "<p>This feature is used to place a summary row at the bottom of the grid. If using a grouping,\nsee <a href=\"#/api/Ext.grid.feature.GroupingSummary\" rel=\"Ext.grid.feature.GroupingSummary\" class=\"docClass\">Ext.grid.feature.GroupingSummary</a>. There are 2 aspects to calculating the summaries,\ncalculation and rendering.</p>\n\n<h2>Calculation</h2>\n\n<p>The summary value needs to be calculated for each column in the grid. This is controlled\nby the summaryType option specified on the column. There are several built in summary types,\nwhich can be specified as a string on the column configuration. These call underlying methods\non the store:</p>\n\n<ul>\n<li><a href=\"#/api/Ext.data.Store-method-count\" rel=\"Ext.data.Store-method-count\" class=\"docClass\">count</a></li>\n<li><a href=\"#/api/Ext.data.Store-method-sum\" rel=\"Ext.data.Store-method-sum\" class=\"docClass\">sum</a></li>\n<li><a href=\"#/api/Ext.data.Store-method-min\" rel=\"Ext.data.Store-method-min\" class=\"docClass\">min</a></li>\n<li><a href=\"#/api/Ext.data.Store-method-max\" rel=\"Ext.data.Store-method-max\" class=\"docClass\">max</a></li>\n<li><a href=\"#/api/Ext.data.Store-method-average\" rel=\"Ext.data.Store-method-average\" class=\"docClass\">average</a></li>\n</ul>\n\n\n<p>Alternatively, the summaryType can be a function definition. If this is the case,\nthe function is called with an array of records to calculate the summary value.</p>\n\n<h2>Rendering</h2>\n\n<p>Similar to a column, the summary also supports a summaryRenderer function. This\nsummaryRenderer is called before displaying a value. The function is optional, if\nnot specified the default calculated value is shown. The summaryRenderer is called with:</p>\n\n<ul>\n<li>value {Object} - The calculated value.</li>\n<li>summaryData {Object} - Contains all raw summary values for the row.</li>\n<li>field {String} - The name of the field we are calculating</li>\n</ul>\n\n\n<h2>Example Usage</h2>\n\n<pre><code>Ext.define('TestResult', {\n    extend: 'Ext.data.Model',\n    fields: ['student', {\n        name: 'mark',\n        type: 'int'\n    }]\n});\n\nExt.create('Ext.grid.Panel', {\n    width: 200,\n    height: 140,\n    renderTo: document.body,\n    features: [{\n        ftype: 'summary'\n    }],\n    store: {\n        model: 'TestResult',\n        data: [{\n            student: 'Student 1',\n            mark: 84\n        },{\n            student: 'Student 2',\n            mark: 72\n        },{\n            student: 'Student 3',\n            mark: 96\n        },{\n            student: 'Student 4',\n            mark: 68\n        }]\n    },\n    columns: [{\n        dataIndex: 'student',\n        text: 'Name',\n        summaryType: 'count',\n        summaryRenderer: function(value, summaryData, dataIndex) {\n            return Ext.String.format('{0} student{1}', value, value !== 1 ? 's' : ''); \n        }\n    }, {\n        dataIndex: 'mark',\n        text: 'Mark',\n        summaryType: 'average'\n    }]\n});\n</code></pre>\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "Summary.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Ext.grid.feature.AbstractSummary"
 });

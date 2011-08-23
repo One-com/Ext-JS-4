@@ -151,6 +151,8 @@ Ext.define('Ext.layout.container.Border', {
 
         // Delegate this operation to the shadow &quot;V&quot; or &quot;H&quot; box layout.
         this.shadowLayout.beforeLayout();
+
+        // note: don't call base because that does a renderItems again
     },
 
     renderItems: function(items, target) {
@@ -163,6 +165,14 @@ Ext.define('Ext.layout.container.Border', {
         //&lt;debug&gt;
         Ext.Error.raise('This should not be called');
         //&lt;/debug&gt;
+    },
+
+    renderChildren: function() {
+        if (!this.borderLayoutInitialized) {
+            this.initializeBorderLayout();
+        }
+
+        this.shadowLayout.renderChildren();
     },
 
     /*

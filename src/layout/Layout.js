@@ -73,8 +73,13 @@ Ext.define('Ext.layout.Layout', {
     },
 
     beforeLayout : function() {
-        this.renderItems(this.getLayoutItems(), this.getRenderTarget());
+        this.renderChildren();
         return true;
+    },
+
+    renderChildren: function () {
+        var me = this;
+        me.renderItems(me.getLayoutItems(), me.getRenderTarget());
     },
 
     /**

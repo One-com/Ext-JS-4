@@ -188,6 +188,14 @@ items: [
 
     isContainer : true,
 
+    /**
+     * The number of container layout calls made on this object.
+     * @property layoutCounter
+     * @type {Number}
+     * @private
+     */
+    layoutCounter : 0,
+
     baseCls: Ext.baseCSSPrefix + 'container',
 
     /**
@@ -306,6 +314,20 @@ items: [
         this.callParent();
     },
 
+    renderChildren: function () {
+        var me = this,
+            layout = me.getLayout();
+
+        me.callParent();
+        // this component's elements exist, so now create the child components' elements
+
+        if (layout) {
+            me.suspendLayout = true;
+            layout.renderChildren();
+            delete me.suspendLayout;
+        }
+    },
+
     // @private
     setLayout : function(layout) {
         var currentLayout = this.layout;
@@ -366,6 +388,7 @@ items: [
 
     // @private
     afterLayout : function(layout) {
+        ++this.layoutCounter;
         this.fireEvent('afterlayout', this, layout);
     },
 

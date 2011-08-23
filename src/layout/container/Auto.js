@@ -83,14 +83,10 @@ Ext.define('Ext.layout.container.Auto', {
     },
 
     configureItem: function(item) {
+        this.callParent(arguments);
 
         // Auto layout does not manage any dimensions.
-        // We have to check our type, because this could be called as a superclass method in a subclass
-        if (this.type === 'autocontainer') {
-            item.layoutManagedHeight = 2;
-            item.layoutManagedWidth = 2;
-        }
-
-        this.callParent(arguments);
+        item.layoutManagedHeight = 2;
+        item.layoutManagedWidth = 2;
     }
 });

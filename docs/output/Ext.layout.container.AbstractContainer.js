@@ -1,21 +1,32 @@
 Ext.data.JsonP.Ext_layout_container_AbstractContainer({
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.layout.Layout"
+  ],
+  "inheritable": false,
+  "subclasses": [
+    "Ext.layout.container.Container"
+  ],
+  "deprecated": null,
   "allMixins": [
 
   ],
-  "deprecated": null,
-  "docauthor": null,
+  "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer",
   "members": {
     "cfg": [
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-cfg-bindToOwnerCtComponent",
         "protected": false,
         "tagname": "cfg",
-        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-cfg-bindToOwnerCtComponent",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/layout/container/AbstractContainer.js",
         "private": false,
+        "static": false,
         "name": "bindToOwnerCtComponent",
         "owner": "Ext.layout.container.AbstractContainer",
         "doc": "<p>Flag to notify the ownerCt Component on afterLayout of a change</p>\n",
@@ -23,15 +34,16 @@ Ext.data.JsonP.Ext_layout_container_AbstractContainer({
         "html_filename": "AbstractContainer.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-cfg-bindToOwnerCtContainer",
         "protected": false,
         "tagname": "cfg",
-        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-cfg-bindToOwnerCtContainer",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/layout/container/AbstractContainer.js",
         "private": false,
+        "static": false,
         "name": "bindToOwnerCtContainer",
         "owner": "Ext.layout.container.AbstractContainer",
         "doc": "<p>Flag to notify the ownerCt Container on afterLayout of a change</p>\n",
@@ -39,16 +51,17 @@ Ext.data.JsonP.Ext_layout_container_AbstractContainer({
         "html_filename": "AbstractContainer.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-cfg-itemCls",
         "protected": false,
         "tagname": "cfg",
-        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-cfg-itemCls",
-        "shortDoc": "An optional extra CSS class that will be added to the container. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/layout/container/AbstractContainer.js",
         "private": false,
+        "shortDoc": "An optional extra CSS class that will be added to the container. ...",
+        "static": false,
         "name": "itemCls",
         "owner": "Ext.layout.container.AbstractContainer",
         "doc": "<p>An optional extra CSS class that will be added to the container. This can be useful for adding\ncustomized styles to the container or any of its children using standard CSS rules. See\n<a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a>.ctCls also.</p>\n\n\n<p></p></p>\n",
@@ -58,119 +71,133 @@ Ext.data.JsonP.Ext_layout_container_AbstractContainer({
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-method-getLayoutItems",
-        "shortDoc": "Returns an array of child components either for a render phase (Performed in the beforeLayout method of the layout's\n...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/layout/container/AbstractContainer.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getLayoutItems",
-        "owner": "Ext.layout.container.AbstractContainer",
-        "doc": "<p>Returns an array of child components either for a render phase (Performed in the beforeLayout method of the layout's\nbase class), or the layout phase (onLayout).</p>\n\n",
-        "linenr": 49,
+        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-method-getLayoutItems",
         "return": {
           "type": "Array",
           "doc": "<p>of child components</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/layout/container/AbstractContainer.js",
+        "private": false,
+        "shortDoc": "Returns an array of child components either for a render phase (Performed in the beforeLayout method of the layout's\n...",
+        "static": false,
+        "name": "getLayoutItems",
+        "owner": "Ext.layout.container.AbstractContainer",
+        "doc": "<p>Returns an array of child components either for a render phase (Performed in the beforeLayout method of the layout's\nbase class), or the layout phase (onLayout).</p>\n\n",
+        "linenr": 49,
         "html_filename": "AbstractContainer.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-method-getRenderTarget",
-        "shortDoc": "Returns the element into which rendering must take place. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/layout/container/AbstractContainer.js",
-        "private": false,
         "params": [
 
         ],
+        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-method-getRenderTarget",
+        "return": {
+          "type": "Ext.core.Element",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/layout/container/AbstractContainer.js",
+        "private": false,
+        "shortDoc": "Returns the element into which rendering must take place. ...",
+        "static": false,
         "name": "getRenderTarget",
         "owner": "Ext.layout.container.AbstractContainer",
         "doc": "<p>Returns the element into which rendering must take place. Defaults to the owner Container's Ext.AbstractComponent.targetEl.</p>\n\n\n<p>May be overridden in layout managers which implement an inner element.</p>\n",
         "linenr": 68,
+        "html_filename": "AbstractContainer.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-method-getTarget",
         "return": {
           "type": "Ext.core.Element",
           "doc": "\n"
         },
-        "html_filename": "AbstractContainer.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer-method-getTarget",
-        "shortDoc": "Returns the owner component's resize element. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/layout/container/AbstractContainer.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Returns the owner component's resize element. ...",
+        "static": false,
         "name": "getTarget",
         "owner": "Ext.layout.container.AbstractContainer",
         "doc": "<p>Returns the owner component's resize element.</p>\n",
         "linenr": 61,
-        "return": {
-          "type": "Ext.core.Element",
-          "doc": "\n"
-        },
         "html_filename": "AbstractContainer.html"
       }
     ],
-    "property": [
-
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
 
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-    "Ext.layout.Layout"
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "AbstractContainer.html#Ext-layout-container-AbstractContainer",
-  "subclasses": [
-    "Ext.layout.container.Container"
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/layout/container/AbstractContainer.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.layout.container.AbstractContainer",
   "doc": "<p>Please refer to sub classes documentation</p>\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "AbstractContainer.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Ext.layout.Layout"
 });

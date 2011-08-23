@@ -1,22 +1,35 @@
 Ext.data.JsonP.Ext_dd_DropTarget({
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.Base",
+    "Ext.dd.DragDrop",
+    "Ext.dd.DDTarget"
+  ],
+  "inheritable": false,
+  "subclasses": [
+    "Ext.dd.DropZone"
+  ],
+  "deprecated": null,
   "allMixins": [
 
   ],
-  "deprecated": null,
-  "docauthor": null,
+  "href": "DropTarget.html#Ext-dd-DropTarget",
   "members": {
     "cfg": [
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "DropTarget.html#Ext-dd-DropTarget-cfg-ddGroup",
         "protected": false,
         "tagname": "cfg",
-        "href": "DropTarget.html#Ext-dd-DropTarget-cfg-ddGroup",
-        "shortDoc": "A named drag drop group to which this object belongs. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
         "private": false,
+        "shortDoc": "A named drag drop group to which this object belongs. ...",
+        "static": false,
         "name": "ddGroup",
         "owner": "Ext.dd.DropTarget",
         "doc": "<p>A named drag drop group to which this object belongs.  If a group is specified, then this object will only\ninteract with other drag drop objects in the same group (defaults to undefined).</p>\n",
@@ -24,15 +37,16 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DropTarget.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "DropTarget.html#Ext-dd-DropTarget-cfg-dropAllowed",
         "protected": false,
         "tagname": "cfg",
-        "href": "DropTarget.html#Ext-dd-DropTarget-cfg-dropAllowed",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
         "private": false,
+        "static": false,
         "name": "dropAllowed",
         "owner": "Ext.dd.DropTarget",
         "doc": "<p>The CSS class returned to the drag source when drop is allowed (defaults to \"x-dd-drop-ok\").</p>\n",
@@ -40,15 +54,16 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DropTarget.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "DropTarget.html#Ext-dd-DropTarget-cfg-dropNotAllowed",
         "protected": false,
         "tagname": "cfg",
-        "href": "DropTarget.html#Ext-dd-DropTarget-cfg-dropNotAllowed",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
         "private": false,
+        "static": false,
         "name": "dropNotAllowed",
         "owner": "Ext.dd.DropTarget",
         "doc": "<p>The CSS class returned to the drag source when drop is not allowed (defaults to \"x-dd-drop-nodrop\").</p>\n",
@@ -56,15 +71,16 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DropTarget.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "DropTarget.html#Ext-dd-DropTarget-cfg-overClass",
         "protected": false,
         "tagname": "cfg",
-        "href": "DropTarget.html#Ext-dd-DropTarget-cfg-overClass",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
         "private": false,
+        "static": false,
         "name": "overClass",
         "owner": "Ext.dd.DropTarget",
         "doc": "<p>The CSS class applied to the drop target element while the drag source is over it (defaults to \"\").</p>\n",
@@ -74,13 +90,8 @@ Ext.data.JsonP.Ext_dd_DropTarget({
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "href": "DropTarget.html#Ext-dd-DropTarget-method-constructor",
-        "tagname": "method",
-        "protected": false,
-        "shortDoc": "Creates new DropTarget. ...",
-        "static": false,
         "params": [
           {
             "type": "Mixed",
@@ -95,28 +106,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "config"
           }
         ],
-        "private": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
-        "doc": "<p>Creates new DropTarget.</p>\n",
-        "owner": "Ext.dd.DropTarget",
-        "name": "DropTarget",
-        "html_filename": "DropTarget.html",
+        "href": "DropTarget.html#Ext-dd-DropTarget-method-constructor",
         "return": {
           "type": "Object",
           "doc": "\n"
         },
-        "linenr": 11
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-addInvalidHandleClass",
-        "shortDoc": "Lets you specify a css class of elements that will not initiate a drag ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
         "private": false,
+        "shortDoc": "Creates new DropTarget. ...",
+        "static": false,
+        "name": "constructor",
+        "owner": "Ext.dd.DropTarget",
+        "doc": "<p>Creates new DropTarget.</p>\n",
+        "linenr": 11,
+        "html_filename": "DropTarget.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "String",
@@ -125,26 +135,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "cssClass"
           }
         ],
-        "name": "addInvalidHandleClass",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Lets you specify a css class of elements that will not initiate a drag</p>\n",
-        "linenr": 861,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-addInvalidHandleClass",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Lets you specify a css class of elements that will not initiate a drag ...",
+        "static": false,
+        "name": "addInvalidHandleClass",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Lets you specify a css class of elements that will not initiate a drag</p>\n",
+        "linenr": 861,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-addInvalidHandleId",
-        "shortDoc": "Lets you to specify an element id for a child of a drag handle\nthat should not initiate a drag ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -153,26 +164,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "id"
           }
         ],
-        "name": "addInvalidHandleId",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Lets you to specify an element id for a child of a drag handle\nthat should not initiate a drag</p>\n",
-        "linenr": 848,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-addInvalidHandleId",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Lets you to specify an element id for a child of a drag handle\nthat should not initiate a drag ...",
+        "static": false,
+        "name": "addInvalidHandleId",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Lets you to specify an element id for a child of a drag handle\nthat should not initiate a drag</p>\n",
+        "linenr": 848,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-addInvalidHandleType",
-        "shortDoc": "Allows you to specify a tag name that should not start a drag operation\nwhen clicked. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -181,54 +193,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "tagName"
           }
         ],
-        "name": "addInvalidHandleType",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Allows you to specify a tag name that should not start a drag operation\nwhen clicked.  This is designed to facilitate embedding links within a\ndrag handle that do something other than start the drag.</p>\n",
-        "linenr": 836,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-addInvalidHandleType",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Allows you to specify a tag name that should not start a drag operation\nwhen clicked. ...",
+        "static": false,
+        "name": "addInvalidHandleType",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Allows you to specify a tag name that should not start a drag operation\nwhen clicked.  This is designed to facilitate embedding links within a\ndrag handle that do something other than start the drag.</p>\n",
+        "linenr": 836,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-addStatics",
-        "shortDoc": "Add / override static properties of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "addStatics",
-        "owner": "Ext.Base",
-        "doc": "<p>Add / override static properties of this class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.addStatics({\n    someProperty: 'someValue',      // My.cool.Class.someProperty = 'someValue'\n    method1: function() { ... },    // My.cool.Class.method1 = function() { ... };\n    method2: function() { ... }     // My.cool.Class.method2 = function() { ... };\n});\n</code></pre>\n",
-        "linenr": 388,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-addToGroup",
-        "shortDoc": "Adds this instance to a group of related drag/drop objects. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -237,49 +222,51 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "sGroup"
           }
         ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-addToGroup",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Adds this instance to a group of related drag/drop objects. ...",
+        "static": false,
         "name": "addToGroup",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Adds this instance to a group of related drag/drop objects.  All\ninstances belong to at least one group, and can belong to as many\ngroups as needed.</p>\n",
         "linenr": 705,
+        "html_filename": "DragDrop.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-applyConfig",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "DragDrop.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-applyConfig",
-        "shortDoc": "Applies the configuration parameters that were passed into the constructor. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Applies the configuration parameters that were passed into the constructor. ...",
+        "static": false,
         "name": "applyConfig",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Applies the configuration parameters that were passed into the constructor.\nThis is supposed to happen at each level through the inheritance chain.  So\na DDProxy implentation will execute apply config on DDProxy, DD, and\nDragDrop in order to get all of the parameters that are available in\neach object.</p>\n",
         "linenr": 615,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callOverridden",
-        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -288,26 +275,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "args"
           }
         ],
-        "name": "callOverridden",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the original method that was previously overridden with <a href=\"#/api/Ext.Base-method-override\" rel=\"Ext.Base-method-override\" class=\"docClass\">Ext.Base.override</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 269,
+        "href": "Base3.html#Ext-Base-method-callOverridden",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result after calling the overridden method</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
+        "static": false,
+        "name": "callOverridden",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the original method that was previously overridden with Ext.Base.override</p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
+        "linenr": 269,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callParent",
-        "shortDoc": "Call the parent's overridden method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -316,72 +304,75 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "args"
           }
         ],
-        "name": "callParent",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
-        "linenr": 124,
+        "href": "Base3.html#Ext-Base-method-callParent",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result from the superclass' method</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the parent's overridden method. ...",
+        "static": false,
+        "name": "callParent",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
+        "linenr": 124,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-clearConstraints",
-        "shortDoc": "Clears any constraints applied to this instance. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
 
         ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-clearConstraints",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Clears any constraints applied to this instance. ...",
+        "static": false,
         "name": "clearConstraints",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Clears any constraints applied to this instance.  Also clears ticks\nsince they can't exist independent of a constraint at this time.</p>\n",
         "linenr": 1007,
+        "html_filename": "DragDrop.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-clearTicks",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "DragDrop.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-clearTicks",
-        "shortDoc": "Clears any tick interval defined for this instance ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Clears any tick interval defined for this instance ...",
+        "static": false,
         "name": "clearTicks",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Clears any tick interval defined for this instance</p>\n",
         "linenr": 1017,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-constrainTo",
-        "shortDoc": "Initializes the drag drop object's constraints to restrict movement to a certain element. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "Mixed",
@@ -402,83 +393,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "inContent"
           }
         ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-constrainTo",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Initializes the drag drop object's constraints to restrict movement to a certain element. ...",
+        "static": false,
         "name": "constrainTo",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Initializes the drag drop object's constraints to restrict movement to a certain element.</p>\n\n<p>Usage:</p>\n\n<pre><code>var dd = new Ext.dd.DDProxy(\"dragDiv1\", \"proxytest\",\n               { dragElId: \"existingProxyDiv\" });\ndd.startDrag = function(){\n    this.constrainTo(\"parent-id\");\n};\n</code></pre>\n\n<p>Or you can initalize it using the <a href=\"#/api/Ext.core.Element\" rel=\"Ext.core.Element\" class=\"docClass\">Ext.core.Element</a> object:</p>\n\n<pre><code>Ext.get(\"dragDiv1\").initDDProxy(\"proxytest\", {dragElId: \"existingProxyDiv\"}, {\n    startDrag : function(){\n        this.constrainTo(\"parent-id\");\n    }\n});\n</code></pre>\n",
         "linenr": 478,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-create",
-        "shortDoc": "Create a new instance of this Class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-
-        ],
-        "name": "create",
-        "owner": "Ext.Base",
-        "doc": "<p>Create a new instance of this Class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.create({\n    someConfig: true\n});\n</code></pre>\n\n<p>All parameters are passed to the constructor of the class.</p>\n",
-        "linenr": 329,
-        "return": {
-          "type": "Object",
-          "doc": "<p>the created instance.</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-createAlias",
-        "shortDoc": "Create aliases for existing prototype methods. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The new method name, or an object to set multiple aliases. See\n<a href=\"#/api/Ext.Function-method-flexSetter\" rel=\"Ext.Function-method-flexSetter\" class=\"docClass\">flexSetter</a></p>\n",
-            "name": "alias"
-          },
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The original method name</p>\n",
-            "name": "origin"
-          }
-        ],
-        "name": "createAlias",
-        "owner": "Ext.Base",
-        "doc": "<p>Create aliases for existing prototype methods. Example:</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    method1: function() { ... },\n    method2: function() { ... }\n});\n\nvar test = new My.cool.Class();\n\nMy.cool.Class.createAlias({\n    method3: 'method1',\n    method4: 'method2'\n});\n\ntest.method3(); // test.method1()\n\nMy.cool.Class.createAlias('method5', 'method3');\n\ntest.method5(); // test.method3() -&gt; test.method1()\n</code></pre>\n",
-        "linenr": 648,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-endDrag",
-        "shortDoc": "Called when we are done dragging the object ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -487,123 +422,99 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "e"
           }
         ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-endDrag",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Called when we are done dragging the object ...",
+        "static": false,
         "name": "endDrag",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Called when we are done dragging the object</p>\n",
         "linenr": 435,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-getDragEl",
-        "shortDoc": "Returns a reference to the actual element to drag. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
 
         ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-getDragEl",
+        "return": {
+          "type": "HTMLElement",
+          "doc": "<p>the html element</p>\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Returns a reference to the actual element to drag. ...",
+        "static": false,
         "name": "getDragEl",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Returns a reference to the actual element to drag.  By default this is\nthe same as the html element, but it can be assigned to another\nelement. An example of this can be found in Ext.dd.DDProxy</p>\n",
         "linenr": 547,
+        "html_filename": "DragDrop.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-getEl",
         "return": {
           "type": "HTMLElement",
           "doc": "<p>the html element</p>\n"
         },
-        "html_filename": "DragDrop.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-getEl",
-        "shortDoc": "Returns a reference to the linked element ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Returns a reference to the linked element ...",
+        "static": false,
         "name": "getEl",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Returns a reference to the linked element</p>\n",
         "linenr": 535,
-        "return": {
-          "type": "HTMLElement",
-          "doc": "<p>the html element</p>\n"
-        },
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-getName",
-        "shortDoc": "Get the current class' name in string format. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getName",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
-        "linenr": 631,
+        "href": "Base3.html#Ext-Base-method-getName",
         "return": {
           "type": "String",
           "doc": "<p>className</p>\n"
         },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-implement",
-        "shortDoc": "Add methods / properties to the prototype of this class. ...",
-        "static": true,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
         "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "implement",
+        "shortDoc": "Get the current class' name in string format. ...",
+        "static": false,
+        "name": "getName",
         "owner": "Ext.Base",
-        "doc": "<p>Add methods / properties to the prototype of this class.</p>\n\n<pre><code>Ext.define('My.awesome.Cat', {\n    constructor: function() {\n        ...\n    }\n});\n\n My.awesome.Cat.implement({\n     meow: function() {\n        alert('Meowww...');\n     }\n });\n\n var kitty = new My.awesome.Cat;\n kitty.meow();\n</code></pre>\n",
-        "linenr": 415,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
+        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
+        "linenr": 631,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-init",
-        "shortDoc": "Sets up the DragDrop object. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -624,26 +535,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "config"
           }
         ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-init",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Sets up the DragDrop object. ...",
+        "static": false,
         "name": "init",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Sets up the DragDrop object.  Must be called in the constructor of any\n<a href=\"#/api/Ext.dd.DragDrop\" rel=\"Ext.dd.DragDrop\" class=\"docClass\">Ext.dd.DragDrop</a> subclass</p>\n",
         "linenr": 557,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-initConfig",
-        "shortDoc": "Initialize configuration for this class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -652,26 +564,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "config"
           }
         ],
-        "name": "initConfig",
-        "owner": "Ext.Base",
-        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
-        "linenr": 63,
+        "href": "Base3.html#Ext-Base-method-initConfig",
         "return": {
           "type": "Object",
           "doc": "<p>mixins The mixin prototypes as key - value pairs</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Initialize configuration for this class. ...",
+        "static": false,
+        "name": "initConfig",
+        "owner": "Ext.Base",
+        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
+        "linenr": 63,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-initTarget",
-        "shortDoc": "Initializes Targeting functionality only... ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -692,49 +605,51 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "config"
           }
         ],
-        "name": "initTarget",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Initializes Targeting functionality only... the object does not\nget a mousedown handler.</p>\n",
-        "linenr": 570,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-initTarget",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Initializes Targeting functionality only... ...",
+        "static": false,
+        "name": "initTarget",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Initializes Targeting functionality only... the object does not\nget a mousedown handler.</p>\n",
+        "linenr": 570,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-isLocked",
-        "shortDoc": "Returns true if this instance is locked, or the drag drop mgr is locked\n(meaning that all drag/drop is disabled on th...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "isLocked",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Returns true if this instance is locked, or the drag drop mgr is locked\n(meaning that all drag/drop is disabled on the page.)</p>\n",
-        "linenr": 783,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-isLocked",
         "return": {
           "type": "Boolean",
           "doc": "<p>true if this obj or all drag/drop is locked, else\nfalse</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Returns true if this instance is locked, or the drag drop mgr is locked\n(meaning that all drag/drop is disabled on th...",
+        "static": false,
+        "name": "isLocked",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Returns true if this instance is locked, or the drag drop mgr is locked\n(meaning that all drag/drop is disabled on the page.)</p>\n",
+        "linenr": 783,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-isValidHandleChild",
-        "shortDoc": "Checks the tag exclusion list to see if this click should be ignored ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "HTMLElement",
@@ -743,49 +658,51 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "node"
           }
         ],
-        "name": "isValidHandleChild",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Checks the tag exclusion list to see if this click should be ignored</p>\n",
-        "linenr": 903,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-isValidHandleChild",
         "return": {
           "type": "Boolean",
           "doc": "<p>true if this is a valid tag type, false if not</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Checks the tag exclusion list to see if this click should be ignored ...",
+        "static": false,
+        "name": "isValidHandleChild",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Checks the tag exclusion list to see if this click should be ignored</p>\n",
+        "linenr": 903,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-lock",
-        "shortDoc": "Locks this instance ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
 
         ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-lock",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Locks this instance ...",
+        "static": false,
         "name": "lock",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Locks this instance</p>\n",
         "linenr": 183,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DropTarget.html#Ext-dd-DropTarget-method-notifyDrop",
-        "shortDoc": "The function a Ext.dd.DragSource calls once to notify this drop target that the dragged item has\nbeen dropped on it. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.dd.DragSource",
@@ -806,26 +723,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "data"
           }
         ],
-        "name": "notifyDrop",
-        "owner": "Ext.dd.DropTarget",
-        "doc": "<p>The function a <a href=\"#/api/Ext.dd.DragSource\" rel=\"Ext.dd.DragSource\" class=\"docClass\">Ext.dd.DragSource</a> calls once to notify this drop target that the dragged item has\nbeen dropped on it.  This method has no default implementation and returns false, so you must provide an\nimplementation that does something to process the drop event and returns true so that the drag source's\nrepair action does not run.</p>\n",
-        "linenr": 100,
+        "href": "DropTarget.html#Ext-dd-DropTarget-method-notifyDrop",
         "return": {
           "type": "Boolean",
           "doc": "<p>False if the drop was invalid.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
+        "private": false,
+        "shortDoc": "The function a Ext.dd.DragSource calls once to notify this drop target that the dragged item has\nbeen dropped on it. ...",
+        "static": false,
+        "name": "notifyDrop",
+        "owner": "Ext.dd.DropTarget",
+        "doc": "<p>The function a <a href=\"#/api/Ext.dd.DragSource\" rel=\"Ext.dd.DragSource\" class=\"docClass\">Ext.dd.DragSource</a> calls once to notify this drop target that the dragged item has\nbeen dropped on it.  This method has no default implementation and returns false, so you must provide an\nimplementation that does something to process the drop event and returns true so that the drag source's\nrepair action does not run.</p>\n",
+        "linenr": 100,
         "html_filename": "DropTarget.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DropTarget.html#Ext-dd-DropTarget-method-notifyEnter",
-        "shortDoc": "The function a Ext.dd.DragSource calls once to notify this drop target that the source is now over the\ntarget. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.dd.DragSource",
@@ -846,26 +764,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "data"
           }
         ],
+        "href": "DropTarget.html#Ext-dd-DropTarget-method-notifyEnter",
+        "return": {
+          "type": "String",
+          "doc": "<p>status The CSS class that communicates the drop status back to the source so that the\nunderlying <a href=\"#/api/Ext.dd.StatusProxy\" rel=\"Ext.dd.StatusProxy\" class=\"docClass\">Ext.dd.StatusProxy</a> can be updated</p>\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
+        "private": false,
+        "shortDoc": "The function a Ext.dd.DragSource calls once to notify this drop target that the source is now over the\ntarget. ...",
+        "static": false,
         "name": "notifyEnter",
         "owner": "Ext.dd.DropTarget",
         "doc": "<p>The function a <a href=\"#/api/Ext.dd.DragSource\" rel=\"Ext.dd.DragSource\" class=\"docClass\">Ext.dd.DragSource</a> calls once to notify this drop target that the source is now over the\ntarget.  This default implementation adds the CSS class specified by overClass (if any) to the drop element\nand returns the dropAllowed config value.  This method should be overridden if drop validation is required.</p>\n",
         "linenr": 55,
-        "return": {
-          "type": "String",
-          "doc": "<p>status The CSS class that communicates the drop status back to the source so that the\nunderlying <a href=\"#/api/Ext.dd.StatusProxy\" rel=\"Ext.dd.StatusProxy\" class=\"docClass\">Ext.dd.StatusProxy</a> can be updated</p>\n"
-        },
         "html_filename": "DropTarget.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DropTarget.html#Ext-dd-DropTarget-method-notifyOut",
-        "shortDoc": "The function a Ext.dd.DragSource calls once to notify this drop target that the source has been dragged\nout of the ta...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.dd.DragSource",
@@ -886,26 +805,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "data"
           }
         ],
+        "href": "DropTarget.html#Ext-dd-DropTarget-method-notifyOut",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
+        "private": false,
+        "shortDoc": "The function a Ext.dd.DragSource calls once to notify this drop target that the source has been dragged\nout of the ta...",
+        "static": false,
         "name": "notifyOut",
         "owner": "Ext.dd.DropTarget",
         "doc": "<p>The function a <a href=\"#/api/Ext.dd.DragSource\" rel=\"Ext.dd.DragSource\" class=\"docClass\">Ext.dd.DragSource</a> calls once to notify this drop target that the source has been dragged\nout of the target without dropping.  This default implementation simply removes the CSS class specified by\noverClass (if any) from the drop element.</p>\n",
         "linenr": 86,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "DropTarget.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DropTarget.html#Ext-dd-DropTarget-method-notifyOver",
-        "shortDoc": "The function a Ext.dd.DragSource calls continuously while it is being dragged over the target. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.dd.DragSource",
@@ -926,49 +846,51 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "data"
           }
         ],
-        "name": "notifyOver",
-        "owner": "Ext.dd.DropTarget",
-        "doc": "<p>The function a <a href=\"#/api/Ext.dd.DragSource\" rel=\"Ext.dd.DragSource\" class=\"docClass\">Ext.dd.DragSource</a> calls continuously while it is being dragged over the target.\nThis method will be called on every mouse movement while the drag source is over the drop target.\nThis default implementation simply returns the dropAllowed config value.</p>\n",
-        "linenr": 72,
+        "href": "DropTarget.html#Ext-dd-DropTarget-method-notifyOver",
         "return": {
           "type": "String",
           "doc": "<p>status The CSS class that communicates the drop status back to the source so that the\nunderlying <a href=\"#/api/Ext.dd.StatusProxy\" rel=\"Ext.dd.StatusProxy\" class=\"docClass\">Ext.dd.StatusProxy</a> can be updated</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
+        "private": false,
+        "shortDoc": "The function a Ext.dd.DragSource calls continuously while it is being dragged over the target. ...",
+        "static": false,
+        "name": "notifyOver",
+        "owner": "Ext.dd.DropTarget",
+        "doc": "<p>The function a <a href=\"#/api/Ext.dd.DragSource\" rel=\"Ext.dd.DragSource\" class=\"docClass\">Ext.dd.DragSource</a> calls continuously while it is being dragged over the target.\nThis method will be called on every mouse movement while the drag source is over the drop target.\nThis default implementation simply returns the dropAllowed config value.</p>\n",
+        "linenr": 72,
         "html_filename": "DropTarget.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-onAvailable",
-        "shortDoc": "Override the onAvailable method to do what is needed after the initial\nposition was determined. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "onAvailable",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Override the onAvailable method to do what is needed after the initial\nposition was determined.</p>\n",
-        "linenr": 460,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-onAvailable",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Override the onAvailable method to do what is needed after the initial\nposition was determined. ...",
+        "static": false,
+        "name": "onAvailable",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Override the onAvailable method to do what is needed after the initial\nposition was determined.</p>\n",
+        "linenr": 460,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-onDrag",
-        "shortDoc": "Abstract method called during the onMouseMove event while dragging an\nobject. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -977,26 +899,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "e"
           }
         ],
-        "name": "onDrag",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Abstract method called during the onMouseMove event while dragging an\nobject.</p>\n",
-        "linenr": 358,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-onDrag",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Abstract method called during the onMouseMove event while dragging an\nobject. ...",
+        "static": false,
+        "name": "onDrag",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Abstract method called during the onMouseMove event while dragging an\nobject.</p>\n",
+        "linenr": 358,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-onDragDrop",
-        "shortDoc": "Abstract method called when this item is dropped on another DragDrop\nobj ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -1011,26 +934,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "id"
           }
         ],
-        "name": "onDragDrop",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Abstract method called when this item is dropped on another DragDrop\nobj</p>\n",
-        "linenr": 412,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-onDragDrop",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Abstract method called when this item is dropped on another DragDrop\nobj ...",
+        "static": false,
+        "name": "onDragDrop",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Abstract method called when this item is dropped on another DragDrop\nobj</p>\n",
+        "linenr": 412,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-onDragEnter",
-        "shortDoc": "Abstract method called when this element fist begins hovering over\nanother DragDrop obj ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -1045,26 +969,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "id"
           }
         ],
-        "name": "onDragEnter",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Abstract method called when this element fist begins hovering over\nanother DragDrop obj</p>\n",
-        "linenr": 365,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-onDragEnter",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Abstract method called when this element fist begins hovering over\nanother DragDrop obj ...",
+        "static": false,
+        "name": "onDragEnter",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Abstract method called when this element fist begins hovering over\nanother DragDrop obj</p>\n",
+        "linenr": 365,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-onDragOut",
-        "shortDoc": "Abstract method called when we are no longer hovering over an element ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -1079,26 +1004,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "id"
           }
         ],
-        "name": "onDragOut",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Abstract method called when we are no longer hovering over an element</p>\n",
-        "linenr": 397,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-onDragOut",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Abstract method called when we are no longer hovering over an element ...",
+        "static": false,
+        "name": "onDragOut",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Abstract method called when we are no longer hovering over an element</p>\n",
+        "linenr": 397,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-onDragOver",
-        "shortDoc": "Abstract method called when this element is hovering over another\nDragDrop obj ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -1113,26 +1039,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "id"
           }
         ],
-        "name": "onDragOver",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Abstract method called when this element is hovering over another\nDragDrop obj</p>\n",
-        "linenr": 381,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-onDragOver",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Abstract method called when this element is hovering over another\nDragDrop obj ...",
+        "static": false,
+        "name": "onDragOver",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Abstract method called when this element is hovering over another\nDragDrop obj</p>\n",
+        "linenr": 381,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-onInvalidDrop",
-        "shortDoc": "Abstract method called when this item is dropped on an area with no\ndrop target ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -1141,26 +1068,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "e"
           }
         ],
-        "name": "onInvalidDrop",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Abstract method called when this item is dropped on an area with no\ndrop target</p>\n",
-        "linenr": 422,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-onInvalidDrop",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Abstract method called when this item is dropped on an area with no\ndrop target ...",
+        "static": false,
+        "name": "onInvalidDrop",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Abstract method called when this item is dropped on an area with no\ndrop target</p>\n",
+        "linenr": 422,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-onMouseDown",
-        "shortDoc": "Called when a drag/drop obj gets a mousedown ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -1169,26 +1097,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "e"
           }
         ],
-        "name": "onMouseDown",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Called when a drag/drop obj gets a mousedown</p>\n",
-        "linenr": 448,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-onMouseDown",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Called when a drag/drop obj gets a mousedown ...",
+        "static": false,
+        "name": "onMouseDown",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Called when a drag/drop obj gets a mousedown</p>\n",
+        "linenr": 448,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-onMouseUp",
-        "shortDoc": "Called when a drag/drop obj gets a mouseup ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -1197,54 +1126,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "e"
           }
         ],
-        "name": "onMouseUp",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Called when a drag/drop obj gets a mouseup</p>\n",
-        "linenr": 454,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-onMouseUp",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Called when a drag/drop obj gets a mouseup ...",
+        "static": false,
+        "name": "onMouseUp",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Called when a drag/drop obj gets a mouseup</p>\n",
+        "linenr": 454,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-override",
-        "shortDoc": "Override prototype members of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "override",
-        "owner": "Ext.Base",
-        "doc": "<p>Override prototype members of this class. Overridden methods can be invoked via\n<a href=\"#/api/Ext.Base-method-callOverridden\" rel=\"Ext.Base-method-callOverridden\" class=\"docClass\">Ext.Base.callOverridden</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 518,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-removeFromGroup",
-        "shortDoc": "Removes this instance from the supplied interaction group ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1253,26 +1155,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "sGroup"
           }
         ],
-        "name": "removeFromGroup",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Removes this instance from the supplied interaction group</p>\n",
-        "linenr": 716,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-removeFromGroup",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Removes this instance from the supplied interaction group ...",
+        "static": false,
+        "name": "removeFromGroup",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Removes this instance from the supplied interaction group</p>\n",
+        "linenr": 716,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-removeInvalidHandleClass",
-        "shortDoc": "Unsets an invalid css class ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1281,26 +1184,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "cssClass"
           }
         ],
-        "name": "removeInvalidHandleClass",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Unsets an invalid css class</p>\n",
-        "linenr": 890,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-removeInvalidHandleClass",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Unsets an invalid css class ...",
+        "static": false,
+        "name": "removeInvalidHandleClass",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Unsets an invalid css class</p>\n",
+        "linenr": 890,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-removeInvalidHandleId",
-        "shortDoc": "Unsets an invalid handle id ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1309,26 +1213,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "id"
           }
         ],
-        "name": "removeInvalidHandleId",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Unsets an invalid handle id</p>\n",
-        "linenr": 879,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-removeInvalidHandleId",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Unsets an invalid handle id ...",
+        "static": false,
+        "name": "removeInvalidHandleId",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Unsets an invalid handle id</p>\n",
+        "linenr": 879,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-removeInvalidHandleType",
-        "shortDoc": "Unsets an excluded tag name set by addInvalidHandleType ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1337,26 +1242,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "tagName"
           }
         ],
-        "name": "removeInvalidHandleType",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Unsets an excluded tag name set by addInvalidHandleType</p>\n",
-        "linenr": 869,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-removeInvalidHandleType",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Unsets an excluded tag name set by addInvalidHandleType ...",
+        "static": false,
+        "name": "removeInvalidHandleType",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Unsets an excluded tag name set by addInvalidHandleType</p>\n",
+        "linenr": 869,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-resetConstraints",
-        "shortDoc": "Must be called if you manually reposition a dd element. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "boolean",
@@ -1365,26 +1271,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "maintainOffset"
           }
         ],
-        "name": "resetConstraints",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Must be called if you manually reposition a dd element.</p>\n",
-        "linenr": 1048,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-resetConstraints",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Must be called if you manually reposition a dd element. ...",
+        "static": false,
+        "name": "resetConstraints",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Must be called if you manually reposition a dd element.</p>\n",
+        "linenr": 1048,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-setDragElId",
-        "shortDoc": "Allows you to specify that an element other than the linked element\nwill be moved with the cursor during a drag ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1393,26 +1300,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "id"
           }
         ],
-        "name": "setDragElId",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Allows you to specify that an element other than the linked element\nwill be moved with the cursor during a drag</p>\n",
-        "linenr": 728,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-setDragElId",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Allows you to specify that an element other than the linked element\nwill be moved with the cursor during a drag ...",
+        "static": false,
+        "name": "setDragElId",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Allows you to specify that an element other than the linked element\nwill be moved with the cursor during a drag</p>\n",
+        "linenr": 728,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-setHandleElId",
-        "shortDoc": "Allows you to specify a child of the linked element that should be\nused to initiate the drag operation. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1421,26 +1329,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "id"
           }
         ],
-        "name": "setHandleElId",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Allows you to specify a child of the linked element that should be\nused to initiate the drag operation.  An example of this would be if\nyou have a content div with text and links.  Clicking anywhere in the\ncontent area would normally start the drag operation.  Use this method\nto specify that an element inside of the content div is the element\nthat starts the drag operation.</p>\n",
-        "linenr": 737,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-setHandleElId",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Allows you to specify a child of the linked element that should be\nused to initiate the drag operation. ...",
+        "static": false,
+        "name": "setHandleElId",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Allows you to specify a child of the linked element that should be\nused to initiate the drag operation.  An example of this would be if\nyou have a content div with text and links.  Clicking anywhere in the\ncontent area would normally start the drag operation.  Use this method\nto specify that an element inside of the content div is the element\nthat starts the drag operation.</p>\n",
+        "linenr": 737,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-setInitPosition",
-        "shortDoc": "Stores the initial placement of the linked element. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "int",
@@ -1455,26 +1364,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "diffY"
           }
         ],
-        "name": "setInitPosition",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Stores the initial placement of the linked element.</p>\n",
-        "linenr": 665,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-setInitPosition",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Stores the initial placement of the linked element. ...",
+        "static": false,
+        "name": "setInitPosition",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Stores the initial placement of the linked element.</p>\n",
+        "linenr": 665,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-setOuterHandleElId",
-        "shortDoc": "Allows you to set an element outside of the linked element as a drag\nhandle ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1483,26 +1393,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "id"
           }
         ],
-        "name": "setOuterHandleElId",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Allows you to set an element outside of the linked element as a drag\nhandle</p>\n",
-        "linenr": 755,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-setOuterHandleElId",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Allows you to set an element outside of the linked element as a drag\nhandle ...",
+        "static": false,
+        "name": "setOuterHandleElId",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Allows you to set an element outside of the linked element as a drag\nhandle</p>\n",
+        "linenr": 755,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-setPadding",
-        "shortDoc": "Configures the padding for the target zone in px. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "int",
@@ -1529,26 +1440,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "iLeft"
           }
         ],
-        "name": "setPadding",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>Configures the padding for the target zone in px.  Effectively expands\n(or reduces) the virtual object size for targeting calculations.\nSupports css-style shorthand; if only one parameter is passed, all sides\nwill have that padding, and if only two are passed, the top and bottom\nwill have the first param, the left and right the second.</p>\n",
-        "linenr": 643,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-setPadding",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Configures the padding for the target zone in px. ...",
+        "static": false,
+        "name": "setPadding",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>Configures the padding for the target zone in px.  Effectively expands\n(or reduces) the virtual object size for targeting calculations.\nSupports css-style shorthand; if only one parameter is passed, all sides\nwill have that padding, and if only two are passed, the top and bottom\nwill have the first param, the left and right the second.</p>\n",
+        "linenr": 643,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-setXConstraint",
-        "shortDoc": "By default, the element can be dragged any place on the screen. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "int",
@@ -1569,26 +1481,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "iTickSize"
           }
         ],
-        "name": "setXConstraint",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>By default, the element can be dragged any place on the screen.  Use\nthis method to limit the horizontal travel of the element.  Pass in\n0,0 for the parameters if you want to lock the drag to the y axis.</p>\n",
-        "linenr": 986,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-setXConstraint",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "By default, the element can be dragged any place on the screen. ...",
+        "static": false,
+        "name": "setXConstraint",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>By default, the element can be dragged any place on the screen.  Use\nthis method to limit the horizontal travel of the element.  Pass in\n0,0 for the parameters if you want to lock the drag to the y axis.</p>\n",
+        "linenr": 986,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-setYConstraint",
-        "shortDoc": "By default, the element can be dragged any place on the screen. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "int",
@@ -1609,26 +1522,27 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "iTickSize"
           }
         ],
-        "name": "setYConstraint",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>By default, the element can be dragged any place on the screen.  Set\nthis to limit the vertical travel of the element.  Pass in 0,0 for the\nparameters if you want to lock the drag to the x axis.</p>\n",
-        "linenr": 1027,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-setYConstraint",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "By default, the element can be dragged any place on the screen. ...",
+        "static": false,
+        "name": "setYConstraint",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>By default, the element can be dragged any place on the screen.  Set\nthis to limit the vertical travel of the element.  Pass in 0,0 for the\nparameters if you want to lock the drag to the x axis.</p>\n",
+        "linenr": 1027,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-startDrag",
-        "shortDoc": "Abstract method called after a drag/drop object is clicked\nand the drag or mousedown time thresholds have beeen met. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
           {
             "type": "int",
@@ -1643,120 +1557,142 @@ Ext.data.JsonP.Ext_dd_DropTarget({
             "name": "Y"
           }
         ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-startDrag",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Abstract method called after a drag/drop object is clicked\nand the drag or mousedown time thresholds have beeen met. ...",
+        "static": false,
         "name": "startDrag",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Abstract method called after a drag/drop object is clicked\nand the drag or mousedown time thresholds have beeen met.</p>\n",
         "linenr": 344,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-statics",
-        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "statics",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
-        "linenr": 199,
+        "href": "Base3.html#Ext-Base-method-statics",
         "return": {
           "type": "Class",
           "doc": "\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
+        "static": false,
+        "name": "statics",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
+        "linenr": 199,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-toString",
-        "shortDoc": "toString method ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "toString",
-        "owner": "Ext.dd.DragDrop",
-        "doc": "<p>toString method</p>\n",
-        "linenr": 1113,
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-toString",
         "return": {
           "type": "string",
           "doc": "<p>string representation of the dd obj</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "toString method ...",
+        "static": false,
+        "name": "toString",
+        "owner": "Ext.dd.DragDrop",
+        "doc": "<p>toString method</p>\n",
+        "linenr": 1113,
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-unlock",
-        "shortDoc": "Unlocks this instace ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
-        "private": false,
         "params": [
 
         ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-unlock",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
+        "private": false,
+        "shortDoc": "Unlocks this instace ...",
+        "static": false,
         "name": "unlock",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Unlocks this instace</p>\n",
         "linenr": 198,
+        "html_filename": "DragDrop.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "DragDrop.html#Ext-dd-DragDrop-method-unreg",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "DragDrop.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "DragDrop.html#Ext-dd-DragDrop-method-unreg",
-        "shortDoc": "Removes all drag and drop hooks for this element ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all drag and drop hooks for this element ...",
+        "static": false,
         "name": "unreg",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Removes all drag and drop hooks for this element</p>\n",
         "linenr": 770,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "DragDrop.html"
       }
     ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
     "property": [
       {
+        "inheritable": false,
         "type": "boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-available",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-available",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "static": false,
         "name": "available",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>The available property is false until the linked dom element is accessible.</p>\n",
@@ -1764,15 +1700,16 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "object",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-config",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-config",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "static": false,
         "name": "config",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Configuration attributes passed into the constructor</p>\n",
@@ -1780,15 +1717,16 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-defaultPadding",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-defaultPadding",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "static": false,
         "name": "defaultPadding",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Provides default constraint padding to \"constrainTo\" elements (defaults to <code>{left:0, right:0, top:0, bottom:0}</code>).</p>\n",
@@ -1796,16 +1734,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "object",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-groups",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-groups",
-        "shortDoc": "The group defines a logical collection of DragDrop objects that are\nrelated. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "The group defines a logical collection of DragDrop objects that are\nrelated. ...",
+        "static": false,
         "name": "groups",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>The group defines a logical collection of DragDrop objects that are\nrelated.  Instances only get events when interacting with other\nDragDrop object in the same group.  This lets us define multiple\ngroups using a single DragDrop subclass if we want. An object in the format {'group1':true, 'group2':true}</p>\n",
@@ -1813,16 +1752,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-hasOuterHandles",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-hasOuterHandles",
-        "shortDoc": "By default, drags can only be initiated if the mousedown occurs in the\nregion the linked element is. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "By default, drags can only be initiated if the mousedown occurs in the\nregion the linked element is. ...",
+        "static": false,
         "name": "hasOuterHandles",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>By default, drags can only be initiated if the mousedown occurs in the\nregion the linked element is.  This is done in part to work around a\nbug in some browsers that mis-report the mousedown if the previous\nmouseup happened outside of the window.  This property is set to true\nif outer handles are defined. Defaults to false.</p>\n",
@@ -1830,16 +1770,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-id",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-id",
-        "shortDoc": "The id of the element associated with this object. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "The id of the element associated with this object. ...",
+        "static": false,
         "name": "id",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>The id of the element associated with this object.  This is what we\nrefer to as the \"linked element\" because the size and position of\nthis element is used to determine when the drag and drop objects have\ninteracted.</p>\n",
@@ -1847,16 +1788,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-ignoreSelf",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-ignoreSelf",
-        "shortDoc": "Set to false to enable a DragDrop object to fire drag events while dragging\nover its own Element. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "Set to false to enable a DragDrop object to fire drag events while dragging\nover its own Element. ...",
+        "static": false,
         "name": "ignoreSelf",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Set to false to enable a DragDrop object to fire drag events while dragging\nover its own Element. Defaults to true - DragDrop objects do not by default\nfire drag events to themselves.</p>\n",
@@ -1864,15 +1806,16 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "Array",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-invalidHandleClasses",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-invalidHandleClasses",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "static": false,
         "name": "invalidHandleClasses",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>An Array of CSS class names for elements to be considered in valid as drag handles.</p>\n",
@@ -1880,16 +1823,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-invalidHandleIds",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-invalidHandleIds",
-        "shortDoc": "An object who's property names identify the IDs of elements to be considered invalid as drag handles. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "An object who's property names identify the IDs of elements to be considered invalid as drag handles. ...",
+        "static": false,
         "name": "invalidHandleIds",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>An object who's property names identify the IDs of elements to be considered invalid as drag handles.\nA non-null property value identifies the ID as invalid. For example, to prevent\ndragging from being initiated on element ID \"foo\", use:</p>\n\n<pre><code>{\n    foo: true\n}</code></pre>\n\n",
@@ -1897,16 +1841,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-invalidHandleTypes",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-invalidHandleTypes",
-        "shortDoc": "An object who's property names identify HTML tags to be considered invalid as drag handles. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "An object who's property names identify HTML tags to be considered invalid as drag handles. ...",
+        "static": false,
         "name": "invalidHandleTypes",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>An object who's property names identify HTML tags to be considered invalid as drag handles.\nA non-null property value identifies the tag as invalid. Defaults to the\nfollowing value which prevents drag operations from being initiated by &lt;a> elements:</p>\n\n<pre><code>{\n    A: \"A\"\n}</code></pre>\n\n",
@@ -1914,16 +1859,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-isTarget",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-isTarget",
-        "shortDoc": "By default, all instances can be a drop target. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "By default, all instances can be a drop target. ...",
+        "static": false,
         "name": "isTarget",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>By default, all instances can be a drop target.  This can be disabled by\nsetting isTarget to false.</p>\n",
@@ -1931,16 +1877,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-maintainOffset",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-maintainOffset",
-        "shortDoc": "Maintain offsets when we resetconstraints. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "Maintain offsets when we resetconstraints. ...",
+        "static": false,
         "name": "maintainOffset",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Maintain offsets when we resetconstraints.  Set to true when you want\nthe position of the element relative to its parent to stay the same\nwhen the page changes</p>\n",
@@ -1948,16 +1895,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-moveOnly",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-moveOnly",
-        "shortDoc": "When set to true, other DD objects in cooperating DDGroups do not receive\nnotification events when this DD object is ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "When set to true, other DD objects in cooperating DDGroups do not receive\nnotification events when this DD object is ...",
+        "static": false,
         "name": "moveOnly",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>When set to true, other DD objects in cooperating DDGroups do not receive\nnotification events when this DD object is dragged over them. Defaults to false.</p>\n",
@@ -1965,16 +1913,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "[int]",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-padding",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-padding",
-        "shortDoc": "The padding configured for this drag and drop object for calculating\nthe drop zone intersection with this object. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "The padding configured for this drag and drop object for calculating\nthe drop zone intersection with this object. ...",
+        "static": false,
         "name": "padding",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>The padding configured for this drag and drop object for calculating\nthe drop zone intersection with this object.\nAn array containing the 4 padding values: [top, right, bottom, left]</p>\n",
@@ -1982,16 +1931,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-primaryButtonOnly",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-primaryButtonOnly",
-        "shortDoc": "By default the drag and drop instance will only respond to the primary\nbutton click (left button for a right-handed m...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "By default the drag and drop instance will only respond to the primary\nbutton click (left button for a right-handed m...",
+        "static": false,
         "name": "primaryButtonOnly",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>By default the drag and drop instance will only respond to the primary\nbutton click (left button for a right-handed mouse).  Set to true to\nallow drag and drop to start with any mouse click that is propogated\nby the browser</p>\n",
@@ -1999,16 +1949,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "Class",
         "deprecated": null,
-        "alias": null,
+        "href": "Base3.html#Ext-Base-property-self",
         "protected": true,
         "tagname": "property",
-        "href": "Base3.html#Ext-Base-property-self",
-        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
         "private": false,
+        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
+        "static": false,
         "name": "self",
         "owner": "Ext.Base",
         "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
@@ -2016,16 +1967,17 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "type": "[int]",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-xTicks",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-xTicks",
-        "shortDoc": "Array of pixel locations the element will snap to if we specified a\nhorizontal graduation/interval. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "Array of pixel locations the element will snap to if we specified a\nhorizontal graduation/interval. ...",
+        "static": false,
         "name": "xTicks",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Array of pixel locations the element will snap to if we specified a\nhorizontal graduation/interval.  This array is generated automatically\nwhen you define a tick interval.</p>\n",
@@ -2033,66 +1985,67 @@ Ext.data.JsonP.Ext_dd_DropTarget({
         "html_filename": "DragDrop.html"
       },
       {
+        "inheritable": false,
         "type": "[int]",
         "deprecated": null,
-        "alias": null,
+        "href": "DragDrop.html#Ext-dd-DragDrop-property-yTicks",
         "protected": false,
         "tagname": "property",
-        "href": "DragDrop.html#Ext-dd-DragDrop-property-yTicks",
-        "shortDoc": "Array of pixel locations the element will snap to if we specified a\nvertical graduation/interval. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DragDrop.js",
         "private": false,
+        "shortDoc": "Array of pixel locations the element will snap to if we specified a\nvertical graduation/interval. ...",
+        "static": false,
         "name": "yTicks",
         "owner": "Ext.dd.DragDrop",
         "doc": "<p>Array of pixel locations the element will snap to if we specified a\nvertical graduation/interval.  This array is generated automatically\nwhen you define a tick interval.</p>\n",
         "linenr": 301,
         "html_filename": "DragDrop.html"
       }
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
-    "event": [
-
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-    "Ext.Base",
-    "Ext.dd.DragDrop",
-    "Ext.dd.DDTarget"
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "DropTarget.html#Ext-dd-DropTarget",
-  "subclasses": [
-    "Ext.dd.DropZone"
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/extjs/src/dd/DropTarget.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.dd.DropTarget",
   "doc": "<p>A simple class that provides the basic implementation needed to make any element a drop target that can have\ndraggable items dropped onto it.  The drop has no effect until an implementation of notifyDrop is provided.</p>\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "DropTarget.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Ext.dd.DDTarget"
 });

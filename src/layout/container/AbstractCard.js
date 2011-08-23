@@ -62,7 +62,7 @@ Ext.define('Ext.layout.container.AbstractCard', {
 
     beforeLayout: function() {
         var me = this;
-        me.activeItem = me.getActiveItem();
+        me.getActiveItem();
         if (me.activeItem && me.deferredRender) {
             me.renderItems([me.activeItem], me.getRenderTarget());
             return true;
@@ -70,6 +70,11 @@ Ext.define('Ext.layout.container.AbstractCard', {
         else {
             return this.callParent(arguments);
         }
+    },
+
+    renderChildren: function () {
+        this.getActiveItem();
+        this.callParent();
     },
 
     onLayout: function() {

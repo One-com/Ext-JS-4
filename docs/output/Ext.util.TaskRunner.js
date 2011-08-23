@@ -1,22 +1,27 @@
 Ext.data.JsonP.Ext_util_TaskRunner({
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+
+  ],
+  "inheritable": false,
+  "subclasses": [
+    "Ext.TaskManager"
+  ],
+  "deprecated": null,
   "allMixins": [
 
   ],
-  "deprecated": null,
-  "docauthor": null,
+  "href": "TaskManager.html#Ext-util-TaskRunner",
   "members": {
     "cfg": [
 
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "href": "TaskManager.html#Ext-util-TaskRunner-method-constructor",
-        "tagname": "method",
-        "protected": false,
-        "shortDoc": " ...",
-        "static": false,
         "params": [
           {
             "type": "Number",
@@ -25,28 +30,27 @@ Ext.data.JsonP.Ext_util_TaskRunner({
             "name": "interval"
           }
         ],
-        "private": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/util/TaskManager.js",
-        "doc": "\n",
-        "owner": "Ext.util.TaskRunner",
-        "name": "TaskRunner",
-        "html_filename": "TaskManager.html",
+        "href": "TaskManager.html#Ext-util-TaskRunner-method-constructor",
         "return": {
           "type": "Object",
           "doc": "\n"
         },
-        "linenr": 1
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "TaskManager.html#Ext-util-TaskRunner-method-start",
-        "shortDoc": "Starts a new task. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/util/TaskManager.js",
         "private": false,
+        "shortDoc": " ...",
+        "static": false,
+        "name": "constructor",
+        "owner": "Ext.util.TaskRunner",
+        "doc": "\n",
+        "linenr": 1,
+        "html_filename": "TaskManager.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Object",
@@ -55,26 +59,27 @@ Ext.data.JsonP.Ext_util_TaskRunner({
             "name": "task"
           }
         ],
-        "name": "start",
-        "owner": "Ext.util.TaskRunner",
-        "doc": "<p>Starts a new task.</p>\n",
-        "linenr": 104,
+        "href": "TaskManager.html#Ext-util-TaskRunner-method-start",
         "return": {
           "type": "Object",
           "doc": "<p>The task</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/util/TaskManager.js",
+        "private": false,
+        "shortDoc": "Starts a new task. ...",
+        "static": false,
+        "name": "start",
+        "owner": "Ext.util.TaskRunner",
+        "doc": "<p>Starts a new task.</p>\n",
+        "linenr": 104,
         "html_filename": "TaskManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "TaskManager.html#Ext-util-TaskRunner-method-stop",
-        "shortDoc": "Stops an existing running task. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/util/TaskManager.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -83,84 +88,104 @@ Ext.data.JsonP.Ext_util_TaskRunner({
             "name": "task"
           }
         ],
-        "name": "stop",
-        "owner": "Ext.util.TaskRunner",
-        "doc": "<p>Stops an existing running task.</p>\n",
-        "linenr": 137,
+        "href": "TaskManager.html#Ext-util-TaskRunner-method-stop",
         "return": {
           "type": "Object",
           "doc": "<p>The task</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/util/TaskManager.js",
+        "private": false,
+        "shortDoc": "Stops an existing running task. ...",
+        "static": false,
+        "name": "stop",
+        "owner": "Ext.util.TaskRunner",
+        "doc": "<p>Stops an existing running task.</p>\n",
+        "linenr": 137,
         "html_filename": "TaskManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "TaskManager.html#Ext-util-TaskRunner-method-stopAll",
-        "shortDoc": "Stops all tasks that are currently running. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/util/TaskManager.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "stopAll",
-        "owner": "Ext.util.TaskRunner",
-        "doc": "<p>Stops all tasks that are currently running.</p>\n",
-        "linenr": 148,
+        "href": "TaskManager.html#Ext-util-TaskRunner-method-stopAll",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/util/TaskManager.js",
+        "private": false,
+        "shortDoc": "Stops all tasks that are currently running. ...",
+        "static": false,
+        "name": "stopAll",
+        "owner": "Ext.util.TaskRunner",
+        "doc": "<p>Stops all tasks that are currently running.</p>\n",
+        "linenr": 148,
         "html_filename": "TaskManager.html"
       }
     ],
-    "property": [
-
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
 
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "TaskManager.html#Ext-util-TaskRunner",
-  "subclasses": [
-    "Ext.TaskManager"
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/util/TaskManager.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.util.TaskRunner",
   "doc": "<p>Provides the ability to execute one or more arbitrary tasks in a multithreaded\nmanner.  Generally, you can use the singleton <a href=\"#/api/Ext.TaskManager\" rel=\"Ext.TaskManager\" class=\"docClass\">Ext.TaskManager</a> instead, but\nif needed, you can create separate instances of TaskRunner.  Any number of\nseparate tasks can be started at any time and will run independently of each\nother. Example usage:</p>\n\n<pre><code>// Start a simple clock task that updates a div once per second\nvar updateClock = function(){\n    Ext.fly('clock').update(new Date().format('g:i:s A'));\n} \nvar task = {\n    run: updateClock,\n    interval: 1000 //1 second\n}\nvar runner = new Ext.util.TaskRunner();\nrunner.start(task);\n\n// equivalent using TaskManager\nExt.TaskManager.start({\n    run: updateClock,\n    interval: 1000\n});\n\n</code></pre>\n\n\n<p>See the <a href=\"#/api/Ext.util.TaskRunner-method-start\" rel=\"Ext.util.TaskRunner-method-start\" class=\"docClass\">start</a> method for details about how to configure a task object.</p>\n\n\n<p>Also see <a href=\"#/api/Ext.util.DelayedTask\" rel=\"Ext.util.DelayedTask\" class=\"docClass\">Ext.util.DelayedTask</a>.</p>\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "TaskManager.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": null
 });

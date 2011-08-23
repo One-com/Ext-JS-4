@@ -31,10 +31,10 @@ Ext.define('Ext.layout.container.Container', {
     /* End Definitions */
 
     layoutItem: function(item, box) {
-        box = box || {};
-        if (item.componentLayout.initialized !== true) {
-            this.setItemSize(item, box.width || item.width || undefined, box.height || item.height || undefined);
-            // item.doComponentLayout(box.width || item.width || undefined, box.height || item.height || undefined);
+        if (box) {
+            item.doComponentLayout(box.width, box.height);
+        } else {
+            item.doComponentLayout();
         }
     },
 

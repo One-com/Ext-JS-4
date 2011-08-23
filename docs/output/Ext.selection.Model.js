@@ -1,22 +1,34 @@
 Ext.data.JsonP.Ext_selection_Model({
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.Base",
+    "Ext.util.Observable"
+  ],
+  "inheritable": false,
+  "subclasses": [
+    "Ext.selection.RowModel"
+  ],
+  "deprecated": null,
   "allMixins": [
 
   ],
-  "deprecated": null,
-  "docauthor": null,
+  "href": "Model2.html#Ext-selection-Model",
   "members": {
     "cfg": [
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Model2.html#Ext-selection-Model-cfg-allowDeselect",
         "protected": false,
         "tagname": "cfg",
-        "href": "Model2.html#Ext-selection-Model-cfg-allowDeselect",
-        "shortDoc": "Allow users to deselect a record in a DataView, List or Grid. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
         "private": false,
+        "shortDoc": "Allow users to deselect a record in a DataView, List or Grid. ...",
+        "static": false,
         "name": "allowDeselect",
         "owner": "Ext.selection.Model",
         "doc": "<p>Allow users to deselect a record in a DataView, List or Grid. Only applicable when the SelectionModel's mode is 'SINGLE'. Defaults to false.</p>\n",
@@ -24,16 +36,17 @@ Ext.data.JsonP.Ext_selection_Model({
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
         "protected": false,
         "tagname": "cfg",
-        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
-        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
+        "static": false,
         "name": "listeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>A config object containing one or more event handlers to be added to this object during initialization. This\nshould be a valid listeners config object as specified in the <a href=\"#/api/Ext.selection.Model-method-addListener\" rel=\"Ext.selection.Model-method-addListener\" class=\"docClass\">addListener</a> example for attaching multiple\nhandlers at once.</p>\n\n<p><strong>DOM events from ExtJS <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Components</a></strong></p>\n\n<p>While <em>some</em> ExtJs Component classes export selected DOM events (e.g. \"click\", \"mouseover\" etc), this is usually\nonly done when extra value can be added. For example the <a href=\"#/api/Ext.view.View\" rel=\"Ext.view.View\" class=\"docClass\">DataView</a>'s <strong><code><a href=\"#/api/Ext.view.View-event-itemclick\" rel=\"Ext.view.View-event-itemclick\" class=\"docClass\">itemclick</a></code></strong> event passing the node clicked on. To access DOM events directly from a\nchild element of a Component, we need to specify the <code>element</code> option to identify the Component property to add a\nDOM listener to:</p>\n\n<pre><code>new Ext.panel.Panel({\n    width: 400,\n    height: 200,\n    dockedItems: [{\n        xtype: 'toolbar'\n    }],\n    listeners: {\n        click: {\n            element: 'el', //bind to the underlying el property on the panel\n            fn: function(){ console.log('click el'); }\n        },\n        dblclick: {\n            element: 'body', //bind to the underlying body property on the panel\n            fn: function(){ console.log('dblclick body'); }\n        }\n    }\n});\n</code></pre>\n",
@@ -41,16 +54,17 @@ Ext.data.JsonP.Ext_selection_Model({
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Model2.html#Ext-selection-Model-cfg-mode",
         "protected": false,
         "tagname": "cfg",
-        "href": "Model2.html#Ext-selection-Model-cfg-mode",
-        "shortDoc": "Modes of selection. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
         "private": false,
+        "shortDoc": "Modes of selection. ...",
+        "static": false,
         "name": "mode",
         "owner": "Ext.selection.Model",
         "doc": "<p>Modes of selection.\nValid values are SINGLE, SIMPLE, and MULTI. Defaults to 'SINGLE'</p>\n",
@@ -60,15 +74,8 @@ Ext.data.JsonP.Ext_selection_Model({
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addEvents",
-        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object/String",
@@ -83,26 +90,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "more"
           }
         ],
-        "name": "addEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
-        "linenr": 494,
+        "href": "Observable.html#Ext-util-Observable-method-addEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
+        "static": false,
+        "name": "addEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
+        "linenr": 494,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addListener",
-        "shortDoc": "Appends an event handler to this object. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -129,26 +137,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "options"
           }
         ],
-        "name": "addListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Appends an event handler to this object.</p>\n",
-        "linenr": 278,
+        "href": "Observable.html#Ext-util-Observable-method-addListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Appends an event handler to this object. ...",
+        "static": false,
+        "name": "addListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Appends an event handler to this object.</p>\n",
+        "linenr": 278,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
-        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -181,54 +190,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "opt"
           }
         ],
-        "name": "addManagedListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 156,
+        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
+        "static": false,
+        "name": "addManagedListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 156,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-addStatics",
-        "shortDoc": "Add / override static properties of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "addStatics",
-        "owner": "Ext.Base",
-        "doc": "<p>Add / override static properties of this class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.addStatics({\n    someProperty: 'someValue',      // My.cool.Class.someProperty = 'someValue'\n    method1: function() { ... },    // My.cool.Class.method1 = function() { ... };\n    method2: function() { ... }     // My.cool.Class.method2 = function() { ... };\n});\n</code></pre>\n",
-        "linenr": 388,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callOverridden",
-        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -237,26 +219,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "args"
           }
         ],
-        "name": "callOverridden",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the original method that was previously overridden with <a href=\"#/api/Ext.Base-method-override\" rel=\"Ext.Base-method-override\" class=\"docClass\">Ext.Base.override</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 269,
+        "href": "Base3.html#Ext-Base-method-callOverridden",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result after calling the overridden method</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
+        "static": false,
+        "name": "callOverridden",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the original method that was previously overridden with Ext.Base.override</p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
+        "linenr": 269,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callParent",
-        "shortDoc": "Call the parent's overridden method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -265,169 +248,75 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "args"
           }
         ],
-        "name": "callParent",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
-        "linenr": 124,
+        "href": "Base3.html#Ext-Base-method-callParent",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result from the superclass' method</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the parent's overridden method. ...",
+        "static": false,
+        "name": "callParent",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
+        "linenr": 124,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-capture",
-        "shortDoc": "Starts capture on the specified Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to capture events from.</p>\n",
-            "name": "o"
-          },
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The function to call when an event is fired.</p>\n",
-            "name": "fn"
-          },
-          {
-            "type": "Object",
-            "optional": true,
-            "doc": "<p>(optional) The scope (<code>this</code> reference) in which the function is executed. Defaults to\nthe Observable firing the event.</p>\n",
-            "name": "scope"
-          }
+
         ],
-        "name": "capture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Starts capture on the specified Observable. All events will be passed to the supplied function with the event\nname + standard signature of the event <strong>before</strong> the event is fired. If the supplied function returns false,\nthe event will not fire.</p>\n",
-        "linenr": 54,
+        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
-        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
+        "static": false,
         "name": "clearListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all listeners for this object including the managed listeners</p>\n",
         "linenr": 425,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
-        "shortDoc": "Removes all managed listeners for this object. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all managed listeners for this object. ...",
+        "static": false,
         "name": "clearManagedListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all managed listeners for this object.</p>\n",
         "linenr": 454,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-create",
-        "shortDoc": "Create a new instance of this Class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-
-        ],
-        "name": "create",
-        "owner": "Ext.Base",
-        "doc": "<p>Create a new instance of this Class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.create({\n    someConfig: true\n});\n</code></pre>\n\n<p>All parameters are passed to the constructor of the class.</p>\n",
-        "linenr": 329,
-        "return": {
-          "type": "Object",
-          "doc": "<p>the created instance.</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-createAlias",
-        "shortDoc": "Create aliases for existing prototype methods. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The new method name, or an object to set multiple aliases. See\n<a href=\"#/api/Ext.Function-method-flexSetter\" rel=\"Ext.Function-method-flexSetter\" class=\"docClass\">flexSetter</a></p>\n",
-            "name": "alias"
-          },
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The original method name</p>\n",
-            "name": "origin"
-          }
-        ],
-        "name": "createAlias",
-        "owner": "Ext.Base",
-        "doc": "<p>Create aliases for existing prototype methods. Example:</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    method1: function() { ... },\n    method2: function() { ... }\n});\n\nvar test = new My.cool.Class();\n\nMy.cool.Class.createAlias({\n    method3: 'method1',\n    method4: 'method2'\n});\n\ntest.method3(); // test.method1()\n\nMy.cool.Class.createAlias('method5', 'method3');\n\ntest.method5(); // test.method3() -&gt; test.method1()\n</code></pre>\n",
-        "linenr": 648,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-deselect",
-        "shortDoc": "Deselects a record instance by record instance or index. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Model/Index",
@@ -442,26 +331,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "suppressEvent"
           }
         ],
-        "name": "deselect",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Deselects a record instance by record instance or index.</p>\n",
-        "linenr": 262,
+        "href": "Model2.html#Ext-selection-Model-method-deselect",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Deselects a record instance by record instance or index. ...",
+        "static": false,
+        "name": "deselect",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Deselects a record instance by record instance or index.</p>\n",
+        "linenr": 262,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-deselectAll",
-        "shortDoc": "Deselect all records in the view. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -470,26 +360,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "suppressEvent"
           }
         ],
-        "name": "deselectAll",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Deselect all records in the view.</p>\n",
-        "linenr": 131,
+        "href": "Model2.html#Ext-selection-Model-method-deselectAll",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Deselect all records in the view. ...",
+        "static": false,
+        "name": "deselectAll",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Deselect all records in the view.</p>\n",
+        "linenr": 131,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
-        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String/[String]",
@@ -498,26 +389,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "events"
           }
         ],
-        "name": "enableBubble",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
-        "linenr": 609,
+        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
+        "static": false,
+        "name": "enableBubble",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
+        "linenr": 609,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
-        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -532,141 +424,147 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "args"
           }
         ],
-        "name": "fireEvent",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.selection.Model-method-addListener\" rel=\"Ext.selection.Model-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.selection.Model-method-enableBubble\" rel=\"Ext.selection.Model-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
-        "linenr": 233,
+        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
         "return": {
           "type": "Boolean",
           "doc": "<p>returns false if any of the handlers return false otherwise it returns true.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
+        "static": false,
+        "name": "fireEvent",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.selection.Model-method-addListener\" rel=\"Ext.selection.Model-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.selection.Model-method-enableBubble\" rel=\"Ext.selection.Model-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
+        "linenr": 233,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-getCount",
-        "shortDoc": "Gets the count of selected records. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getCount",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Gets the count of selected records.</p>\n",
-        "linenr": 599,
+        "href": "Model2.html#Ext-selection-Model-method-getCount",
         "return": {
           "type": "Number",
           "doc": "<p>The number of selected records</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Gets the count of selected records. ...",
+        "static": false,
+        "name": "getCount",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Gets the count of selected records.</p>\n",
+        "linenr": 599,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-getLastSelected",
-        "shortDoc": "Returns the last selected record. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getLastSelected",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Returns the last selected record.</p>\n",
-        "linenr": 438,
+        "href": "Model2.html#Ext-selection-Model-method-getLastSelected",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Returns the last selected record. ...",
+        "static": false,
+        "name": "getLastSelected",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Returns the last selected record.</p>\n",
+        "linenr": 438,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-getName",
-        "shortDoc": "Get the current class' name in string format. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getName",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
-        "linenr": 631,
+        "href": "Base3.html#Ext-Base-method-getName",
         "return": {
           "type": "String",
           "doc": "<p>className</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the current class' name in string format. ...",
+        "static": false,
+        "name": "getName",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
+        "linenr": 631,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-getSelection",
-        "shortDoc": "Returns an array of the currently selected records. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getSelection",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Returns an array of the currently selected records.</p>\n",
-        "linenr": 449,
+        "href": "Model2.html#Ext-selection-Model-method-getSelection",
         "return": {
           "type": "Array",
           "doc": "<p>The selected records</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Returns an array of the currently selected records. ...",
+        "static": false,
+        "name": "getSelection",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Returns an array of the currently selected records.</p>\n",
+        "linenr": 449,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-getSelectionMode",
-        "shortDoc": "Returns the current selectionMode. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getSelectionMode",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Returns the current selectionMode. SINGLE, MULTI or SIMPLE.</p>\n",
-        "linenr": 457,
+        "href": "Model2.html#Ext-selection-Model-method-getSelectionMode",
         "return": {
           "type": "String",
           "doc": "<p>The selectionMode</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Returns the current selectionMode. ...",
+        "static": false,
+        "name": "getSelectionMode",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Returns the current selectionMode. SINGLE, MULTI or SIMPLE.</p>\n",
+        "linenr": 457,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-hasListener",
-        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -675,77 +573,51 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "eventName"
           }
         ],
-        "name": "hasListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
-        "linenr": 530,
+        "href": "Observable.html#Ext-util-Observable-method-hasListener",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the event is being listened for, else false</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
+        "static": false,
+        "name": "hasListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
+        "linenr": 530,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-hasSelection",
-        "shortDoc": "Returns true if there are any a selected records. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "hasSelection",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Returns true if there are any a selected records.</p>\n",
-        "linenr": 502,
+        "href": "Model2.html#Ext-selection-Model-method-hasSelection",
         "return": {
           "type": "Boolean",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Returns true if there are any a selected records. ...",
+        "static": false,
+        "name": "hasSelection",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Returns true if there are any a selected records.</p>\n",
+        "linenr": 502,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-implement",
-        "shortDoc": "Add methods / properties to the prototype of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "implement",
-        "owner": "Ext.Base",
-        "doc": "<p>Add methods / properties to the prototype of this class.</p>\n\n<pre><code>Ext.define('My.awesome.Cat', {\n    constructor: function() {\n        ...\n    }\n});\n\n My.awesome.Cat.implement({\n     meow: function() {\n        alert('Meowww...');\n     }\n });\n\n var kitty = new My.awesome.Cat;\n kitty.meow();\n</code></pre>\n",
-        "linenr": 415,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-initConfig",
-        "shortDoc": "Initialize configuration for this class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -754,26 +626,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "config"
           }
         ],
-        "name": "initConfig",
-        "owner": "Ext.Base",
-        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
-        "linenr": 63,
+        "href": "Base3.html#Ext-Base-method-initConfig",
         "return": {
           "type": "Object",
           "doc": "<p>mixins The mixin prototypes as key - value pairs</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Initialize configuration for this class. ...",
+        "static": false,
+        "name": "initConfig",
+        "owner": "Ext.Base",
+        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
+        "linenr": 63,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-isFocused",
-        "shortDoc": "Determines if this record is currently focused. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -782,49 +655,51 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "Ext"
           }
         ],
-        "name": "isFocused",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Determines if this record is currently focused.</p>\n",
-        "linenr": 420,
+        "href": "Model2.html#Ext-selection-Model-method-isFocused",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Determines if this record is currently focused. ...",
+        "static": false,
+        "name": "isFocused",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Determines if this record is currently focused.</p>\n",
+        "linenr": 420,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-isLocked",
-        "shortDoc": "Returns true if the selections are locked. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "isLocked",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Returns true if the selections are locked.</p>\n",
-        "linenr": 475,
+        "href": "Model2.html#Ext-selection-Model-method-isLocked",
         "return": {
           "type": "Boolean",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Returns true if the selections are locked. ...",
+        "static": false,
+        "name": "isLocked",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Returns true if the selections are locked.</p>\n",
+        "linenr": 475,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-isSelected",
-        "shortDoc": "Returns true if the specified row is selected. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Record/Number",
@@ -833,31 +708,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "record"
           }
         ],
-        "name": "isSelected",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Returns <tt>true</tt> if the specified row is selected.</p>\n",
-        "linenr": 492,
+        "href": "Model2.html#Ext-selection-Model-method-isSelected",
         "return": {
           "type": "Boolean",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Returns true if the specified row is selected. ...",
+        "static": false,
+        "name": "isSelected",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Returns <tt>true</tt> if the specified row is selected.</p>\n",
+        "linenr": 492,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "addManagedListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mon",
-        "shortDoc": "Shorthand for addManagedListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -890,31 +761,32 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "opt"
           }
         ],
-        "name": "mon",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.selection.Model-method-addManagedListener\" rel=\"Ext.selection.Model-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 681,
+        "href": "Observable.html#Ext-util-Observable-method-mon",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
+        "protected": false,
+        "tagname": "method",
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "removeManagedListener"
+          "owner": "addManagedListener"
         },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mun",
-        "shortDoc": "Shorthand for removeManagedListener. ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "Shorthand for addManagedListener. ...",
+        "static": false,
+        "name": "mon",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.selection.Model-method-addManagedListener\" rel=\"Ext.selection.Model-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 681,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Observable|Element",
@@ -941,65 +813,32 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "scope"
           }
         ],
-        "name": "mun",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.selection.Model-method-removeManagedListener\" rel=\"Ext.selection.Model-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.selection.Model-method-mon\" rel=\"Ext.selection.Model-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
-        "linenr": 687,
+        "href": "Observable.html#Ext-util-Observable-method-mun",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-observe",
-        "shortDoc": "Sets observability on the passed class constructor. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The class constructor to make observable.</p>\n",
-            "name": "c"
-          },
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "<p>An object containing a series of listeners to add. See <a href=\"#/api/Ext.selection.Model-method-addListener\" rel=\"Ext.selection.Model-method-addListener\" class=\"docClass\">addListener</a>.</p>\n",
-            "name": "listeners"
-          }
-        ],
-        "name": "observe",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Sets observability on the passed class constructor.</p>\n\n<p>This makes any event fired on any instance of the passed class also fire a single event through\nthe <strong>class</strong> allowing for central handling of events on many instances at once.</p>\n\n<p>Usage:</p>\n\n<pre><code>Ext.util.Observable.observe(Ext.data.Connection);\nExt.data.Connection.on('beforerequest', function(con, options) {\n    console.log('Ajax request made to ' + options.url);\n});\n</code></pre>\n",
-        "linenr": 69,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "addListener"
+          "owner": "removeManagedListener"
         },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-on",
-        "shortDoc": "Shorthand for addListener. ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "Shorthand for removeManagedListener. ...",
+        "static": false,
+        "name": "mun",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.selection.Model-method-removeManagedListener\" rel=\"Ext.selection.Model-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.selection.Model-method-mon\" rel=\"Ext.selection.Model-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
+        "linenr": 687,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "String",
@@ -1026,54 +865,32 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "options"
           }
         ],
-        "name": "on",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.selection.Model-method-addListener\" rel=\"Ext.selection.Model-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
-        "linenr": 669,
+        "href": "Observable.html#Ext-util-Observable-method-on",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "addListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for addListener. ...",
+        "static": false,
+        "name": "on",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.selection.Model-method-addListener\" rel=\"Ext.selection.Model-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
+        "linenr": 669,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-override",
-        "shortDoc": "Override prototype members of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "override",
-        "owner": "Ext.Base",
-        "doc": "<p>Override prototype members of this class. Overridden methods can be invoked via\n<a href=\"#/api/Ext.Base-method-callOverridden\" rel=\"Ext.Base-method-callOverridden\" class=\"docClass\">Ext.Base.callOverridden</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 518,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
-        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -1094,54 +911,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "prefix"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
+        "static": false,
         "name": "relayEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Relays selected events from the specified Observable as if the events were fired by <code>this</code>.</p>\n",
         "linenr": 573,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-releaseCapture",
-        "shortDoc": "Removes all added captures from the Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to release</p>\n",
-            "name": "o"
-          }
-        ],
-        "name": "releaseCapture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes <strong>all</strong> added captures from the Observable.</p>\n",
-        "linenr": 44,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeListener",
-        "shortDoc": "Removes an event handler. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1162,26 +952,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "scope"
           }
         ],
-        "name": "removeListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes an event handler.</p>\n",
-        "linenr": 392,
+        "href": "Observable.html#Ext-util-Observable-method-removeListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes an event handler. ...",
+        "static": false,
+        "name": "removeListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Removes an event handler.</p>\n",
+        "linenr": 392,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
-        "shortDoc": "Removes listeners that were added by the mon method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable|Element",
@@ -1208,49 +999,51 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "scope"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes listeners that were added by the mon method. ...",
+        "static": false,
         "name": "removeManagedListener",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes listeners that were added by the <a href=\"#/api/Ext.selection.Model-method-mon\" rel=\"Ext.selection.Model-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
         "linenr": 197,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
-        "shortDoc": "Resumes firing events (see suspendEvents). ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Resumes firing events (see suspendEvents). ...",
+        "static": false,
         "name": "resumeEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Resumes firing events (see <a href=\"#/api/Ext.selection.Model-method-suspendEvents\" rel=\"Ext.selection.Model-method-suspendEvents\" class=\"docClass\">suspendEvents</a>).</p>\n\n<p>If events were suspended using the <code>**queueSuspended**</code> parameter, then all events fired\nduring event suspension will be sent to any listeners now.</p>\n",
         "linenr": 554,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-select",
-        "shortDoc": "Selects a record instance by record instance or index. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Model/Index",
@@ -1271,26 +1064,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "suppressEvent"
           }
         ],
-        "name": "select",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Selects a record instance by record instance or index.</p>\n",
-        "linenr": 252,
+        "href": "Model2.html#Ext-selection-Model-method-select",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Selects a record instance by record instance or index. ...",
+        "static": false,
+        "name": "select",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Selects a record instance by record instance or index.</p>\n",
+        "linenr": 252,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-selectAll",
-        "shortDoc": "Select all records in the view. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -1299,26 +1093,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "suppressEvent"
           }
         ],
-        "name": "selectAll",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Select all records in the view.</p>\n",
-        "linenr": 111,
+        "href": "Model2.html#Ext-selection-Model-method-selectAll",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Select all records in the view. ...",
+        "static": false,
+        "name": "selectAll",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Select all records in the view.</p>\n",
+        "linenr": 111,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-selectRange",
-        "shortDoc": "Selects a range of rows if the selection model is not locked. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Model/Number",
@@ -1345,26 +1140,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "dir"
           }
         ],
-        "name": "selectRange",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Selects a range of rows if the selection model <a href=\"#/api/Ext.selection.Model-method-isLocked\" rel=\"Ext.selection.Model-method-isLocked\" class=\"docClass\">is not locked</a>.\nAll rows in between startRow and endRow are also selected.</p>\n",
-        "linenr": 190,
+        "href": "Model2.html#Ext-selection-Model-method-selectRange",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Selects a range of rows if the selection model is not locked. ...",
+        "static": false,
+        "name": "selectRange",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Selects a range of rows if the selection model <a href=\"#/api/Ext.selection.Model-method-isLocked\" rel=\"Ext.selection.Model-method-isLocked\" class=\"docClass\">is not locked</a>.\nAll rows in between startRow and endRow are also selected.</p>\n",
+        "linenr": 190,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-setLastFocused",
-        "shortDoc": " ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Model",
@@ -1379,26 +1175,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "supressFocus"
           }
         ],
-        "name": "setLastFocused",
-        "owner": "Ext.selection.Model",
-        "doc": "\n",
-        "linenr": 408,
+        "href": "Model2.html#Ext-selection-Model-method-setLastFocused",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": " ...",
+        "static": false,
+        "name": "setLastFocused",
+        "owner": "Ext.selection.Model",
+        "doc": "\n",
+        "linenr": 408,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-setLocked",
-        "shortDoc": "Locks the current selection and disables any changes from\nhappening to the selection. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -1407,26 +1204,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "locked"
           }
         ],
-        "name": "setLocked",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Locks the current selection and disables any changes from\nhappening to the selection.</p>\n",
-        "linenr": 483,
+        "href": "Model2.html#Ext-selection-Model-method-setLocked",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Locks the current selection and disables any changes from\nhappening to the selection. ...",
+        "static": false,
+        "name": "setLocked",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Locks the current selection and disables any changes from\nhappening to the selection.</p>\n",
+        "linenr": 483,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Model2.html#Ext-selection-Model-method-setSelectionMode",
-        "shortDoc": "Sets the current selectionMode. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -1435,49 +1233,51 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "selMode"
           }
         ],
-        "name": "setSelectionMode",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>Sets the current selectionMode. SINGLE, MULTI or SIMPLE.</p>\n",
-        "linenr": 465,
+        "href": "Model2.html#Ext-selection-Model-method-setSelectionMode",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Sets the current selectionMode. ...",
+        "static": false,
+        "name": "setSelectionMode",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>Sets the current selectionMode. SINGLE, MULTI or SIMPLE.</p>\n",
+        "linenr": 465,
         "html_filename": "Model2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-statics",
-        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "statics",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
-        "linenr": 199,
+        "href": "Base3.html#Ext-Base-method-statics",
         "return": {
           "type": "Class",
           "doc": "\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
+        "static": false,
+        "name": "statics",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
+        "linenr": 199,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
-        "shortDoc": "Suspends the firing of all events. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -1486,31 +1286,27 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "queueSuspended"
           }
         ],
-        "name": "suspendEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.selection.Model-method-resumeEvents\" rel=\"Ext.selection.Model-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
-        "linenr": 541,
+        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Suspends the firing of all events. ...",
+        "static": false,
+        "name": "suspendEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.selection.Model-method-resumeEvents\" rel=\"Ext.selection.Model-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
+        "linenr": 541,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "removeListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-un",
-        "shortDoc": "Shorthand for removeListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1531,69 +1327,34 @@ Ext.data.JsonP.Ext_selection_Model({
             "name": "scope"
           }
         ],
-        "name": "un",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.selection.Model-method-removeListener\" rel=\"Ext.selection.Model-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
-        "linenr": 675,
+        "href": "Observable.html#Ext-util-Observable-method-un",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "removeListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for removeListener. ...",
+        "static": false,
+        "name": "un",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.selection.Model-method-removeListener\" rel=\"Ext.selection.Model-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
+        "linenr": 675,
         "html_filename": "Observable.html"
       }
     ],
-    "property": [
-      {
-        "type": "Object",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Model2.html#Ext-selection-Model-property-selected",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
-        "name": "selected",
-        "owner": "Ext.selection.Model",
-        "doc": "<p>READ-ONLY A MixedCollection that maintains all of the currently selected\nrecords.</p>\n",
-        "linenr": 34,
-        "html_filename": "Model2.html"
-      },
-      {
-        "type": "Class",
-        "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "property",
-        "href": "Base3.html#Ext-Base-property-self",
-        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "name": "self",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
-        "linenr": 18,
-        "html_filename": "Base3.html"
-      }
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "Model2.html#Ext-selection-Model-event-selectionchange",
-        "shortDoc": "Fired after a selection change has occurred ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.selection.Model",
@@ -1614,46 +1375,107 @@ Ext.data.JsonP.Ext_selection_Model({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "Model2.html#Ext-selection-Model-event-selectionchange",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "shortDoc": "Fired after a selection change has occurred ...",
+        "static": false,
         "name": "selectionchange",
         "owner": "Ext.selection.Model",
         "doc": "<p>Fired after a selection change has occurred</p>\n",
         "linenr": 57,
         "html_filename": "Model2.html"
       }
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+      {
+        "inheritable": false,
+        "type": "Object",
+        "deprecated": null,
+        "href": "Model2.html#Ext-selection-Model-property-selected",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
+        "private": false,
+        "static": false,
+        "name": "selected",
+        "owner": "Ext.selection.Model",
+        "doc": "<p>READ-ONLY A MixedCollection that maintains all of the currently selected\nrecords.</p>\n",
+        "linenr": 34,
+        "html_filename": "Model2.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Class",
+        "deprecated": null,
+        "href": "Base3.html#Ext-Base-property-self",
+        "protected": true,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
+        "static": false,
+        "name": "self",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
+        "linenr": 18,
+        "html_filename": "Base3.html"
+      }
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-    "Ext.Base",
-    "Ext.util.Observable"
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "Model2.html#Ext-selection-Model",
-  "subclasses": [
-    "Ext.selection.RowModel"
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/selection/Model.js",
   "private": false,
   "alternateClassNames": [
     "Ext.AbstractSelectionModel"
   ],
+  "static": false,
   "name": "Ext.selection.Model",
   "doc": "<p>Tracks what records are currently selected in a databound widget.</p>\n\n<p>This is an abstract class and is not meant to be directly used.</p>\n\n<p>DataBound UI widgets such as GridPanel, TreePanel, and ListView\nshould subclass AbstractStoreSelectionModel and provide a way\nto binding to the component.</p>\n\n<p>The abstract methods onSelectChange and onLastFocusChanged should\nbe implemented in these subclasses to update the UI widget.</p>\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "Model2.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Ext.util.Observable"
 });

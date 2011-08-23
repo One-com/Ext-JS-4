@@ -801,10 +801,14 @@ each of the buttons in the fbar.
         me.callParent(arguments);
     },
 
-    afterRender: function() {
+    afterComponentLayout: function() {
         var me = this;
         me.callParent(arguments);
-        if (me.collapsed) {
+
+        // Instate the collapsed state on our first component layout. We need to wait for
+        // this moment so that we have established at least some of our size (from our
+        // ownerCt).
+        if (me.collapsed && me.componentLayoutCounter == 1) {
             me.collapsed = false;
             me.collapse(null, false, true);
         }

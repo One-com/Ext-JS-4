@@ -1,22 +1,33 @@
 Ext.data.JsonP.Ext_data_Request({
-  "allMixins": [
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+
+  ],
+  "inheritable": false,
+  "subclasses": [
 
   ],
   "deprecated": null,
-  "docauthor": null,
+  "allMixins": [
+
+  ],
+  "href": "Request.html#Ext-data-Request",
   "members": {
     "cfg": [
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Request.html#Ext-data-Request-cfg-action",
         "protected": false,
         "tagname": "cfg",
-        "href": "Request.html#Ext-data-Request-cfg-action",
-        "shortDoc": "The name of the action this Request represents. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Request.js",
         "private": false,
+        "shortDoc": "The name of the action this Request represents. ...",
+        "static": false,
         "name": "action",
         "owner": "Ext.data.Request",
         "doc": "<p>The name of the action this Request represents. Usually one of 'create', 'read', 'update' or 'destroy'</p>\n",
@@ -24,16 +35,17 @@ Ext.data.JsonP.Ext_data_Request({
         "html_filename": "Request.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Request.html#Ext-data-Request-cfg-method",
         "protected": false,
         "tagname": "cfg",
-        "href": "Request.html#Ext-data-Request-cfg-method",
-        "shortDoc": "The HTTP method to use on this Request (defaults to 'GET'). ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Request.js",
         "private": false,
+        "shortDoc": "The HTTP method to use on this Request (defaults to 'GET'). ...",
+        "static": false,
         "name": "method",
         "owner": "Ext.data.Request",
         "doc": "<p>The HTTP method to use on this Request (defaults to 'GET'). Should be one of 'GET', 'POST', 'PUT' or 'DELETE'</p>\n",
@@ -41,16 +53,17 @@ Ext.data.JsonP.Ext_data_Request({
         "html_filename": "Request.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Request.html#Ext-data-Request-cfg-params",
         "protected": false,
         "tagname": "cfg",
-        "href": "Request.html#Ext-data-Request-cfg-params",
-        "shortDoc": "HTTP request params. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Request.js",
         "private": false,
+        "shortDoc": "HTTP request params. ...",
+        "static": false,
         "name": "params",
         "owner": "Ext.data.Request",
         "doc": "<p>HTTP request params. The Proxy and its Writer have access to and can modify this object.</p>\n",
@@ -58,15 +71,16 @@ Ext.data.JsonP.Ext_data_Request({
         "html_filename": "Request.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Request.html#Ext-data-Request-cfg-url",
         "protected": false,
         "tagname": "cfg",
-        "href": "Request.html#Ext-data-Request-cfg-url",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Request.js",
         "private": false,
+        "static": false,
         "name": "url",
         "owner": "Ext.data.Request",
         "doc": "<p>The url to access on this Request</p>\n",
@@ -76,13 +90,8 @@ Ext.data.JsonP.Ext_data_Request({
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "href": "Request.html#Ext-data-Request-method-constructor",
-        "tagname": "method",
-        "protected": false,
-        "shortDoc": "Creates the Request object. ...",
-        "static": false,
         "params": [
           {
             "type": "Object",
@@ -91,63 +100,80 @@ Ext.data.JsonP.Ext_data_Request({
             "name": "config"
           }
         ],
-        "private": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Request.js",
-        "doc": "<p>Creates the Request object.</p>\n",
-        "owner": "Ext.data.Request",
-        "name": "Request",
-        "html_filename": "Request.html",
+        "href": "Request.html#Ext-data-Request-method-constructor",
         "return": {
           "type": "Object",
           "doc": "\n"
         },
-        "linenr": 32
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Request.js",
+        "private": false,
+        "shortDoc": "Creates the Request object. ...",
+        "static": false,
+        "name": "constructor",
+        "owner": "Ext.data.Request",
+        "doc": "<p>Creates the Request object.</p>\n",
+        "linenr": 32,
+        "html_filename": "Request.html"
       }
     ],
-    "property": [
-
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
 
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "Request.html#Ext-data-Request",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": "Ed Spencer",
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Request.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.data.Request",
   "doc": "<p>Simple class that represents a Request that will be made by any <a href=\"#/api/Ext.data.proxy.Server\" rel=\"Ext.data.proxy.Server\" class=\"docClass\">Ext.data.proxy.Server</a> subclass.\nAll this class does is standardize the representation of a Request as used by any ServerProxy subclass,\nit does not contain any actual logic or perform the request itself.</p>\n\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "Request.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Object"
 });

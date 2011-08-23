@@ -1,22 +1,33 @@
 Ext.data.JsonP.Ext_ElementLoader({
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.Base"
+  ],
+  "inheritable": false,
+  "subclasses": [
+    "Ext.ComponentLoader"
+  ],
+  "deprecated": null,
   "allMixins": [
     "Ext.util.Observable"
   ],
-  "deprecated": null,
-  "docauthor": null,
+  "href": "ElementLoader.html#Ext-ElementLoader",
   "members": {
     "cfg": [
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-ajaxOptions",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-ajaxOptions",
-        "shortDoc": "Any additional options to be passed to the request, for example timeout or headers. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "shortDoc": "Any additional options to be passed to the request, for example timeout or headers. ...",
+        "static": false,
         "name": "ajaxOptions",
         "owner": "Ext.ElementLoader",
         "doc": "<p>Any additional options to be passed to the request, for example timeout or headers. Defaults to <tt>null</tt>.</p>\n",
@@ -24,16 +35,17 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean/Object",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-autoLoad",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-autoLoad",
-        "shortDoc": "True to have the loader make a request as soon as it is created. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "shortDoc": "True to have the loader make a request as soon as it is created. ...",
+        "static": false,
         "name": "autoLoad",
         "owner": "Ext.ElementLoader",
         "doc": "<p>True to have the loader make a request as soon as it is created. Defaults to <tt>false</tt>.\nThis argument can also be a set of options that will be passed to <a href=\"#/api/Ext.ElementLoader-method-load\" rel=\"Ext.ElementLoader-method-load\" class=\"docClass\">load</a> is called.</p>\n",
@@ -41,16 +53,17 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-baseParams",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-baseParams",
-        "shortDoc": "Params that will be attached to every request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "shortDoc": "Params that will be attached to every request. ...",
+        "static": false,
         "name": "baseParams",
         "owner": "Ext.ElementLoader",
         "doc": "<p>Params that will be attached to every request. These parameters\nwill not be overridden by any params in the load options. Defaults to <tt>null</tt>.</p>\n",
@@ -58,15 +71,16 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "Function",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-failure",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-failure",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "static": false,
         "name": "failure",
         "owner": "Ext.ElementLoader",
         "doc": "<p>A function to be called when a load request fails.</p>\n",
@@ -74,16 +88,17 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
         "protected": false,
         "tagname": "cfg",
-        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
-        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
+        "static": false,
         "name": "listeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>A config object containing one or more event handlers to be added to this object during initialization. This\nshould be a valid listeners config object as specified in the <a href=\"#/api/Ext.ElementLoader-method-addListener\" rel=\"Ext.ElementLoader-method-addListener\" class=\"docClass\">addListener</a> example for attaching multiple\nhandlers at once.</p>\n\n<p><strong>DOM events from ExtJS <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Components</a></strong></p>\n\n<p>While <em>some</em> ExtJs Component classes export selected DOM events (e.g. \"click\", \"mouseover\" etc), this is usually\nonly done when extra value can be added. For example the <a href=\"#/api/Ext.view.View\" rel=\"Ext.view.View\" class=\"docClass\">DataView</a>'s <strong><code><a href=\"#/api/Ext.view.View-event-itemclick\" rel=\"Ext.view.View-event-itemclick\" class=\"docClass\">itemclick</a></code></strong> event passing the node clicked on. To access DOM events directly from a\nchild element of a Component, we need to specify the <code>element</code> option to identify the Component property to add a\nDOM listener to:</p>\n\n<pre><code>new Ext.panel.Panel({\n    width: 400,\n    height: 200,\n    dockedItems: [{\n        xtype: 'toolbar'\n    }],\n    listeners: {\n        click: {\n            element: 'el', //bind to the underlying el property on the panel\n            fn: function(){ console.log('click el'); }\n        },\n        dblclick: {\n            element: 'body', //bind to the underlying body property on the panel\n            fn: function(){ console.log('dblclick body'); }\n        }\n    }\n});\n</code></pre>\n",
@@ -91,15 +106,16 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "type": "Mixed",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-loadMask",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-loadMask",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "static": false,
         "name": "loadMask",
         "owner": "Ext.ElementLoader",
         "doc": "<p>True or a string to show when the element is loading.</p>\n",
@@ -107,16 +123,17 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-params",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-params",
-        "shortDoc": "Any params to be attached to the Ajax request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "shortDoc": "Any params to be attached to the Ajax request. ...",
+        "static": false,
         "name": "params",
         "owner": "Ext.ElementLoader",
         "doc": "<p>Any params to be attached to the Ajax request. These parameters will\nbe overridden by any params in the load options. Defaults to <tt>null</tt>.</p>\n",
@@ -124,16 +141,17 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "Function",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-renderer",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-renderer",
-        "shortDoc": "A custom function to render the content to the element. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "shortDoc": "A custom function to render the content to the element. ...",
+        "static": false,
         "name": "renderer",
         "owner": "Ext.ElementLoader",
         "doc": "<p>A custom function to render the content to the element. The passed parameters\nare</p>\n\n<ul>\n<li>The loader</li>\n<li>The response</li>\n<li>The active request</li>\n</ul>\n\n",
@@ -141,15 +159,16 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-scope",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-scope",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "static": false,
         "name": "scope",
         "owner": "Ext.ElementLoader",
         "doc": "<p>The scope to execute the <a href=\"#/api/Ext.ElementLoader-cfg-success\" rel=\"Ext.ElementLoader-cfg-success\" class=\"docClass\">success</a> and <a href=\"#/api/Ext.ElementLoader-cfg-failure\" rel=\"Ext.ElementLoader-cfg-failure\" class=\"docClass\">failure</a> functions in.</p>\n",
@@ -157,15 +176,16 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-scripts",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-scripts",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "static": false,
         "name": "scripts",
         "owner": "Ext.ElementLoader",
         "doc": "<p>True to parse any inline script tags in the response.</p>\n",
@@ -173,15 +193,16 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "Function",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-success",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-success",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "static": false,
         "name": "success",
         "owner": "Ext.ElementLoader",
         "doc": "<p>A function to be called when a load request is successful.</p>\n",
@@ -189,16 +210,17 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "Mixed",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-target",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-target",
-        "shortDoc": "The target element for the loader. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "shortDoc": "The target element for the loader. ...",
+        "static": false,
         "name": "target",
         "owner": "Ext.ElementLoader",
         "doc": "<p>The target element for the loader. It can be the DOM element, the id or an Ext.Element.</p>\n",
@@ -206,16 +228,17 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "ElementLoader.html#Ext-ElementLoader-cfg-url",
         "protected": false,
         "tagname": "cfg",
-        "href": "ElementLoader.html#Ext-ElementLoader-cfg-url",
-        "shortDoc": "The url to retrieve the content from. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
+        "shortDoc": "The url to retrieve the content from. ...",
+        "static": false,
         "name": "url",
         "owner": "Ext.ElementLoader",
         "doc": "<p>The url to retrieve the content from. Defaults to <tt>null</tt>.</p>\n",
@@ -225,38 +248,32 @@ Ext.data.JsonP.Ext_ElementLoader({
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ElementLoader.html#Ext-ElementLoader-method-abort",
-        "shortDoc": "Aborts the active load request ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "abort",
-        "owner": "Ext.ElementLoader",
-        "doc": "<p>Aborts the active load request</p>\n",
-        "linenr": 180,
+        "href": "ElementLoader.html#Ext-ElementLoader-method-abort",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
+        "private": false,
+        "shortDoc": "Aborts the active load request ...",
+        "static": false,
+        "name": "abort",
+        "owner": "Ext.ElementLoader",
+        "doc": "<p>Aborts the active load request</p>\n",
+        "linenr": 180,
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addEvents",
-        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object/String",
@@ -271,26 +288,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "more"
           }
         ],
-        "name": "addEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
-        "linenr": 494,
+        "href": "Observable.html#Ext-util-Observable-method-addEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
+        "static": false,
+        "name": "addEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
+        "linenr": 494,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addListener",
-        "shortDoc": "Appends an event handler to this object. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -317,26 +335,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "options"
           }
         ],
-        "name": "addListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Appends an event handler to this object.</p>\n",
-        "linenr": 278,
+        "href": "Observable.html#Ext-util-Observable-method-addListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Appends an event handler to this object. ...",
+        "static": false,
+        "name": "addListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Appends an event handler to this object.</p>\n",
+        "linenr": 278,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
-        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -369,54 +388,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "opt"
           }
         ],
-        "name": "addManagedListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 156,
+        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
+        "static": false,
+        "name": "addManagedListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 156,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-addStatics",
-        "shortDoc": "Add / override static properties of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "addStatics",
-        "owner": "Ext.Base",
-        "doc": "<p>Add / override static properties of this class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.addStatics({\n    someProperty: 'someValue',      // My.cool.Class.someProperty = 'someValue'\n    method1: function() { ... },    // My.cool.Class.method1 = function() { ... };\n    method2: function() { ... }     // My.cool.Class.method2 = function() { ... };\n});\n</code></pre>\n",
-        "linenr": 388,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callOverridden",
-        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -425,26 +417,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "args"
           }
         ],
-        "name": "callOverridden",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the original method that was previously overridden with <a href=\"#/api/Ext.Base-method-override\" rel=\"Ext.Base-method-override\" class=\"docClass\">Ext.Base.override</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 269,
+        "href": "Base3.html#Ext-Base-method-callOverridden",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result after calling the overridden method</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
+        "static": false,
+        "name": "callOverridden",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the original method that was previously overridden with Ext.Base.override</p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
+        "linenr": 269,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callParent",
-        "shortDoc": "Call the parent's overridden method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -453,192 +446,99 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "args"
           }
         ],
-        "name": "callParent",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
-        "linenr": 124,
+        "href": "Base3.html#Ext-Base-method-callParent",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result from the superclass' method</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the parent's overridden method. ...",
+        "static": false,
+        "name": "callParent",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
+        "linenr": 124,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-capture",
-        "shortDoc": "Starts capture on the specified Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to capture events from.</p>\n",
-            "name": "o"
-          },
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The function to call when an event is fired.</p>\n",
-            "name": "fn"
-          },
-          {
-            "type": "Object",
-            "optional": true,
-            "doc": "<p>(optional) The scope (<code>this</code> reference) in which the function is executed. Defaults to\nthe Observable firing the event.</p>\n",
-            "name": "scope"
-          }
+
         ],
-        "name": "capture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Starts capture on the specified Observable. All events will be passed to the supplied function with the event\nname + standard signature of the event <strong>before</strong> the event is fired. If the supplied function returns false,\nthe event will not fire.</p>\n",
-        "linenr": 54,
+        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
-        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
+        "static": false,
         "name": "clearListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all listeners for this object including the managed listeners</p>\n",
         "linenr": 425,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
-        "shortDoc": "Removes all managed listeners for this object. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all managed listeners for this object. ...",
+        "static": false,
         "name": "clearManagedListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all managed listeners for this object.</p>\n",
         "linenr": 454,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-create",
-        "shortDoc": "Create a new instance of this Class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "create",
-        "owner": "Ext.Base",
-        "doc": "<p>Create a new instance of this Class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.create({\n    someConfig: true\n});\n</code></pre>\n\n<p>All parameters are passed to the constructor of the class.</p>\n",
-        "linenr": 329,
-        "return": {
-          "type": "Object",
-          "doc": "<p>the created instance.</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-createAlias",
-        "shortDoc": "Create aliases for existing prototype methods. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The new method name, or an object to set multiple aliases. See\n<a href=\"#/api/Ext.Function-method-flexSetter\" rel=\"Ext.Function-method-flexSetter\" class=\"docClass\">flexSetter</a></p>\n",
-            "name": "alias"
-          },
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The original method name</p>\n",
-            "name": "origin"
-          }
-        ],
-        "name": "createAlias",
-        "owner": "Ext.Base",
-        "doc": "<p>Create aliases for existing prototype methods. Example:</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    method1: function() { ... },\n    method2: function() { ... }\n});\n\nvar test = new My.cool.Class();\n\nMy.cool.Class.createAlias({\n    method3: 'method1',\n    method4: 'method2'\n});\n\ntest.method3(); // test.method1()\n\nMy.cool.Class.createAlias('method5', 'method3');\n\ntest.method5(); // test.method3() -&gt; test.method1()\n</code></pre>\n",
-        "linenr": 648,
+        "href": "ElementLoader.html#Ext-ElementLoader-method-destroy",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "ElementLoader.html#Ext-ElementLoader-method-destroy",
-        "shortDoc": "Destroys the loader. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Destroys the loader. ...",
+        "static": false,
         "name": "destroy",
         "owner": "Ext.ElementLoader",
         "doc": "<p>Destroys the loader. Any active requests will be aborted.</p>\n",
         "linenr": 364,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
-        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String/[String]",
@@ -647,26 +547,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "events"
           }
         ],
-        "name": "enableBubble",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
-        "linenr": 609,
+        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
+        "static": false,
+        "name": "enableBubble",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
+        "linenr": 609,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
-        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -681,72 +582,75 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "args"
           }
         ],
-        "name": "fireEvent",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.ElementLoader-method-addListener\" rel=\"Ext.ElementLoader-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.ElementLoader-method-enableBubble\" rel=\"Ext.ElementLoader-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
-        "linenr": 233,
+        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
         "return": {
           "type": "Boolean",
           "doc": "<p>returns false if any of the handlers return false otherwise it returns true.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
+        "static": false,
+        "name": "fireEvent",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.ElementLoader-method-addListener\" rel=\"Ext.ElementLoader-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.ElementLoader-method-enableBubble\" rel=\"Ext.ElementLoader-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
+        "linenr": 233,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-getName",
-        "shortDoc": "Get the current class' name in string format. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getName",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
-        "linenr": 631,
+        "href": "Base3.html#Ext-Base-method-getName",
         "return": {
           "type": "String",
           "doc": "<p>className</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the current class' name in string format. ...",
+        "static": false,
+        "name": "getName",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
+        "linenr": 631,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ElementLoader.html#Ext-ElementLoader-method-getTarget",
-        "shortDoc": "Get the target of this loader. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getTarget",
-        "owner": "Ext.ElementLoader",
-        "doc": "<p>Get the target of this loader.</p>\n",
-        "linenr": 172,
+        "href": "ElementLoader.html#Ext-ElementLoader-method-getTarget",
         "return": {
           "type": "Ext.Component",
           "doc": "<p>target The target, null if none exists.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
+        "private": false,
+        "shortDoc": "Get the target of this loader. ...",
+        "static": false,
+        "name": "getTarget",
+        "owner": "Ext.ElementLoader",
+        "doc": "<p>Get the target of this loader.</p>\n",
+        "linenr": 172,
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-hasListener",
-        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -755,54 +659,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "eventName"
           }
         ],
-        "name": "hasListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
-        "linenr": 530,
+        "href": "Observable.html#Ext-util-Observable-method-hasListener",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the event is being listened for, else false</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
+        "static": false,
+        "name": "hasListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
+        "linenr": 530,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-implement",
-        "shortDoc": "Add methods / properties to the prototype of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "implement",
-        "owner": "Ext.Base",
-        "doc": "<p>Add methods / properties to the prototype of this class.</p>\n\n<pre><code>Ext.define('My.awesome.Cat', {\n    constructor: function() {\n        ...\n    }\n});\n\n My.awesome.Cat.implement({\n     meow: function() {\n        alert('Meowww...');\n     }\n });\n\n var kitty = new My.awesome.Cat;\n kitty.meow();\n</code></pre>\n",
-        "linenr": 415,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-initConfig",
-        "shortDoc": "Initialize configuration for this class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -811,49 +688,51 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "config"
           }
         ],
-        "name": "initConfig",
-        "owner": "Ext.Base",
-        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
-        "linenr": 63,
+        "href": "Base3.html#Ext-Base-method-initConfig",
         "return": {
           "type": "Object",
           "doc": "<p>mixins The mixin prototypes as key - value pairs</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Initialize configuration for this class. ...",
+        "static": false,
+        "name": "initConfig",
+        "owner": "Ext.Base",
+        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
+        "linenr": 63,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ElementLoader.html#Ext-ElementLoader-method-isAutoRefreshing",
-        "shortDoc": "Checks whether the loader is automatically refreshing. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "isAutoRefreshing",
-        "owner": "Ext.ElementLoader",
-        "doc": "<p>Checks whether the loader is automatically refreshing. See <a href=\"#/api/Ext.ElementLoader-method-startAutoRefresh\" rel=\"Ext.ElementLoader-method-startAutoRefresh\" class=\"docClass\">startAutoRefresh</a>.</p>\n",
-        "linenr": 356,
+        "href": "ElementLoader.html#Ext-ElementLoader-method-isAutoRefreshing",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the loader is automatically refreshing</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
+        "private": false,
+        "shortDoc": "Checks whether the loader is automatically refreshing. ...",
+        "static": false,
+        "name": "isAutoRefreshing",
+        "owner": "Ext.ElementLoader",
+        "doc": "<p>Checks whether the loader is automatically refreshing. See <a href=\"#/api/Ext.ElementLoader-method-startAutoRefresh\" rel=\"Ext.ElementLoader-method-startAutoRefresh\" class=\"docClass\">startAutoRefresh</a>.</p>\n",
+        "linenr": 356,
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ElementLoader.html#Ext-ElementLoader-method-load",
-        "shortDoc": "Load new data from the server. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -862,31 +741,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "options"
           }
         ],
-        "name": "load",
-        "owner": "Ext.ElementLoader",
-        "doc": "<p>Load new data from the server.</p>\n",
-        "linenr": 211,
+        "href": "ElementLoader.html#Ext-ElementLoader-method-load",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
+        "private": false,
+        "shortDoc": "Load new data from the server. ...",
+        "static": false,
+        "name": "load",
+        "owner": "Ext.ElementLoader",
+        "doc": "<p>Load new data from the server.</p>\n",
+        "linenr": 211,
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "addManagedListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mon",
-        "shortDoc": "Shorthand for addManagedListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -919,31 +794,32 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "opt"
           }
         ],
-        "name": "mon",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.ElementLoader-method-addManagedListener\" rel=\"Ext.ElementLoader-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 681,
+        "href": "Observable.html#Ext-util-Observable-method-mon",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
+        "protected": false,
+        "tagname": "method",
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "removeManagedListener"
+          "owner": "addManagedListener"
         },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mun",
-        "shortDoc": "Shorthand for removeManagedListener. ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "Shorthand for addManagedListener. ...",
+        "static": false,
+        "name": "mon",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.ElementLoader-method-addManagedListener\" rel=\"Ext.ElementLoader-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 681,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Observable|Element",
@@ -970,65 +846,32 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "scope"
           }
         ],
-        "name": "mun",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.ElementLoader-method-removeManagedListener\" rel=\"Ext.ElementLoader-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.ElementLoader-method-mon\" rel=\"Ext.ElementLoader-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
-        "linenr": 687,
+        "href": "Observable.html#Ext-util-Observable-method-mun",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-observe",
-        "shortDoc": "Sets observability on the passed class constructor. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The class constructor to make observable.</p>\n",
-            "name": "c"
-          },
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "<p>An object containing a series of listeners to add. See <a href=\"#/api/Ext.ElementLoader-method-addListener\" rel=\"Ext.ElementLoader-method-addListener\" class=\"docClass\">addListener</a>.</p>\n",
-            "name": "listeners"
-          }
-        ],
-        "name": "observe",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Sets observability on the passed class constructor.</p>\n\n<p>This makes any event fired on any instance of the passed class also fire a single event through\nthe <strong>class</strong> allowing for central handling of events on many instances at once.</p>\n\n<p>Usage:</p>\n\n<pre><code>Ext.util.Observable.observe(Ext.data.Connection);\nExt.data.Connection.on('beforerequest', function(con, options) {\n    console.log('Ajax request made to ' + options.url);\n});\n</code></pre>\n",
-        "linenr": 69,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "addListener"
+          "owner": "removeManagedListener"
         },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-on",
-        "shortDoc": "Shorthand for addListener. ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "Shorthand for removeManagedListener. ...",
+        "static": false,
+        "name": "mun",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.ElementLoader-method-removeManagedListener\" rel=\"Ext.ElementLoader-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.ElementLoader-method-mon\" rel=\"Ext.ElementLoader-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
+        "linenr": 687,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "String",
@@ -1055,54 +898,32 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "options"
           }
         ],
-        "name": "on",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.ElementLoader-method-addListener\" rel=\"Ext.ElementLoader-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
-        "linenr": 669,
+        "href": "Observable.html#Ext-util-Observable-method-on",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "addListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for addListener. ...",
+        "static": false,
+        "name": "on",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.ElementLoader-method-addListener\" rel=\"Ext.ElementLoader-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
+        "linenr": 669,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-override",
-        "shortDoc": "Override prototype members of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "override",
-        "owner": "Ext.Base",
-        "doc": "<p>Override prototype members of this class. Overridden methods can be invoked via\n<a href=\"#/api/Ext.Base-method-callOverridden\" rel=\"Ext.Base-method-callOverridden\" class=\"docClass\">Ext.Base.callOverridden</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 518,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
-        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -1123,54 +944,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "prefix"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
+        "static": false,
         "name": "relayEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Relays selected events from the specified Observable as if the events were fired by <code>this</code>.</p>\n",
         "linenr": 573,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-releaseCapture",
-        "shortDoc": "Removes all added captures from the Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to release</p>\n",
-            "name": "o"
-          }
-        ],
-        "name": "releaseCapture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes <strong>all</strong> added captures from the Observable.</p>\n",
-        "linenr": 44,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeListener",
-        "shortDoc": "Removes an event handler. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1191,26 +985,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "scope"
           }
         ],
-        "name": "removeListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes an event handler.</p>\n",
-        "linenr": 392,
+        "href": "Observable.html#Ext-util-Observable-method-removeListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes an event handler. ...",
+        "static": false,
+        "name": "removeListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Removes an event handler.</p>\n",
+        "linenr": 392,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
-        "shortDoc": "Removes listeners that were added by the mon method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable|Element",
@@ -1237,49 +1032,51 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "scope"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes listeners that were added by the mon method. ...",
+        "static": false,
         "name": "removeManagedListener",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes listeners that were added by the <a href=\"#/api/Ext.ElementLoader-method-mon\" rel=\"Ext.ElementLoader-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
         "linenr": 197,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
-        "shortDoc": "Resumes firing events (see suspendEvents). ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Resumes firing events (see suspendEvents). ...",
+        "static": false,
         "name": "resumeEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Resumes firing events (see <a href=\"#/api/Ext.ElementLoader-method-suspendEvents\" rel=\"Ext.ElementLoader-method-suspendEvents\" class=\"docClass\">suspendEvents</a>).</p>\n\n<p>If events were suspended using the <code>**queueSuspended**</code> parameter, then all events fired\nduring event suspension will be sent to any listeners now.</p>\n",
         "linenr": 554,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ElementLoader.html#Ext-ElementLoader-method-setTarget",
-        "shortDoc": "Set an {Ext.Element} as the target of this loader. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
-        "private": false,
         "params": [
           {
             "type": "Mixed",
@@ -1288,26 +1085,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "target"
           }
         ],
-        "name": "setTarget",
-        "owner": "Ext.ElementLoader",
-        "doc": "<p>Set an {Ext.Element} as the target of this loader. Note that if the target is changed,\nany active requests will be aborted.</p>\n",
-        "linenr": 158,
+        "href": "ElementLoader.html#Ext-ElementLoader-method-setTarget",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
+        "private": false,
+        "shortDoc": "Set an {Ext.Element} as the target of this loader. ...",
+        "static": false,
+        "name": "setTarget",
+        "owner": "Ext.ElementLoader",
+        "doc": "<p>Set an {Ext.Element} as the target of this loader. Note that if the target is changed,\nany active requests will be aborted.</p>\n",
+        "linenr": 158,
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ElementLoader.html#Ext-ElementLoader-method-startAutoRefresh",
-        "shortDoc": "Automatically refreshes the content over a specified period. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -1322,72 +1120,75 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "options"
           }
         ],
+        "href": "ElementLoader.html#Ext-ElementLoader-method-startAutoRefresh",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
+        "private": false,
+        "shortDoc": "Automatically refreshes the content over a specified period. ...",
+        "static": false,
         "name": "startAutoRefresh",
         "owner": "Ext.ElementLoader",
         "doc": "<p>Automatically refreshes the content over a specified period.</p>\n",
         "linenr": 335,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-statics",
-        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "statics",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
-        "linenr": 199,
+        "href": "Base3.html#Ext-Base-method-statics",
         "return": {
           "type": "Class",
           "doc": "\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
+        "static": false,
+        "name": "statics",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
+        "linenr": 199,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "ElementLoader.html#Ext-ElementLoader-method-stopAutoRefresh",
-        "shortDoc": "Clears any auto refresh. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "stopAutoRefresh",
-        "owner": "Ext.ElementLoader",
-        "doc": "<p>Clears any auto refresh. See <a href=\"#/api/Ext.ElementLoader-method-startAutoRefresh\" rel=\"Ext.ElementLoader-method-startAutoRefresh\" class=\"docClass\">startAutoRefresh</a>.</p>\n",
-        "linenr": 348,
+        "href": "ElementLoader.html#Ext-ElementLoader-method-stopAutoRefresh",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
+        "private": false,
+        "shortDoc": "Clears any auto refresh. ...",
+        "static": false,
+        "name": "stopAutoRefresh",
+        "owner": "Ext.ElementLoader",
+        "doc": "<p>Clears any auto refresh. See <a href=\"#/api/Ext.ElementLoader-method-startAutoRefresh\" rel=\"Ext.ElementLoader-method-startAutoRefresh\" class=\"docClass\">startAutoRefresh</a>.</p>\n",
+        "linenr": 348,
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
-        "shortDoc": "Suspends the firing of all events. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -1396,31 +1197,27 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "queueSuspended"
           }
         ],
-        "name": "suspendEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.ElementLoader-method-resumeEvents\" rel=\"Ext.ElementLoader-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
-        "linenr": 541,
+        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Suspends the firing of all events. ...",
+        "static": false,
+        "name": "suspendEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.ElementLoader-method-resumeEvents\" rel=\"Ext.ElementLoader-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
+        "linenr": 541,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "removeListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-un",
-        "shortDoc": "Shorthand for removeListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1441,53 +1238,34 @@ Ext.data.JsonP.Ext_ElementLoader({
             "name": "scope"
           }
         ],
-        "name": "un",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.ElementLoader-method-removeListener\" rel=\"Ext.ElementLoader-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
-        "linenr": 675,
+        "href": "Observable.html#Ext-util-Observable-method-un",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "removeListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for removeListener. ...",
+        "static": false,
+        "name": "un",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.ElementLoader-method-removeListener\" rel=\"Ext.ElementLoader-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
+        "linenr": 675,
         "html_filename": "Observable.html"
       }
     ],
-    "property": [
-      {
-        "type": "Class",
-        "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "property",
-        "href": "Base3.html#Ext-Base-property-self",
-        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "name": "self",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
-        "linenr": 18,
-        "html_filename": "Base3.html"
-      }
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "ElementLoader.html#Ext-ElementLoader-event-beforeload",
-        "shortDoc": "Fires before a load request is made to the server. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.ElementLoader",
@@ -1508,6 +1286,14 @@ Ext.data.JsonP.Ext_ElementLoader({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "ElementLoader.html#Ext-ElementLoader-event-beforeload",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
+        "private": false,
+        "shortDoc": "Fires before a load request is made to the server. ...",
+        "static": false,
         "name": "beforeload",
         "owner": "Ext.ElementLoader",
         "doc": "<p>Fires before a load request is made to the server.\nReturning false from an event listener can prevent the load\nfrom occurring.</p>\n",
@@ -1515,15 +1301,8 @@ Ext.data.JsonP.Ext_ElementLoader({
         "html_filename": "ElementLoader.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "ElementLoader.html#Ext-ElementLoader-event-exception",
-        "shortDoc": "Fires after a successful load. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.ElementLoader",
@@ -1550,45 +1329,90 @@ Ext.data.JsonP.Ext_ElementLoader({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "ElementLoader.html#Ext-ElementLoader-event-exception",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
+        "private": false,
+        "shortDoc": "Fires after a successful load. ...",
+        "static": false,
         "name": "exception",
         "owner": "Ext.ElementLoader",
         "doc": "<p>Fires after a successful load.</p>\n",
         "linenr": 136,
         "html_filename": "ElementLoader.html"
       }
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+      {
+        "inheritable": false,
+        "type": "Class",
+        "deprecated": null,
+        "href": "Base3.html#Ext-Base-property-self",
+        "protected": true,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
+        "static": false,
+        "name": "self",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
+        "linenr": 18,
+        "html_filename": "Base3.html"
+      }
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-    "Ext.Base"
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
     "Ext.util.Observable"
   ],
-  "href": "ElementLoader.html#Ext-ElementLoader",
-  "subclasses": [
-    "Ext.ComponentLoader"
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/ElementLoader.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.ElementLoader",
   "doc": "<p>A class used to load remote content to an Element. Sample usage:</p>\n\n<pre><code>Ext.get('el').load({\n    url: 'myPage.php',\n    scripts: true,\n    params: {\n        id: 1\n    }\n});\n</code></pre>\n\n\n<p>\nIn general this class will not be instanced directly, rather the <a href=\"#/api/Ext.core.Element-event-load\" rel=\"Ext.core.Element-event-load\" class=\"docClass\">Ext.core.Element.load</a> method\nwill be used.\n</p>\n\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "ElementLoader.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Ext.Base"
 });

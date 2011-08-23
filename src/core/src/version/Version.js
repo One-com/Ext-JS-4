@@ -43,7 +43,7 @@ If you are unsure which license is appropriate for your use, please contact the 
 (function() {
 
 // Current core version
-var version = '4.0.2', Version;
+var version = '4.0.2a', Version;
     Ext.Version = Version = Ext.extend(Object, {
 
         /**

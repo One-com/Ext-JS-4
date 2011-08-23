@@ -193,7 +193,7 @@
             "id": "classes",
             "files": [
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "Observable.js"
                 },
                 {
@@ -201,143 +201,143 @@
                     "name": "Animate.js"
                 },
                 {
-                    "path": "../src/state/",
+                    "path": "../src/src/state/",
                     "name": "Provider.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "HashMap.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "Template.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "ComponentQuery.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "Filter.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "Sorter.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "ElementLoader.js"
                 },
                 {
-                    "path": "../src/layout/",
+                    "path": "../src/src/layout/",
                     "name": "Layout.js"
                 },
                 {
-                    "path": "../src/layout/component/",
+                    "path": "../src/src/layout/component/",
                     "name": "Component.js"
                 },
                 {
-                    "path": "../src/state/",
+                    "path": "../src/src/state/",
                     "name": "Manager.js"
                 },
                 {
-                    "path": "../src/state/",
+                    "path": "../src/src/state/",
                     "name": "Stateful.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "AbstractManager.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "PluginManager.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "ComponentManager.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "XTemplate.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "AbstractMixedCollection.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "Sortable.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "MixedCollection.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "StoreManager.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "LoadMask.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "ComponentLoader.js"
                 },
                 {
-                    "path": "../src/layout/component/",
+                    "path": "../src/src/layout/component/",
                     "name": "Auto.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "AbstractComponent.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "AbstractPlugin.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Connection.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "Ajax.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Association.js"
                 },
                 {
-                    "path": "../src/",
+                    "path": "../src/src/",
                     "name": "ModelManager.js"
                 },
                 {
-                    "path": "../src/app/",
+                    "path": "../src/src/app/",
                     "name": "Controller.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "SortTypes.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Errors.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Operation.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "validations.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "ResultSet.js"
                 },
                 {
-                    "path": "../src/data/writer/",
+                    "path": "../src/src/data/writer/",
                     "name": "Writer.js"
                 },
                 {
@@ -345,7 +345,7 @@
                     "name": "Floating.js"
                 },
                 {
-                    "path": "../src/layout/container/",
+                    "path": "../src/src/layout/container/",
                     "name": "AbstractContainer.js"
                 },
                 {
@@ -377,7 +377,7 @@
                     "name": "Scroller.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "Offset.js"
                 },
                 {
@@ -385,31 +385,31 @@
                     "name": "KeyNav.js"
                 },
                 {
-                    "path": "../src/fx/",
+                    "path": "../src/src/fx/",
                     "name": "Queue.js"
                 },
                 {
-                    "path": "../src/fx/target/",
+                    "path": "../src/src/fx/target/",
                     "name": "Target.js"
                 },
                 {
-                    "path": "../src/fx/target/",
+                    "path": "../src/src/fx/target/",
                     "name": "Sprite.js"
                 },
                 {
-                    "path": "../src/fx/target/",
+                    "path": "../src/src/fx/target/",
                     "name": "CompositeSprite.js"
                 },
                 {
-                    "path": "../src/fx/target/",
+                    "path": "../src/src/fx/target/",
                     "name": "Component.js"
                 },
                 {
-                    "path": "../src/fx/",
+                    "path": "../src/src/fx/",
                     "name": "CubicBezier.js"
                 },
                 {
-                    "path": "../src/draw/",
+                    "path": "../src/src/draw/",
                     "name": "Color.js"
                 },
                 {
@@ -421,51 +421,51 @@
                     "name": "Proxy.js"
                 },
                 {
-                    "path": "../src/layout/component/",
+                    "path": "../src/src/layout/component/",
                     "name": "AbstractDock.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "Memento.js"
                 },
                 {
-                    "path": "../src/app/",
+                    "path": "../src/src/app/",
                     "name": "EventBus.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Types.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Field.js"
                 },
                 {
-                    "path": "../src/data/reader/",
+                    "path": "../src/src/data/reader/",
                     "name": "Reader.js"
                 },
                 {
-                    "path": "../src/data/reader/",
+                    "path": "../src/src/data/reader/",
                     "name": "Json.js"
                 },
                 {
-                    "path": "../src/data/writer/",
+                    "path": "../src/src/data/writer/",
                     "name": "Json.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "Proxy.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "Server.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "Ajax.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Model.js"
                 },
                 {
@@ -477,11 +477,11 @@
                     "name": "Container.js"
                 },
                 {
-                    "path": "../src/layout/container/",
+                    "path": "../src/src/layout/container/",
                     "name": "Auto.js"
                 },
                 {
-                    "path": "../src/container/",
+                    "path": "../src/src/container/",
                     "name": "AbstractContainer.js"
                 },
                 {
@@ -513,7 +513,7 @@
                     "name": "Menu.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "Region.js"
                 },
                 {
@@ -541,7 +541,7 @@
                     "name": "Toolbar.js"
                 },
                 {
-                    "path": "../src/panel/",
+                    "path": "../src/src/panel/",
                     "name": "AbstractPanel.js"
                 },
                 {
@@ -549,35 +549,35 @@
                     "name": "Header.js"
                 },
                 {
-                    "path": "../src/fx/target/",
+                    "path": "../src/src/fx/target/",
                     "name": "Element.js"
                 },
                 {
-                    "path": "../src/fx/target/",
+                    "path": "../src/src/fx/target/",
                     "name": "CompositeElement.js"
                 },
                 {
-                    "path": "../src/fx/",
+                    "path": "../src/src/fx/",
                     "name": "Manager.js"
                 },
                 {
-                    "path": "../src/fx/",
+                    "path": "../src/src/fx/",
                     "name": "Animator.js"
                 },
                 {
-                    "path": "../src/fx/",
+                    "path": "../src/src/fx/",
                     "name": "Easing.js"
                 },
                 {
-                    "path": "../src/draw/",
+                    "path": "../src/src/draw/",
                     "name": "Draw.js"
                 },
                 {
-                    "path": "../src/fx/",
+                    "path": "../src/src/fx/",
                     "name": "PropertyHandler.js"
                 },
                 {
-                    "path": "../src/fx/",
+                    "path": "../src/src/fx/",
                     "name": "Anim.js"
                 },
                 {
@@ -629,339 +629,339 @@
                     "name": "QuickTipManager.js"
                 },
                 {
-                    "path": "../src/app/",
+                    "path": "../src/src/app/",
                     "name": "Application.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "Callout.js"
                 },
                 {
-                    "path": "../src/draw/",
+                    "path": "../src/src/draw/",
                     "name": "CompositeSprite.js"
                 },
                 {
-                    "path": "../src/layout/component/",
+                    "path": "../src/src/layout/component/",
                     "name": "Draw.js"
                 },
                 {
-                    "path": "../src/chart/theme/",
+                    "path": "../src/src/chart/theme/",
                     "name": "Theme.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "Mask.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "Navigation.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "Shape.js"
                 },
                 {
-                    "path": "../src/draw/",
+                    "path": "../src/src/draw/",
                     "name": "Surface.js"
                 },
                 {
-                    "path": "../src/draw/",
+                    "path": "../src/src/draw/",
                     "name": "Component.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "LegendItem.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "Legend.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "Chart.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "Highlight.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "Label.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "MaskLayer.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "TipSurface.js"
                 },
                 {
-                    "path": "../src/chart/",
+                    "path": "../src/src/chart/",
                     "name": "Tip.js"
                 },
                 {
-                    "path": "../src/chart/axis/",
+                    "path": "../src/src/chart/axis/",
                     "name": "Abstract.js"
                 },
                 {
-                    "path": "../src/chart/axis/",
+                    "path": "../src/src/chart/axis/",
                     "name": "Axis.js"
                 },
                 {
-                    "path": "../src/chart/axis/",
+                    "path": "../src/src/chart/axis/",
                     "name": "Category.js"
                 },
                 {
-                    "path": "../src/chart/axis/",
+                    "path": "../src/src/chart/axis/",
                     "name": "Gauge.js"
                 },
                 {
-                    "path": "../src/chart/axis/",
+                    "path": "../src/src/chart/axis/",
                     "name": "Numeric.js"
                 },
                 {
-                    "path": "../src/chart/axis/",
+                    "path": "../src/src/chart/axis/",
                     "name": "Radial.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "AbstractStore.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "Grouper.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Store.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "JsonStore.js"
                 },
                 {
-                    "path": "../src/chart/axis/",
+                    "path": "../src/src/chart/axis/",
                     "name": "Time.js"
                 },
                 {
-                    "path": "../src/chart/series/",
+                    "path": "../src/src/chart/series/",
                     "name": "Series.js"
                 },
                 {
-                    "path": "../src/chart/series/",
+                    "path": "../src/src/chart/series/",
                     "name": "Cartesian.js"
                 },
                 {
-                    "path": "../src/chart/series/",
+                    "path": "../src/src/chart/series/",
                     "name": "Area.js"
                 },
                 {
-                    "path": "../src/chart/series/",
+                    "path": "../src/src/chart/series/",
                     "name": "Bar.js"
                 },
                 {
-                    "path": "../src/chart/series/",
+                    "path": "../src/src/chart/series/",
                     "name": "Column.js"
                 },
                 {
-                    "path": "../src/chart/series/",
+                    "path": "../src/src/chart/series/",
                     "name": "Gauge.js"
                 },
                 {
-                    "path": "../src/chart/series/",
+                    "path": "../src/src/chart/series/",
                     "name": "Line.js"
                 },
                 {
-                    "path": "../src/chart/series/",
+                    "path": "../src/src/chart/series/",
                     "name": "Pie.js"
                 },
                 {
-                    "path": "../src/chart/series/",
+                    "path": "../src/src/chart/series/",
                     "name": "Radar.js"
                 },
                 {
-                    "path": "../src/chart/series/",
+                    "path": "../src/src/chart/series/",
                     "name": "Scatter.js"
                 },
                 {
-                    "path": "../src/chart/theme/",
+                    "path": "../src/src/chart/theme/",
                     "name": "Base.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "ArrayStore.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Batch.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "BelongsToAssociation.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "BufferStore.js"
                 },
                 {
-                    "path": "../src/direct/",
+                    "path": "../src/src/direct/",
                     "name": "Manager.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "Direct.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "DirectStore.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "Inflector.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "HasManyAssociation.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "JsonP.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "JsonPStore.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "NodeInterface.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "NodeStore.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Request.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "Tree.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "TreeStore.js"
                 },
                 {
-                    "path": "../src/data/",
+                    "path": "../src/src/data/",
                     "name": "XmlStore.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "Client.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "JsonP.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "WebStorage.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "LocalStorage.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "Memory.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "Rest.js"
                 },
                 {
-                    "path": "../src/data/proxy/",
+                    "path": "../src/src/data/proxy/",
                     "name": "SessionStorage.js"
                 },
                 {
-                    "path": "../src/data/reader/",
+                    "path": "../src/src/data/reader/",
                     "name": "Array.js"
                 },
                 {
-                    "path": "../src/data/reader/",
+                    "path": "../src/src/data/reader/",
                     "name": "Xml.js"
                 },
                 {
-                    "path": "../src/data/writer/",
+                    "path": "../src/src/data/writer/",
                     "name": "Xml.js"
                 },
                 {
-                    "path": "../src/direct/",
+                    "path": "../src/src/direct/",
                     "name": "Event.js"
                 },
                 {
-                    "path": "../src/direct/",
+                    "path": "../src/src/direct/",
                     "name": "RemotingEvent.js"
                 },
                 {
-                    "path": "../src/direct/",
+                    "path": "../src/src/direct/",
                     "name": "ExceptionEvent.js"
                 },
                 {
-                    "path": "../src/direct/",
+                    "path": "../src/src/direct/",
                     "name": "Provider.js"
                 },
                 {
-                    "path": "../src/direct/",
+                    "path": "../src/src/direct/",
                     "name": "JsonProvider.js"
                 },
                 {
-                    "path": "../src/direct/",
+                    "path": "../src/src/direct/",
                     "name": "PollingProvider.js"
                 },
                 {
-                    "path": "../src/direct/",
+                    "path": "../src/src/direct/",
                     "name": "RemotingMethod.js"
                 },
                 {
-                    "path": "../src/direct/",
+                    "path": "../src/src/direct/",
                     "name": "Transaction.js"
                 },
                 {
-                    "path": "../src/direct/",
+                    "path": "../src/src/direct/",
                     "name": "RemotingProvider.js"
                 },
                 {
-                    "path": "../src/draw/",
+                    "path": "../src/src/draw/",
                     "name": "Matrix.js"
                 },
                 {
-                    "path": "../src/draw/",
+                    "path": "../src/src/draw/",
                     "name": "SpriteDD.js"
                 },
                 {
-                    "path": "../src/draw/",
+                    "path": "../src/src/draw/",
                     "name": "Sprite.js"
                 },
                 {
-                    "path": "../src/draw/engine/",
+                    "path": "../src/src/draw/engine/",
                     "name": "Svg.js"
                 },
                 {
-                    "path": "../src/draw/engine/",
+                    "path": "../src/src/draw/engine/",
                     "name": "Vml.js"
                 },
                 {
-                    "path": "../src/fx/target/",
+                    "path": "../src/src/fx/target/",
                     "name": "ElementCSS.js"
                 },
                 {
-                    "path": "../src/fx/target/",
+                    "path": "../src/src/fx/target/",
                     "name": "CompositeElementCSS.js"
                 },
                 {
-                    "path": "../src/layout/container/",
+                    "path": "../src/src/layout/container/",
                     "name": "AbstractFit.js"
                 },
                 {
@@ -969,31 +969,31 @@
                     "name": "Fit.js"
                 },
                 {
-                    "path": "../src/layout/container/",
+                    "path": "../src/src/layout/container/",
                     "name": "AbstractCard.js"
                 },
                 {
-                    "path": "../src/selection/",
+                    "path": "../src/src/selection/",
                     "name": "Model.js"
                 },
                 {
-                    "path": "../src/selection/",
+                    "path": "../src/src/selection/",
                     "name": "DataViewModel.js"
                 },
                 {
-                    "path": "../src/state/",
+                    "path": "../src/src/state/",
                     "name": "CookieProvider.js"
                 },
                 {
-                    "path": "../src/state/",
+                    "path": "../src/src/state/",
                     "name": "LocalStorageProvider.js"
                 },
                 {
-                    "path": "../src/util/",
+                    "path": "../src/src/util/",
                     "name": "Point.js"
                 },
                 {
-                    "path": "../src/view/",
+                    "path": "../src/src/view/",
                     "name": "AbstractView.js"
                 },
                 {
@@ -1872,7 +1872,7 @@
             "dest": "src"
         },
         {
-            "src": "../src/",
+            "src": "../src/src/",
             "dest": "src"
         },
         {

@@ -1,22 +1,36 @@
 Ext.data.JsonP.Ext_data_proxy_Rest({
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.Base",
+    "Ext.data.proxy.Proxy",
+    "Ext.data.proxy.Server",
+    "Ext.data.proxy.Ajax"
+  ],
+  "inheritable": false,
+  "subclasses": [
+
+  ],
+  "deprecated": null,
   "allMixins": [
     "Ext.util.Observable"
   ],
-  "deprecated": null,
-  "docauthor": null,
+  "href": "Rest.html#Ext-data-proxy-Rest",
   "members": {
     "cfg": [
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-api",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-api",
-        "shortDoc": "Specific urls to call on CRUD action methods \"create\", \"read\", \"update\" and \"destroy\". ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "Specific urls to call on CRUD action methods \"create\", \"read\", \"update\" and \"destroy\". ...",
+        "static": false,
         "name": "api",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>Specific urls to call on CRUD action methods \"create\", \"read\", \"update\" and \"destroy\".\nDefaults to:</p>\n\n<pre><code>api: {\n    create  : undefined,\n    read    : undefined,\n    update  : undefined,\n    destroy : undefined\n}\n</code></pre>\n\n\n<p>The url is built based upon the action being executed <tt>[create|read|update|destroy]</tt>\nusing the commensurate <tt><a href=\"#/api/Ext.data.proxy.Rest-cfg-api\" rel=\"Ext.data.proxy.Rest-cfg-api\" class=\"docClass\">api</a></tt> property, or if undefined default to the\nconfigured <a href=\"#/api/Ext.data.Store\" rel=\"Ext.data.Store\" class=\"docClass\">Ext.data.Store</a>.<a href=\"#/api/Ext.data.proxy.Server-cfg-url\" rel=\"Ext.data.proxy.Server-cfg-url\" class=\"docClass\">url</a>.</p>\n\n\n<br>\n\n\n<p>For example:</p>\n\n\n<pre><code>api: {\n    create  : '/controller/new',\n    read    : '/controller/load',\n    update  : '/controller/update',\n    destroy : '/controller/destroy_action'\n}\n</code></pre>\n\n\n<p>If the specific URL for a given CRUD action is undefined, the CRUD action request\nwill be directed to the configured <tt><a href=\"#/api/Ext.data.proxy.Server-cfg-url\" rel=\"Ext.data.proxy.Server-cfg-url\" class=\"docClass\">url</a></tt>.</p>\n\n",
@@ -24,16 +38,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Rest.html#Ext-data-proxy-Rest-cfg-appendId",
         "protected": false,
         "tagname": "cfg",
-        "href": "Rest.html#Ext-data-proxy-Rest-cfg-appendId",
-        "shortDoc": "True to automatically append the ID of a Model instance when performing a request based\non that single instance. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Rest.js",
         "private": false,
+        "shortDoc": "True to automatically append the ID of a Model instance when performing a request based\non that single instance. ...",
+        "static": false,
         "name": "appendId",
         "owner": "Ext.data.proxy.Rest",
         "doc": "<p>True to automatically append the ID of a Model instance when performing a request based\non that single instance. See RestProxy intro docs for more details. Defaults to true.</p>\n",
@@ -41,16 +56,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Rest.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Rest.html#Ext-data-proxy-Rest-cfg-batchActions",
         "protected": false,
         "tagname": "cfg",
-        "href": "Rest.html#Ext-data-proxy-Rest-cfg-batchActions",
-        "shortDoc": "True to batch actions of a particular type when synchronizing the store. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Rest.js",
         "private": false,
+        "shortDoc": "True to batch actions of a particular type when synchronizing the store. ...",
+        "static": false,
         "name": "batchActions",
         "owner": "Ext.data.proxy.Rest",
         "doc": "<p>True to batch actions of a particular type when synchronizing the store.\nDefaults to <tt>false</tt>.</p>\n",
@@ -58,16 +74,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Rest.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-cfg-batchOrder",
         "protected": false,
         "tagname": "cfg",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-cfg-batchOrder",
-        "shortDoc": "Comma-separated ordering 'create', 'update' and 'destroy' actions when batching. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
         "private": false,
+        "shortDoc": "Comma-separated ordering 'create', 'update' and 'destroy' actions when batching. ...",
+        "static": false,
         "name": "batchOrder",
         "owner": "Ext.data.proxy.Proxy",
         "doc": "<p>Comma-separated ordering 'create', 'update' and 'destroy' actions when batching. Override this\nto set a different order for the batched CRUD actions to be executed in. Defaults to 'create,update,destroy'</p>\n",
@@ -75,15 +92,16 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-cacheString",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-cacheString",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "static": false,
         "name": "cacheString",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The name of the cache param added to the url when using noCache (defaults to \"_dc\")</p>\n",
@@ -91,16 +109,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-directionParam",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-directionParam",
-        "shortDoc": "The name of the direction parameter to send in a request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "The name of the direction parameter to send in a request. ...",
+        "static": false,
         "name": "directionParam",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The name of the direction parameter to send in a request. <strong>This is only used when simpleSortMode is set to true.</strong>\nDefaults to 'dir'.</p>\n",
@@ -108,16 +127,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-extraParams",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-extraParams",
-        "shortDoc": "Extra parameters that will be included on every request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "Extra parameters that will be included on every request. ...",
+        "static": false,
         "name": "extraParams",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>Extra parameters that will be included on every request. Individual requests with params\nof the same name will override these params when they are in conflict.</p>\n",
@@ -125,16 +145,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-filterParam",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-filterParam",
-        "shortDoc": "The name of the 'filter' parameter to send in a request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "The name of the 'filter' parameter to send in a request. ...",
+        "static": false,
         "name": "filterParam",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The name of the 'filter' parameter to send in a request. Defaults to 'filter'. Set\nthis to undefined if you don't want to send a filter parameter</p>\n",
@@ -142,16 +163,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Rest.html#Ext-data-proxy-Rest-cfg-format",
         "protected": false,
         "tagname": "cfg",
-        "href": "Rest.html#Ext-data-proxy-Rest-cfg-format",
-        "shortDoc": "Optional data format to send to the server when making any request (e.g. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Rest.js",
         "private": false,
+        "shortDoc": "Optional data format to send to the server when making any request (e.g. ...",
+        "static": false,
         "name": "format",
         "owner": "Ext.data.proxy.Rest",
         "doc": "<p>Optional data format to send to the server when making any request (e.g. 'json'). See the\nRestProxy intro docs for full details. Defaults to undefined.</p>\n",
@@ -159,16 +181,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Rest.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-groupParam",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-groupParam",
-        "shortDoc": "The name of the 'group' parameter to send in a request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "The name of the 'group' parameter to send in a request. ...",
+        "static": false,
         "name": "groupParam",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The name of the 'group' parameter to send in a request. Defaults to 'group'. Set this\nto undefined if you don't want to send a group parameter</p>\n",
@@ -176,16 +199,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Ajax.html#Ext-data-proxy-Ajax-cfg-headers",
         "protected": false,
         "tagname": "cfg",
-        "href": "Ajax.html#Ext-data-proxy-Ajax-cfg-headers",
-        "shortDoc": "Any headers to add to the Ajax request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Ajax.js",
         "private": false,
+        "shortDoc": "Any headers to add to the Ajax request. ...",
+        "static": false,
         "name": "headers",
         "owner": "Ext.data.proxy.Ajax",
         "doc": "<p>Any headers to add to the Ajax request. Defaults to <tt>undefined</tt>.</p>\n",
@@ -193,16 +217,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Ajax.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-limitParam",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-limitParam",
-        "shortDoc": "The name of the 'limit' parameter to send in a request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "The name of the 'limit' parameter to send in a request. ...",
+        "static": false,
         "name": "limitParam",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The name of the 'limit' parameter to send in a request. Defaults to 'limit'. Set this\nto undefined if you don't want to send a limit parameter</p>\n",
@@ -210,16 +235,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
         "protected": false,
         "tagname": "cfg",
-        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
-        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
+        "static": false,
         "name": "listeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>A config object containing one or more event handlers to be added to this object during initialization. This\nshould be a valid listeners config object as specified in the <a href=\"#/api/Ext.data.proxy.Rest-method-addListener\" rel=\"Ext.data.proxy.Rest-method-addListener\" class=\"docClass\">addListener</a> example for attaching multiple\nhandlers at once.</p>\n\n<p><strong>DOM events from ExtJS <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Components</a></strong></p>\n\n<p>While <em>some</em> ExtJs Component classes export selected DOM events (e.g. \"click\", \"mouseover\" etc), this is usually\nonly done when extra value can be added. For example the <a href=\"#/api/Ext.view.View\" rel=\"Ext.view.View\" class=\"docClass\">DataView</a>'s <strong><code><a href=\"#/api/Ext.view.View-event-itemclick\" rel=\"Ext.view.View-event-itemclick\" class=\"docClass\">itemclick</a></code></strong> event passing the node clicked on. To access DOM events directly from a\nchild element of a Component, we need to specify the <code>element</code> option to identify the Component property to add a\nDOM listener to:</p>\n\n<pre><code>new Ext.panel.Panel({\n    width: 400,\n    height: 200,\n    dockedItems: [{\n        xtype: 'toolbar'\n    }],\n    listeners: {\n        click: {\n            element: 'el', //bind to the underlying el property on the panel\n            fn: function(){ console.log('click el'); }\n        },\n        dblclick: {\n            element: 'body', //bind to the underlying body property on the panel\n            fn: function(){ console.log('dblclick body'); }\n        }\n    }\n});\n</code></pre>\n",
@@ -227,16 +253,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "type": "String/Ext.data.Model",
         "deprecated": null,
-        "alias": null,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-cfg-model",
         "protected": false,
         "tagname": "cfg",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-cfg-model",
-        "shortDoc": "The name of the Model to tie to this Proxy. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
         "private": false,
+        "shortDoc": "The name of the Model to tie to this Proxy. ...",
+        "static": false,
         "name": "model",
         "owner": "Ext.data.proxy.Proxy",
         "doc": "<p>The name of the Model to tie to this Proxy. Can be either the string name of\nthe Model, or a reference to the Model constructor. Required.</p>\n",
@@ -244,16 +271,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-noCache",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-noCache",
-        "shortDoc": "(optional) Defaults to true. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "(optional) Defaults to true. ...",
+        "static": false,
         "name": "noCache",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>(optional) Defaults to true. Disable caching by adding a unique parameter\nname to the request.</p>\n",
@@ -261,16 +289,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-pageParam",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-pageParam",
-        "shortDoc": "The name of the 'page' parameter to send in a request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "The name of the 'page' parameter to send in a request. ...",
+        "static": false,
         "name": "pageParam",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The name of the 'page' parameter to send in a request. Defaults to 'page'. Set this to\nundefined if you don't want to send a page parameter</p>\n",
@@ -278,16 +307,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "Object/String/Ext.data.reader.Reader",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-reader",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-reader",
-        "shortDoc": "The Ext.data.reader.Reader to use to decode the server's response. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "The Ext.data.reader.Reader to use to decode the server's response. ...",
+        "static": false,
         "name": "reader",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The <a href=\"#/api/Ext.data.reader.Reader\" rel=\"Ext.data.reader.Reader\" class=\"docClass\">Ext.data.reader.Reader</a> to use to decode the server's response. This can\neither be a Reader instance, a config object or just a valid Reader type name (e.g. 'json', 'xml').</p>\n",
@@ -295,16 +325,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-simpleSortMode",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-simpleSortMode",
-        "shortDoc": "Enabling simpleSortMode in conjunction with remoteSort will only send one sort property and a direction when a remote...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "Enabling simpleSortMode in conjunction with remoteSort will only send one sort property and a direction when a remote...",
+        "static": false,
         "name": "simpleSortMode",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>Enabling simpleSortMode in conjunction with remoteSort will only send one sort property and a direction when a remote sort is requested.\nThe directionParam and sortParam will be sent with the property name and either 'ASC' or 'DESC'</p>\n",
@@ -312,16 +343,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-sortParam",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-sortParam",
-        "shortDoc": "The name of the 'sort' parameter to send in a request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "The name of the 'sort' parameter to send in a request. ...",
+        "static": false,
         "name": "sortParam",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The name of the 'sort' parameter to send in a request. Defaults to 'sort'. Set this\nto undefined if you don't want to send a sort parameter</p>\n",
@@ -329,16 +361,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-startParam",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-startParam",
-        "shortDoc": "The name of the 'start' parameter to send in a request. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "The name of the 'start' parameter to send in a request. ...",
+        "static": false,
         "name": "startParam",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The name of the 'start' parameter to send in a request. Defaults to 'start'. Set this\nto undefined if you don't want to send a start parameter</p>\n",
@@ -346,16 +379,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "Number",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-timeout",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-timeout",
-        "shortDoc": "(optional) The number of milliseconds to wait for a response. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "(optional) The number of milliseconds to wait for a response. ...",
+        "static": false,
         "name": "timeout",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>(optional) The number of milliseconds to wait for a response.\nDefaults to 30000 milliseconds (30 seconds).</p>\n",
@@ -363,15 +397,16 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-url",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-url",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "static": false,
         "name": "url",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The URL from which to request the data object.</p>\n",
@@ -379,16 +414,17 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "type": "Object/String/Ext.data.writer.Writer",
         "deprecated": null,
-        "alias": null,
+        "href": "Server.html#Ext-data-proxy-Server-cfg-writer",
         "protected": false,
         "tagname": "cfg",
-        "href": "Server.html#Ext-data-proxy-Server-cfg-writer",
-        "shortDoc": "The Ext.data.writer.Writer to use to encode any request sent to the server. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
         "private": false,
+        "shortDoc": "The Ext.data.writer.Writer to use to encode any request sent to the server. ...",
+        "static": false,
         "name": "writer",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>The <a href=\"#/api/Ext.data.writer.Writer\" rel=\"Ext.data.writer.Writer\" class=\"docClass\">Ext.data.writer.Writer</a> to use to encode any request sent to the server.\nThis can either be a Writer instance, a config object or just a valid Writer type name (e.g. 'json', 'xml').</p>\n",
@@ -398,38 +434,32 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "href": "Ajax.html#Ext-data-proxy-Ajax-method-constructor",
-        "tagname": "method",
-        "protected": false,
-        "shortDoc": "Note that if this HttpProxy is being used by a Store, then the\nStore's call to load will override any specified callb...",
-        "static": false,
         "params": [
 
         ],
-        "private": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Ajax.js",
-        "doc": "<p>Note that if this HttpProxy is being used by a <a href=\"#/api/Ext.data.Store\" rel=\"Ext.data.Store\" class=\"docClass\">Store</a>, then the\nStore's call to load will override any specified <tt>callback</tt> and <tt>params</tt>\noptions. In this case, use the Store's events to modify parameters,\nor react to loading events. The Store's baseParams may also be\nused to pass parameters known at instantiation time.</p>\n\n\n\n\n<p>If an options parameter is passed, the singleton <a href=\"#/api/Ext.Ajax\" rel=\"Ext.Ajax\" class=\"docClass\">Ext.Ajax</a> object will be used to make\nthe request.</p>\n\n",
-        "owner": "Ext.data.proxy.Ajax",
-        "name": "Rest",
-        "html_filename": "Ajax.html",
+        "href": "Ajax.html#Ext-data-proxy-Ajax-method-constructor",
         "return": {
           "type": "Object",
           "doc": "\n"
         },
-        "linenr": 1
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addEvents",
-        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Ajax.js",
         "private": false,
+        "shortDoc": "Note that if this HttpProxy is being used by a Store, then the\nStore's call to load will override any specified callb...",
+        "static": false,
+        "name": "constructor",
+        "owner": "Ext.data.proxy.Ajax",
+        "doc": "<p>Note that if this HttpProxy is being used by a <a href=\"#/api/Ext.data.Store\" rel=\"Ext.data.Store\" class=\"docClass\">Store</a>, then the\nStore's call to load will override any specified <tt>callback</tt> and <tt>params</tt>\noptions. In this case, use the Store's events to modify parameters,\nor react to loading events. The Store's baseParams may also be\nused to pass parameters known at instantiation time.</p>\n\n\n\n\n<p>If an options parameter is passed, the singleton <a href=\"#/api/Ext.Ajax\" rel=\"Ext.Ajax\" class=\"docClass\">Ext.Ajax</a> object will be used to make\nthe request.</p>\n\n",
+        "linenr": 1,
+        "html_filename": "Ajax.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Object/String",
@@ -444,26 +474,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "more"
           }
         ],
-        "name": "addEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
-        "linenr": 494,
+        "href": "Observable.html#Ext-util-Observable-method-addEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
+        "static": false,
+        "name": "addEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
+        "linenr": 494,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addListener",
-        "shortDoc": "Appends an event handler to this object. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -490,26 +521,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "options"
           }
         ],
-        "name": "addListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Appends an event handler to this object.</p>\n",
-        "linenr": 278,
+        "href": "Observable.html#Ext-util-Observable-method-addListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Appends an event handler to this object. ...",
+        "static": false,
+        "name": "addListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Appends an event handler to this object.</p>\n",
+        "linenr": 278,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
-        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -542,54 +574,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "opt"
           }
         ],
-        "name": "addManagedListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 156,
+        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
+        "static": false,
+        "name": "addManagedListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 156,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-addStatics",
-        "shortDoc": "Add / override static properties of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "addStatics",
-        "owner": "Ext.Base",
-        "doc": "<p>Add / override static properties of this class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.addStatics({\n    someProperty: 'someValue',      // My.cool.Class.someProperty = 'someValue'\n    method1: function() { ... },    // My.cool.Class.method1 = function() { ... };\n    method2: function() { ... }     // My.cool.Class.method2 = function() { ... };\n});\n</code></pre>\n",
-        "linenr": 388,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Server.html#Ext-data-proxy-Server-method-afterRequest",
-        "shortDoc": "Optional callback function which can be used to clean up after a request has been completed. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Request",
@@ -604,26 +609,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "success"
           }
         ],
-        "name": "afterRequest",
-        "owner": "Ext.data.proxy.Server",
-        "doc": "<p>Optional callback function which can be used to clean up after a request has been completed.</p>\n",
-        "linenr": 451,
+        "href": "Server.html#Ext-data-proxy-Server-method-afterRequest",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
+        "private": false,
+        "shortDoc": "Optional callback function which can be used to clean up after a request has been completed. ...",
+        "static": false,
+        "name": "afterRequest",
+        "owner": "Ext.data.proxy.Server",
+        "doc": "<p>Optional callback function which can be used to clean up after a request has been completed.</p>\n",
+        "linenr": 451,
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-batch",
-        "shortDoc": "Performs a batch of Operations, in the order specified by batchOrder. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -638,26 +644,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "listeners"
           }
         ],
-        "name": "batch",
-        "owner": "Ext.data.proxy.Proxy",
-        "doc": "<p>Performs a batch of <a href=\"#/api/Ext.data.Operation\" rel=\"Ext.data.Operation\" class=\"docClass\">Operations</a>, in the order specified by <a href=\"#/api/Ext.data.proxy.Rest-cfg-batchOrder\" rel=\"Ext.data.proxy.Rest-cfg-batchOrder\" class=\"docClass\">batchOrder</a>. Used internally by\n<a href=\"#/api/Ext.data.Store\" rel=\"Ext.data.Store\" class=\"docClass\">Ext.data.Store</a>'s <a href=\"#/api/Ext.data.Store-method-sync\" rel=\"Ext.data.Store-method-sync\" class=\"docClass\">sync</a> method. Example usage:</p>\n\n<pre><code>myProxy.batch({\n    create : [myModel1, myModel2],\n    update : [myModel3],\n    destroy: [myModel4, myModel5]\n});\n</code></pre>\n\n\n<p>Where the myModel* above are <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Model</a> instances - in this case 1 and 2 are new instances and have not been\nsaved before, 3 has been saved previously but needs to be updated, and 4 and 5 have already been saved but should now be destroyed.</p>\n",
-        "linenr": 242,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-batch",
         "return": {
           "type": "Ext.data.Batch",
           "doc": "<p>The newly created <a href=\"#/api/Ext.data.Batch\" rel=\"Ext.data.Batch\" class=\"docClass\">Ext.data.Batch</a> object</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Performs a batch of Operations, in the order specified by batchOrder. ...",
+        "static": false,
+        "name": "batch",
+        "owner": "Ext.data.proxy.Proxy",
+        "doc": "<p>Performs a batch of <a href=\"#/api/Ext.data.Operation\" rel=\"Ext.data.Operation\" class=\"docClass\">Operations</a>, in the order specified by <a href=\"#/api/Ext.data.proxy.Rest-cfg-batchOrder\" rel=\"Ext.data.proxy.Rest-cfg-batchOrder\" class=\"docClass\">batchOrder</a>. Used internally by\n<a href=\"#/api/Ext.data.Store\" rel=\"Ext.data.Store\" class=\"docClass\">Ext.data.Store</a>'s <a href=\"#/api/Ext.data.Store-method-sync\" rel=\"Ext.data.Store-method-sync\" class=\"docClass\">sync</a> method. Example usage:</p>\n\n<pre><code>myProxy.batch({\n    create : [myModel1, myModel2],\n    update : [myModel3],\n    destroy: [myModel4, myModel5]\n});\n</code></pre>\n\n\n<p>Where the myModel* above are <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Model</a> instances - in this case 1 and 2 are new instances and have not been\nsaved before, 3 has been saved previously but needs to be updated, and 4 and 5 have already been saved but should now be destroyed.</p>\n",
+        "linenr": 242,
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Server.html#Ext-data-proxy-Server-method-buildRequest",
-        "shortDoc": "Creates and returns an Ext.data.Request object based on the options passed by the Store\nthat this Proxy is attached to. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Operation",
@@ -666,26 +673,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "operation"
           }
         ],
-        "name": "buildRequest",
-        "owner": "Ext.data.proxy.Server",
-        "doc": "<p>Creates and returns an <a href=\"#/api/Ext.data.Request\" rel=\"Ext.data.Request\" class=\"docClass\">Ext.data.Request</a> object based on the options passed by the <a href=\"#/api/Ext.data.Store\" rel=\"Ext.data.Store\" class=\"docClass\">Store</a>\nthat this Proxy is attached to.</p>\n",
-        "linenr": 173,
+        "href": "Server.html#Ext-data-proxy-Server-method-buildRequest",
         "return": {
           "type": "Ext.data.Request",
           "doc": "<p>The request object</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
+        "private": false,
+        "shortDoc": "Creates and returns an Ext.data.Request object based on the options passed by the Store\nthat this Proxy is attached to. ...",
+        "static": false,
+        "name": "buildRequest",
+        "owner": "Ext.data.proxy.Server",
+        "doc": "<p>Creates and returns an <a href=\"#/api/Ext.data.Request\" rel=\"Ext.data.Request\" class=\"docClass\">Ext.data.Request</a> object based on the options passed by the <a href=\"#/api/Ext.data.Store\" rel=\"Ext.data.Store\" class=\"docClass\">Store</a>\nthat this Proxy is attached to.</p>\n",
+        "linenr": 173,
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Rest.html#Ext-data-proxy-Rest-method-buildUrl",
-        "shortDoc": "Specialized version of buildUrl that incorporates the appendId and format options into the\ngenerated url. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Rest.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -694,26 +702,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "request"
           }
         ],
-        "name": "buildUrl",
-        "owner": "Ext.data.proxy.Rest",
-        "doc": "<p>Specialized version of buildUrl that incorporates the <a href=\"#/api/Ext.data.proxy.Rest-cfg-appendId\" rel=\"Ext.data.proxy.Rest-cfg-appendId\" class=\"docClass\">appendId</a> and <a href=\"#/api/Ext.data.proxy.Rest-cfg-format\" rel=\"Ext.data.proxy.Rest-cfg-format\" class=\"docClass\">format</a> options into the\ngenerated url. Override this to provide further customizations, but remember to call the superclass buildUrl\nso that additional parameters like the cache buster string are appended</p>\n",
-        "linenr": 136,
+        "href": "Rest.html#Ext-data-proxy-Rest-method-buildUrl",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Rest.js",
+        "private": false,
+        "shortDoc": "Specialized version of buildUrl that incorporates the appendId and format options into the\ngenerated url. ...",
+        "static": false,
+        "name": "buildUrl",
+        "owner": "Ext.data.proxy.Rest",
+        "doc": "<p>Specialized version of buildUrl that incorporates the <a href=\"#/api/Ext.data.proxy.Rest-cfg-appendId\" rel=\"Ext.data.proxy.Rest-cfg-appendId\" class=\"docClass\">appendId</a> and <a href=\"#/api/Ext.data.proxy.Rest-cfg-format\" rel=\"Ext.data.proxy.Rest-cfg-format\" class=\"docClass\">format</a> options into the\ngenerated url. Override this to provide further customizations, but remember to call the superclass buildUrl\nso that additional parameters like the cache buster string are appended</p>\n",
+        "linenr": 136,
         "html_filename": "Rest.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callOverridden",
-        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -722,26 +731,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "args"
           }
         ],
-        "name": "callOverridden",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the original method that was previously overridden with <a href=\"#/api/Ext.Base-method-override\" rel=\"Ext.Base-method-override\" class=\"docClass\">Ext.Base.override</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 269,
+        "href": "Base3.html#Ext-Base-method-callOverridden",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result after calling the overridden method</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
+        "static": false,
+        "name": "callOverridden",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the original method that was previously overridden with Ext.Base.override</p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
+        "linenr": 269,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callParent",
-        "shortDoc": "Call the parent's overridden method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -750,112 +760,75 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "args"
           }
         ],
-        "name": "callParent",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
-        "linenr": 124,
+        "href": "Base3.html#Ext-Base-method-callParent",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result from the superclass' method</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the parent's overridden method. ...",
+        "static": false,
+        "name": "callParent",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
+        "linenr": 124,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-capture",
-        "shortDoc": "Starts capture on the specified Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to capture events from.</p>\n",
-            "name": "o"
-          },
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The function to call when an event is fired.</p>\n",
-            "name": "fn"
-          },
-          {
-            "type": "Object",
-            "optional": true,
-            "doc": "<p>(optional) The scope (<code>this</code> reference) in which the function is executed. Defaults to\nthe Observable firing the event.</p>\n",
-            "name": "scope"
-          }
+
         ],
-        "name": "capture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Starts capture on the specified Observable. All events will be passed to the supplied function with the event\nname + standard signature of the event <strong>before</strong> the event is fired. If the supplied function returns false,\nthe event will not fire.</p>\n",
-        "linenr": 54,
+        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
-        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
+        "static": false,
         "name": "clearListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all listeners for this object including the managed listeners</p>\n",
         "linenr": 425,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
-        "shortDoc": "Removes all managed listeners for this object. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all managed listeners for this object. ...",
+        "static": false,
         "name": "clearManagedListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all managed listeners for this object.</p>\n",
         "linenr": 454,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-create",
-        "shortDoc": "Performs the given create operation. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Operation",
@@ -876,60 +849,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "scope"
           }
         ],
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-create",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Performs the given create operation. ...",
+        "static": false,
         "name": "create",
         "owner": "Ext.data.proxy.Proxy",
         "doc": "<p>Performs the given create operation.</p>\n",
         "linenr": 206,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-createAlias",
-        "shortDoc": "Create aliases for existing prototype methods. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The new method name, or an object to set multiple aliases. See\n<a href=\"#/api/Ext.Function-method-flexSetter\" rel=\"Ext.Function-method-flexSetter\" class=\"docClass\">flexSetter</a></p>\n",
-            "name": "alias"
-          },
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The original method name</p>\n",
-            "name": "origin"
-          }
-        ],
-        "name": "createAlias",
-        "owner": "Ext.Base",
-        "doc": "<p>Create aliases for existing prototype methods. Example:</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    method1: function() { ... },\n    method2: function() { ... }\n});\n\nvar test = new My.cool.Class();\n\nMy.cool.Class.createAlias({\n    method3: 'method1',\n    method4: 'method2'\n});\n\ntest.method3(); // test.method1()\n\nMy.cool.Class.createAlias('method5', 'method3');\n\ntest.method5(); // test.method3() -&gt; test.method1()\n</code></pre>\n",
-        "linenr": 648,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-destroy",
-        "shortDoc": "Performs the given destroy operation. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Operation",
@@ -950,26 +890,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "scope"
           }
         ],
-        "name": "destroy",
-        "owner": "Ext.data.proxy.Proxy",
-        "doc": "<p>Performs the given destroy operation.</p>\n",
-        "linenr": 233,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-destroy",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Performs the given destroy operation. ...",
+        "static": false,
+        "name": "destroy",
+        "owner": "Ext.data.proxy.Proxy",
+        "doc": "<p>Performs the given destroy operation.</p>\n",
+        "linenr": 233,
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Server.html#Ext-data-proxy-Server-method-doRequest",
-        "shortDoc": "In ServerProxy subclasses, the create, read, update and destroy methods all pass\nthrough to doRequest. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Operation",
@@ -990,26 +931,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "scope"
           }
         ],
-        "name": "doRequest",
-        "owner": "Ext.data.proxy.Server",
-        "doc": "<p>In ServerProxy subclasses, the <a href=\"#/api/Ext.data.proxy.Rest-method-create\" rel=\"Ext.data.proxy.Rest-method-create\" class=\"docClass\">create</a>, <a href=\"#/api/Ext.data.proxy.Rest-method-read\" rel=\"Ext.data.proxy.Rest-method-read\" class=\"docClass\">read</a>, <a href=\"#/api/Ext.data.proxy.Rest-method-update\" rel=\"Ext.data.proxy.Rest-method-update\" class=\"docClass\">update</a> and <a href=\"#/api/Ext.data.proxy.Rest-method-destroy\" rel=\"Ext.data.proxy.Rest-method-destroy\" class=\"docClass\">destroy</a> methods all pass\nthrough to doRequest. Each ServerProxy subclass must implement the doRequest method - see <a href=\"#/api/Ext.data.proxy.JsonP\" rel=\"Ext.data.proxy.JsonP\" class=\"docClass\">Ext.data.proxy.JsonP</a>\nand <a href=\"#/api/Ext.data.proxy.Ajax\" rel=\"Ext.data.proxy.Ajax\" class=\"docClass\">Ext.data.proxy.Ajax</a> for examples. This method carries the same signature as each of the methods that delegate to it.</p>\n",
-        "linenr": 437,
+        "href": "Server.html#Ext-data-proxy-Server-method-doRequest",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
+        "private": false,
+        "shortDoc": "In ServerProxy subclasses, the create, read, update and destroy methods all pass\nthrough to doRequest. ...",
+        "static": false,
+        "name": "doRequest",
+        "owner": "Ext.data.proxy.Server",
+        "doc": "<p>In ServerProxy subclasses, the <a href=\"#/api/Ext.data.proxy.Rest-method-create\" rel=\"Ext.data.proxy.Rest-method-create\" class=\"docClass\">create</a>, <a href=\"#/api/Ext.data.proxy.Rest-method-read\" rel=\"Ext.data.proxy.Rest-method-read\" class=\"docClass\">read</a>, <a href=\"#/api/Ext.data.proxy.Rest-method-update\" rel=\"Ext.data.proxy.Rest-method-update\" class=\"docClass\">update</a> and <a href=\"#/api/Ext.data.proxy.Rest-method-destroy\" rel=\"Ext.data.proxy.Rest-method-destroy\" class=\"docClass\">destroy</a> methods all pass\nthrough to doRequest. Each ServerProxy subclass must implement the doRequest method - see <a href=\"#/api/Ext.data.proxy.JsonP\" rel=\"Ext.data.proxy.JsonP\" class=\"docClass\">Ext.data.proxy.JsonP</a>\nand <a href=\"#/api/Ext.data.proxy.Ajax\" rel=\"Ext.data.proxy.Ajax\" class=\"docClass\">Ext.data.proxy.Ajax</a> for examples. This method carries the same signature as each of the methods that delegate to it.</p>\n",
+        "linenr": 437,
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
-        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String/[String]",
@@ -1018,26 +960,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "events"
           }
         ],
-        "name": "enableBubble",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
-        "linenr": 609,
+        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
+        "static": false,
+        "name": "enableBubble",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
+        "linenr": 609,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Server.html#Ext-data-proxy-Server-method-encodeFilters",
-        "shortDoc": "Encodes the array of Ext.util.Filter objects into a string to be sent in the request url. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
-        "private": false,
         "params": [
           {
             "type": "Array",
@@ -1046,26 +989,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "sorters"
           }
         ],
-        "name": "encodeFilters",
-        "owner": "Ext.data.proxy.Server",
-        "doc": "<p>Encodes the array of <a href=\"#/api/Ext.util.Filter\" rel=\"Ext.util.Filter\" class=\"docClass\">Ext.util.Filter</a> objects into a string to be sent in the request url. By default,\nthis simply JSON-encodes the filter data</p>\n",
-        "linenr": 320,
+        "href": "Server.html#Ext-data-proxy-Server-method-encodeFilters",
         "return": {
           "type": "String",
           "doc": "<p>The encoded filters</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
+        "private": false,
+        "shortDoc": "Encodes the array of Ext.util.Filter objects into a string to be sent in the request url. ...",
+        "static": false,
+        "name": "encodeFilters",
+        "owner": "Ext.data.proxy.Server",
+        "doc": "<p>Encodes the array of <a href=\"#/api/Ext.util.Filter\" rel=\"Ext.util.Filter\" class=\"docClass\">Ext.util.Filter</a> objects into a string to be sent in the request url. By default,\nthis simply JSON-encodes the filter data</p>\n",
+        "linenr": 320,
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Server.html#Ext-data-proxy-Server-method-encodeSorters",
-        "shortDoc": "Encodes the array of Ext.util.Sorter objects into a string to be sent in the request url. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
-        "private": false,
         "params": [
           {
             "type": "Array",
@@ -1074,26 +1018,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "sorters"
           }
         ],
-        "name": "encodeSorters",
-        "owner": "Ext.data.proxy.Server",
-        "doc": "<p>Encodes the array of <a href=\"#/api/Ext.util.Sorter\" rel=\"Ext.util.Sorter\" class=\"docClass\">Ext.util.Sorter</a> objects into a string to be sent in the request url. By default,\nthis simply JSON-encodes the sorter data</p>\n",
-        "linenr": 299,
+        "href": "Server.html#Ext-data-proxy-Server-method-encodeSorters",
         "return": {
           "type": "String",
           "doc": "<p>The encoded sorters</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
+        "private": false,
+        "shortDoc": "Encodes the array of Ext.util.Sorter objects into a string to be sent in the request url. ...",
+        "static": false,
+        "name": "encodeSorters",
+        "owner": "Ext.data.proxy.Server",
+        "doc": "<p>Encodes the array of <a href=\"#/api/Ext.util.Sorter\" rel=\"Ext.util.Sorter\" class=\"docClass\">Ext.util.Sorter</a> objects into a string to be sent in the request url. By default,\nthis simply JSON-encodes the sorter data</p>\n",
+        "linenr": 299,
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
-        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1108,26 +1053,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "args"
           }
         ],
-        "name": "fireEvent",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.data.proxy.Rest-method-addListener\" rel=\"Ext.data.proxy.Rest-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.data.proxy.Rest-method-enableBubble\" rel=\"Ext.data.proxy.Rest-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
-        "linenr": 233,
+        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
         "return": {
           "type": "Boolean",
           "doc": "<p>returns false if any of the handlers return false otherwise it returns true.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
+        "static": false,
+        "name": "fireEvent",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.data.proxy.Rest-method-addListener\" rel=\"Ext.data.proxy.Rest-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.data.proxy.Rest-method-enableBubble\" rel=\"Ext.data.proxy.Rest-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
+        "linenr": 233,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Ajax.html#Ext-data-proxy-Ajax-method-getMethod",
-        "shortDoc": "Returns the HTTP method name for a given request. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Ajax.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Request",
@@ -1136,118 +1082,123 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "request"
           }
         ],
-        "name": "getMethod",
-        "owner": "Ext.data.proxy.Ajax",
-        "doc": "<p>Returns the HTTP method name for a given request. By default this returns based on a lookup on <a href=\"#/api/Ext.data.proxy.Rest-property-actionMethods\" rel=\"Ext.data.proxy.Rest-property-actionMethods\" class=\"docClass\">actionMethods</a>.</p>\n",
-        "linenr": 281,
+        "href": "Ajax.html#Ext-data-proxy-Ajax-method-getMethod",
         "return": {
           "type": "String",
           "doc": "<p>The HTTP method to use (should be one of 'GET', 'POST', 'PUT' or 'DELETE')</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Ajax.js",
+        "private": false,
+        "shortDoc": "Returns the HTTP method name for a given request. ...",
+        "static": false,
+        "name": "getMethod",
+        "owner": "Ext.data.proxy.Ajax",
+        "doc": "<p>Returns the HTTP method name for a given request. By default this returns based on a lookup on <a href=\"#/api/Ext.data.proxy.Rest-property-actionMethods\" rel=\"Ext.data.proxy.Rest-property-actionMethods\" class=\"docClass\">actionMethods</a>.</p>\n",
+        "linenr": 281,
         "html_filename": "Ajax.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-getModel",
-        "shortDoc": "Returns the model attached to this Proxy ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getModel",
-        "owner": "Ext.data.proxy.Proxy",
-        "doc": "<p>Returns the model attached to this Proxy</p>\n",
-        "linenr": 124,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-getModel",
         "return": {
           "type": "Ext.data.Model",
           "doc": "<p>The model</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Returns the model attached to this Proxy ...",
+        "static": false,
+        "name": "getModel",
+        "owner": "Ext.data.proxy.Proxy",
+        "doc": "<p>Returns the model attached to this Proxy</p>\n",
+        "linenr": 124,
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-getName",
-        "shortDoc": "Get the current class' name in string format. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getName",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
-        "linenr": 631,
+        "href": "Base3.html#Ext-Base-method-getName",
         "return": {
           "type": "String",
           "doc": "<p>className</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the current class' name in string format. ...",
+        "static": false,
+        "name": "getName",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
+        "linenr": 631,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-getReader",
-        "shortDoc": "Returns the reader currently attached to this proxy instance ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getReader",
-        "owner": "Ext.data.proxy.Proxy",
-        "doc": "<p>Returns the reader currently attached to this proxy instance</p>\n",
-        "linenr": 163,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-getReader",
         "return": {
           "type": "Ext.data.reader.Reader",
           "doc": "<p>The Reader instance</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Returns the reader currently attached to this proxy instance ...",
+        "static": false,
+        "name": "getReader",
+        "owner": "Ext.data.proxy.Proxy",
+        "doc": "<p>Returns the reader currently attached to this proxy instance</p>\n",
+        "linenr": 163,
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-getWriter",
-        "shortDoc": "Returns the writer currently attached to this proxy instance ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getWriter",
-        "owner": "Ext.data.proxy.Proxy",
-        "doc": "<p>Returns the writer currently attached to this proxy instance</p>\n",
-        "linenr": 198,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-getWriter",
         "return": {
           "type": "Ext.data.writer.Writer",
           "doc": "<p>The Writer instance</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Returns the writer currently attached to this proxy instance ...",
+        "static": false,
+        "name": "getWriter",
+        "owner": "Ext.data.proxy.Proxy",
+        "doc": "<p>Returns the writer currently attached to this proxy instance</p>\n",
+        "linenr": 198,
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-hasListener",
-        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1256,54 +1207,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "eventName"
           }
         ],
-        "name": "hasListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
-        "linenr": 530,
+        "href": "Observable.html#Ext-util-Observable-method-hasListener",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the event is being listened for, else false</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
+        "static": false,
+        "name": "hasListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
+        "linenr": 530,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-implement",
-        "shortDoc": "Add methods / properties to the prototype of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "implement",
-        "owner": "Ext.Base",
-        "doc": "<p>Add methods / properties to the prototype of this class.</p>\n\n<pre><code>Ext.define('My.awesome.Cat', {\n    constructor: function() {\n        ...\n    }\n});\n\n My.awesome.Cat.implement({\n     meow: function() {\n        alert('Meowww...');\n     }\n });\n\n var kitty = new My.awesome.Cat;\n kitty.meow();\n</code></pre>\n",
-        "linenr": 415,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-initConfig",
-        "shortDoc": "Initialize configuration for this class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -1312,31 +1236,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "config"
           }
         ],
-        "name": "initConfig",
-        "owner": "Ext.Base",
-        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
-        "linenr": 63,
+        "href": "Base3.html#Ext-Base-method-initConfig",
         "return": {
           "type": "Object",
           "doc": "<p>mixins The mixin prototypes as key - value pairs</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Initialize configuration for this class. ...",
+        "static": false,
+        "name": "initConfig",
+        "owner": "Ext.Base",
+        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
+        "linenr": 63,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "addManagedListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mon",
-        "shortDoc": "Shorthand for addManagedListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -1369,31 +1289,32 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "opt"
           }
         ],
-        "name": "mon",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.proxy.Rest-method-addManagedListener\" rel=\"Ext.data.proxy.Rest-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 681,
+        "href": "Observable.html#Ext-util-Observable-method-mon",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
+        "protected": false,
+        "tagname": "method",
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "removeManagedListener"
+          "owner": "addManagedListener"
         },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mun",
-        "shortDoc": "Shorthand for removeManagedListener. ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "Shorthand for addManagedListener. ...",
+        "static": false,
+        "name": "mon",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.proxy.Rest-method-addManagedListener\" rel=\"Ext.data.proxy.Rest-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 681,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Observable|Element",
@@ -1420,65 +1341,32 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "scope"
           }
         ],
-        "name": "mun",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.proxy.Rest-method-removeManagedListener\" rel=\"Ext.data.proxy.Rest-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.data.proxy.Rest-method-mon\" rel=\"Ext.data.proxy.Rest-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
-        "linenr": 687,
+        "href": "Observable.html#Ext-util-Observable-method-mun",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-observe",
-        "shortDoc": "Sets observability on the passed class constructor. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The class constructor to make observable.</p>\n",
-            "name": "c"
-          },
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "<p>An object containing a series of listeners to add. See <a href=\"#/api/Ext.data.proxy.Rest-method-addListener\" rel=\"Ext.data.proxy.Rest-method-addListener\" class=\"docClass\">addListener</a>.</p>\n",
-            "name": "listeners"
-          }
-        ],
-        "name": "observe",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Sets observability on the passed class constructor.</p>\n\n<p>This makes any event fired on any instance of the passed class also fire a single event through\nthe <strong>class</strong> allowing for central handling of events on many instances at once.</p>\n\n<p>Usage:</p>\n\n<pre><code>Ext.util.Observable.observe(Ext.data.Connection);\nExt.data.Connection.on('beforerequest', function(con, options) {\n    console.log('Ajax request made to ' + options.url);\n});\n</code></pre>\n",
-        "linenr": 69,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "addListener"
+          "owner": "removeManagedListener"
         },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-on",
-        "shortDoc": "Shorthand for addListener. ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "Shorthand for removeManagedListener. ...",
+        "static": false,
+        "name": "mun",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.proxy.Rest-method-removeManagedListener\" rel=\"Ext.data.proxy.Rest-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.data.proxy.Rest-method-mon\" rel=\"Ext.data.proxy.Rest-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
+        "linenr": 687,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "String",
@@ -1505,54 +1393,32 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "options"
           }
         ],
-        "name": "on",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.proxy.Rest-method-addListener\" rel=\"Ext.data.proxy.Rest-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
-        "linenr": 669,
+        "href": "Observable.html#Ext-util-Observable-method-on",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "addListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for addListener. ...",
+        "static": false,
+        "name": "on",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.proxy.Rest-method-addListener\" rel=\"Ext.data.proxy.Rest-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
+        "linenr": 669,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-override",
-        "shortDoc": "Override prototype members of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "override",
-        "owner": "Ext.Base",
-        "doc": "<p>Override prototype members of this class. Overridden methods can be invoked via\n<a href=\"#/api/Ext.Base-method-callOverridden\" rel=\"Ext.Base-method-callOverridden\" class=\"docClass\">Ext.Base.callOverridden</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 518,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Server.html#Ext-data-proxy-Server-method-processResponse",
-        "shortDoc": " ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -1591,26 +1457,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "scope"
           }
         ],
-        "name": "processResponse",
-        "owner": "Ext.data.proxy.Server",
-        "doc": "\n",
-        "linenr": 209,
+        "href": "Server.html#Ext-data-proxy-Server-method-processResponse",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
+        "private": false,
+        "shortDoc": " ...",
+        "static": false,
+        "name": "processResponse",
+        "owner": "Ext.data.proxy.Server",
+        "doc": "\n",
+        "linenr": 209,
         "html_filename": "Server.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-read",
-        "shortDoc": "Performs the given read operation. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Operation",
@@ -1631,26 +1498,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "scope"
           }
         ],
-        "name": "read",
-        "owner": "Ext.data.proxy.Proxy",
-        "doc": "<p>Performs the given read operation.</p>\n",
-        "linenr": 215,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-read",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Performs the given read operation. ...",
+        "static": false,
+        "name": "read",
+        "owner": "Ext.data.proxy.Proxy",
+        "doc": "<p>Performs the given read operation.</p>\n",
+        "linenr": 215,
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
-        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -1671,54 +1539,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "prefix"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
+        "static": false,
         "name": "relayEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Relays selected events from the specified Observable as if the events were fired by <code>this</code>.</p>\n",
         "linenr": 573,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-releaseCapture",
-        "shortDoc": "Removes all added captures from the Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to release</p>\n",
-            "name": "o"
-          }
-        ],
-        "name": "releaseCapture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes <strong>all</strong> added captures from the Observable.</p>\n",
-        "linenr": 44,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeListener",
-        "shortDoc": "Removes an event handler. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1739,26 +1580,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "scope"
           }
         ],
-        "name": "removeListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes an event handler.</p>\n",
-        "linenr": 392,
+        "href": "Observable.html#Ext-util-Observable-method-removeListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes an event handler. ...",
+        "static": false,
+        "name": "removeListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Removes an event handler.</p>\n",
+        "linenr": 392,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
-        "shortDoc": "Removes listeners that were added by the mon method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable|Element",
@@ -1785,49 +1627,51 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "scope"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes listeners that were added by the mon method. ...",
+        "static": false,
         "name": "removeManagedListener",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes listeners that were added by the <a href=\"#/api/Ext.data.proxy.Rest-method-mon\" rel=\"Ext.data.proxy.Rest-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
         "linenr": 197,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
-        "shortDoc": "Resumes firing events (see suspendEvents). ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Resumes firing events (see suspendEvents). ...",
+        "static": false,
         "name": "resumeEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Resumes firing events (see <a href=\"#/api/Ext.data.proxy.Rest-method-suspendEvents\" rel=\"Ext.data.proxy.Rest-method-suspendEvents\" class=\"docClass\">suspendEvents</a>).</p>\n\n<p>If events were suspended using the <code>**queueSuspended**</code> parameter, then all events fired\nduring event suspension will be sent to any listeners now.</p>\n",
         "linenr": 554,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-setModel",
-        "shortDoc": "Sets the model associated with this proxy. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
           {
             "type": "String|Ext.data.Model",
@@ -1842,26 +1686,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "setOnStore"
           }
         ],
-        "name": "setModel",
-        "owner": "Ext.data.proxy.Proxy",
-        "doc": "<p>Sets the model associated with this proxy. This will only usually be called by a Store</p>\n",
-        "linenr": 104,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-setModel",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Sets the model associated with this proxy. ...",
+        "static": false,
+        "name": "setModel",
+        "owner": "Ext.data.proxy.Proxy",
+        "doc": "<p>Sets the model associated with this proxy. This will only usually be called by a Store</p>\n",
+        "linenr": 104,
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-setReader",
-        "shortDoc": "Sets the Proxy's Reader by string, config object or Reader instance ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
           {
             "type": "String|Object|Ext.data.reader.Reader",
@@ -1870,26 +1715,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "reader"
           }
         ],
-        "name": "setReader",
-        "owner": "Ext.data.proxy.Proxy",
-        "doc": "<p>Sets the Proxy's Reader by string, config object or Reader instance</p>\n",
-        "linenr": 132,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-setReader",
         "return": {
           "type": "Ext.data.reader.Reader",
           "doc": "<p>The attached Reader object</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Sets the Proxy's Reader by string, config object or Reader instance ...",
+        "static": false,
+        "name": "setReader",
+        "owner": "Ext.data.proxy.Proxy",
+        "doc": "<p>Sets the Proxy's Reader by string, config object or Reader instance</p>\n",
+        "linenr": 132,
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-setWriter",
-        "shortDoc": "Sets the Proxy's Writer by string, config object or Writer instance ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
           {
             "type": "String|Object|Ext.data.writer.Writer",
@@ -1898,49 +1744,51 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "writer"
           }
         ],
-        "name": "setWriter",
-        "owner": "Ext.data.proxy.Proxy",
-        "doc": "<p>Sets the Proxy's Writer by string, config object or Writer instance</p>\n",
-        "linenr": 171,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-setWriter",
         "return": {
           "type": "Ext.data.writer.Writer",
           "doc": "<p>The attached Writer object</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Sets the Proxy's Writer by string, config object or Writer instance ...",
+        "static": false,
+        "name": "setWriter",
+        "owner": "Ext.data.proxy.Proxy",
+        "doc": "<p>Sets the Proxy's Writer by string, config object or Writer instance</p>\n",
+        "linenr": 171,
         "html_filename": "Proxy2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-statics",
-        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "statics",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
-        "linenr": 199,
+        "href": "Base3.html#Ext-Base-method-statics",
         "return": {
           "type": "Class",
           "doc": "\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
+        "static": false,
+        "name": "statics",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
+        "linenr": 199,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
-        "shortDoc": "Suspends the firing of all events. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -1949,31 +1797,27 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "queueSuspended"
           }
         ],
-        "name": "suspendEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.data.proxy.Rest-method-resumeEvents\" rel=\"Ext.data.proxy.Rest-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
-        "linenr": 541,
+        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Suspends the firing of all events. ...",
+        "static": false,
+        "name": "suspendEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.data.proxy.Rest-method-resumeEvents\" rel=\"Ext.data.proxy.Rest-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
+        "linenr": 541,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "removeListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-un",
-        "shortDoc": "Shorthand for removeListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1994,26 +1838,32 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "scope"
           }
         ],
-        "name": "un",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.proxy.Rest-method-removeListener\" rel=\"Ext.data.proxy.Rest-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
-        "linenr": 675,
+        "href": "Observable.html#Ext-util-Observable-method-un",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "removeListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for removeListener. ...",
+        "static": false,
+        "name": "un",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.proxy.Rest-method-removeListener\" rel=\"Ext.data.proxy.Rest-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
+        "linenr": 675,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-update",
-        "shortDoc": "Performs the given update operation. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Operation",
@@ -2034,70 +1884,29 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "name": "scope"
           }
         ],
-        "name": "update",
-        "owner": "Ext.data.proxy.Proxy",
-        "doc": "<p>Performs the given update operation.</p>\n",
-        "linenr": 224,
+        "href": "Proxy2.html#Ext-data-proxy-Proxy-method-update",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Proxy.js",
+        "private": false,
+        "shortDoc": "Performs the given update operation. ...",
+        "static": false,
+        "name": "update",
+        "owner": "Ext.data.proxy.Proxy",
+        "doc": "<p>Performs the given update operation.</p>\n",
+        "linenr": 224,
         "html_filename": "Proxy2.html"
       }
     ],
-    "property": [
-      {
-        "type": "Object",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Rest.html#Ext-data-proxy-Rest-property-actionMethods",
-        "shortDoc": "Mapping of action name to HTTP request method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Rest.js",
-        "private": false,
-        "name": "actionMethods",
-        "owner": "Ext.data.proxy.Rest",
-        "doc": "<p>Mapping of action name to HTTP request method. These default to RESTful conventions for the 'create', 'read',\n'update' and 'destroy' actions (which map to 'POST', 'GET', 'PUT' and 'DELETE' respectively). This object should\nnot be changed except globally via <a href=\"#/api/Ext-method-override\" rel=\"Ext-method-override\" class=\"docClass\">Ext.override</a> - the <a href=\"#/api/Ext.data.proxy.Rest-method-getMethod\" rel=\"Ext.data.proxy.Rest-method-getMethod\" class=\"docClass\">getMethod</a> function can be overridden instead.</p>\n",
-        "linenr": 172,
-        "html_filename": "Rest.html"
-      },
-      {
-        "type": "Class",
-        "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "property",
-        "href": "Base3.html#Ext-Base-property-self",
-        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "name": "self",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
-        "linenr": 18,
-        "html_filename": "Base3.html"
-      }
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "Server.html#Ext-data-proxy-Server-event-exception",
-        "shortDoc": "Fires when the server returns an exception ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.proxy.Proxy",
@@ -2124,48 +1933,108 @@ Ext.data.JsonP.Ext_data_proxy_Rest({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "Server.html#Ext-data-proxy-Server-event-exception",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Server.js",
+        "private": false,
+        "shortDoc": "Fires when the server returns an exception ...",
+        "static": false,
         "name": "exception",
         "owner": "Ext.data.proxy.Server",
         "doc": "<p>Fires when the server returns an exception</p>\n",
         "linenr": 133,
         "html_filename": "Server.html"
       }
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+      {
+        "inheritable": false,
+        "type": "Object",
+        "deprecated": null,
+        "href": "Rest.html#Ext-data-proxy-Rest-property-actionMethods",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Rest.js",
+        "private": false,
+        "shortDoc": "Mapping of action name to HTTP request method. ...",
+        "static": false,
+        "name": "actionMethods",
+        "owner": "Ext.data.proxy.Rest",
+        "doc": "<p>Mapping of action name to HTTP request method. These default to RESTful conventions for the 'create', 'read',\n'update' and 'destroy' actions (which map to 'POST', 'GET', 'PUT' and 'DELETE' respectively). This object should\nnot be changed except globally via <a href=\"#/api/Ext-method-override\" rel=\"Ext-method-override\" class=\"docClass\">Ext.override</a> - the <a href=\"#/api/Ext.data.proxy.Rest-method-getMethod\" rel=\"Ext.data.proxy.Rest-method-getMethod\" class=\"docClass\">getMethod</a> function can be overridden instead.</p>\n",
+        "linenr": 172,
+        "html_filename": "Rest.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Class",
+        "deprecated": null,
+        "href": "Base3.html#Ext-Base-property-self",
+        "protected": true,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
+        "static": false,
+        "name": "self",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
+        "linenr": 18,
+        "html_filename": "Base3.html"
+      }
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-    "Ext.Base",
-    "Ext.data.proxy.Proxy",
-    "Ext.data.proxy.Server",
-    "Ext.data.proxy.Ajax"
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "Rest.html#Ext-data-proxy-Rest",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": "Ed Spencer",
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/proxy/Rest.js",
   "private": false,
   "alternateClassNames": [
     "Ext.data.RestProxy"
   ],
+  "static": false,
   "name": "Ext.data.proxy.Rest",
   "doc": "<p>RestProxy is a specialization of the <a href=\"#/api/Ext.data.proxy.Ajax\" rel=\"Ext.data.proxy.Ajax\" class=\"docClass\">AjaxProxy</a> which simply maps the four actions \n(create, read, update and destroy) to RESTful HTTP verbs. For example, let's set up a <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Model</a>\nwith an inline RestProxy</p>\n\n\n\n\n<pre><code>Ext.define('User', {\n    extend: 'Ext.data.Model',\n    fields: ['id', 'name', 'email'],\n\n    proxy: {\n        type: 'rest',\n        url : '/users'\n    }\n});\n</code></pre>\n\n\n\n\n<p>Now we can create a new User instance and save it via the RestProxy. Doing this will cause the Proxy to send a\nPOST request to '/users':\n\n<pre><code>var user = Ext.ModelManager.create({name: 'Ed Spencer', email: 'ed@sencha.com'}, 'User');\n\nuser.save(); //POST /users\n</code></pre>\n\n<p>Let's expand this a little and provide a callback for the <a href=\"#/api/Ext.data.Model-method-save\" rel=\"Ext.data.Model-method-save\" class=\"docClass\">Ext.data.Model.save</a> call to update the Model\nonce it has been created. We'll assume the creation went successfully and that the server gave this user an ID of \n123:</p>\n\n<pre><code>user.save({\n    success: function(user) {\n        user.set('name', 'Khan Noonien Singh');\n\n        user.save(); //PUT /users/123\n    }\n});\n</code></pre>\n\n<p>Now that we're no longer creating a new Model instance, the request method is changed to an HTTP PUT, targeting\nthe relevant url for that user. Now let's delete this user, which will use the DELETE method:</p>\n\n<pre><code>    user.destroy(); //DELETE /users/123\n</code></pre>\n\n<p>Finally, when we perform a load of a Model or Store, RestProxy will use the GET method:</p>\n\n<pre><code>//1. Load via Store\n\n//the Store automatically picks up the Proxy from the User model\nvar store = new Ext.data.Store({\n    model: 'User'\n});\n\nstore.load(); //GET /users\n\n//2. Load directly from the Model\n\n//GET /users/123\nExt.ModelManager.getModel('User').load(123, {\n    success: function(user) {\n        console.log(user.getId()); //outputs 123\n    }\n});\n</code></pre>\n\n<p><u>Url generation</u></p>\n\n<p>RestProxy is able to automatically generate the urls above based on two configuration options - <a href=\"#/api/Ext.data.proxy.Rest-cfg-appendId\" rel=\"Ext.data.proxy.Rest-cfg-appendId\" class=\"docClass\">appendId</a>\nand <a href=\"#/api/Ext.data.proxy.Rest-cfg-format\" rel=\"Ext.data.proxy.Rest-cfg-format\" class=\"docClass\">format</a>. If appendId is true (it is by default) then RestProxy will automatically append the ID of the \nModel instance in question to the configured url, resulting in the '/users/123' that we saw above.</p>\n\n<p>If the request is not for a specific Model instance (e.g. loading a Store), the url is not appended with an id. \nRestProxy will automatically insert a '/' before the ID if one is not already present.</p>\n\n<pre><code>new Ext.data.proxy.Rest({\n    url: '/users',\n    appendId: true //default\n});\n\n// Collection url: /users\n// Instance url  : /users/123\n</code></pre>\n\n<p>RestProxy can also optionally append a format string to the end of any generated url:</p>\n\n<pre><code>new Ext.data.proxy.Rest({\n    url: '/users',\n    format: 'json'\n});\n\n// Collection url: /users.json\n// Instance url  : /users/123.json\n</code></pre>\n\n<p>If further customization is needed, simply implement the <a href=\"#/api/Ext.data.proxy.Rest-method-buildUrl\" rel=\"Ext.data.proxy.Rest-method-buildUrl\" class=\"docClass\">buildUrl</a> method and add your custom generated\nurl onto the <a href=\"#/api/Ext.data.Request\" rel=\"Ext.data.Request\" class=\"docClass\">Request</a> object that is passed to buildUrl. See \n<a href=\"source/RestProxy.html#method-Ext.data.proxy.Rest-buildUrl\">RestProxy's implementation</a> for an example of\nhow to achieve this.</p>\n\n<p>Note that RestProxy inherits from <a href=\"#/api/Ext.data.proxy.Ajax\" rel=\"Ext.data.proxy.Ajax\" class=\"docClass\">AjaxProxy</a>, which already injects all of the sorter,\nfilter, group and paging options into the generated url. See the <a href=\"#/api/Ext.data.proxy.Ajax\" rel=\"Ext.data.proxy.Ajax\" class=\"docClass\">AjaxProxy docs</a> for more\ndetails.</p>\n\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "Rest.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Ext.data.proxy.Ajax"
 });

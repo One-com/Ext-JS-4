@@ -1,24 +1,27 @@
 Ext.data.JsonP.Ext_EventManager({
-  "allMixins": [
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+
+  ],
+  "inheritable": false,
+  "subclasses": [
 
   ],
   "deprecated": null,
-  "docauthor": null,
+  "allMixins": [
+
+  ],
+  "href": "EventManager.html#Ext-EventManager",
   "members": {
     "cfg": [
 
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-addListener",
-        "shortDoc": "Appends an event handler to an element. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "String/HTMLElement",
@@ -51,26 +54,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "options"
           }
         ],
-        "name": "addListener",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Appends an event handler to an element.  The shorthand version <a href=\"#/api/Ext.EventManager-method-on\" rel=\"Ext.EventManager-method-on\" class=\"docClass\">on</a> is equivalent.  Typically you will\nuse <a href=\"#/api/Ext.core.Element-method-addListener\" rel=\"Ext.core.Element-method-addListener\" class=\"docClass\">Ext.core.Element.addListener</a> directly on an Element in favor of calling this version.</p>\n",
-        "linenr": 284,
+        "href": "EventManager.html#Ext-EventManager-method-addListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Appends an event handler to an element. ...",
+        "static": false,
+        "name": "addListener",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Appends an event handler to an element.  The shorthand version <a href=\"#/api/Ext.EventManager-method-on\" rel=\"Ext.EventManager-method-on\" class=\"docClass\">on</a> is equivalent.  Typically you will\nuse <a href=\"#/api/Ext.core.Element-method-addListener\" rel=\"Ext.core.Element-method-addListener\" class=\"docClass\">Ext.core.Element.addListener</a> directly on an Element in favor of calling this version.</p>\n",
+        "linenr": 284,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-getId",
-        "shortDoc": "Get the id of the element. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Mixed",
@@ -79,49 +83,51 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "element"
           }
         ],
-        "name": "getId",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Get the id of the element. If one has not been assigned, automatically assign it.</p>\n",
-        "linenr": 170,
+        "href": "EventManager.html#Ext-EventManager-method-getId",
         "return": {
           "type": "String",
           "doc": "<p>id</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Get the id of the element. ...",
+        "static": false,
+        "name": "getId",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Get the id of the element. If one has not been assigned, automatically assign it.</p>\n",
+        "linenr": 170,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-getKeyEvent",
-        "shortDoc": "Indicates which event to use for getting key presses. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getKeyEvent",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Indicates which event to use for getting key presses.</p>\n",
-        "linenr": 834,
+        "href": "EventManager.html#Ext-EventManager-method-getKeyEvent",
         "return": {
           "type": "String",
           "doc": "<p>The appropriate event name.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Indicates which event to use for getting key presses. ...",
+        "static": false,
+        "name": "getKeyEvent",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Indicates which event to use for getting key presses.</p>\n",
+        "linenr": 834,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-getPageX",
-        "shortDoc": "Gets the x coordinate from the event ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -130,26 +136,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "event"
           }
         ],
-        "name": "getPageX",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Gets the x coordinate from the event</p>\n",
-        "linenr": 656,
+        "href": "EventManager.html#Ext-EventManager-method-getPageX",
         "return": {
           "type": "Number",
           "doc": "<p>The x coordinate</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Gets the x coordinate from the event ...",
+        "static": false,
+        "name": "getPageX",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Gets the x coordinate from the event</p>\n",
+        "linenr": 656,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-getPageXY",
-        "shortDoc": "Gets the x &amp; ycoordinate from the event ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -158,26 +165,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "event"
           }
         ],
-        "name": "getPageXY",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Gets the x &amp; ycoordinate from the event</p>\n",
-        "linenr": 674,
+        "href": "EventManager.html#Ext-EventManager-method-getPageXY",
         "return": {
           "type": "Array",
           "doc": "<p>The x/y coordinate</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Gets the x &amp; ycoordinate from the event ...",
+        "static": false,
+        "name": "getPageXY",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Gets the x &amp; ycoordinate from the event</p>\n",
+        "linenr": 674,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-getPageY",
-        "shortDoc": "Gets the y coordinate from the event ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -186,26 +194,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "event"
           }
         ],
-        "name": "getPageY",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Gets the y coordinate from the event</p>\n",
-        "linenr": 665,
+        "href": "EventManager.html#Ext-EventManager-method-getPageY",
         "return": {
           "type": "Number",
           "doc": "<p>The y coordinate</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Gets the y coordinate from the event ...",
+        "static": false,
+        "name": "getPageY",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Gets the y coordinate from the event</p>\n",
+        "linenr": 665,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-getRelatedTarget",
-        "shortDoc": "Gets the related target from the event. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -214,26 +223,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "event"
           }
         ],
-        "name": "getRelatedTarget",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Gets the related target from the event.</p>\n",
-        "linenr": 638,
+        "href": "EventManager.html#Ext-EventManager-method-getRelatedTarget",
         "return": {
           "type": "HTMLElement",
           "doc": "<p>The related target.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Gets the related target from the event. ...",
+        "static": false,
+        "name": "getRelatedTarget",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Gets the related target from the event.</p>\n",
+        "linenr": 638,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-getTarget",
-        "shortDoc": "Gets the target of the event. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -242,49 +252,51 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "event"
           }
         ],
-        "name": "getTarget",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Gets the target of the event.</p>\n",
-        "linenr": 694,
+        "href": "EventManager.html#Ext-EventManager-method-getTarget",
         "return": {
           "type": "HTMLElement",
           "doc": "<p>target</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Gets the target of the event. ...",
+        "static": false,
+        "name": "getTarget",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Gets the target of the event.</p>\n",
+        "linenr": 694,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-on",
-        "shortDoc": "Alias for Ext.EventManager.addListener ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "on",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Alias for <a href=\"#/api/Ext.EventManager-method-addListener\" rel=\"Ext.EventManager-method-addListener\" class=\"docClass\">Ext.EventManager.addListener</a></p>\n",
-        "linenr": 859,
+        "href": "EventManager.html#Ext-EventManager-method-on",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Alias for Ext.EventManager.addListener ...",
+        "static": false,
+        "name": "on",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Alias for <a href=\"#/api/Ext.EventManager-method-addListener\" rel=\"Ext.EventManager-method-addListener\" class=\"docClass\">Ext.EventManager.addListener</a></p>\n",
+        "linenr": 859,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-onDocumentReady",
-        "shortDoc": "Adds a listener to be notified when the document is ready (before onload and before images are loaded). ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Function",
@@ -305,26 +317,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "options"
           }
         ],
-        "name": "onDocumentReady",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Adds a listener to be notified when the document is ready (before onload and before images are loaded). Can be\naccessed shorthanded as Ext.onReady().</p>\n",
-        "linenr": 129,
+        "href": "EventManager.html#Ext-EventManager-method-onDocumentReady",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Adds a listener to be notified when the document is ready (before onload and before images are loaded). ...",
+        "static": false,
+        "name": "onDocumentReady",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Adds a listener to be notified when the document is ready (before onload and before images are loaded). Can be\naccessed shorthanded as Ext.onReady().</p>\n",
+        "linenr": 129,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-onWindowResize",
-        "shortDoc": "Adds a listener to be notified when the browser window is resized and provides resize event buffering (100 millisecon...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Function",
@@ -345,26 +358,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "options"
           }
         ],
-        "name": "onWindowResize",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Adds a listener to be notified when the browser window is resized and provides resize event buffering (100 milliseconds),\npasses new viewport width and height to handlers.</p>\n",
-        "linenr": 732,
+        "href": "EventManager.html#Ext-EventManager-method-onWindowResize",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Adds a listener to be notified when the browser window is resized and provides resize event buffering (100 millisecon...",
+        "static": false,
+        "name": "onWindowResize",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Adds a listener to be notified when the browser window is resized and provides resize event buffering (100 milliseconds),\npasses new viewport width and height to handlers.</p>\n",
+        "linenr": 732,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-preventDefault",
-        "shortDoc": "Prevents the browsers default handling of the event. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -373,26 +387,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "The"
           }
         ],
-        "name": "preventDefault",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Prevents the browsers default handling of the event.</p>\n",
-        "linenr": 616,
+        "href": "EventManager.html#Ext-EventManager-method-preventDefault",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Prevents the browsers default handling of the event. ...",
+        "static": false,
+        "name": "preventDefault",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Prevents the browsers default handling of the event.</p>\n",
+        "linenr": 616,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-purgeElement",
-        "shortDoc": "Recursively removes all previous added listeners from an element and its children. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "String/HTMLElement",
@@ -407,26 +422,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "eventName"
           }
         ],
-        "name": "purgeElement",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Recursively removes all previous added listeners from an element and its children. Typically you will use <a href=\"#/api/Ext.core.Element-method-purgeAllListeners\" rel=\"Ext.core.Element-method-purgeAllListeners\" class=\"docClass\">Ext.core.Element.purgeAllListeners</a>\ndirectly on an Element in favor of calling this version.</p>\n",
-        "linenr": 452,
+        "href": "EventManager.html#Ext-EventManager-method-purgeElement",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Recursively removes all previous added listeners from an element and its children. ...",
+        "static": false,
+        "name": "purgeElement",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Recursively removes all previous added listeners from an element and its children. Typically you will use <a href=\"#/api/Ext.core.Element-method-purgeAllListeners\" rel=\"Ext.core.Element-method-purgeAllListeners\" class=\"docClass\">Ext.core.Element.purgeAllListeners</a>\ndirectly on an Element in favor of calling this version.</p>\n",
+        "linenr": 452,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-removeAll",
-        "shortDoc": "Removes all event handers from an element. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "String/HTMLElement",
@@ -435,26 +451,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "el"
           }
         ],
-        "name": "removeAll",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Removes all event handers from an element.  Typically you will use <a href=\"#/api/Ext.core.Element-method-removeAllListeners\" rel=\"Ext.core.Element-method-removeAllListeners\" class=\"docClass\">Ext.core.Element.removeAllListeners</a>\ndirectly on an Element in favor of calling this version.</p>\n",
-        "linenr": 431,
+        "href": "EventManager.html#Ext-EventManager-method-removeAll",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Removes all event handers from an element. ...",
+        "static": false,
+        "name": "removeAll",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Removes all event handers from an element.  Typically you will use <a href=\"#/api/Ext.core.Element-method-removeAllListeners\" rel=\"Ext.core.Element-method-removeAllListeners\" class=\"docClass\">Ext.core.Element.removeAllListeners</a>\ndirectly on an Element in favor of calling this version.</p>\n",
+        "linenr": 431,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-removeListener",
-        "shortDoc": "Removes an event handler from an element. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "String/HTMLElement",
@@ -481,26 +498,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "scope"
           }
         ],
+        "href": "EventManager.html#Ext-EventManager-method-removeListener",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Removes an event handler from an element. ...",
+        "static": false,
         "name": "removeListener",
         "owner": "Ext.EventManager",
         "doc": "<p>Removes an event handler from an element.  The shorthand version <a href=\"#/api/Ext.EventManager-method-un\" rel=\"Ext.EventManager-method-un\" class=\"docClass\">un</a> is equivalent.  Typically\nyou will use <a href=\"#/api/Ext.core.Element-method-removeListener\" rel=\"Ext.core.Element-method-removeListener\" class=\"docClass\">Ext.core.Element.removeListener</a> directly on an Element in favor of calling this version.</p>\n",
         "linenr": 371,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-removeResizeListener",
-        "shortDoc": "Removes the passed window resize listener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Function",
@@ -515,26 +533,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "scope"
           }
         ],
+        "href": "EventManager.html#Ext-EventManager-method-removeResizeListener",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Removes the passed window resize listener. ...",
+        "static": false,
         "name": "removeResizeListener",
         "owner": "Ext.EventManager",
         "doc": "<p>Removes the passed window resize listener.</p>\n",
         "linenr": 765,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-removeUnloadListener",
-        "shortDoc": "Removes the passed window unload listener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Function",
@@ -549,26 +568,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "scope"
           }
         ],
-        "name": "removeUnloadListener",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Removes the passed window unload listener.</p>\n",
-        "linenr": 813,
+        "href": "EventManager.html#Ext-EventManager-method-removeUnloadListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Removes the passed window unload listener. ...",
+        "static": false,
+        "name": "removeUnloadListener",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Removes the passed window unload listener.</p>\n",
+        "linenr": 813,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-stopEvent",
-        "shortDoc": "Stop the event (preventDefault and stopPropagation) ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -577,26 +597,27 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "The"
           }
         ],
-        "name": "stopEvent",
-        "owner": "Ext.EventManager",
-        "doc": "<p>Stop the event (preventDefault and stopPropagation)</p>\n",
-        "linenr": 594,
+        "href": "EventManager.html#Ext-EventManager-method-stopEvent",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Stop the event (preventDefault and stopPropagation) ...",
+        "static": false,
+        "name": "stopEvent",
+        "owner": "Ext.EventManager",
+        "doc": "<p>Stop the event (preventDefault and stopPropagation)</p>\n",
+        "linenr": 594,
         "html_filename": "EventManager.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-stopPropagation",
-        "shortDoc": "Cancels bubbling of the event. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
-        "private": false,
         "params": [
           {
             "type": "Event",
@@ -605,84 +626,104 @@ Ext.data.JsonP.Ext_EventManager({
             "name": "The"
           }
         ],
+        "href": "EventManager.html#Ext-EventManager-method-stopPropagation",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
+        "private": false,
+        "shortDoc": "Cancels bubbling of the event. ...",
+        "static": false,
         "name": "stopPropagation",
         "owner": "Ext.EventManager",
         "doc": "<p>Cancels bubbling of the event.</p>\n",
         "linenr": 603,
+        "html_filename": "EventManager.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "EventManager.html#Ext-EventManager-method-un",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "EventManager.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "EventManager.html#Ext-EventManager-method-un",
-        "shortDoc": "Alias for Ext.EventManager.removeListener ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Alias for Ext.EventManager.removeListener ...",
+        "static": false,
         "name": "un",
         "owner": "Ext.EventManager",
         "doc": "<p>Alias for <a href=\"#/api/Ext.EventManager-method-removeListener\" rel=\"Ext.EventManager-method-removeListener\" class=\"docClass\">Ext.EventManager.removeListener</a></p>\n",
         "linenr": 866,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "EventManager.html"
       }
     ],
-    "property": [
-
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
 
     ]
   },
   "singleton": true,
-  "alias": null,
-  "superclasses": [
-
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "EventManager.html#Ext-EventManager",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/EventManager.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.EventManager",
   "doc": "<p>Registers event handlers that want to receive a normalized EventObject instead of the standard browser event and provides\nseveral useful events directly.\nSee <a href=\"#/api/Ext.EventObject\" rel=\"Ext.EventObject\" class=\"docClass\">Ext.EventObject</a> for more details on normalized event objects.</p>\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "EventManager.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": null
 });

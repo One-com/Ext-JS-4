@@ -1,24 +1,27 @@
 Ext.data.JsonP.Ext_data_validations({
-  "allMixins": [
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+
+  ],
+  "inheritable": false,
+  "subclasses": [
 
   ],
   "deprecated": null,
-  "docauthor": null,
+  "allMixins": [
+
+  ],
+  "href": "validations.html#Ext-data-validations",
   "members": {
     "cfg": [
 
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "validations.html#Ext-data-validations-method-exclusion",
-        "shortDoc": "Validates that the given value is present in the configured list ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -33,26 +36,27 @@ Ext.data.JsonP.Ext_data_validations({
             "name": "value"
           }
         ],
-        "name": "exclusion",
-        "owner": "Ext.data.validations",
-        "doc": "<p>Validates that the given value is present in the configured list</p>\n",
-        "linenr": 103,
+        "href": "validations.html#Ext-data-validations-method-exclusion",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the value is not present in the list</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
+        "private": false,
+        "shortDoc": "Validates that the given value is present in the configured list ...",
+        "static": false,
+        "name": "exclusion",
+        "owner": "Ext.data.validations",
+        "doc": "<p>Validates that the given value is present in the configured list</p>\n",
+        "linenr": 103,
         "html_filename": "validations.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "validations.html#Ext-data-validations-method-format",
-        "shortDoc": "Returns true if the given value passes validation against the configured matcher regex ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -67,26 +71,27 @@ Ext.data.JsonP.Ext_data_validations({
             "name": "value"
           }
         ],
-        "name": "format",
-        "owner": "Ext.data.validations",
-        "doc": "<p>Returns true if the given value passes validation against the configured matcher regex</p>\n",
-        "linenr": 84,
+        "href": "validations.html#Ext-data-validations-method-format",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the value passes the format validation</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
+        "private": false,
+        "shortDoc": "Returns true if the given value passes validation against the configured matcher regex ...",
+        "static": false,
+        "name": "format",
+        "owner": "Ext.data.validations",
+        "doc": "<p>Returns true if the given value passes validation against the configured matcher regex</p>\n",
+        "linenr": 84,
         "html_filename": "validations.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "validations.html#Ext-data-validations-method-inclusion",
-        "shortDoc": "Validates that the given value is present in the configured list ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -101,26 +106,27 @@ Ext.data.JsonP.Ext_data_validations({
             "name": "value"
           }
         ],
-        "name": "inclusion",
-        "owner": "Ext.data.validations",
-        "doc": "<p>Validates that the given value is present in the configured list</p>\n",
-        "linenr": 94,
+        "href": "validations.html#Ext-data-validations-method-inclusion",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the value is present in the list</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
+        "private": false,
+        "shortDoc": "Validates that the given value is present in the configured list ...",
+        "static": false,
+        "name": "inclusion",
+        "owner": "Ext.data.validations",
+        "doc": "<p>Validates that the given value is present in the configured list</p>\n",
+        "linenr": 94,
         "html_filename": "validations.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "validations.html#Ext-data-validations-method-length",
-        "shortDoc": "Returns true if the given value is between the configured min and max values ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -135,26 +141,27 @@ Ext.data.JsonP.Ext_data_validations({
             "name": "value"
           }
         ],
-        "name": "length",
-        "owner": "Ext.data.validations",
-        "doc": "<p>Returns true if the given value is between the configured min and max values</p>\n",
-        "linenr": 62,
+        "href": "validations.html#Ext-data-validations-method-length",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the value passes validation</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
+        "private": false,
+        "shortDoc": "Returns true if the given value is between the configured min and max values ...",
+        "static": false,
+        "name": "length",
+        "owner": "Ext.data.validations",
+        "doc": "<p>Returns true if the given value is between the configured min and max values</p>\n",
+        "linenr": 62,
         "html_filename": "validations.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "validations.html#Ext-data-validations-method-presence",
-        "shortDoc": "Validates that the given value is present ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -169,28 +176,46 @@ Ext.data.JsonP.Ext_data_validations({
             "name": "value"
           }
         ],
-        "name": "presence",
-        "owner": "Ext.data.validations",
-        "doc": "<p>Validates that the given value is present</p>\n",
-        "linenr": 48,
+        "href": "validations.html#Ext-data-validations-method-presence",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if validation passed</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
+        "private": false,
+        "shortDoc": "Validates that the given value is present ...",
+        "static": false,
+        "name": "presence",
+        "owner": "Ext.data.validations",
+        "doc": "<p>Validates that the given value is present</p>\n",
+        "linenr": 48,
         "html_filename": "validations.html"
       }
     ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
     "property": [
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "validations.html#Ext-data-validations-property-exclusionMessage",
         "protected": false,
         "tagname": "property",
-        "href": "validations.html#Ext-data-validations-property-exclusionMessage",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
         "private": false,
+        "static": false,
         "name": "exclusionMessage",
         "owner": "Ext.data.validations",
         "doc": "<p>The default error message used when an exclusion validation fails</p>\n",
@@ -198,15 +223,16 @@ Ext.data.JsonP.Ext_data_validations({
         "html_filename": "validations.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "validations.html#Ext-data-validations-property-formatMessage",
         "protected": false,
         "tagname": "property",
-        "href": "validations.html#Ext-data-validations-property-formatMessage",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
         "private": false,
+        "static": false,
         "name": "formatMessage",
         "owner": "Ext.data.validations",
         "doc": "<p>The default error message used when a format validation fails</p>\n",
@@ -214,15 +240,16 @@ Ext.data.JsonP.Ext_data_validations({
         "html_filename": "validations.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "validations.html#Ext-data-validations-property-inclusionMessage",
         "protected": false,
         "tagname": "property",
-        "href": "validations.html#Ext-data-validations-property-inclusionMessage",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
         "private": false,
+        "static": false,
         "name": "inclusionMessage",
         "owner": "Ext.data.validations",
         "doc": "<p>The default error message used when an inclusion validation fails</p>\n",
@@ -230,15 +257,16 @@ Ext.data.JsonP.Ext_data_validations({
         "html_filename": "validations.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "validations.html#Ext-data-validations-property-lengthMessage",
         "protected": false,
         "tagname": "property",
-        "href": "validations.html#Ext-data-validations-property-lengthMessage",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
         "private": false,
+        "static": false,
         "name": "lengthMessage",
         "owner": "Ext.data.validations",
         "doc": "<p>The default error message used when a length validation fails</p>\n",
@@ -246,63 +274,66 @@ Ext.data.JsonP.Ext_data_validations({
         "html_filename": "validations.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "validations.html#Ext-data-validations-property-presenceMessage",
         "protected": false,
         "tagname": "property",
-        "href": "validations.html#Ext-data-validations-property-presenceMessage",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
         "private": false,
+        "static": false,
         "name": "presenceMessage",
         "owner": "Ext.data.validations",
         "doc": "<p>The default error message used when a presence validation fails</p>\n",
         "linenr": 13,
         "html_filename": "validations.html"
       }
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
-    "event": [
-
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "validations.html#Ext-data-validations",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": "Ed Spencer",
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/validations.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.data.validations",
   "doc": "<p>This singleton contains a set of validation functions that can be used to validate any type\nof data. They are most often used in <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Models</a>, where they are automatically\nset up and executed.</p>\n\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "validations.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Object"
 });

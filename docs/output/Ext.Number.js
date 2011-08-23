@@ -1,24 +1,27 @@
 Ext.data.JsonP.Ext_Number({
-  "allMixins": [
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+
+  ],
+  "inheritable": false,
+  "subclasses": [
 
   ],
   "deprecated": null,
-  "docauthor": null,
+  "allMixins": [
+
+  ],
+  "href": "Number3.html#Ext-Number",
   "members": {
     "cfg": [
 
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Number3.html#Ext-Number-method-constrain",
-        "shortDoc": "Checks whether or not the passed number is within a desired range. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/lang/Number.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -39,26 +42,27 @@ Ext.data.JsonP.Ext_Number({
             "name": "max"
           }
         ],
-        "name": "constrain",
-        "owner": "Ext.Number",
-        "doc": "<p>Checks whether or not the passed number is within a desired range.  If the number is already within the\nrange it is returned, otherwise the min or max value is returned depending on which side of the range is\nexceeded. Note that this method returns the constrained value but does not change the current number.</p>\n",
-        "linenr": 13,
+        "href": "Number3.html#Ext-Number-method-constrain",
         "return": {
           "type": "Number",
           "doc": "<p>The constrained value if outside the range, otherwise the current value</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/lang/Number.js",
+        "private": false,
+        "shortDoc": "Checks whether or not the passed number is within a desired range. ...",
+        "static": false,
+        "name": "constrain",
+        "owner": "Ext.Number",
+        "doc": "<p>Checks whether or not the passed number is within a desired range.  If the number is already within the\nrange it is returned, otherwise the min or max value is returned depending on which side of the range is\nexceeded. Note that this method returns the constrained value but does not change the current number.</p>\n",
+        "linenr": 13,
         "html_filename": "Number3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Number3.html#Ext-Number-method-from",
-        "shortDoc": "Validate that a value is numeric and convert it to a number if necessary. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/lang/Number.js",
-        "private": false,
         "params": [
           {
             "type": "Mixed",
@@ -73,26 +77,27 @@ Ext.data.JsonP.Ext_Number({
             "name": "defaultValue"
           }
         ],
-        "name": "from",
-        "owner": "Ext.Number",
-        "doc": "<p>Validate that a value is numeric and convert it to a number if necessary. Returns the specified default value if\nit is not.</p>\n\n<p>Ext.Number.from('1.23', 1); // returns 1.23\nExt.Number.from('abc', 1); // returns 1</p>\n",
-        "linenr": 76,
+        "href": "Number3.html#Ext-Number-method-from",
         "return": {
           "type": "Number",
           "doc": "<p>value, if numeric, defaultValue otherwise</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/lang/Number.js",
+        "private": false,
+        "shortDoc": "Validate that a value is numeric and convert it to a number if necessary. ...",
+        "static": false,
+        "name": "from",
+        "owner": "Ext.Number",
+        "doc": "<p>Validate that a value is numeric and convert it to a number if necessary. Returns the specified default value if\nit is not.</p>\n\n<p>Ext.Number.from('1.23', 1); // returns 1.23\nExt.Number.from('abc', 1); // returns 1</p>\n",
+        "linenr": 76,
         "html_filename": "Number3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Number3.html#Ext-Number-method-snap",
-        "shortDoc": "Snaps the passed number between stopping points based upon a passed increment value. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/lang/Number.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -119,26 +124,27 @@ Ext.data.JsonP.Ext_Number({
             "name": "maxValue"
           }
         ],
-        "name": "snap",
-        "owner": "Ext.Number",
-        "doc": "<p>Snaps the passed number between stopping points based upon a passed increment value.</p>\n",
-        "linenr": 34,
+        "href": "Number3.html#Ext-Number-method-snap",
         "return": {
           "type": "Number",
           "doc": "<p>The value of the nearest snap target.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/lang/Number.js",
+        "private": false,
+        "shortDoc": "Snaps the passed number between stopping points based upon a passed increment value. ...",
+        "static": false,
+        "name": "snap",
+        "owner": "Ext.Number",
+        "doc": "<p>Snaps the passed number between stopping points based upon a passed increment value.</p>\n",
+        "linenr": 34,
         "html_filename": "Number3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Number3.html#Ext-Number-method-toFixed",
-        "shortDoc": "Formats a number using fixed-point notation ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/lang/Number.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -153,61 +159,80 @@ Ext.data.JsonP.Ext_Number({
             "name": "precision"
           }
         ],
-        "name": "toFixed",
-        "owner": "Ext.Number",
-        "doc": "<p>Formats a number using fixed-point notation</p>\n",
-        "linenr": 61,
+        "href": "Number3.html#Ext-Number-method-toFixed",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/lang/Number.js",
+        "private": false,
+        "shortDoc": "Formats a number using fixed-point notation ...",
+        "static": false,
+        "name": "toFixed",
+        "owner": "Ext.Number",
+        "doc": "<p>Formats a number using fixed-point notation</p>\n",
+        "linenr": 61,
         "html_filename": "Number3.html"
       }
     ],
-    "property": [
-
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
 
     ]
   },
   "singleton": true,
-  "alias": null,
-  "superclasses": [
-
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "Number3.html#Ext-Number",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/lang/Number.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.Number",
   "doc": "<p>A collection of useful static methods to deal with numbers</p>\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "Number3.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": null
 });

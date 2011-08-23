@@ -1,22 +1,27 @@
 Ext.data.JsonP.Ext_util_Point({
-  "allMixins": [
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.util.Region"
+  ],
+  "inheritable": false,
+  "subclasses": [
 
   ],
   "deprecated": null,
-  "docauthor": null,
+  "allMixins": [
+
+  ],
+  "href": "Point.html#Ext-util-Point",
   "members": {
     "cfg": [
 
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "href": "Region.html#Ext-util-Region-method-constructor",
-        "tagname": "method",
-        "protected": false,
-        "shortDoc": "Creates a region from the bounding sides. ...",
-        "static": false,
         "params": [
           {
             "type": "Number",
@@ -43,28 +48,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "left"
           }
         ],
-        "private": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "doc": "<p>Creates a region from the bounding sides.</p>\n",
-        "owner": "Ext.util.Region",
-        "name": "Point",
-        "html_filename": "Region.html",
+        "href": "Region.html#Ext-util-Region-method-constructor",
         "return": {
           "type": "Object",
           "doc": "\n"
         },
-        "linenr": 40
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-adjust",
-        "shortDoc": "Modifies the current region to be adjusted by offsets. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
         "private": false,
+        "shortDoc": "Creates a region from the bounding sides. ...",
+        "static": false,
+        "name": "constructor",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Creates a region from the bounding sides.</p>\n",
+        "linenr": 40,
+        "html_filename": "Region.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Number",
@@ -91,26 +95,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "left"
           }
         ],
-        "name": "adjust",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Modifies the current region to be adjusted by offsets.</p>\n",
-        "linenr": 116,
+        "href": "Region.html#Ext-util-Region-method-adjust",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Modifies the current region to be adjusted by offsets. ...",
+        "static": false,
+        "name": "adjust",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Modifies the current region to be adjusted by offsets.</p>\n",
+        "linenr": 116,
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-constrainTo",
-        "shortDoc": "Modifies the current region to be constrained to the targetRegion. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.util.Region",
@@ -119,26 +124,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "targetRegion"
           }
         ],
-        "name": "constrainTo",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Modifies the current region to be constrained to the targetRegion.</p>\n",
-        "linenr": 102,
+        "href": "Region.html#Ext-util-Region-method-constrainTo",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Modifies the current region to be constrained to the targetRegion. ...",
+        "static": false,
+        "name": "constrainTo",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Modifies the current region to be constrained to the targetRegion.</p>\n",
+        "linenr": 102,
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-contains",
-        "shortDoc": "Checks if this region completely contains the region that is passed in. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.util.Region",
@@ -147,49 +153,51 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "region"
           }
         ],
-        "name": "contains",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Checks if this region completely contains the region that is passed in.</p>\n",
-        "linenr": 55,
+        "href": "Region.html#Ext-util-Region-method-contains",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Checks if this region completely contains the region that is passed in. ...",
+        "static": false,
+        "name": "contains",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Checks if this region completely contains the region that is passed in.</p>\n",
+        "linenr": 55,
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-copy",
-        "shortDoc": "Create a copy of this Region. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "copy",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Create a copy of this Region.</p>\n",
-        "linenr": 308,
+        "href": "Region.html#Ext-util-Region-method-copy",
         "return": {
           "type": "Ext.util.Region",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Create a copy of this Region. ...",
+        "static": false,
+        "name": "copy",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Create a copy of this Region.</p>\n",
+        "linenr": 308,
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-copyFrom",
-        "shortDoc": "Copy the values of another Region to this Region ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "Region",
@@ -198,26 +206,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "The"
           }
         ],
-        "name": "copyFrom",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Copy the values of another Region to this Region</p>\n",
-        "linenr": 316,
+        "href": "Region.html#Ext-util-Region-method-copyFrom",
         "return": {
           "type": "Ext.util.Region",
           "doc": "<p>This Region</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Copy the values of another Region to this Region ...",
+        "static": false,
+        "name": "copyFrom",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Copy the values of another Region to this Region</p>\n",
+        "linenr": 316,
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Point.html#Ext-util-Point-method-equals",
-        "shortDoc": "Compare this point and another point ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.util.Point/Object",
@@ -226,82 +235,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "The"
           }
         ],
-        "name": "equals",
-        "owner": "Ext.util.Point",
-        "doc": "<p>Compare this point and another point</p>\n",
-        "linenr": 46,
+        "href": "Point.html#Ext-util-Point-method-equals",
         "return": {
           "type": "Boolean",
           "doc": "<p>Returns whether they are equivalent</p>\n"
         },
-        "html_filename": "Point.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-from",
-        "shortDoc": "Creates a Region from a \"box\" Object which contains four numeric properties top, right, bottom and left. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "<p>An object with <code>top</code>, <code>right</code>, <code>bottom</code> and <code>left</code> properties.</p>\n",
-            "name": "o"
-          }
-        ],
-        "name": "from",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Creates a Region from a \"box\" Object which contains four numeric properties <code>top</code>, <code>right</code>, <code>bottom</code> and <code>left</code>.</p>\n",
-        "linenr": 27,
-        "return": {
-          "type": "Ext.util.Region",
-          "doc": "<p>region The Region constructed based on the passed object</p>\n"
-        },
-        "html_filename": "Region.html"
-      },
-      {
-        "deprecated": null,
         "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Point.html#Ext-util-Point-method-fromEvent",
-        "shortDoc": "Returns a new instance of Ext.util.Point base on the pageX / pageY values of the given event ...",
-        "static": true,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
         "private": false,
-        "params": [
-          {
-            "type": "Event",
-            "optional": false,
-            "doc": "<p>The event</p>\n",
-            "name": "e"
-          }
-        ],
-        "name": "fromEvent",
+        "shortDoc": "Compare this point and another point ...",
+        "static": false,
+        "name": "equals",
         "owner": "Ext.util.Point",
-        "doc": "<p>Returns a new instance of <a href=\"#/api/Ext.util.Point\" rel=\"Ext.util.Point\" class=\"docClass\">Ext.util.Point</a> base on the pageX / pageY values of the given event</p>\n",
-        "linenr": 19,
-        "return": {
-          "type": "void",
-          "doc": "<p>Ext.util.Point</p>\n"
-        },
+        "doc": "<p>Compare this point and another point</p>\n",
+        "linenr": 46,
         "html_filename": "Point.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-getOutOfBoundOffset",
-        "shortDoc": "Get the offset amount of a point outside the region ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -316,26 +270,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "p"
           }
         ],
-        "name": "getOutOfBoundOffset",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Get the offset amount of a point outside the region</p>\n",
-        "linenr": 132,
+        "href": "Region.html#Ext-util-Region-method-getOutOfBoundOffset",
         "return": {
           "type": "Ext.util.Offset",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Get the offset amount of a point outside the region ...",
+        "static": false,
+        "name": "getOutOfBoundOffset",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Get the offset amount of a point outside the region</p>\n",
+        "linenr": 132,
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-getOutOfBoundOffsetX",
-        "shortDoc": "Get the offset amount on the x-axis ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -344,26 +299,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "p"
           }
         ],
+        "href": "Region.html#Ext-util-Region-method-getOutOfBoundOffsetX",
+        "return": {
+          "type": "Number",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Get the offset amount on the x-axis ...",
+        "static": false,
         "name": "getOutOfBoundOffsetX",
         "owner": "Ext.util.Region",
         "doc": "<p>Get the offset amount on the x-axis</p>\n",
         "linenr": 155,
-        "return": {
-          "type": "Number",
-          "doc": "\n"
-        },
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-getOutOfBoundOffsetY",
-        "shortDoc": "Get the offset amount on the y-axis ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -372,54 +328,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "p"
           }
         ],
-        "name": "getOutOfBoundOffsetY",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Get the offset amount on the y-axis</p>\n",
-        "linenr": 170,
+        "href": "Region.html#Ext-util-Region-method-getOutOfBoundOffsetY",
         "return": {
           "type": "Number",
           "doc": "\n"
         },
-        "html_filename": "Region.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-getRegion",
-        "shortDoc": "Retrieves an Ext.util.Region for a particular element. ...",
-        "static": true,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
         "private": false,
-        "params": [
-          {
-            "type": "Mixed",
-            "optional": false,
-            "doc": "<p>An element ID, htmlElement or <a href=\"#/api/Ext.core.Element\" rel=\"Ext.core.Element\" class=\"docClass\">Ext.core.Element</a> representing an element in the document.</p>\n",
-            "name": "el"
-          }
-        ],
-        "name": "getRegion",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Retrieves an <a href=\"#/api/Ext.util.Region\" rel=\"Ext.util.Region\" class=\"docClass\">Ext.util.Region</a> for a particular element.</p>\n",
-        "linenr": 17,
-        "return": {
-          "type": "Ext.util.Region",
-          "doc": "<p>region</p>\n"
-        },
-        "html_filename": "Region.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-intersect",
-        "shortDoc": "Checks if this region intersects the region passed in. ...",
+        "shortDoc": "Get the offset amount on the y-axis ...",
         "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
+        "name": "getOutOfBoundOffsetY",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Get the offset amount on the y-axis</p>\n",
+        "linenr": 170,
+        "html_filename": "Region.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Ext.util.Region",
@@ -428,26 +357,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "region"
           }
         ],
-        "name": "intersect",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Checks if this region intersects the region passed in.</p>\n",
-        "linenr": 68,
+        "href": "Region.html#Ext-util-Region-method-intersect",
         "return": {
           "type": "Ext.util.Region/Boolean",
           "doc": "<p>Returns the intersected region or false if there is no intersection.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Checks if this region intersects the region passed in. ...",
+        "static": false,
+        "name": "intersect",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Checks if this region intersects the region passed in.</p>\n",
+        "linenr": 68,
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-isOutOfBound",
-        "shortDoc": "Check whether the point / offset is out of bound ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -462,26 +392,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "p"
           }
         ],
+        "href": "Region.html#Ext-util-Region-method-isOutOfBound",
+        "return": {
+          "type": "Boolean",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Check whether the point / offset is out of bound ...",
+        "static": false,
         "name": "isOutOfBound",
         "owner": "Ext.util.Region",
         "doc": "<p>Check whether the point / offset is out of bound</p>\n",
         "linenr": 185,
-        "return": {
-          "type": "Boolean",
-          "doc": "\n"
-        },
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-isOutOfBoundX",
-        "shortDoc": "Check whether the offset is out of bound in the x-axis ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -490,26 +421,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "p"
           }
         ],
+        "href": "Region.html#Ext-util-Region-method-isOutOfBoundX",
+        "return": {
+          "type": "Boolean",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Check whether the offset is out of bound in the x-axis ...",
+        "static": false,
         "name": "isOutOfBoundX",
         "owner": "Ext.util.Region",
         "doc": "<p>Check whether the offset is out of bound in the x-axis</p>\n",
         "linenr": 204,
-        "return": {
-          "type": "Boolean",
-          "doc": "\n"
-        },
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-isOutOfBoundY",
-        "shortDoc": "Check whether the offset is out of bound in the y-axis ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -518,26 +450,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "p"
           }
         ],
-        "name": "isOutOfBoundY",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Check whether the offset is out of bound in the y-axis</p>\n",
-        "linenr": 213,
+        "href": "Region.html#Ext-util-Region-method-isOutOfBoundY",
         "return": {
           "type": "Boolean",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Check whether the offset is out of bound in the y-axis ...",
+        "static": false,
+        "name": "isOutOfBoundY",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Check whether the offset is out of bound in the y-axis</p>\n",
+        "linenr": 213,
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Point.html#Ext-util-Point-method-isWithin",
-        "shortDoc": "Whether the given point is not away from this point within the given threshold amount. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.util.Point/Object",
@@ -552,49 +485,51 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "threshold"
           }
         ],
-        "name": "isWithin",
-        "owner": "Ext.util.Point",
-        "doc": "<p>Whether the given point is not away from this point within the given threshold amount.\nTODO: Rename this isNear.</p>\n",
-        "linenr": 56,
+        "href": "Point.html#Ext-util-Point-method-isWithin",
         "return": {
           "type": "Boolean",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
+        "private": false,
+        "shortDoc": "Whether the given point is not away from this point within the given threshold amount. ...",
+        "static": false,
+        "name": "isWithin",
+        "owner": "Ext.util.Point",
+        "doc": "<p>Whether the given point is not away from this point within the given threshold amount.\nTODO: Rename this isNear.</p>\n",
+        "linenr": 56,
         "html_filename": "Point.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-round",
-        "shortDoc": "Round all the properties of this region ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "round",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Round all the properties of this region</p>\n",
-        "linenr": 360,
+        "href": "Region.html#Ext-util-Region-method-round",
         "return": {
           "type": "Ext.util.Region",
           "doc": "<p>this This Region</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Round all the properties of this region ...",
+        "static": false,
+        "name": "round",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Round all the properties of this region</p>\n",
+        "linenr": 360,
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Point.html#Ext-util-Point-method-roundedEquals",
-        "shortDoc": "Compare this point with another point when the x and y values of both points are rounded. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.util.Point/Object",
@@ -603,49 +538,51 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "The"
           }
         ],
-        "name": "roundedEquals",
-        "owner": "Ext.util.Point",
-        "doc": "<p>Compare this point with another point when the x and y values of both points are rounded. E.g:\n[100.3,199.8] will equals to [100, 200]</p>\n",
-        "linenr": 76,
+        "href": "Point.html#Ext-util-Point-method-roundedEquals",
         "return": {
           "type": "Boolean",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
+        "private": false,
+        "shortDoc": "Compare this point with another point when the x and y values of both points are rounded. ...",
+        "static": false,
+        "name": "roundedEquals",
+        "owner": "Ext.util.Point",
+        "doc": "<p>Compare this point with another point when the x and y values of both points are rounded. E.g:\n[100.3,199.8] will equals to [100, 200]</p>\n",
+        "linenr": 76,
         "html_filename": "Point.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Point.html#Ext-util-Point-method-toString",
-        "shortDoc": "Returns a human-eye-friendly string that represents this point,\nuseful for debugging ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "toString",
-        "owner": "Ext.util.Point",
-        "doc": "<p>Returns a human-eye-friendly string that represents this point,\nuseful for debugging</p>\n",
-        "linenr": 37,
+        "href": "Point.html#Ext-util-Point-method-toString",
         "return": {
           "type": "String",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
+        "private": false,
+        "shortDoc": "Returns a human-eye-friendly string that represents this point,\nuseful for debugging ...",
+        "static": false,
+        "name": "toString",
+        "owner": "Ext.util.Point",
+        "doc": "<p>Returns a human-eye-friendly string that represents this point,\nuseful for debugging</p>\n",
+        "linenr": 37,
         "html_filename": "Point.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Point.html#Ext-util-Point-method-translate",
-        "shortDoc": "Translate this region by the given offset amount. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.util.Offset/Object",
@@ -660,26 +597,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "The"
           }
         ],
+        "href": "Point.html#Ext-util-Point-method-translate",
+        "return": {
+          "type": "Ext.util.Region",
+          "doc": "<p>this This Region</p>\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
+        "private": false,
+        "shortDoc": "Translate this region by the given offset amount. ...",
+        "static": false,
         "name": "translate",
         "owner": "Ext.util.Point",
         "doc": "<p>Translate this region by the given offset amount. TODO: Either use translate or translateBy!</p>\n",
         "linenr": 87,
-        "return": {
-          "type": "Ext.util.Region",
-          "doc": "<p>this This Region</p>\n"
-        },
         "html_filename": "Point.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-translateBy",
-        "shortDoc": "Translate this region by the given offset amount ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.util.Offset/Object",
@@ -694,26 +632,27 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "The"
           }
         ],
-        "name": "translateBy",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Translate this region by the given offset amount</p>\n",
-        "linenr": 339,
+        "href": "Region.html#Ext-util-Region-method-translateBy",
         "return": {
           "type": "Ext.util.Region",
           "doc": "<p>this This Region</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Translate this region by the given offset amount ...",
+        "static": false,
+        "name": "translateBy",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Translate this region by the given offset amount</p>\n",
+        "linenr": 339,
         "html_filename": "Region.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Region.html#Ext-util-Region-method-union",
-        "shortDoc": "Returns the smallest region that contains the current AND targetRegion. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.util.Region",
@@ -722,61 +661,108 @@ Ext.data.JsonP.Ext_util_Point({
             "name": "region"
           }
         ],
-        "name": "union",
-        "owner": "Ext.util.Region",
-        "doc": "<p>Returns the smallest region that contains the current AND targetRegion.</p>\n",
-        "linenr": 88,
+        "href": "Region.html#Ext-util-Region-method-union",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Region.js",
+        "private": false,
+        "shortDoc": "Returns the smallest region that contains the current AND targetRegion. ...",
+        "static": false,
+        "name": "union",
+        "owner": "Ext.util.Region",
+        "doc": "<p>Returns the smallest region that contains the current AND targetRegion.</p>\n",
+        "linenr": 88,
         "html_filename": "Region.html"
       }
     ],
-    "property": [
-
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
 
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-    "Ext.util.Region"
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "Point.html#Ext-util-Point",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.util.Point",
   "doc": "<p>Represents a 2D point with x and y properties, useful for comparison and instantiation\nfrom an event:</p>\n\n<pre><code>var point = Ext.util.Point.fromEvent(e);\n</code></pre>\n\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "Point.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+          {
+            "type": "Event",
+            "optional": false,
+            "doc": "<p>The event</p>\n",
+            "name": "e"
+          }
+        ],
+        "href": "Point.html#Ext-util-Point-method-fromEvent",
+        "return": {
+          "type": "void",
+          "doc": "<p>Ext.util.Point</p>\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Point.js",
+        "private": false,
+        "shortDoc": "Returns a new instance of Ext.util.Point base on the pageX / pageY values of the given event ...",
+        "static": true,
+        "name": "fromEvent",
+        "owner": "Ext.util.Point",
+        "doc": "<p>Returns a new instance of <a href=\"#/api/Ext.util.Point\" rel=\"Ext.util.Point\" class=\"docClass\">Ext.util.Point</a> base on the pageX / pageY values of the given event</p>\n",
+        "linenr": 19,
+        "html_filename": "Point.html"
+      }
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Ext.util.Region"
 });

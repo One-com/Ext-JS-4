@@ -1,24 +1,27 @@
 Ext.data.JsonP.Ext_JSON({
-  "allMixins": [
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+
+  ],
+  "inheritable": false,
+  "subclasses": [
 
   ],
   "deprecated": null,
-  "docauthor": null,
+  "allMixins": [
+
+  ],
+  "href": "JSON.html#Ext-JSON",
   "members": {
     "cfg": [
 
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "JSON.html#Ext-JSON-method-decode",
-        "shortDoc": "Decodes (parses) a JSON string to an object. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/misc/JSON.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -33,26 +36,27 @@ Ext.data.JsonP.Ext_JSON({
             "name": "safe"
           }
         ],
-        "name": "decode",
-        "owner": "Ext.JSON",
-        "doc": "<p>Decodes (parses) a JSON string to an object. If the JSON is invalid, this function throws a SyntaxError unless the safe option is set.</p>\n",
-        "linenr": 129,
+        "href": "JSON.html#Ext-JSON-method-decode",
         "return": {
           "type": "Object",
           "doc": "<p>The resulting object</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/misc/JSON.js",
+        "private": false,
+        "shortDoc": "Decodes (parses) a JSON string to an object. ...",
+        "static": false,
+        "name": "decode",
+        "owner": "Ext.JSON",
+        "doc": "<p>Decodes (parses) a JSON string to an object. If the JSON is invalid, this function throws a SyntaxError unless the safe option is set.</p>\n",
+        "linenr": 129,
         "html_filename": "JSON.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "JSON.html#Ext-JSON-method-encode",
-        "shortDoc": "Encodes an Object, Array or other value ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/misc/JSON.js",
-        "private": false,
         "params": [
           {
             "type": "Mixed",
@@ -61,26 +65,27 @@ Ext.data.JsonP.Ext_JSON({
             "name": "o"
           }
         ],
-        "name": "encode",
-        "owner": "Ext.JSON",
-        "doc": "<p>Encodes an Object, Array or other value</p>\n",
-        "linenr": 112,
+        "href": "JSON.html#Ext-JSON-method-encode",
         "return": {
           "type": "String",
           "doc": "<p>The JSON string</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/misc/JSON.js",
+        "private": false,
+        "shortDoc": "Encodes an Object, Array or other value ...",
+        "static": false,
+        "name": "encode",
+        "owner": "Ext.JSON",
+        "doc": "<p>Encodes an Object, Array or other value</p>\n",
+        "linenr": 112,
         "html_filename": "JSON.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "JSON.html#Ext-JSON-method-encodeDate",
-        "shortDoc": "Encodes a Date. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/misc/JSON.js",
-        "private": false,
         "params": [
           {
             "type": "Date",
@@ -89,61 +94,80 @@ Ext.data.JsonP.Ext_JSON({
             "name": "d"
           }
         ],
-        "name": "encodeDate",
-        "owner": "Ext.JSON",
-        "doc": "<p>Encodes a Date. This returns the actual string which is inserted into the JSON string as the literal expression.\n<b>The returned value includes enclosing double quotation marks.</b></p>\n\n\n<p>The default return format is \"yyyy-mm-ddThh:mm:ss\".</p>\n\n\n<p>To override this:</p>\n\n\n<pre><code>     Ext.JSON.encodeDate = function(d) {\n     return d.format('\"Y-m-d\"');\n     };\n     </code></pre>\n\n",
-        "linenr": 91,
+        "href": "JSON.html#Ext-JSON-method-encodeDate",
         "return": {
           "type": "String",
           "doc": "<p>The string literal to use in a JSON string.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/misc/JSON.js",
+        "private": false,
+        "shortDoc": "Encodes a Date. ...",
+        "static": false,
+        "name": "encodeDate",
+        "owner": "Ext.JSON",
+        "doc": "<p>Encodes a Date. This returns the actual string which is inserted into the JSON string as the literal expression.\n<b>The returned value includes enclosing double quotation marks.</b></p>\n\n\n<p>The default return format is \"yyyy-mm-ddThh:mm:ss\".</p>\n\n\n<p>To override this:</p>\n\n\n<pre><code>     Ext.JSON.encodeDate = function(d) {\n     return d.format('\"Y-m-d\"');\n     };\n     </code></pre>\n\n",
+        "linenr": 91,
         "html_filename": "JSON.html"
       }
     ],
-    "property": [
-
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
 
     ]
   },
   "singleton": true,
-  "alias": null,
-  "superclasses": [
-
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "JSON.html#Ext-JSON",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/misc/JSON.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.JSON",
   "doc": "<p>Modified version of Douglas Crockford\"s json.js that doesn\"t\nmess with the Object prototype\nhttp://www.json.org/js.html</p>\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "JSON.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": null
 });

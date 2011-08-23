@@ -1,23 +1,36 @@
 Ext.data.JsonP.Ext_data_DirectStore({
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+    "Ext.Base",
+    "Ext.data.AbstractStore",
+    "Ext.data.Store"
+  ],
+  "inheritable": false,
+  "subclasses": [
+
+  ],
+  "deprecated": null,
   "allMixins": [
     "Ext.util.Observable",
     "Ext.util.Sortable"
   ],
-  "deprecated": null,
-  "docauthor": null,
+  "href": "DirectStore.html#Ext-data-DirectStore",
   "members": {
     "cfg": [
       {
+        "inheritable": false,
         "type": "Boolean/Object",
         "deprecated": null,
-        "alias": null,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-cfg-autoLoad",
         "protected": false,
         "tagname": "cfg",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-cfg-autoLoad",
-        "shortDoc": "If data is not specified, and if autoLoad is true or an Object, this store's load method\nis automatically called afte...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
         "private": false,
+        "shortDoc": "If data is not specified, and if autoLoad is true or an Object, this store's load method\nis automatically called afte...",
+        "static": false,
         "name": "autoLoad",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>If data is not specified, and if autoLoad is true or an Object, this store's load method\nis automatically called after creation. If the value of autoLoad is an Object, this Object will be passed to the store's\nload method. Defaults to false.</p>\n",
@@ -25,16 +38,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-cfg-autoSync",
         "protected": false,
         "tagname": "cfg",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-cfg-autoSync",
-        "shortDoc": "True to automatically sync the Store with its Proxy after every edit to one of its Records. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
         "private": false,
+        "shortDoc": "True to automatically sync the Store with its Proxy after every edit to one of its Records. ...",
+        "static": false,
         "name": "autoSync",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>True to automatically sync the Store with its Proxy after every edit to one of its Records.\nDefaults to false.</p>\n",
@@ -42,16 +56,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-buffered",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-buffered",
-        "shortDoc": "Allow the store to buffer and pre-fetch pages of records. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "Allow the store to buffer and pre-fetch pages of records. ...",
+        "static": false,
         "name": "buffered",
         "owner": "Ext.data.Store",
         "doc": "<p>Allow the store to buffer and pre-fetch pages of records. This is to be used in conjunction with a view will\ntell the store to pre-fetch records ahead of a time.</p>\n",
@@ -59,16 +74,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-clearOnPageLoad",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-clearOnPageLoad",
-        "shortDoc": "True to empty the store when loading another page via loadPage,\nnextPage or previousPage (defaults to true). ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "True to empty the store when loading another page via loadPage,\nnextPage or previousPage (defaults to true). ...",
+        "static": false,
         "name": "clearOnPageLoad",
         "owner": "Ext.data.Store",
         "doc": "<p>True to empty the store when loading another page via <a href=\"#/api/Ext.data.DirectStore-method-loadPage\" rel=\"Ext.data.DirectStore-method-loadPage\" class=\"docClass\">loadPage</a>,\n<a href=\"#/api/Ext.data.DirectStore-method-nextPage\" rel=\"Ext.data.DirectStore-method-nextPage\" class=\"docClass\">nextPage</a> or <a href=\"#/api/Ext.data.DirectStore-method-previousPage\" rel=\"Ext.data.DirectStore-method-previousPage\" class=\"docClass\">previousPage</a> (defaults to true). Setting to false keeps existing records, allowing\nlarge data sets to be loaded one page at a time but rendered all together.</p>\n",
@@ -76,16 +92,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "Array",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-data",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-data",
-        "shortDoc": "Optional array of Model instances or data objects to load locally. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "Optional array of Model instances or data objects to load locally. ...",
+        "static": false,
         "name": "data",
         "owner": "Ext.data.Store",
         "doc": "<p>Optional array of Model instances or data objects to load locally. See \"Inline data\" above for details.</p>\n",
@@ -93,16 +110,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "Array",
         "deprecated": null,
-        "alias": null,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-cfg-fields",
         "protected": false,
         "tagname": "cfg",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-cfg-fields",
-        "shortDoc": "This may be used in place of specifying a model configuration. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
         "private": false,
+        "shortDoc": "This may be used in place of specifying a model configuration. ...",
+        "static": false,
         "name": "fields",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>This may be used in place of specifying a <a href=\"#/api/Ext.data.DirectStore-cfg-model\" rel=\"Ext.data.DirectStore-cfg-model\" class=\"docClass\">model</a> configuration. The fields should be a\nset of <a href=\"#/api/Ext.data.Field\" rel=\"Ext.data.Field\" class=\"docClass\">Ext.data.Field</a> configuration objects. The store will automatically create a <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Ext.data.Model</a>\nwith these fields. In general this configuration option should be avoided, it exists for the purposes of\nbackwards compatibility. For anything more complicated, such as specifying a particular id property or\nassocations, a <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Ext.data.Model</a> should be defined and specified for the <a href=\"#/api/Ext.data.DirectStore-cfg-model\" rel=\"Ext.data.DirectStore-cfg-model\" class=\"docClass\">model</a> config.</p>\n",
@@ -110,16 +128,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "type": "Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
         "protected": false,
         "tagname": "cfg",
-        "href": "Observable.html#Ext-util-Observable-cfg-listeners",
-        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "A config object containing one or more event handlers to be added to this object during initialization. ...",
+        "static": false,
         "name": "listeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>A config object containing one or more event handlers to be added to this object during initialization. This\nshould be a valid listeners config object as specified in the <a href=\"#/api/Ext.data.DirectStore-method-addListener\" rel=\"Ext.data.DirectStore-method-addListener\" class=\"docClass\">addListener</a> example for attaching multiple\nhandlers at once.</p>\n\n<p><strong>DOM events from ExtJS <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Components</a></strong></p>\n\n<p>While <em>some</em> ExtJs Component classes export selected DOM events (e.g. \"click\", \"mouseover\" etc), this is usually\nonly done when extra value can be added. For example the <a href=\"#/api/Ext.view.View\" rel=\"Ext.view.View\" class=\"docClass\">DataView</a>'s <strong><code><a href=\"#/api/Ext.view.View-event-itemclick\" rel=\"Ext.view.View-event-itemclick\" class=\"docClass\">itemclick</a></code></strong> event passing the node clicked on. To access DOM events directly from a\nchild element of a Component, we need to specify the <code>element</code> option to identify the Component property to add a\nDOM listener to:</p>\n\n<pre><code>new Ext.panel.Panel({\n    width: 400,\n    height: 200,\n    dockedItems: [{\n        xtype: 'toolbar'\n    }],\n    listeners: {\n        click: {\n            element: 'el', //bind to the underlying el property on the panel\n            fn: function(){ console.log('click el'); }\n        },\n        dblclick: {\n            element: 'body', //bind to the underlying body property on the panel\n            fn: function(){ console.log('dblclick body'); }\n        }\n    }\n});\n</code></pre>\n",
@@ -127,15 +146,16 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-model",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-model",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "static": false,
         "name": "model",
         "owner": "Ext.data.Store",
         "doc": "<p>The <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Ext.data.Model</a> associated with this store</p>\n",
@@ -143,16 +163,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "Number",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-pageSize",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-pageSize",
-        "shortDoc": "The number of records considered to form a 'page'. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "The number of records considered to form a 'page'. ...",
+        "static": false,
         "name": "pageSize",
         "owner": "Ext.data.Store",
         "doc": "<p>The number of records considered to form a 'page'. This is used to power the built-in\npaging using the nextPage and previousPage functions. Defaults to 25.</p>\n",
@@ -160,16 +181,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "String/Ext.data.proxy.Proxy/Object",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-proxy",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-proxy",
-        "shortDoc": "The Proxy to use for this Store. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "The Proxy to use for this Store. ...",
+        "static": false,
         "name": "proxy",
         "owner": "Ext.data.Store",
         "doc": "<p>The Proxy to use for this Store. This can be either a string, a config\nobject or a Proxy instance - see <a href=\"#/api/Ext.data.DirectStore-method-setProxy\" rel=\"Ext.data.DirectStore-method-setProxy\" class=\"docClass\">setProxy</a> for details.</p>\n",
@@ -177,16 +199,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "Number",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-purgePageCount",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-purgePageCount",
-        "shortDoc": "The number of pages to keep in the cache before purging additional records. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "The number of pages to keep in the cache before purging additional records. ...",
+        "static": false,
         "name": "purgePageCount",
         "owner": "Ext.data.Store",
         "doc": "<p>The number of pages to keep in the cache before purging additional records. A value of 0 indicates to never purge the prefetched data.\nThis option is only relevant when the <a href=\"#/api/Ext.data.DirectStore-cfg-buffered\" rel=\"Ext.data.DirectStore-cfg-buffered\" class=\"docClass\">buffered</a> option is set to true.</p>\n",
@@ -194,16 +217,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-remoteFilter",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-remoteFilter",
-        "shortDoc": "True to defer any filtering operation to the server. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "True to defer any filtering operation to the server. ...",
+        "static": false,
         "name": "remoteFilter",
         "owner": "Ext.data.Store",
         "doc": "<p>True to defer any filtering operation to the server. If false, filtering is done locally on the client. Defaults to <tt>false</tt>.</p>\n",
@@ -211,16 +235,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-remoteGroup",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-remoteGroup",
-        "shortDoc": "True if the grouping should apply on the server side, false if it is local only (defaults to false). ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "True if the grouping should apply on the server side, false if it is local only (defaults to false). ...",
+        "static": false,
         "name": "remoteGroup",
         "owner": "Ext.data.Store",
         "doc": "<p>True if the grouping should apply on the server side, false if it is local only (defaults to false).  If the\ngrouping is local, it can be applied immediately to the data.  If it is remote, then it will simply act as a\nhelper, automatically sending the grouping information to the server.</p>\n",
@@ -228,16 +253,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-remoteSort",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-remoteSort",
-        "shortDoc": "True to defer any sorting operation to the server. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "True to defer any sorting operation to the server. ...",
+        "static": false,
         "name": "remoteSort",
         "owner": "Ext.data.Store",
         "doc": "<p>True to defer any sorting operation to the server. If false, sorting is done locally on the client. Defaults to <tt>false</tt>.</p>\n",
@@ -245,16 +271,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "Store2.html#Ext-data-Store-cfg-sortOnFilter",
         "protected": false,
         "tagname": "cfg",
-        "href": "Store2.html#Ext-data-Store-cfg-sortOnFilter",
-        "shortDoc": "For local filtering only, causes sort to be called whenever filter is called,\ncausing the sorters to be reapplied aft...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "For local filtering only, causes sort to be called whenever filter is called,\ncausing the sorters to be reapplied aft...",
+        "static": false,
         "name": "sortOnFilter",
         "owner": "Ext.data.Store",
         "doc": "<p>For local filtering only, causes <a href=\"#/api/Ext.data.DirectStore-method-sort\" rel=\"Ext.data.DirectStore-method-sort\" class=\"docClass\">sort</a> to be called whenever <a href=\"#/api/Ext.data.DirectStore-method-filter\" rel=\"Ext.data.DirectStore-method-filter\" class=\"docClass\">filter</a> is called,\ncausing the sorters to be reapplied after filtering. Defaults to true</p>\n",
@@ -262,16 +289,17 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "type": "String",
         "deprecated": null,
-        "alias": null,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-cfg-storeId",
         "protected": false,
         "tagname": "cfg",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-cfg-storeId",
-        "shortDoc": "Optional unique identifier for this store. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
         "private": false,
+        "shortDoc": "Optional unique identifier for this store. ...",
+        "static": false,
         "name": "storeId",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>Optional unique identifier for this store. If present, this Store will be registered with\nthe <a href=\"#/api/Ext.data.StoreManager\" rel=\"Ext.data.StoreManager\" class=\"docClass\">Ext.data.StoreManager</a>, making it easy to reuse elsewhere. Defaults to undefined.</p>\n",
@@ -281,13 +309,8 @@ Ext.data.JsonP.Ext_data_DirectStore({
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "href": "DirectStore.html#Ext-data-DirectStore-method-constructor",
-        "tagname": "method",
-        "protected": false,
-        "shortDoc": " ...",
-        "static": false,
         "params": [
           {
             "type": "Object",
@@ -296,28 +319,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "config"
           }
         ],
-        "private": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/DirectStore.js",
-        "doc": "\n",
-        "owner": "Ext.data.DirectStore",
-        "name": "DirectStore",
-        "html_filename": "DirectStore.html",
+        "href": "DirectStore.html#Ext-data-DirectStore-method-constructor",
         "return": {
           "type": "Object",
           "doc": "\n"
         },
-        "linenr": 43
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-add",
-        "shortDoc": "Adds Model instances to the Store by instantiating them based on a JavaScript object. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/DirectStore.js",
         "private": false,
+        "shortDoc": " ...",
+        "static": false,
+        "name": "constructor",
+        "owner": "Ext.data.DirectStore",
+        "doc": "\n",
+        "linenr": 43,
+        "html_filename": "DirectStore.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Object",
@@ -326,26 +348,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "data"
           }
         ],
-        "name": "add",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Adds Model instances to the Store by instantiating them based on a JavaScript object. When adding already-\ninstantiated Models, use <a href=\"#/api/Ext.data.DirectStore-method-insert\" rel=\"Ext.data.DirectStore-method-insert\" class=\"docClass\">insert</a> instead. The instances will be added at the end of the existing collection.\nThis method accepts either a single argument array of Model instances or any number of model instance arguments.\nSample usage:</p>\n\n<pre><code>myStore.add({some: 'data'}, {some: 'other data'});\n</code></pre>\n\n",
-        "linenr": 798,
+        "href": "Store2.html#Ext-data-Store-method-add",
         "return": {
           "type": "Array",
           "doc": "<p>The array of newly created model instances</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Adds Model instances to the Store by instantiating them based on a JavaScript object. ...",
+        "static": false,
+        "name": "add",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Adds Model instances to the Store by instantiating them based on a JavaScript object. When adding already-\ninstantiated Models, use <a href=\"#/api/Ext.data.DirectStore-method-insert\" rel=\"Ext.data.DirectStore-method-insert\" class=\"docClass\">insert</a> instead. The instances will be added at the end of the existing collection.\nThis method accepts either a single argument array of Model instances or any number of model instance arguments.\nSample usage:</p>\n\n<pre><code>myStore.add({some: 'data'}, {some: 'other data'});\n</code></pre>\n\n",
+        "linenr": 798,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addEvents",
-        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object/String",
@@ -360,26 +383,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "more"
           }
         ],
-        "name": "addEvents",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
-        "linenr": 494,
+        "href": "Observable.html#Ext-util-Observable-method-addEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds the specified events to the list of events which this Observable may fire. ...",
+        "static": false,
+        "name": "addEvents",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds the specified events to the list of events which this Observable may fire.</p>\n",
+        "linenr": 494,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addListener",
-        "shortDoc": "Appends an event handler to this object. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -406,26 +430,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "options"
           }
         ],
-        "name": "addListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Appends an event handler to this object.</p>\n",
-        "linenr": 278,
+        "href": "Observable.html#Ext-util-Observable-method-addListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Appends an event handler to this object. ...",
+        "static": false,
+        "name": "addListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Appends an event handler to this object.</p>\n",
+        "linenr": 278,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
-        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -458,54 +483,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "opt"
           }
         ],
-        "name": "addManagedListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 156,
+        "href": "Observable.html#Ext-util-Observable-method-addManagedListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed. ...",
+        "static": false,
+        "name": "addManagedListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 156,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-addStatics",
-        "shortDoc": "Add / override static properties of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "addStatics",
-        "owner": "Ext.Base",
-        "doc": "<p>Add / override static properties of this class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.addStatics({\n    someProperty: 'someValue',      // My.cool.Class.someProperty = 'someValue'\n    method1: function() { ... },    // My.cool.Class.method1 = function() { ... };\n    method2: function() { ... }     // My.cool.Class.method2 = function() { ... };\n});\n</code></pre>\n",
-        "linenr": 388,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-aggregate",
-        "shortDoc": "Runs the aggregate function for all the records in the store. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Function",
@@ -532,26 +530,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "args"
           }
         ],
-        "name": "aggregate",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Runs the aggregate function for all the records in the store.</p>\n",
-        "linenr": 2125,
+        "href": "Store2.html#Ext-data-Store-method-aggregate",
         "return": {
           "type": "Object",
           "doc": "<p>An object literal with the group names and their appropriate values.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Runs the aggregate function for all the records in the store. ...",
+        "static": false,
+        "name": "aggregate",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Runs the aggregate function for all the records in the store.</p>\n",
+        "linenr": 2125,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-average",
-        "shortDoc": "Gets the average value in the store. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -566,26 +565,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "grouped"
           }
         ],
-        "name": "average",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Gets the average value in the store.</p>\n",
-        "linenr": 2092,
+        "href": "Store2.html#Ext-data-Store-method-average",
         "return": {
           "type": "Mixed/undefined",
           "doc": "<p>The average value, if no items exist, 0.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Gets the average value in the store. ...",
+        "static": false,
+        "name": "average",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Gets the average value in the store.</p>\n",
+        "linenr": 2092,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callOverridden",
-        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -594,26 +594,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "args"
           }
         ],
-        "name": "callOverridden",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the original method that was previously overridden with <a href=\"#/api/Ext.Base-method-override\" rel=\"Ext.Base-method-override\" class=\"docClass\">Ext.Base.override</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 269,
+        "href": "Base3.html#Ext-Base-method-callOverridden",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result after calling the overridden method</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the original method that was previously overridden with Ext.Base.override\n\nExt.define('My.Cat', {\n    constructo...",
+        "static": false,
+        "name": "callOverridden",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the original method that was previously overridden with Ext.Base.override</p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
+        "linenr": 269,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-callParent",
-        "shortDoc": "Call the parent's overridden method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Array/Arguments",
@@ -622,66 +623,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "args"
           }
         ],
-        "name": "callParent",
-        "owner": "Ext.Base",
-        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
-        "linenr": 124,
+        "href": "Base3.html#Ext-Base-method-callParent",
         "return": {
           "type": "Mixed",
           "doc": "<p>Returns the result from the superclass' method</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Call the parent's overridden method. ...",
+        "static": false,
+        "name": "callParent",
+        "owner": "Ext.Base",
+        "doc": "<p>Call the parent's overridden method. For example:</p>\n\n<pre><code>Ext.define('My.own.A', {\n    constructor: function(test) {\n        alert(test);\n    }\n});\n\nExt.define('My.own.B', {\n    extend: 'My.own.A',\n\n    constructor: function(test) {\n        alert(test);\n\n        this.callParent([test + 1]);\n    }\n});\n\nExt.define('My.own.C', {\n    extend: 'My.own.B',\n\n    constructor: function() {\n        alert(\"Going to call parent's overriden constructor...\");\n\n        this.callParent(arguments);\n    }\n});\n\nvar a = new My.own.A(1); // alerts '1'\nvar b = new My.own.B(1); // alerts '1', then alerts '2'\nvar c = new My.own.C(2); // alerts \"Going to call parent's overriden constructor...\"\n                         // alerts '2', then alerts '3'\n</code></pre>\n",
+        "linenr": 124,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-capture",
-        "shortDoc": "Starts capture on the specified Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to capture events from.</p>\n",
-            "name": "o"
-          },
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The function to call when an event is fired.</p>\n",
-            "name": "fn"
-          },
-          {
-            "type": "Object",
-            "optional": true,
-            "doc": "<p>(optional) The scope (<code>this</code> reference) in which the function is executed. Defaults to\nthe Observable firing the event.</p>\n",
-            "name": "scope"
-          }
-        ],
-        "name": "capture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Starts capture on the specified Observable. All events will be passed to the supplied function with the event\nname + standard signature of the event <strong>before</strong> the event is fired. If the supplied function returns false,\nthe event will not fire.</p>\n",
-        "linenr": 54,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-clearFilter",
-        "shortDoc": "Revert to a view of the Record cache with no filtering applied. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -690,95 +652,99 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "suppressEvent"
           }
         ],
+        "href": "Store2.html#Ext-data-Store-method-clearFilter",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Revert to a view of the Record cache with no filtering applied. ...",
+        "static": false,
         "name": "clearFilter",
         "owner": "Ext.data.Store",
         "doc": "<p>Revert to a view of the Record cache with no filtering applied.</p>\n",
         "linenr": 1158,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Store2.html#Ext-data-Store-method-clearGrouping",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Store2.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-clearGrouping",
-        "shortDoc": "Clear any groupers in the store ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Clear any groupers in the store ...",
+        "static": false,
         "name": "clearGrouping",
         "owner": "Ext.data.Store",
         "doc": "<p>Clear any groupers in the store</p>\n",
         "linenr": 532,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Store2.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearListeners",
-        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all listeners for this object including the managed listeners ...",
+        "static": false,
         "name": "clearListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all listeners for this object including the managed listeners</p>\n",
         "linenr": 425,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-clearManagedListeners",
-        "shortDoc": "Removes all managed listeners for this object. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Removes all managed listeners for this object. ...",
+        "static": false,
         "name": "clearManagedListeners",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes all managed listeners for this object.</p>\n",
         "linenr": 454,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-collect",
-        "shortDoc": "Collects unique values for a particular dataIndex from this store. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -799,26 +765,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "bypassFilter"
           }
         ],
-        "name": "collect",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Collects unique values for a particular dataIndex from this store.</p>\n",
-        "linenr": 1807,
+        "href": "Store2.html#Ext-data-Store-method-collect",
         "return": {
           "type": "Array",
           "doc": "<p>An array of the unique values</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Collects unique values for a particular dataIndex from this store. ...",
+        "static": false,
+        "name": "collect",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Collects unique values for a particular dataIndex from this store.</p>\n",
+        "linenr": 1807,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-count",
-        "shortDoc": "Gets the count of items in the store. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -827,83 +794,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "grouped"
           }
         ],
-        "name": "count",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Gets the count of items in the store.</p>\n",
-        "linenr": 1995,
+        "href": "Store2.html#Ext-data-Store-method-count",
         "return": {
           "type": "Number",
           "doc": "<p>the count</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Gets the count of items in the store. ...",
+        "static": false,
+        "name": "count",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Gets the count of items in the store.</p>\n",
+        "linenr": 1995,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-create",
-        "shortDoc": "Create a new instance of this Class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-
-        ],
-        "name": "create",
-        "owner": "Ext.Base",
-        "doc": "<p>Create a new instance of this Class.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    ...\n});\n\nMy.cool.Class.create({\n    someConfig: true\n});\n</code></pre>\n\n<p>All parameters are passed to the constructor of the class.</p>\n",
-        "linenr": 329,
-        "return": {
-          "type": "Object",
-          "doc": "<p>the created instance.</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-createAlias",
-        "shortDoc": "Create aliases for existing prototype methods. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The new method name, or an object to set multiple aliases. See\n<a href=\"#/api/Ext.Function-method-flexSetter\" rel=\"Ext.Function-method-flexSetter\" class=\"docClass\">flexSetter</a></p>\n",
-            "name": "alias"
-          },
-          {
-            "type": "String/Object",
-            "optional": false,
-            "doc": "<p>The original method name</p>\n",
-            "name": "origin"
-          }
-        ],
-        "name": "createAlias",
-        "owner": "Ext.Base",
-        "doc": "<p>Create aliases for existing prototype methods. Example:</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    method1: function() { ... },\n    method2: function() { ... }\n});\n\nvar test = new My.cool.Class();\n\nMy.cool.Class.createAlias({\n    method3: 'method1',\n    method4: 'method2'\n});\n\ntest.method3(); // test.method1()\n\nMy.cool.Class.createAlias('method5', 'method3');\n\ntest.method5(); // test.method3() -&gt; test.method1()\n</code></pre>\n",
-        "linenr": 648,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-each",
-        "shortDoc": "Calls the specified function for each of the Records in the cache. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Function",
@@ -918,26 +829,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "scope"
           }
         ],
-        "name": "each",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Calls the specified function for each of the <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Records</a> in the cache.</p>\n",
-        "linenr": 847,
+        "href": "Store2.html#Ext-data-Store-method-each",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Calls the specified function for each of the Records in the cache. ...",
+        "static": false,
+        "name": "each",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Calls the specified function for each of the <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Records</a> in the cache.</p>\n",
+        "linenr": 847,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
-        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String/[String]",
@@ -946,26 +858,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "events"
           }
         ],
-        "name": "enableBubble",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
-        "linenr": 609,
+        "href": "Observable.html#Ext-util-Observable-method-enableBubble",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Enables events fired by this Observable to bubble up an owner hierarchy by calling this.getBubbleTarget() if\npresent. ...",
+        "static": false,
+        "name": "enableBubble",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Enables events fired by this Observable to bubble up an owner hierarchy by calling <code>this.getBubbleTarget()</code> if\npresent. There is no implementation in the Observable base class.</p>\n\n<p>This is commonly used by Ext.Components to bubble events to owner Containers.\nSee <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>. The default implementation in <a href=\"#/api/Ext.Component\" rel=\"Ext.Component\" class=\"docClass\">Ext.Component</a> returns the\nComponent's immediate owner. But if a known target is required, this can be overridden to access the\nrequired target more quickly.</p>\n\n<p>Example:</p>\n\n<pre><code>Ext.override(Ext.form.field.Base, {\n    //  Add functionality to Field's initComponent to enable the change event to bubble\n    initComponent : Ext.Function.createSequence(Ext.form.field.Base.prototype.initComponent, function() {\n        this.enableBubble('change');\n    }),\n\n    //  We know that we want Field's events to bubble directly to the FormPanel.\n    getBubbleTarget : function() {\n        if (!this.formPanel) {\n            this.formPanel = this.findParentByType('form');\n        }\n        return this.formPanel;\n    }\n});\n\nvar myForm = new Ext.formPanel({\n    title: 'User Details',\n    items: [{\n        ...\n    }],\n    listeners: {\n        change: function() {\n            // Title goes red if form has been modified.\n            myForm.header.setStyle('color', 'red');\n        }\n    }\n});\n</code></pre>\n",
+        "linenr": 609,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-filter",
-        "shortDoc": "Filters the loaded set of records by a given set of filters. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Mixed",
@@ -980,26 +893,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "value"
           }
         ],
-        "name": "filter",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Filters the loaded set of records by a given set of filters.</p>\n",
-        "linenr": 1107,
+        "href": "Store2.html#Ext-data-Store-method-filter",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Filters the loaded set of records by a given set of filters. ...",
+        "static": false,
+        "name": "filter",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Filters the loaded set of records by a given set of filters.</p>\n",
+        "linenr": 1107,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-filterBy",
-        "shortDoc": "Filter by a function. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Function",
@@ -1014,26 +928,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "scope"
           }
         ],
-        "name": "filterBy",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Filter by a function. The specified function will be called for each\nRecord in this Store. If the function returns <tt>true</tt> the Record is included,\notherwise it is filtered out.</p>\n",
-        "linenr": 1189,
+        "href": "Store2.html#Ext-data-Store-method-filterBy",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Filter by a function. ...",
+        "static": false,
+        "name": "filterBy",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Filter by a function. The specified function will be called for each\nRecord in this Store. If the function returns <tt>true</tt> the Record is included,\notherwise it is filtered out.</p>\n",
+        "linenr": 1189,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-find",
-        "shortDoc": "Finds the index of the first matching Record in this store by a specific field value. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1072,26 +987,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "exactMatch"
           }
         ],
-        "name": "find",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Finds the index of the first matching Record in this store by a specific field value.</p>\n",
-        "linenr": 1723,
+        "href": "Store2.html#Ext-data-Store-method-find",
         "return": {
           "type": "Number",
           "doc": "<p>The matched index or -1</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Finds the index of the first matching Record in this store by a specific field value. ...",
+        "static": false,
+        "name": "find",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Finds the index of the first matching Record in this store by a specific field value.</p>\n",
+        "linenr": 1723,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-findBy",
-        "shortDoc": "Find the index of the first matching Record in this Store by a function. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Function",
@@ -1112,26 +1028,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "startIndex"
           }
         ],
-        "name": "findBy",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Find the index of the first matching Record in this Store by a function.\nIf the function returns <tt>true</tt> it is considered a match.</p>\n",
-        "linenr": 1791,
+        "href": "Store2.html#Ext-data-Store-method-findBy",
         "return": {
           "type": "Number",
           "doc": "<p>The matched index or -1</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Find the index of the first matching Record in this Store by a function. ...",
+        "static": false,
+        "name": "findBy",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Find the index of the first matching Record in this Store by a function.\nIf the function returns <tt>true</tt> it is considered a match.</p>\n",
+        "linenr": 1791,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-findExact",
-        "shortDoc": "Finds the index of the first matching Record in this store by a specific field value. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1152,26 +1069,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "startIndex"
           }
         ],
-        "name": "findExact",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Finds the index of the first matching Record in this store by a specific field value.</p>\n",
-        "linenr": 1777,
+        "href": "Store2.html#Ext-data-Store-method-findExact",
         "return": {
           "type": "Number",
           "doc": "<p>The matched index or -1</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Finds the index of the first matching Record in this store by a specific field value. ...",
+        "static": false,
+        "name": "findExact",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Finds the index of the first matching Record in this store by a specific field value.</p>\n",
+        "linenr": 1777,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-findRecord",
-        "shortDoc": "Finds the first matching Record in this store by a specific field value. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1210,26 +1128,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "exactMatch"
           }
         ],
-        "name": "findRecord",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Finds the first matching Record in this store by a specific field value.</p>\n",
-        "linenr": 1739,
+        "href": "Store2.html#Ext-data-Store-method-findRecord",
         "return": {
           "type": "Ext.data.Model",
           "doc": "<p>The matched record or null</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Finds the first matching Record in this store by a specific field value. ...",
+        "static": false,
+        "name": "findRecord",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Finds the first matching Record in this store by a specific field value.</p>\n",
+        "linenr": 1739,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
-        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1244,26 +1163,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "args"
           }
         ],
-        "name": "fireEvent",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.data.DirectStore-method-addListener\" rel=\"Ext.data.DirectStore-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.data.DirectStore-method-enableBubble\" rel=\"Ext.data.DirectStore-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
-        "linenr": 233,
+        "href": "Observable.html#Ext-util-Observable-method-fireEvent",
         "return": {
           "type": "Boolean",
           "doc": "<p>returns false if any of the handlers return false otherwise it returns true.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Fires the specified event with the passed parameters (minus the event name, plus the options object passed\nto addList...",
+        "static": false,
+        "name": "fireEvent",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Fires the specified event with the passed parameters (minus the event name, plus the <code>options</code> object passed\nto <a href=\"#/api/Ext.data.DirectStore-method-addListener\" rel=\"Ext.data.DirectStore-method-addListener\" class=\"docClass\">addListener</a>).</p>\n\n<p>An event may be set to bubble up an Observable parent hierarchy (See <a href=\"#/api/Ext.Component-method-getBubbleTarget\" rel=\"Ext.Component-method-getBubbleTarget\" class=\"docClass\">Ext.Component.getBubbleTarget</a>) by\ncalling <a href=\"#/api/Ext.data.DirectStore-method-enableBubble\" rel=\"Ext.data.DirectStore-method-enableBubble\" class=\"docClass\">enableBubble</a>.</p>\n",
+        "linenr": 233,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-first",
-        "shortDoc": "Convenience function for getting the first model instance in the store ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -1272,26 +1192,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "grouped"
           }
         ],
-        "name": "first",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Convenience function for getting the first model instance in the store</p>\n",
-        "linenr": 1921,
+        "href": "Store2.html#Ext-data-Store-method-first",
         "return": {
           "type": "Ext.data.Model/undefined",
           "doc": "<p>The first model instance in the store, or undefined</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Convenience function for getting the first model instance in the store ...",
+        "static": false,
+        "name": "first",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Convenience function for getting the first model instance in the store</p>\n",
+        "linenr": 1921,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-getAt",
-        "shortDoc": "Get the Record at the specified index. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -1300,26 +1221,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "index"
           }
         ],
-        "name": "getAt",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Get the Record at the specified index.</p>\n",
-        "linenr": 1843,
+        "href": "Store2.html#Ext-data-Store-method-getAt",
         "return": {
           "type": "Ext.data.Model",
           "doc": "<p>The Record at the passed index. Returns undefined if not found.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Get the Record at the specified index. ...",
+        "static": false,
+        "name": "getAt",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Get the Record at the specified index.</p>\n",
+        "linenr": 1843,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-getById",
-        "shortDoc": "Get the Record with the specified id. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1328,49 +1250,51 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "id"
           }
         ],
-        "name": "getById",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Get the Record with the specified id.</p>\n",
-        "linenr": 1862,
+        "href": "Store2.html#Ext-data-Store-method-getById",
         "return": {
           "type": "Ext.data.Model",
           "doc": "<p>The Record with the passed id. Returns undefined if not found.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Get the Record with the specified id. ...",
+        "static": false,
+        "name": "getById",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Get the Record with the specified id.</p>\n",
+        "linenr": 1862,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-getCount",
-        "shortDoc": "Gets the number of cached records. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getCount",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Gets the number of cached records.</p>\n\n<p>If using paging, this may not be the total size of the dataset. If the data object\nused by the Reader contains the dataset size, then the <a href=\"#/api/Ext.data.DirectStore-method-getTotalCount\" rel=\"Ext.data.DirectStore-method-getTotalCount\" class=\"docClass\">getTotalCount</a> function returns\nthe dataset size.  <b>Note</b>: see the Important note in <a href=\"#/api/Ext.data.DirectStore-event-load\" rel=\"Ext.data.DirectStore-event-load\" class=\"docClass\">load</a>.</p>\n\n",
-        "linenr": 1821,
+        "href": "Store2.html#Ext-data-Store-method-getCount",
         "return": {
           "type": "Number",
           "doc": "<p>The number of Records in the Store's cache.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Gets the number of cached records. ...",
+        "static": false,
+        "name": "getCount",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Gets the number of cached records.</p>\n\n<p>If using paging, this may not be the total size of the dataset. If the data object\nused by the Reader contains the dataset size, then the <a href=\"#/api/Ext.data.DirectStore-method-getTotalCount\" rel=\"Ext.data.DirectStore-method-getTotalCount\" class=\"docClass\">getTotalCount</a> function returns\nthe dataset size.  <b>Note</b>: see the Important note in <a href=\"#/api/Ext.data.DirectStore-event-load\" rel=\"Ext.data.DirectStore-event-load\" class=\"docClass\">load</a>.</p>\n\n",
+        "linenr": 1821,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-getGroupString",
-        "shortDoc": "Returns the string to group on for a given model instance. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Model",
@@ -1379,26 +1303,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "instance"
           }
         ],
-        "name": "getGroupString",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Returns the string to group on for a given model instance. The default implementation of this method returns\nthe model's <a href=\"#/api/Ext.data.DirectStore-property-groupField\" rel=\"Ext.data.DirectStore-property-groupField\" class=\"docClass\">groupField</a>, but this can be overridden to group by an arbitrary string. For example, to\ngroup by the first letter of a model's 'name' field, use the following code:</p>\n\n\n<pre><code>new Ext.data.Store({\n    groupDir: 'ASC',\n    getGroupString: function(instance) {\n        return instance.get('name')[0];\n    }\n});\n</code></pre>\n\n",
-        "linenr": 739,
+        "href": "Store2.html#Ext-data-Store-method-getGroupString",
         "return": {
           "type": "String",
           "doc": "<p>The string to compare when forming groups</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Returns the string to group on for a given model instance. ...",
+        "static": false,
+        "name": "getGroupString",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Returns the string to group on for a given model instance. The default implementation of this method returns\nthe model's <a href=\"#/api/Ext.data.DirectStore-property-groupField\" rel=\"Ext.data.DirectStore-property-groupField\" class=\"docClass\">groupField</a>, but this can be overridden to group by an arbitrary string. For example, to\ngroup by the first letter of a model's 'name' field, use the following code:</p>\n\n\n<pre><code>new Ext.data.Store({\n    groupDir: 'ASC',\n    getGroupString: function(instance) {\n        return instance.get('name')[0];\n    }\n});\n</code></pre>\n\n",
+        "linenr": 739,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-getGroups",
-        "shortDoc": "Returns an object containing the result of applying grouping to the records in this store. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1407,72 +1332,75 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "groupName"
           }
         ],
-        "name": "getGroups",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Returns an object containing the result of applying grouping to the records in this store. See <a href=\"#/api/Ext.data.DirectStore-property-groupField\" rel=\"Ext.data.DirectStore-property-groupField\" class=\"docClass\">groupField</a>,\n<a href=\"#/api/Ext.data.DirectStore-property-groupDir\" rel=\"Ext.data.DirectStore-property-groupDir\" class=\"docClass\">groupDir</a> and <a href=\"#/api/Ext.data.DirectStore-method-getGroupString\" rel=\"Ext.data.DirectStore-method-getGroupString\" class=\"docClass\">getGroupString</a>. Example for a store containing records with a color field:</p>\n\n<pre><code>var myStore = new Ext.data.Store({\n    groupField: 'color',\n    groupDir  : 'DESC'\n});\n\nmyStore.getGroups(); //returns:\n[\n    {\n        name: 'yellow',\n        children: [\n            //all records where the color field is 'yellow'\n        ]\n    },\n    {\n        name: 'red',\n        children: [\n            //all records where the color field is 'red'\n        ]\n    }\n]\n</code></pre>\n\n",
-        "linenr": 570,
+        "href": "Store2.html#Ext-data-Store-method-getGroups",
         "return": {
           "type": "Array",
           "doc": "<p>The grouped data</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Returns an object containing the result of applying grouping to the records in this store. ...",
+        "static": false,
+        "name": "getGroups",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Returns an object containing the result of applying grouping to the records in this store. See <a href=\"#/api/Ext.data.DirectStore-property-groupField\" rel=\"Ext.data.DirectStore-property-groupField\" class=\"docClass\">groupField</a>,\n<a href=\"#/api/Ext.data.DirectStore-property-groupDir\" rel=\"Ext.data.DirectStore-property-groupDir\" class=\"docClass\">groupDir</a> and <a href=\"#/api/Ext.data.DirectStore-method-getGroupString\" rel=\"Ext.data.DirectStore-method-getGroupString\" class=\"docClass\">getGroupString</a>. Example for a store containing records with a color field:</p>\n\n<pre><code>var myStore = new Ext.data.Store({\n    groupField: 'color',\n    groupDir  : 'DESC'\n});\n\nmyStore.getGroups(); //returns:\n[\n    {\n        name: 'yellow',\n        children: [\n            //all records where the color field is 'yellow'\n        ]\n    },\n    {\n        name: 'red',\n        children: [\n            //all records where the color field is 'red'\n        ]\n    }\n]\n</code></pre>\n\n",
+        "linenr": 570,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-getName",
-        "shortDoc": "Get the current class' name in string format. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getName",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
-        "linenr": 631,
+        "href": "Base3.html#Ext-Base-method-getName",
         "return": {
           "type": "String",
           "doc": "<p>className</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the current class' name in string format. ...",
+        "static": false,
+        "name": "getName",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the current class' name in string format.</p>\n\n<pre><code>Ext.define('My.cool.Class', {\n    constructor: function() {\n        alert(this.self.getName()); // alerts 'My.cool.Class'\n    }\n});\n\nMy.cool.Class.getName(); // 'My.cool.Class'\n</code></pre>\n",
+        "linenr": 631,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-method-getNewRecords",
-        "shortDoc": "Returns all Model instances that are either currently a phantom (e.g. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getNewRecords",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>Returns all Model instances that are either currently a phantom (e.g. have no id), or have an ID but have not\nyet been saved on this Store (this happens when adding a non-phantom record from another Store into this one)</p>\n",
-        "linenr": 450,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-method-getNewRecords",
         "return": {
           "type": "Array",
           "doc": "<p>The Model instances</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Returns all Model instances that are either currently a phantom (e.g. ...",
+        "static": false,
+        "name": "getNewRecords",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>Returns all Model instances that are either currently a phantom (e.g. have no id), or have an ID but have not\nyet been saved on this Store (this happens when adding a non-phantom record from another Store into this one)</p>\n",
+        "linenr": 450,
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-getPageFromRecordIndex",
-        "shortDoc": "Determines the page from a record index ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -1481,49 +1409,51 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "index"
           }
         ],
-        "name": "getPageFromRecordIndex",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Determines the page from a record index</p>\n",
-        "linenr": 1523,
+        "href": "Store2.html#Ext-data-Store-method-getPageFromRecordIndex",
         "return": {
           "type": "Number",
           "doc": "<p>The page the record belongs to</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Determines the page from a record index ...",
+        "static": false,
+        "name": "getPageFromRecordIndex",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Determines the page from a record index</p>\n",
+        "linenr": 1523,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-method-getProxy",
-        "shortDoc": "Returns the proxy currently attached to this proxy instance ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getProxy",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>Returns the proxy currently attached to this proxy instance</p>\n",
-        "linenr": 305,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-method-getProxy",
         "return": {
           "type": "Ext.data.proxy.Proxy",
           "doc": "<p>The Proxy instance</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Returns the proxy currently attached to this proxy instance ...",
+        "static": false,
+        "name": "getProxy",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>Returns the proxy currently attached to this proxy instance</p>\n",
+        "linenr": 305,
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-getRange",
-        "shortDoc": "Returns a range of Records between specified indices. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -1538,95 +1468,99 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "endIndex"
           }
         ],
-        "name": "getRange",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Returns a range of Records between specified indices.</p>\n",
-        "linenr": 1852,
+        "href": "Store2.html#Ext-data-Store-method-getRange",
         "return": {
           "type": "Ext.data.Model[]",
           "doc": "<p>An array of Records</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Returns a range of Records between specified indices. ...",
+        "static": false,
+        "name": "getRange",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Returns a range of Records between specified indices.</p>\n",
+        "linenr": 1852,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-method-getRemovedRecords",
-        "shortDoc": "Returns any records that have been removed from the store but not yet destroyed on the proxy. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getRemovedRecords",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>Returns any records that have been removed from the store but not yet destroyed on the proxy.</p>\n",
-        "linenr": 476,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-method-getRemovedRecords",
         "return": {
           "type": "Array",
           "doc": "<p>The removed Model instances</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Returns any records that have been removed from the store but not yet destroyed on the proxy. ...",
+        "static": false,
+        "name": "getRemovedRecords",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>Returns any records that have been removed from the store but not yet destroyed on the proxy.</p>\n",
+        "linenr": 476,
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-getTotalCount",
-        "shortDoc": "Returns the total number of Model instances that the Proxy\nindicates exist. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getTotalCount",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Returns the total number of <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Model</a> instances that the <a href=\"#/api/Ext.data.proxy.Proxy\" rel=\"Ext.data.proxy.Proxy\" class=\"docClass\">Proxy</a>\nindicates exist. This will usually differ from <a href=\"#/api/Ext.data.DirectStore-method-getCount\" rel=\"Ext.data.DirectStore-method-getCount\" class=\"docClass\">getCount</a> when using paging - getCount returns the\nnumber of records loaded into the Store at the moment, getTotalCount returns the number of records that\ncould be loaded into the Store if the Store contained all data</p>\n",
-        "linenr": 1832,
+        "href": "Store2.html#Ext-data-Store-method-getTotalCount",
         "return": {
           "type": "Number",
           "doc": "<p>The total number of Model instances available via the Proxy</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Returns the total number of Model instances that the Proxy\nindicates exist. ...",
+        "static": false,
+        "name": "getTotalCount",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Returns the total number of <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">Model</a> instances that the <a href=\"#/api/Ext.data.proxy.Proxy\" rel=\"Ext.data.proxy.Proxy\" class=\"docClass\">Proxy</a>\nindicates exist. This will usually differ from <a href=\"#/api/Ext.data.DirectStore-method-getCount\" rel=\"Ext.data.DirectStore-method-getCount\" class=\"docClass\">getCount</a> when using paging - getCount returns the\nnumber of records loaded into the Store at the moment, getTotalCount returns the number of records that\ncould be loaded into the Store if the Store contained all data</p>\n",
+        "linenr": 1832,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-method-getUpdatedRecords",
-        "shortDoc": "Returns all Model instances that have been updated in the Store but not yet synchronized with the Proxy ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "getUpdatedRecords",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>Returns all Model instances that have been updated in the Store but not yet synchronized with the Proxy</p>\n",
-        "linenr": 459,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-method-getUpdatedRecords",
         "return": {
           "type": "Array",
           "doc": "<p>The updated Model instances</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Returns all Model instances that have been updated in the Store but not yet synchronized with the Proxy ...",
+        "static": false,
+        "name": "getUpdatedRecords",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>Returns all Model instances that have been updated in the Store but not yet synchronized with the Proxy</p>\n",
+        "linenr": 459,
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-group",
-        "shortDoc": "Group data in the store ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String|Array",
@@ -1641,26 +1575,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "direction"
           }
         ],
-        "name": "group",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Group data in the store</p>\n",
-        "linenr": 484,
+        "href": "Store2.html#Ext-data-Store-method-group",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Group data in the store ...",
+        "static": false,
+        "name": "group",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Group data in the store</p>\n",
+        "linenr": 484,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-guaranteeRange",
-        "shortDoc": "Guarantee a specific range, this will load the store with a range (that\nmust be the pageSize or smaller) and take car...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -1687,26 +1622,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "scope"
           }
         ],
-        "name": "guaranteeRange",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Guarantee a specific range, this will load the store with a range (that\nmust be the pageSize or smaller) and take care of any loading that may\nbe necessary.</p>\n",
-        "linenr": 1601,
+        "href": "Store2.html#Ext-data-Store-method-guaranteeRange",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Guarantee a specific range, this will load the store with a range (that\nmust be the pageSize or smaller) and take car...",
+        "static": false,
+        "name": "guaranteeRange",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Guarantee a specific range, this will load the store with a range (that\nmust be the pageSize or smaller) and take care of any loading that may\nbe necessary.</p>\n",
+        "linenr": 1601,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-hasListener",
-        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1715,77 +1651,51 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "eventName"
           }
         ],
-        "name": "hasListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
-        "linenr": 530,
+        "href": "Observable.html#Ext-util-Observable-method-hasListener",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the event is being listened for, else false</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Checks to see if this object has any listeners for a specified event ...",
+        "static": false,
+        "name": "hasListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Checks to see if this object has any listeners for a specified event</p>\n",
+        "linenr": 530,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-hasPendingRequests",
-        "shortDoc": "Returns the number of pending requests out. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
 
         ],
+        "href": "Store2.html#Ext-data-Store-method-hasPendingRequests",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Returns the number of pending requests out. ...",
+        "static": false,
         "name": "hasPendingRequests",
         "owner": "Ext.data.Store",
         "doc": "<p>Returns the number of pending requests out.</p>\n",
         "linenr": 1586,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-implement",
-        "shortDoc": "Add methods / properties to the prototype of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "implement",
-        "owner": "Ext.Base",
-        "doc": "<p>Add methods / properties to the prototype of this class.</p>\n\n<pre><code>Ext.define('My.awesome.Cat', {\n    constructor: function() {\n        ...\n    }\n});\n\n My.awesome.Cat.implement({\n     meow: function() {\n        alert('Meowww...');\n     }\n });\n\n var kitty = new My.awesome.Cat;\n kitty.meow();\n</code></pre>\n",
-        "linenr": 415,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-indexOf",
-        "shortDoc": "Get the index within the cache of the passed Record. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Model",
@@ -1794,26 +1704,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "record"
           }
         ],
-        "name": "indexOf",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Get the index within the cache of the passed Record.</p>\n",
-        "linenr": 1873,
+        "href": "Store2.html#Ext-data-Store-method-indexOf",
         "return": {
           "type": "Number",
           "doc": "<p>The index of the passed Record. Returns -1 if not found.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Get the index within the cache of the passed Record. ...",
+        "static": false,
+        "name": "indexOf",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Get the index within the cache of the passed Record.</p>\n",
+        "linenr": 1873,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-indexOfId",
-        "shortDoc": "Get the index within the cache of the Record with the passed id. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -1822,26 +1733,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "id"
           }
         ],
-        "name": "indexOfId",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Get the index within the cache of the Record with the passed id.</p>\n",
-        "linenr": 1892,
+        "href": "Store2.html#Ext-data-Store-method-indexOfId",
         "return": {
           "type": "Number",
           "doc": "<p>The index of the Record. Returns -1 if not found.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Get the index within the cache of the Record with the passed id. ...",
+        "static": false,
+        "name": "indexOfId",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Get the index within the cache of the Record with the passed id.</p>\n",
+        "linenr": 1892,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-indexOfTotal",
-        "shortDoc": "Get the index within the entire dataset. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Model",
@@ -1850,26 +1762,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "record"
           }
         ],
-        "name": "indexOfTotal",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Get the index within the entire dataset. From 0 to the totalCount.</p>\n",
-        "linenr": 1883,
+        "href": "Store2.html#Ext-data-Store-method-indexOfTotal",
         "return": {
           "type": "Number",
           "doc": "<p>The index of the passed Record. Returns -1 if not found.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Get the index within the entire dataset. ...",
+        "static": false,
+        "name": "indexOfTotal",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Get the index within the entire dataset. From 0 to the totalCount.</p>\n",
+        "linenr": 1883,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-initConfig",
-        "shortDoc": "Initialize configuration for this class. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -1878,49 +1791,51 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "config"
           }
         ],
-        "name": "initConfig",
-        "owner": "Ext.Base",
-        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
-        "linenr": 63,
+        "href": "Base3.html#Ext-Base-method-initConfig",
         "return": {
           "type": "Object",
           "doc": "<p>mixins The mixin prototypes as key - value pairs</p>\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Initialize configuration for this class. ...",
+        "static": false,
+        "name": "initConfig",
+        "owner": "Ext.Base",
+        "doc": "<p>Initialize configuration for this class. a typical example:</p>\n\n<pre><code>Ext.define('My.awesome.Class', {\n    // The default config\n    config: {\n        name: 'Awesome',\n        isAwesome: true\n    },\n\n    constructor: function(config) {\n        this.initConfig(config);\n\n        return this;\n    }\n});\n\nvar awesome = new My.awesome.Class({\n    name: 'Super Awesome'\n});\n\nalert(awesome.getName()); // 'Super Awesome'\n</code></pre>\n",
+        "linenr": 63,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Sortable.html#Ext-util-Sortable-method-initSortable",
-        "shortDoc": "Performs initialization of this mixin. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "initSortable",
-        "owner": "Ext.util.Sortable",
-        "doc": "<p>Performs initialization of this mixin. Component classes using this mixin should call this method\nduring their own initialization.</p>\n",
-        "linenr": 36,
+        "href": "Sortable.html#Ext-util-Sortable-method-initSortable",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
+        "private": false,
+        "shortDoc": "Performs initialization of this mixin. ...",
+        "static": false,
+        "name": "initSortable",
+        "owner": "Ext.util.Sortable",
+        "doc": "<p>Performs initialization of this mixin. Component classes using this mixin should call this method\nduring their own initialization.</p>\n",
+        "linenr": 36,
         "html_filename": "Sortable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-insert",
-        "shortDoc": "Inserts Model instances into the Store at the given index and fires the add event. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -1935,95 +1850,99 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "records"
           }
         ],
-        "name": "insert",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Inserts Model instances into the Store at the given index and fires the <a href=\"#/api/Ext.data.DirectStore-event-add\" rel=\"Ext.data.DirectStore-event-add\" class=\"docClass\">add</a> event.\nSee also <code><a href=\"#/api/Ext.data.DirectStore-event-add\" rel=\"Ext.data.DirectStore-event-add\" class=\"docClass\">add</a></code>.</p>\n",
-        "linenr": 761,
+        "href": "Store2.html#Ext-data-Store-method-insert",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Inserts Model instances into the Store at the given index and fires the add event. ...",
+        "static": false,
+        "name": "insert",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Inserts Model instances into the Store at the given index and fires the <a href=\"#/api/Ext.data.DirectStore-event-add\" rel=\"Ext.data.DirectStore-event-add\" class=\"docClass\">add</a> event.\nSee also <code><a href=\"#/api/Ext.data.DirectStore-event-add\" rel=\"Ext.data.DirectStore-event-add\" class=\"docClass\">add</a></code>.</p>\n",
+        "linenr": 761,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-isFiltered",
-        "shortDoc": "Returns true if this store is currently filtered ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "isFiltered",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Returns true if this store is currently filtered</p>\n",
-        "linenr": 1180,
+        "href": "Store2.html#Ext-data-Store-method-isFiltered",
         "return": {
           "type": "Boolean",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Returns true if this store is currently filtered ...",
+        "static": false,
+        "name": "isFiltered",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Returns true if this store is currently filtered</p>\n",
+        "linenr": 1180,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-isGrouped",
-        "shortDoc": "Checks if the store is currently grouped ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "isGrouped",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Checks if the store is currently grouped</p>\n",
-        "linenr": 553,
+        "href": "Store2.html#Ext-data-Store-method-isGrouped",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the store is grouped.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Checks if the store is currently grouped ...",
+        "static": false,
+        "name": "isGrouped",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Checks if the store is currently grouped</p>\n",
+        "linenr": 553,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-method-isLoading",
-        "shortDoc": "Returns true if the Store is currently performing a load operation ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "isLoading",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>Returns true if the Store is currently performing a load operation</p>\n",
-        "linenr": 715,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-method-isLoading",
         "return": {
           "type": "Boolean",
           "doc": "<p>True if the Store is currently loading</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Returns true if the Store is currently performing a load operation ...",
+        "static": false,
+        "name": "isLoading",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>Returns true if the Store is currently performing a load operation</p>\n",
+        "linenr": 715,
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-last",
-        "shortDoc": "Convenience function for getting the last model instance in the store ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -2032,26 +1951,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "grouped"
           }
         ],
-        "name": "last",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Convenience function for getting the last model instance in the store</p>\n",
-        "linenr": 1941,
+        "href": "Store2.html#Ext-data-Store-method-last",
         "return": {
           "type": "Ext.data.Model/undefined",
           "doc": "<p>The last model instance in the store, or undefined</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Convenience function for getting the last model instance in the store ...",
+        "static": false,
+        "name": "last",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Convenience function for getting the last model instance in the store</p>\n",
+        "linenr": 1941,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-load",
-        "shortDoc": "Loads data into the Store via the configured proxy. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Object/Function",
@@ -2060,26 +1980,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "options"
           }
         ],
-        "name": "load",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Loads data into the Store via the configured <a href=\"#/api/Ext.data.DirectStore-cfg-proxy\" rel=\"Ext.data.DirectStore-cfg-proxy\" class=\"docClass\">proxy</a>. This uses the Proxy to make an\nasynchronous call to whatever storage backend the Proxy uses, automatically adding the retrieved\ninstances into the Store and calling an optional callback if required. Example usage:</p>\n\n\n\n\n<pre><code>store.load({\n    scope   : this,\n    callback: function(records, operation, success) {\n        //the <a href=\"#/api/Ext.data.Operation\" rel=\"Ext.data.Operation\" class=\"docClass\">operation</a> object contains all of the details of the load operation\n        console.log(records);\n    }\n});\n</code></pre>\n\n\n\n\n<p>If the callback scope does not need to be set, a function can simply be passed:</p>\n\n\n\n\n<pre><code>store.load(function(records, operation, success) {\n    console.log('loaded records');\n});\n</code></pre>\n\n",
-        "linenr": 921,
+        "href": "Store2.html#Ext-data-Store-method-load",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Loads data into the Store via the configured proxy. ...",
+        "static": false,
+        "name": "load",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Loads data into the Store via the configured <a href=\"#/api/Ext.data.DirectStore-cfg-proxy\" rel=\"Ext.data.DirectStore-cfg-proxy\" class=\"docClass\">proxy</a>. This uses the Proxy to make an\nasynchronous call to whatever storage backend the Proxy uses, automatically adding the retrieved\ninstances into the Store and calling an optional callback if required. Example usage:</p>\n\n\n\n\n<pre><code>store.load({\n    scope   : this,\n    callback: function(records, operation, success) {\n        //the <a href=\"#/api/Ext.data.Operation\" rel=\"Ext.data.Operation\" class=\"docClass\">operation</a> object contains all of the details of the load operation\n        console.log(records);\n    }\n});\n</code></pre>\n\n\n\n\n<p>If the callback scope does not need to be set, a function can simply be passed:</p>\n\n\n\n\n<pre><code>store.load(function(records, operation, success) {\n    console.log('loaded records');\n});\n</code></pre>\n\n",
+        "linenr": 921,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-loadData",
-        "shortDoc": "Loads an array of data straight into the Store ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Array",
@@ -2094,26 +2015,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "append"
           }
         ],
-        "name": "loadData",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Loads an array of data straight into the Store</p>\n",
-        "linenr": 1226,
+        "href": "Store2.html#Ext-data-Store-method-loadData",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Loads an array of data straight into the Store ...",
+        "static": false,
+        "name": "loadData",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Loads an array of data straight into the Store</p>\n",
+        "linenr": 1226,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-loadPage",
-        "shortDoc": "Loads a given 'page' of data by setting the start and limit values appropriately. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -2122,26 +2044,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "page"
           }
         ],
-        "name": "loadPage",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Loads a given 'page' of data by setting the start and limit values appropriately. Internally this just causes a normal\nload operation, passing in calculated 'start' and 'limit' params</p>\n",
-        "linenr": 1299,
+        "href": "Store2.html#Ext-data-Store-method-loadPage",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Loads a given 'page' of data by setting the start and limit values appropriately. ...",
+        "static": false,
+        "name": "loadPage",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Loads a given 'page' of data by setting the start and limit values appropriately. Internally this just causes a normal\nload operation, passing in calculated 'start' and 'limit' params</p>\n",
+        "linenr": 1299,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-loadRecords",
-        "shortDoc": "Loads an array of {@Ext.data.Model model} instances into the store, fires the datachanged event. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Array",
@@ -2156,26 +2079,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "options"
           }
         ],
-        "name": "loadRecords",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Loads an array of {@Ext.data.Model model} instances into the store, fires the datachanged event. This should only usually\nbe called internally when loading from the <a href=\"#/api/Ext.data.proxy.Proxy\" rel=\"Ext.data.proxy.Proxy\" class=\"docClass\">Proxy</a>, when adding records manually use <a href=\"#/api/Ext.data.DirectStore-event-add\" rel=\"Ext.data.DirectStore-event-add\" class=\"docClass\">add</a> instead</p>\n",
-        "linenr": 1249,
+        "href": "Store2.html#Ext-data-Store-method-loadRecords",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Loads an array of {@Ext.data.Model model} instances into the store, fires the datachanged event. ...",
+        "static": false,
+        "name": "loadRecords",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Loads an array of {@Ext.data.Model model} instances into the store, fires the datachanged event. This should only usually\nbe called internally when loading from the <a href=\"#/api/Ext.data.proxy.Proxy\" rel=\"Ext.data.proxy.Proxy\" class=\"docClass\">Proxy</a>, when adding records manually use <a href=\"#/api/Ext.data.DirectStore-event-add\" rel=\"Ext.data.DirectStore-event-add\" class=\"docClass\">add</a> instead</p>\n",
+        "linenr": 1249,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-max",
-        "shortDoc": "Gets the maximum value in the store. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -2190,26 +2114,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "grouped"
           }
         ],
-        "name": "max",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Gets the maximum value in the store.</p>\n",
-        "linenr": 2053,
+        "href": "Store2.html#Ext-data-Store-method-max",
         "return": {
           "type": "Mixed/undefined",
           "doc": "<p>The maximum value, if no items exist, undefined.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Gets the maximum value in the store. ...",
+        "static": false,
+        "name": "max",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Gets the maximum value in the store.</p>\n",
+        "linenr": 2053,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-min",
-        "shortDoc": "Gets the minimum value in the store. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -2224,31 +2149,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "grouped"
           }
         ],
-        "name": "min",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Gets the minimum value in the store.</p>\n",
-        "linenr": 2015,
+        "href": "Store2.html#Ext-data-Store-method-min",
         "return": {
           "type": "Mixed/undefined",
           "doc": "<p>The minimum value, if no items exist, undefined.</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Gets the minimum value in the store. ...",
+        "static": false,
+        "name": "min",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Gets the minimum value in the store.</p>\n",
+        "linenr": 2015,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "addManagedListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mon",
-        "shortDoc": "Shorthand for addManagedListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable/Element",
@@ -2281,31 +2202,32 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "opt"
           }
         ],
-        "name": "mon",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.DirectStore-method-addManagedListener\" rel=\"Ext.data.DirectStore-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
-        "linenr": 681,
+        "href": "Observable.html#Ext-util-Observable-method-mon",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
+        "protected": false,
+        "tagname": "method",
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "removeManagedListener"
+          "owner": "addManagedListener"
         },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-mun",
-        "shortDoc": "Shorthand for removeManagedListener. ...",
-        "static": false,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
+        "shortDoc": "Shorthand for addManagedListener. ...",
+        "static": false,
+        "name": "mon",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.DirectStore-method-addManagedListener\" rel=\"Ext.data.DirectStore-method-addManagedListener\" class=\"docClass\">addManagedListener</a>.</p>\n\n<p>Adds listeners to any Observable object (or Element) which are automatically removed when this Component is\ndestroyed.</p>\n",
+        "linenr": 681,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "Observable|Element",
@@ -2332,88 +2254,56 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "scope"
           }
         ],
-        "name": "mun",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.DirectStore-method-removeManagedListener\" rel=\"Ext.data.DirectStore-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.data.DirectStore-method-mon\" rel=\"Ext.data.DirectStore-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
-        "linenr": 687,
+        "href": "Observable.html#Ext-util-Observable-method-mun",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-nextPage",
-        "shortDoc": "Loads the next 'page' in the current data set ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
-        "params": [
-
-        ],
-        "name": "nextPage",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Loads the next 'page' in the current data set</p>\n",
-        "linenr": 1317,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Store2.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-observe",
-        "shortDoc": "Sets observability on the passed class constructor. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Function",
-            "optional": false,
-            "doc": "<p>The class constructor to make observable.</p>\n",
-            "name": "c"
-          },
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "<p>An object containing a series of listeners to add. See <a href=\"#/api/Ext.data.DirectStore-method-addListener\" rel=\"Ext.data.DirectStore-method-addListener\" class=\"docClass\">addListener</a>.</p>\n",
-            "name": "listeners"
-          }
-        ],
-        "name": "observe",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Sets observability on the passed class constructor.</p>\n\n<p>This makes any event fired on any instance of the passed class also fire a single event through\nthe <strong>class</strong> allowing for central handling of events on many instances at once.</p>\n\n<p>Usage:</p>\n\n<pre><code>Ext.util.Observable.observe(Ext.data.Connection);\nExt.data.Connection.on('beforerequest', function(con, options) {\n    console.log('Ajax request made to ' + options.url);\n});\n</code></pre>\n",
-        "linenr": 69,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
         "alias": {
           "tagname": "alias",
           "cls": "Ext.util.Observable",
           "doc": null,
-          "owner": "addListener"
+          "owner": "removeManagedListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for removeManagedListener. ...",
+        "static": false,
+        "name": "mun",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.DirectStore-method-removeManagedListener\" rel=\"Ext.data.DirectStore-method-removeManagedListener\" class=\"docClass\">removeManagedListener</a>.</p>\n\n<p>Removes listeners that were added by the <a href=\"#/api/Ext.data.DirectStore-method-mon\" rel=\"Ext.data.DirectStore-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
+        "linenr": 687,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Store2.html#Ext-data-Store-method-nextPage",
+        "return": {
+          "type": "void",
+          "doc": "\n"
         },
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-on",
-        "shortDoc": "Shorthand for addListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
+        "shortDoc": "Loads the next 'page' in the current data set ...",
+        "static": false,
+        "name": "nextPage",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Loads the next 'page' in the current data set</p>\n",
+        "linenr": 1317,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
         "params": [
           {
             "type": "String",
@@ -2440,54 +2330,32 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "options"
           }
         ],
-        "name": "on",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.DirectStore-method-addListener\" rel=\"Ext.data.DirectStore-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
-        "linenr": 669,
+        "href": "Observable.html#Ext-util-Observable-method-on",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "addListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for addListener. ...",
+        "static": false,
+        "name": "on",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.DirectStore-method-addListener\" rel=\"Ext.data.DirectStore-method-addListener\" class=\"docClass\">addListener</a>.</p>\n\n<p>Appends an event handler to this object.</p>\n",
+        "linenr": 669,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-override",
-        "shortDoc": "Override prototype members of this class. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Object",
-            "optional": false,
-            "doc": "\n",
-            "name": "members"
-          }
-        ],
-        "name": "override",
-        "owner": "Ext.Base",
-        "doc": "<p>Override prototype members of this class. Overridden methods can be invoked via\n<a href=\"#/api/Ext.Base-method-callOverridden\" rel=\"Ext.Base-method-callOverridden\" class=\"docClass\">Ext.Base.callOverridden</a></p>\n\n<pre><code>Ext.define('My.Cat', {\n    constructor: function() {\n        alert(\"I'm a cat!\");\n\n        return this;\n    }\n});\n\nMy.Cat.override({\n    constructor: function() {\n        alert(\"I'm going to be a cat!\");\n\n        var instance = this.callOverridden();\n\n        alert(\"Meeeeoooowwww\");\n\n        return instance;\n    }\n});\n\nvar kitty = new My.Cat(); // alerts \"I'm going to be a cat!\"\n                          // alerts \"I'm a cat!\"\n                          // alerts \"Meeeeoooowwww\"\n</code></pre>\n",
-        "linenr": 518,
-        "return": {
-          "type": "Ext.Base",
-          "doc": "<p>this</p>\n"
-        },
-        "html_filename": "Base3.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-prefetch",
-        "shortDoc": "Prefetches data the Store using its configured proxy. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -2496,26 +2364,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "options"
           }
         ],
-        "name": "prefetch",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Prefetches data the Store using its configured <a href=\"#/api/Ext.data.DirectStore-cfg-proxy\" rel=\"Ext.data.DirectStore-cfg-proxy\" class=\"docClass\">proxy</a>.</p>\n",
-        "linenr": 1341,
+        "href": "Store2.html#Ext-data-Store-method-prefetch",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Prefetches data the Store using its configured proxy. ...",
+        "static": false,
+        "name": "prefetch",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Prefetches data the Store using its configured <a href=\"#/api/Ext.data.DirectStore-cfg-proxy\" rel=\"Ext.data.DirectStore-cfg-proxy\" class=\"docClass\">proxy</a>.</p>\n",
+        "linenr": 1341,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-prefetchPage",
-        "shortDoc": "Prefetches a page of data. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -2536,72 +2405,75 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": ""
           }
         ],
+        "href": "Store2.html#Ext-data-Store-method-prefetchPage",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Prefetches a page of data. ...",
+        "static": false,
         "name": "prefetchPage",
         "owner": "Ext.data.Store",
         "doc": "<p>Prefetches a page of data.</p>\n",
         "linenr": 1375,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Store2.html#Ext-data-Store-method-previousPage",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Store2.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-previousPage",
-        "shortDoc": "Loads the previous 'page' in the current data set ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Loads the previous 'page' in the current data set ...",
+        "static": false,
         "name": "previousPage",
         "owner": "Ext.data.Store",
         "doc": "<p>Loads the previous 'page' in the current data set</p>\n",
         "linenr": 1324,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Store2.html#Ext-data-Store-method-purgeRecords",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Store2.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-purgeRecords",
-        "shortDoc": "Purge the least recently used records in the prefetch if the purgeCount\nhas been exceeded. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Purge the least recently used records in the prefetch if the purgeCount\nhas been exceeded. ...",
+        "static": false,
         "name": "purgeRecords",
         "owner": "Ext.data.Store",
         "doc": "<p>Purge the least recently used records in the prefetch if the purgeCount\nhas been exceeded.</p>\n",
         "linenr": 1482,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-queryBy",
-        "shortDoc": "Query the cached records in this Store using a filtering function. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Function",
@@ -2616,26 +2488,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "scope"
           }
         ],
-        "name": "queryBy",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Query the cached records in this Store using a filtering function. The specified function\nwill be called with each record in this Store. If the function returns <tt>true</tt> the record is\nincluded in the results.</p>\n",
-        "linenr": 1208,
+        "href": "Store2.html#Ext-data-Store-method-queryBy",
         "return": {
           "type": "MixedCollection",
           "doc": "<p>Returns an <a href=\"#/api/Ext.util.MixedCollection\" rel=\"Ext.util.MixedCollection\" class=\"docClass\">Ext.util.MixedCollection</a> of the matched records</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Query the cached records in this Store using a filtering function. ...",
+        "static": false,
+        "name": "queryBy",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Query the cached records in this Store using a filtering function. The specified function\nwill be called with each record in this Store. If the function returns <tt>true</tt> the record is\nincluded in the results.</p>\n",
+        "linenr": 1208,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
-        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -2656,54 +2529,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "prefix"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-relayEvents",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Relays selected events from the specified Observable as if the events were fired by this. ...",
+        "static": false,
         "name": "relayEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Relays selected events from the specified Observable as if the events were fired by <code>this</code>.</p>\n",
         "linenr": 573,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-releaseCapture",
-        "shortDoc": "Removes all added captures from the Observable. ...",
-        "static": true,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
-        "params": [
-          {
-            "type": "Observable",
-            "optional": false,
-            "doc": "<p>The Observable to release</p>\n",
-            "name": "o"
-          }
-        ],
-        "name": "releaseCapture",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes <strong>all</strong> added captures from the Observable.</p>\n",
-        "linenr": 44,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-remove",
-        "shortDoc": "Removes the given record from the Store, firing the 'remove' event for each instance that is removed, plus a single\n'...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Model/Array",
@@ -2718,26 +2564,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "isMove"
           }
         ],
-        "name": "remove",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Removes the given record from the Store, firing the 'remove' event for each instance that is removed, plus a single\n'datachanged' event after removal.</p>\n",
-        "linenr": 858,
+        "href": "Store2.html#Ext-data-Store-method-remove",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Removes the given record from the Store, firing the 'remove' event for each instance that is removed, plus a single\n'...",
+        "static": false,
+        "name": "remove",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Removes the given record from the Store, firing the 'remove' event for each instance that is removed, plus a single\n'datachanged' event after removal.</p>\n",
+        "linenr": 858,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-removeAll",
-        "shortDoc": "Remove all items from the store. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -2746,26 +2593,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "silent"
           }
         ],
-        "name": "removeAll",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Remove all items from the store.</p>\n",
-        "linenr": 1901,
+        "href": "Store2.html#Ext-data-Store-method-removeAll",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Remove all items from the store. ...",
+        "static": false,
+        "name": "removeAll",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Remove all items from the store.</p>\n",
+        "linenr": 1901,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-removeAt",
-        "shortDoc": "Removes the model instance at the given index ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Number",
@@ -2774,26 +2622,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "index"
           }
         ],
-        "name": "removeAt",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Removes the model instance at the given index</p>\n",
-        "linenr": 909,
+        "href": "Store2.html#Ext-data-Store-method-removeAt",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Removes the model instance at the given index ...",
+        "static": false,
+        "name": "removeAt",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Removes the model instance at the given index</p>\n",
+        "linenr": 909,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeListener",
-        "shortDoc": "Removes an event handler. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -2814,26 +2663,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "scope"
           }
         ],
-        "name": "removeListener",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Removes an event handler.</p>\n",
-        "linenr": 392,
+        "href": "Observable.html#Ext-util-Observable-method-removeListener",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes an event handler. ...",
+        "static": false,
+        "name": "removeListener",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Removes an event handler.</p>\n",
+        "linenr": 392,
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
-        "shortDoc": "Removes listeners that were added by the mon method. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Observable|Element",
@@ -2860,49 +2710,51 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "scope"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-removeManagedListener",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Removes listeners that were added by the mon method. ...",
+        "static": false,
         "name": "removeManagedListener",
         "owner": "Ext.util.Observable",
         "doc": "<p>Removes listeners that were added by the <a href=\"#/api/Ext.data.DirectStore-method-mon\" rel=\"Ext.data.DirectStore-method-mon\" class=\"docClass\">mon</a> method.</p>\n",
         "linenr": 197,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-resumeEvents",
-        "shortDoc": "Resumes firing events (see suspendEvents). ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Resumes firing events (see suspendEvents). ...",
+        "static": false,
         "name": "resumeEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Resumes firing events (see <a href=\"#/api/Ext.data.DirectStore-method-suspendEvents\" rel=\"Ext.data.DirectStore-method-suspendEvents\" class=\"docClass\">suspendEvents</a>).</p>\n\n<p>If events were suspended using the <code>**queueSuspended**</code> parameter, then all events fired\nduring event suspension will be sent to any listeners now.</p>\n",
         "linenr": 554,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "Observable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-method-setProxy",
-        "shortDoc": "Sets the Store's Proxy by string, config object or Proxy instance ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
           {
             "type": "String|Object|Ext.data.proxy.Proxy",
@@ -2911,26 +2763,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "proxy"
           }
         ],
-        "name": "setProxy",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>Sets the Store's Proxy by string, config object or Proxy instance</p>\n",
-        "linenr": 276,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-method-setProxy",
         "return": {
           "type": "Ext.data.proxy.Proxy",
           "doc": "<p>The attached Proxy object</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Sets the Store's Proxy by string, config object or Proxy instance ...",
+        "static": false,
+        "name": "setProxy",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>Sets the Store's Proxy by string, config object or Proxy instance</p>\n",
+        "linenr": 276,
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Sortable.html#Ext-util-Sortable-method-sort",
-        "shortDoc": "Sorts the data in the Store by one or more of its properties. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
-        "private": false,
         "params": [
           {
             "type": "String|Array",
@@ -2957,49 +2810,51 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "doSort"
           }
         ],
-        "name": "sort",
-        "owner": "Ext.util.Sortable",
-        "doc": "<p>Sorts the data in the Store by one or more of its properties. Example usage:</p>\n\n\n<pre><code>//sort by a single field\nmyStore.sort('myField', 'DESC');\n\n//sorting by multiple fields\nmyStore.sort([\n    {\n        property : 'age',\n        direction: 'ASC'\n    },\n    {\n        property : 'name',\n        direction: 'DESC'\n    }\n]);\n</code></pre>\n\n\n<p>Internally, Store converts the passed arguments into an array of <a href=\"#/api/Ext.util.Sorter\" rel=\"Ext.util.Sorter\" class=\"docClass\">Ext.util.Sorter</a> instances, and delegates the actual\nsorting to its internal <a href=\"#/api/Ext.util.MixedCollection\" rel=\"Ext.util.MixedCollection\" class=\"docClass\">Ext.util.MixedCollection</a>.</p>\n\n\n<p>When passing a single string argument to sort, Store maintains a ASC/DESC toggler per field, so this code:</p>\n\n\n<pre><code>store.sort('myField');\nstore.sort('myField');\n     </code></pre>\n\n\n<p>Is equivalent to this code, because Store handles the toggling automatically:</p>\n\n\n<pre><code>store.sort('myField', 'ASC');\nstore.sort('myField', 'DESC');\n</code></pre>\n\n",
-        "linenr": 58,
+        "href": "Sortable.html#Ext-util-Sortable-method-sort",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
+        "private": false,
+        "shortDoc": "Sorts the data in the Store by one or more of its properties. ...",
+        "static": false,
+        "name": "sort",
+        "owner": "Ext.util.Sortable",
+        "doc": "<p>Sorts the data in the Store by one or more of its properties. Example usage:</p>\n\n\n<pre><code>//sort by a single field\nmyStore.sort('myField', 'DESC');\n\n//sorting by multiple fields\nmyStore.sort([\n    {\n        property : 'age',\n        direction: 'ASC'\n    },\n    {\n        property : 'name',\n        direction: 'DESC'\n    }\n]);\n</code></pre>\n\n\n<p>Internally, Store converts the passed arguments into an array of <a href=\"#/api/Ext.util.Sorter\" rel=\"Ext.util.Sorter\" class=\"docClass\">Ext.util.Sorter</a> instances, and delegates the actual\nsorting to its internal <a href=\"#/api/Ext.util.MixedCollection\" rel=\"Ext.util.MixedCollection\" class=\"docClass\">Ext.util.MixedCollection</a>.</p>\n\n\n<p>When passing a single string argument to sort, Store maintains a ASC/DESC toggler per field, so this code:</p>\n\n\n<pre><code>store.sort('myField');\nstore.sort('myField');\n     </code></pre>\n\n\n<p>Is equivalent to this code, because Store handles the toggling automatically:</p>\n\n\n<pre><code>store.sort('myField', 'ASC');\nstore.sort('myField', 'DESC');\n</code></pre>\n\n",
+        "linenr": 58,
         "html_filename": "Sortable.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "method",
-        "href": "Base3.html#Ext-Base-method-statics",
-        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
         "params": [
 
         ],
-        "name": "statics",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
-        "linenr": 199,
+        "href": "Base3.html#Ext-Base-method-statics",
         "return": {
           "type": "Class",
           "doc": "\n"
         },
+        "protected": true,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the class from which this object was instantiated. ...",
+        "static": false,
+        "name": "statics",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the class from which this object was instantiated. Note that unlike <a href=\"#/api/Ext.Base-property-self\" rel=\"Ext.Base-property-self\" class=\"docClass\">Ext.Base.self</a>,\n<code>this.statics()</code> is scope-independent and it always returns the class from which it was called, regardless of what\n<code>this</code> points to during run-time</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        totalCreated: 0,\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        var statics = this.statics();\n\n        alert(statics.speciesName);     // always equals to 'Cat' no matter what 'this' refers to\n                                        // equivalent to: My.Cat.speciesName\n\n        alert(this.self.speciesName);   // dependent on 'this'\n\n        statics.totalCreated++;\n\n        return this;\n    },\n\n    clone: function() {\n        var cloned = new this.self;                      // dependent on 'this'\n\n        cloned.groupName = this.statics().speciesName;   // equivalent to: My.Cat.speciesName\n\n        return cloned;\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n\n    statics: {\n        speciesName: 'Snow Leopard'     // My.SnowLeopard.speciesName = 'Snow Leopard'\n    },\n\n    constructor: function() {\n        this.callParent();\n    }\n});\n\nvar cat = new My.Cat();                 // alerts 'Cat', then alerts 'Cat'\n\nvar snowLeopard = new My.SnowLeopard(); // alerts 'Cat', then alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));         // alerts 'My.SnowLeopard'\nalert(clone.groupName);                 // alerts 'Cat'\n\nalert(My.Cat.totalCreated);             // alerts 3\n</code></pre>\n",
+        "linenr": 199,
         "html_filename": "Base3.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Store2.html#Ext-data-Store-method-sum",
-        "shortDoc": "Sums the value of property for each record between start\nand end and returns the result. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -3014,26 +2869,27 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "grouped"
           }
         ],
-        "name": "sum",
-        "owner": "Ext.data.Store",
-        "doc": "<p>Sums the value of <tt>property</tt> for each <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">record</a> between <tt>start</tt>\nand <tt>end</tt> and returns the result.</p>\n",
-        "linenr": 1962,
+        "href": "Store2.html#Ext-data-Store-method-sum",
         "return": {
           "type": "Number",
           "doc": "<p>The sum</p>\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Sums the value of property for each record between start\nand end and returns the result. ...",
+        "static": false,
+        "name": "sum",
+        "owner": "Ext.data.Store",
+        "doc": "<p>Sums the value of <tt>property</tt> for each <a href=\"#/api/Ext.data.Model\" rel=\"Ext.data.Model\" class=\"docClass\">record</a> between <tt>start</tt>\nand <tt>end</tt> and returns the result.</p>\n",
+        "linenr": 1962,
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
-        "shortDoc": "Suspends the firing of all events. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "Boolean",
@@ -3042,54 +2898,51 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "queueSuspended"
           }
         ],
+        "href": "Observable.html#Ext-util-Observable-method-suspendEvents",
+        "return": {
+          "type": "void",
+          "doc": "\n"
+        },
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Suspends the firing of all events. ...",
+        "static": false,
         "name": "suspendEvents",
         "owner": "Ext.util.Observable",
         "doc": "<p>Suspends the firing of all events. (see <a href=\"#/api/Ext.data.DirectStore-method-resumeEvents\" rel=\"Ext.data.DirectStore-method-resumeEvents\" class=\"docClass\">resumeEvents</a>)</p>\n",
         "linenr": 541,
+        "html_filename": "Observable.html"
+      },
+      {
+        "inheritable": false,
+        "deprecated": null,
+        "params": [
+
+        ],
+        "href": "AbstractStore.html#Ext-data-AbstractStore-method-sync",
         "return": {
           "type": "void",
           "doc": "\n"
         },
-        "html_filename": "Observable.html"
-      },
-      {
-        "deprecated": null,
-        "alias": null,
         "protected": false,
         "tagname": "method",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-method-sync",
-        "shortDoc": "Synchronizes the Store with its Proxy. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
         "private": false,
-        "params": [
-
-        ],
+        "shortDoc": "Synchronizes the Store with its Proxy. ...",
+        "static": false,
         "name": "sync",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>Synchronizes the Store with its Proxy. This asks the Proxy to batch together any new, updated\nand deleted records in the store, updating the Store's internal representation of the records\nas each operation completes.</p>\n",
         "linenr": 546,
-        "return": {
-          "type": "void",
-          "doc": "\n"
-        },
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": {
-          "tagname": "alias",
-          "cls": "Ext.util.Observable",
-          "doc": null,
-          "owner": "removeListener"
-        },
-        "protected": false,
-        "tagname": "method",
-        "href": "Observable.html#Ext-util-Observable-method-un",
-        "shortDoc": "Shorthand for removeListener. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
-        "private": false,
         "params": [
           {
             "type": "String",
@@ -3110,318 +2963,34 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "name": "scope"
           }
         ],
-        "name": "un",
-        "owner": "Ext.util.Observable",
-        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.DirectStore-method-removeListener\" rel=\"Ext.data.DirectStore-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
-        "linenr": 675,
+        "href": "Observable.html#Ext-util-Observable-method-un",
         "return": {
           "type": "void",
           "doc": "\n"
         },
+        "protected": false,
+        "tagname": "method",
+        "alias": {
+          "tagname": "alias",
+          "cls": "Ext.util.Observable",
+          "doc": null,
+          "owner": "removeListener"
+        },
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Observable.js",
+        "private": false,
+        "shortDoc": "Shorthand for removeListener. ...",
+        "static": false,
+        "name": "un",
+        "owner": "Ext.util.Observable",
+        "doc": "<p>Shorthand for <a href=\"#/api/Ext.data.DirectStore-method-removeListener\" rel=\"Ext.data.DirectStore-method-removeListener\" class=\"docClass\">removeListener</a>.</p>\n\n<p>Removes an event handler.</p>\n",
+        "linenr": 675,
         "html_filename": "Observable.html"
       }
     ],
-    "property": [
-      {
-        "type": "String",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Sortable.html#Ext-util-Sortable-property-",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
-        "private": false,
-        "name": "",
-        "owner": "Ext.util.Sortable",
-        "doc": "<p>The property in each item that contains the data to sort.</p>\n",
-        "linenr": 31,
-        "html_filename": "Sortable.html"
-      },
-      {
-        "type": "String",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-property-batchUpdateMode",
-        "shortDoc": "Sets the updating behavior based on batch synchronization. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
-        "name": "batchUpdateMode",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>Sets the updating behavior based on batch synchronization. 'operation' (the default) will update the Store's\ninternal representation of the data after each operation of the batch has completed, 'complete' will wait until\nthe entire batch has been completed before updating the Store's data. 'complete' is a good choice for local\nstorage proxies, 'operation' is better for remote proxies, where there is a comparatively high latency.</p>\n",
-        "linenr": 67,
-        "html_filename": "AbstractStore.html"
-      },
-      {
-        "type": "Number",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Store2.html#Ext-data-Store-property-currentPage",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
-        "name": "currentPage",
-        "owner": "Ext.data.Store",
-        "doc": "<p>The page that the Store has most recently loaded (see <a href=\"#/api/Ext.data.DirectStore-method-loadPage\" rel=\"Ext.data.DirectStore-method-loadPage\" class=\"docClass\">loadPage</a>)</p>\n",
-        "linenr": 275,
-        "html_filename": "Store2.html"
-      },
-      {
-        "type": "Ext.util.MixedCollection",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Store2.html#Ext-data-Store-property-data",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
-        "name": "data",
-        "owner": "Ext.data.Store",
-        "doc": "<p>The MixedCollection that holds this store's local cache of records</p>\n",
-        "linenr": 370,
-        "html_filename": "Store2.html"
-      },
-      {
-        "type": "String",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-property-defaultProxyType",
-        "shortDoc": "The string type of the Proxy to create if none is specified. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
-        "name": "defaultProxyType",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>The string type of the Proxy to create if none is specified. This defaults to creating a <a href=\"#/api/Ext.data.proxy.Memory\" rel=\"Ext.data.proxy.Memory\" class=\"docClass\">memory proxy</a>.</p>\n",
-        "linenr": 102,
-        "html_filename": "AbstractStore.html"
-      },
-      {
-        "type": "String",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Sortable.html#Ext-util-Sortable-property-defaultSortDirection",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
-        "private": false,
-        "name": "defaultSortDirection",
-        "owner": "Ext.util.Sortable",
-        "doc": "<p>The default sort direction to use if one is not specified (defaults to \"ASC\")</p>\n",
-        "linenr": 20,
-        "html_filename": "Sortable.html"
-      },
-      {
-        "type": "Boolean",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-property-filterOnLoad",
-        "shortDoc": "If true, any filters attached to this Store will be run after loading data, before the datachanged event is fired. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
-        "name": "filterOnLoad",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>If true, any filters attached to this Store will be run after loading data, before the datachanged event is fired.\nDefaults to true, ignored if <a href=\"#/api/Ext.data.DirectStore-cfg-remoteFilter\" rel=\"Ext.data.DirectStore-cfg-remoteFilter\" class=\"docClass\">remoteFilter</a> is true</p>\n",
-        "linenr": 77,
-        "html_filename": "AbstractStore.html"
-      },
-      {
-        "type": "Ext.util.MixedCollection",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-property-filters",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
-        "name": "filters",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>The collection of <a href=\"#/api/Ext.util.Filter\" rel=\"Ext.util.Filter\" class=\"docClass\">Filters</a> currently applied to this Store</p>\n",
-        "linenr": 266,
-        "html_filename": "AbstractStore.html"
-      },
-      {
-        "type": "String",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Store2.html#Ext-data-Store-property-groupDir",
-        "shortDoc": "The direction in which sorting should be applied when grouping. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
-        "name": "groupDir",
-        "owner": "Ext.data.Store",
-        "doc": "<p>The direction in which sorting should be applied when grouping. Defaults to \"ASC\" - the other supported value is \"DESC\"</p>\n",
-        "linenr": 261,
-        "html_filename": "Store2.html"
-      },
-      {
-        "type": "String",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Store2.html#Ext-data-Store-property-groupField",
-        "shortDoc": "The (optional) field by which to group data in the store. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
-        "name": "groupField",
-        "owner": "Ext.data.Store",
-        "doc": "<p>The (optional) field by which to group data in the store. Internally, grouping is very similar to sorting - the\ngroupField and <a href=\"#/api/Ext.data.DirectStore-property-groupDir\" rel=\"Ext.data.DirectStore-property-groupDir\" class=\"docClass\">groupDir</a> are injected as the first sorter (see <a href=\"#/api/Ext.data.DirectStore-method-sort\" rel=\"Ext.data.DirectStore-method-sort\" class=\"docClass\">sort</a>). Stores support a single\nlevel of grouping, and groups can be fetched via the <a href=\"#/api/Ext.data.DirectStore-method-getGroups\" rel=\"Ext.data.DirectStore-method-getGroups\" class=\"docClass\">getGroups</a> method.</p>\n",
-        "linenr": 252,
-        "html_filename": "Store2.html"
-      },
-      {
-        "type": "Ext.util.MixedCollection",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Store2.html#Ext-data-Store-property-groupers",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
-        "name": "groupers",
-        "owner": "Ext.data.Store",
-        "doc": "<p>The collection of <a href=\"#/api/Ext.util.Grouper\" rel=\"Ext.util.Grouper\" class=\"docClass\">Groupers</a> currently applied to this Store</p>\n",
-        "linenr": 392,
-        "html_filename": "Store2.html"
-      },
-      {
-        "type": "Boolean",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-property-isDestroyed",
-        "shortDoc": "True if the Store has already been destroyed via destroyStore. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
-        "name": "isDestroyed",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>True if the Store has already been destroyed via destroyStore. If this is true, the reference to Store should be deleted\nas it will not function correctly any more.</p>\n",
-        "linenr": 109,
-        "html_filename": "AbstractStore.html"
-      },
-      {
-        "type": "Boolean",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Sortable.html#Ext-util-Sortable-property-isSortable",
-        "shortDoc": "Flag denoting that this object is sortable. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
-        "private": false,
-        "name": "isSortable",
-        "owner": "Ext.util.Sortable",
-        "doc": "<p>Flag denoting that this object is sortable. Always true.</p>\n",
-        "linenr": 13,
-        "html_filename": "Sortable.html"
-      },
-      {
-        "type": "Class",
-        "deprecated": null,
-        "alias": null,
-        "protected": true,
-        "tagname": "property",
-        "href": "Base3.html#Ext-Base-property-self",
-        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
-        "private": false,
-        "name": "self",
-        "owner": "Ext.Base",
-        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
-        "linenr": 18,
-        "html_filename": "Base3.html"
-      },
-      {
-        "type": "Ext.util.MixedCollection",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Store2.html#Ext-data-Store-property-snapshot",
-        "shortDoc": "A pristine (unfiltered) collection of the records in this store. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
-        "name": "snapshot",
-        "owner": "Ext.data.Store",
-        "doc": "<p>A pristine (unfiltered) collection of the records in this store. This is used to reinstate\nrecords when a filter is removed or changed</p>\n",
-        "linenr": 1137,
-        "html_filename": "Store2.html"
-      },
-      {
-        "type": "Boolean",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-property-sortOnLoad",
-        "shortDoc": "If true, any sorters attached to this Store will be run after loading data, before the datachanged event is fired. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
-        "name": "sortOnLoad",
-        "owner": "Ext.data.AbstractStore",
-        "doc": "<p>If true, any sorters attached to this Store will be run after loading data, before the datachanged event is fired.\nDefaults to true, igored if <a href=\"#/api/Ext.data.DirectStore-cfg-remoteSort\" rel=\"Ext.data.DirectStore-cfg-remoteSort\" class=\"docClass\">remoteSort</a> is true</p>\n",
-        "linenr": 85,
-        "html_filename": "AbstractStore.html"
-      },
-      {
-        "type": "Ext.util.MixedCollection",
-        "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "property",
-        "href": "Sortable.html#Ext-util-Sortable-property-sorters",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
-        "private": false,
-        "name": "sorters",
-        "owner": "Ext.util.Sortable",
-        "doc": "<p>The collection of <a href=\"#/api/Ext.util.Sorter\" rel=\"Ext.util.Sorter\" class=\"docClass\">Sorters</a> currently applied to this Store</p>\n",
-        "linenr": 44,
-        "html_filename": "Sortable.html"
-      }
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
     "event": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-event-add",
-        "shortDoc": "Fired when a Model instance has been added to this Store ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Store",
@@ -3448,6 +3017,14 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "AbstractStore.html#Ext-data-AbstractStore-event-add",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Fired when a Model instance has been added to this Store ...",
+        "static": false,
         "name": "add",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>Fired when a Model instance has been added to this Store</p>\n",
@@ -3455,15 +3032,8 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-event-beforeload",
-        "shortDoc": "Event description ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Store",
@@ -3484,6 +3054,14 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "AbstractStore.html#Ext-data-AbstractStore-event-beforeload",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Event description ...",
+        "static": false,
         "name": "beforeload",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>Event description</p>\n",
@@ -3491,15 +3069,8 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "Store2.html#Ext-data-Store-event-beforeprefetch",
-        "shortDoc": "Fires before a prefetch occurs. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.store",
@@ -3520,6 +3091,14 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "Store2.html#Ext-data-Store-event-beforeprefetch",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Fires before a prefetch occurs. ...",
+        "static": false,
         "name": "beforeprefetch",
         "owner": "Ext.data.Store",
         "doc": "<p>Fires before a prefetch occurs. Return false to cancel.</p>\n",
@@ -3527,15 +3106,8 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-event-beforesync",
-        "shortDoc": "Called before a call to sync is executed. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
           {
             "type": "Object",
@@ -3550,6 +3122,14 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "AbstractStore.html#Ext-data-AbstractStore-event-beforesync",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Called before a call to sync is executed. ...",
+        "static": false,
         "name": "beforesync",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>Called before a call to <a href=\"#/api/Ext.data.DirectStore-method-sync\" rel=\"Ext.data.DirectStore-method-sync\" class=\"docClass\">sync</a> is executed. Return false from any listener to cancel the synv</p>\n",
@@ -3557,15 +3137,8 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-event-clear",
-        "shortDoc": "Fired after the removeAll method is called. ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Store",
@@ -3580,6 +3153,14 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "AbstractStore.html#Ext-data-AbstractStore-event-clear",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Fired after the removeAll method is called. ...",
+        "static": false,
         "name": "clear",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>Fired after the <a href=\"#/api/Ext.data.DirectStore-method-removeAll\" rel=\"Ext.data.DirectStore-method-removeAll\" class=\"docClass\">removeAll</a> method is called.</p>\n",
@@ -3587,15 +3168,8 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-event-datachanged",
-        "shortDoc": "Fires whenever the records in the Store have changed in some way - this could include adding or removing records,\nor ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Store",
@@ -3610,6 +3184,14 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "AbstractStore.html#Ext-data-AbstractStore-event-datachanged",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Fires whenever the records in the Store have changed in some way - this could include adding or removing records,\nor ...",
+        "static": false,
         "name": "datachanged",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>Fires whenever the records in the Store have changed in some way - this could include adding or removing records,\nor updating the data in existing records</p>\n",
@@ -3617,15 +3199,8 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "Store2.html#Ext-data-Store-event-groupchange",
-        "shortDoc": "Fired whenever the grouping in the grid changes ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Store",
@@ -3646,6 +3221,14 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "Store2.html#Ext-data-Store-event-groupchange",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Fired whenever the grouping in the grid changes ...",
+        "static": false,
         "name": "groupchange",
         "owner": "Ext.data.Store",
         "doc": "<p>Fired whenever the grouping in the grid changes</p>\n",
@@ -3653,15 +3236,8 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "Store2.html#Ext-data-Store-event-load",
-        "shortDoc": "Fires whenever records have been prefetched ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.store",
@@ -3694,6 +3270,14 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "Store2.html#Ext-data-Store-event-load",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "Fires whenever records have been prefetched ...",
+        "static": false,
         "name": "load",
         "owner": "Ext.data.Store",
         "doc": "<p>Fires whenever records have been prefetched</p>\n",
@@ -3701,15 +3285,8 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "Store2.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-event-remove",
-        "shortDoc": "Fired when a Model instance has been removed from this Store ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
           {
             "type": "Ext.data.Store",
@@ -3736,6 +3313,14 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "AbstractStore.html#Ext-data-AbstractStore-event-remove",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Fired when a Model instance has been removed from this Store ...",
+        "static": false,
         "name": "remove",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>Fired when a Model instance has been removed from this Store</p>\n",
@@ -3743,15 +3328,8 @@ Ext.data.JsonP.Ext_data_DirectStore({
         "html_filename": "AbstractStore.html"
       },
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "protected": false,
-        "tagname": "event",
-        "href": "AbstractStore.html#Ext-data-AbstractStore-event-update",
-        "shortDoc": "Fires when a Record has been updated ...",
-        "static": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
-        "private": false,
         "params": [
           {
             "type": "Store",
@@ -3778,47 +3356,371 @@ Ext.data.JsonP.Ext_data_DirectStore({
             "doc": "<p>The options object passed to <a href=\"#/api/Ext.util.Observable-method-addListener\" rel=\"Ext.util.Observable-method-addListener\" class=\"docClass\">Ext.util.Observable.addListener</a>.</p>\n"
           }
         ],
+        "href": "AbstractStore.html#Ext-data-AbstractStore-event-update",
+        "protected": false,
+        "tagname": "event",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Fires when a Record has been updated ...",
+        "static": false,
         "name": "update",
         "owner": "Ext.data.AbstractStore",
         "doc": "<p>Fires when a Record has been updated</p>\n",
         "linenr": 159,
         "html_filename": "AbstractStore.html"
       }
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+      {
+        "inheritable": false,
+        "type": "String",
+        "deprecated": null,
+        "href": "Sortable.html#Ext-util-Sortable-property-",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
+        "private": false,
+        "static": false,
+        "name": "",
+        "owner": "Ext.util.Sortable",
+        "doc": "<p>The property in each item that contains the data to sort.</p>\n",
+        "linenr": 31,
+        "html_filename": "Sortable.html"
+      },
+      {
+        "inheritable": false,
+        "type": "String",
+        "deprecated": null,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-property-batchUpdateMode",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "Sets the updating behavior based on batch synchronization. ...",
+        "static": false,
+        "name": "batchUpdateMode",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>Sets the updating behavior based on batch synchronization. 'operation' (the default) will update the Store's\ninternal representation of the data after each operation of the batch has completed, 'complete' will wait until\nthe entire batch has been completed before updating the Store's data. 'complete' is a good choice for local\nstorage proxies, 'operation' is better for remote proxies, where there is a comparatively high latency.</p>\n",
+        "linenr": 67,
+        "html_filename": "AbstractStore.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Number",
+        "deprecated": null,
+        "href": "Store2.html#Ext-data-Store-property-currentPage",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "static": false,
+        "name": "currentPage",
+        "owner": "Ext.data.Store",
+        "doc": "<p>The page that the Store has most recently loaded (see <a href=\"#/api/Ext.data.DirectStore-method-loadPage\" rel=\"Ext.data.DirectStore-method-loadPage\" class=\"docClass\">loadPage</a>)</p>\n",
+        "linenr": 275,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Ext.util.MixedCollection",
+        "deprecated": null,
+        "href": "Store2.html#Ext-data-Store-property-data",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "static": false,
+        "name": "data",
+        "owner": "Ext.data.Store",
+        "doc": "<p>The MixedCollection that holds this store's local cache of records</p>\n",
+        "linenr": 370,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "type": "String",
+        "deprecated": null,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-property-defaultProxyType",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "The string type of the Proxy to create if none is specified. ...",
+        "static": false,
+        "name": "defaultProxyType",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>The string type of the Proxy to create if none is specified. This defaults to creating a <a href=\"#/api/Ext.data.proxy.Memory\" rel=\"Ext.data.proxy.Memory\" class=\"docClass\">memory proxy</a>.</p>\n",
+        "linenr": 102,
+        "html_filename": "AbstractStore.html"
+      },
+      {
+        "inheritable": false,
+        "type": "String",
+        "deprecated": null,
+        "href": "Sortable.html#Ext-util-Sortable-property-defaultSortDirection",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
+        "private": false,
+        "static": false,
+        "name": "defaultSortDirection",
+        "owner": "Ext.util.Sortable",
+        "doc": "<p>The default sort direction to use if one is not specified (defaults to \"ASC\")</p>\n",
+        "linenr": 20,
+        "html_filename": "Sortable.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Boolean",
+        "deprecated": null,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-property-filterOnLoad",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "If true, any filters attached to this Store will be run after loading data, before the datachanged event is fired. ...",
+        "static": false,
+        "name": "filterOnLoad",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>If true, any filters attached to this Store will be run after loading data, before the datachanged event is fired.\nDefaults to true, ignored if <a href=\"#/api/Ext.data.DirectStore-cfg-remoteFilter\" rel=\"Ext.data.DirectStore-cfg-remoteFilter\" class=\"docClass\">remoteFilter</a> is true</p>\n",
+        "linenr": 77,
+        "html_filename": "AbstractStore.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Ext.util.MixedCollection",
+        "deprecated": null,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-property-filters",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "static": false,
+        "name": "filters",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>The collection of <a href=\"#/api/Ext.util.Filter\" rel=\"Ext.util.Filter\" class=\"docClass\">Filters</a> currently applied to this Store</p>\n",
+        "linenr": 266,
+        "html_filename": "AbstractStore.html"
+      },
+      {
+        "inheritable": false,
+        "type": "String",
+        "deprecated": null,
+        "href": "Store2.html#Ext-data-Store-property-groupDir",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "The direction in which sorting should be applied when grouping. ...",
+        "static": false,
+        "name": "groupDir",
+        "owner": "Ext.data.Store",
+        "doc": "<p>The direction in which sorting should be applied when grouping. Defaults to \"ASC\" - the other supported value is \"DESC\"</p>\n",
+        "linenr": 261,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "type": "String",
+        "deprecated": null,
+        "href": "Store2.html#Ext-data-Store-property-groupField",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "The (optional) field by which to group data in the store. ...",
+        "static": false,
+        "name": "groupField",
+        "owner": "Ext.data.Store",
+        "doc": "<p>The (optional) field by which to group data in the store. Internally, grouping is very similar to sorting - the\ngroupField and <a href=\"#/api/Ext.data.DirectStore-property-groupDir\" rel=\"Ext.data.DirectStore-property-groupDir\" class=\"docClass\">groupDir</a> are injected as the first sorter (see <a href=\"#/api/Ext.data.DirectStore-method-sort\" rel=\"Ext.data.DirectStore-method-sort\" class=\"docClass\">sort</a>). Stores support a single\nlevel of grouping, and groups can be fetched via the <a href=\"#/api/Ext.data.DirectStore-method-getGroups\" rel=\"Ext.data.DirectStore-method-getGroups\" class=\"docClass\">getGroups</a> method.</p>\n",
+        "linenr": 252,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Ext.util.MixedCollection",
+        "deprecated": null,
+        "href": "Store2.html#Ext-data-Store-property-groupers",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "static": false,
+        "name": "groupers",
+        "owner": "Ext.data.Store",
+        "doc": "<p>The collection of <a href=\"#/api/Ext.util.Grouper\" rel=\"Ext.util.Grouper\" class=\"docClass\">Groupers</a> currently applied to this Store</p>\n",
+        "linenr": 392,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Boolean",
+        "deprecated": null,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-property-isDestroyed",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "True if the Store has already been destroyed via destroyStore. ...",
+        "static": false,
+        "name": "isDestroyed",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>True if the Store has already been destroyed via destroyStore. If this is true, the reference to Store should be deleted\nas it will not function correctly any more.</p>\n",
+        "linenr": 109,
+        "html_filename": "AbstractStore.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Boolean",
+        "deprecated": null,
+        "href": "Sortable.html#Ext-util-Sortable-property-isSortable",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
+        "private": false,
+        "shortDoc": "Flag denoting that this object is sortable. ...",
+        "static": false,
+        "name": "isSortable",
+        "owner": "Ext.util.Sortable",
+        "doc": "<p>Flag denoting that this object is sortable. Always true.</p>\n",
+        "linenr": 13,
+        "html_filename": "Sortable.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Class",
+        "deprecated": null,
+        "href": "Base3.html#Ext-Base-property-self",
+        "protected": true,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/core/src/class/Base.js",
+        "private": false,
+        "shortDoc": "Get the reference to the current class from which this object was instantiated. ...",
+        "static": false,
+        "name": "self",
+        "owner": "Ext.Base",
+        "doc": "<p>Get the reference to the current class from which this object was instantiated. Unlike <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>,\n<code>this.self</code> is scope-dependent and it's meant to be used for dynamic inheritance. See <a href=\"#/api/Ext.Base-method-statics\" rel=\"Ext.Base-method-statics\" class=\"docClass\">Ext.Base.statics</a>\nfor a detailed comparison</p>\n\n<pre><code>Ext.define('My.Cat', {\n    statics: {\n        speciesName: 'Cat' // My.Cat.speciesName = 'Cat'\n    },\n\n    constructor: function() {\n        alert(this.self.speciesName); / dependent on 'this'\n\n        return this;\n    },\n\n    clone: function() {\n        return new this.self();\n    }\n});\n\n\nExt.define('My.SnowLeopard', {\n    extend: 'My.Cat',\n    statics: {\n        speciesName: 'Snow Leopard'         // My.SnowLeopard.speciesName = 'Snow Leopard'\n    }\n});\n\nvar cat = new My.Cat();                     // alerts 'Cat'\nvar snowLeopard = new My.SnowLeopard();     // alerts 'Snow Leopard'\n\nvar clone = snowLeopard.clone();\nalert(Ext.getClassName(clone));             // alerts 'My.SnowLeopard'\n</code></pre>\n",
+        "linenr": 18,
+        "html_filename": "Base3.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Ext.util.MixedCollection",
+        "deprecated": null,
+        "href": "Store2.html#Ext-data-Store-property-snapshot",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/Store.js",
+        "private": false,
+        "shortDoc": "A pristine (unfiltered) collection of the records in this store. ...",
+        "static": false,
+        "name": "snapshot",
+        "owner": "Ext.data.Store",
+        "doc": "<p>A pristine (unfiltered) collection of the records in this store. This is used to reinstate\nrecords when a filter is removed or changed</p>\n",
+        "linenr": 1137,
+        "html_filename": "Store2.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Boolean",
+        "deprecated": null,
+        "href": "AbstractStore.html#Ext-data-AbstractStore-property-sortOnLoad",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/AbstractStore.js",
+        "private": false,
+        "shortDoc": "If true, any sorters attached to this Store will be run after loading data, before the datachanged event is fired. ...",
+        "static": false,
+        "name": "sortOnLoad",
+        "owner": "Ext.data.AbstractStore",
+        "doc": "<p>If true, any sorters attached to this Store will be run after loading data, before the datachanged event is fired.\nDefaults to true, igored if <a href=\"#/api/Ext.data.DirectStore-cfg-remoteSort\" rel=\"Ext.data.DirectStore-cfg-remoteSort\" class=\"docClass\">remoteSort</a> is true</p>\n",
+        "linenr": 85,
+        "html_filename": "AbstractStore.html"
+      },
+      {
+        "inheritable": false,
+        "type": "Ext.util.MixedCollection",
+        "deprecated": null,
+        "href": "Sortable.html#Ext-util-Sortable-property-sorters",
+        "protected": false,
+        "tagname": "property",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/util/Sortable.js",
+        "private": false,
+        "static": false,
+        "name": "sorters",
+        "owner": "Ext.util.Sortable",
+        "doc": "<p>The collection of <a href=\"#/api/Ext.util.Sorter\" rel=\"Ext.util.Sorter\" class=\"docClass\">Sorters</a> currently applied to this Store</p>\n",
+        "linenr": 44,
+        "html_filename": "Sortable.html"
+      }
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-    "Ext.Base",
-    "Ext.data.AbstractStore",
-    "Ext.data.Store"
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "DirectStore.html#Ext-data-DirectStore",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": null,
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/DirectStore.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.data.DirectStore",
   "doc": "<p>Small helper class to create an <a href=\"#/api/Ext.data.Store\" rel=\"Ext.data.Store\" class=\"docClass\">Ext.data.Store</a> configured with an\n<a href=\"#/api/Ext.data.proxy.Direct\" rel=\"Ext.data.proxy.Direct\" class=\"docClass\">Ext.data.proxy.Direct</a> and <a href=\"#/api/Ext.data.reader.Json\" rel=\"Ext.data.reader.Json\" class=\"docClass\">Ext.data.reader.Json</a> to make interacting\nwith an Ext.Direct Server-side <a href=\"#/api/Ext.direct.Provider\" rel=\"Ext.direct.Provider\" class=\"docClass\">Provider</a> easier.\nTo create a different proxy/reader combination create a basic <a href=\"#/api/Ext.data.Store\" rel=\"Ext.data.Store\" class=\"docClass\">Ext.data.Store</a>\nconfigured as needed.</p>\n\n\n\n\n<p><b>*Note:</b> Although they are not listed, this class inherits all of the config options of:</p>\n\n\n<div><ul class=\"mdetail-params\">\n<li><b><a href=\"#/api/Ext.data.Store\" rel=\"Ext.data.Store\" class=\"docClass\">Store</a></b></li>\n<div class=\"sub-desc\"><ul class=\"mdetail-params\">\n\n</ul></div>\n<li><b><a href=\"#/api/Ext.data.reader.Json\" rel=\"Ext.data.reader.Json\" class=\"docClass\">JsonReader</a></b></li>\n<div class=\"sub-desc\"><ul class=\"mdetail-params\">\n<li><tt><b><a href=\"#/api/Ext.data.reader.Json-cfg-root\" rel=\"Ext.data.reader.Json-cfg-root\" class=\"docClass\">root</a></b></tt></li>\n<li><tt><b><a href=\"#/api/Ext.data.reader.Json-cfg-idProperty\" rel=\"Ext.data.reader.Json-cfg-idProperty\" class=\"docClass\">idProperty</a></b></tt></li>\n<li><tt><b><a href=\"#/api/Ext.data.reader.Json-cfg-totalProperty\" rel=\"Ext.data.reader.Json-cfg-totalProperty\" class=\"docClass\">totalProperty</a></b></tt></li>\n</ul></div>\n\n<li><b><a href=\"#/api/Ext.data.proxy.Direct\" rel=\"Ext.data.proxy.Direct\" class=\"docClass\">DirectProxy</a></b></li>\n<div class=\"sub-desc\"><ul class=\"mdetail-params\">\n<li><tt><b><a href=\"#/api/Ext.data.proxy.Direct-cfg-directFn\" rel=\"Ext.data.proxy.Direct-cfg-directFn\" class=\"docClass\">directFn</a></b></tt></li>\n<li><tt><b><a href=\"#/api/Ext.data.proxy.Direct-cfg-paramOrder\" rel=\"Ext.data.proxy.Direct-cfg-paramOrder\" class=\"docClass\">paramOrder</a></b></tt></li>\n<li><tt><b><a href=\"#/api/Ext.data.proxy.Direct-cfg-paramsAsHash\" rel=\"Ext.data.proxy.Direct-cfg-paramsAsHash\" class=\"docClass\">paramsAsHash</a></b></tt></li>\n</ul></div>\n</ul></div>\n\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "DirectStore.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Ext.data.Store"
 });

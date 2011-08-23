@@ -266,7 +266,12 @@ Ext.define('Ext.layout.container.Box', {
         for (i = 0; i < visibleCount; i++) {
             child = visibleItems[i];
             childPerpendicular = child[perpendicularPrefix];
-            me.layoutItem(child);
+            if (!child.flex || !(me.align == 'stretch' || me.align == 'stretchmax')) {
+                if (child.componentLayout.initialized !== true) {
+                    me.layoutItem(child);
+                }
+            }
+
             childMargins = child.margins;
             parallelMargins = childMargins[me.parallelBefore] + childMargins[me.parallelAfter];
 

@@ -528,6 +528,7 @@ Ext.define('Ext.grid.Lockable', {
         var me = this,
             width = me.lockedGrid.headerCt.getFullWidth(true);
         me.lockedGrid.setWidth(width);
+        me.doComponentLayout();
     },
     
     onLockedHeaderResize: function() {

@@ -1,22 +1,33 @@
 Ext.data.JsonP.Ext_data_ResultSet({
-  "allMixins": [
+  "mixedInto": [
+
+  ],
+  "superclasses": [
+
+  ],
+  "inheritable": false,
+  "subclasses": [
 
   ],
   "deprecated": null,
-  "docauthor": null,
+  "allMixins": [
+
+  ],
+  "href": "ResultSet.html#Ext-data-ResultSet",
   "members": {
     "cfg": [
       {
+        "inheritable": false,
         "type": "Number",
         "deprecated": null,
-        "alias": null,
+        "href": "ResultSet.html#Ext-data-ResultSet-cfg-count",
         "protected": false,
         "tagname": "cfg",
-        "href": "ResultSet.html#Ext-data-ResultSet-cfg-count",
-        "shortDoc": "The number of records in this ResultSet. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/ResultSet.js",
         "private": false,
+        "shortDoc": "The number of records in this ResultSet. ...",
+        "static": false,
         "name": "count",
         "owner": "Ext.data.ResultSet",
         "doc": "<p>The number of records in this ResultSet. Note that total may differ from this number</p>\n",
@@ -24,16 +35,17 @@ Ext.data.JsonP.Ext_data_ResultSet({
         "html_filename": "ResultSet.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "ResultSet.html#Ext-data-ResultSet-cfg-loaded",
         "protected": false,
         "tagname": "cfg",
-        "href": "ResultSet.html#Ext-data-ResultSet-cfg-loaded",
-        "shortDoc": "True if the records have already been loaded. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/ResultSet.js",
         "private": false,
+        "shortDoc": "True if the records have already been loaded. ...",
+        "static": false,
         "name": "loaded",
         "owner": "Ext.data.ResultSet",
         "doc": "<p>True if the records have already been loaded. This is only meaningful when dealing with\nSQL-backed proxies</p>\n",
@@ -41,16 +53,17 @@ Ext.data.JsonP.Ext_data_ResultSet({
         "html_filename": "ResultSet.html"
       },
       {
+        "inheritable": false,
         "type": "Array",
         "deprecated": null,
-        "alias": null,
+        "href": "ResultSet.html#Ext-data-ResultSet-cfg-records",
         "protected": false,
         "tagname": "cfg",
-        "href": "ResultSet.html#Ext-data-ResultSet-cfg-records",
-        "shortDoc": "The array of record instances. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/ResultSet.js",
         "private": false,
+        "shortDoc": "The array of record instances. ...",
+        "static": false,
         "name": "records",
         "owner": "Ext.data.ResultSet",
         "doc": "<p>The array of record instances. Required</p>\n",
@@ -58,15 +71,16 @@ Ext.data.JsonP.Ext_data_ResultSet({
         "html_filename": "ResultSet.html"
       },
       {
+        "inheritable": false,
         "type": "Boolean",
         "deprecated": null,
-        "alias": null,
+        "href": "ResultSet.html#Ext-data-ResultSet-cfg-success",
         "protected": false,
         "tagname": "cfg",
-        "href": "ResultSet.html#Ext-data-ResultSet-cfg-success",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/ResultSet.js",
         "private": false,
+        "static": false,
         "name": "success",
         "owner": "Ext.data.ResultSet",
         "doc": "<p>True if the ResultSet loaded successfully, false if any errors were encountered</p>\n",
@@ -74,16 +88,17 @@ Ext.data.JsonP.Ext_data_ResultSet({
         "html_filename": "ResultSet.html"
       },
       {
+        "inheritable": false,
         "type": "Number",
         "deprecated": null,
-        "alias": null,
+        "href": "ResultSet.html#Ext-data-ResultSet-cfg-total",
         "protected": false,
         "tagname": "cfg",
-        "href": "ResultSet.html#Ext-data-ResultSet-cfg-total",
-        "shortDoc": "The total number of records reported by the data source. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/ResultSet.js",
         "private": false,
+        "shortDoc": "The total number of records reported by the data source. ...",
+        "static": false,
         "name": "total",
         "owner": "Ext.data.ResultSet",
         "doc": "<p>The total number of records reported by the data source. This ResultSet may form a subset of\nthose records (see count)</p>\n",
@@ -93,13 +108,8 @@ Ext.data.JsonP.Ext_data_ResultSet({
     ],
     "method": [
       {
+        "inheritable": false,
         "deprecated": null,
-        "alias": null,
-        "href": "ResultSet.html#Ext-data-ResultSet-method-constructor",
-        "tagname": "method",
-        "protected": false,
-        "shortDoc": "Creates the resultSet ...",
-        "static": false,
         "params": [
           {
             "type": "Object",
@@ -108,79 +118,97 @@ Ext.data.JsonP.Ext_data_ResultSet({
             "name": "config"
           }
         ],
-        "private": false,
-        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/ResultSet.js",
-        "doc": "<p>Creates the resultSet</p>\n",
-        "owner": "Ext.data.ResultSet",
-        "name": "ResultSet",
-        "html_filename": "ResultSet.html",
+        "href": "ResultSet.html#Ext-data-ResultSet-method-constructor",
         "return": {
           "type": "Object",
           "doc": "\n"
         },
-        "linenr": 39
+        "protected": false,
+        "tagname": "method",
+        "alias": null,
+        "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/ResultSet.js",
+        "private": false,
+        "shortDoc": "Creates the resultSet ...",
+        "static": false,
+        "name": "constructor",
+        "owner": "Ext.data.ResultSet",
+        "doc": "<p>Creates the resultSet</p>\n",
+        "linenr": 39,
+        "html_filename": "ResultSet.html"
       }
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
     ],
     "property": [
       {
+        "inheritable": false,
         "type": "Mixed",
         "deprecated": null,
-        "alias": null,
+        "href": "ResultSet.html#Ext-data-ResultSet-property-totalRecords",
         "protected": false,
         "tagname": "property",
-        "href": "ResultSet.html#Ext-data-ResultSet-property-totalRecords",
-        "shortDoc": "DEPRECATED - will be removed in Ext JS 5.0. ...",
-        "static": false,
+        "alias": null,
         "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/ResultSet.js",
         "private": false,
+        "shortDoc": "DEPRECATED - will be removed in Ext JS 5.0. ...",
+        "static": false,
         "name": "totalRecords",
         "owner": "Ext.data.ResultSet",
         "doc": "<p>DEPRECATED - will be removed in <a href=\"#/api/Ext\" rel=\"Ext\" class=\"docClass\">Ext</a> JS 5.0. This is just a copy of this.total - use that instead</p>\n",
         "linenr": 46,
         "html_filename": "ResultSet.html"
       }
-    ],
-    "cssVar": [
-
-    ],
-    "cssMixin": [
-
-    ],
-    "event": [
-
     ]
   },
   "singleton": false,
-  "alias": null,
-  "superclasses": [
-
-  ],
   "protected": false,
   "tagname": "class",
   "mixins": [
 
   ],
-  "href": "ResultSet.html#Ext-data-ResultSet",
-  "subclasses": [
-
-  ],
-  "static": false,
+  "alias": null,
   "author": "Ed Spencer",
-  "component": false,
   "filename": "/mnt/ebs/nightly/git/SDK/platform/src/data/ResultSet.js",
   "private": false,
   "alternateClassNames": [
 
   ],
+  "static": false,
   "name": "Ext.data.ResultSet",
   "doc": "<p>Simple wrapper class that represents a set of records returned by a Proxy.</p>\n\n",
-  "mixedInto": [
-
-  ],
+  "docauthor": null,
+  "component": false,
   "linenr": 1,
   "xtypes": [
 
   ],
   "html_filename": "ResultSet.html",
+  "statics": {
+    "cfg": [
+
+    ],
+    "method": [
+
+    ],
+    "event": [
+
+    ],
+    "css_var": [
+
+    ],
+    "css_mixin": [
+
+    ],
+    "property": [
+
+    ]
+  },
   "extends": "Object"
 });

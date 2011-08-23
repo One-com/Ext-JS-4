@@ -149,15 +149,6 @@ Ext.define('Ext.panel.Table', {
             view,
             border = me.border;
 
-        // We cannot buffer this because that will wait for the 30msec from afterLayout (or what
-        // ever event triggers it) and we may be in the middle of an animation; that is a bad
-        // time to injectView because it causes a layout (by calling add on the container). A
-        // throttled func will be called immediately on first call and then block subsequent
-        // (rapid fire) calls for 30msec before allowing another call to go through. Similar
-        // results, but the action moves from the trailing edge of the interval to the leading
-        // edge.
-        me.injectView = Ext.Function.createThrottled(me.injectView, 30, me);
-
         if (me.hideHeaders) {
             border = false;
         }
@@ -290,266 +281,280 @@ Ext.define('Ext.panel.Table', {
             // getView converts viewConfig into a View instance
             view = me.getView();
 
-            if (view) {
-                me.mon(view.store, {
-                    load: me.onStoreLoad,
-                    scope: me
-                });
-                me.mon(view, {
-                    refresh: me.onViewRefresh,
-                    scope: me
-                });
-                this.relayEvents(view, [
-                    /**
-                     * @event beforeitemmousedown
-                     * Fires before the mousedown event on an item is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforeitemmousedown',
-                    /**
-                     * @event beforeitemmouseup
-                     * Fires before the mouseup event on an item is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforeitemmouseup',
-                    /**
-                     * @event beforeitemmouseenter
-                     * Fires before the mouseenter event on an item is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforeitemmouseenter',
-                    /**
-                     * @event beforeitemmouseleave
-                     * Fires before the mouseleave event on an item is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforeitemmouseleave',
-                    /**
-                     * @event beforeitemclick
-                     * Fires before the click event on an item is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforeitemclick',
-                    /**
-                     * @event beforeitemdblclick
-                     * Fires before the dblclick event on an item is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforeitemdblclick',
-                    /**
-                     * @event beforeitemcontextmenu
-                     * Fires before the contextmenu event on an item is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforeitemcontextmenu',
-                    /**
-                     * @event itemmousedown
-                     * Fires when there is a mouse down on an item
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'itemmousedown',
-                    /**
-                     * @event itemmouseup
-                     * Fires when there is a mouse up on an item
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'itemmouseup',
-                    /**
-                     * @event itemmouseenter
-                     * Fires when the mouse enters an item.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'itemmouseenter',
-                    /**
-                     * @event itemmouseleave
-                     * Fires when the mouse leaves an item.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'itemmouseleave',
-                    /**
-                     * @event itemclick
-                     * Fires when an item is clicked.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'itemclick',
-                    /**
-                     * @event itemdblclick
-                     * Fires when an item is double clicked.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'itemdblclick',
-                    /**
-                     * @event itemcontextmenu
-                     * Fires when an item is right clicked.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.data.Model} record The record that belongs to the item
-                     * @param {HTMLElement} item The item's element
-                     * @param {Number} index The item's index
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'itemcontextmenu',
-                    /**
-                     * @event beforecontainermousedown
-                     * Fires before the mousedown event on the container is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforecontainermousedown',
-                    /**
-                     * @event beforecontainermouseup
-                     * Fires before the mouseup event on the container is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforecontainermouseup',
-                    /**
-                     * @event beforecontainermouseover
-                     * Fires before the mouseover event on the container is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforecontainermouseover',
-                    /**
-                     * @event beforecontainermouseout
-                     * Fires before the mouseout event on the container is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforecontainermouseout',
-                    /**
-                     * @event beforecontainerclick
-                     * Fires before the click event on the container is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforecontainerclick',
-                    /**
-                     * @event beforecontainerdblclick
-                     * Fires before the dblclick event on the container is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforecontainerdblclick',
-                    /**
-                     * @event beforecontainercontextmenu
-                     * Fires before the contextmenu event on the container is processed. Returns false to cancel the default action.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'beforecontainercontextmenu',
-                    /**
-                     * @event containermouseup
-                     * Fires when there is a mouse up on the container
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'containermouseup',
-                    /**
-                     * @event containermouseover
-                     * Fires when you move the mouse over the container.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'containermouseover',
-                    /**
-                     * @event containermouseout
-                     * Fires when you move the mouse out of the container.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'containermouseout',
-                    /**
-                     * @event containerclick
-                     * Fires when the container is clicked.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'containerclick',
-                    /**
-                     * @event containerdblclick
-                     * Fires when the container is double clicked.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'containerdblclick',
-                    /**
-                     * @event containercontextmenu
-                     * Fires when the container is right clicked.
-                     * @param {Ext.view.View} this
-                     * @param {Ext.EventObject} e The raw event object
-                     */
-                    'containercontextmenu',
+            view.on({
+                afterrender: function () {
+                    // hijack the view el's scroll method
+                    view.el.scroll = Ext.Function.bind(me.elScroll, me);
+                    // We use to listen to document.body wheel events, but that's a
+                    // little much. We scope just to the view now.
+                    me.mon(view.el, {
+                        mousewheel: me.onMouseWheel,
+                        scope: me
+                    });
+                },
+                single: true
+            });
+            this.items = [view];
 
-                    /**
-                     * @event selectionchange
-                     * Fires when the selected nodes change. Relayed event from the underlying selection model.
-                     * @param {Ext.view.View} this
-                     * @param {Array} selections Array of the selected nodes
-                     */
-                    'selectionchange',
-                    /**
-                     * @event beforeselect
-                     * Fires before a selection is made. If any handlers return false, the selection is cancelled.
-                     * @param {Ext.view.View} this
-                     * @param {HTMLElement} node The node to be selected
-                     * @param {Array} selections Array of currently selected nodes
-                     */
-                    'beforeselect'
-                ]);
-            }
+            me.mon(view.store, {
+                load: me.onStoreLoad,
+                scope: me
+            });
+            me.mon(view, {
+                refresh: me.onViewRefresh,
+                scope: me
+            });
+            this.relayEvents(view, [
+                /**
+                 * @event beforeitemmousedown
+                 * Fires before the mousedown event on an item is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforeitemmousedown',
+                /**
+                 * @event beforeitemmouseup
+                 * Fires before the mouseup event on an item is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforeitemmouseup',
+                /**
+                 * @event beforeitemmouseenter
+                 * Fires before the mouseenter event on an item is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforeitemmouseenter',
+                /**
+                 * @event beforeitemmouseleave
+                 * Fires before the mouseleave event on an item is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforeitemmouseleave',
+                /**
+                 * @event beforeitemclick
+                 * Fires before the click event on an item is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforeitemclick',
+                /**
+                 * @event beforeitemdblclick
+                 * Fires before the dblclick event on an item is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforeitemdblclick',
+                /**
+                 * @event beforeitemcontextmenu
+                 * Fires before the contextmenu event on an item is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforeitemcontextmenu',
+                /**
+                 * @event itemmousedown
+                 * Fires when there is a mouse down on an item
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'itemmousedown',
+                /**
+                 * @event itemmouseup
+                 * Fires when there is a mouse up on an item
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'itemmouseup',
+                /**
+                 * @event itemmouseenter
+                 * Fires when the mouse enters an item.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'itemmouseenter',
+                /**
+                 * @event itemmouseleave
+                 * Fires when the mouse leaves an item.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'itemmouseleave',
+                /**
+                 * @event itemclick
+                 * Fires when an item is clicked.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'itemclick',
+                /**
+                 * @event itemdblclick
+                 * Fires when an item is double clicked.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'itemdblclick',
+                /**
+                 * @event itemcontextmenu
+                 * Fires when an item is right clicked.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.data.Model} record The record that belongs to the item
+                 * @param {HTMLElement} item The item's element
+                 * @param {Number} index The item's index
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'itemcontextmenu',
+                /**
+                 * @event beforecontainermousedown
+                 * Fires before the mousedown event on the container is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforecontainermousedown',
+                /**
+                 * @event beforecontainermouseup
+                 * Fires before the mouseup event on the container is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforecontainermouseup',
+                /**
+                 * @event beforecontainermouseover
+                 * Fires before the mouseover event on the container is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforecontainermouseover',
+                /**
+                 * @event beforecontainermouseout
+                 * Fires before the mouseout event on the container is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforecontainermouseout',
+                /**
+                 * @event beforecontainerclick
+                 * Fires before the click event on the container is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforecontainerclick',
+                /**
+                 * @event beforecontainerdblclick
+                 * Fires before the dblclick event on the container is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforecontainerdblclick',
+                /**
+                 * @event beforecontainercontextmenu
+                 * Fires before the contextmenu event on the container is processed. Returns false to cancel the default action.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'beforecontainercontextmenu',
+                /**
+                 * @event containermouseup
+                 * Fires when there is a mouse up on the container
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'containermouseup',
+                /**
+                 * @event containermouseover
+                 * Fires when you move the mouse over the container.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'containermouseover',
+                /**
+                 * @event containermouseout
+                 * Fires when you move the mouse out of the container.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'containermouseout',
+                /**
+                 * @event containerclick
+                 * Fires when the container is clicked.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'containerclick',
+                /**
+                 * @event containerdblclick
+                 * Fires when the container is double clicked.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'containerdblclick',
+                /**
+                 * @event containercontextmenu
+                 * Fires when the container is right clicked.
+                 * @param {Ext.view.View} this
+                 * @param {Ext.EventObject} e The raw event object
+                 */
+                'containercontextmenu',
+
+                /**
+                 * @event selectionchange
+                 * Fires when the selected nodes change. Relayed event from the underlying selection model.
+                 * @param {Ext.view.View} this
+                 * @param {Array} selections Array of the selected nodes
+                 */
+                'selectionchange',
+                /**
+                 * @event beforeselect
+                 * Fires before a selection is made. If any handlers return false, the selection is cancelled.
+                 * @param {Ext.view.View} this
+                 * @param {HTMLElement} node The node to be selected
+                 * @param {Array} selections Array of currently selected nodes
+                 */
+                'beforeselect'
+            ]);
         }
+
         me.callParent(arguments);
     },
 
@@ -772,52 +777,6 @@ Ext.define('Ext.panel.Table', {
 
     /**
      * @private
-     * Called after this Component has achieved its correct initial size, after all layouts have done their thing.
-     * This is so we can add the View only after the initial size is known. This method is throttled 30ms.
-     */
-    injectView: function() {
-        if (!this.hasView && !this.collapsed) {
-            var me   = this,
-                view = me.getView();
-
-            me.hasView = true;
-            me.add(view);
-
-            function viewReady () {
-                // hijack the view el's scroll method
-                view.el.scroll = Ext.Function.bind(me.elScroll, me);
-                // We use to listen to document.body wheel events, but that's a
-                // little much. We scope just to the view now.
-                me.mon(view.el, {
-                    mousewheel: me.onMouseWheel,
-                    scope: me
-                });
-                if (!me.height) {
-                    me.doComponentLayout();
-                }
-            }
-
-            if (view.rendered) {
-                viewReady();
-            } else {
-                view.on({
-                    afterrender: viewReady,
-                    single: true
-                });
-            }
-        }
-    },
-
-    afterExpand: function() {
-        // TODO - this is *not* called when part of an accordion!
-        this.callParent(arguments);
-        if (!this.hasView) {
-            this.injectView();
-        }
-    },
-
-    /**
-     * @private
      * Process UI events from the view. Propagate them to whatever internal Components need to process them
      * @param {String} type Event type, eg 'click'
      * @param {TableView} view TableView Component
@@ -929,9 +888,6 @@ Ext.define('Ext.panel.Table', {
     afterComponentLayout: function() {
         var me = this;
         me.callParent(arguments);
-
-        // Insert the View the first time the Panel has a Component layout performed.
-        me.injectView();
 
         // Avoid recursion
         if (!me.changingScrollBars) {
@@ -1082,7 +1038,7 @@ Ext.define('Ext.panel.Table', {
         var me = this,
             vertScroller = me.getVerticalScroller(),
             horizScroller = me.getHorizontalScroller(),
-            scrollDelta = me.scrollDelta / -5,
+            scrollDelta = -me.scrollDelta,
             deltas = e.getWheelDeltas(),
             deltaX = scrollDelta * deltas.x,
             deltaY = scrollDelta * deltas.y,
