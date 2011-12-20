@@ -21,11 +21,11 @@ Ext.define('Ext.selection.RowModel', {
      * Turns on/off keyboard navigation within the grid.
      */
     enableKeyNav: true,
-    
+
     /**
      * @cfg {Boolean} [ignoreRightMouseSelection=true]
      * True to ignore selections that are made when using the right mouse button if there are
-     * records that are already selected. If no records are selected, selection will continue 
+     * records that are already selected. If no records are selected, selection will continue
      * as normal
      */
     ignoreRightMouseSelection: true,
@@ -126,6 +126,26 @@ Ext.define('Ext.selection.RowModel', {
         view.el.on(Ext.EventManager.getKeyEvent(), me.onKeyPress, me);
     },
 
+    keyHandler: function (e, idx) {
+        var me = this,
+            record = me.store.getAt(idx);
+
+        if (record) {
+            if (e.shiftKey) {
+                me.selectRange(record, e.ctrlKey);
+            } else if (e.ctrlKey) {
+                e.preventDefault();
+            } else {
+                me.select(record);
+            }
+
+            me.setLastFocused(record);
+            if (!e.shiftKey) {
+                me.shiftAnchor = record;
+            }
+        }
+    },
+
     // Returns the number of rows currently visible on the screen or
     // false if there were no rows. This assumes that all rows are
     // of the same height and the first view is accurate.
@@ -145,66 +165,25 @@ Ext.define('Ext.selection.RowModel', {
     },
 
     // go to last visible record in grid.
-    onKeyEnd: function(e) {
-        var me = this,
-            last = me.store.getAt(me.store.getCount() - 1);
-
-        if (last) {
-            if (e.shiftKey) {
-                me.selectRange(last, me.lastFocused || 0);
-                me.setLastFocused(last);
-            } else if (e.ctrlKey) {
-                me.setLastFocused(last);
-            } else {
-                me.doSelect(last);
-            }
-        }
+    onKeyEnd: function(e, t) {
+        this.keyHandler(e, this.store.getCount() - 1);
     },
 
     // go to first visible record in grid.
-    onKeyHome: function(e) {
-        var me = this,
-            first = me.store.getAt(0);
-
-        if (first) {
-            if (e.shiftKey) {
-                me.selectRange(first, me.lastFocused || 0);
-                me.setLastFocused(first);
-            } else if (e.ctrlKey) {
-                me.setLastFocused(first);
-            } else {
-                me.doSelect(first, false);
-            }
-        }
+    onKeyHome: function(e, t) {
+        this.keyHandler(e, 0);
     },
 
     // Go one page up from the lastFocused record in the grid.
     onKeyPageUp: function(e) {
         var me = this,
             rowsVisible = me.getRowsVisible(),
-            selIdx,
-            prevIdx,
-            prevRecord,
-            currRec;
+            lastFocusedIdx = e.recordIndex,
+            idx;
 
         if (rowsVisible) {
-            selIdx = e.recordIndex;
-            prevIdx = selIdx - rowsVisible;
-            if (prevIdx < 0) {
-                prevIdx = 0;
-            }
-            prevRecord = me.store.getAt(prevIdx);
-            if (e.shiftKey) {
-                currRec = me.store.getAt(selIdx);
-                me.selectRange(prevRecord, currRec, e.ctrlKey, 'up');
-                me.setLastFocused(prevRecord);
-            } else if (e.ctrlKey) {
-                e.preventDefault();
-                me.setLastFocused(prevRecord);
-            } else {
-                me.doSelect(prevRecord);
-            }
-
+            idx = Math.max(lastFocusedIdx - rowsVisible, 0);
+            me.keyHandler(e, idx);
         }
     },
 
@@ -212,30 +191,12 @@ Ext.define('Ext.selection.RowModel', {
     onKeyPageDown: function(e) {
         var me = this,
             rowsVisible = me.getRowsVisible(),
-            selIdx,
-            nextIdx,
-            nextRecord,
-            currRec;
+            lastFocusedIdx = e.recordIndex,
+            idx;
 
         if (rowsVisible) {
-            selIdx = e.recordIndex;
-            nextIdx = selIdx + rowsVisible;
-            if (nextIdx >= me.store.getCount()) {
-                nextIdx = me.store.getCount() - 1;
-            }
-            nextRecord = me.store.getAt(nextIdx);
-            if (e.shiftKey) {
-                currRec = me.store.getAt(selIdx);
-                me.selectRange(nextRecord, currRec, e.ctrlKey, 'down');
-                me.setLastFocused(nextRecord);
-            } else if (e.ctrlKey) {
-                // some browsers, this means go thru browser tabs
-                // attempt to stop.
-                e.preventDefault();
-                me.setLastFocused(nextRecord);
-            } else {
-                me.doSelect(nextRecord);
-            }
+            idx = Math.min(lastFocusedIdx + rowsVisible, me.store.getCount() - 1);
+            me.keyHandler(e, idx);
         }
     },
 
@@ -249,9 +210,9 @@ Ext.define('Ext.selection.RowModel', {
 
             if (record) {
                 if (me.isSelected(record)) {
-                    me.doDeselect(record, false);
+                    me.deselect(record);
                 } else {
-                    me.doSelect(record, true);
+                    me.select(record, true);
                 }
             }
         }
@@ -262,38 +223,9 @@ Ext.define('Ext.selection.RowModel', {
     // selection. Provides bounds checking.
     onKeyUp: function(e) {
         var me = this,
-            view = me.views[0],
-            idx  = me.store.indexOf(me.lastFocused),
-            record;
+            lastFocusedIdx = me.lastFocused ? me.store.indexOf(me.lastFocused) : 0;
 
-        if (idx > 0) {
-            // needs to be the filtered count as thats what
-            // will be visible.
-            record = me.store.getAt(idx - 1);
-            if (e.shiftKey && me.lastFocused) {
-                if (me.isSelected(me.lastFocused) && me.isSelected(record)) {
-                    me.doDeselect(me.lastFocused, true);
-                    me.setLastFocused(record);
-                } else if (!me.isSelected(me.lastFocused)) {
-                    me.doSelect(me.lastFocused, true);
-                    me.doSelect(record, true);
-                } else {
-                    me.doSelect(record, true);
-                }
-            } else if (e.ctrlKey) {
-                me.setLastFocused(record);
-            } else {
-                me.doSelect(record);
-                //view.focusRow(idx - 1);
-            }
-        }
-        // There was no lastFocused record, and the user has pressed up
-        // Ignore??
-        //else if (this.selected.getCount() == 0) {
-        //
-        //    this.doSelect(record);
-        //    //view.focusRow(idx - 1);
-        //}
+        me.keyHandler(e, lastFocusedIdx - 1);
     },
 
     // Navigate one record down. This could be a selection or
@@ -301,34 +233,9 @@ Ext.define('Ext.selection.RowModel', {
     // selection. Provides bounds checking.
     onKeyDown: function(e) {
         var me = this,
-            view = me.views[0],
-            idx  = me.store.indexOf(me.lastFocused),
-            record;
+            lastFocusedIdx = me.lastFocused ? me.store.indexOf(me.lastFocused) : 0;
 
-        // needs to be the filtered count as thats what
-        // will be visible.
-        if (idx + 1 < me.store.getCount()) {
-            record = me.store.getAt(idx + 1);
-            if (me.selected.getCount() === 0) {
-                me.doSelect(record);
-                //view.focusRow(idx + 1);
-            } else if (e.shiftKey && me.lastFocused) {
-                if (me.isSelected(me.lastFocused) && me.isSelected(record)) {
-                    me.doDeselect(me.lastFocused, true);
-                    me.setLastFocused(record);
-                } else if (!me.isSelected(me.lastFocused)) {
-                    me.doSelect(me.lastFocused, true);
-                    me.doSelect(record, true);
-                } else {
-                    me.doSelect(record, true);
-                }
-            } else if (e.ctrlKey) {
-                me.setLastFocused(record);
-            } else {
-                me.doSelect(record);
-                //view.focusRow(idx + 1);
-            }
-        }
+        me.keyHandler(e, lastFocusedIdx + 1);
     },
 
     scrollByDeltaX: function(delta) {
@@ -358,7 +265,7 @@ Ext.define('Ext.selection.RowModel', {
         }
         this.selectWithEvent(record, e);
     },
-    
+
     /**
      * Checks whether a selection should proceed based on the ignoreRightMouseSelection
      * option.
@@ -463,18 +370,13 @@ Ext.define('Ext.selection.RowModel', {
     selectNext: function(keepExisting, suppressEvent) {
         var me = this,
             store = me.store,
-            selection = me.getSelection(),
-            record = selection[selection.length - 1],
-            index = store.indexOf(record) + 1,
-            success;
+            record = store.getAt(store.indexOf(me.getSelection().last()) + 1);
 
-        if(index === store.getCount() || index === 0) {
-            success = false;
-        } else {
-            me.doSelect(index, keepExisting, suppressEvent);
-            success = true;
+        if (record) {
+            me.select(record, keepExisting, suppressEvent);
+            me.setLastFocused(record, suppressEvent);
         }
-        return success;
+        return !!record;
     },
 
     /**
@@ -485,18 +387,14 @@ Ext.define('Ext.selection.RowModel', {
      */
     selectPrevious: function(keepExisting, suppressEvent) {
         var me = this,
-            selection = me.getSelection(),
-            record = selection[0],
-            index = me.store.indexOf(record) - 1,
-            success;
+            store = me.store,
+            record = store.getAt(store.indexOf(me.getSelection().first()) - 1);
 
-        if(index < 0) {
-            success = false;
-        } else {
-            me.doSelect(index, keepExisting, suppressEvent);
-            success = true
+        if (record) {
+            me.select(record, keepExisting, suppressEvent);
+            me.setLastFocused(record, suppressEvent);
         }
-        return success;
+        return !!record;
     }
 
 });

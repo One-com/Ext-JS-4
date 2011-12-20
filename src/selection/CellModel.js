@@ -152,7 +152,7 @@ Ext.define('Ext.selection.CellModel', {
     // notify the view that the cell has been selected to update the ui
     // appropriately and bring the cell into focus
     onCellSelect: function(position) {
-        this.doSelect(this.view.getStore().getAt(position.row));
+        this.select(position.row);
     },
 
     // notify view that the cell has been deselected to update the ui
