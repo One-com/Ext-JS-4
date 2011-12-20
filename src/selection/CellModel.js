@@ -171,7 +171,7 @@ Ext.define('Ext.selection.CellModel', {
             store = me.view.getStore(),
             record = store.getAt(position.row);
 
-        me.doSelect(record);
+        me.select(record);
         me.primaryView.onCellSelect(position);
         // TODO: Remove temporary cellFocus call here.
         me.primaryView.onCellFocus(position);
@@ -185,7 +185,7 @@ Ext.define('Ext.selection.CellModel', {
             store = me.view.getStore(),
             record = store.getAt(position.row);
 
-        me.doDeselect(record);
+        me.deselect(record);
         me.primaryView.onCellDeselect(position);
         me.fireEvent('deselect', me, record, position.row, position.column);
     },

@@ -126,19 +126,9 @@ Ext.define('Ext.selection.Model', {
      * @param {Boolean} suppressEvent True to suppress any select events
      */
     selectAll: function(suppressEvent) {
-        var me = this,
-            selections = me.store.getRange(),
-            i = 0,
-            len = selections.length,
-            start = me.getSelection().length;
+        var me = this;
 
-        me.bulkChange = true;
-        for (; i < len; i++) {
-            me.doSelect(selections[i], true, suppressEvent);
-        }
-        delete me.bulkChange;
-        // fire selection change only if the number of selections differs
-        me.maybeFireSelectionChange(me.getSelection().length !== start);
+        me.select(me.store.getRange(), suppressEvent);
     },
 
     /**
@@ -146,19 +136,9 @@ Ext.define('Ext.selection.Model', {
      * @param {Boolean} suppressEvent True to suppress any deselect events
      */
     deselectAll: function(suppressEvent) {
-        var me = this,
-            selections = me.getSelection(),
-            i = 0,
-            len = selections.length,
-            start = me.getSelection().length;
+        var me = this;
 
-        me.bulkChange = true;
-        for (; i < len; i++) {
-            me.doDeselect(selections[i], suppressEvent);
-        }
-        delete me.bulkChange;
-        // fire selection change only if the number of selections differs
-        me.maybeFireSelectionChange(me.getSelection().length !== start);
+        me.deselect(me.getSelection(), suppressEvent);
     },
 
     // Provides differentiation of logic between MULTI, SIMPLE and SINGLE
@@ -169,256 +149,207 @@ Ext.define('Ext.selection.Model', {
 
         switch (me.selectionMode) {
             case 'MULTI':
-                if (e.ctrlKey && me.isSelected(record)) {
-                    me.doDeselect(record, false);
-                } else if (e.shiftKey && me.lastFocused) {
-                    me.selectRange(me.lastFocused, record, e.ctrlKey);
+                if (e.shiftKey) {
+                    me.selectRange(record, e.ctrlKey);
                 } else if (e.ctrlKey) {
-                    me.doSelect(record, true, false);
-                } else if (me.isSelected(record) && !e.shiftKey && !e.ctrlKey && me.selected.getCount() > 1) {
-                    me.doSelect(record, keepExisting, false);
+                    if (me.isSelected(record)) {
+                        me.deselect(record);
+                    } else {
+                        me.select(record, true);
+                    }
                 } else {
-                    me.doSelect(record, false);
+                    //me.select(record, me.isSelected(record) && me.selected.getCount() > 1 && keepExisting); // Don't deselect existing selection if record is selected
+                    me.select(record, keepExisting);
                 }
                 break;
             case 'SIMPLE':
                 if (me.isSelected(record)) {
-                    me.doDeselect(record);
+                    me.deselect(record);
                 } else {
-                    me.doSelect(record, true);
+                    me.select(record, true);
                 }
                 break;
             case 'SINGLE':
-                // if allowDeselect is on and this record isSelected, deselect it
-                if (me.allowDeselect && me.isSelected(record)) {
-                    me.doDeselect(record);
-                // select the record and do NOT maintain existing selections
+                if (me.isSelected(record) && me.allowDeselect) {
+                    // if allowDeselect is on and this record isSelected, deselect it
+                    me.deselect(record);
                 } else {
-                    me.doSelect(record, false);
+                    // select the record and do NOT maintain existing selections
+                    me.select(record, true);
                 }
                 break;
+        }
+
+        me.setLastFocused(record);
+        if (!e.shiftKey) {
+            me.shiftAnchor = record;
         }
     },
 
     /**
      * Selects a range of rows if the selection model {@link #isLocked is not locked}.
-     * All rows in between startRow and endRow are also selected.
-     * @param {Ext.data.Model/Number} startRow The record or index of the first row in the range
-     * @param {Ext.data.Model/Number} endRow The record or index of the last row in the range
+     * All rows between record and the previously active record will also be selected.
+     * @param {Ext.data.Model} The record that was interacted with
      * @param {Boolean} [keepExisting] True to retain existing selections
      */
-    selectRange : function(startRow, endRow, keepExisting, dir){
+    selectRange: function (from, to, keepExisting) {
         var me = this,
-            store = me.store,
-            selectedCount = 0,
-            i,
-            tmp,
-            dontDeselect,
-            records = [];
+            store = me.store;
 
-        if (me.isLocked()){
-            return;
+        /* Normalize differences between old and new api.
+         * Old API:
+         *     from and to may be records or indices. keepExisting is an optinal boolean
+         * New API:
+         *     from is a record and keepExisting is an optional boolean
+         */
+        // from was a record, get the index
+        if (Ext.isObject(from)) {
+            from = store.indexOf(from);
         }
 
-        if (!keepExisting) {
-            me.deselectAll(true);
-        }
-
-        if (!Ext.isNumber(startRow)) {
-            startRow = store.indexOf(startRow);
-        }
-        if (!Ext.isNumber(endRow)) {
-            endRow = store.indexOf(endRow);
-        }
-
-        // swap values
-        if (startRow > endRow){
-            tmp = endRow;
-            endRow = startRow;
-            startRow = tmp;
-        }
-
-        for (i = startRow; i <= endRow; i++) {
-            if (me.isSelected(store.getAt(i))) {
-                selectedCount++;
+        if (Ext.isBoolean(to)) {
+            to = me.shiftAnchor ? store.indexOf(me.shiftAnchor) : 0;
+            keepExisting = to;
+        } else if (!Ext.isEmpty(to)) {
+            if (Ext.isObject(to)) {
+                to = store.indexOf(to);
+            } else if (!Ext.isNumber(to)) {
+                keepExisting = !!to;
             }
         }
+        /* Compatibility code end */
 
-        if (!dir) {
-            dontDeselect = -1;
-        } else {
-            dontDeselect = (dir == 'up') ? startRow : endRow;
-        }
-
-        for (i = startRow; i <= endRow; i++){
-            if (selectedCount == (endRow - startRow + 1)) {
-                if (i != dontDeselect) {
-                    me.doDeselect(i, true);
-                }
-            } else {
-                records.push(store.getAt(i));
-            }
-        }
-        me.doMultiSelect(records, true);
+        me.select(store.getRange(from, to), keepExisting);
     },
 
     /**
-     * Selects a record instance by record instance or index.
+     * Selects an array of records or a record by index.
      * @param {Ext.data.Model[]/Number} records An array of records or an index
      * @param {Boolean} [keepExisting] True to retain existing selections
      * @param {Boolean} [suppressEvent] Set to true to not fire a select event
      */
-    select: function(records, keepExisting, suppressEvent) {
-        // Automatically selecting eg store.first() or store.last() will pass undefined, so that must just return;
-        if (Ext.isDefined(records)) {
-            this.doSelect(records, keepExisting, suppressEvent);
-        }
-    },
-
-    /**
-     * Deselects a record instance by record instance or index.
-     * @param {Ext.data.Model[]/Number} records An array of records or an index
-     * @param {Boolean} [suppressEvent] Set to true to not fire a deselect event
-     */
-    deselect: function(records, suppressEvent) {
-        this.doDeselect(records, suppressEvent);
-    },
-
-    doSelect: function(records, keepExisting, suppressEvent) {
-        var me = this,
-            record;
-
-        if (me.locked) {
-            return;
-        }
-        if (typeof records === "number") {
-            records = [me.store.getAt(records)];
-        }
-        if (me.selectionMode == "SINGLE" && records) {
-            record = records.length ? records[0] : records;
-            me.doSingleSelect(record, suppressEvent);
-        } else {
-            me.doMultiSelect(records, keepExisting, suppressEvent);
-        }
-    },
-
-    doMultiSelect: function(records, keepExisting, suppressEvent) {
+    select: function (records, keepExisting, suppressEvent) {
         var me = this,
             selected = me.selected,
+            toDeselect = [],
+            success,
             change = false,
-            i = 0,
-            len, record;
+            i,
+            record,
+            commit;
 
-        if (me.locked) {
+        if (me.locked || !Ext.isDefined(records) || (Ext.isArray(records) && records.length === 0)) {
             return;
         }
-
-
-        records = !Ext.isArray(records) ? [records] : records;
-        len = records.length;
-        if (!keepExisting && selected.getCount() > 0) {
-            if (me.doDeselect(me.getSelection(), suppressEvent) === false) {
-                return;
-            }
-            // TODO - coalesce the selectionchange event in deselect w/the one below...
-        }
-
-        function commit () {
-            selected.add(record);
-            change = true;
-        }
-
-        for (; i < len; i++) {
-            record = records[i];
-            if (keepExisting && me.isSelected(record)) {
-                continue;
-            }
-            me.lastSelected = record;
-
-            me.onSelectChange(record, true, suppressEvent, commit);
-        }
-        me.setLastFocused(record, suppressEvent);
-        // fire selchange if there was a change and there is no suppressEvent flag
-        me.maybeFireSelectionChange(change && !suppressEvent);
-    },
-
-    // records can be an index, a record or an array of records
-    doDeselect: function(records, suppressEvent) {
-        var me = this,
-            selected = me.selected,
-            i = 0,
-            len, record,
-            attempted = 0,
-            accepted = 0;
-
-        if (me.locked) {
-            return false;
-        }
-
-        if (typeof records === "number") {
+        if (Ext.isNumber(records)) {
             records = [me.store.getAt(records)];
         } else if (!Ext.isArray(records)) {
             records = [records];
         }
 
-        function commit () {
-            ++accepted;
-            selected.remove(record);
+        if (me.selectionMode === 'SINGLE') {
+            records = [records[0]];
         }
 
-        len = records.length;
+        // Find out which records need to be selected and which to be deselected so we only fire events once
+        selected.each(function (item) {
+            var idx = records.indexOf(item);
+            if (idx < 0) {
+                // The selected item was not in the list of records to be selected
+                // Mark for deselection
+                toDeselect.push(item);
+            } else {
+                // The selected item was in the list of records to be selected
+                // Splice it out so we don't fire unneeded selection events
+                records.splice(idx, 1);
+            }
+        });
 
-        for (; i < len; i++) {
+        // Deselect records
+        if (!keepExisting && toDeselect.length > 0) {
+            success = me.doDeselect(toDeselect, suppressEvent);
+
+            if (!success) {
+                return;
+            } else {
+                change = true;
+            }
+        }
+
+        // Select records
+        commit = function () {
+            selected.add(record);
+            me.lastSelected = record;
+            change = true;
+        };
+
+        for (i = 0; i < records.length; i += 1) {
+            record = records[i];
+            me.onSelectChange(record, true, suppressEvent, commit);
+        }
+
+        if (change && !suppressEvent) {
+            me.fireEvent('selectionchange', me, me.getSelection());
+        }
+    },
+
+    /**
+     * Deselects an array of records or a record by index.
+     * @param {Ext.data.Model[]/Number} records An array of records or an index
+     * @param {Boolean} [suppressEvent] Set to true to not fire a deselect event
+     */
+    deselect: function (records, suppressEvent) {
+        var me = this,
+            success;
+
+        if (me.locked) {
+            return false;
+        }
+
+        if (Ext.isNumber(records)) {
+            records = [me.store.getAt(records)];
+        } else if (!Ext.isArray(records)) {
+            records = [records];
+        }
+
+        success = me.doDeselect(records, suppressEvent);
+
+        if (me.lastSelected && me.isSelected(me.lastSelected)) {
+            me.lastSelected = me.selected.last();
+        }
+
+        // fire selchange if there was a change and there is no suppressEvent flag
+        if (records.length > 0 && success && !suppressEvent) {
+            me.fireEvent('selectionchange', me, me.getSelection());
+        }
+
+        return success;
+    },
+
+    // records is an array of records
+    doDeselect: function (records, suppressEvent) {
+        var me = this,
+            selected = me.selected,
+            attempted = 0,
+            accepted = 0,
+            record,
+            commit,
+            i;
+
+        commit = function () {
+            accepted += 1;
+            selected.remove(record);
+        };
+
+        for (i = 0; i < records.length; i += 1) {
             record = records[i];
             if (me.isSelected(record)) {
-                if (me.lastSelected == record) {
-                    me.lastSelected = selected.last();
-                }
-                ++attempted;
+                attempted += 1;
                 me.onSelectChange(record, false, suppressEvent, commit);
             }
         }
 
-        // fire selchange if there was a change and there is no suppressEvent flag
-        me.maybeFireSelectionChange(accepted > 0 && !suppressEvent);
         return accepted === attempted;
-    },
-
-    doSingleSelect: function(record, suppressEvent) {
-        var me = this,
-            changed = false,
-            selected = me.selected;
-
-        if (me.locked) {
-            return;
-        }
-        // already selected.
-        // should we also check beforeselect?
-        if (me.isSelected(record)) {
-            return;
-        }
-
-        function commit () {
-            me.bulkChange = true;
-            if (selected.getCount() > 0 && me.doDeselect(me.lastSelected, suppressEvent) === false) {
-                delete me.bulkChange;
-                return false;
-            }
-            delete me.bulkChange;
-
-            selected.add(record);
-            me.lastSelected = record;
-            changed = true;
-        }
-
-        me.onSelectChange(record, true, suppressEvent, commit);
-
-        if (changed) {
-            if (!suppressEvent) {
-                me.setLastFocused(record);
-            }
-            me.maybeFireSelectionChange(!suppressEvent);
-        }
     },
 
     /**
@@ -439,16 +370,6 @@ Ext.define('Ext.selection.Model', {
      */
     isFocused: function(record) {
         return record === this.getLastFocused();
-    },
-
-
-    // fire selection change as long as true is not passed
-    // into maybeFireSelectionChange
-    maybeFireSelectionChange: function(fireEvent) {
-        var me = this;
-        if (fireEvent && !me.bulkChange) {
-            me.fireEvent('selectionchange', me, me.getSelection());
-        }
     },
 
     /**
@@ -549,31 +470,17 @@ Ext.define('Ext.selection.Model', {
             change = true;
         }
 
-        me.clearSelections();
+        me.deselectAll(true);
+        me.select(toBeSelected, false, true);
 
         if (me.store.indexOf(lastFocused) !== -1) {
             // restore the last focus but supress restoring focus
             this.setLastFocused(lastFocused, true);
         }
 
-        if (toBeSelected.length) {
-            // perform the selection again
-            me.doSelect(toBeSelected, false, true);
+        if (change) {
+            me.fireEvent('selectionchange', me, me.getSelection());
         }
-
-        me.maybeFireSelectionChange(change);
-    },
-
-    /**
-     * A fast reset of the selections without firing events, updating the ui, etc.
-     * For private usage only.
-     * @private
-     */
-    clearSelections: function() {
-        // reset the entire selection to nothing
-        this.selected.clear();
-        this.lastSelected = null;
-        this.setLastFocused(null);
     },
 
     // when a record is added to a store
@@ -584,31 +491,19 @@ Ext.define('Ext.selection.Model', {
     // when a store is cleared remove all selections
     // (if there were any)
     onStoreClear: function() {
-        if (this.selected.getCount > 0) {
-            this.clearSelections();
-            this.maybeFireSelectionChange(true);
-        }
+        this.deselectAll();
     },
 
     // prune records from the SelectionModel if
     // they were selected at the time they were
     // removed.
     onStoreRemove: function(store, record) {
-        var me = this,
-            selected = me.selected;
+        var me = this;
 
-        if (me.locked || !me.pruneRemoved) {
-            return;
-        }
+        me.deselect(record);
 
-        if (selected.remove(record)) {
-            if (me.lastSelected == record) {
-                me.lastSelected = null;
-            }
-            if (me.getLastFocused() == record) {
-                me.setLastFocused(null);
-            }
-            me.maybeFireSelectionChange(true);
+        if (me.getLastFocused() == record) {
+            me.setLastFocused(null);
         }
     },
 
