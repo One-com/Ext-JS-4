@@ -175,7 +175,7 @@ Ext.define('Ext.selection.Model', {
                     me.deselect(record);
                 } else {
                     // select the record and do NOT maintain existing selections
-                    me.select(record, true);
+                    me.select(record);
                 }
                 break;
         }
