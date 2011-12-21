@@ -208,8 +208,8 @@ Ext.define('Ext.selection.Model', {
         }
 
         if (Ext.isBoolean(to)) {
-            to = me.shiftAnchor ? store.indexOf(me.shiftAnchor) : 0;
             keepExisting = to;
+            to = me.shiftAnchor ? store.indexOf(me.shiftAnchor) : 0;
         } else if (!Ext.isEmpty(to)) {
             if (Ext.isObject(to)) {
                 to = store.indexOf(to);
