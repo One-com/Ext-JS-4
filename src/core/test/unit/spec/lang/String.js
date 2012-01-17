@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 describe("Ext.String", function() {
 
     describe("ellipsis", function() {
@@ -365,5 +351,46 @@ describe("Ext.String", function() {
             expect(capitalize('this is a sentence')).toEqual('This is a sentence');
         });
     });
-});
 
+    describe('splitWords', function () {
+        // ensure it works using a direct fn:
+        var splitWords = Ext.String.splitWords;
+        
+        it('should handle no args', function () {
+            var words = splitWords();
+            expect(Ext.encode(words)).toEqual('[]');
+        });
+        it('should handle null', function () {
+            var words = splitWords(null);
+            expect(Ext.encode(words)).toEqual('[]');
+        });
+        it('should handle an empty string', function () {
+            var words = splitWords('');
+            expect(Ext.encode(words)).toEqual('[]');
+        });
+        it('should handle one trimmed word', function () {
+            var words = splitWords('foo');
+            expect(Ext.encode(words)).toEqual('["foo"]');
+        });
+        it('should handle one word with spaces around it', function () {
+            var words = splitWords(' foo ');
+            expect(Ext.encode(words)).toEqual('["foo"]');
+        });
+        it('should handle two trimmed words', function () {
+            var words = splitWords('foo bar');
+            expect(Ext.encode(words)).toEqual('["foo","bar"]');
+        });
+        it('should handle two untrimmed words', function () {
+            var words = splitWords('  foo  bar  ');
+            expect(Ext.encode(words)).toEqual('["foo","bar"]');
+        });
+        it('should handle five trimmed words', function () {
+            var words = splitWords('foo bar bif boo foobar');
+            expect(Ext.encode(words)).toEqual('["foo","bar","bif","boo","foobar"]');
+        });
+        it('should handle five untrimmed words', function () {
+            var words = splitWords(' foo   bar   bif   boo  foobar    \t');
+            expect(Ext.encode(words)).toEqual('["foo","bar","bif","boo","foobar"]');
+        });
+    })
+});

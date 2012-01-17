@@ -24,7 +24,7 @@ Ext.define('Ext.state.Stateful', {
 
     /* Begin Definitions */
 
-   mixins: {
+    mixins: {
         observable: 'Ext.util.Observable'
     },
 
@@ -174,12 +174,14 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
     },
 
 <span id='Ext-state-Stateful-method-addStateEvents'>    /**
-</span>     * Add events that will trigger the state to be saved.
+</span>     * Add events that will trigger the state to be saved. If the first argument is an
+     * array, each element of that array is the name of a state event. Otherwise, each
+     * argument passed to this method is the name of a state event.
      * @param {String/String[]} events The event name or an array of event names.
      */
     addStateEvents: function(events){
         if (!Ext.isArray(events)) {
-            events = [events];
+            events = Array.prototype.slice.call(arguments, 0);
         }
 
         var me = this,
@@ -201,7 +203,7 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
 
         if (delay &gt; 0) {
             if (!me.stateTask) {
-                me.stateTask = Ext.create('Ext.util.DelayedTask', me.saveState, me);
+                me.stateTask = new Ext.util.DelayedTask(me.saveState, me);
             }
             me.stateTask.delay(me.saveDelay);
         } else {

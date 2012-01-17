@@ -1,20 +1,4 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
- * @class Ext.resizer.ResizeTracker
- * @extends Ext.dd.DragTracker
  * Private utility class for Ext.resizer.Resizer.
  * @private
  */
@@ -126,7 +110,7 @@ Ext.define('Ext.resizer.ResizeTracker', {
 
     onStart: function(e) {
         // returns the Ext.ResizeHandle that the user started dragging
-        this.activeResizeHandle = Ext.getCmp(this.getDragTarget().id);
+        this.activeResizeHandle = Ext.get(this.getDragTarget().id);
 
         // If we are using a proxy, ensure it is sized.
         if (!this.dynamic) {
@@ -330,10 +314,10 @@ Ext.define('Ext.resizer.ResizeTracker', {
     resize: function(box, direction, atEnd) {
         var target = this.getResizeTarget(atEnd);
         if (target.isComponent) {
+            target.setSize(box.width, box.height);
             if (target.floating) {
                 target.setPagePosition(box.x, box.y);
             }
-            target.setSize(box.width, box.height);
         } else {
             target.setBox(box);
             // update the originalTarget if this was wrapped.
@@ -350,4 +334,3 @@ Ext.define('Ext.resizer.ResizeTracker', {
         }
     }
 });
-

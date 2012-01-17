@@ -1,18 +1,5 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
+ * @private
  * A month picker component. This class is used by the {@link Ext.picker.Date Date picker} class
  * to allow browsing and selection of year/months combinations.
  */
@@ -21,6 +8,10 @@ Ext.define('Ext.picker.Month', {
     requires: ['Ext.XTemplate', 'Ext.util.ClickRepeater', 'Ext.Date', 'Ext.button.Button'],
     alias: 'widget.monthpicker',
     alternateClassName: 'Ext.MonthPicker',
+
+    childEls: [
+        'bodyEl', 'prevEl', 'nextEl', 'buttonsEl'
+    ],
 
     renderTpl: [
         '<div id="{id}-bodyEl" class="{baseCls}-body">',
@@ -48,15 +39,20 @@ Ext.define('Ext.picker.Month', {
     /**
      * @cfg {String} okText The text to display on the ok button.
      */
+    //<locale>
     okText: 'OK',
+    //</locale>
 
     /**
      * @cfg {String} cancelText The text to display on the cancel button.
      */
+    //<locale>
     cancelText: 'Cancel',
+    //</locale>
 
     /**
-     * @cfg {String} baseCls The base CSS class to apply to the picker element. Defaults to <tt>'x-monthpicker'</tt>
+     * @cfg {String} [baseCls='x-monthpicker']
+     *  The base CSS class to apply to the picker element.
      */
     baseCls: Ext.baseCSSPrefix + 'monthpicker',
 
@@ -66,8 +62,7 @@ Ext.define('Ext.picker.Month', {
     showButtons: true,
 
     /**
-     * @cfg {String} selectedCls The class to be added to selected items in the picker. Defaults to
-     * <tt>'x-monthpicker-selected'</tt>
+     * @cfg {String} [selectedCls='x-monthpicker-selected'] The class to be added to selected items in the picker.
      */
 
     /**
@@ -153,12 +148,14 @@ Ext.define('Ext.picker.Month', {
     },
 
     // private, inherit docs
-    onRender: function(ct, position){
+    beforeRender: function(){
         var me = this,
             i = 0,
             months = [],
             shortName = Ext.Date.getShortMonthName,
             monthLen = me.monthOffset;
+
+        me.callParent();
 
         for (; i < monthLen; ++i) {
             months.push(shortName(i), shortName(i + monthLen));
@@ -169,10 +166,6 @@ Ext.define('Ext.picker.Month', {
             years: me.getYears(),
             showButtons: me.showButtons
         });
-
-        me.addChildEls('bodyEl', 'prevEl', 'nextEl', 'buttonsEl');
-
-        me.callParent(arguments);
     },
 
     // private, inherit docs
@@ -191,13 +184,13 @@ Ext.define('Ext.picker.Month', {
         me.months = body.select('.' + me.baseCls + '-month a');
 
         if (me.showButtons) {
-            me.okBtn = Ext.create('Ext.button.Button', {
+            me.okBtn = new Ext.button.Button({
                 text: me.okText,
                 renderTo: buttonsEl,
                 handler: me.onOkClick,
                 scope: me
             });
-            me.cancelBtn = Ext.create('Ext.button.Button', {
+            me.cancelBtn = new Ext.button.Button({
                 text: me.cancelText,
                 renderTo: buttonsEl,
                 handler: me.onCancelClick,
@@ -205,12 +198,12 @@ Ext.define('Ext.picker.Month', {
             });
         }
 
-        me.backRepeater = Ext.create('Ext.util.ClickRepeater', me.prevEl, {
+        me.backRepeater = new Ext.util.ClickRepeater(me.prevEl, {
             handler: Ext.Function.bind(me.adjustYear, me, [-me.totalYears])
         });
 
         me.prevEl.addClsOnOver(me.baseCls + '-yearnav-prev-over');
-        me.nextRepeater = Ext.create('Ext.util.ClickRepeater', me.nextEl, {
+        me.nextRepeater = new Ext.util.ClickRepeater(me.nextEl, {
             handler: Ext.Function.bind(me.adjustYear, me, [me.totalYears])
         });
         me.nextEl.addClsOnOver(me.baseCls + '-yearnav-next-over');
@@ -438,4 +431,3 @@ Ext.define('Ext.picker.Month', {
         me.callParent();
     }
 });
-

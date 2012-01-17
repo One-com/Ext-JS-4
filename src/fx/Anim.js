@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.fx.Anim
  *
@@ -252,6 +238,9 @@ from : {
  }
  </code></pre>
      */
+    
+    // private
+    frameCount: 0,
 
     // @private
     constructor: function(config) {
@@ -261,9 +250,9 @@ from : {
         config = config || {};
         // If keyframes are passed, they really want an Animator instead.
         if (config.keyframes) {
-            return Ext.create('Ext.fx.Animator', config);
+            return new Ext.fx.Animator(config);
         }
-        config = Ext.apply(me, config);
+        Ext.apply(me, config);
         if (me.from === undefined) {
             me.from = {};
         }
@@ -282,7 +271,6 @@ from : {
             }
         }
         me.id = Ext.id(null, 'ext-anim-');
-        Ext.fx.Manager.addAnim(me);
         me.addEvents(
             /**
              * @event beforeanimate
@@ -305,11 +293,11 @@ from : {
               */
             'lastframe'
         );
-        me.mixins.observable.constructor.call(me, config);
+        me.mixins.observable.constructor.call(me);
         if (config.callback) {
             me.on('afteranimate', config.callback, config.scope);
         }
-        return me;
+        Ext.fx.Manager.addAnim(me);
     },
 
     /**
@@ -363,6 +351,7 @@ from : {
             delay = me.delay,
             delayStart = me.delayStart,
             delayDelta;
+        
         if (delay) {
             if (!delayStart) {
                 me.delayStart = startTime;
@@ -385,6 +374,7 @@ from : {
                 me.initAttrs();
             }
             me.running = true;
+            me.frameCount = 0;
         }
     },
 
@@ -417,6 +407,8 @@ from : {
                 ret[attr] = propHandlers[attr].set(values, easing);
             }
         }
+        me.frameCount++;
+            
         return ret;
     },
 
@@ -459,8 +451,15 @@ from : {
         me.running = false;
         Ext.fx.Manager.removeAnim(me);
         me.fireEvent('afteranimate', me, me.startTime);
+    },
+    
+    isReady: function() {
+        return this.paused === false && this.running === false && this.iterations > 0;
+    },
+    
+    isRunning: function() {
+        return this.paused === false && this.running === true && this.isAnimator !== true;
     }
 });
 // Set flag to indicate that Fx is available. Class might not be available immediately.
 Ext.enableFx = true;
-

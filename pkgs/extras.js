@@ -6,8 +6,8 @@ Copyright (c) 2011 Sencha Inc
 
 Contact:  http://www.sencha.com/contact
 
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
+Commercial Usage
+Licensees holding valid commercial licenses may use this file in accordance with the Commercial Software License Agreement provided with the Software or, alternatively, in accordance with the terms contained in a written agreement between you and Sencha.
 
 If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
 
@@ -173,46 +173,49 @@ Ext.JSON.encodeDate = function(d) {
  * Shorthand for {@link Ext.JSON#encode}
  * @member Ext
  * @method encode
- * @alias Ext.JSON#encode
+ * @inheritdoc Ext.JSON#encode
  */
 Ext.encode = Ext.JSON.encode;
 /**
  * Shorthand for {@link Ext.JSON#decode}
  * @member Ext
  * @method decode
- * @alias Ext.JSON#decode
+ * @inheritdoc Ext.JSON#decode
  */
 Ext.decode = Ext.JSON.decode;
 
 
 /**
  * @class Ext
-
- The Ext namespace (global object) encapsulates all classes, singletons, and utility methods provided by Sencha's libraries.</p>
- Most user interface Components are at a lower level of nesting in the namespace, but many common utility functions are provided
- as direct properties of the Ext namespace.
-
- Also many frequently used methods from other classes are provided as shortcuts within the Ext namespace.
- For example {@link Ext#getCmp Ext.getCmp} aliases {@link Ext.ComponentManager#get Ext.ComponentManager.get}.
-
- Many applications are initiated with {@link Ext#onReady Ext.onReady} which is called once the DOM is ready.
- This ensures all scripts have been loaded, preventing dependency issues. For example
-
-     Ext.onReady(function(){
-         new Ext.Component({
-             renderTo: document.body,
-             html: 'DOM ready!'
-         });
-     });
-
-For more information about how to use the Ext classes, see
-
-- <a href="http://www.sencha.com/learn/">The Learning Center</a>
-- <a href="http://www.sencha.com/learn/Ext_FAQ">The FAQ</a>
-- <a href="http://www.sencha.com/forum/">The forums</a>
-
+ *
+ * The Ext namespace (global object) encapsulates all classes, singletons, and
+ * utility methods provided by Sencha's libraries.
+ *
+ * Most user interface Components are at a lower level of nesting in the namespace,
+ * but many common utility functions are provided as direct properties of the Ext namespace.
+ *
+ * Also many frequently used methods from other classes are provided as shortcuts
+ * within the Ext namespace. For example {@link Ext#getCmp Ext.getCmp} aliases
+ * {@link Ext.ComponentManager#get Ext.ComponentManager.get}.
+ *
+ * Many applications are initiated with {@link Ext#onReady Ext.onReady} which is
+ * called once the DOM is ready. This ensures all scripts have been loaded,
+ * preventing dependency issues. For example:
+ *
+ *     Ext.onReady(function(){
+ *         new Ext.Component({
+ *             renderTo: document.body,
+ *             html: 'DOM ready!'
+ *         });
+ *     });
+ *
+ * For more information about how to use the Ext classes, see:
+ *
+ * - <a href="http://www.sencha.com/learn/">The Learning Center</a>
+ * - <a href="http://www.sencha.com/learn/Ext_FAQ">The FAQ</a>
+ * - <a href="http://www.sencha.com/forum/">The forums</a>
+ *
  * @singleton
- * @markdown
  */
 Ext.apply(Ext, {
     userAgent: navigator.userAgent.toLowerCase(),
@@ -223,25 +226,27 @@ Ext.apply(Ext, {
 
     /**
      * True when the document is fully initialized and ready for action
-     * @type Boolean
      */
     isReady: false,
 
     /**
      * True to automatically uncache orphaned Ext.Elements periodically
-     * @type Boolean
      */
     enableGarbageCollector: true,
 
     /**
      * True to automatically purge event listeners during garbageCollection.
-     * @type Boolean
      */
     enableListenerCollection: true,
 
     /**
+     * True to enable sandboxing (defaults to false).
+     */
+    enableSandbox: false,
+    
+    /**
      * Generates unique ids. If the element already has an id, it is unchanged
-     * @param {HTMLElement/Ext.Element} el (optional) The element to generate an id for
+     * @param {HTMLElement/Ext.Element} [el] The element to generate an id for
      * @param {String} prefix (optional) Id prefix (defaults "ext-gen")
      * @return {String} The generated Id.
      */
@@ -257,10 +262,7 @@ Ext.apply(Ext, {
         }
         if (!el.id) {
             if (me.isSandboxed) {
-                if (!me.uniqueGlobalNamespace) {
-                    me.getUniqueGlobalNamespace();
-                }
-                sandboxPrefix = me.uniqueGlobalNamespace + '-';
+                sandboxPrefix = Ext.sandboxName.toLowerCase() + '-';
             }
             el.id = sandboxPrefix + (prefix || "ext-gen") + (++Ext.idSeed);
         }
@@ -272,8 +274,11 @@ Ext.apply(Ext, {
      * @return Ext.Element The document body
      */
     getBody: function() {
-        return Ext.get(document.body || false);
-    },
+        var body;
+        return function() {
+            return body || (body = Ext.get(document.body));
+        };
+    }(),
 
     /**
      * Returns the current document head as an {@link Ext.Element}.
@@ -282,13 +287,8 @@ Ext.apply(Ext, {
      */
     getHead: function() {
         var head;
-
         return function() {
-            if (head == undefined) {
-                head = Ext.get(document.getElementsByTagName("head")[0]);
-            }
-
-            return head;
+            return head || (head = Ext.get(document.getElementsByTagName("head")[0]));
         };
     }(),
 
@@ -297,14 +297,18 @@ Ext.apply(Ext, {
      * @return Ext.Element The document
      */
     getDoc: function() {
-        return Ext.get(document);
-    },
+        var doc;
+        return function() {
+            return doc || (doc = Ext.get(document));
+        };
+    }(),
 
     /**
      * This is shorthand reference to {@link Ext.ComponentManager#get}.
      * Looks up an existing {@link Ext.Component Component} by {@link Ext.Component#id id}
+     *
      * @param {String} id The component {@link Ext.Component#id id}
-     * @return Ext.Component The Component, <tt>undefined</tt> if not found, or <tt>null</tt> if a
+     * @return Ext.Component The Component, `undefined` if not found, or `null` if a
      * Class was found.
     */
     getCmp: function(id) {
@@ -325,7 +329,8 @@ Ext.apply(Ext, {
      * intended for arguments of type {@link Ext.Element} and {@link Ext.Component}, but any subclass of
      * {@link Ext.util.Observable} can be passed in.  Any number of elements and/or components can be
      * passed into this function in a single call as separate arguments.
-     * @param {Ext.Element/Ext.Component/Ext.Element[]/Ext.Component[]...} arg1
+     *
+     * @param {Ext.Element/Ext.Component/Ext.Element[]/Ext.Component[]...} args
      * An {@link Ext.Element}, {@link Ext.Component}, or an Array of either of these to destroy
      */
     destroy: function() {
@@ -357,9 +362,9 @@ Ext.apply(Ext, {
      *     Ext.isFunction(myFunc) && myFunc.apply(this, [arg1, arg2]);
      *
      * @param {Function} callback The callback to execute
-     * @param {Object} scope (optional) The scope to execute in
-     * @param {Array} args (optional) The arguments to pass to the function
-     * @param {Number} delay (optional) Pass a number to delay the call by a number of milliseconds.
+     * @param {Object} [scope] The scope to execute in
+     * @param {Array} [args] The arguments to pass to the function
+     * @param {Number} [delay] Pass a number to delay the call by a number of milliseconds.
      */
     callback: function(callback, scope, args, delay){
         if(Ext.isFunction(callback)){
@@ -374,35 +379,27 @@ Ext.apply(Ext, {
     },
 
     /**
-     * Convert certain characters (&, <, >, and ') to their HTML character equivalents for literal display in web pages.
-     * @param {String} value The string to encode
-     * @return {String} The encoded text
+     * Alias for {@link Ext.String#htmlEncode}.
+     * @inheritdoc Ext.String#htmlEncode
      */
     htmlEncode : function(value) {
         return Ext.String.htmlEncode(value);
     },
 
     /**
-     * Convert certain characters (&, <, >, and ') from their HTML character equivalents.
-     * @param {String} value The string to decode
-     * @return {String} The decoded text
+     * Alias for {@link Ext.String#htmlDecode}.
+     * @inheritdoc Ext.String#htmlDecode
      */
     htmlDecode : function(value) {
          return Ext.String.htmlDecode(value);
     },
 
     /**
-     * Appends content to the query string of a URL, handling logic for whether to place
-     * a question mark or ampersand.
-     * @param {String} url The URL to append to.
-     * @param {String} s The content to append to the URL.
-     * @return (String) The resulting URL
+     * Alias for {@link Ext.String#urlAppend}.
+     * @inheritdoc Ext.String#urlAppend
      */
     urlAppend : function(url, s) {
-        if (!Ext.isEmpty(s)) {
-            return url + (url.indexOf('?') === -1 ? '?' : '&') + s;
-        }
-        return url;
+        return Ext.String.urlAppend(url, s);
     }
 });
 
@@ -414,8 +411,6 @@ window.undefined = window.undefined;
 
 /**
  * @class Ext
- * Ext core utilities and functions.
- * @singleton
  */
 (function(){
 /*
@@ -453,9 +448,9 @@ Opera 11.11 - Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11
         isSafari4 = isSafari && check(/version\/4/),
         isSafari5 = isSafari && check(/version\/5/),
         isIE = !isOpera && check(/msie/),
-        isIE7 = isIE && (check(/msie 7/) || docMode == 7),
-        isIE8 = isIE && (check(/msie 8/) && docMode != 7 && docMode != 9 || docMode == 8),
-        isIE9 = isIE && (check(/msie 9/) && docMode != 7 && docMode != 8 || docMode == 9),
+        isIE7 = isIE && ((check(/msie 7/) && docMode != 8 && docMode != 9) || docMode == 7),
+        isIE8 = isIE && ((check(/msie 8/) && docMode != 7 && docMode != 9) || docMode == 8),
+        isIE9 = isIE && ((check(/msie 9/) && docMode != 7 && docMode != 8) || docMode == 9),
         isIE6 = isIE && check(/msie 6/),
         isGecko = !isWebKit && check(/gecko/),
         isGecko3 = isGecko && check(/rv:1\.9/),
@@ -481,28 +476,31 @@ Opera 11.11 - Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11
         document.execCommand("BackgroundImageCache", false, true);
     } catch(e) {}
 
+
     //<debug>
+    var primitiveRe = /string|number|boolean/;
     function dumpObject (object) {
-        var member, members = [];
+        var member, type,
+            members = [];
 
         // Cannot use Ext.encode since it can recurse endlessly (if we're lucky)
         // ...and the data could be prettier!
         Ext.Object.each(object, function (name, value) {
-            if (typeof(value) === "function") {
+            type = typeof value;
+            if (type == "function") {
                 return;
             }
 
-            if (!Ext.isDefined(value) || value === null ||
-                    Ext.isDate(value) ||
-                    Ext.isString(value) || (typeof(value) == "number") ||
-                    Ext.isBoolean(value)) {
+            if (type == 'undefined') {
+                member = type;
+            } else if (value === null || primitiveRe.test(type) || Ext.isDate(value)) {
                 member = Ext.encode(value);
             } else if (Ext.isArray(value)) {
                 member = '[ ]';
             } else if (Ext.isObject(value)) {
                 member = '{ }';
             } else {
-                member = 'undefined';
+                member = type;
             }
             members.push(Ext.encode(name) + ': ' + member);
         });
@@ -522,7 +520,7 @@ Opera 11.11 - Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11
 
         log.indent = indent;
 
-        if (!Ext.isString(message)) {
+        if (typeof message != 'string') {
             options = message;
             message = options.msg || '';
             level = options.level || level;
@@ -545,7 +543,7 @@ Opera 11.11 - Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11
             message += Array.prototype.slice.call(arguments, 1).join('');
         }
 
-        message = indent ? Ext.String.repeat('   ', indent) + message : message;
+        message = indent ? Ext.String.repeat(' ', log.indentSize * indent) + message : message;
         // w/o console, all messages are equal, so munge the level into the message:
         if (level != 'log') {
             message = '[' + level.charAt(0).toUpperCase() + '] ' + message;
@@ -593,10 +591,29 @@ Opera 11.11 - Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11
         ++log.counters[level];
     }
 
+    function logx (level, args) {
+        if (typeof args[0] == 'string') {
+            args.unshift({});
+        }
+        args[0].level = level;
+        log.apply(this, args);
+    }
+
+    log.error = function () {
+        logx('error', Array.prototype.slice.call(arguments));
+    }
+    log.info = function () {
+        logx('info', Array.prototype.slice.call(arguments));
+    }
+    log.warn = function () {
+        logx('warn', Array.prototype.slice.call(arguments));
+    }
+
     log.count = 0;
     log.counters = { error: 0, warn: 0, info: 0, log: 0 };
+    log.indentSize = 2;
     log.out = [];
-    log.max = 250;
+    log.max = 750;
     log.show = function () {
         window.open('','extlog').document.write([
             '<html><head><script type="text/javascript">',
@@ -606,7 +623,7 @@ Opera 11.11 - Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11
                         'extlog = ext && ext.log;',
                     'if (extlog && extlog.out && lastCount != extlog.count) {',
                         'lastCount = extlog.count;',
-                        'var s = "<tt>" + extlog.out.join("<br>").replace(/[ ]/g, "&nbsp;") + "</tt>";',
+                        'var s = "<tt>" + extlog.out.join("~~~").replace(/[&]/g, "&amp;").replace(/[<]/g, "&lt;").replace(/[ ]/g, "&nbsp;").replace(/\\~\\~\\~/g, "<br>") + "</tt>";',
                         'document.body.innerHTML = s;',
                     '}',
                     'setTimeout(update, 1000);',
@@ -616,65 +633,72 @@ Opera 11.11 - Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11
     };
     //</debug>
 
-    Ext.setVersion('extjs', '4.0.7');
+    var nullLog = function () {};
+    nullLog.info = nullLog.warn = nullLog.error = Ext.emptyFn;
+
+    Ext.setVersion('extjs', '4.1.0');
     Ext.apply(Ext, {
         /**
-         * URL to a blank file used by Ext when in secure mode for iframe src and onReady src to prevent
-         * the IE insecure content warning (<tt>'about:blank'</tt>, except for IE in secure mode, which is <tt>'javascript:""'</tt>).
-         * @type String
+         * @property {String} SSL_SECURE_URL
+         * URL to a blank file used by Ext when in secure mode for iframe src and onReady src
+         * to prevent the IE insecure content warning (`'about:blank'`, except for IE
+         * in secure mode, which is `'javascript:""'`).
          */
-        SSL_SECURE_URL : isSecure && isIE ? 'javascript:""' : 'about:blank',
+        SSL_SECURE_URL : isSecure && isIE ? 'javascript:\'\'' : 'about:blank',
 
         /**
-         * True if the {@link Ext.fx.Anim} Class is available
-         * @type Boolean
-         * @property enableFx
+         * @property {Boolean} enableFx
+         * True if the {@link Ext.fx.Anim} Class is available.
          */
 
         /**
-         * True to scope the reset CSS to be just applied to Ext components. Note that this wraps root containers
-         * with an additional element. Also remember that when you turn on this option, you have to use ext-all-scoped {
-         * unless you use the bootstrap.js to load your javascript, in which case it will be handled for you.
-         * @type Boolean
+         * @property {Boolean} scopeResetCSS
+         * True to scope the reset CSS to be just applied to Ext components. Note that this
+         * wraps root containers with an additional element. Also remember that when you turn
+         * on this option, you have to use ext-all-scoped (unless you use the bootstrap.js to
+         * load your javascript, in which case it will be handled for you).
          */
         scopeResetCSS : Ext.buildSettings.scopeResetCSS,
 
         /**
-         * EXPERIMENTAL - True to cascade listener removal to child elements when an element is removed.
-         * Currently not optimized for performance.
-         * @type Boolean
+         * @property {Boolean} enableNestedListenerRemoval
+         * **Experimental.** True to cascade listener removal to child elements when an element
+         * is removed. Currently not optimized for performance.
          */
         enableNestedListenerRemoval : false,
 
         /**
+         * @property {Boolean} USE_NATIVE_JSON
          * Indicates whether to use native browser parsing for JSON methods.
          * This option is ignored if the browser does not support native JSON methods.
-         * <b>Note: Native JSON methods will not work with objects that have functions.
-         * Also, property names must be quoted, otherwise the data will not parse.</b> (Defaults to false)
-         * @type Boolean
+         *
+         * **Note:** Native JSON methods will not work with objects that have functions.
+         * Also, property names must be quoted, otherwise the data will not parse.
          */
         USE_NATIVE_JSON : false,
 
         /**
-         * Return the dom node for the passed String (id), dom node, or Ext.Element.
+         * Returns the dom node for the passed String (id), dom node, or Ext.Element.
          * Optional 'strict' flag is needed for IE since it can return 'name' and
          * 'id' elements by using getElementById.
+         *
          * Here are some examples:
-         * <pre><code>
-// gets dom node based on id
-var elDom = Ext.getDom('elId');
-// gets dom node based on the dom node
-var elDom1 = Ext.getDom(elDom);
-
-// If we don&#39;t know if we are working with an
-// Ext.Element or a dom node use Ext.getDom
-function(el){
-    var dom = Ext.getDom(el);
-    // do something with the dom node
-}
-         * </code></pre>
-         * <b>Note</b>: the dom node to be found actually needs to exist (be rendered, etc)
+         *
+         *     // gets dom node based on id
+         *     var elDom = Ext.getDom('elId');
+         *     // gets dom node based on the dom node
+         *     var elDom1 = Ext.getDom(elDom);
+         *
+         *     // If we don&#39;t know if we are working with an
+         *     // Ext.Element or a dom node use Ext.getDom
+         *     function(el){
+         *         var dom = Ext.getDom(el);
+         *         // do something with the dom node
+         *     }
+         *
+         * **Note:** the dom node to be found actually needs to exist (be rendered, etc)
          * when this method is called to be successful.
+         *
          * @param {String/HTMLElement/Ext.Element} el
          * @return HTMLElement
          */
@@ -686,7 +710,7 @@ function(el){
                 return el.dom;
             } else {
                 if (typeof el == 'string') {
-                    var e = document.getElementById(el);
+                    var e = Ext.getElementById(el);
                     // IE returns elements with the 'name' and 'id' attribute.
                     // we do a strict check to return the element with only the id attribute
                     if (e && isIE && strict) {
@@ -705,10 +729,13 @@ function(el){
 
         /**
          * Removes a DOM node from the document.
-         * <p>Removes this element from the document, removes all DOM event listeners, and deletes the cache reference.
-         * All DOM event listeners are removed from this element. If {@link Ext#enableNestedListenerRemoval Ext.enableNestedListenerRemoval} is
-         * <code>true</code>, then DOM event listeners are also removed from all child nodes. The body node
-         * will be ignored if passed in.</p>
+         *
+         * Removes this element from the document, removes all DOM event listeners, and
+         * deletes the cache reference. All DOM event listeners are removed from this element.
+         * If {@link Ext#enableNestedListenerRemoval Ext.enableNestedListenerRemoval} is
+         * `true`, then DOM event listeners are also removed from all child nodes.
+         * The body node will be ignored if passed in.
+         *
          * @param {HTMLElement} node The node to remove
          * @method
          */
@@ -908,10 +935,9 @@ function(el){
          * for the documentMode of the current page, which is factored into {@link #isIE7},
          * {@link #isIE8} and {@link #isIE9}. Thus this is not always true:
          *
-         *      Ext.isIE8 == (Ext.ieVersion == 8)
+         *     Ext.isIE8 == (Ext.ieVersion == 8)
          *
          * @type Number
-         * @markdown
          */
         ieVersion: ieVersion,
 
@@ -938,26 +964,29 @@ function(el){
          * @type Boolean
          */
         isSecure: isSecure,
-
+        
         /**
-         * URL to a 1x1 transparent gif image used by Ext to create inline icons with CSS background images.
-         * In older versions of IE, this defaults to "http://sencha.com/s.gif" and you should change this to a URL on your server.
+         * URL to a 1x1 transparent gif image used by Ext to create inline icons with
+         * CSS background images. In older versions of IE, this defaults to
+         * "http://sencha.com/s.gif" and you should change this to a URL on your server.
          * For other browsers it uses an inline data URL.
          * @type String
          */
         BLANK_IMAGE_URL : (isIE6 || isIE7) ? '/' + '/www.sencha.com/s.gif' : 'data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
 
         /**
-         * <p>Utility method for returning a default value if the passed value is empty.</p>
-         * <p>The value is deemed to be empty if it is<div class="mdetail-params"><ul>
-         * <li>null</li>
-         * <li>undefined</li>
-         * <li>an empty array</li>
-         * <li>a zero length string (Unless the <tt>allowBlank</tt> parameter is <tt>true</tt>)</li>
-         * </ul></div>
+         * Utility method for returning a default value if the passed value is empty.
+         *
+         * The value is deemed to be empty if it is:
+         *
+         * - null
+         * - undefined
+         * - an empty array
+         * - a zero length string (Unless the `allowBlank` parameter is `true`)
+         *
          * @param {Object} value The value to test
          * @param {Object} defaultValue The value to return if the original value is empty
-         * @param {Boolean} allowBlank (optional) true to allow zero length strings to qualify as non-empty (defaults to false)
+         * @param {Boolean} [allowBlank=false] true to allow zero length strings to qualify as non-empty.
          * @return {Object} value, if non-empty, else defaultValue
          * @deprecated 4.0.0 Use {@link Ext#valueFrom} instead
          */
@@ -966,7 +995,7 @@ function(el){
         },
 
         /**
-         * Escapes the passed string for use in a regular expression
+         * Escapes the passed string for use in a regular expression.
          * @param {String} str
          * @return {String}
          * @deprecated 4.0.0 Use {@link Ext.String#escapeRegex} instead
@@ -977,20 +1006,20 @@ function(el){
 
         /**
          * Applies event listeners to elements by selectors when the document is ready.
-         * The event name is specified with an <tt>&#64;</tt> suffix.
-         * <pre><code>
-Ext.addBehaviors({
-    // add a listener for click on all anchors in element with id foo
-    '#foo a&#64;click' : function(e, t){
-        // do something
-    },
-
-    // add the same listener to multiple selectors (separated by comma BEFORE the &#64;)
-    '#foo a, #bar span.some-class&#64;mouseover' : function(){
-        // do something
-    }
-});
-         * </code></pre>
+         * The event name is specified with an `@` suffix.
+         *
+         *     Ext.addBehaviors({
+         *         // add a listener for click on all anchors in element with id foo
+         *         '#foo a@click' : function(e, t){
+         *             // do something
+         *         },
+         *      
+         *         // add the same listener to multiple selectors (separated by comma BEFORE the @)
+         *         '#foo a, #bar span.some-class@mouseover' : function(){
+         *             // do something
+         *         }
+         *     });
+         *
          * @param {Object} obj The list of behaviors to apply
          */
         addBehaviors : function(o){
@@ -1019,32 +1048,33 @@ Ext.addBehaviors({
         /**
          * Returns the size of the browser scrollbars. This can differ depending on
          * operating system settings, such as the theme or font size.
-         * @param {Boolean} force (optional) true to force a recalculation of the value.
-         * @return {Object} An object containing the width of a vertical scrollbar and the
-         * height of a horizontal scrollbar.
+         * @param {Boolean} [force] true to force a recalculation of the value.
+         * @return {Object} An object containing scrollbar sizes.
+         * @return.width {Number} The width of the vertical scrollbar.
+         * @return.height {Number} The height of the horizontal scrollbar.
          */
         getScrollbarSize: function (force) {
-            if(!Ext.isReady){
-                return 0;
+            if (!Ext.isReady) {
+                return {};
             }
 
-            if(force === true || scrollbarSize === null){
-                // BrowserBug: IE9
-                // When IE9 positions an element offscreen via offsets, the offsetWidth is
-                // inaccurately reported. For IE9 only, we render on screen before removing.
-                var cssClass = Ext.isIE9 ? '' : Ext.baseCSSPrefix + 'hide-offsets',
-                    // Append our div, do our calculation and then remove it
-                    div = Ext.getBody().createChild('<div class="' + cssClass + '" style="width:100px;height:50px;overflow:hidden;"><div style="height:200px;"></div></div>'),
-                    child = div.child('div', true),
-                    w1 = child.offsetWidth;
+            if (force || !scrollbarSize) {
+                var db = document.body,
+                    div = document.createElement('div');
 
-                div.setStyle('overflow', (Ext.isWebKit || Ext.isGecko) ? 'auto' : 'scroll');
+                div.style.width = div.style.height = '100px';
+                div.style.overflow = 'scroll';
+                div.style.position = 'absolute';
 
-                var w2 = child.offsetWidth, width = w1 - w2;
-                div.remove();
+                db.appendChild(div); // now we can measure the div...
 
-                // We assume width == height for now. TODO: is this always true?
-                scrollbarSize = { width: width, height: width };
+                // at least in iE9 the div is not 100px - the scrollbar size is removed!
+                scrollbarSize = {
+                    width: div.offsetWidth - div.clientWidth,
+                    height: div.offsetHeight - div.clientHeight
+                };
+
+                db.removeChild(div);
             }
 
             return scrollbarSize;
@@ -1056,7 +1086,7 @@ Ext.addBehaviors({
          *
          * This method is deprected in favor of {@link #getScrollbarSize}.
          *
-         * @param {Boolean} force (optional) true to force a recalculation of the value.
+         * @param {Boolean} [force] true to force a recalculation of the value.
          * @return {Number} The width of a vertical scrollbar.
          * @deprecated
          */
@@ -1084,7 +1114,8 @@ Ext.addBehaviors({
          * @param {Object} source The source object.
          * @param {String/String[]} names Either an Array of property names, or a comma-delimited list
          * of property names to copy.
-         * @param {Boolean} usePrototypeKeys (Optional) Defaults to false. Pass true to copy keys off of the prototype as well as the instance.
+         * @param {Boolean} [usePrototypeKeys] Defaults to false. Pass true to copy keys off of the
+         * prototype as well as the instance.
          * @return {Object} The modified object.
          */
         copyTo : function(dest, source, names, usePrototypeKeys){
@@ -1144,35 +1175,37 @@ Ext.addBehaviors({
          *  - `stack`: True to include a stack trace in the log.
          *  - `indent`: Cause subsequent log statements to be indented one step.
          *  - `outdent`: Cause this and following statements to be one step less indented.
-         * @markdown
+         *
+         * @method
          */
         log :
             //<debug>
             log ||
             //</debug>
-            Ext.emptyFn,
+            nullLog,
 
         /**
          * Partitions the set into two sets: a true set and a false set.
-         * Example:
-         * Example2:
-         * <pre><code>
-// Example 1:
-Ext.partition([true, false, true, true, false]); // [[true, true, true], [false, false]]
-
-// Example 2:
-Ext.partition(
-    Ext.query("p"),
-    function(val){
-        return val.className == "class1"
-    }
-);
-// true are those paragraph elements with a className of "class1",
-// false set are those that do not have that className.
-         * </code></pre>
+         *
+         * Example 1:
+         *
+         *     Ext.partition([true, false, true, true, false]);
+         *     // returns [[true, true, true], [false, false]]
+         *
+         * Example 2:
+         *
+         *     Ext.partition(
+         *         Ext.query("p"),
+         *         function(val){
+         *             return val.className == "class1"
+         *         }
+         *     );
+         *     // true are those paragraph elements with a className of "class1",
+         *     // false set are those that do not have that className.
+         *
          * @param {Array/NodeList} arr The array to partition
-         * @param {Function} truth (optional) a function to determine truth.  If this is omitted the element
-         * itself must be able to be evaluated for its truthfulness.
+         * @param {Function} truth (optional) a function to determine truth.
+         * If this is omitted the element itself must be able to be evaluated for its truthfulness.
          * @return {Array} [array of truish values, array of falsy values]
          * @deprecated 4.0.0 Will be removed in the next major version
          */
@@ -1186,11 +1219,12 @@ Ext.partition(
 
         /**
          * Invokes a method on each item in an Array.
-         * <pre><code>
-// Example:
-Ext.invoke(Ext.query("p"), "getAttribute", "id");
-// [el1.getAttribute("id"), el2.getAttribute("id"), ..., elN.getAttribute("id")]
-         * </code></pre>
+         *
+         * Example:
+         *
+         *     Ext.invoke(Ext.query("p"), "getAttribute", "id");
+         *     // [el1.getAttribute("id"), el2.getAttribute("id"), ..., elN.getAttribute("id")]
+         *
          * @param {Array/NodeList} arr The Array of items to invoke the method on.
          * @param {String} methodName The method name to invoke.
          * @param {Object...} args Arguments to send into the method invocation.
@@ -1211,22 +1245,27 @@ Ext.invoke(Ext.query("p"), "getAttribute", "id");
         },
 
         /**
-         * <p>Zips N sets together.</p>
-         * <pre><code>
-// Example 1:
-Ext.zip([1,2,3],[4,5,6]); // [[1,4],[2,5],[3,6]]
-// Example 2:
-Ext.zip(
-    [ "+", "-", "+"],
-    [  12,  10,  22],
-    [  43,  15,  96],
-    function(a, b, c){
-        return "$" + a + "" + b + "." + c
-    }
-); // ["$+12.43", "$-10.15", "$+22.96"]
-         * </code></pre>
-         * @param {Array/NodeList...} arr This argument may be repeated. Array(s) to contribute values.
-         * @param {Function} zipper (optional) The last item in the argument list. This will drive how the items are zipped together.
+         * Zips N sets together.
+         *
+         * Example 1:
+         *
+         *     Ext.zip([1,2,3],[4,5,6]); // [[1,4],[2,5],[3,6]]
+         *
+         * Example 2:
+         *
+         *     Ext.zip(
+         *         [ "+", "-", "+"],
+         *         [  12,  10,  22],
+         *         [  43,  15,  96],
+         *         function(a, b, c){
+         *             return "$" + a + "" + b + "." + c
+         *         }
+         *     ); // ["$+12.43", "$-10.15", "$+22.96"]
+         *
+         * @param {Array/NodeList...} arr This argument may be repeated. Array(s)
+         * to contribute values.
+         * @param {Function} zipper (optional) The last item in the argument list.
+         * This will drive how the items are zipped together.
          * @return {Array} The zipped set.
          * @deprecated 4.0.0 Will be removed in the next major version
          */
@@ -1252,10 +1291,13 @@ Ext.zip(
 
         /**
          * Turns an array into a sentence, joined by a specified connector - e.g.:
-         * Ext.toSentence(['Adama', 'Tigh', 'Roslin']); //'Adama, Tigh and Roslin'
-         * Ext.toSentence(['Adama', 'Tigh', 'Roslin'], 'or'); //'Adama, Tigh or Roslin'
+         * 
+         *     Ext.toSentence(['Adama', 'Tigh', 'Roslin']); //'Adama, Tigh and Roslin'
+         *     Ext.toSentence(['Adama', 'Tigh', 'Roslin'], 'or'); //'Adama, Tigh or Roslin'
+         * 
          * @param {String[]} items The array to create a sentence from
-         * @param {String} connector The string to use to connect the last two words. Usually 'and' or 'or' - defaults to 'and'.
+         * @param {String} connector The string to use to connect the last two words.
+         * Usually 'and' or 'or' - defaults to 'and'.
          * @return {String} The sentence string
          * @deprecated 4.0.0 Will be removed in the next major version
          */
@@ -1273,9 +1315,9 @@ Ext.zip(
         },
 
         /**
-         * By default, Ext intelligently decides whether floating elements should be shimmed. If you are using flash,
-         * you may want to set this to true.
-         * @type Boolean
+         * @property {Boolean} useShims
+         * By default, Ext intelligently decides whether floating elements should be shimmed.
+         * If you are using flash, you may want to set this to true.
          */
         useShims: isIE6
     });
@@ -1292,10 +1334,11 @@ Ext.application = function(config) {
     Ext.require('Ext.app.Application');
 
     Ext.onReady(function() {
-        Ext.create('Ext.app.Application', config);
+        new Ext.app.Application(config);
     });
 };
 
+//<localeInfo useApply="true" />
 /**
  * @class Ext.util.Format
 
@@ -1367,28 +1410,36 @@ XTemplates can also directly use Ext.util.Format functions:
          * <p>The character that the {@link #number} function uses as a thousand separator.</p>
          * <p>This may be overridden in a locale file.</p>
          */
+        //<locale>
         thousandSeparator: ',',
+        //</locale>
 
         /**
          * @property {String} decimalSeparator
          * <p>The character that the {@link #number} function uses as a decimal point.</p>
          * <p>This may be overridden in a locale file.</p>
          */
+        //<locale>
         decimalSeparator: '.',
+        //</locale>
 
         /**
          * @property {Number} currencyPrecision
          * <p>The number of decimal places that the {@link #currency} function displays.</p>
          * <p>This may be overridden in a locale file.</p>
          */
+        //<locale>
         currencyPrecision: 2,
+        //</locale>
 
         /**
          * @property {String} currencySign
          * <p>The currency sign that the {@link #currency} function displays.</p>
          * <p>This may be overridden in a locale file.</p>
          */
+         //<locale>
         currencySign: '$',
+        //</locale>
 
         /**
          * @property {Boolean} currencyAtEnd
@@ -1396,7 +1447,9 @@ XTemplates can also directly use Ext.util.Format functions:
          * append the currency sign to the formatted value.</p>
          * <p>This may be overridden in a locale file.</p>
          */
+        //<locale>
         currencyAtEnd: false,
+        //</locale>
 
         /**
          * Checks a reference and converts it to empty string if it is undefined
@@ -1472,7 +1525,7 @@ XTemplates can also directly use Ext.util.Format functions:
                 v = -v;
                 negativeSign = '-';
             }
-            decimals = decimals || UtilFormat.currencyPrecision;
+            decimals = Ext.isDefined(decimals) ? decimals : UtilFormat.currencyPrecision;
             format += format + (decimals > 0 ? '.' : '');
             for (; i < decimals; i++) {
                 format += '0';
@@ -1643,7 +1696,7 @@ XTemplates can also directly use Ext.util.Format functions:
             }
 
             if (1 < psplit.length) {
-                v = v.toFixed(psplit[1].length);
+                v = Ext.Number.toFixed(v, psplit[1].length);
             } else if(2 < psplit.length) {
                 //<debug>
                 Ext.Error.raise({
@@ -1655,7 +1708,7 @@ XTemplates can also directly use Ext.util.Format functions:
                 });
                 //</debug>
             } else {
-                v = v.toFixed(0);
+                v = Ext.Number.toFixed(v, 0);
             }
 
             var fnum = v.toString();
@@ -1735,49 +1788,49 @@ XTemplates can also directly use Ext.util.Format functions:
         /**
          * Alias for {@link Ext.String#capitalize}.
          * @method
-         * @alias Ext.String#capitalize
+         * @inheritdoc Ext.String#capitalize
          */
         capitalize: Ext.String.capitalize,
 
         /**
          * Alias for {@link Ext.String#ellipsis}.
          * @method
-         * @alias Ext.String#ellipsis
+         * @inheritdoc Ext.String#ellipsis
          */
         ellipsis: Ext.String.ellipsis,
 
         /**
          * Alias for {@link Ext.String#format}.
          * @method
-         * @alias Ext.String#format
+         * @inheritdoc Ext.String#format
          */
         format: Ext.String.format,
 
         /**
          * Alias for {@link Ext.String#htmlDecode}.
          * @method
-         * @alias Ext.String#htmlDecode
+         * @inheritdoc Ext.String#htmlDecode
          */
         htmlDecode: Ext.String.htmlDecode,
 
         /**
          * Alias for {@link Ext.String#htmlEncode}.
          * @method
-         * @alias Ext.String#htmlEncode
+         * @inheritdoc Ext.String#htmlEncode
          */
         htmlEncode: Ext.String.htmlEncode,
 
         /**
          * Alias for {@link Ext.String#leftPad}.
          * @method
-         * @alias Ext.String#leftPad
+         * @inheritdoc Ext.String#leftPad
          */
         leftPad: Ext.String.leftPad,
 
         /**
          * Alias for {@link Ext.String#trim}.
          * @method
-         * @alias Ext.String#trim
+         * @inheritdoc Ext.String#trim
          */
         trim : Ext.String.trim,
 
@@ -2004,7 +2057,391 @@ Ext.TaskManager.start(task);
  * <p>See the {@link #start} method for details about how to configure a task object.</p>
  * @singleton
  */
-Ext.TaskManager = Ext.create('Ext.util.TaskRunner');
+Ext.TaskManager = new Ext.util.TaskRunner();
+
+/**
+ * @class Ext.perf.Accumulator
+ * @private
+ */
+Ext.define('Ext.perf.Accumulator', function () {
+    var currentFrame = null,
+        formatTpl;
+
+    // lazy init on first request for timestamp (avoids infobar in IE until needed)
+    var getTimestamp = function () {
+        getTimestamp = function () {
+            return new Date().getTime();
+        }
+
+        if (window.ActiveXObject) {
+            try {
+                // the above technique is not very accurate for small intervals...
+                var toolbox = new ActiveXObject('SenchaToolbox.Toolbox');
+                getTimestamp = function () {
+                    return toolbox.milliseconds;
+                };
+            } catch (e) {
+                // ignore
+            }
+        }
+
+        Ext.perf.getTimestamp = Ext.perf.Accumulator.getTimestamp = getTimestamp;
+        return getTimestamp();
+    };
+
+    function adjustSet (set, time) {
+        set.sum += time;
+        set.min = Math.min(set.min, time);
+        set.max = Math.max(set.max, time);
+    }
+
+    function leaveFrame () {
+        var time = getTimestamp(), // do this first
+            me = this, // me = frame
+            accum = me.accum,
+            totalTime = time - me.time;
+
+        ++accum.count;
+        if (! --accum.depth) {
+            adjustSet(accum.total, totalTime);
+        }
+        adjustSet(accum.pure, totalTime - me.childTime);
+
+        currentFrame = me.parent;
+        if (currentFrame) {
+            ++currentFrame.accum.childCount;
+            currentFrame.childTime += totalTime;
+        }
+    }
+
+    function makeSet () {
+        return {
+            min: Number.MAX_VALUE,
+            max: 0,
+            sum: 0
+        }
+    }
+
+    function makeTap (me, fn) {
+        return function () {
+            var frame = me.enter(),
+                ret = fn.apply(this, arguments);
+
+            frame.leave();
+            return ret;
+        };
+    }
+
+    function round (x) {
+        return Math.round(x * 100) / 100;
+    }
+
+    function setToJSON (count, childCount, calibration, set) {
+        var data = {
+            avg: 0,
+            min: set.min,
+            max: set.max,
+            sum: 0
+        };
+
+        if (count) {
+            calibration = calibration || 0;
+            data.sum = set.sum - childCount * calibration;
+            data.avg = data.sum / count;
+            // min and max cannot be easily corrected since we don't know the number of
+            // child calls for them.
+        }
+
+        return data;
+    }
+
+    return {
+        constructor: function (name) {
+            var me = this;
+
+            me.count = me.childCount = me.depth = me.maxDepth = 0;
+            me.pure = makeSet();
+            me.total = makeSet();
+            me.name = name;
+        },
+
+        statics: {
+            getTimestamp: getTimestamp
+        },
+
+        format: function (calibration) {
+            if (!formatTpl) {
+                formatTpl = new Ext.XTemplate([
+                        '{name} - {count} call(s)',
+                        '<tpl if="count">',
+                            '<tpl if="childCount">',
+                                ' ({childCount} children)',
+                            '</tpl>',
+                            '<tpl if="depth - 1">',
+                                ' ({depth} deep)',
+                            '</tpl>',
+                            '<tpl for="times">',
+                                ', {type}: {[this.time(values.sum)]} msec (',
+                                     //'min={[this.time(values.min)]}, ',
+                                     'avg={[this.time(values.sum / parent.count)]}',
+                                     //', max={[this.time(values.max)]}',
+                                     ')',
+                            '</tpl>',
+                        '</tpl>'
+                    ].join(''), {
+                        time: function (t) {
+                            return Math.round(t * 100) / 100;
+                        }
+                    });
+            }
+
+            var data = this.getData(calibration);
+            data.name = this.name;
+            data.pure.type = 'Pure';
+            data.total.type = 'Total';
+            data.times = [data.pure, data.total];
+            return formatTpl.apply(data);
+        },
+
+        getData: function (calibration) {
+            var me = this;
+
+            return {
+                count: me.count,
+                childCount: me.childCount,
+                depth: me.maxDepth,
+                pure: setToJSON(me.count, me.childCount, calibration, me.pure),
+                total: setToJSON(me.count, me.childCount, calibration, me.total)
+            };
+        },
+
+        enter: function () {
+            var me = this,
+                frame = {
+                    accum: me,
+                    leave: leaveFrame,
+                    childTime: 0,
+                    parent: currentFrame
+                };
+
+            ++me.depth;
+            if (me.maxDepth < me.depth) {
+                me.maxDepth = me.depth;
+            }
+
+            currentFrame = frame;
+            frame.time = getTimestamp(); // do this last
+            return frame;
+        },
+
+        monitor: function (fn, scope, args) {
+            var frame = this.enter();
+            if (args) {
+                fn.apply(scope, args);
+            } else {
+                fn.call(scope);
+            }
+            frame.leave();
+        },
+
+        report: function () {
+            Ext.log(this.format());
+        },
+
+        tap: function (className, methodName) {
+            var me = this,
+                methods = typeof methodName == 'string' ? [methodName] : methodName,
+                klass, statik, i, parts, length, name, src;
+
+            if (typeof className == 'string') {
+                klass = Ext.global;
+                parts = className.split('.');
+                for (i = 0, length = parts.length; i < length; ++i) {
+                    klass = klass[parts[i]];
+                }
+            } else {
+                klass = className;
+            }
+
+            for (i = 0, length = methods.length; i < length; ++i) {
+                name = methods[i];
+                statik = name.charAt(0) == '!';
+
+                if (statik) {
+                    name = name.substring(1);
+                } else {
+                    statik = !(name in klass.prototype);
+                }
+
+                src = statik ? klass : klass.prototype;
+                src[name] = makeTap(me, src[name]);
+            }
+
+            return me;
+        }
+    };
+}(),
+
+function () {
+    Ext.perf.getTimestamp = this.getTimestamp;
+});
+
+/**
+ * @class Ext.perf.Monitor
+ * @singleton
+ * @private
+ */
+Ext.define('Ext.perf.Monitor', {
+    singleton: true,
+    alternateClassName: 'Ext.Perf',
+
+    requires: [
+        'Ext.perf.Accumulator'
+    ],
+
+    constructor: function () {
+        this.accumulators = [];
+        this.accumulatorsByName = {};
+    },
+
+    calibrate: function () {
+        var accum = new Ext.perf.Accumulator('$'),
+            total = accum.total,
+            getTimestamp = Ext.perf.Accumulator.getTimestamp,
+            count = 0,
+            frame,
+            endTime,
+            startTime;
+
+        startTime = getTimestamp();
+
+        do {
+            frame = accum.enter();
+            frame.leave();
+            ++count;
+        } while (total.sum < 100);
+
+        endTime = getTimestamp();
+
+        return (endTime - startTime) / count;
+    },
+
+    get: function (name) {
+        var me = this,
+            accum = me.accumulatorsByName[name];
+
+        if (!accum) {
+            me.accumulatorsByName[name] = accum = new Ext.perf.Accumulator(name);
+            me.accumulators.push(accum);
+        }
+
+        return accum;
+    },
+
+    enter: function (name) {
+        return this.get(name).enter();
+    },
+
+    monitor: function (name, fn, scope) {
+        this.get(name).monitor(fn, scope);
+    },
+
+    report: function () {
+        var me = this,
+            accumulators = me.accumulators,
+            calibration = me.calibrate(),
+            report = ['Calibration: ' + Math.round(calibration * 100) / 100 + ' msec/sample'];
+
+        accumulators.sort(function (a, b) {
+            return (a.name < b.name) ? -1 : ((b.name < a.name) ? 1 : 0);
+        });
+
+        Ext.each(accumulators, function (accum) {
+            report.push(accum.format(calibration));
+        });
+        Ext.log(report.join('\n'));
+    },
+
+    getData: function (all) {
+        var ret = {},
+            accumulators = this.accumulators;
+
+        Ext.each(accumulators, function (accum) {
+            if (all || accum.count) {
+                ret[accum.name] = accum.getData();
+            }
+        });
+
+        return ret;
+    },
+
+    setup: function (config) {
+        if (!config) {
+            config = {
+                /*insertHtml: {
+                    'Ext.dom.Helper': 'insertHtml'
+                },*/
+                /*xtplCompile: {
+                    'Ext.XTemplateCompiler': 'compile'
+                },*/
+//                doInsert: {
+//                    'Ext.Template': 'doInsert'
+//                },
+//                applyOut: {
+//                    'Ext.XTemplate': 'applyOut'
+//                },
+                render: {
+                    'Ext.AbstractComponent': 'render'
+                },
+//                fnishRender: {
+//                    'Ext.AbstractComponent': 'finishRender'
+//                },
+//                renderSelectors: {
+//                    'Ext.AbstractComponent': 'applyRenderSelectors'
+//                },
+//                compAddCls: {
+//                    'Ext.AbstractComponent': 'addCls'
+//                },
+//                compRemoveCls: {
+//                    'Ext.AbstractComponent': 'removeCls'
+//                },
+//                getStyle: {
+//                    'Ext.core.Element': 'getStyle'
+//                },
+//                setStyle: {
+//                    'Ext.core.Element': 'setStyle'
+//                },
+//                addCls: {
+//                    'Ext.core.Element': 'addCls'
+//                },
+//                removeCls: {
+//                    'Ext.core.Element': 'removeCls'
+//                },
+//                measure: {
+//                    'Ext.layout.component.Component': 'measureAutoDimensions'
+//                },
+//                moveItem: {
+//                    'Ext.layout.Layout': 'moveItem'
+//                },
+//                layoutFlush: {
+//                    'Ext.layout.Context': 'flush'
+//                },
+                layout: {
+                    'Ext.layout.Context': 'run'
+                }
+            };
+        }
+
+        Ext.Object.each(config, function (accumName, taps) {
+            var accum = Ext.Perf.get(accumName);
+
+            Ext.Object.each(taps, function (className, methods) {
+                accum.tap(className, methods);
+            });
+        });
+    }
+});
+
 /**
  * @class Ext.is
  * 
@@ -2143,38 +2580,67 @@ Ext.is.init();
  * @singleton
  */
 Ext.supports = {
+    /**
+     * Runs feature detection routines and sets the various flags. This is called when
+     * the scripts loads (very early) and again at {@link Ext#onReady}. Some detections
+     * are flagged as `early` and run immediately. Others that require the document body
+     * will not run until ready.
+     * 
+     * Each test is run only once, so calling this method from an onReady function is safe
+     * and ensures that all flags have been set.
+     * @markdown
+     * @private
+     */
     init : function() {
-        var doc = document,
-            div = doc.createElement('div'),
-            tests = this.tests,
-            ln = tests.length,
-            i, test;
+        var me = this,
+            doc = document,
+            tests = me.tests,
+            n = tests.length,
+            div = n && Ext.isReady && doc.createElement('div'),
+            test, notRun = [];
 
-        div.innerHTML = [
-            '<div style="height:30px;width:50px;">',
-                '<div style="height:20px;width:20px;"></div>',
-            '</div>',
-            '<div style="width: 200px; height: 200px; position: relative; padding: 5px;">',
-                '<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>',
-            '</div>',
-            '<div style="float:left; background-color:transparent;"></div>'
-        ].join('');
+        if (div) {
+            div.innerHTML = [
+                '<div style="height:30px;width:50px;">',
+                    '<div style="height:20px;width:20px;"></div>',
+                '</div>',
+                '<div style="width: 200px; height: 200px; position: relative; padding: 5px;">',
+                    '<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>',
+                '</div>',
+                '<div style="position: absolute; left: 10%; top: 10%;"></div>',
+                '<div style="float:left; background-color:transparent;"></div>'
+            ].join('');
 
-        doc.body.appendChild(div);
-
-        for (i = 0; i < ln; i++) {
-            test = tests[i];
-            this[test.identity] = test.fn.call(this, doc, div);
+            doc.body.appendChild(div);
         }
 
-        doc.body.removeChild(div);
+        while (n--) {
+            test = tests[n];
+            if (div || test.early) {
+                me[test.identity] = test.fn.call(me, doc, div);
+            } else {
+                notRun.push(test);
+            }
+        }
+
+        if (div) {
+            doc.body.removeChild(div);
+        }
+
+        me.tests = notRun;
     },
+
+    /**
+     * @property PointerEvents True if document environment supports the CSS3 pointer-events style.
+     * @type {Boolean}
+     */
+    PointerEvents: 'pointerEvents' in document.documentElement.style,
 
     /**
      * @property CSS3BoxShadow True if document environment supports the CSS3 box-shadow style.
      * @type {Boolean}
      */
-    CSS3BoxShadow: Ext.isDefined(document.documentElement.style.boxShadow),
+    CSS3BoxShadow: 'boxShadow' in document.documentElement.style,
 
     /**
      * @property ClassList True if document environment supports the HTML5 classList API.
@@ -2266,6 +2732,7 @@ Ext.supports = {
          */
         {
             identity: 'DisplayChangeInputSelectionBug',
+            early: true,
             fn: function() {
                 var webKitVersion = Ext.webKitVersion;
                 // WebKit but older than Safari 5 or Chrome 6:
@@ -2284,6 +2751,7 @@ Ext.supports = {
          */
         {
             identity: 'DisplayChangeTextAreaSelectionBug',
+            early: true,
             fn: function() {
                 var webKitVersion = Ext.webKitVersion;
 
@@ -2395,7 +2863,8 @@ Ext.supports = {
         {
             identity: 'History',
             fn: function() {
-                return !!(window.history && history.pushState);
+                var history = window.history;
+                return !!(history && history.pushState);
             }
         },
         
@@ -2584,8 +3053,34 @@ Ext.supports = {
                 // sadly, we cannot feature detect this...
                 return Ext.isIE || Ext.isGecko || Ext.webKitVersion >= 534.16; // Chrome 10+
             }
+        },
+        
+        /**
+         * @property TextAreaMaxLength True if the browser supports maxlength on textareas.
+         * @type {Boolean}
+         */
+        {
+            identity: 'TextAreaMaxLength',
+            fn: function(){
+                var el = document.createElement('textarea');
+                return ('maxlength' in el);
+            }
+        },
+        /**
+         * @property GetPositionPercentage True if the browser will return the left/top/right/bottom 
+         * position as a percentage when explicitly set as a percentage value.
+         * @type {Boolean}
+         */
+        // Related bug: https://bugzilla.mozilla.org/show_bug.cgi?id=707691#c7
+        {
+            identity: 'GetPositionPercentage',
+            fn: function(doc, div){
+                return Ext.get(div.childNodes[2]).getStyle('left') == '10%';
+            }
         }
     ]
 };
+
+Ext.supports.init(); // run the "early" detections now
 
 

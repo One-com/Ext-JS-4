@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @author Ed Spencer
  * TabBar is used internally by a {@link Ext.tab.Panel TabPanel} and typically should not need to be created manually.
@@ -23,8 +9,7 @@ Ext.define('Ext.tab.Bar', {
     baseCls: Ext.baseCSSPrefix + 'tab-bar',
 
     requires: [
-        'Ext.tab.Tab',
-        'Ext.FocusManager'
+        'Ext.tab.Tab'
     ],
 
     isTabBar: true,
@@ -46,9 +31,15 @@ Ext.define('Ext.tab.Bar', {
      */
     plain: false,
 
+    childEls: [
+        'body', 'strip'
+    ],
+
     // @private
     renderTpl: [
-        '<div id="{id}-body" class="{baseCls}-body <tpl if="bodyCls"> {bodyCls}</tpl> <tpl if="ui"> {baseCls}-body-{ui}<tpl for="uiCls"> {parent.baseCls}-body-{parent.ui}-{.}</tpl></tpl>"<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>></div>',
+        '<div id="{id}-body" class="{baseCls}-body <tpl if="bodyCls"> {bodyCls}</tpl> <tpl if="ui"> {baseCls}-body-{ui}<tpl for="uiCls"> {parent.baseCls}-body-{parent.ui}-{.}</tpl></tpl>"<tpl if="bodyStyle"> style="{bodyStyle}"</tpl>>',
+            '{%this.renderContainer(out,values)%}',
+        '</div>',
         '<div id="{id}-strip" class="{baseCls}-strip<tpl if="ui"> {baseCls}-strip-{ui}<tpl for="uiCls"> {parent.baseCls}-strip-{parent.ui}-{.}</tpl></tpl>"></div>'
     ],
 
@@ -86,25 +77,31 @@ Ext.define('Ext.tab.Bar', {
             'change'
         );
 
-        me.addChildEls('body', 'strip');
         me.callParent(arguments);
+
+        me.on({
+            click: me.onClick,
+            element: 'el',
+            delegate: '.' + Ext.baseCSSPrefix + 'tab',
+            scope: me
+        });
 
         // TabBar must override the Header's align setting.
         me.layout.align = (me.orientation == 'vertical') ? 'left' : 'top';
-        me.layout.overflowHandler = Ext.create('Ext.layout.container.boxOverflow.Scroller', me.layout);
+        me.layout.overflowHandler = new Ext.layout.container.boxOverflow.Scroller(me.layout);
 
         me.remove(me.titleCmp);
         delete me.titleCmp;
 
-        // Subscribe to Ext.FocusManager for key navigation
-        keys = me.orientation == 'vertical' ? ['up', 'down'] : ['left', 'right'];
-        Ext.FocusManager.subscribe(me, {
-            keys: keys
-        });
-
         Ext.apply(me.renderData, {
             bodyCls: me.bodyCls
         });
+    },
+
+    getLayout: function() {
+        var me = this;
+        me.layout.type = (me.dock === 'top' || me.dock === 'bottom') ? 'hbox' : 'vbox';
+        return me.callParent(arguments);
     },
 
     // @private
@@ -119,30 +116,27 @@ Ext.define('Ext.tab.Bar', {
         if (tab === me.previousTab) {
             me.previousTab = null;
         }
+        
+        if (tab === me.activeTab) {
+            me.activeTab = null;
+        }
+        
         if (me.items.getCount() === 0) {
             me.activeTab = null;
         }
         me.callParent(arguments);    
     },
 
-    // @private
-    afterRender: function() {
-        var me = this;
-
-        me.mon(me.el, {
-            scope: me,
-            click: me.onClick,
-            delegate: '.' + Ext.baseCSSPrefix + 'tab'
-        });
+    afterComponentLayout : function(width) {
+        var me = this,
+            tab = me.activeTab;
+            
         me.callParent(arguments);
-
-    },
-
-    afterComponentLayout : function() {
-        var me = this;
-
-        me.callParent(arguments);
-        me.strip.setWidth(me.el.getWidth());
+        me.strip.setWidth(width);
+        
+        if (tab && me.rendered) {
+            me.layout.overflowHandler.scrollToItem(tab);
+        }
     },
 
     // @private
@@ -224,12 +218,7 @@ Ext.define('Ext.tab.Bar', {
         }
         tab.activate();
 
-        if (me.rendered) {
-            me.layout.layout();
-            tab.el && tab.el.scrollIntoView(me.layout.getRenderTarget());
-        }
         me.activeTab = tab;
         me.fireEvent('change', me, tab, tab.card);
     }
 });
-

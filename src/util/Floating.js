@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * A mixin to add floating capability to a Component.
  */
@@ -21,43 +7,63 @@ Ext.define('Ext.util.Floating', {
 
     /**
      * @cfg {Boolean} focusOnToFront
-     * Specifies whether the floated component should be automatically {@link Ext.Component#focus focused} when
+     * Specifies whether the floated component should be automatically {@link Ext.Component#method-focus focused} when
      * it is {@link #toFront brought to the front}.
      */
     focusOnToFront: true,
 
     /**
      * @cfg {String/Boolean} shadow
-     * Specifies whether the floating component should be given a shadow. Set to true to automatically create an {@link
-     * Ext.Shadow}, or a string indicating the shadow's display {@link Ext.Shadow#mode}. Set to false to disable the
-     * shadow.
+     * Specifies whether the floating component should be given a shadow. Set to true to automatically create an
+     * {@link Ext.Shadow}, or a string indicating the shadow's display {@link Ext.Shadow#mode}. Set to false to
+     * disable the shadow.
      */
     shadow: 'sides',
 
-    constructor: function(config) {
+    /**
+     * @cfg {String/Boolean} shadowOffset
+     * Number of pixels to offset the shadow.
+     */
+
+    constructor: function (dom) {
         var me = this;
-        
+
+        me.el = new Ext.Layer(Ext.apply({
+            hideMode     : me.hideMode,
+            hidden       : me.hidden,
+            shadow       : (typeof me.shadow != 'undefined') ? me.shadow : 'sides',
+            shadowOffset : me.shadowOffset,
+            constrain    : false,
+            shim         : (me.shim === false) ? false : undefined
+        }, me.floating), dom);
+
+        // release config object (if it was one)
         me.floating = true;
-        me.el = Ext.create('Ext.Layer', Ext.apply({}, config, {
-            hideMode: me.hideMode,
-            hidden: me.hidden,
-            shadow: Ext.isDefined(me.shadow) ? me.shadow : 'sides',
-            shadowOffset: me.shadowOffset,
-            constrain: false,
-            shim: me.shim === false ? false : undefined
-        }), me.el);
+        
+        // Register with the configured ownerCt.
+        // With this we acquire a floatParent for relative positioning, and a zIndexParent which is an
+        // ancestor floater which provides zIndex management.
+        me.registerWithOwnerCt();
     },
 
-    onFloatRender: function() {
+    registerWithOwnerCt: function() {
         var me = this;
-        me.zIndexParent = me.getZIndexParent();
+
+        if (me.zIndexParent) {
+            me.zIndexParent.unregisterFloatingItem(me);
+        }
+
+        // Acquire a zIndexParent by traversing the ownerCt axis for the nearest floating ancestor
+        me.zIndexParent = me.up('[floating]');
         me.setFloatParent(me.ownerCt);
         delete me.ownerCt;
 
-        if (me.zIndexParent) {
-            me.zIndexParent.registerFloatingItem(me);
-        } else {
-            Ext.WindowManager.register(me);
+        if (me.registerWithManager !== false) {
+            if (me.zIndexParent) {
+                me.zIndexParent.registerFloatingItem(me);
+            } else {
+                Ext.WindowManager.register(me);
+            }
         }
     },
 
@@ -107,38 +113,20 @@ Ext.define('Ext.util.Floating', {
         }
     },
 
-    /**
-     * @private
-     * Finds the ancestor Container responsible for allocating zIndexes for the passed Component.
-     *
-     * That will be the outermost floating Container (a Container which has no ownerCt and has floating:true).
-     *
-     * If we have no ancestors, or we walk all the way up to the document body, there's no zIndexParent,
-     * and the global Ext.WindowManager will be used.
-     */
-    getZIndexParent: function() {
-        var p = this.ownerCt,
-            c;
-
-        if (p) {
-            while (p) {
-                c = p;
-                p = p.ownerCt;
-            }
-            if (c.floating) {
-                return c;
-            }
-        }
-    },
-
     // private
     // z-index is managed by the zIndexManager and may be overwritten at any time.
     // Returns the next z-index to be used.
     // If this is a Container, then it will have rebased any managed floating Components,
     // and so the next available z-index will be approximately 10000 above that.
     setZIndex: function(index) {
-        var me = this;
+        var me = this,
+            mask = me.loadMask;
+            
         me.el.setZIndex(index);
+        
+        if (mask && mask.onZIndexChange) {
+            mask.onZIndexChange(index);
+        }
 
         // Next item goes 10 above;
         index += 10;
@@ -158,8 +146,9 @@ Ext.define('Ext.util.Floating', {
      * rendered to.
      *
      * An alternative constraint may be passed.
-     * @param {String/HTMLElement/Ext.Element/Ext.util.Region} constrainTo (Optional) The Element or {@link Ext.util.Region Region} into which this Component is
-     * to be constrained. Defaults to the element into which this floating Component was rendered.
+     * @param {String/HTMLElement/Ext.Element/Ext.util.Region} [constrainTo] The Element or {@link Ext.util.Region Region}
+     * into which this Component is to be constrained. Defaults to the element into which this floating Component
+     * was rendered.
      */
     doConstrain: function(constrainTo) {
         var me = this,
@@ -178,7 +167,8 @@ Ext.define('Ext.util.Floating', {
     /**
      * Gets the x/y offsets to constrain this float
      * @private
-     * @param {String/HTMLElement/Ext.Element/Ext.util.Region} constrainTo (Optional) The Element or {@link Ext.util.Region Region} into which this Component is to be constrained.
+     * @param {String/HTMLElement/Ext.Element/Ext.util.Region} [constrainTo] The Element or {@link Ext.util.Region Region}
+     * into which this Component is to be constrained.
      * @return {Number[]} The x/y constraints
      */
     getConstrainVector: function(constrainTo){
@@ -197,24 +187,23 @@ Ext.define('Ext.util.Floating', {
      *
      * @param {Ext.Component/Ext.Element/HTMLElement/String} element
      * The element or {@link Ext.Component} to align to. If passing a component, it must be a
-     * omponent instance. If a string id is passed, it will be used as an element id.
-     * @param {String} [position="tl-bl?"] The position to align to (see {@link
-     * Ext.Element#alignTo} for more details).
+     * component instance. If a string id is passed, it will be used as an element id.
+     * @param {String} [position="tl-bl?"] The position to align to
+     * (see {@link Ext.Element#alignTo} for more details).
      * @param {Number[]} [offsets] Offset the positioning by [x, y]
      * @return {Ext.Component} this
      */
     alignTo: function(element, position, offsets) {
-        if (element.isComponent) {
-            element = element.getEl();
-        }
-        var xy = this.el.getAlignToXY(element, position, offsets);
-        this.setPagePosition(xy);
+
+        // element may be a Component, so first attempt to use its el to align to.
+        // When aligning to an Element's X,Y position, we must use setPagePosition which disregards any floatParent
+        this.setPagePosition(this.el.getAlignToXY(element.el || element, position, offsets));
         return this;
     },
 
     /**
-     * Brings this floating Component to the front of any other visible, floating Components managed by the same {@link
-     * Ext.ZIndexManager ZIndexManager}
+     * Brings this floating Component to the front of any other visible, floating Components managed by the same
+     * {@link Ext.ZIndexManager ZIndexManager}
      *
      * If this Component is modal, inserts the modal mask just below this Component in the z-index stack.
      *
@@ -262,11 +251,14 @@ Ext.define('Ext.util.Floating', {
             if (me.el.shadow && !me.maximized) {
                 me.el.enableShadow(true);
             }
+            if (me.modal) {
+                me.focus(false, true);
+            }
             me.fireEvent('activate', me);
         } else {
             // Only the *Windows* in a zIndex stack share a shadow. All other types of floaters
             // can keep their shadows all the time
-            if ((me instanceof Ext.window.Window) && (newActive instanceof Ext.window.Window)) {
+            if (me.isWindow && (newActive && newActive.isWindow)) {
                 me.el.disableShadow();
             }
             me.fireEvent('deactivate', me);
@@ -288,9 +280,22 @@ Ext.define('Ext.util.Floating', {
      */
     center: function() {
         var me = this,
+            xy;
+            
+        if (me.isVisible()) {
             xy = me.el.getAlignToXY(me.container, 'c-c');
-        me.setPagePosition(xy);
+            me.setPagePosition(xy);
+        } else {
+            me.needsCenter = true;
+        }
         return me;
+    },
+    
+    onFloatShow: function(){
+        if (this.needsCenter) {
+            this.center();    
+        }
+        delete this.needsCenter;
     },
 
     // private

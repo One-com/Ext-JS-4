@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * A specialized SplitButton that contains a menu of {@link Ext.menu.CheckItem} elements. The button automatically
  * cycles through each menu item on click, raising the button's {@link #change} event (or calling the button's
@@ -55,7 +41,7 @@ Ext.define('Ext.button.Cycle', {
      * An array of {@link Ext.menu.CheckItem} **config** objects to be used when creating the button's menu items (e.g.,
      * `{text:'Foo', iconCls:'foo-icon'}`)
      * 
-     * @deprecated 4.0 Use the {@link #menu} config instead. All menu items will be created as
+     * @deprecated 4.0 Use the {@link #cfg-menu} config instead. All menu items will be created as
      * {@link Ext.menu.CheckItem CheckItems}.
      */
     /**

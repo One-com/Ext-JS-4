@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * This class is used to send requests to the server using {@link Ext.direct.Manager Ext.Direct}. When a
  * request is made, the transport mechanism is handed off to the appropriate
@@ -78,16 +64,18 @@ Ext.define('Ext.data.proxy.Direct', {
     paramsAsHash: true,
 
     /**
-     * @cfg {Function} directFn
-     * Function to call when executing a request.  directFn is a simple alternative to defining the api configuration-parameter
-     * for Store's which will not implement a full CRUD api.
+     * @cfg {Function/String} directFn
+     * Function to call when executing a request. directFn is a simple alternative to defining the api configuration-parameter
+     * for Store's which will not implement a full CRUD api. The directFn may also be a string reference to the fully qualified
+     * name of the function, for example: 'MyApp.company.GetProfile'. This can be useful when using dynamic loading. The string 
+     * will be looked up when the proxy is created.
      */
     directFn : undefined,
 
     /**
      * @cfg {Object} api
      * The same as {@link Ext.data.proxy.Server#api}, however instead of providing urls, you should provide a direct
-     * function call.
+     * function call. See {@link #directFn}.
      */
 
     /**
@@ -100,13 +88,29 @@ Ext.define('Ext.data.proxy.Direct', {
     paramOrderRe: /[\s,|]/,
 
     constructor: function(config){
-        var me = this;
-
-        Ext.apply(me, config);
-        if (Ext.isString(me.paramOrder)) {
-            me.paramOrder = me.paramOrder.split(me.paramOrderRe);
-        }
+        var me = this,
+            paramOrder,
+            fn,
+            api;
+            
         me.callParent(arguments);
+        
+        paramOrder = me.paramOrder;
+        if (Ext.isString(paramOrder)) {
+            me.paramOrder = paramOrder.split(me.paramOrderRe);
+        }
+        
+        fn = me.directFn;
+        if (fn) {
+            me.directFn = Ext.direct.Manager.parseMethod(fn);
+        }
+        
+        api = me.api;
+        for (fn in api) {
+            if (api.hasOwnProperty(fn)) {
+                api[fn] = Ext.direct.Manager.parseMethod(api[fn]);
+            }
+        }
     },
 
     doRequest: function(operation, callback, scope) {
@@ -191,4 +195,3 @@ Ext.define('Ext.data.proxy.Direct', {
         return '';
     }
 });
-

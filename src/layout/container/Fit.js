@@ -1,25 +1,10 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
- * This is a base class for layouts that contain **a single item** that automatically expands to fill the layout's
- * container. This class is intended to be extended or created via the `layout: 'fit'`
+ * This is a base class for layouts that contain a single item that automatically expands to fill the layout's
+ * container. This class is intended to be extended or created via the layout:'fit'
  * {@link Ext.container.Container#layout} config, and should generally not need to be created directly via the new keyword.
  *
  * Fit layout does not have any direct config options (other than inherited ones). To fit a panel to a container using
- * Fit layout, simply set `layout: 'fit'` on the container and add a single panel to it. If the container has multiple
- * panels, only the first one will be displayed.
+ * Fit layout, simply set `layout: 'fit'` on the container and add a single panel to it.
  *
  *     @example
  *     Ext.create('Ext.panel.Panel', {
@@ -35,46 +20,50 @@ If you are unsure which license is appropriate for your use, please contact the 
  *         },
  *         renderTo: Ext.getBody()
  *     });
+ *
+ * If the container has multiple items, all of the items will all be equally sized. This is usually not
+ * desired, so to avoid this, place only a **single** item in the container. This sizing of all items
+ * can be used to provide a background {@link Ext.Img image} that is "behind" another item
+ * such as a {@link Ext.view.View dataview} if you also absolutely position the items.
  */
 Ext.define('Ext.layout.container.Fit', {
 
     /* Begin Definitions */
-
-    extend: 'Ext.layout.container.AbstractFit',
-    alias: 'layout.fit',
+    extend: 'Ext.layout.container.Container',
     alternateClassName: 'Ext.layout.FitLayout',
-    requires: ['Ext.layout.container.Box'],
+
+    alias: 'layout.fit',
 
     /* End Definitions */
 
+    itemCls: Ext.baseCSSPrefix + 'fit-item',
+    targetCls: Ext.baseCSSPrefix + 'layout-fit',
+    type: 'fit',
+   
     /**
      * @cfg {Object} defaultMargins
-     * <p>If the individual contained items do not have a <tt>margins</tt>
-     * property specified or margin specified via CSS, the default margins from this property will be
-     * applied to each item.</p>
-     * <br><p>This property may be specified as an object containing margins
-     * to apply in the format:</p><pre><code>
-{
-    top: (top margin),
-    right: (right margin),
-    bottom: (bottom margin),
-    left: (left margin)
-}</code></pre>
-     * <p>This property may also be specified as a string containing
-     * space-separated, numeric margin values. The order of the sides associated
-     * with each value matches the way CSS processes margin values:</p>
-     * <div class="mdetail-params"><ul>
-     * <li>If there is only one value, it applies to all sides.</li>
-     * <li>If there are two values, the top and bottom borders are set to the
-     * first value and the right and left are set to the second.</li>
-     * <li>If there are three values, the top is set to the first value, the left
-     * and right are set to the second, and the bottom is set to the third.</li>
-     * <li>If there are four values, they apply to the top, right, bottom, and
-     * left, respectively.</li>
-     * </ul></div>
-     * <p>Defaults to:</p><pre><code>
-     * {top:0, right:0, bottom:0, left:0}
-     * </code></pre>
+     * If the individual contained items do not have a margins property specified or margin specified via CSS, the
+     * default margins from this property will be applied to each item.
+     *
+     * This property may be specified as an object containing margins to apply in the format:
+     *
+     *     {
+     *         top: (top margin),
+     *         right: (right margin),
+     *         bottom: (bottom margin),
+     *         left: (left margin)
+     *     }
+     *
+     * This property may also be specified as a string containing space-separated, numeric margin values. The order of
+     * the sides associated with each value matches the way CSS processes margin values:
+     *
+     *   - If there is only one value, it applies to all sides.
+     *   - If there are two values, the top and bottom borders are set to the first value and the right and left are
+     *     set to the second.
+     *   - If there are three values, the top is set to the first value, the left and right are set to the second,
+     *     and the bottom is set to the third.
+     *   - If there are four values, they apply to the top, right, bottom, and left, respectively.
+     *
      */
     defaultMargins: {
         top: 0,
@@ -83,58 +72,115 @@ Ext.define('Ext.layout.container.Fit', {
         left: 0
     },
 
+    manageMargins: true,
+
+    sizePolicies: {
+        0: { setsWidth: 0, setsHeight: 0 },
+        1: { setsWidth: 1, setsHeight: 0 },
+        2: { setsWidth: 0, setsHeight: 1 },
+        3: { setsWidth: 1, setsHeight: 1 }
+    },
+
+    getItemSizePolicy: function (item) {
+        // this layout's sizePolicy is derived from its owner's sizeModel:
+        var sizeModel = this.owner.getSizeModel(),
+            mode = (sizeModel.width.shrinkWrap ? 0 : 1) |
+                   (sizeModel.height.shrinkWrap ? 0 : 2);
+
+       return this.sizePolicies[mode];
+    },
+
     // @private
-    onLayout : function() {
+    calculate : function (ownerContext) {
         var me = this,
-            size,
-            item,
-            margins;
-        me.callParent();
+            childItems = ownerContext.childItems,
+            length = childItems.length,
+            info = {
+                contentWidth: 0,
+                contentHeight: 0,
+                length: length,
+                ownerContext: ownerContext,
+                targetSize: me.getContainerSize(ownerContext)
+            },
+            i;
 
-        if (me.owner.items.length) {
-            item = me.owner.items.get(0);
-            margins = item.margins || me.defaultMargins;
-            size = me.getLayoutTargetSize();
-            size.width  -= margins.width;
-            size.height -= margins.height;
-            me.setItemBox(item, size);
+        for (i = 0; i < length; ++i) {
+            info.index = i;
+            me.fitItem(childItems[i], info);
+        }
 
-            // If any margins were configure either through the margins config, or in the CSS style,
-            // Then positioning will be used.
-            if (margins.left || margins.top) {
-                item.setPosition(margins.left, margins.top);
-            }
+        if (!ownerContext.setContentSize(info.contentWidth, info.contentHeight)) {
+            me.done = false;
         }
     },
 
-    getTargetBox : function() {
-        return this.getLayoutTargetSize();
-    },
-
-    setItemBox : function(item, box) {
+    fitItem: function (itemContext, info) {
         var me = this;
-        if (item && box.height > 0) {
-            if (!me.owner.isFixedWidth()) {
-               box.width = undefined;
-            }
-            if (!me.owner.isFixedHeight()) {
-               box.height = undefined;
-            }
-            me.setItemSize(item, box.width, box.height);
+
+        info.margins = itemContext.getMarginInfo();
+        info.needed = info.got = 0;
+
+        me.fitItemWidth(itemContext, info);
+        me.fitItemHeight(itemContext, info);
+
+        // If not all required dimensions have been satisfied, we're not done.
+        if (info.got != info.needed) {
+            me.done = false;
         }
     },
 
-    configureItem: function(item) {
+    fitItemWidth: function (itemContext, info) {
+        // Attempt to set only dimensions that are being controlled, not shrinkWrap dimensions
+        if (info.ownerContext.widthModel.shrinkWrap) {
+            info.contentWidth = Math.max(info.contentWidth, itemContext.getProp('width'));
+        } else if (itemContext.widthModel.calculated) {
+            ++info.needed;
+            if (info.targetSize.gotWidth) {
+                ++info.got;
+                this.setItemWidth(itemContext, info);
+            }
+        }
 
-        // Card layout only controls dimensions which IT has controlled.
-        // That calculation has to be determined at run time by examining the ownerCt's isFixedWidth()/isFixedHeight() methods
-        item.layoutManagedHeight = 0;
-        item.layoutManagedWidth = 0;
+        this.positionItemX(itemContext, info);
+    },
 
-        this.callParent(arguments);
+    fitItemHeight: function (itemContext, info) {
+        if (info.ownerContext.heightModel.shrinkWrap) {
+            info.contentHeight = Math.max(info.contentHeight, itemContext.getProp('height'));
+        } else if (itemContext.heightModel.calculated) {
+            ++info.needed;
+            if (info.targetSize.gotHeight) {
+                ++info.got;
+                this.setItemHeight(itemContext, info);
+            }
+        }
+
+        this.positionItemY(itemContext, info);
+    },
+
+    positionItemX: function (itemContext, info) {
+        var margins = info.margins;
+
+        // Adjust position to account for configured margins or if we have multiple items
+        // (all items should overlap):
+        if (info.index || margins.left) {
+            itemContext.setProp('x', margins.left);
+        }
+    },
+
+    positionItemY: function (itemContext, info) {
+        var margins = info.margins;
+
+        if (info.index || margins.top) {
+            itemContext.setProp('y', margins.top);
+        }
+    },
+
+    setItemHeight: function (itemContext, info) {
+        itemContext.setHeight(info.targetSize.height - info.margins.height);
+    },
+
+    setItemWidth: function (itemContext, info) {
+        itemContext.setWidth(info.targetSize.width - info.margins.width);
     }
-}, function() {
-    // Use Box layout's renderItem which reads CSS margins, and adds them to any configured item margins
-    // (Defaulting to "0 0 0 0")
-    this.prototype.renderItem = Ext.layout.container.Box.prototype.renderItem;
 });

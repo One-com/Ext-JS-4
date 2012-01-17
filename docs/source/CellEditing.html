@@ -101,7 +101,7 @@ Ext.define('Ext.grid.plugin.CellEditing', {
          *         e.record.commit();
          *     };
          *
-         * @param {Ext.grid.plugin.Editing} editor
+         * @param {Ext.grid.plugin.CellEditing} editor
          * @param {Object} e An edit event with the following properties:
          *
          * - grid - The grid
@@ -132,7 +132,7 @@ Ext.define('Ext.grid.plugin.CellEditing', {
          *       }
          *     });
          *
-         * @param {Ext.grid.plugin.Editing} editor
+         * @param {Ext.grid.plugin.CellEditing} editor
          * @param {Object} e An edit event with the following properties:
          *
          * - grid - The grid
@@ -146,11 +146,27 @@ Ext.define('Ext.grid.plugin.CellEditing', {
          * - colIdx - The column index that is being edited
          * - cancel - Set this to true to cancel the edit or return false from your handler.
          */
+<span id='Ext-grid-plugin-CellEditing-event-canceledit'>        /**
+</span>         * @event canceledit
+         * Fires when the user started editing a cell but then cancelled the edit.
+         * @param {Ext.grid.plugin.CellEditing} editor
+         * @param {Object} e An edit event with the following properties:
+         * 
+         * - grid - The grid
+         * - record - The record that was edited
+         * - field - The field name that was edited
+         * - value - The value being set
+         * - row - The grid table row
+         * - column - The grid {@link Ext.grid.column.Column Column} defining the column that was edited.
+         * - rowIdx - The row index that was edited
+         * - colIdx - The column index that was edited
+         */
+
         this.callParent(arguments);
-        this.editors = Ext.create('Ext.util.MixedCollection', false, function(editor) {
+        this.editors = new Ext.util.MixedCollection(false, function(editor) {
             return editor.editorId;
         });
-        this.editTask = Ext.create('Ext.util.DelayedTask');
+        this.editTask = new Ext.util.DelayedTask();
     },
     
     onReconfigure: function(){
@@ -197,26 +213,22 @@ Ext.define('Ext.grid.plugin.CellEditing', {
         });
     },
 
-<span id='Ext-grid-plugin-CellEditing-method-startEdit'>    /**
-</span>     * Starts editing the specified record, using the specified Column definition to define which field is being edited.
-     * @param {Ext.data.Model} record The Store data record which backs the row to be edited.
-     * @param {Ext.data.Model} columnHeader The Column object defining the column to be edited. @override
-     */
     startEdit: function(record, columnHeader) {
         var me = this,
-            value = record.get(columnHeader.dataIndex),
             context = me.getEditingContext(record, columnHeader),
-            ed;
+            value, ed;
+            
+        // Complete the edit now, before getting the editor's target
+        // cell DOM element. Completing the edit causes a row refresh.
+        // Also allows any post-edit events to take effect before continuing
+        me.completeEdit();
 
         record = context.record;
         columnHeader = context.column;
-
-        // Complete the edit now, before getting the editor's target
-        // cell DOM element. Completing the edit causes a view refresh.
-        me.completeEdit();
+        value = record.get(columnHeader.dataIndex);
 
         context.originalValue = context.value = value;
-        if (me.beforeEdit(context) === false || me.fireEvent('beforeedit', context) === false || context.cancel) {
+        if (me.beforeEdit(context) === false || me.fireEvent('beforeedit', me, context) === false || context.cancel) {
             return false;
         }
         
@@ -234,6 +246,7 @@ Ext.define('Ext.grid.plugin.CellEditing', {
 
             // Defer, so we have some time between view scroll to sync up the editor
             me.editTask.delay(15, ed.startEdit, ed, [me.getCell(record, columnHeader), value]);
+            me.editing = true;
         } else {
             // BrowserBug: WebKit &amp; IE refuse to focus the element, rather
             // it will focus it and then immediately focus the body. This
@@ -247,6 +260,7 @@ Ext.define('Ext.grid.plugin.CellEditing', {
         var activeEd = this.getActiveEditor();
         if (activeEd) {
             activeEd.completeEdit();
+            this.editing = false;
         }
     },
 
@@ -291,13 +305,13 @@ Ext.define('Ext.grid.plugin.CellEditing', {
 
             // Allow them to specify a CellEditor in the Column
             if (!(editor instanceof Ext.grid.CellEditor)) {
-                editor = Ext.create('Ext.grid.CellEditor', {
+                editor = new Ext.grid.CellEditor({
                     editorId: editorId,
-                    field: editor
+                    field: editor,
+                    editingPlugin: me,
+                    ownerCt: me.grid
                 });
             }
-            editor.parentEl = me.grid.getEditorParent();
-            // editor.parentEl should be set here.
             editor.on({
                 scope: me,
                 specialkey: me.onSpecialKey,
@@ -342,25 +356,24 @@ Ext.define('Ext.grid.plugin.CellEditing', {
     onEditComplete : function(ed, value, startValue) {
         var me = this,
             grid = me.grid,
-            sm = grid.getSelectionModel(),
             activeColumn = me.getActiveColumn(),
-            dataIndex;
+            record;
 
         if (activeColumn) {
-            dataIndex = activeColumn.dataIndex;
+            record = me.context.record;
 
             me.setActiveEditor(null);
             me.setActiveColumn(null);
             me.setActiveRecord(null);
-            delete sm.wasEditing;
+            delete grid.getSelectionModel().wasEditing;
     
             if (!me.validateEdit()) {
                 return;
             }
             // Only update the record if the new value is different than the
-            // startValue, when the view refreshes its el will gain focus
-            if (value !== startValue) {
-                me.context.record.set(dataIndex, value);
+            // startValue. When the view refreshes its el will gain focus
+            if (!record.isEqual(value, startValue)) {
+                record.set(activeColumn.dataIndex, value);
             // Restore focus back to the view's element.
             } else {
                 grid.getView().getEl(activeColumn).focus();
@@ -384,6 +397,7 @@ Ext.define('Ext.grid.plugin.CellEditing', {
         if (activeEd) {
             activeEd.cancelEdit();
             viewEl.focus();
+            me.callParent(arguments);
         }
     },
 
@@ -392,17 +406,14 @@ Ext.define('Ext.grid.plugin.CellEditing', {
      * @param {Object} position A position with keys of row and column.
      */
     startEditByPosition: function(position) {
-        var me = this,
-            grid = me.grid,
-            sm = grid.getSelectionModel(),
-            editRecord = grid.store.getAt(position.row),
-            editColumnHeader = grid.headerCt.getHeaderAtIndex(position.column);
+        var sm = this.grid.getSelectionModel();
 
         if (sm.selectByPosition) {
             sm.selectByPosition(position);
         }
-        me.startEdit(editRecord, editColumnHeader);
+        this.startEdit(position.row, position.column);
     }
-});</pre>
+});
+</pre>
 </body>
 </html>

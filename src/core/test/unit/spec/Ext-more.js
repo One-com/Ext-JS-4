@@ -1,20 +1,6 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 describe("Ext-more", function() {
     beforeEach(function() {
-        addGlobal("ExtBox1"); 
+        addGlobal("ExtBox1");
     });
     describe("Ext.id", function(){
         var el;
@@ -59,7 +45,7 @@ describe("Ext-more", function() {
 
     describe("Ext.getBody", function() {
         it("should return current document body as an Ext.Element", function() {
-            expect(Ext.getBody()).toEqual(Ext.get(document.body)); 
+            expect(Ext.getBody()).toEqual(Ext.get(document.body));
         });
     });
 
@@ -103,7 +89,7 @@ describe("Ext-more", function() {
         });
 
         afterEach(function() {
-            cfn = undefined; 
+            cfn = undefined;
         });
 
         it("should execute the passed function in the specified scope", function() {
@@ -113,7 +99,7 @@ describe("Ext-more", function() {
 
         it("should pass arguments to the callback function", function() {
             Ext.callback(cfn, fakeScope, [1, 2, 3, 4, 6]);
-            expect(cfn).toHaveBeenCalledWith(1, 2, 3, 4,6); 
+            expect(cfn).toHaveBeenCalledWith(1, 2, 3, 4,6);
         });
 
         it("should be able to defer function call", function() {
@@ -286,11 +272,7 @@ describe("Ext-more", function() {
 
             it("should remove a dom element from document", function(){
                 Ext.removeNode(el.dom);
-               if (!Ext.isIE) {
-                    expect(el.dom.parentNode).toBe(null);
-               } else {
-                   expect(el.dom.parentNode.innerHTML).toBe(undefined);
-               }
+                 expect(!el.dom.parentNode).toBe(true);
             });
 
             it("should delete the cache reference", function() {
@@ -324,7 +306,7 @@ describe("Ext-more", function() {
                 Ext.getBody().un('mouseup', listener);
             });
         });
-        
+
         if (!Ext.isIE6 && !Ext.isIE7) {
             describe("if enableNestedListenerRemoval is true", function() {
                 var el, child;
@@ -341,7 +323,7 @@ describe("Ext-more", function() {
 
                     it("should remove listener on children", function() {
                         var listener = jasmine.createSpy();
-                        child.on('mouseup', listener); 
+                        child.on('mouseup', listener);
                         Ext.removeNode(el.dom);
                         jasmine.fireMouseEvent(child.dom, 'mouseup');
                         expect(listener).not.toHaveBeenCalled();
@@ -361,7 +343,7 @@ describe("Ext-more", function() {
 
                 it("should not remove listener on children", function() {
                     var listener = jasmine.createSpy();
-                    child.on('mouseup', listener); 
+                    child.on('mouseup', listener);
                     Ext.removeNode(el.dom);
                     jasmine.fireMouseEvent(child.dom, 'mouseup');
                     expect(listener).toHaveBeenCalled();
@@ -376,7 +358,7 @@ describe("Ext-more", function() {
 
         beforeEach(function() {
             span1 = Ext.getBody().createChild({
-                tag: 'span' 
+                tag: 'span'
             });
 
             span2 = Ext.getBody().createChild({
@@ -423,11 +405,11 @@ describe("Ext-more", function() {
         });
     });
 
-    describe("Ext.getScrollBarWidth", function() {
+    xdescribe("Ext.getScrollBarWidth", function() {
         it("should return a number between 10 and 40 (we assume that document is loaded)", function() {
             expect(Ext.getScrollBarWidth() > 10).toBe(true);
             expect(Ext.getScrollBarWidth() < 40).toBe(true);
-        }); 
+        });
     });
 
     describe("Ext.copyTo", function(){
@@ -455,7 +437,7 @@ describe("Ext-more", function() {
 
                 expect(dest).toEqual({
                     a: 1,
-                    b: 2 
+                    b: 2
                 });
             });
         });
@@ -465,7 +447,7 @@ describe("Ext-more", function() {
                 Ext.copyTo(dest, src, 'c,b,e');
                 expect(dest).toEqual({
                     b: 2,
-                    c: 3 
+                    c: 3
                 });
             });
         });
@@ -509,7 +491,7 @@ describe("Ext-more", function() {
                 expect(Ext.partition([true, true, false, false, true])).toEqual([[true,true,true], [false,false]]);
             });
         });
-        
+
         describe("with an array to partition and a function to determine truth", function() {
             it("should partition the set into two sets: a true and a false set", function() {
                 var array = [
@@ -521,16 +503,16 @@ describe("Ext-more", function() {
                  expect(Ext.partition(array, function(item){
                         return item == "a";
                 })).toEqual([
-                    ['a', 'a'], 
+                    ['a', 'a'],
                     ['b', 'c']
                 ]);
             });
         });
-        
+
         describe("with a NodeList to partition and a function to determine truth", function() {
             it("should partition the set into two sets: a true and a false set", function() {
                 var p = [];
-                
+
                 p[0] = Ext.getBody().createChild({
                     tag: "p",
                     cls: "class1"
@@ -554,15 +536,15 @@ describe("Ext-more", function() {
                 p[5] = Ext.getBody().createChild({
                     tag: "p",
                     cls: "class1"
-                });                    
-                
+                });
+
                 expect(Ext.partition(Ext.query("p"), function(val){
                         return val.className == "class1";
                 })).toEqual([
-                    [p[0].dom, p[2].dom, p[5].dom], 
+                    [p[0].dom, p[2].dom, p[5].dom],
                     [p[1].dom, p[3].dom, p[4].dom]
                 ]);
-                
+
                 Ext.Array.each(p, function(el) {
                     el.remove();
                 });
@@ -570,4 +552,3 @@ describe("Ext-more", function() {
         });
     });
 });
-

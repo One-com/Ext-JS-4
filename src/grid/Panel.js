@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @author Aaron Conran
  * @docauthor Ed Spencer
@@ -278,7 +264,6 @@ If you are unsure which license is appropriate for your use, please contact the 
  *         // Use a PagingGridScroller (this is interchangeable with a PagingToolbar)
  *         verticalScrollerType: 'paginggridscroller',
  *         // do not reset the scrollbar when the view refreshs
- *         invalidateScrollerOnRefresh: false,
  *         // infinite scrolling does not support selection
  *         disableSelection: true,
  *         // ...
@@ -308,13 +293,8 @@ If you are unsure which license is appropriate for your use, please contact the 
  *         }
  *     });
  *
- *     // specify segment of data you want to load using params
- *     store.load({
- *         params:{
- *             start:0,
- *             limit: itemsPerPage
- *         }
- *     });
+ *     // specify the page you want to load
+ *     store.loadPage(1);
  *
  *     Ext.create('Ext.grid.Panel', {
  *         title: 'Simpsons',
@@ -346,28 +326,25 @@ Ext.define('Ext.grid.Panel', {
 
     // Required for the Lockable Mixin. These are the configurations which will be copied to the
     // normal and locked sub tablepanels
-    normalCfgCopy: ['invalidateScrollerOnRefresh', 'verticalScroller', 'verticalScrollDock', 'verticalScrollerType', 'scroll'],
-    lockedCfgCopy: ['invalidateScrollerOnRefresh'],
+    bothCfgCopy: [
+        'invalidateScrollerOnRefresh',
+        'hideHeaders',
+        'enableColumnHide',
+        'enableColumnMove',
+        'enableColumnResize',
+        'sortableColumns'
+    ],
+    normalCfgCopy: [ 
+        'verticalScroller', 
+        'verticalScrollDock', 
+        'verticalScrollerType', 
+        'scroll'
+    ],
+    lockedCfgCopy: [],
 
     /**
-     * @cfg {Boolean} [columnLines=false] Adds column line styling
+     * @cfg {Boolean} rowLines False to remove row line styling
      */
+    rowLines: true
 
-    initComponent: function() {
-        var me = this;
-
-        if (me.columnLines) {
-            me.setColumnLines(me.columnLines);
-        }
-
-        me.callParent();
-    },
-
-    setColumnLines: function(show) {
-        var me = this,
-            method = (show) ? 'addClsWithUI' : 'removeClsWithUI';
-
-        me[method]('with-col-lines');
-    }
 });
-

@@ -19,7 +19,6 @@
 </span> * @class Ext.Ajax
  * @singleton
  * @markdown
- * @extends Ext.data.Connection
 
 A singleton instance of an {@link Ext.data.Connection}. This class
 is used to communicate with your server side code. It can be used as follows:
@@ -59,8 +58,9 @@ Ext.define('Ext.Ajax', {
     extend: 'Ext.data.Connection',
     singleton: true,
 
-<span id='Ext-Ajax-cfg-url'>    /**
-</span>     * @cfg {String} url @hide
+<span id='Ext-Ajax-property-disableCaching'>    /**
+</span>     * @property {Boolean} disableCaching
+     * True to add a unique cache-buster param to GET requests. Defaults to true.
      */
 <span id='Ext-Ajax-cfg-extraParams'>    /**
 </span>     * @cfg {Object} extraParams @hide
@@ -118,6 +118,7 @@ Ext.define('Ext.Ajax', {
      * Whether a new request should abort any pending requests.
      */
     autoAbort : false
-});</pre>
+});
+</pre>
 </body>
 </html>

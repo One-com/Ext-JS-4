@@ -1,32 +1,21 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 ﻿/**
  * Traditional Chinese translation
  * By hata1234
  * 09 April 2007
  */
 Ext.onReady(function(){
+    var cm = Ext.ClassManager, 
+        exists = Ext.Function.bind(cm.get, cm);
+
     if(Ext.Updater) {
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">讀取中...</div>';
     }
 
-    if(Ext.view.View){
+    if(exists('Ext.view.View')){
         Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.grid.Panel){
+    if(exists('Ext.grid.Panel')){
         Ext.grid.Panel.prototype.ddText = "選擇了 {0} 行";
     }
 
@@ -34,7 +23,7 @@ Ext.onReady(function(){
         Ext.TabPanelItem.prototype.closeText = "關閉此標籤";
     }
 
-    if(Ext.form.field.Base){
+    if(exists('Ext.form.field.Base')){
         Ext.form.field.Base.prototype.invalidText = "數值不符合欄位規定";
     }
 
@@ -78,7 +67,7 @@ Ext.onReady(function(){
         };
     }
 
-    if(Ext.util.Format){
+    if(exists('Ext.util.Format')){
         Ext.apply(Ext.util.Format, {
             thousandSeparator: '.',
             decimalSeparator: ',',
@@ -87,7 +76,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.picker.Date){
+    if(exists('Ext.picker.Date')){
         Ext.apply(Ext.picker.Date.prototype, {
             todayText         : "今天",
             minText           : "日期必須大於最小容許日期",
@@ -104,14 +93,14 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.picker.Month) {
+    if(exists('Ext.picker.Month')) {
         Ext.apply(Ext.picker.Month.prototype, {
             okText            : "确定",
             cancelText        : "取消"
         });
     }
 
-    if(Ext.toolbar.Paging){
+    if(exists('Ext.toolbar.Paging')){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "第",
             afterPageText  : "頁，共{0}頁",
@@ -125,7 +114,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.field.Text){
+    if(exists('Ext.form.field.Text')){
         Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "此欄位最少要輸入 {0} 個字",
             maxLengthText : "此欄位最多輸入 {0} 個字",
@@ -135,7 +124,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.field.Number){
+    if(exists('Ext.form.field.Number')){
         Ext.apply(Ext.form.field.Number.prototype, {
             minText : "此欄位之數值必須大於 {0}",
             maxText : "此欄位之數值必須小於 {0}",
@@ -143,7 +132,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.field.Date){
+    if(exists('Ext.form.field.Date')){
         Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "無法使用",
             disabledDatesText : "無法使用",
@@ -154,7 +143,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.field.ComboBox){
+    if(exists('Ext.form.field.ComboBox')){
         Ext.apply(Ext.form.field.ComboBox.prototype, {
             valueNotFoundText : undefined
         });
@@ -163,7 +152,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.field.VTypes){
+    if(exists('Ext.form.field.VTypes')){
         Ext.apply(Ext.form.field.VTypes, {
             emailText    : '此欄位必須輸入像 "user@example.com" 之E-Mail格式',
             urlText      : '此欄位必須輸入像 "http:/'+'/www.example.com" 之網址格式',
@@ -172,7 +161,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.grid.header.Container){
+    if(exists('Ext.grid.header.Container')){
         Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "正向排序",
             sortDescText : "反向排序",
@@ -182,7 +171,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.grid.PropertyColumnModel){
+    if(exists('Ext.grid.PropertyColumnModel')){
         Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
             nameText   : "名稱",
             valueText  : "數值",
@@ -190,10 +179,4 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
-        Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype, {
-            splitTip            : "拖曳縮放大小.",
-            collapsibleSplitTip : "拖曳縮放大小. 滑鼠雙擊隱藏."
-        });
-    }
 });

@@ -1,32 +1,21 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 ﻿/**
  * Russian translation
  * By ZooKeeper (utf-8 encoding)
  * 6 November 2007
  */
 Ext.onReady(function() {
+    var cm = Ext.ClassManager, 
+        exists = Ext.Function.bind(cm.get, cm);
+
     if(Ext.Updater) {
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Идет загрузка...</div>';
     }
 
-    if(Ext.view.View){
+    if(exists('Ext.view.View')){
         Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.grid.Panel){
+    if(exists('Ext.grid.Panel')){
         Ext.grid.Panel.prototype.ddText = "{0} выбранных строк";
     }
 
@@ -34,7 +23,7 @@ Ext.onReady(function() {
         Ext.TabPanelItem.prototype.closeText = "Закрыть эту вкладку";
     }
 
-    if(Ext.form.field.Base){
+    if(exists('Ext.form.field.Base')){
         Ext.form.field.Base.prototype.invalidText = "Значение в этом поле неверное";
     }
 
@@ -119,7 +108,7 @@ Ext.onReady(function() {
         };
     }
 
-    if(Ext.util.Format){
+    if(exists('Ext.util.Format')){
         Ext.apply(Ext.util.Format, {
             thousandSeparator: '.',
             decimalSeparator: ',',
@@ -128,7 +117,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Date){
+    if(exists('Ext.picker.Date')){
         Ext.apply(Ext.picker.Date.prototype, {
             todayText          : "Сегодня",
             minText            : "Эта дата раньше минимальной даты",
@@ -146,14 +135,14 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Month) {
+    if(exists('Ext.picker.Month')) {
         Ext.apply(Ext.picker.Month.prototype, {
             okText             : "&#160;OK&#160;",
             cancelText         : "Отмена"
         });
     }
 
-    if(Ext.toolbar.Paging){
+    if(exists('Ext.toolbar.Paging')){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Страница",
             afterPageText  : "из {0}",
@@ -167,7 +156,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Text){
+    if(exists('Ext.form.field.Text')){
         Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Минимальная длина этого поля {0}",
             maxLengthText : "Максимальная длина этого поля {0}",
@@ -177,7 +166,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Number){
+    if(exists('Ext.form.field.Number')){
         Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Значение этого поля не может быть меньше {0}",
             maxText : "Значение этого поля не может быть больше {0}",
@@ -185,7 +174,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Date){
+    if(exists('Ext.form.field.Date')){
         Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Не доступно",
             disabledDatesText : "Не доступно",
@@ -197,7 +186,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.ComboBox){
+    if(exists('Ext.form.field.ComboBox')){
         Ext.apply(Ext.form.field.ComboBox.prototype, {
             valueNotFoundText : undefined
         });
@@ -206,7 +195,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.VTypes){
+    if(exists('Ext.form.field.VTypes')){
         Ext.apply(Ext.form.field.VTypes, {
             emailText     : 'Это поле должно содержать адрес электронной почты в формате "user@example.com"',
             urlText       : 'Это поле должно содержать URL в формате "http:/'+'/www.example.com"',
@@ -215,7 +204,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.HtmlEditor){
+    if(exists('Ext.form.field.HtmlEditor')){
         Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'Пожалуйста введите адрес:',
             buttonTips : {
@@ -293,11 +282,11 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.Basic){
+    if(exists('Ext.form.Basic')){
         Ext.form.Basic.prototype.waitTitle = "Пожалуйста подождите...";
     }
 
-    if(Ext.grid.header.Container){
+    if(exists('Ext.grid.header.Container')){
         Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Сортировать по возрастанию",
             sortDescText : "Сортировать по убыванию",
@@ -307,7 +296,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.GroupingFeature){
+    if(exists('Ext.grid.GroupingFeature')){
         Ext.apply(Ext.grid.GroupingFeature.prototype, {
             emptyGroupText : '(Пусто)',
             groupByText    : 'Группировать по этому полю',
@@ -315,7 +304,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.PropertyColumnModel){
+    if(exists('Ext.grid.PropertyColumnModel')){
         Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
             nameText   : "Название",
             valueText  : "Значение",
@@ -330,10 +319,4 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
-        Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype, {
-            splitTip            : "Тяните для изменения размера.",
-            collapsibleSplitTip : "Тяните для изменения размера. Двойной щелчок спрячет панель."
-        });
-    }
 });

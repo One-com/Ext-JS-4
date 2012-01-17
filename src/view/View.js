@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * A mechanism for displaying data using custom layout templates and formatting.
  *
@@ -364,9 +350,30 @@ Ext.define('Ext.view.View', {
              * @param {HTMLElement} node The node to be selected
              * @param {HTMLElement[]} selections Array of currently selected nodes
              */
-            'beforeselect'
+            'beforeselect',
+            
+            /**
+             * @event highlightitem
+             * Fires when a node is highlighted using keyboard navigation, or mouseover.
+             * @param {Ext.view.View} view This View Component.
+             * @param {Ext.Element} node The highlighted node.
+             */
+            'highlightitem',
+            
+            /**
+             * @event unhighlightitem
+             * Fires when a node is unhighlighted using keyboard navigation, or mouseout.
+             * @param {Ext.view.View} view This View Component.
+             * @param {Ext.Element} node The previously highlighted node.
+             */
+            'unhighlightitem'
         );
     },
+
+    getFocusEl: function() {
+        return this.getTargetEl();
+    },
+
     // private
     afterRender: function(){
         var me = this,
@@ -582,6 +589,7 @@ Ext.define('Ext.view.View', {
         me.clearHighlight();
         me.highlightedItem = item;
         Ext.fly(item).addCls(me.overItemCls);
+        me.fireEvent('highlightitem', me, item);
     },
 
     /**
@@ -593,16 +601,35 @@ Ext.define('Ext.view.View', {
 
         if (highlighted) {
             Ext.fly(highlighted).removeCls(me.overItemCls);
+            me.fireEvent('unhighlightitem', me, highlighted);
             delete me.highlightedItem;
+        }
+    },
+    
+    onUpdate: function(store, record){
+        var me = this,
+            node = me.getNode(record),
+            newNode = me.callParent(arguments),
+            highlighted = me.highlightedItem;
+            
+        if (highlighted && highlighted === node) {
+            delete me.highlightedItem;
+            if (newNode) {
+                me.highlightItem(newNode);
+            }
         }
     },
 
     refresh: function() {
-        var me = this;
-        me.clearHighlight();
-        me.callParent(arguments);
-        if (!me.isFixedHeight()) {
-            me.doComponentLayout();
+        this.clearHighlight();
+        this.callParent(arguments);
+        this.refreshHeight();
+    },
+    
+    refreshHeight: function(){
+        var sizeModel = this.getSizeModel();
+        if (sizeModel.height.shrinkWrap) {
+            this.updateLayout();
         }
     }
 });

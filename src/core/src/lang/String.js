@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.String
  *
@@ -24,6 +10,8 @@ Ext.String = {
     escapeRe: /('|\\)/g,
     formatRe: /\{(\d+)\}/g,
     escapeRegexRe: /([-.*+?^${}()|[\]\/\\])/g,
+    basicTrimRe: /^\s+|\s+$/g,
+    whitespaceRe: /\s+/,
 
     /**
      * Convert certain characters (&, <, >, and ") to their HTML character equivalents for literal display in web pages.
@@ -38,16 +26,16 @@ Ext.String = {
             '<': '&lt;',
             '"': '&quot;'
         }, keys = [], p, regex;
-        
+
         for (p in entities) {
             keys.push(p);
         }
-        
+
         regex = new RegExp('(' + keys.join('|') + ')', 'g');
-        
+
         return function(value) {
             return (!value) ? value : String(value).replace(regex, function(match, capture) {
-                return entities[capture];    
+                return entities[capture];
             });
         };
     })(),
@@ -65,13 +53,13 @@ Ext.String = {
             '&lt;': '<',
             '&quot;': '"'
         }, keys = [], p, regex;
-        
+
         for (p in entities) {
             keys.push(p);
         }
-        
+
         regex = new RegExp('(' + keys.join('|') + '|&#[0-9]{1,5};' + ')', 'g');
-        
+
         return function(value) {
             return (!value) ? value : String(value).replace(regex, function(match, capture) {
                 if (capture in entities) {
@@ -88,7 +76,7 @@ Ext.String = {
      * a question mark or ampersand.
      * @param {String} url The URL to append to.
      * @param {String} string The content to append to the URL.
-     * @return (String) The resulting URL
+     * @return {String} The resulting URL
      */
     urlAppend : function(url, string) {
         if (!Ext.isEmpty(string)) {
@@ -239,6 +227,46 @@ var s = Ext.String.format('&lt;div class="{0}">{1}&lt;/div>', cls, text);
             buf.push(pattern);
         }
         return buf.join(sep || '');
+    },
+
+    /**
+     * Splits a string of space separated words into an array, trimming as needed. If the
+     * words are already an array, it is returned.
+     *
+     * @param {String/Array} words
+     */
+    splitWords: function (words) {
+        if (words && typeof words == 'string') {
+            return words.replace(Ext.String.basicTrimRe, '').split(Ext.String.whitespaceRe);
+        }
+        return words || [];
     }
 };
 
+/**
+ * Old alias to {@link Ext.String#htmlEncode}
+ * @deprecated Use {@link Ext.String#htmlEncode} instead
+ * @method
+ * @member Ext
+ * @inheritdoc Ext.String#htmlEncode
+ */
+Ext.htmlEncode = Ext.String.htmlEncode;
+
+
+/**
+ * Old alias to {@link Ext.String#htmlDecode}
+ * @deprecated Use {@link Ext.String#htmlDecode} instead
+ * @method
+ * @member Ext
+ * @inheritdoc Ext.String#htmlDecode
+ */
+Ext.htmlDecode = Ext.String.htmlDecode;
+
+/**
+ * Old alias to {@link Ext.String#urlAppend}
+ * @deprecated Use {@link Ext.String#urlAppend} instead
+ * @method
+ * @member Ext
+ * @inheritdoc Ext.String#urlAppend
+ */
+Ext.urlAppend = Ext.String.urlAppend;

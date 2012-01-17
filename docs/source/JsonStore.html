@@ -18,7 +18,6 @@
   <pre class="prettyprint lang-js"><span id='Ext-data-JsonStore'>/**
 </span> * @author Ed Spencer
  * @class Ext.data.JsonStore
- * @extends Ext.data.Store
  * @ignore
  *
  * &lt;p&gt;Small helper class to make creating {@link Ext.data.Store}s from JSON data easier.
@@ -56,7 +55,7 @@ var store = new Ext.data.JsonStore({
 }
 &lt;/code&gt;&lt;/pre&gt;
  *
- * &lt;p&gt;An object literal of this form could also be used as the {@link #data} config option.&lt;/p&gt;
+ * &lt;p&gt;An object literal of this form could also be used as the {@link #cfg-data} config option.&lt;/p&gt;
  *
  * @xtype jsonstore
  */
@@ -64,9 +63,6 @@ Ext.define('Ext.data.JsonStore',  {
     extend: 'Ext.data.Store',
     alias: 'store.json',
 
-<span id='Ext-data-JsonStore-cfg-reader'>    /**
-</span>     * @cfg {Ext.data.DataReader} reader @hide
-     */
     constructor: function(config) {
         config = config || {};
 

@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * Provides a time input field with a time dropdown and automatic time validation.
  *
@@ -57,10 +43,9 @@ Ext.define('Ext.form.field.Time', {
     alternateClassName: ['Ext.form.TimeField', 'Ext.form.Time'],
 
     /**
-     * @cfg {String} triggerCls
+     * @cfg {String} [triggerCls='x-form-time-trigger']
      * An additional CSS class used to style the trigger button. The trigger will always get the {@link #triggerBaseCls}
-     * by default and triggerCls will be **appended** if specified. Defaults to 'x-form-time-trigger' for the Time field
-     * trigger.
+     * by default and triggerCls will be **appended** if specified.
      */
     triggerCls: Ext.baseCSSPrefix + 'form-time-trigger',
 
@@ -80,40 +65,56 @@ Ext.define('Ext.form.field.Time', {
      * @cfg {String} minText
      * The error text to display when the entered time is before {@link #minValue}.
      */
+    //<locale>
     minText : "The time in this field must be equal to or after {0}",
+    //</locale>
 
     /**
      * @cfg {String} maxText
      * The error text to display when the entered time is after {@link #maxValue}.
      */
+    //<locale>
     maxText : "The time in this field must be equal to or before {0}",
+    //</locale>
 
     /**
      * @cfg {String} invalidText
      * The error text to display when the time in the field is invalid.
      */
+    //<locale>
     invalidText : "{0} is not a valid time",
+    //</locale>
 
     /**
-     * @cfg {String} format
+     * @cfg {String} [format=undefined]
      * The default time format string which can be overriden for localization support. The format must be valid
-     * according to {@link Ext.Date#parse} (defaults to 'g:i A', e.g., '3:15 PM'). For 24-hour time format try 'H:i'
-     * instead.
+     * according to {@link Ext.Date#parse}.
+     *
+     * Defaults to `'g:i A'`, e.g., `'3:15 PM'`. For 24-hour time format try `'H:i'` instead.
      */
+    //<locale>
     format : "g:i A",
+    //</locale>
 
     /**
-     * @cfg {String} submitFormat
-     * The date format string which will be submitted to the server. The format must be valid according to {@link
-     * Ext.Date#parse} (defaults to {@link #format}).
+     * @cfg {String} [submitFormat=undefined]
+     * The date format string which will be submitted to the server. The format must be valid according to
+     * {@link Ext.Date#parse}.
+     *
+     * Defaults to {@link #format}.
      */
+    //<locale>
+    submitFormat: 'g:i A',
+    //</locale>
 
     /**
      * @cfg {String} altFormats
      * Multiple date formats separated by "|" to try when parsing a user input value and it doesn't match the defined
      * format.
      */
+    //<locale>
     altFormats : "g:ia|g:iA|g:i a|g:i A|h:i|g:i|H:i|ga|ha|gA|h a|g a|g A|gi|hi|gia|hia|g|H|gi a|hi a|giA|hiA|gi A|hi A",
+    //</locale>
 
     /**
      * @cfg {Number} increment
@@ -141,6 +142,8 @@ Ext.define('Ext.form.field.Time', {
      */
     initDate: '1/1/2008',
     initDateFormat: 'j/n/Y',
+    
+    ignoreSelection: 0,
 
 
     initComponent: function() {
@@ -327,7 +330,7 @@ Ext.define('Ext.form.field.Time', {
      */
     createPicker: function() {
         var me = this,
-            picker = Ext.create('Ext.picker.Time', {
+            picker = new Ext.picker.Time({
                 pickerField: me,
                 selModel: {
                     mode: 'SINGLE'
@@ -348,8 +351,27 @@ Ext.define('Ext.form.field.Time', {
             selectionchange: me.onListSelect,
             scope: me
         });
+        
+        me.mon(picker, {
+            scope: me,
+            itemclick: me.onItemClick
+        });
 
         return picker;
+    },
+    
+    onItemClick: function(picker, record){
+        // The selection change events won't fire when clicking on the selected element. Detect it here.
+        var me = this,
+            valueField = me.valueField,
+            selected = picker.getSelectionModel().getSelection();
+
+        if (selected.length > 0) {
+            selected = selected[0];
+            if (selected && Ext.Date.isEqual(record.get('date'), selected.get('date'))) {
+                me.collapse();
+            }
+        }
     },
 
     /**
@@ -362,11 +384,11 @@ Ext.define('Ext.form.field.Time', {
             keyNav = me.pickerKeyNav,
             selectOnTab = me.selectOnTab,
             picker = me.getPicker(),
-            lastSelected = picker.getSelectionModel().lastSelected,
-            itemNode;
+            itemNode,
+            selected;
 
         if (!keyNav) {
-            keyNav = me.pickerKeyNav = Ext.create('Ext.view.BoundListKeyNav', this.inputEl, {
+            keyNav = me.pickerKeyNav = new Ext.view.BoundListKeyNav(this.inputEl, {
                 boundList: picker,
                 forceKeyDown: true,
                 tab: function(e) {
@@ -389,13 +411,15 @@ Ext.define('Ext.form.field.Time', {
         }
         Ext.defer(keyNav.enable, 1, keyNav); //wait a bit so it doesn't react to the down arrow opening the picker
 
+        // syncronize the selection in case "setValue" was called before the picker was expanded for the first time
+        me.syncSelection();
+
         // Highlight the last selected item and scroll it into view
-        if (lastSelected) {
-            itemNode = picker.getNode(lastSelected);
-            if (itemNode) {
-                picker.highlightItem(itemNode);
-                picker.el.scrollChildIntoView(itemNode, false);
-            }
+        selected = picker.getSelectionModel().getSelection()[0];
+        if (selected) {
+            itemNode = picker.getNode(selected);
+            picker.highlightItem(itemNode);
+            picker.listEl.scrollChildIntoView(itemNode, false);
         }
     },
 
@@ -435,12 +459,60 @@ Ext.define('Ext.form.field.Time', {
         var me = this,
             record = recordArray[0],
             val = record ? record.get('date') : null;
-        me.setValue(val);
-        me.fireEvent('select', me, val);
-        me.picker.clearHighlight();
-        me.collapse();
-        me.inputEl.focus();
+            
+        if (!me.ignoreSelection) {
+            me.skipSync = true;
+            me.setValue(val);
+            me.skipSync = false;
+            me.fireEvent('select', me, val);
+            me.picker.clearHighlight();
+            me.collapse();
+            me.inputEl.focus();
+        }
+    },
+    
+    setValue: function(){
+        this.callParent(arguments);
+        this.syncSelection();
+    },
+    
+    /**
+     * @private 
+     * Synchronizes the selection in the picker to match the current value
+     */
+    syncSelection: function() {
+        var me = this,
+            picker = me.picker,
+            toSelect,
+            selModel,
+            value;
+            
+        if (picker && !me.skipSync) {
+            picker.clearHighlight();
+            value = me.getValue();
+            selModel = picker.getSelectionModel();
+            // Update the selection to match
+            me.ignoreSelection++;
+            if (value === null) {
+                selModel.deselectAll();
+            } else if(Ext.isDate(value)) {
+                // find value, select it
+                picker.store.each(function(rec){
+                   if (Ext.Date.isEqual(rec.get('date'), value)) {
+                       toSelect = rec;
+                       return false;
+                   }
+                });
+                selModel.select(toSelect);
+            }
+            me.ignoreSelection--;
+        }
+    },
+
+    postBlur: function() {
+        var me = this;
+
+        me.callParent(arguments);
+        me.setRawValue(me.formatDate(me.getValue()));
     }
 });
-
-

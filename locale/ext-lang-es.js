@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * Spanish/Latin American Translation by genius551v 04-08-2007
  * Revised by efege, 2007-04-15.
@@ -21,15 +7,18 @@ If you are unsure which license is appropriate for your use, please contact the 
  *     by halkon_polako 14-aug-2008
  */
 Ext.onReady(function() {
+    var cm = Ext.ClassManager, 
+        exists = Ext.Function.bind(cm.get, cm);
+
     if(Ext.Updater) {
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Cargando...</div>';
     }
 
-    if(Ext.view.View){
+    if(exists('Ext.view.View')){
       Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.grid.Panel){
+    if(exists('Ext.grid.Panel')){
       Ext.grid.Panel.prototype.ddText = "{0} fila(s) seleccionada(s)";
     }
 
@@ -104,7 +93,7 @@ Ext.onReady(function() {
       };
     }
 
-    if(Ext.util.Format){
+    if(exists('Ext.util.Format')){
         Ext.apply(Ext.util.Format, {
             thousandSeparator: '.',
             decimalSeparator: ',',
@@ -113,7 +102,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Date){
+    if(exists('Ext.picker.Date')){
       Ext.apply(Ext.picker.Date.prototype, {
         todayText         : "Hoy",
         minText           : "Esta fecha es anterior a la fecha m&#237;nima",
@@ -131,14 +120,14 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.picker.Month) {
+    if(exists('Ext.picker.Month')) {
       Ext.apply(Ext.picker.Month.prototype, {
           okText            : "&#160;Ok&#160;",
           cancelText        : "Cancelar"
       });
     }
 
-    if(Ext.toolbar.Paging){
+    if(exists('Ext.toolbar.Paging')){
       Ext.apply(Ext.PagingToolbar.prototype, {
         beforePageText : "P&#225;gina",
         afterPageText  : "de {0}",
@@ -152,11 +141,11 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.field.Base){
+    if(exists('Ext.form.field.Base')){
       Ext.form.field.Base.prototype.invalidText = "El valor en este campo es inv&#225;lido";
     }
 
-    if(Ext.form.field.Text){
+    if(exists('Ext.form.field.Text')){
       Ext.apply(Ext.form.field.Text.prototype, {
         minLengthText : "El tama&#241;o m&#237;nimo para este campo es de {0}",
         maxLengthText : "El tama&#241;o m&#225;ximo para este campo es de {0}",
@@ -166,7 +155,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.field.Number){
+    if(exists('Ext.form.field.Number')){
       Ext.apply(Ext.form.field.Number.prototype, {
         decimalSeparator : ",",
         decimalPrecision : 2,
@@ -176,7 +165,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.field.Date){
+    if(exists('Ext.form.field.Date')){
       Ext.apply(Ext.form.field.Date.prototype, {
         disabledDaysText  : "Deshabilitado",
         disabledDatesText : "Deshabilitado",
@@ -188,7 +177,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.field.ComboBox){
+    if(exists('Ext.form.field.ComboBox')){
       Ext.apply(Ext.form.field.ComboBox.prototype, {
         valueNotFoundText : undefined
       });
@@ -197,7 +186,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.VTypes){
+    if(exists('Ext.form.field.VTypes')){
       Ext.apply(Ext.form.field.VTypes, {
         emailText    : 'Este campo debe ser una direcci&#243;n de correo electr&#243;nico con el formato "usuario@dominio.com"',
         urlText      : 'Este campo debe ser una URL con el formato "http:/'+'/www.dominio.com"',
@@ -206,7 +195,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.field.HtmlEditor){
+    if(exists('Ext.form.field.HtmlEditor')){
       Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : "Por favor proporcione la URL para el enlace:",
         buttonTips : {
@@ -284,7 +273,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.grid.header.Container){
+    if(exists('Ext.grid.header.Container')){
       Ext.apply(Ext.grid.header.Container.prototype, {
         sortAscText  : "Ordenar en forma ascendente",
         sortDescText : "Ordenar en forma descendente",
@@ -292,7 +281,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.grid.GroupingFeature){
+    if(exists('Ext.grid.GroupingFeature')){
       Ext.apply(Ext.grid.GroupingFeature.prototype, {
         emptyGroupText : '(Ninguno)',
         groupByText    : 'Agrupar por este campo',
@@ -300,7 +289,7 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.grid.PropertyColumnModel){
+    if(exists('Ext.grid.PropertyColumnModel')){
       Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
         nameText   : "Nombre",
         valueText  : "Valor",
@@ -308,14 +297,8 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
-      Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype, {
-        splitTip            : "Arrastre para redimensionar.",
-        collapsibleSplitTip : "Arrastre para redimensionar. Doble clic para ocultar."
-      });
-    }
 
-    if(Ext.form.field.Time){
+    if(exists('Ext.form.field.Time')){
       Ext.apply(Ext.form.field.Time.prototype, {
         minText : "La hora en este campo debe ser igual o posterior a {0}",
         maxText : "La hora en este campo debe ser igual o anterior a {0}",
@@ -325,13 +308,13 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.CheckboxGroup){
+    if(exists('Ext.form.CheckboxGroup')){
       Ext.apply(Ext.form.CheckboxGroup.prototype, {
         blankText : "Debe seleccionar al menos un &#233;tem de este grupo"
       });
     }
 
-    if(Ext.form.RadioGroup){
+    if(exists('Ext.form.RadioGroup')){
       Ext.apply(Ext.form.RadioGroup.prototype, {
         blankText : "Debe seleccionar un &#233;tem de este grupo"
       });

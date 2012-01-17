@@ -1,20 +1,5 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.chart.axis.Axis
- * @extends Ext.chart.axis.Abstract
  *
  * Defines axis for charts. The axis position, type, style can be configured.
  * The axes are defined in an axes array of configuration objects where the type,
@@ -111,6 +96,7 @@ Ext.define('Ext.chart.axis.Axis', {
     /**
      * @cfg {Number} majorTickSteps
      * If `minimum` and `maximum` are specified it forces the number of major ticks to the specified value.
+     * If a number of major ticks is forced, it wont search for pretty numbers at the ticks.
      */
 
     /**
@@ -123,7 +109,7 @@ Ext.define('Ext.chart.axis.Axis', {
      * The title for the Axis
      */
 
-    //@private force min/max values from store
+    // @private force min/max values from store
     forceMinMax: false,
 
     /**
@@ -175,16 +161,12 @@ Ext.define('Ext.chart.axis.Axis', {
 
         //if one series is stacked I have to aggregate the values
         //for the scale.
-        // TODO(zhangbei): the code below does not support series that stack on 1 side but non-stacked axis
-        // listed in axis config. For example, a Area series whose axis : ['left', 'bottom'].
-        // Assuming only stack on y-axis.
-        // CHANGED BY Nicolas: I removed the check `me.position == 'left'` and `me.position == 'right'` since 
-        // it was constraining the minmax calculation to y-axis stacked
-        // visualizations.
+
         for (i = 0, l = series.length; !aggregate && i < l; i++) {
-            aggregate = aggregate || series[i].stacked;
+            aggregate = aggregate || ln > 1 && series[i].stacked;
             excludes = series[i].__excludes || excludes;
         }
+
         store.each(function(record) {
             if (aggregate) {
                 if (!isFinite(min)) {
@@ -242,9 +224,10 @@ Ext.define('Ext.chart.axis.Axis', {
             max = range.max,
             outfrom, outto, out;
 
-        out = Ext.draw.Draw.snapEnds(min, max, me.majorTickSteps !== false ?  (me.majorTickSteps +1) : me.steps);
+        out = Ext.draw.Draw.snapEnds(min, max, me.majorTickSteps !== false ?  (me.majorTickSteps+1) : me.steps, (me.majorTickSteps === false));
         outfrom = out.from;
         outto = out.to;
+
         if (me.forceMinMax) {
             if (!isNaN(max)) {
                 out.to = max;
@@ -273,6 +256,7 @@ Ext.define('Ext.chart.axis.Axis', {
         if (me.adjustMinimumByMajorUnit) {
             out.from -= out.step;
         }
+
         me.prevMin = min == max? 0 : min;
         me.prevMax = max;
         return out;
@@ -315,9 +299,10 @@ Ext.define('Ext.chart.axis.Axis', {
         if (me.hidden || isNaN(step) || (from == to)) {
             return;
         }
-
+        
         me.from = stepCalcs.from;
         me.to = stepCalcs.to;
+
         if (position == 'left' || position == 'right') {
             currentX = Math.floor(x) + 0.5;
             path = ["M", currentX, y, "l", 0, -length];
@@ -336,6 +321,7 @@ Ext.define('Ext.chart.axis.Axis', {
             calcLabels = true;
             me.labels = [stepCalcs.from];
         }
+
         if (position == 'right' || position == 'left') {
             currentY = y - gutterY;
             currentX = x - ((position == 'left') * dashSize * 2);
@@ -348,9 +334,11 @@ Ext.define('Ext.chart.axis.Axis', {
                 }
                 inflections.push([ Math.floor(x), Math.floor(currentY) ]);
                 currentY -= delta;
+                
                 if (calcLabels) {
                     me.labels.push(me.labels[me.labels.length -1] + step);
                 }
+                
                 if (delta === 0) {
                     break;
                 }
@@ -395,6 +383,12 @@ Ext.define('Ext.chart.axis.Axis', {
                 }
             }
         }
+
+        // the label on index "inflections.length-1" is the last label that gets rendered
+        if(calcLabels){
+            me.labels[inflections.length-1] = +(me.labels[inflections.length-1]).toFixed(10);
+        }
+        
         if (!me.axis) {
             me.axis = me.chart.surface.add(Ext.apply({
                 type: 'path',
@@ -531,7 +525,7 @@ Ext.define('Ext.chart.axis.Axis', {
         }
     },
 
-    //@private
+    // @private
     getOrCreateLabel: function(i, text) {
         var me = this,
             labelGroup = me.labelGroup,
@@ -851,4 +845,3 @@ Ext.define('Ext.chart.axis.Axis', {
         }, true);
     }
 });
-

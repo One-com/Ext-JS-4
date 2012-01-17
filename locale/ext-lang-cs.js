@@ -1,32 +1,21 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * Czech Translations
  * Translated by Tomáš Korčák (72)
  * 2008/02/08 18:02, Ext-2.0.1
  */
 Ext.onReady(function() {
+    var cm = Ext.ClassManager, 
+        exists = Ext.Function.bind(cm.get, cm);
+
     if (Ext.Updater) {
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Prosím čekejte...</div>';
     }
 
-    if(Ext.view.View){
+    if(exists('Ext.view.View')){
         Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.grid.Panel){
+    if(exists('Ext.grid.Panel')){
         Ext.grid.Panel.prototype.ddText = "{0} vybraných řádků";
     }
 
@@ -34,7 +23,7 @@ Ext.onReady(function() {
         Ext.TabPanelItem.prototype.closeText = "Zavřít záložku";
     }
 
-    if(Ext.form.field.Base){
+    if(exists('Ext.form.field.Base')){
         Ext.form.field.Base.prototype.invalidText = "Hodnota v tomto poli je neplatná";
     }
 
@@ -121,7 +110,7 @@ Ext.onReady(function() {
         };
     }
 
-    if(Ext.util.Format){
+    if(exists('Ext.util.Format')){
         Ext.apply(Ext.util.Format, {
             thousandSeparator: '.',
             decimalSeparator: ',',
@@ -130,7 +119,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Date){
+    if(exists('Ext.picker.Date')){
         Ext.apply(Ext.picker.Date.prototype, {
             todayText         : "Dnes",
             minText           : "Datum nesmí být starší než je minimální",
@@ -148,14 +137,14 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Month) {
+    if(exists('Ext.picker.Month')) {
         Ext.apply(Ext.picker.Month.prototype, {
             okText            : "&#160;OK&#160;",
             cancelText        : "Storno"
         });
     }
 
-    if(Ext.toolbar.Paging){
+    if(exists('Ext.toolbar.Paging')){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Strana",
             afterPageText  : "z {0}",
@@ -169,7 +158,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Text){
+    if(exists('Ext.form.field.Text')){
         Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Pole nesmí mít méně {0} znaků",
             maxLengthText : "Pole nesmí být delší než {0} znaků",
@@ -179,7 +168,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Number){
+    if(exists('Ext.form.field.Number')){
         Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Hodnota v tomto poli nesmí být menší než {0}",
             maxText : "Hodnota v tomto poli nesmí být větší než {0}",
@@ -187,7 +176,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Date){
+    if(exists('Ext.form.field.Date')){
         Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Neaktivní",
             disabledDatesText : "Neaktivní",
@@ -199,7 +188,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.ComboBox){
+    if(exists('Ext.form.field.ComboBox')){
         Ext.apply(Ext.form.field.ComboBox.prototype, {
             valueNotFoundText : undefined
         });
@@ -208,7 +197,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.VTypes){
+    if(exists('Ext.form.field.VTypes')){
         Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'V tomto poli může být vyplněna pouze emailová adresa ve formátu "uživatel@doména.cz"',
             urlText      : 'V tomto poli může být vyplněna pouze URL (adresa internetové stránky) ve formátu "http:/'+'/www.doména.cz"',
@@ -217,7 +206,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.HtmlEditor){
+    if(exists('Ext.form.field.HtmlEditor')){
         Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'Zadejte URL adresu odkazu:',
             buttonTips : {
@@ -295,7 +284,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.header.Container){
+    if(exists('Ext.grid.header.Container')){
         Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Řadit vzestupně",
             sortDescText : "Řadit sestupně",
@@ -305,7 +294,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.GroupingFeature){
+    if(exists('Ext.grid.GroupingFeature')){
         Ext.apply(Ext.grid.GroupingFeature.prototype, {
             emptyGroupText : '(Žádná data)',
             groupByText    : 'Seskupit dle tohoto pole',
@@ -313,7 +302,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.PropertyColumnModel){
+    if(exists('Ext.grid.PropertyColumnModel')){
         Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
             nameText   : "Název",
             valueText  : "Hodnota",
@@ -321,10 +310,4 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
-        Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype, {
-            splitTip            : "Tahem změnit velikost.",
-            collapsibleSplitTip : "Tahem změnit velikost. Dvojklikem skrýt."
-        });
-    }
 });

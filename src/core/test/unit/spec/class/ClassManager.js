@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 describe("Ext.ClassManager", function() {
     var manager = Ext.ClassManager,
         cls, emptyFn = function(){};
@@ -336,17 +322,6 @@ describe("Ext.ClassManager", function() {
                 expect(manager.getByAlias('superclass')).toBe(parentClass);
             });
         });
-
-        describe("onClassExtended", function() {
-            it("should store an internal reference", function() {
-                expect(parentClass.prototype.$onExtended).toBeDefined();
-                expect(subClass.prototype.$onExtended).toBeDefined();
-            });
-
-            it("should invoke the internal reference", function() {
-                expect(subClass.onClassExtendedCalled).toBe(true);
-            });
-        });
     });
 
     describe("instantiate", function() {
@@ -475,7 +450,7 @@ describe("Ext.ClassManager", function() {
             });
         });
     });
-    
+
     describe("createNamespaces", function() {
         var w = window;
 
@@ -578,4 +553,3 @@ describe("Ext.ClassManager", function() {
         });
     });
 });
-

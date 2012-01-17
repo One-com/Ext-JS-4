@@ -1,25 +1,11 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 describe("Ext", function() {
-    
+
     describe("Ext.global", function() {
         it("should return the global scope", function() {
             expect(Ext.global).toBe((function(){ return this;}).call());
         });
     });
-    
+
     describe("Ext.apply", function() {
         var origin, o;
 
@@ -181,9 +167,9 @@ describe("Ext", function() {
         it("should return undefined without params", function() {
             expect(Ext.emptyFn()).toBeUndefined();
         });
-        
+
         it("should return undefined if you pass params", function() {
-           expect(Ext.emptyFn('aaaa', 'bbbbb')).toBeUndefined(); 
+           expect(Ext.emptyFn('aaaa', 'bbbbb')).toBeUndefined();
         });
     });
 
@@ -398,7 +384,7 @@ describe("Ext", function() {
         it("should throw an error if superclass isn't defined", function() {
             expect(function() {
                 Ext.extend(undefined, {});
-            }).toRaiseExtError("Attempting to extend from a class which has not been loaded on the page.");
+            }).toThrow("Attempting to extend from a class which has not been loaded on the page.");
         });
 
         it("should create a superclass that return the original classe", function() {
@@ -438,64 +424,64 @@ describe("Ext", function() {
 
     describe("Ext.valueFrom", function() {
         var value, defaultValue;
-        
+
         describe("with allowBlank", function() {
             describe("and an empty string", function() {
                 it("should return the value", function() {
                     expect(Ext.valueFrom('', 'aaa', true)).toBe('');
                 });
             });
-            
+
             describe("and a string", function() {
                 it("should return the value", function() {
                     expect(Ext.valueFrom('bbb', 'aaa', true)).toBe('bbb');
                 });
             });
-            
+
             describe("and an undefined value", function() {
                 it("should return the default value", function() {
                     expect(Ext.valueFrom(undefined, 'aaa', true)).toBe('aaa');
                 });
             });
-            
+
             describe("and a null value", function() {
                 it("should return the default value", function() {
                     expect(Ext.valueFrom(null, 'aaa', true)).toBe('aaa');
                 });
             });
-            
+
             describe("and a 0 value", function() {
                 it("should return the value", function() {
                     expect(Ext.valueFrom(0, 'aaa', true)).toBe(0);
                 });
             });
         });
-        
+
         describe("without allowBlank", function() {
             describe("and an empty string", function() {
                 it("should return the default value", function() {
                     expect(Ext.valueFrom('', 'aaa')).toBe('aaa');
                 });
             });
-            
+
             describe("and a string", function() {
                 it("should return the value", function() {
                     expect(Ext.valueFrom('bbb', 'aaa')).toBe('bbb');
                 });
             });
-            
+
             describe("and an undefined value", function() {
                 it("should return the default value", function() {
                     expect(Ext.valueFrom(undefined, 'aaa')).toBe('aaa');
                 });
             });
-            
+
             describe("and a null value", function() {
                 it("should return the default value", function() {
                     expect(Ext.valueFrom(null, 'aaa')).toBe('aaa');
                 });
             });
-            
+
             describe("and a 0 value", function() {
                 it("should return the value", function() {
                     expect(Ext.valueFrom(0, 'aaa')).toBe(0);
@@ -503,7 +489,7 @@ describe("Ext", function() {
             });
         });
     });
-    
+
     describe("Ext.typeOf", function() {
         it("should return null", function() {
             expect(Ext.typeOf(null)).toEqual('null');
@@ -648,6 +634,10 @@ describe("Ext", function() {
 
         it("should return true with html collection", function() {
             expect(Ext.isIterable(document.images)).toBe(true);
+        });
+        
+        it("should return false for a function", function(){
+            expect(Ext.isIterable(function(){})).toBe(false);
         });
     });
 
@@ -930,7 +920,7 @@ describe("Ext", function() {
         it("should return false with Ext.Element", function() {
            expect(Ext.isElement(Ext.getBody())).toBe(false);
         });
-        
+
         it("should return false with TextNode", function() {
             var textNode = document.createTextNode('foobar');
             document.body.appendChild(textNode);
@@ -1261,7 +1251,7 @@ describe("Ext", function() {
             expect(Ext.isNumeric(document.getElementsByTagName('body'))).toBe(false);
         });
     });
-    
+
     describe("Ext.isObject", function() {
         it("should return false with empty array", function() {
             expect(Ext.isObject([])).toBe(false);
@@ -1488,8 +1478,8 @@ describe("Ext", function() {
 
         it("should return false with node list", function() {
             expect(Ext.isTextNode(document.getElementsByTagName('body'))).toBe(false);
-        }); 
-        
+        });
+
         it("should return false with element", function() {
            expect(Ext.isTextNode(Ext.getBody().dom)).toBe(false);
         });
@@ -1497,29 +1487,29 @@ describe("Ext", function() {
         it("should return false with Ext.Element", function() {
            expect(Ext.isTextNode(Ext.getBody())).toBe(false);
         });
-        
+
         it("should return true with TextNode", function() {
             var textNode = document.createTextNode('foobar');
             document.body.appendChild(textNode);
             expect(Ext.isTextNode(textNode)).toBe(true);
             document.body.removeChild(textNode);
-        });    
+        });
     });
-    
+
     describe("Ext.clone", function() {
         var clone;
-        
+
         afterEach(function() {
             clone = null;
         });
-        
+
         it("should clone an array", function() {
             var array = [2,'5',[1,3,4]];
             clone = Ext.clone(array);
             expect(clone).toEqual(array);
             expect(clone).not.toBe(array);
         });
-        
+
         it("should clone an object", function() {
             var object = {
                 fn: function() {
@@ -1531,17 +1521,17 @@ describe("Ext", function() {
             expect(clone).toEqual(object);
             expect(clone).not.toBe(object);
         });
-        
+
         it("should clone a date", function(){
-            var date = new Date(); 
+            var date = new Date();
             clone = Ext.clone(date);
             expect(clone).toEqual(date);
             expect(clone).not.toBe(date);
         });
-        
+
         it("should clone a dom node", function(){
             var node = document.createElement('DIV');
-            document.body.appendChild(node); 
+            document.body.appendChild(node);
             clone = Ext.clone(node);
             expect(clone.tagName).toEqual(clone.tagName);
             expect(clone.innerHTML).toEqual(clone.innerHTML);
@@ -1549,11 +1539,10 @@ describe("Ext", function() {
             document.body.removeChild(node);
         });
     });
-    
+
     describe('getUniqueGlobalNamespace', function() {
         it("should return an unique global namespace", function() {
-            expect(Ext.getUniqueGlobalNamespace()).toBe("ExtBox1"); 
+            expect(Ext.getUniqueGlobalNamespace()).toBe("ExtBox1");
         });
     });
 });
-

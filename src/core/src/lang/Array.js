@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.Array
  * @singleton
@@ -598,7 +584,7 @@ If you are unsure which license is appropriate for your use, please contact the 
             }
 
             if (value && value.length !== undefined && typeof value !== 'string') {
-                return Ext.toArray(value);
+                return ExtArray.toArray(value);
             }
 
             return [value];
@@ -756,6 +742,7 @@ If you are unsure which license is appropriate for your use, please contact the 
          * end. Negative values are offsets from the end of the array. If end is omitted,
          * all items up to the end of the array are copied.
          * @return {Array} The copied piece of the array.
+         * @method
          */
         // Note: IE6 will return [] on slice.call(x, undefined).
         slice: ([1,2].slice(1, undefined).length ?
@@ -937,6 +924,55 @@ If you are unsure which license is appropriate for your use, please contact the 
             return sum;
         },
 
+        /**
+         * Creates a map (object) keyed by the elements of the given array. The values in
+         * the map are the index+1 of the array element. For example:
+         * 
+         *      var map = Ext.Array.toMap(['a','b','c']);
+         *
+         *      // map = { a: 1, b: 2, c: 3 };
+         * 
+         * Or a key property can be specified:
+         * 
+         *      var map = Ext.Array.toMap([
+         *              { name: 'a' },
+         *              { name: 'b' },
+         *              { name: 'c' }
+         *          ], 'name');
+         *
+         *      // map = { a: 1, b: 2, c: 3 };
+         * 
+         * Lastly, a key extractor can be provided:
+         * 
+         *      var map = Ext.Array.toMap([
+         *              { name: 'a' },
+         *              { name: 'b' },
+         *              { name: 'c' }
+         *          ], function (obj) { return obj.name.toUpperCase(); });
+         *
+         *      // map = { A: 1, B: 2, C: 3 };
+         */
+        toMap: function(array, getKey, scope) {
+            var map = {},
+                i = array.length;
+
+            if (!getKey) {
+                while (i--) {
+                    map[array[i]] = i+1;
+                }
+            } else if (typeof getKey == 'string') {
+                while (i--) {
+                    map[array[i][getKey]] = i+1;
+                }
+            } else {
+                while (i--) {
+                    map[getKey.call(scope, array[i])] = i+1;
+                }
+            }
+
+            return map;
+        },
+
         //<debug>
         _replaceSim: replaceSim, // for unit testing
         _spliceSim: spliceSim,
@@ -958,7 +994,7 @@ If you are unsure which license is appropriate for your use, please contact the 
         /**
          * Inserts items in to an array.
          *
-         * @param {Array} array The Array on which to replace.
+         * @param {Array} array The Array in which to insert.
          * @param {Number} index The index in the array at which to operate.
          * @param {Array} items The array of items to insert at index.
          * @return {Array} The array passed.
@@ -991,6 +1027,8 @@ If you are unsure which license is appropriate for your use, please contact the 
          * @param {Array} array The Array on which to replace.
          * @param {Number} index The index in the array at which to operate.
          * @param {Number} removeCount The number of items to remove at index (can be 0).
+         * @param {Object...} elements The elements to add to the array. If you don't specify
+         * any elements, splice simply removes elements from the array.
          * @return {Array} An array containing the removed items.
          * @method
          */
@@ -1000,14 +1038,14 @@ If you are unsure which license is appropriate for your use, please contact the 
     /**
      * @method
      * @member Ext
-     * @alias Ext.Array#each
+     * @inheritdoc Ext.Array#each
      */
     Ext.each = ExtArray.each;
 
     /**
      * @method
      * @member Ext.Array
-     * @alias Ext.Array#merge
+     * @inheritdoc Ext.Array#merge
      */
     ExtArray.union = ExtArray.merge;
 
@@ -1016,7 +1054,7 @@ If you are unsure which license is appropriate for your use, please contact the 
      * @deprecated 4.0.0 Use {@link Ext.Array#min} instead
      * @method
      * @member Ext
-     * @alias Ext.Array#min
+     * @inheritdoc Ext.Array#min
      */
     Ext.min = ExtArray.min;
 
@@ -1025,7 +1063,7 @@ If you are unsure which license is appropriate for your use, please contact the 
      * @deprecated 4.0.0 Use {@link Ext.Array#max} instead
      * @method
      * @member Ext
-     * @alias Ext.Array#max
+     * @inheritdoc Ext.Array#max
      */
     Ext.max = ExtArray.max;
 
@@ -1034,7 +1072,7 @@ If you are unsure which license is appropriate for your use, please contact the 
      * @deprecated 4.0.0 Use {@link Ext.Array#sum} instead
      * @method
      * @member Ext
-     * @alias Ext.Array#sum
+     * @inheritdoc Ext.Array#sum
      */
     Ext.sum = ExtArray.sum;
 
@@ -1043,7 +1081,7 @@ If you are unsure which license is appropriate for your use, please contact the 
      * @deprecated 4.0.0 Use {@link Ext.Array#mean} instead
      * @method
      * @member Ext
-     * @alias Ext.Array#mean
+     * @inheritdoc Ext.Array#mean
      */
     Ext.mean = ExtArray.mean;
 
@@ -1052,7 +1090,7 @@ If you are unsure which license is appropriate for your use, please contact the 
      * @deprecated 4.0.0 Use {@link Ext.Array#flatten} instead
      * @method
      * @member Ext
-     * @alias Ext.Array#flatten
+     * @inheritdoc Ext.Array#flatten
      */
     Ext.flatten = ExtArray.flatten;
 
@@ -1061,7 +1099,7 @@ If you are unsure which license is appropriate for your use, please contact the 
      * @deprecated 4.0.0 Use {@link Ext.Array#clean} instead
      * @method
      * @member Ext
-     * @alias Ext.Array#clean
+     * @inheritdoc Ext.Array#clean
      */
     Ext.clean = ExtArray.clean;
 
@@ -1070,7 +1108,7 @@ If you are unsure which license is appropriate for your use, please contact the 
      * @deprecated 4.0.0 Use {@link Ext.Array#unique} instead
      * @method
      * @member Ext
-     * @alias Ext.Array#unique
+     * @inheritdoc Ext.Array#unique
      */
     Ext.unique = ExtArray.unique;
 
@@ -1079,17 +1117,16 @@ If you are unsure which license is appropriate for your use, please contact the 
      * @deprecated 4.0.0 Use {@link Ext.Array#pluck Ext.Array.pluck} instead
      * @method
      * @member Ext
-     * @alias Ext.Array#pluck
+     * @inheritdoc Ext.Array#pluck
      */
     Ext.pluck = ExtArray.pluck;
 
     /**
      * @method
      * @member Ext
-     * @alias Ext.Array#toArray
+     * @inheritdoc Ext.Array#toArray
      */
     Ext.toArray = function() {
         return ExtArray.toArray.apply(ExtArray, arguments);
     };
 })();
-

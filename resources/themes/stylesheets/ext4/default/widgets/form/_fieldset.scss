@@ -2,10 +2,11 @@
     .#{$prefix}fieldset {
         border: $fieldset-border;
         
-        padding: 0 $fieldset-padding;
+        padding: $fieldset-padding;
         margin-bottom: $fieldset-padding;
         
         display: block; /* preserve margins in IE */
+        position: relative;
     }
     
     .#{$prefix}ie .#{$prefix}fieldset {

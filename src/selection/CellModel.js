@@ -1,20 +1,5 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
- * @class Ext.selection.CellModel
- * @extends Ext.selection.Model
+ *
  */
 Ext.define('Ext.selection.CellModel', {
     extend: 'Ext.selection.Model',
@@ -64,7 +49,7 @@ Ext.define('Ext.selection.CellModel', {
         me.primaryView = view;
         me.views = me.views || [];
         me.views.push(view);
-        me.bind(view.getStore(), true);
+        me.bindStore(view.getStore(), true);
 
         view.on({
             cellmousedown: me.onMouseDown,
@@ -91,7 +76,7 @@ Ext.define('Ext.selection.CellModel', {
 
         // view.el has tabIndex -1 to allow for
         // keyboard events to be passed to it.
-        me.keyNav = Ext.create('Ext.util.KeyNav', view.el, {
+        me.keyNav = new Ext.util.KeyNav(view.el, {
             up: me.onKeyUp,
             down: me.onKeyDown,
             right: me.onKeyRight,
@@ -147,10 +132,10 @@ Ext.define('Ext.selection.CellModel', {
         if (me.position) {
             me.onCellDeselect(me.position);
         }
+        me.position = pos;
         if (pos) {
             me.onCellSelect(pos);
         }
-        me.position = pos;
     },
 
     /**
@@ -167,27 +152,38 @@ Ext.define('Ext.selection.CellModel', {
     // notify the view that the cell has been selected to update the ui
     // appropriately and bring the cell into focus
     onCellSelect: function(position) {
-        var me = this,
-            store = me.view.getStore(),
-            record = store.getAt(position.row);
-
-        me.doSelect(record);
-        me.primaryView.onCellSelect(position);
-        // TODO: Remove temporary cellFocus call here.
-        me.primaryView.onCellFocus(position);
-        me.fireEvent('select', me, record, position.row, position.column);
+        this.doSelect(this.view.getStore().getAt(position.row));
     },
 
     // notify view that the cell has been deselected to update the ui
     // appropriately
     onCellDeselect: function(position) {
+        this.doDeselect(this.view.getStore().getAt(position.row));
+    },
+    
+    onSelectChange: function(record, isSelected, suppressEvent, commitFn) {
         var me = this,
-            store = me.view.getStore(),
-            record = store.getAt(position.row);
+            store = me.store,
+            pos = me.position,
+            eventName = isSelected ? 'select' : 'deselect',
+            view = me.primaryView;
 
-        me.doDeselect(record);
-        me.primaryView.onCellDeselect(position);
-        me.fireEvent('deselect', me, record, position.row, position.column);
+        if ((suppressEvent || me.fireEvent('before' + eventName, me, record, pos.row, pos.column)) !== false &&
+                commitFn() !== false) {
+
+            if (isSelected) {
+                view.onCellSelect(pos);
+                // TODO: Remove temporary cellFocus call here.
+                view.onCellFocus(pos);
+            } else {
+                view.onCellDeselect(pos);
+                delete me.position;
+            }
+
+            if (!suppressEvent) {
+                me.fireEvent(eventName, me, record, pos.row, pos.column);
+            }
+        }
     },
 
     onKeyTab: function(e, t) {

@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @docauthor Jason Johnston <jason@sencha.com>
  *
@@ -107,15 +93,30 @@ Ext.define('Ext.form.field.Base', {
      * The content of the field body is defined by this config option.
      */
     fieldSubTpl: [ // note: {id} here is really {inputId}, but {cmpId} is available
-        '<input id="{id}" type="{type}" ',
-        '<tpl if="name">name="{name}" </tpl>',
-        '<tpl if="size">size="{size}" </tpl>',
-        '<tpl if="tabIdx">tabIndex="{tabIdx}" </tpl>',
-        'class="{fieldCls} {typeCls}" autocomplete="off" />',
+        '<input id="{id}" type="{type}" {inputAttrTpl}',
+            ' size="1"', // allows inputs to fully respect CSS widths across all browsers
+            '<tpl if="name"> name="{name}"</tpl>',
+            '<tpl if="value"> value="{value}"</tpl>',
+            '<tpl if="placeholder"> placeholder="{placeholder}"</tpl>',
+            '<tpl if="maxLength !== undefined"> maxlength="{maxLength}"</tpl>',
+            '<tpl if="readOnly"> readonly="readonly"</tpl>',
+            '<tpl if="disabled"> disabled="disabled"</tpl>',
+            '<tpl if="tabIdx"> tabIndex="{tabIdx}"</tpl>',
+            '<tpl if="fieldStyle"> style="{fieldStyle}"</tpl>',
+        ' class="{fieldCls} {typeCls} {editableCls}" autocomplete="off"/>',
         {
-            compiled: true,
             disableFormats: true
         }
+    ],
+
+    subTplInsertions: [
+        /**
+         * @cfg {String/Array/Ext.XTemplate} inputAttrTpl
+         * An optional string or `XTemplate` configuration to insert in the field markup
+         * inside the input element (as attributes). If an `XTemplate` is used, the component's
+         * {@link #getSubTplData subTpl data} serves as the context.
+         */
+        'inputAttrTpl'
     ],
 
     /**
@@ -147,7 +148,9 @@ Ext.define('Ext.form.field.Base', {
      * @cfg {String} invalidText
      * The error text to use when marking a field invalid and no message is provided
      */
+    //<locale>
     invalidText : 'The value in this field is invalid',
+    //</locale>
 
     /**
      * @cfg {String} [fieldCls='x-form-field']
@@ -166,7 +169,7 @@ Ext.define('Ext.form.field.Base', {
      * @cfg {String} [focusCls='x-form-focus']
      * The CSS class to use when the field receives focus
      */
-    focusCls : Ext.baseCSSPrefix + 'form-focus',
+    focusCls : 'form-focus',
 
     /**
      * @cfg {String} dirtyCls
@@ -254,18 +257,6 @@ Ext.define('Ext.form.field.Base', {
 
         me.addEvents(
             /**
-             * @event focus
-             * Fires when this field receives input focus.
-             * @param {Ext.form.field.Base} this
-             */
-            'focus',
-            /**
-             * @event blur
-             * Fires when this field loses input focus.
-             * @param {Ext.form.field.Base} this
-             */
-            'blur',
-            /**
              * @event specialkey
              * Fires when any key related to navigation (arrows, tab, enter, esc, etc.) is pressed. To handle other keys
              * see {@link Ext.util.KeyMap}. You can check {@link Ext.EventObject#getKey} to determine which key was
@@ -298,7 +289,15 @@ Ext.define('Ext.form.field.Base', {
              * @param {Ext.form.field.Base} this
              * @param {Ext.EventObject} e The event object
              */
-            'specialkey'
+            'specialkey',
+
+            /**
+             * @event writeablechange
+             * Fires when this field changes its read-only status.
+             * @param {Ext.form.field.Base} this
+             * @param {Boolean} Read only flag
+             */
+            'writeablechange'
         );
 
         // Init mixins
@@ -316,7 +315,7 @@ Ext.define('Ext.form.field.Base', {
      * automatically generated.
      */
     getInputId: function() {
-        return this.inputId || (this.inputId = Ext.id());
+        return this.inputId || (this.inputId = this.id + '-inputEl');
     },
 
     /**
@@ -327,27 +326,55 @@ Ext.define('Ext.form.field.Base', {
     getSubTplData: function() {
         var me = this,
             type = me.inputType,
-            inputId = me.getInputId();
+            inputId = me.getInputId(),
+            cls = [],
+            data;
 
-        return Ext.applyIf(me.subTplData, {
-            id: inputId,
-            cmpId: me.id,
-            name: me.name || inputId,
-            type: type,
-            size: me.size || 20,
-            cls: me.cls,
-            fieldCls: me.fieldCls,
-            tabIdx: me.tabIndex,
-            typeCls: Ext.baseCSSPrefix + 'form-' + (type === 'password' ? 'text' : type)
-        });
+        if (me.cls) {
+            cls.push(me.cls);
+        }
+        if (me.readOnly) {
+            cls.push(me.readOnlyCls);
+        }
+        
+        data = Ext.apply({
+            id         : inputId,
+            cmpId      : me.id,
+            name       : me.name || inputId,
+            disabled   : me.disabled,
+            readOnly   : false,
+            value      : me.getRawValue(),
+            type       : type,
+            cls        : cls.join(' '),
+            fieldCls   : me.fieldCls,
+            fieldStyle : me.getFieldStyle(),
+            tabIdx     : me.tabIndex,
+            typeCls    : Ext.baseCSSPrefix + 'form-' + (type === 'password' ? 'text' : type)
+        }, me.subTplData);
+
+        me.getInsertionRenderData(data, me.subTplInsertions);
+
+        return data;
     },
 
-    afterRender: function() {
+    afterFirstLayout: function() {
         this.callParent();
-        
-        if (this.inputEl) {
-            this.inputEl.selectable();
+        var el = this.inputEl;
+        if (el) {
+            el.selectable();
         }
+    },
+
+    applyRenderSelectors: function() {
+        var me = this;
+
+        me.callParent();
+
+        /**
+         * @property {Ext.Element} inputEl
+         * The input Element for this Field. Only available after the field has been rendered.
+         */
+        me.inputEl = me.el.getById(me.getInputId());
     },
 
     /**
@@ -383,43 +410,15 @@ Ext.define('Ext.form.field.Base', {
         me.fieldStyle = style;
     },
 
-    // private
-    onRender : function() {
-        var me = this,
-            fieldStyle = me.fieldStyle;
-
-        me.onLabelableRender();
-
-        /**
-         * @property {Ext.Element} inputEl
-         * The input Element for this Field. Only available after the field has been rendered.
-         */
-        me.addChildEls({ name: 'inputEl', id: me.getInputId() });
-
-        me.callParent(arguments);
-
-        // Make the stored rawValue get set as the input element's value
-        me.setRawValue(me.rawValue);
-
-        if (me.readOnly) {
-            me.setReadOnly(true);
-        }
-        if (me.disabled) {
-            me.disable();
-        }
-        if (fieldStyle) {
-            me.setFieldStyle(fieldStyle);
-        }
-
-        me.renderActiveError();
+    getFieldStyle: function() {
+        return 'width:100%;' + (Ext.isObject(this.fieldStyle) ? Ext.DomHelper.generateStyles(this.fieldStyle) : this.fieldStyle ||'');
     },
 
-    initAria: function() {
+    // private
+    onRender : function() {
         var me = this;
-        me.callParent();
-
-        // Associate the field to the error message element
-        me.getActionEl().dom.setAttribute('aria-describedby', Ext.id(me.errorEl));
+        me.callParent(arguments);
+        me.renderActiveError();
     },
 
     getFocusEl: function() {
@@ -580,9 +579,15 @@ Ext.define('Ext.form.field.Base', {
     onDisable: function() {
         var me = this,
             inputEl = me.inputEl;
+            
         me.callParent();
         if (inputEl) {
             inputEl.dom.disabled = true;
+            if (me.hasActiveError()) {
+                // clear invalid state since the field is now disabled
+                me.clearInvalid();
+                me.needsValidateOnEnable = true;
+            }
         }
     },
 
@@ -590,9 +595,17 @@ Ext.define('Ext.form.field.Base', {
     onEnable: function() {
         var me = this,
             inputEl = me.inputEl;
+            
         me.callParent();
         if (inputEl) {
             inputEl.dom.disabled = false;
+            if (me.needsValidateOnEnable) {
+                delete me.needsValidateOnEnable;
+                // will trigger errors to be shown
+                me.forceValidation = true;
+                me.isValid();
+                delete me.forceValidation;
+            }
         }
     },
 
@@ -603,18 +616,19 @@ Ext.define('Ext.form.field.Base', {
     setReadOnly: function(readOnly) {
         var me = this,
             inputEl = me.inputEl;
-        if (inputEl) {
-            inputEl.dom.readOnly = readOnly;
-            inputEl.dom.setAttribute('aria-readonly', readOnly);
-        }
+        readOnly = !!readOnly;
         me[readOnly ? 'addCls' : 'removeCls'](me.readOnlyCls);
         me.readOnly = readOnly;
+        if (inputEl) {
+            inputEl.dom.readOnly = readOnly;
+        }
+        me.fireEvent('writeablechange', me, readOnly);
     },
 
     // private
     fireKey: function(e){
         if(e.isSpecialKey()){
-            this.fireEvent('specialkey', this, Ext.create('Ext.EventObjectImpl', e));
+            this.fireEvent('specialkey', this, new Ext.EventObjectImpl(e));
         }
     },
 
@@ -624,16 +638,17 @@ Ext.define('Ext.form.field.Base', {
             inputEl = me.inputEl,
             onChangeTask,
             onChangeEvent;
+
+        // standardise buffer across all browsers + OS-es for consistent event order.
+        // (the 10ms buffer for Editors fixes a weird FF/Win editor issue when changing OS window focus)
+        if (me.inEditor) {
+            me.onBlur = Ext.Function.createBuffered(me.onBlur, 10);
+        }
         if (inputEl) {
             me.mon(inputEl, Ext.EventManager.getKeyEvent(), me.fireKey,  me);
-            me.mon(inputEl, 'focus', me.onFocus, me);
-
-            // standardise buffer across all browsers + OS-es for consistent event order.
-            // (the 10ms buffer for Editors fixes a weird FF/Win editor issue when changing OS window focus)
-            me.mon(inputEl, 'blur', me.onBlur, me, me.inEditor ? {buffer:10} : null);
 
             // listen for immediate value changes
-            onChangeTask = Ext.create('Ext.util.DelayedTask', me.checkChange, me);
+            onChangeTask = new Ext.util.DelayedTask(me.checkChange, me);
             me.onChangeEvent = onChangeEvent = function() {
                 onChangeTask.delay(me.checkChangeBuffer);
             };
@@ -666,54 +681,6 @@ Ext.define('Ext.form.field.Base', {
         }
     },
 
-    // private
-    preFocus: Ext.emptyFn,
-
-    // private
-    onFocus: function() {
-        var me = this,
-            focusCls = me.focusCls,
-            inputEl = me.inputEl;
-        me.preFocus();
-        if (focusCls && inputEl) {
-            inputEl.addCls(focusCls);
-        }
-        if (!me.hasFocus) {
-            me.hasFocus = true;
-            me.componentLayout.onFocus();
-            me.fireEvent('focus', me);
-        }
-    },
-
-    // private
-    beforeBlur : Ext.emptyFn,
-
-    // private
-    onBlur : function(){
-        var me = this,
-            focusCls = me.focusCls,
-            inputEl = me.inputEl;
-
-        if (me.destroying) {
-            return;
-        }
-
-        me.beforeBlur();
-        if (focusCls && inputEl) {
-            inputEl.removeCls(focusCls);
-        }
-        if (me.validateOnBlur) {
-            me.validate();
-        }
-        me.hasFocus = false;
-        me.fireEvent('blur', me);
-        me.postBlur();
-    },
-
-    // private
-    postBlur : Ext.emptyFn,
-
-
     /**
      * @private Called when the field's dirty state changes. Adds/removes the {@link #dirtyCls} on the main element.
      * @param {Boolean} isDirty
@@ -731,8 +698,12 @@ Ext.define('Ext.form.field.Base', {
      * @return {Boolean} True if the value is valid, else false
      */
     isValid : function() {
-        var me = this;
-        return me.disabled || me.validateValue(me.processRawValue(me.getRawValue()));
+        var me = this,
+            disabled = me.disabled,
+            validate = me.forceValidation || !disabled;
+            
+        
+        return validate ? me.validateValue(me.processRawValue(me.getRawValue())) : disabled;
     },
 
 
@@ -777,7 +748,7 @@ Ext.define('Ext.form.field.Base', {
             oldMsg = me.getActiveError();
         me.setActiveErrors(Ext.Array.from(errors));
         if (oldMsg !== me.getActiveError()) {
-            me.doComponentLayout();
+            me.updateLayout();
         }
     },
 
@@ -794,7 +765,7 @@ Ext.define('Ext.form.field.Base', {
             hadError = me.hasActiveError();
         me.unsetActiveError();
         if (hadError) {
-            me.doComponentLayout();
+            me.updateLayout();
         }
     },
 
@@ -818,4 +789,3 @@ Ext.define('Ext.form.field.Base', {
     }
 
 });
-

@@ -237,11 +237,12 @@ Ext.define('Ext.chart.series.Scatter', {
         store.each(function(record, i) {
             xValue = record.get(me.xField);
             yValue = record.get(me.yField);
-            //skip undefined values
-            if (typeof yValue == 'undefined' || (typeof yValue == 'string' &amp;&amp; !yValue)) {
+            //skip undefined or null values
+            if (typeof yValue == 'undefined' || (typeof yValue == 'string' &amp;&amp; !yValue)
+                || xValue == null || yValue == null) {
                 //&lt;debug warn&gt;
                 if (Ext.isDefined(Ext.global.console)) {
-                    Ext.global.console.warn(&quot;[Ext.chart.series.Scatter]  Skipping a store element with an undefined value at &quot;, record, xValue, yValue);
+                    Ext.global.console.warn(&quot;[Ext.chart.series.Scatter]  Skipping a store element with a value which is either undefined or null  at &quot;, record, xValue, yValue);
                 }
                 //&lt;/debug&gt;
                 return;
@@ -391,8 +392,11 @@ Ext.define('Ext.chart.series.Scatter', {
 
         //if the store is empty then there's nothing to be rendered
         if (!store || !store.getCount()) {
+            me.hide();
+            me.items = [];
             return;
         }
+
 
         me.unHighlightItem();
         me.cleanHighlights();

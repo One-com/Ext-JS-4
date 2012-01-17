@@ -298,6 +298,20 @@ Ext.define('Ext.EventObjectImpl', {
         1: 1,
         2: 2
     },
+    
+<span id='Ext-EventObject-property-ctrlKey'>    /**
+</span>     * @property {Boolean} ctrlKey
+     * True if the control key was down during the event.
+     * In Mac this will also be true when meta key was down.
+     */
+<span id='Ext-EventObject-property-altKey'>    /**
+</span>     * @property {Boolean} altKey
+     * True if the alt key was down during the event.
+     */
+<span id='Ext-EventObject-property-shiftKey'>    /**
+</span>     * @property {Boolean} shiftKey
+     * True if the shift key was down during the event.
+     */
 
     constructor: function(event, freezeEvent){
         if (event) {
@@ -618,7 +632,7 @@ Ext.getBody().on('click', function(e,t){
      */
     getPoint : function(){
         var xy = this.getXY();
-        return Ext.create('Ext.util.Point', xy[0], xy[1]);
+        return new Ext.util.Point(xy[0], xy[1]);
     },
 
 <span id='Ext-EventObject-method-hasModifier'>   /**

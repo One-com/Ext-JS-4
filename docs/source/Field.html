@@ -309,7 +309,7 @@ Ext.define('Ext.form.field.Field', {
      */
     isDirty : function() {
         var me = this;
-        return !me.disabled &amp;&amp; !me.isEqual(me.getValue(), me.originalValue);
+        return !me.disabled &amp;&amp; typeof me.originalValue != 'undefined' &amp;&amp; !me.isEqual(me.getValue(), me.originalValue);
     },
 
 <span id='Ext-form-field-Field-method-checkDirty'>    /**
@@ -326,7 +326,7 @@ Ext.define('Ext.form.field.Field', {
         }
     },
 
-<span id='Ext-form-field-Field-property-onDirtyChange'>    /**
+<span id='Ext-form-field-Field-method-onDirtyChange'>    /**
 </span>     * @private Called when the field's dirty state changes.
      * @param {Boolean} isDirty
      */

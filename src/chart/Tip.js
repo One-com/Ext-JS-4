@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.chart.Tip
  * Provides tips for Ext.chart.series.Series.
@@ -33,9 +19,10 @@ Ext.define('Ext.chart.Tip', {
             me.tipTimeout = null;
             me.tipConfig = Ext.apply({}, config.tips, {
                 renderer: Ext.emptyFn,
-                constrainPosition: false
+                constrainPosition: true,
+                autoHide: true
             });
-            me.tooltip = Ext.create('Ext.tip.ToolTip', me.tipConfig);
+            me.tooltip = new Ext.tip.ToolTip(me.tipConfig);
             me.chart.surface.on('mousemove', me.tooltip.onMouseMove, me.tooltip);
             me.chart.surface.on('mouseleave', function() {
                 me.hideTip();
@@ -44,7 +31,7 @@ Ext.define('Ext.chart.Tip', {
                 //initialize a surface
                 surface = me.tipConfig.surface;
                 sprites = surface.sprites;
-                tipSurface = Ext.create('Ext.chart.TipSurface', {
+                tipSurface = new Ext.chart.TipSurface({
                     id: 'tipSurfaceComponent',
                     sprites: sprites
                 });

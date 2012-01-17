@@ -153,38 +153,67 @@ Ext.is.init();
  * @singleton
  */
 Ext.supports = {
+<span id='Ext-supports-method-init'>    /**
+</span>     * Runs feature detection routines and sets the various flags. This is called when
+     * the scripts loads (very early) and again at {@link Ext#onReady}. Some detections
+     * are flagged as `early` and run immediately. Others that require the document body
+     * will not run until ready.
+     * 
+     * Each test is run only once, so calling this method from an onReady function is safe
+     * and ensures that all flags have been set.
+     * @markdown
+     * @private
+     */
     init : function() {
-        var doc = document,
-            div = doc.createElement('div'),
-            tests = this.tests,
-            ln = tests.length,
-            i, test;
+        var me = this,
+            doc = document,
+            tests = me.tests,
+            n = tests.length,
+            div = n &amp;&amp; Ext.isReady &amp;&amp; doc.createElement('div'),
+            test, notRun = [];
 
-        div.innerHTML = [
-            '&lt;div style=&quot;height:30px;width:50px;&quot;&gt;',
-                '&lt;div style=&quot;height:20px;width:20px;&quot;&gt;&lt;/div&gt;',
-            '&lt;/div&gt;',
-            '&lt;div style=&quot;width: 200px; height: 200px; position: relative; padding: 5px;&quot;&gt;',
-                '&lt;div style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;',
-            '&lt;/div&gt;',
-            '&lt;div style=&quot;float:left; background-color:transparent;&quot;&gt;&lt;/div&gt;'
-        ].join('');
+        if (div) {
+            div.innerHTML = [
+                '&lt;div style=&quot;height:30px;width:50px;&quot;&gt;',
+                    '&lt;div style=&quot;height:20px;width:20px;&quot;&gt;&lt;/div&gt;',
+                '&lt;/div&gt;',
+                '&lt;div style=&quot;width: 200px; height: 200px; position: relative; padding: 5px;&quot;&gt;',
+                    '&lt;div style=&quot;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;',
+                '&lt;/div&gt;',
+                '&lt;div style=&quot;position: absolute; left: 10%; top: 10%;&quot;&gt;&lt;/div&gt;',
+                '&lt;div style=&quot;float:left; background-color:transparent;&quot;&gt;&lt;/div&gt;'
+            ].join('');
 
-        doc.body.appendChild(div);
-
-        for (i = 0; i &lt; ln; i++) {
-            test = tests[i];
-            this[test.identity] = test.fn.call(this, doc, div);
+            doc.body.appendChild(div);
         }
 
-        doc.body.removeChild(div);
+        while (n--) {
+            test = tests[n];
+            if (div || test.early) {
+                me[test.identity] = test.fn.call(me, doc, div);
+            } else {
+                notRun.push(test);
+            }
+        }
+
+        if (div) {
+            doc.body.removeChild(div);
+        }
+
+        me.tests = notRun;
     },
+
+<span id='Ext-supports-property-PointerEvents'>    /**
+</span>     * @property PointerEvents True if document environment supports the CSS3 pointer-events style.
+     * @type {Boolean}
+     */
+    PointerEvents: 'pointerEvents' in document.documentElement.style,
 
 <span id='Ext-supports-property-CSS3BoxShadow'>    /**
 </span>     * @property CSS3BoxShadow True if document environment supports the CSS3 box-shadow style.
      * @type {Boolean}
      */
-    CSS3BoxShadow: Ext.isDefined(document.documentElement.style.boxShadow),
+    CSS3BoxShadow: 'boxShadow' in document.documentElement.style,
 
 <span id='Ext-supports-property-ClassList'>    /**
 </span>     * @property ClassList True if document environment supports the HTML5 classList API.
@@ -276,6 +305,7 @@ Ext.supports = {
          */
         {
             identity: 'DisplayChangeInputSelectionBug',
+            early: true,
             fn: function() {
                 var webKitVersion = Ext.webKitVersion;
                 // WebKit but older than Safari 5 or Chrome 6:
@@ -294,6 +324,7 @@ Ext.supports = {
          */
         {
             identity: 'DisplayChangeTextAreaSelectionBug',
+            early: true,
             fn: function() {
                 var webKitVersion = Ext.webKitVersion;
 
@@ -405,7 +436,8 @@ Ext.supports = {
         {
             identity: 'History',
             fn: function() {
-                return !!(window.history &amp;&amp; history.pushState);
+                var history = window.history;
+                return !!(history &amp;&amp; history.pushState);
             }
         },
         
@@ -594,9 +626,35 @@ Ext.supports = {
                 // sadly, we cannot feature detect this...
                 return Ext.isIE || Ext.isGecko || Ext.webKitVersion &gt;= 534.16; // Chrome 10+
             }
+        },
+        
+<span id='Ext-supports-property-TextAreaMaxLength'>        /**
+</span>         * @property TextAreaMaxLength True if the browser supports maxlength on textareas.
+         * @type {Boolean}
+         */
+        {
+            identity: 'TextAreaMaxLength',
+            fn: function(){
+                var el = document.createElement('textarea');
+                return ('maxlength' in el);
+            }
+        },
+<span id='Ext-supports-property-GetPositionPercentage'>        /**
+</span>         * @property GetPositionPercentage True if the browser will return the left/top/right/bottom 
+         * position as a percentage when explicitly set as a percentage value.
+         * @type {Boolean}
+         */
+        // Related bug: https://bugzilla.mozilla.org/show_bug.cgi?id=707691#c7
+        {
+            identity: 'GetPositionPercentage',
+            fn: function(doc, div){
+                return Ext.get(div.childNodes[2]).getStyle('left') == '10%';
+            }
         }
     ]
 };
+
+Ext.supports.init(); // run the &quot;early&quot; detections now
 </pre>
 </body>
 </html>

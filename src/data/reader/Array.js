@@ -1,21 +1,6 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @author Ed Spencer
  * @class Ext.data.reader.Array
- * @extends Ext.data.reader.Json
  * 
  * <p>Data reader class to create an Array of {@link Ext.data.Model} objects from an Array.
  * Each element of that Array represents a row of data fields. The
@@ -54,6 +39,10 @@ Ext.define('Ext.data.reader.Array', {
     alternateClassName: 'Ext.data.ArrayReader',
     alias : 'reader.array',
 
+    // For Array Reader, methods in the base which use these properties must not see the defaults
+    totalProperty: undefined,
+    successProperty: undefined,
+
     /**
      * @private
      * Most of the work is done for us by JsonReader, but we need to overwrite the field accessors to just
@@ -61,7 +50,7 @@ Ext.define('Ext.data.reader.Array', {
      */
     buildExtractors: function() {
         this.callParent(arguments);
-        
+
         var fields = this.model.prototype.fields.items,
             i = 0,
             length = fields.length,
@@ -76,8 +65,7 @@ Ext.define('Ext.data.reader.Array', {
                 };
             }(map !== null ? map : i));
         }
-        
+
         this.extractorFunctions = extractorFunctions;
     }
 });
-

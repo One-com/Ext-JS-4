@@ -57,7 +57,7 @@ Ext.define('Ext.draw.SpriteDD', {
         y1 = pos[1];
         y2 = y1 + bbox.height;
         
-        return Ext.create('Ext.util.Region', y1, x2, y2, x1);
+        return new Ext.util.Region(y1, x2, y2, x1);
     },
 
     /*

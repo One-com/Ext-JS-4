@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * ToolTip is a {@link Ext.tip.Tip} implementation that handles the common case of displaying a
  * tooltip when hovering over a certain element or elements on the page. It allows fine-grained
@@ -224,16 +210,6 @@ Ext.define('Ext.tip.ToolTip', {
         me.anchorEl = me.el.createChild({
             cls: Ext.baseCSSPrefix + 'tip-anchor ' + me.anchorCls
         });
-    },
-
-    // private
-    afterRender: function() {
-        var me = this,
-            zIndex;
-
-        me.callParent(arguments);
-        zIndex = parseInt(me.el.getZIndex(), 10) || 0;
-        me.anchorEl.setStyle('z-index', zIndex + 1).setVisibilityMode(Ext.Element.DISPLAY);
     },
 
     /**
@@ -502,6 +478,9 @@ Ext.define('Ext.tip.ToolTip', {
     // private
     onTargetOut: function(e) {
         var me = this;
+
+        // If disabled, moving within the current target, ignore the mouseout
+        // EventObject.within is the only correct way to determine this.
         if (me.disabled || e.within(me.target.dom, true)) {
             return;
         }
@@ -577,18 +556,18 @@ Ext.define('Ext.tip.ToolTip', {
                 me.doConstrain();
             }
             me.toFront(true);
-        }
-
-        if (me.dismissDelay && me.autoHide !== false) {
-            me.dismissTimer = Ext.defer(me.hide, me.dismissDelay, me);
-        }
-        if (me.anchor) {
-            me.syncAnchor();
-            if (!me.anchorEl.isVisible()) {
-                me.anchorEl.show();
+            me.el.sync(true);
+            if (me.dismissDelay && me.autoHide !== false) {
+                me.dismissTimer = Ext.defer(me.hide, me.dismissDelay, me);
             }
-        } else {
-            me.anchorEl.hide();
+            if (me.anchor) {
+                me.syncAnchor();
+                if (!me.anchorEl.isVisible()) {
+                    me.anchorEl.show();
+                }
+            } else {
+                me.anchorEl.hide();
+            }
         }
     },
 
@@ -621,6 +600,7 @@ Ext.define('Ext.tip.ToolTip', {
             break;
         }
         me.anchorEl.alignTo(me.el, anchorPos + '-' + targetPos, offset);
+        me.anchorEl.setStyle('z-index', parseInt(me.el.getZIndex(), 10) || 0 + 1).setVisibilityMode(Ext.Element.DISPLAY);
     },
 
     // private
@@ -701,4 +681,3 @@ Ext.define('Ext.tip.ToolTip', {
         this.callParent();
     }
 });
-

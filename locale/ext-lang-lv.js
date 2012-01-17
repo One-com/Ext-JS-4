@@ -1,30 +1,19 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * Latvian Translations
  * By salix 17 April 2007
  */
 Ext.onReady(function() {
+    var cm = Ext.ClassManager, 
+        exists = Ext.Function.bind(cm.get, cm);
+
     if(Ext.Updater){
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Notiek ielāde...</div>';
     }
-    if(Ext.view.View){
+    if(exists('Ext.view.View')){
         Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.grid.Panel){
+    if(exists('Ext.grid.Panel')){
         Ext.grid.Panel.prototype.ddText = "{0} iezīmētu rindu";
     }
 
@@ -32,7 +21,7 @@ Ext.onReady(function() {
         Ext.TabPanelItem.prototype.closeText = "Aizver šo zīmni";
     }
 
-    if(Ext.form.field.Base){
+    if(exists('Ext.form.field.Base')){
         Ext.form.field.Base.prototype.invalidText = "Vērtība šajā laukā nav pareiza";
     }
 
@@ -76,7 +65,7 @@ Ext.onReady(function() {
         };
     }
 
-    if(Ext.util.Format){
+    if(exists('Ext.util.Format')){
         Ext.apply(Ext.util.Format, {
             thousandSeparator: '.',
             decimalSeparator: ',',
@@ -85,7 +74,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Date){
+    if(exists('Ext.picker.Date')){
         Ext.apply(Ext.picker.Date.prototype, {
             todayText         : "Šodiena",
             minText           : "Norādītais datums ir mazāks par minimālo datumu",
@@ -103,7 +92,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.Paging){
+    if(exists('Ext.toolbar.Paging')){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Lapa",
             afterPageText  : "no {0}",
@@ -117,7 +106,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Text){
+    if(exists('Ext.form.field.Text')){
         Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Minimālais garums šim laukam ir {0}",
             maxLengthText : "Maksimālais garums šim laukam ir {0}",
@@ -127,7 +116,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Number){
+    if(exists('Ext.form.field.Number')){
         Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Minimālais garums šim laukam ir  {0}",
             maxText : "Maksimālais garums šim laukam ir  {0}",
@@ -135,7 +124,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Date){
+    if(exists('Ext.form.field.Date')){
         Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Atspējots",
             disabledDatesText : "Atspējots",
@@ -146,7 +135,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.ComboBox){
+    if(exists('Ext.form.field.ComboBox')){
         Ext.apply(Ext.form.field.ComboBox.prototype, {
             valueNotFoundText : undefined
         });
@@ -155,7 +144,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.VTypes){
+    if(exists('Ext.form.field.VTypes')){
         Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Šajā laukā jāieraksta e-pasta adrese formātā "lietotās@domēns.lv"',
             urlText      : 'Šajā laukā jāieraksta URL formātā "http:/'+'/www.domēns.lv"',
@@ -164,7 +153,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.header.Container){
+    if(exists('Ext.grid.header.Container')){
         Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Kārtot pieaugošā secībā",
             sortDescText : "Kārtot dilstošā secībā",
@@ -174,7 +163,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.PropertyColumnModel){
+    if(exists('Ext.grid.PropertyColumnModel')){
         Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
             nameText   : "Nosaukums",
             valueText  : "Vērtība",
@@ -182,10 +171,4 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
-        Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype, {
-            splitTip            : "Velc, lai mainītu izmēru.",
-            collapsibleSplitTip : "Velc, lai mainītu izmēru. Dubultklikšķis noslēpj apgabalu."
-        });
-    }
 });

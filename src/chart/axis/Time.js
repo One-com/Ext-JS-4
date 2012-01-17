@@ -1,20 +1,6 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.chart.axis.Time
- * @extends Ext.chart.axis.Numeric
+ * @extends Ext.chart.axis.Axis
  *
  * A type of axis whose units are measured in time values. Use this axis
  * for listing dates that you will want to group or dynamically change.
@@ -29,6 +15,8 @@ If you are unsure which license is appropriate for your use, please contact the 
  *         fields: 'date',
  *         title: 'Day',
  *         dateFormat: 'M d',
+ *         groupBy: 'year,month,day',
+ *         aggregateOp: 'sum',
  *
  *         constrain: true,
  *         fromDate: new Date('1/1/11'),
@@ -78,16 +66,16 @@ Ext.define('Ext.chart.axis.Time', {
 
     /**
      * @cfg {Array/Boolean} step
-     * An array with two components: The first is the unit of the step (day, month, year, etc).
-     * The second one is the number of units for the step (1, 2, etc.).
-     * Defaults to `[Ext.Date.DAY, 1]`.
+     * An array with two components: The first is the unit of the step (day, month, year, etc). The second one is the number of units for the step (1, 2, etc.).
+     * Default's [Ext.Date.DAY, 1]. If this is specified, {@link #steps} config is omitted.
      */
     step: [Ext.Date.DAY, 1],
-    
+
     /**
      * @cfg {Boolean} constrain
      * If true, the values of the chart will be rendered only if they belong between the fromDate and toDate.
      * If false, the time axis will adapt to the new values by adding/removing steps.
+     * Default's false.
      */
     constrain: false,
 
@@ -177,5 +165,4 @@ Ext.define('Ext.chart.axis.Time', {
         }
     }
  });
-
 

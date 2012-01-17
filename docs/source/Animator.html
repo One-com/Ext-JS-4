@@ -318,7 +318,7 @@ keyframes : {
                 damper = attrs.damper || me.damper;
                 delete attrs.easing;
                 delete attrs.damper;
-                anim = Ext.create('Ext.fx.Anim', {
+                anim = new Ext.fx.Anim({
                     target: target,
                     easing: easing,
                     damper: damper,

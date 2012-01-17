@@ -1,31 +1,13 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
- * @private
- * @class Ext.layout.component.field.Trigger
- * @extends Ext.layout.component.field.Field
  * Layout class for {@link Ext.form.field.Trigger} fields. Adjusts the input field size to accommodate
  * the trigger button(s).
  * @private
  */
-
 Ext.define('Ext.layout.component.field.Trigger', {
 
     /* Begin Definitions */
 
-    alias: ['layout.triggerfield'],
+    alias: 'layout.triggerfield',
 
     extend: 'Ext.layout.component.field.Field',
 
@@ -33,22 +15,70 @@ Ext.define('Ext.layout.component.field.Trigger', {
 
     type: 'triggerfield',
 
-    sizeBodyContents: function(width, height) {
+    beginLayout: function(ownerContext) {
+        var me = this,
+            owner = me.owner,
+            flags;
+
+        ownerContext.triggerWrap = ownerContext.getEl('triggerWrap');
+
+        me.callParent(arguments);
+
+        // if any of these important states have changed, sync them now:
+        flags = owner.getTriggerStateFlags();
+        if (flags != owner.lastTriggerStateFlags) {
+            owner.lastTriggerStateFlags = flags;
+            me.updateEditState();
+        }
+    },
+
+    beginLayoutFixed: function (ownerContext, width) {
+        var owner = ownerContext.target;
+
+        this.callParent(arguments);
+
+        owner.inputCell.setStyle('width', '100%');
+        owner.inputEl.setStyle('width', '100%');
+        owner.triggerWrap.setStyle('width', width);
+        owner.triggerWrap.setStyle('table-layout', 'fixed');
+    },
+
+    beginLayoutShrinkWrap: function (ownerContext) {
+        var owner = ownerContext.target,
+            emptyString = '';
+
+        this.callParent(arguments);
+
+        owner.triggerWrap.setStyle('width', emptyString);
+        owner.inputCell.setStyle('width', emptyString);
+        owner.inputEl.setStyle('width', emptyString);
+        owner.triggerWrap.setStyle('table-layout', 'auto');
+    },
+
+    updateEditState: function() {
         var me = this,
             owner = me.owner,
             inputEl = owner.inputEl,
-            triggerWrap = owner.triggerWrap,
-            triggerWidth = owner.getTriggerWidth();
+            noeditCls = Ext.baseCSSPrefix + 'trigger-noedit',
+            displayed,
+            readOnly;
 
-        // If we or our ancestor is hidden, we can get a triggerWidth calculation
-        // of 0.  We don't want to resize in this case.
-        if (owner.hideTrigger || owner.readOnly || triggerWidth > 0) {
-            // Decrease the field's width by the width of the triggers. Both the field and the triggerWrap
-            // are floated left in CSS so they'll stack up side by side.
-            me.setElementSize(inputEl, Ext.isNumber(width) ? width - triggerWidth : width);
-    
-            // Explicitly set the triggerWrap's width, to prevent wrapping
-            triggerWrap.setWidth(triggerWidth);
+        if (me.owner.readOnly) {
+            inputEl.addCls(noeditCls);
+            readOnly = true;
+            displayed = false;
+        } else {
+            if (me.owner.editable) {
+                inputEl.removeCls(noeditCls);
+                readOnly = false;
+            } else {
+                inputEl.addCls(noeditCls);
+                readOnly = true;
+            }
+            displayed = !me.owner.hideTrigger;
         }
+
+        owner.triggerWrap.setDisplayed(displayed);
+        inputEl.dom.readOnly = readOnly;
     }
 });

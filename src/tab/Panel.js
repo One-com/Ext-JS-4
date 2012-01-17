@@ -1,23 +1,9 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @author Ed Spencer, Tommy Maintz, Brian Moeskau
  *
  * A basic tab container. TabPanels can be used exactly like a standard {@link Ext.panel.Panel} for
  * layout purposes, but also have special support for containing child Components
- * (`{@link Ext.container.Container#items items}`) that are managed using a
+ * (`{@link Ext.container.Container#cfg-items items}`) that are managed using a
  * {@link Ext.layout.container.Card CardLayout layout manager}, and displayed as separate tabs.
  *
  * **Note:** By default, a tab's close tool _destroys_ the child tab Component and all its descendants.
@@ -228,7 +214,7 @@ If you are unsure which license is appropriate for your use, please contact the 
  *         renderTo : Ext.getBody()
  *     });
  *
- * Adding a new tab is very simple with a TabPanel. You simple call the {@link #add} method with an config
+ * Adding a new tab is very simple with a TabPanel. You simple call the {@link #method-add} method with an config
  * object for a panel.
  *
  *     @example
@@ -261,7 +247,7 @@ If you are unsure which license is appropriate for your use, please contact the 
  *         renderTo : Ext.getBody()
  *     });
  *
- * Additionally, removing a tab is very also simple with a TabPanel. You simple call the {@link #remove} method
+ * Additionally, removing a tab is very also simple with a TabPanel. You simple call the {@link #method-remove} method
  * with an config object for a panel.
  *
  *     @example
@@ -339,14 +325,14 @@ Ext.define('Ext.tab.Panel', {
     plain: false,
 
     /**
-     * @cfg {String} itemCls
+     * @cfg {String} [itemCls='x-tabpanel-child']
      * The class added to each child item of this TabPanel.
      */
-    itemCls: 'x-tabpanel-child',
+    itemCls: Ext.baseCSSPrefix + 'tabpanel-child',
 
     /**
      * @cfg {Number} minTabWidth
-     * The minimum width for a tab in the {@link #tabBar}.
+     * The minimum width for a tab in the {@link #cfg-tabBar}.
      */
     minTabWidth: undefined,
 
@@ -358,8 +344,8 @@ Ext.define('Ext.tab.Panel', {
     /**
      * @cfg {Boolean} deferredRender
      *
-     * True by default to defer the rendering of child {@link Ext.container.Container#items items} to the browsers DOM
-     * until a tab is activated. False will render all contained {@link Ext.container.Container#items items} as soon as
+     * True by default to defer the rendering of child {@link Ext.container.Container#cfg-items items} to the browsers DOM
+     * until a tab is activated. False will render all contained {@link Ext.container.Container#cfg-items items} as soon as
      * the {@link Ext.layout.container.Card layout} is rendered. If there is a significant amount of content or a lot of
      * heavy controls being rendered into panels that are not displayed by default, setting this to true might improve
      * performance.
@@ -374,10 +360,10 @@ Ext.define('Ext.tab.Panel', {
     //inherit docs
     initComponent: function() {
         var me = this,
-            dockedItems = me.dockedItems || [],
+            dockedItems = [].concat(me.dockedItems || []),
             activeTab = me.activeTab || 0;
 
-        me.layout = Ext.create('Ext.layout.container.Card', Ext.apply({
+        me.layout = new Ext.layout.container.Card(Ext.apply({
             owner: me,
             deferredRender: me.deferredRender,
             itemCls: me.itemCls
@@ -386,17 +372,13 @@ Ext.define('Ext.tab.Panel', {
         /**
          * @property {Ext.tab.Bar} tabBar Internal reference to the docked TabBar
          */
-        me.tabBar = Ext.create('Ext.tab.Bar', Ext.apply({}, me.tabBar, {
+        me.tabBar = new Ext.tab.Bar(Ext.apply({}, me.tabBar, {
             dock: me.tabPosition,
             plain: me.plain,
             border: me.border,
             cardLayout: me.layout,
             tabPanel: me
         }));
-
-        if (dockedItems && !Ext.isArray(dockedItems)) {
-            dockedItems = [dockedItems];
-        }
 
         dockedItems.push(me.tabBar);
         me.dockedItems = dockedItems;
@@ -425,6 +407,8 @@ Ext.define('Ext.tab.Panel', {
 
         //set the active tab
         me.setActiveTab(activeTab);
+        // prevent initial tabchange
+        me.initialTabSet = true;
         //set the active tab after initial layout
         me.on('afterlayout', me.afterInitialLayout, me, {single: true});
     },
@@ -467,7 +451,8 @@ Ext.define('Ext.tab.Panel', {
                 me.layout.setActiveItem(card);
             }
 
-            if (previous && previous !== card) {
+            //previous will be undefined or this.activeTab at instantiation
+            if (me.initialTabSet && previous !== card) {
                 me.fireEvent('tabchange', me, card, previous);
             }
         }
@@ -502,13 +487,12 @@ Ext.define('Ext.tab.Panel', {
                 card: item,
                 disabled: item.disabled,
                 closable: item.closable,
-                hidden: item.hidden,
-                tabBar: me.tabBar
+                hidden: item.hidden && !item.hiddenByLayout, // only hide if it wasn't hidden by the layout itself
+                tooltip: item.tooltip,
+                tabBar: me.tabBar,
+                closeText: item.closeText
             };
 
-        if (item.closeText) {
-            defaultConfig.closeText = item.closeText;
-        }
         cfg = Ext.applyIf(cfg, defaultConfig);
         item.tab = me.tabBar.insert(index, cfg);
 
@@ -518,6 +502,7 @@ Ext.define('Ext.tab.Panel', {
             disable: me.onItemDisable,
             beforeshow: me.onItemBeforeShow,
             iconchange: me.onItemIconChange,
+            iconclschange: me.onItemIconClsChange,
             titlechange: me.onItemTitleChange
         });
 
@@ -531,11 +516,6 @@ Ext.define('Ext.tab.Panel', {
             if (item.isPanel && me.border) {
                 item.setBorder(false);
             }
-        }
-
-        // ensure that there is at least one active tab
-        if (this.rendered && me.items.getCount() === 1) {
-            me.setActiveTab(0);
         }
     },
 
@@ -568,11 +548,20 @@ Ext.define('Ext.tab.Panel', {
 
     /**
      * @private
+     * Update the tab icon when panel icon has been set or changed.
+     */
+    onItemIconChange: function(item, newIcon) {
+        item.tab.setIcon(newIcon);
+        this.getTabBar().updateLayout();
+    },
+    
+    /**
+     * @private
      * Update the tab iconCls when panel iconCls has been set or changed.
      */
-    onItemIconChange: function(item, newIconCls) {
+    onItemIconClsChange: function(item, newIconCls) {
         item.tab.setIconCls(newIconCls);
-        this.getTabBar().doLayout();
+        this.getTabBar().updateLayout();
     },
 
     /**
@@ -581,7 +570,7 @@ Ext.define('Ext.tab.Panel', {
      */
     onItemTitleChange: function(item, newTitle) {
         item.tab.setText(newTitle);
-        this.getTabBar().doLayout();
+        this.getTabBar().updateLayout();
     },
 
 
@@ -628,4 +617,3 @@ Ext.define('Ext.tab.Panel', {
         }
     }
 });
-

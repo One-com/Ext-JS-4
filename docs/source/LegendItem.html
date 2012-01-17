@@ -17,7 +17,6 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-chart-LegendItem'>/**
 </span> * @class Ext.chart.LegendItem
- * @extends Ext.draw.CompositeSprite
  * A single item of a legend (marker plus label)
  */
 Ext.define('Ext.chart.LegendItem', {
@@ -82,14 +81,16 @@ Ext.define('Ext.chart.LegendItem', {
                     &quot;stroke-width&quot;: series.lineWidth,
                     &quot;stroke-linejoin&quot;: &quot;round&quot;,
                     &quot;stroke-dasharray&quot;: series.dash,
-                    stroke: seriesStyle.stroke || '#000',
+                    stroke: seriesStyle.stroke || series.getLegendColor(index) || '#000',
                     style: {
                         cursor: 'pointer'
                     }
                 }));
             }
             if (series.showMarkers || seriesType === 'scatter') {
-                markerConfig = Ext.apply(series.markerStyle, series.markerConfig || {});
+                markerConfig = Ext.apply(series.markerStyle, series.markerConfig || {}, {
+                    fill: series.getLegendColor(index)
+                });
                 me.add('marker', Ext.chart.Shape[markerConfig.type](surface, {
                     fill: markerConfig.fill,
                     x: 8.5,

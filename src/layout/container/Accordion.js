@@ -1,21 +1,4 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
- * @class Ext.layout.container.Accordion
- * @extends Ext.layout.container.VBox
- *
  * This is a layout that manages multiple Panels in an expandable accordion style such that only
  * **one Panel can be expanded at any given time**. Each Panel has built-in support for expanding and collapsing.
  *
@@ -31,7 +14,7 @@ If you are unsure which license is appropriate for your use, please contact the 
  *             // applied to each contained panel
  *             bodyStyle: 'padding:15px'
  *         },
- *         layoutConfig: {
+ *         layout: {
  *             // layout-specific configs go here
  *             titleCollapse: false,
  *             animate: true,
@@ -84,7 +67,7 @@ Ext.define('Ext.layout.container.Accordion', {
     /**
      * @cfg {Boolean} hideCollapseTool
      * True to hide the contained Panels' collapse/expand toggle buttons, false to display them.
-     * When set to true, {@link #titleCollapse} is automatically set to <code>true</code>.
+     * When set to true, {@link #titleCollapse} is automatically set to true.
      */
     hideCollapseTool : false,
 
@@ -99,7 +82,7 @@ Ext.define('Ext.layout.container.Accordion', {
      * @cfg {Boolean} animate
      * True to slide the contained panels open and closed during expand/collapse using animation, false to open and
      * close directly with no animation. Note: The layout performs animated collapsing
-     * and expanding, <i>not</i> the child Panels.
+     * and expanding, *not* the child Panels.
      */
     animate : true,
     /**
@@ -112,18 +95,25 @@ Ext.define('Ext.layout.container.Accordion', {
     activeOnTop : false,
     /**
      * @cfg {Boolean} multi
-     * Set to <code>true</code> to enable multiple accordion items to be open at once.
+     * Set to true to enable multiple accordion items to be open at once.
      */
     multi: false,
+    
+    defaultAnimatePolicy: {
+        y: true,
+        height: true
+    },
 
     constructor: function() {
         var me = this;
 
         me.callParent(arguments);
 
-        // animate flag must be false during initial render phase so we don't get animations.
-        me.initialAnimate = me.animate;
-        me.animate = false;
+        if (me.animate) {
+            me.animatePolicy = Ext.apply({}, me.defaultAnimatePolicy);
+        } else {
+            me.animatePolicy = null;
+        }
 
         // Child Panels are not absolutely positioned if we are not filling, so use a different itemCls.
         if (me.fill === false) {
@@ -148,18 +138,20 @@ Ext.define('Ext.layout.container.Accordion', {
         }
     },
 
-    renderItems : function(items, target) {
+    beforeRenderItems: function (items) {
         var me = this,
             ln = items.length,
             i = 0,
-            comp,
-            targetSize = me.getLayoutTargetSize(),
-            renderedPanels = [];
+            comp;
 
         for (; i < ln; i++) {
             comp = items[i];
             if (!comp.rendered) {
-                renderedPanels.push(comp);
+                // Add class to the Panel's header before render
+                comp.on({
+                    beforerender: me.onChildPanelRender,
+                    single: true
+                });
 
                 // Set up initial properties for Panels in an accordion.
                 if (me.collapseFirst) {
@@ -174,22 +166,19 @@ Ext.define('Ext.layout.container.Accordion', {
                 }
 
                 delete comp.hideHeader;
+                delete comp.width;
                 comp.collapsible = true;
                 comp.title = comp.title || '&#160;';
+                comp.addBodyCls(Ext.baseCSSPrefix + 'accordion-body');
 
                 // Set initial sizes
-                comp.width = targetSize.width;
                 if (me.fill) {
-                    delete comp.height;
-                    delete comp.flex;
-
                     // If there is an expanded item, all others must be rendered collapsed.
                     if (me.expandedItem !== undefined) {
                         comp.collapsed = true;
                     }
                     // Otherwise expand the first item with collapsed explicitly configured as false
                     else if (comp.hasOwnProperty('collapsed') && comp.collapsed === false) {
-                        comp.flex = 1;
                         me.expandedItem = i;
                     } else {
                         comp.collapsed = true;
@@ -202,9 +191,7 @@ Ext.define('Ext.layout.container.Accordion', {
                         scope: me
                     });
                 } else {
-                    delete comp.flex;
                     comp.animCollapse = me.initialAnimate;
-                    comp.autoHeight = true;
                     comp.autoScroll = false;
                 }
                 comp.border = comp.collapsed;
@@ -216,98 +203,91 @@ Ext.define('Ext.layout.container.Accordion', {
             me.expandedItem = 0;
             comp = items[0];
             comp.collapsed = comp.border = false;
-            if (me.fill) {
-                comp.flex = 1;
-            }
-        }
-
-        // Render all Panels.
-        me.callParent(arguments);
-
-        // Postprocess rendered Panels.
-        ln = renderedPanels.length;
-        for (i = 0; i < ln; i++) {
-            comp = renderedPanels[i];
-
-            // Delete the dimension property so that our align: 'stretch' processing manages the width from here
-            delete comp.width;
-
-            comp.header.addCls(Ext.baseCSSPrefix + 'accordion-hd');
-            comp.body.addCls(Ext.baseCSSPrefix + 'accordion-body');
         }
     },
 
-    onLayout: function() {
-        var me = this;
+    getItemsRenderTree: function(items) {
+        this.beforeRenderItems(items);
 
+        return this.callParent(arguments);
+    },
+
+    renderItems : function(items, target) {
+        this.beforeRenderItems(items);
+
+        this.callParent(arguments);
+    },
+
+    configureItem: function(item) {
+        this.callParent(arguments);
+
+        // we handle animations for the expand/collapse of items:
+        item.animCollapse = false;
+
+        if (this.fill) {
+            item.flex = 1;
+        }
+    },
+
+    onChildPanelRender: function(panel) {
+        panel.header.addCls(Ext.baseCSSPrefix + 'accordion-hd');
+    },
+
+    beginLayout: function (ownerContext) {
+        this.callParent(arguments);
+        this.updatePanelClasses(ownerContext);
+    },
+
+    calculate: function(ownerContext) {
+        var me = this,
+            itemContext;
 
         if (me.fill) {
             me.callParent(arguments);
         } else {
-            var targetSize = me.getLayoutTargetSize(),
-                items = me.getVisibleItems(),
+            var targetSize = me.getContainerSize(ownerContext),
+                items = ownerContext.childItems,
                 len = items.length,
-                i = 0, comp;
+                i;
 
-            for (; i < len; i++) {
-                comp = items[i];
-                if (comp.collapsed) {
-                    items[i].setWidth(targetSize.width);
+            for (i = 0; i < len; i++) {
+                itemContext = items[i];
+                if (itemContext.target.collapsed) {
+                    itemContext.setWidth(targetSize.width);
                 } else {
-                    items[i].setSize(null, null);
+                    itemContext.setSize(null, null);
                 }
             }
         }
-        me.updatePanelClasses();
 
         return me;
     },
 
-    updatePanelClasses: function() {
-        var children = this.getLayoutItems(),
+    updatePanelClasses: function(ownerContext) {
+        var children = ownerContext.visibleItems,
             ln = children.length,
             siblingCollapsed = true,
-            i, child;
+            layoutContext = ownerContext.context,
+            i, child, headerContext;
 
         for (i = 0; i < ln; i++) {
             child = children[i];
-
-            // Fix for EXTJSIV-3724. Windows only.
-            // Collapsing the Psnel's el to a size which only allows a single hesder to be visible, scrolls the header out of view.
-            if (Ext.isWindows) {
-                child.el.dom.scrollTop = 0;
-            }
+            headerContext = layoutContext.getCmp(child.header);
 
             if (siblingCollapsed) {
-                child.header.removeCls(Ext.baseCSSPrefix + 'accordion-hd-sibling-expanded');
-            }
-            else {
-                child.header.addCls(Ext.baseCSSPrefix + 'accordion-hd-sibling-expanded');
+                headerContext.removeCls(Ext.baseCSSPrefix + 'accordion-hd-sibling-expanded');
+            } else {
+                headerContext.addCls(Ext.baseCSSPrefix + 'accordion-hd-sibling-expanded');
             }
 
             if (i + 1 == ln && child.collapsed) {
-                child.header.addCls(Ext.baseCSSPrefix + 'accordion-hd-last-collapsed');
+                headerContext.addCls(Ext.baseCSSPrefix + 'accordion-hd-last-collapsed');
+            } else {
+                headerContext.removeCls(Ext.baseCSSPrefix + 'accordion-hd-last-collapsed');
             }
-            else {
-                child.header.removeCls(Ext.baseCSSPrefix + 'accordion-hd-last-collapsed');
-            }
+
             siblingCollapsed = child.collapsed;
         }
-    },
-    
-    animCallback: function(){
-        Ext.Array.forEach(this.toCollapse, function(comp){
-            comp.fireEvent('collapse', comp);
-        });
-        
-        Ext.Array.forEach(this.toExpand, function(comp){
-            comp.fireEvent('expand', comp);
-        });    
-    },
-    
-    setupEvents: function(){
-        this.toCollapse = [];
-        this.toExpand = [];    
     },
 
     // When a Component expands, adjust the heights of the other Components to be just enough to accommodate
@@ -315,125 +295,61 @@ Ext.define('Ext.layout.container.Accordion', {
     // The expanded Component receives the only flex value, and so gets all remaining space.
     onComponentExpand: function(toExpand) {
         var me = this,
-            it = me.owner.items.items,
-            len = it.length,
-            i = 0,
-            comp;
+            owner = me.owner,
+            expanded,
+            expandedCount, i,
+            previousValue;
 
-        me.setupEvents();
-        for (; i < len; i++) {
-            comp = it[i];
-            if (comp === toExpand && comp.collapsed) {
-                me.setExpanded(comp);
-            } else if (!me.multi && (comp.rendered && comp.header.rendered && comp !== toExpand && !comp.collapsed)) {
-                me.setCollapsed(comp);
+        if (!me.processing) {
+            me.processing = true;
+            previousValue = owner.deferLayouts;
+            owner.deferLayouts = true;
+            expanded = me.multi ? [] : owner.query('>panel:not([collapsed])');
+            expandedCount = expanded.length;
+            
+            // Collapse all other expanded child items (Won't loop if multi is true)
+            for (i = 0; i < expandedCount; i++) {
+                expanded[i].collapse();
             }
+            owner.deferLayouts = previousValue;
+            me.processing = false;
         }
-
-        me.animate = me.initialAnimate;
-        if (me.activeOnTop) {
-            // insert will trigger a layout
-            me.owner.insert(0, toExpand); 
-        } else {
-            me.layout();
-        }
-        me.animate = false;
-        return false;
     },
 
     onComponentCollapse: function(comp) {
         var me = this,
-            toExpand = comp.next() || comp.prev(),
-            expanded = me.multi ? me.owner.query('>panel:not([collapsed])') : [];
+            owner = me.owner,
+            toExpand,
+            expanded,
+            previousValue;
 
-        me.setupEvents();
-        // If we are allowing multi, and the "toCollapse" component is NOT the only expanded Component,
-        // then ask the box layout to collapse it to its header.
-        if (me.multi) {
-            me.setCollapsed(comp);
+        if (!me.processing) {
+            me.processing = true;
+            previousValue = owner.deferLayouts;
+            owner.deferLayouts = true;
+            toExpand = comp.next() || comp.prev();
 
-            // If the collapsing Panel is the only expanded one, expand the following Component.
-            // All this is handling fill: true, so there must be at least one expanded,
-            if (expanded.length === 1 && expanded[0] === comp) {
-                me.setExpanded(toExpand);
+            // If we are allowing multi, and the "toCollapse" component is NOT the only expanded Component,
+            // then ask the box layout to collapse it to its header.
+            if (me.multi) {
+                expanded = me.owner.query('>panel:not([collapsed])');
+
+                // If the collapsing Panel is the only expanded one, expand the following Component.
+                // All this is handling fill: true, so there must be at least one expanded,
+                if (expanded.length === 1) {
+                    toExpand.expand();
+                }
+
+            } else {
+                toExpand.expand();
             }
-
-            me.animate = me.initialAnimate;
-            me.layout();
-            me.animate = false;
+            owner.deferLayouts = previousValue;
+            me.processing = false;
         }
-        // Not allowing multi: expand the next sibling if possible, prev sibling if we collapsed the last
-        else if (toExpand) {
-            me.onComponentExpand(toExpand);
-        }
-        return false;
     },
 
     onComponentShow: function(comp) {
         // Showing a Component means that you want to see it, so expand it.
         this.onComponentExpand(comp);
-    },
-
-    setCollapsed: function(comp) {
-        var otherDocks = comp.getDockedItems(),
-            dockItem,
-            len = otherDocks.length,
-            i = 0;
-
-        // Hide all docked items except the header
-        comp.hiddenDocked = [];
-        for (; i < len; i++) {
-            dockItem = otherDocks[i];
-            if ((dockItem !== comp.header) && !dockItem.hidden) {
-                dockItem.hidden = true;
-                comp.hiddenDocked.push(dockItem);
-            }
-        }
-        comp.addCls(comp.collapsedCls);
-        comp.header.addCls(comp.collapsedHeaderCls);
-        comp.height = comp.header.getHeight();
-        comp.el.setHeight(comp.height);
-        comp.collapsed = true;
-        delete comp.flex;
-        if (this.initialAnimate) {
-            this.toCollapse.push(comp);
-        } else {
-            comp.fireEvent('collapse', comp);
-        }
-        if (comp.collapseTool) {
-            comp.collapseTool.setType('expand-' + comp.getOppositeDirection(comp.collapseDirection));
-        }
-    },
-
-    setExpanded: function(comp) {
-        var otherDocks = comp.hiddenDocked,
-            len = otherDocks ? otherDocks.length : 0,
-            i = 0;
-
-        // Show temporarily hidden docked items
-        for (; i < len; i++) {
-            otherDocks[i].show();
-        }
-
-        // If it was an initial native collapse which hides the body
-        if (!comp.body.isVisible()) {
-            comp.body.show();
-        }
-        delete comp.collapsed;
-        delete comp.height;
-        delete comp.componentLayout.lastComponentSize;
-        comp.suspendLayout = false;
-        comp.flex = 1;
-        comp.removeCls(comp.collapsedCls);
-        comp.header.removeCls(comp.collapsedHeaderCls);
-         if (this.initialAnimate) {
-            this.toExpand.push(comp);
-        } else {
-            comp.fireEvent('expand', comp);
-        }
-        if (comp.collapseTool) {
-            comp.collapseTool.setType('collapse-' + comp.collapseDirection);
-        }
-        comp.setAutoScroll(comp.initialConfig.autoScroll);
     }
 });

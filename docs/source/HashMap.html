@@ -55,7 +55,7 @@ Ext.define('Ext.util.HashMap', {
      */
     constructor: function(config) {
         config = config || {};
-        
+
         var me = this,
             keyFn = config.keyFn;
 
@@ -95,7 +95,7 @@ Ext.define('Ext.util.HashMap', {
 
         me.mixins.observable.constructor.call(me, config);
         me.clear(true);
-        
+
         if (keyFn) {
             me.getKey = keyFn;
         }
@@ -137,7 +137,7 @@ Ext.define('Ext.util.HashMap', {
     },
 
 <span id='Ext-util-HashMap-method-add'>    /**
-</span>     * Adds an item to the collection. Fires the {@link #add} event when complete.
+</span>     * Adds an item to the collection. Fires the {@link #event-add} event when complete.
      * @param {String} key &lt;p&gt;The key to associate with the item, or the new item.&lt;/p&gt;
      * &lt;p&gt;If a {@link #getKey} implementation was specified for this HashMap,
      * or if the key of the stored items is in a property called &lt;tt&gt;&lt;b&gt;id&lt;/b&gt;&lt;/tt&gt;,
@@ -170,7 +170,7 @@ Ext.define('Ext.util.HashMap', {
 
 <span id='Ext-util-HashMap-method-replace'>    /**
 </span>     * Replaces an item in the hash. If the key doesn't exist, the
-     * {@link #add} method will be used.
+     * {@link #method-add} method will be used.
      * @param {String} key The key of the item.
      * @param {Object} value The new value for the item.
      * @return {Object} The new value of the item.

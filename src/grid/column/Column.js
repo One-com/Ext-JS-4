@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * This class specifies the definition for a column inside a {@link Ext.grid.Panel}. It encompasses
  * both the grid header configuration as well as displaying data within the grid itself. If the
@@ -68,7 +54,7 @@ If you are unsure which license is appropriate for your use, please contact the 
  *  - {@link #sortable}: Specifies whether the column can be sorted by clicking the header or using the column menu
  *  - {@link #hideable}: Specifies whether the column can be hidden using the column menu
  *  - {@link #menuDisabled}: Disables the column header menu
- *  - {@link #draggable}: Specifies whether the column header can be reordered by dragging
+ *  - {@link #cfg-draggable}: Specifies whether the column header can be reordered by dragging
  *  - {@link #groupable}: Specifies whether the grid can be grouped by the column dataIndex. See also {@link Ext.grid.feature.Grouping}
  *
  * # Data Options
@@ -79,7 +65,7 @@ If you are unsure which license is appropriate for your use, please contact the 
 Ext.define('Ext.grid.column.Column', {
     extend: 'Ext.grid.header.Container',
     alias: 'widget.gridcolumn',
-    requires: ['Ext.util.KeyNav'],
+    requires: ['Ext.util.KeyNav', 'Ext.grid.ColumnComponentLayout', 'Ext.grid.ColumnLayout'],
     alternateClassName: 'Ext.grid.Column',
 
     baseCls: Ext.baseCSSPrefix + 'column-header ' + Ext.baseCSSPrefix + 'unselectable',
@@ -93,15 +79,20 @@ Ext.define('Ext.grid.column.Column', {
 
     possibleSortStates: ['ASC', 'DESC'],
 
+    childEls: [
+        'titleEl', 'triggerEl', 'textEl'
+    ],
+
     renderTpl:
-        '<div id="{id}-titleContainer" class="' + Ext.baseCSSPrefix + 'column-header-inner">' +
+        '<div id="{id}-titleEl" class="' + Ext.baseCSSPrefix + 'column-header-inner">' +
             '<span id="{id}-textEl" class="' + Ext.baseCSSPrefix + 'column-header-text">' +
                 '{text}' +
             '</span>' +
-            '<tpl if="!values.menuDisabled">'+
+            '<tpl if="!menuDisabled">'+
                 '<div id="{id}-triggerEl" class="' + Ext.baseCSSPrefix + 'column-header-trigger"></div>'+
             '</tpl>' +
-        '</div>',
+        '</div>' +
+        '{%this.renderContainer(out,values)%}',
 
     /**
      * @cfg {Object[]} columns
@@ -127,9 +118,17 @@ Ext.define('Ext.grid.column.Column', {
     text: '&#160;',
 
     /**
+     * @cfg {String} [emptyCellText=undefined]
+     * The text to diplay in empty cells (cells with a value of `undefined`, `null`, or `''`).
+     *
+     * Defaults to `&#160;` aka `&nbsp;`.
+     */
+    emptyCellText: '&#160;',
+
+    /**
      * @cfg {Boolean} sortable
      * False to disable sorting of this column. Whether local/remote sorting is used is specified in
-     * `{@link Ext.data.Store#remoteSort}`. Defaults to true.
+     * `{@link Ext.data.Store#remoteSort}`.
      */
     sortable: true,
 
@@ -142,24 +141,25 @@ Ext.define('Ext.grid.column.Column', {
 
     /**
      * @cfg {Boolean} fixed
-     * @deprecated.
      * True to prevent the column from being resizable.
+     * @deprecated
      */
 
     /**
      * @cfg {Boolean} resizable
-     * Set to <code>false</code> to prevent the column from being resizable. Defaults to <code>true</code>
+     * False to prevent the column from being resizable.
      */
+    resizable: true,
 
     /**
      * @cfg {Boolean} hideable
-     * False to prevent the user from hiding this column. Defaults to true.
+     * False to prevent the user from hiding this column.
      */
     hideable: true,
 
     /**
      * @cfg {Boolean} menuDisabled
-     * True to disable the column header menu containing sort/hide options. Defaults to false.
+     * True to disable the column header menu containing sort/hide options.
      */
     menuDisabled: false,
 
@@ -188,16 +188,24 @@ Ext.define('Ext.grid.column.Column', {
      * @cfg {String} renderer.return The HTML string to be rendered.
      */
     renderer: false,
+    
+    /**
+     * @cfg {Function} editRenderer
+     * A renderer to be used in conjunction with {@link Ext.grid.plugin.RowEditing RowEditing}. This renderer is used to
+     * display a custom value for non-editable fields.
+     */
+    editRenderer: false,
 
     /**
      * @cfg {String} align
-     * Sets the alignment of the header and rendered columns. Defaults to 'left'.
+     * Sets the alignment of the header and rendered columns.
+     * Possible values are: `'left'`, `'center'`, and `'right'`.
      */
     align: 'left',
 
     /**
      * @cfg {Boolean} draggable
-     * False to disable drag-drop reordering of this column. Defaults to true.
+     * False to disable drag-drop reordering of this column.
      */
     draggable: true,
 
@@ -239,11 +247,13 @@ Ext.define('Ext.grid.column.Column', {
      */
     isHeader: true,
 
+    componentLayout: 'columncomponent',
+    
+    // We need to override the default component resizable behaviour here
+    initResizable: Ext.emptyFn,
+
     initComponent: function() {
-        var me = this,
-            i,
-            len,
-            item;
+        var me = this;
 
         if (Ext.isDefined(me.header)) {
             me.text = me.header;
@@ -259,7 +269,9 @@ Ext.define('Ext.grid.column.Column', {
         // Non-flexed Headers may never be squeezed in the event of a shortfall so
         // always set their minWidth to their current width.
         else {
-            me.minWidth = me.width;
+            //me.minWidth = me.width;
+            // we cannot set minWidth as that is a user controlled value... we need to not
+            // apply shortfall squeeze instead
         }
 
         if (!me.triStateSort) {
@@ -283,32 +295,33 @@ Ext.define('Ext.grid.column.Column', {
             me.items = me.columns;
             delete me.columns;
             delete me.flex;
-            me.width = 0;
-
-            // Acquire initial width from sub headers
-            for (i = 0, len = me.items.length; i < len; i++) {
-                item = me.items[i];
-                if (!item.hidden) {
-                    me.width += item.width || Ext.grid.header.Container.prototype.defaultWidth;
-                }
-                //<debug>
-                if (item.flex) {
-                    Ext.Error.raise('Ext.grid.column.Column: items of a grouped header do not support flexed values. Each item must explicitly define its width.');
-                }
-                //</debug>
-            }
-            me.minWidth = me.width;
-
+            delete me.width;
             me.cls = (me.cls||'') + ' ' + Ext.baseCSSPrefix + 'group-header';
             me.sortable = false;
             me.resizable = false;
             me.align = 'center';
+        } else {
+            // If we are not a group header, then this is not to be used as a container, and must not have a container layout executed, and it must
+            // acquire layout height from DOM content, not from child items.
+            me.isContainer = false;
         }
-
-        me.addChildEls('titleContainer', 'triggerEl', 'textEl');
+        me.addCls(Ext.baseCSSPrefix + 'column-header-align-' + me.align);
 
         // Initialize as a HeaderContainer
         me.callParent(arguments);
+
+        me.on({
+            element:  'el',
+            click:    me.onElClick,
+            dblclick: me.onElDblClick,
+            scope:    me
+        });
+        me.on({
+            element:    'titleEl',
+            mouseenter: me.onTitleMouseOver,
+            mouseleave: me.onTitleMouseOut,
+            scope:      me
+        });
     },
 
     onAdd: function(childHeader) {
@@ -325,12 +338,10 @@ Ext.define('Ext.grid.column.Column', {
 
     initRenderData: function() {
         var me = this;
-
-        Ext.applyIf(me.renderData, {
+        return Ext.applyIf(me.callParent(arguments), {
             text: me.text,
             menuDisabled: me.menuDisabled
         });
-        return me.callParent(arguments);
     },
 
     applyColumnState: function (state) {
@@ -413,16 +424,19 @@ Ext.define('Ext.grid.column.Column', {
         return this.isGroupColumn ? false : this.getOwnerHeaderCt().getHeaderIndex(this);
     },
 
-    onRender: function() {
+    beforeRender: function() {
         var me = this,
             grid = me.up('tablepanel');
 
+        me.callParent();
+
         // Disable the menu if there's nothing to show in the menu, ie:
         // Column cannot be sorted, grouped or locked, and there are no grid columns which may be hidden
-        if (grid && (!me.sortable || grid.sortableColumns === false) && !me.groupable && !me.lockable && (grid.enableColumnHide === false || !me.getOwnerHeaderCt().getHideableColumns().length)) {
+        if (grid && (!me.sortable || grid.sortableColumns === false) && !me.groupable &&
+                     !me.lockable && (grid.enableColumnHide === false ||
+                     !me.getOwnerHeaderCt().getHideableColumns().length)) {
             me.menuDisabled = true;
         }
-        me.callParent(arguments);
     },
 
     afterRender: function() {
@@ -431,13 +445,9 @@ Ext.define('Ext.grid.column.Column', {
 
         me.callParent(arguments);
 
-        el.addCls(Ext.baseCSSPrefix + 'column-header-align-' + me.align).addClsOnOver(me.overCls);
-
-        me.mon(el, {
-            click:     me.onElClick,
-            dblclick:  me.onElDblClick,
-            scope:     me
-        });
+        if (me.overCls) {
+            el.addClsOnOver(me.overCls);
+        }
 
         // BrowserBug: Ie8 Strict Mode, this will break the focus for this browser,
         // must be fixed when focus management will be implemented.
@@ -449,13 +459,7 @@ Ext.define('Ext.grid.column.Column', {
             });
         }
 
-        me.mon(me.titleContainer, {
-            mouseenter:  me.onTitleMouseOver,
-            mouseleave:  me.onTitleMouseOut,
-            scope:      me
-        });
-
-        me.keyNav = Ext.create('Ext.util.KeyNav', el, {
+        me.keyNav = new Ext.util.KeyNav(el, {
             enter: me.onEnterKey,
             down: me.onDownKey,
             scope: me
@@ -501,20 +505,14 @@ Ext.define('Ext.grid.column.Column', {
         }
     },
 
-    afterComponentLayout: function(width, height) {
+    afterComponentLayout: function(width, height, oldWidth, oldHeight) {
         var me = this,
-            ownerHeaderCt = this.getOwnerHeaderCt();
+            ownerHeaderCt = me.getOwnerHeaderCt();
 
         me.callParent(arguments);
 
-        // Only changes at the base level inform the grid's HeaderContainer which will update the View
-        // Skip this if the width is null or undefined which will be the Box layout's initial pass  through the child Components
-        // Skip this if it's the initial size setting in which case there is no ownerheaderCt yet - that is set afterRender
-        if (width && !me.isGroupHeader && ownerHeaderCt) {
+        if (ownerHeaderCt && (width !== oldWidth)) {
             ownerHeaderCt.onHeaderResize(me, width, true);
-        }
-        if (me.oldWidth && (width !== me.oldWidth)) {
-            ownerHeaderCt.fireEvent('columnresize', ownerHeaderCt, this, width);
         }
         delete me.oldWidth;
     },
@@ -524,20 +522,24 @@ Ext.define('Ext.grid.column.Column', {
     // Total available header height must be passed to enable padding for inner elements to be calculated.
     setPadding: function(headerHeight) {
         var me = this,
-            lineHeight = Ext.util.TextMetrics.measure(me.textEl.dom, me.text).height;
+            lineHeight = parseInt(me.textEl.getStyle('line-height'), 10),
+            textHeight = parseInt(me.textEl.dom.offsetHeight, 10);
 
         // Top title containing element must stretch to match height of sibling group headers
         if (!me.isGroupHeader) {
-            if (me.titleContainer.getHeight() < headerHeight) {
-                me.titleContainer.dom.style.height = headerHeight + 'px';
+            if (me.titleEl.getHeight() < headerHeight) {
+                me.titleEl.dom.style.height = headerHeight + 'px';
             }
         }
-        headerHeight = me.titleContainer.getViewSize().height;
+        headerHeight = me.titleEl.getViewSize().height;
 
         // Vertically center the header text in potentially vertically stretched header
-        if (lineHeight) {
-            me.titleContainer.setStyle({
-                paddingTop: Math.max(((headerHeight - lineHeight) / 2), 0) + 'px'
+        if (textHeight) {
+            if(lineHeight) {
+                textHeight = Math.ceil(textHeight / lineHeight) * lineHeight;
+            }
+            me.titleEl.setStyle({
+                paddingTop: Math.max(((headerHeight - textHeight) / 2), 0) + 'px'
             });
         }
 
@@ -556,11 +558,11 @@ Ext.define('Ext.grid.column.Column', {
     },
 
     onTitleMouseOver: function() {
-        this.titleContainer.addCls(this.hoverCls);
+        this.titleEl.addCls(this.hoverCls);
     },
 
     onTitleMouseOut: function() {
-        this.titleContainer.removeCls(this.hoverCls);
+        this.titleEl.removeCls(this.hoverCls);
     },
 
     onDownKey: function(e) {
@@ -682,103 +684,96 @@ Ext.define('Ext.grid.column.Column', {
                 ownerHeaderCt.clearOtherSortStates(me);
             }
             me.sortState = state;
-            ownerHeaderCt.fireEvent('sortchange', ownerHeaderCt, me, state);
+            // we only want to fire the event if we have a null state when using triStateSort
+            if (me.triStateSort || state !== null) {
+                ownerHeaderCt.fireEvent('sortchange', ownerHeaderCt, me, state);
+            }
         }
     },
 
-    hide: function() {
+    hide: function(fromOwner) {
         var me = this,
-            items,
-            len, i,
-            lb,
             newWidth = 0,
-            ownerHeaderCt = me.getOwnerHeaderCt();
+            ownerHeaderCt = me.getOwnerHeaderCt(),
+            owner = me.ownerCt,
+            ownerIsGroup = owner.isGroupHeader,
+            item, items, len, i;
+            
+        // owner is a group, hide call didn't come from the owner
+        if (ownerIsGroup && !fromOwner) {
+            items = owner.query('>:not([hidden])');
+            // only have one item that isn't hidden, this is it.
+            if (items.length === 1 && items[0] == me) {
+                me.ownerCt.hide();
+                return;
+            }
+        }
+
+        Ext.suspendLayouts();
 
         // Hiding means setting to zero width, so cache the width
         me.oldWidth = me.getWidth();
 
-        // Hiding a group header hides itself, and then informs the HeaderContainer about its sub headers (Suppressing header layout)
         if (me.isGroupHeader) {
             items = me.items.items;
-            me.callParent(arguments);
-            ownerHeaderCt.onHeaderHide(me);
             for (i = 0, len = items.length; i < len; i++) {
-                items[i].hidden = true;
-                ownerHeaderCt.onHeaderHide(items[i], true);
+                item = items[i];
+                if (!item.hidden) {
+                    item.hide(true);
+                }
             }
-            return;
         }
 
-        // TODO: Work with Jamie to produce a scheme where we can show/hide/resize without triggering a layout cascade
-        lb = me.ownerCt.componentLayout.layoutBusy;
-        me.ownerCt.componentLayout.layoutBusy = true;
-        me.callParent(arguments);
-        me.ownerCt.componentLayout.layoutBusy = lb;
-
+        me.callParent();
         // Notify owning HeaderContainer
         ownerHeaderCt.onHeaderHide(me);
 
         if (me.ownerCt.isGroupHeader) {
-            // If we've just hidden the last header in a group, then hide the group
-            items = me.ownerCt.query('>:not([hidden])');
-            if (!items.length) {
-                me.ownerCt.hide();
-            }
-            // Size the group down to accommodate fewer sub headers
-            else {
+            items = owner.query('>:not([hidden])');
+            if (items.length && !fromOwner) {
+                // We have visible child items and wasn't hidden by the owner
+                // Size the group down to accommodate fewer sub headers
                 for (i = 0, len = items.length; i < len; i++) {
                     newWidth += items[i].getWidth();
                 }
-                me.ownerCt.minWidth = newWidth;
-                me.ownerCt.setWidth(newWidth);
+                owner.setWidth(newWidth);
             }
         }
+        Ext.resumeLayouts(true);
     },
 
-    show: function() {
+    show: function(fromOwner, fromChild) {
         var me = this,
             ownerCt = me.ownerCt,
-            ownerCtCompLayout = ownerCt.componentLayout,
-            ownerCtCompLayoutBusy = ownerCtCompLayout.layoutBusy,
-            ownerCtLayout = ownerCt.layout,
-            ownerCtLayoutBusy = ownerCtLayout.layoutBusy,
+            newWidth = 0,
             items,
             len, i,
-            item,
-            newWidth = 0;
+            item;
 
-        // TODO: Work with Jamie to produce a scheme where we can show/hide/resize without triggering a layout cascade
+        Ext.suspendLayouts();
 
-        // Suspend our owner's layouts (both component and container):
-        ownerCtCompLayout.layoutBusy = ownerCtLayout.layoutBusy = true;
+        // If a sub header, ensure that the group header is visible
+        if (me.isSubHeader && ownerCt.hidden) {
+            ownerCt.show(false, true);
+        }
 
         me.callParent(arguments);
 
-        ownerCtCompLayout.layoutBusy = ownerCtCompLayoutBusy;
-        ownerCtLayout.layoutBusy = ownerCtLayoutBusy;
-
-        // If a sub header, ensure that the group header is visible
-        if (me.isSubHeader) {
-            if (!ownerCt.isVisible()) {
-                ownerCt.show();
-            }
-        }
-
         // If we've just shown a group with all its sub headers hidden, then show all its sub headers
-        if (me.isGroupHeader && !me.query(':not([hidden])').length) {
+        if (me.isGroupHeader && fromChild !== true && !me.query(':not([hidden])').length) {
             items = me.query('>*');
             for (i = 0, len = items.length; i < len; i++) {
                 item = items[i];
-                item.preventLayout = true;
-                item.show();
+                if (item.hidden) {
+                    item.show(true);
+                }
                 newWidth += item.getWidth();
-                delete item.preventLayout;
             }
             me.setWidth(newWidth);
         }
 
         // Resize the owning group to accommodate
-        if (ownerCt.isGroupHeader && me.preventLayout !== true) {
+        if (ownerCt.isGroupHeader && !fromOwner) {
             items = ownerCt.query('>:not([hidden])');
             for (i = 0, len = items.length; i < len; i++) {
                 newWidth += items[i].getWidth();
@@ -790,8 +785,9 @@ Ext.define('Ext.grid.column.Column', {
         // Notify owning HeaderContainer
         ownerCt = me.getOwnerHeaderCt();
         if (ownerCt) {
-            ownerCt.onHeaderShow(me, me.preventLayout);
+            ownerCt.onHeaderShow(me);
         }
+        Ext.resumeLayouts(true);
     },
 
     getDesiredWidth: function() {
@@ -853,4 +849,3 @@ Ext.define('Ext.grid.column.Column', {
      * assumed.
      */
 });
-

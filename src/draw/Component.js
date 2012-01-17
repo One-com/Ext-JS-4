@@ -1,20 +1,5 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.draw.Component
- * @extends Ext.Component
  *
  * The Draw Component is a surface in which sprites can be rendered. The Draw Component
  * manages and holds a `Surface` instance: an interface that has
@@ -89,13 +74,15 @@ Ext.define('Ext.draw.Component', {
     /**
      * @cfg {Boolean} viewBox
      * Turn on view box support which will scale and position items in the draw component to fit to the component while
-     * maintaining aspect ratio. Note that this scaling can override other sizing settings on yor items. Defaults to true.
+     * maintaining aspect ratio. Note that this scaling can override other sizing settings on your items.
      */
     viewBox: true,
 
+    shrinkWrap: 3,
+    
     /**
      * @cfg {Boolean} autoSize
-     * Turn on autoSize support which will set the bounding div's size to the natural size of the contents. Defaults to false.
+     * Turn on autoSize support which will set the bounding div's size to the natural size of the contents.
      */
     autoSize: false,
 
@@ -187,7 +174,7 @@ Ext.define('Ext.draw.Component', {
         }
     },
 
-    //@private
+    // @private
     autoSizeSurface: function() {
         var me = this,
             items = me.surface.items,
@@ -201,14 +188,8 @@ Ext.define('Ext.draw.Component', {
                 y: -bbox.y + (+Ext.isOpera)
             }
         }, true);
-        if (me.rendered) {
-            me.setSize(width, height);
-            me.surface.setSize(width, height);
-        }
-        else {
-            me.surface.setSize(width, height);
-        }
-        me.el.setSize(width, height);
+        me.surface.setSize(width, height);
+        me.updateLayout();
     },
 
     /**
@@ -219,26 +200,32 @@ Ext.define('Ext.draw.Component', {
      *     drawComponent.surface.add(sprite);
      */
     createSurface: function() {
-        var surface = Ext.draw.Surface.create(Ext.apply({}, {
-                width: this.width,
-                height: this.height,
-                renderTo: this.el
-            }, this.initialConfig));
+        var me = this,
+            cfg = Ext.apply({}, {
+                width: me.width,
+                height: me.height,
+                renderTo: me.el
+            }, me.initialConfig),
+            surface;
+            
+        // ensure we remove any listeners to prevent duplicate events since we refire them below
+        delete cfg.listeners;
+        surface = Ext.draw.Surface.create(cfg);
         if (!surface) {
             // In case we cannot create a surface, return false so we can stop
             return false;
         }
-        this.surface = surface;
+        me.surface = surface;
 
 
         function refire(eventName) {
             return function(e) {
-                this.fireEvent(eventName, e);
+                me.fireEvent(eventName, e);
             };
         }
 
         surface.on({
-            scope: this,
+            scope: me,
             mouseup: refire('mouseup'),
             mousedown: refire('mousedown'),
             mousemove: refire('mousemove'),
@@ -255,12 +242,8 @@ Ext.define('Ext.draw.Component', {
      * Clean up the Surface instance on component destruction
      */
     onDestroy: function() {
-        var surface = this.surface;
-        if (surface) {
-            surface.destroy();
-        }
+        Ext.destroy(this.surface);
         this.callParent(arguments);
     }
 
 });
-

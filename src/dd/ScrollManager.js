@@ -1,36 +1,21 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
- * @class Ext.dd.ScrollManager
- * <p>Provides automatic scrolling of overflow regions in the page during drag operations.</p>
- * <p>The ScrollManager configs will be used as the defaults for any scroll container registered with it,
- * but you can also override most of the configs per scroll container by adding a
- * <tt>ddScrollConfig</tt> object to the target element that contains these properties: {@link #hthresh},
- * {@link #vthresh}, {@link #increment} and {@link #frequency}.  Example usage:
- * <pre><code>
-var el = Ext.get('scroll-ct');
-el.ddScrollConfig = {
-    vthresh: 50,
-    hthresh: -1,
-    frequency: 100,
-    increment: 200
-};
-Ext.dd.ScrollManager.register(el);
-</code></pre>
+ * Provides automatic scrolling of overflow regions in the page during drag operations.
+ *
+ * The ScrollManager configs will be used as the defaults for any scroll container registered with it, but you can also
+ * override most of the configs per scroll container by adding a ddScrollConfig object to the target element that
+ * contains these properties: {@link #hthresh}, {@link #vthresh}, {@link #increment} and {@link #frequency}. Example
+ * usage:
+ *
+ *     var el = Ext.get('scroll-ct');
+ *     el.ddScrollConfig = {
+ *         vthresh: 50,
+ *         hthresh: -1,
+ *         frequency: 100,
+ *         increment: 200
+ *     };
+ *     Ext.dd.ScrollManager.register(el);
+ *
  * Note: This class is designed to be used in "Point Mode
- * @singleton
  */
 Ext.define('Ext.dd.ScrollManager', {
     singleton: true,
@@ -180,46 +165,39 @@ Ext.define('Ext.dd.ScrollManager', {
     },
 
     /**
-     * The number of pixels from the top or bottom edge of a container the pointer needs to be to
-     * trigger scrolling
-     * @type Number
+     * The number of pixels from the top or bottom edge of a container the pointer needs to be to trigger scrolling
      */
     vthresh : 25,
+
     /**
-     * The number of pixels from the right or left edge of a container the pointer needs to be to
-     * trigger scrolling
-     * @type Number
+     * The number of pixels from the right or left edge of a container the pointer needs to be to trigger scrolling
      */
     hthresh : 25,
 
     /**
      * The number of pixels to scroll in each scroll increment
-     * @type Number
      */
     increment : 100,
 
     /**
      * The frequency of scrolls in milliseconds
-     * @type Number
      */
     frequency : 500,
 
     /**
      * True to animate the scroll
-     * @type Boolean
      */
     animate: true,
 
     /**
      * The animation duration in seconds - MUST BE less than Ext.dd.ScrollManager.frequency!
-     * @type Number
      */
     animDuration: 0.4,
 
     /**
-     * The named drag drop {@link Ext.dd.DragSource#ddGroup group} to which this container belongs.
-     * If a ddGroup is specified, then container scrolling will only occur when a dragged object is in the same ddGroup.
-     * @type String
+     * @property {String} ddGroup
+     * The named drag drop {@link Ext.dd.DragSource#ddGroup group} to which this container belongs. If a ddGroup is
+     * specified, then container scrolling will only occur when a dragged object is in the same ddGroup.
      */
     ddGroup: undefined,
 
@@ -236,4 +214,3 @@ Ext.define('Ext.dd.ScrollManager', {
         }
     }
 });
-

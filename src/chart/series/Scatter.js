@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.chart.series.Scatter
  * @extends Ext.chart.series.Cartesian
@@ -234,11 +220,12 @@ Ext.define('Ext.chart.series.Scatter', {
         store.each(function(record, i) {
             xValue = record.get(me.xField);
             yValue = record.get(me.yField);
-            //skip undefined values
-            if (typeof yValue == 'undefined' || (typeof yValue == 'string' && !yValue)) {
+            //skip undefined or null values
+            if (typeof yValue == 'undefined' || (typeof yValue == 'string' && !yValue)
+                || xValue == null || yValue == null) {
                 //<debug warn>
                 if (Ext.isDefined(Ext.global.console)) {
-                    Ext.global.console.warn("[Ext.chart.series.Scatter]  Skipping a store element with an undefined value at ", record, xValue, yValue);
+                    Ext.global.console.warn("[Ext.chart.series.Scatter]  Skipping a store element with a value which is either undefined or null  at ", record, xValue, yValue);
                 }
                 //</debug>
                 return;
@@ -388,8 +375,11 @@ Ext.define('Ext.chart.series.Scatter', {
 
         //if the store is empty then there's nothing to be rendered
         if (!store || !store.getCount()) {
+            me.hide();
+            me.items = [];
             return;
         }
+
 
         me.unHighlightItem();
         me.cleanHighlights();
@@ -675,5 +665,4 @@ Ext.define('Ext.chart.series.Scatter', {
             point[1] - tolerance <= y && point[1] + tolerance >= y);
     }
 });
-
 

@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * A Sprite is an object rendered in a Drawing surface.
  *
@@ -156,11 +142,11 @@ Ext.define('Ext.draw.Sprite', {
      */
 
     /**
-     * @cfg {Array} path Used in path sprites, the path of the sprite written in SVG-like path syntax
+     * @cfg {String} path Used in path sprites, the path of the sprite written in SVG-like path syntax.
      */
 
     /**
-     * @cfg {Number} opacity The opacity of the sprite
+     * @cfg {Number} opacity The opacity of the sprite. A number between 0 and 1.
      */
 
     /**
@@ -225,7 +211,7 @@ Ext.define('Ext.draw.Sprite', {
     ],
     constructor: function(config) {
         var me = this;
-        config = config || {};
+        config = Ext.merge({}, config || {});
         me.id = Ext.id(null, 'ext-sprite-');
         me.transformations = [];
         Ext.copyTo(this, config, 'surface,group,type,draggable');
@@ -285,7 +271,7 @@ Ext.define('Ext.draw.Sprite', {
         if (!me.el) {
             me.surface.createSpriteElement(me);
         }
-        me.dd = Ext.create('Ext.draw.SpriteDD', me, Ext.isBoolean(me.draggable) ? null : me.draggable);
+        me.dd = new Ext.draw.SpriteDD(me, Ext.isBoolean(me.draggable) ? null : me.draggable);
         me.on('beforedestroy', me.dd.destroy, me.dd);
     },
 
@@ -333,6 +319,10 @@ Ext.define('Ext.draw.Sprite', {
         }
 
         // Flag font/text change
+        if ('text' in attrs) {
+            me.dirtyFont = true;
+        }
+
         for (i = 0; i < fontPropsLength; i++) {
             attr = fontProps[i];
             if (attr in attrs && attrs[attr] !== spriteAttrs[attr]) {
@@ -425,6 +415,8 @@ Ext.define('Ext.draw.Sprite', {
 
     /**
      * Removes the sprite.
+     * @return {Boolean} True if sprite was successfully removed.
+     * False when there was no surface to remove it from.
      */
     remove: function() {
         if (this.surface) {
@@ -493,4 +485,3 @@ Ext.define('Ext.draw.Sprite', {
         return this;
     }
 });
-

@@ -27,6 +27,8 @@ Ext.String = {
     escapeRe: /('|\\)/g,
     formatRe: /\{(\d+)\}/g,
     escapeRegexRe: /([-.*+?^${}()|[\]\/\\])/g,
+    basicTrimRe: /^\s+|\s+$/g,
+    whitespaceRe: /\s+/,
 
 <span id='Ext-String-method-htmlEncode'>    /**
 </span>     * Convert certain characters (&amp;, &lt;, &gt;, and &quot;) to their HTML character equivalents for literal display in web pages.
@@ -41,16 +43,16 @@ Ext.String = {
             '&lt;': '&amp;lt;',
             '&quot;': '&amp;quot;'
         }, keys = [], p, regex;
-        
+
         for (p in entities) {
             keys.push(p);
         }
-        
+
         regex = new RegExp('(' + keys.join('|') + ')', 'g');
-        
+
         return function(value) {
             return (!value) ? value : String(value).replace(regex, function(match, capture) {
-                return entities[capture];    
+                return entities[capture];
             });
         };
     })(),
@@ -68,13 +70,13 @@ Ext.String = {
             '&amp;lt;': '&lt;',
             '&amp;quot;': '&quot;'
         }, keys = [], p, regex;
-        
+
         for (p in entities) {
             keys.push(p);
         }
-        
+
         regex = new RegExp('(' + keys.join('|') + '|&amp;#[0-9]{1,5};' + ')', 'g');
-        
+
         return function(value) {
             return (!value) ? value : String(value).replace(regex, function(match, capture) {
                 if (capture in entities) {
@@ -91,7 +93,7 @@ Ext.String = {
      * a question mark or ampersand.
      * @param {String} url The URL to append to.
      * @param {String} string The content to append to the URL.
-     * @return (String) The resulting URL
+     * @return {String} The resulting URL
      */
     urlAppend : function(url, string) {
         if (!Ext.isEmpty(string)) {
@@ -242,8 +244,49 @@ var s = Ext.String.format('&amp;lt;div class=&quot;{0}&quot;&gt;{1}&amp;lt;/div&
             buf.push(pattern);
         }
         return buf.join(sep || '');
+    },
+
+<span id='Ext-String-method-splitWords'>    /**
+</span>     * Splits a string of space separated words into an array, trimming as needed. If the
+     * words are already an array, it is returned.
+     *
+     * @param {String/Array} words
+     */
+    splitWords: function (words) {
+        if (words &amp;&amp; typeof words == 'string') {
+            return words.replace(Ext.String.basicTrimRe, '').split(Ext.String.whitespaceRe);
+        }
+        return words || [];
     }
 };
+
+<span id='Ext-method-htmlEncode'>/**
+</span> * Old alias to {@link Ext.String#htmlEncode}
+ * @deprecated Use {@link Ext.String#htmlEncode} instead
+ * @method
+ * @member Ext
+ * @inheritdoc Ext.String#htmlEncode
+ */
+Ext.htmlEncode = Ext.String.htmlEncode;
+
+
+<span id='Ext-method-htmlDecode'>/**
+</span> * Old alias to {@link Ext.String#htmlDecode}
+ * @deprecated Use {@link Ext.String#htmlDecode} instead
+ * @method
+ * @member Ext
+ * @inheritdoc Ext.String#htmlDecode
+ */
+Ext.htmlDecode = Ext.String.htmlDecode;
+
+<span id='Ext-method-urlAppend'>/**
+</span> * Old alias to {@link Ext.String#urlAppend}
+ * @deprecated Use {@link Ext.String#urlAppend} instead
+ * @method
+ * @member Ext
+ * @inheritdoc Ext.String#urlAppend
+ */
+Ext.urlAppend = Ext.String.urlAppend;
 </pre>
 </body>
 </html>

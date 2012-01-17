@@ -1,22 +1,7 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.Ajax
  * @singleton
  * @markdown
- * @extends Ext.data.Connection
 
 A singleton instance of an {@link Ext.data.Connection}. This class
 is used to communicate with your server side code. It can be used as follows:
@@ -57,7 +42,8 @@ Ext.define('Ext.Ajax', {
     singleton: true,
 
     /**
-     * @cfg {String} url @hide
+     * @property {Boolean} disableCaching
+     * True to add a unique cache-buster param to GET requests. Defaults to true.
      */
     /**
      * @cfg {Object} extraParams @hide

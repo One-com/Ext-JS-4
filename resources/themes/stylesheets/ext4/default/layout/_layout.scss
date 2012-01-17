@@ -56,6 +56,11 @@
         top:0;
     }
 
+    .#{$prefix}rtl .#{$prefix}box-item {
+        right: 0;
+        left: auto;
+    }
+
     .#{$prefix}box-layout-ct,
     .#{$prefix}border-layout-ct {
         overflow: hidden;
@@ -68,6 +73,10 @@
 
     .#{$prefix}inline-children > * {
         display: inline-block !important;
+    }
+
+    .#{$prefix}abs-layout-ct {
+        position: relative;
     }
 
     .#{$prefix}abs-layout-item {

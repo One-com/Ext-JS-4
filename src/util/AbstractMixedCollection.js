@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.util.AbstractMixedCollection
  * @private
@@ -23,6 +9,11 @@ Ext.define('Ext.util.AbstractMixedCollection', {
         observable: 'Ext.util.Observable'
     },
 
+    /**
+     * @private Mutation counter which is incremented upon add and remove.
+     */
+    generation: 0,
+
     constructor: function(allowFunctions, keyFn) {
         var me = this;
 
@@ -31,12 +22,10 @@ Ext.define('Ext.util.AbstractMixedCollection', {
         me.keys = [];
         me.length = 0;
 
-        me.addEvents(
             /**
              * @event clear
              * Fires when the collection is cleared.
              */
-            'clear',
 
             /**
              * @event add
@@ -45,7 +34,6 @@ Ext.define('Ext.util.AbstractMixedCollection', {
              * @param {Object} o The item added.
              * @param {String} key The key associated with the added item.
              */
-            'add',
 
             /**
              * @event replace
@@ -54,16 +42,12 @@ Ext.define('Ext.util.AbstractMixedCollection', {
              * @param {Object} old The item being replaced.
              * @param {Object} new The new item.
              */
-            'replace',
-
             /**
              * @event remove
              * Fires when an item is removed from the collection.
              * @param {Object} o The item being removed.
              * @param {String} key (optional) The key associated with the removed item.
              */
-            'remove'
-        );
 
         me.allowFunctions = allowFunctions === true;
 
@@ -82,7 +66,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
     allowFunctions : false,
 
     /**
-     * Adds an item to the collection. Fires the {@link #add} event when complete.
+     * Adds an item to the collection. Fires the {@link #event-add} event when complete.
      * @param {String} key <p>The key to associate with the item, or the new item.</p>
      * <p>If a {@link #getKey} implementation was specified for this MixedCollection,
      * or if the key of the stored items is in a property called <tt><b>id</b></tt>,
@@ -108,6 +92,7 @@ Ext.define('Ext.util.AbstractMixedCollection', {
             }
             me.map[myKey] = myObj;
         }
+        me.generation++;
         me.length++;
         me.items.push(myObj);
         me.keys.push(myKey);
@@ -148,7 +133,7 @@ mc.add(otherEl);
     },
 
     /**
-     * Replaces an item in the collection. Fires the {@link #replace} event when complete.
+     * Replaces an item in the collection. Fires the {@link #event-replace} event when complete.
      * @param {String} key <p>The key associated with the item to replace, or the replacement item.</p>
      * <p>If you supplied a {@link #getKey} implementation for this MixedCollection, or if the key
      * of your stored items is in a property called <tt><b>id</b></tt>, then the MixedCollection
@@ -171,6 +156,7 @@ mc.add(otherEl);
         if (typeof key == 'undefined' || key === null || typeof old == 'undefined') {
              return me.add(key, o);
         }
+        me.generation++;
         index = me.indexOfKey(key);
         me.items[index] = o;
         me.map[key] = o;
@@ -281,7 +267,7 @@ mc.add(otherEl);
     //</deprecated>
 
     /**
-     * Inserts an item at the specified index in the collection. Fires the {@link #add} event when complete.
+     * Inserts an item at the specified index in the collection. Fires the {@link #event-add} event when complete.
      * @param {Number} index The index to insert the item at.
      * @param {String} key The key to associate with the new item, or the item itself.
      * @param {Object} o (optional) If the second parameter was a key, the new item.
@@ -304,6 +290,7 @@ mc.add(otherEl);
         if (index >= me.length) {
             return me.add(myKey, myObj);
         }
+        me.generation++;
         me.length++;
         Ext.Array.splice(me.items, index, 0, myObj);
         if (typeof myKey != 'undefined' && myKey !== null) {
@@ -319,7 +306,8 @@ mc.add(otherEl);
      * @param {Object} o The item to remove.
      * @return {Object} The item removed or false if no item was removed.
      */
-    remove : function(o){
+    remove : function(o) {
+        this.generation++;
         return this.removeAt(this.indexOf(o));
     },
 
@@ -337,7 +325,7 @@ mc.add(otherEl);
     },
 
     /**
-     * Remove an item from a specified index in the collection. Fires the {@link #remove} event when complete.
+     * Remove an item from a specified index in the collection. Fires the {@link #event-remove} event when complete.
      * @param {Number} index The index within the collection of the item to remove.
      * @return {Object} The item removed or false if no item was removed.
      */
@@ -356,6 +344,7 @@ mc.add(otherEl);
             }
             Ext.Array.erase(me.keys, index, 1);
             me.fireEvent('remove', o, key);
+            me.generation++;
             return o;
         }
         return false;
@@ -435,7 +424,7 @@ mc.add(otherEl);
      * @return {Boolean} True if the collection contains the Object as an item.
      */
     contains : function(o){
-        return Ext.Array.contains(this.items, o);
+        return typeof this.map[this.getKey(o)] != 'undefined';
     },
 
     /**
@@ -448,7 +437,7 @@ mc.add(otherEl);
     },
 
     /**
-     * Removes all items from the collection.  Fires the {@link #clear} event when complete.
+     * Removes all items from the collection.  Fires the {@link #event-clear} event when complete.
      */
     clear : function(){
         var me = this;
@@ -457,6 +446,7 @@ mc.add(otherEl);
         me.items = [];
         me.keys = [];
         me.map = {};
+        me.generation++;
         me.fireEvent('clear');
     },
 
@@ -611,7 +601,7 @@ var middleAged = people.filter('age', 24);
 
         //support for the simple case of filtering by property/value
         if (Ext.isString(property)) {
-            filters.push(Ext.create('Ext.util.Filter', {
+            filters.push(new Ext.util.Filter({
                 property     : property,
                 value        : value,
                 anyMatch     : anyMatch,
@@ -758,4 +748,3 @@ var middleAged = people.filter('age', 24);
         return copy;
     }
 });
-

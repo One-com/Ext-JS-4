@@ -21,7 +21,8 @@
  */
 Ext.define('Ext.app.EventBus', {
     requires: [
-        'Ext.util.Event'
+        'Ext.util.Event',
+        'Ext.Component'
     ],
     mixins: {
         observable: 'Ext.util.Observable'
@@ -52,23 +53,26 @@ Ext.define('Ext.app.EventBus', {
             // Loop over all the selectors that are bound to this event
             for (selector in selectors) {
                 // Check if the target matches the selector
-                if (target.is(selector)) {
+                if (selectors.hasOwnProperty(selector) &amp;&amp; target.is(selector)) {
                     // Loop over all the controllers that are bound to this selector
                     controllers = selectors[selector];
                     for (id in controllers) {
-                        // Loop over all the events that are bound to this selector on this controller
-                        events = controllers[id];
-                        for (i = 0, ln = events.length; i &lt; ln; i++) {
-                            event = events[i];
-                            // Fire the event!
-                            if (event.fire.apply(event, Array.prototype.slice.call(args, 1)) === false) {
-                                return false;
-                            };
+                        if (controllers.hasOwnProperty(id)) {
+                            // Loop over all the events that are bound to this selector on this controller
+                            events = controllers[id];
+                            for (i = 0, ln = events.length; i &lt; ln; i++) {
+                                event = events[i];
+                                // Fire the event!
+                                if (event.fire.apply(event, Array.prototype.slice.call(args, 1)) === false) {
+                                    return false;
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+        return true;
     },
 
     control: function(selectors, listeners, controller) {
@@ -87,7 +91,7 @@ Ext.define('Ext.app.EventBus', {
             Ext.Object.each(listeners, function(ev, listener) {
                 var options = {},
                     scope = controller,
-                    event = Ext.create('Ext.util.Event', controller, ev);
+                    event = new Ext.util.Event(controller, ev);
 
                 // Normalize the listener
                 if (Ext.isObject(listener)) {
@@ -110,6 +114,7 @@ Ext.define('Ext.app.EventBus', {
             });
         });
     }
-});</pre>
+});
+</pre>
 </body>
 </html>

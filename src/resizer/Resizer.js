@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * Applies drag handles to an element or component to make it resizable. The drag handles are inserted into the element
  * (or component's element) and positioned absolute.
@@ -180,9 +166,12 @@ Ext.define('Ext.resizer.Resizer', {
             possibles,
             len,
             i = 0,
-            pos;
+            pos, 
+            handleEls = [],
+            eastWestStyle, style,
+            box;
 
-        this.addEvents(
+        me.addEvents(
             /**
              * @event beforeresize
              * Fired before resize is allowed. Return false to cancel resize.
@@ -239,8 +228,8 @@ Ext.define('Ext.resizer.Resizer', {
                     me.maxHeight = target.maxHeight;
                 }
                 if (target.floating) {
-                    if (!this.hasOwnProperty('handles')) {
-                        this.handles = 'n ne e se s sw w nw';
+                    if (!me.hasOwnProperty('handles')) {
+                        me.handles = 'n ne e se s sw w nw';
                     }
                 }
             } else {
@@ -262,7 +251,7 @@ Ext.define('Ext.resizer.Resizer', {
              * Reference to the original resize target if the element of the original resize target was an IMG or a
              * TEXTAREA which must be wrapped in a DIV.
              */
-            me.originalTarget = me.target;
+            me.originalTarget = me.target.isComponent ? me.target.getEl() : me.target;
             me.target = me.el = me.el.wrap({
                 cls: me.wrapCls,
                 id: me.el.id + '-rzwrap'
@@ -271,7 +260,7 @@ Ext.define('Ext.resizer.Resizer', {
             // Transfer originalTarget's positioning/sizing
             me.el.setPositioning(me.originalTarget.getPositioning());
             me.originalTarget.clearPositioning();
-            var box = me.originalTarget.getBox();
+            box = me.originalTarget.getBox();
             me.el.setBox(box);
         }
 
@@ -285,7 +274,7 @@ Ext.define('Ext.resizer.Resizer', {
         /**
          * @property {Ext.resizer.ResizeTracker} resizeTracker
          */
-        me.resizeTracker = Ext.create('Ext.resizer.ResizeTracker', {
+        me.resizeTracker = new Ext.resizer.ResizeTracker({
             disabled: me.disabled,
             target: me.target,
             constrainTo: me.constrainTo,
@@ -304,9 +293,12 @@ Ext.define('Ext.resizer.Resizer', {
         });
 
         // Relay the ResizeTracker's superclass events as our own resize events
-        me.resizeTracker.on('mousedown', me.onBeforeResize, me);
-        me.resizeTracker.on('drag', me.onResize, me);
-        me.resizeTracker.on('dragend', me.onResizeEnd, me);
+        me.resizeTracker.on({
+            mousedown: me.onBeforeResize,
+            drag: me.onResize,
+            dragend: me.onResizeEnd,
+            scope: me
+        });
 
         if (me.handles == 'all') {
             me.handles = 'n s e w ne nw se sw';
@@ -315,23 +307,36 @@ Ext.define('Ext.resizer.Resizer', {
         handles = me.handles = me.handles.split(/ |\s*?[,;]\s*?/);
         possibles = me.possiblePositions;
         len = handles.length;
-        handleCls = me.handleCls + ' ' + (this.target.isComponent ? (me.target.baseCls + '-handle ') : '') + me.handleCls + '-';
+        handleCls = me.handleCls + ' ' + (me.target.isComponent ? (me.target.baseCls + '-handle ') : '') + me.handleCls + '-';
 
-        for(; i < len; i++){
+        // Needs heighting on IE6!
+        if (Ext.isIE6) {
+            eastWestStyle = ' style="height:' + me.el.getHeight() + 'px"';
+        }
+        for (; i < len; i++){
             // if specified and possible, create
             if (handles[i] && possibles[handles[i]]) {
                 pos = possibles[handles[i]];
-                // store a reference in this.east, this.west, etc
+                if (pos === 'east' || pos === 'west') {
+                    style = eastWestStyle;
+                } else {
+                    style = '';
+                }
+                handleEls.push('<div id="' + me.el.id + '-' + pos + '-handle" class="' + handleCls + pos + ' ' + Ext.baseCSSPrefix + 'unselectable"' + style + '></div>');
+            }
+        }
+        Ext.DomHelper.append(me.el, handleEls.join(''));
 
-                me[pos] = Ext.create('Ext.Component', {
-                    owner: this,
-                    region: pos,
-                    cls: handleCls + pos,
-                    renderTo: me.el
-                });
-                me[pos].el.unselectable();
+        // store a reference to each handle elelemtn in this.east, this.west, etc
+        for (i = 0; i < len; i++){
+            // if specified and possible, create
+            if (handles[i] && possibles[handles[i]]) {
+                pos = possibles[handles[i]];
+                me[pos] = me.el.getById(me.el.id + '-' + pos + '-handle');
+                me[pos].region = pos;
+                me[pos].unselectable();
                 if (me.transparent) {
-                    me[pos].el.setOpacity(0);
+                    me[pos].setOpacity(0);
                 }
             }
         }
@@ -345,15 +350,13 @@ Ext.define('Ext.resizer.Resizer', {
         }
 
         // Size the element
-        if (me.width != null || me.height != null) {
+        if (me.width !== null || me.height !== null) {
             if (me.originalTarget) {
                 me.originalTarget.setWidth(me.width);
                 me.originalTarget.setHeight(me.height);
             }
             me.resizeTo(me.width, me.height);
         }
-
-        me.forceHandlesHeight();
     },
 
     disable: function() {
@@ -370,8 +373,8 @@ Ext.define('Ext.resizer.Resizer', {
      * @param e The Event
      */
     onBeforeResize: function(tracker, e) {
-        var b = this.target.getBox();
-        return this.fireEvent('beforeresize', this, b.width, b.height, e);
+        var box = this.target.getBox();
+        return this.fireEvent('beforeresize', this, box.width, box.height, e);
     },
 
     /**
@@ -381,9 +384,10 @@ Ext.define('Ext.resizer.Resizer', {
      */
     onResize: function(tracker, e) {
         var me = this,
-            b = me.target.getBox();
+            box = me.target.getBox();
+            
         me.forceHandlesHeight();
-        return me.fireEvent('resizedrag', me, b.width, b.height, e);
+        return me.fireEvent('resizedrag', me, box.width, box.height, e);
     },
 
     /**
@@ -393,9 +397,10 @@ Ext.define('Ext.resizer.Resizer', {
      */
     onResizeEnd: function(tracker, e) {
         var me = this,
-            b = me.target.getBox();
+            box = me.target.getBox();
+            
         me.forceHandlesHeight();
-        return me.fireEvent('resize', me, b.width, b.height, e);
+        return me.fireEvent('resize', me, box.width, box.height, e);
     },
 
     /**
@@ -432,11 +437,13 @@ Ext.define('Ext.resizer.Resizer', {
     },
 
     destroy: function() {
-        var h;
-        for (var i = 0, l = this.handles.length; i < l; i++) {
-            h = this[this.possiblePositions[this.handles[i]]];
-            delete h.owner;
-            Ext.destroy(h);
+        var i = 0,
+            handles = this.handles,
+            len = handles.length,
+            positions = this.possiblePositions;
+
+        for (; i < len; i++) {
+            this[positions[handles[i]]].remove();
         }
     },
 
@@ -460,4 +467,3 @@ Ext.define('Ext.resizer.Resizer', {
         }
     }
 });
-

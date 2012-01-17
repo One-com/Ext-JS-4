@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * A Surface is an interface to render methods inside a draw {@link Ext.draw.Component}.
  * A Surface contains methods to render sprites, get bounding boxes of sprites, add
@@ -143,7 +129,7 @@ Ext.define('Ext.draw.Surface', {
     },
 
     requires: ['Ext.draw.CompositeSprite'],
-    uses: ['Ext.draw.engine.Svg', 'Ext.draw.engine.Vml'],
+    uses: ['Ext.draw.engine.Svg', 'Ext.draw.engine.Vml', 'Ext.draw.engine.SvgExporter', 'Ext.draw.engine.ImageExporter'],
 
     separatorRe: /[, ]+/,
 
@@ -169,6 +155,23 @@ Ext.define('Ext.draw.Surface', {
                 }
             }
             return false;
+        },
+        
+        save: function(config, surface){
+            var exportTypes = {
+                    /* 
+                    example adds
+                    'image/png': 'Image',
+                    'image/jpeg': 'Image',
+                    */
+                    'image/png': 'Image',
+                    'image/jpeg': 'Image',
+                    'image/svg+xml': 'Svg'
+                },
+                prefix = exportTypes[config.type] || 'Svg';           
+
+            return (Ext.draw.engine[prefix + 'Exporter']).self.generate(config, surface);
+            
         }
     },
 
@@ -346,8 +349,8 @@ Ext.define('Ext.draw.Surface', {
     // @private
     initItems: function() {
         var items = this.items;
-        this.items = Ext.create('Ext.draw.CompositeSprite');
-        this.groups = Ext.create('Ext.draw.CompositeSprite');
+        this.items = new Ext.draw.CompositeSprite();
+        this.groups = new Ext.draw.CompositeSprite();
         if (items) {
             this.add(items);
         }
@@ -359,6 +362,11 @@ Ext.define('Ext.draw.Surface', {
             width = me.width,
             height = me.height,
             gradientId, gradient, backgroundSprite;
+        if (Ext.isString(config)) {
+            config = {
+                fill : config
+            };
+        }
         if (config) {
             if (config.gradient) {
                 gradient = config.gradient;
@@ -370,7 +378,8 @@ Ext.define('Ext.draw.Surface', {
                     y: 0,
                     width: width,
                     height: height,
-                    fill: 'url(#' + gradientId + ')'
+                    fill: 'url(#' + gradientId + ')',
+                    zIndex: -1000
                 });
             } else if (config.fill) {
                 me.background = me.add({
@@ -379,7 +388,8 @@ Ext.define('Ext.draw.Surface', {
                     y: 0,
                     width: width,
                     height: height,
-                    fill: config.fill
+                    fill: config.fill,
+                    zIndex: -1000
                 });
             } else if (config.image) {
                 me.background = me.add({
@@ -388,7 +398,8 @@ Ext.define('Ext.draw.Surface', {
                     y: 0,
                     width: width,
                     height: height,
-                    src: config.image
+                    src: config.image,
+                    zIndex: -1000
                 });
             }
         }
@@ -408,11 +419,14 @@ Ext.define('Ext.draw.Surface', {
      */
     setSize: function(w, h) {
         if (this.background) {
-            this.background.setAttributes({
+            this.background.setAttributes(Ext.apply(this.viewBox === true ? {
                 width: w,
                 height: h,
+                x: 0,
+                y: 0
+            } : this.viewBox || {}, { 
                 hidden: false
-            }, true);
+            }), true);
         }
         this.applyViewBox();
     },
@@ -503,6 +517,7 @@ Ext.define('Ext.draw.Surface', {
      *        }
      *    });
      *
+     * @param {Object} gradient A gradient config.
      * @method
      */
     addGradient: Ext.emptyFn,
@@ -521,6 +536,8 @@ Ext.define('Ext.draw.Surface', {
      *         y: 100
      *     });
      *
+     * @param {Ext.draw.Sprite[]/Ext.draw.Sprite...} args One or more Sprite objects of configs.
+     * @return {Ext.draw.Sprite[]/Ext.draw.Sprite} The sprites added.
      */
     add: function() {
         var args = Array.prototype.slice.call(arguments),
@@ -622,7 +639,6 @@ Ext.define('Ext.draw.Surface', {
      *
      * @param {Ext.draw.Sprite} sprite
      * @param {Boolean} destroySprite
-     * @return {Number} the sprite's new index in the list
      */
     remove: function(sprite, destroySprite) {
         if (sprite) {
@@ -645,7 +661,6 @@ Ext.define('Ext.draw.Surface', {
      *     drawComponent.surface.removeAll();
      *
      * @param {Boolean} destroySprites Whether to destroy all sprites when removing them.
-     * @return {Number} The sprite's new index in the list.
      */
     removeAll: function(destroySprites) {
         var items = this.items.items,
@@ -679,15 +694,14 @@ Ext.define('Ext.draw.Surface', {
             viewBoxHeight = viewBox.height;
             relativeHeight = height / viewBoxHeight;
             relativeWidth = width / viewBoxWidth;
+            size = Math.min(relativeWidth, relativeHeight);
 
-            if (viewBoxWidth * relativeHeight < width) {
-                viewBoxX -= (width - viewBoxWidth * relativeHeight) / 2 / relativeHeight;
+            if (viewBoxWidth * size < width) {
+                viewBoxX -= (width - viewBoxWidth * size) / 2 / size;
             }
-            if (viewBoxHeight * relativeWidth < height) {
-                viewBoxY -= (height - viewBoxHeight * relativeWidth) / 2 / relativeWidth;
+            if (viewBoxHeight * size < height) {
+                viewBoxY -= (height - viewBoxHeight * size) / 2 / size;
             }
-
-            size = 1 / Math.min(viewBoxWidth, relativeHeight);
 
             me.viewBoxShift = {
                 dx: -viewBoxX,
@@ -700,7 +714,7 @@ Ext.define('Ext.draw.Surface', {
     transformToViewBox: function (x, y) {
         if (this.viewBoxShift) {
             var me = this, shift = me.viewBoxShift;
-            return [x * shift.scale - shift.dx, y * shift.scale - shift.dy];
+            return [x / shift.scale - shift.dx, y / shift.scale - shift.dy];
         } else {
             return [x, y];
         }
@@ -741,7 +755,7 @@ Ext.define('Ext.draw.Surface', {
             centerX = sprite.attr.rotation.x,
             centerY = sprite.attr.rotation.y;
         if (!Ext.isNumber(centerX) || !Ext.isNumber(centerY)) {
-            bbox = this.getBBox(sprite);
+            bbox = this.getBBox(sprite, true);
             centerX = !Ext.isNumber(centerX) ? bbox.x + bbox.width / 2 : centerX;
             centerY = !Ext.isNumber(centerY) ? bbox.y + bbox.height / 2 : centerY;
         }
@@ -842,7 +856,7 @@ Ext.define('Ext.draw.Surface', {
     createGroup: function(id) {
         var group = this.groups.get(id);
         if (!group) {
-            group = Ext.create('Ext.draw.CompositeSprite', {
+            group = new Ext.draw.CompositeSprite({
                 surface: this
             });
             group.id = id || Ext.id(null, 'ext-surface-group-');
@@ -906,8 +920,8 @@ Ext.define('Ext.draw.Surface', {
      */
     setText: Ext.emptyFn,
 
-    //@private Creates an item and appends it to the surface. Called
-    //as an internal method when calling `add`.
+    // @private Creates an item and appends it to the surface. Called
+    // as an internal method when calling `add`.
     createItem: Ext.emptyFn,
 
     /**
@@ -929,5 +943,9 @@ Ext.define('Ext.draw.Surface', {
     destroy: function() {
         delete this.domRef;
         this.removeAll();
+        if (this.background) {
+            this.background.destroy;
+            delete this.background;
+        }
     }
 });

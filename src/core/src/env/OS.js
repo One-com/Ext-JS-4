@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.env.OS
  * Provides useful information about the current operating system environment.
@@ -78,14 +64,16 @@ Ext.define('Ext.env.OS', {
 
     /**
      * @property {String} name
-     * Read-only - the full name of the current operating system
-     * Possible values are: iOS, Android, WebOS, BlackBerry, MacOSX, Windows, Linux and Other
+     * The full name of the current operating system.
+     * Possible values are: iOS, Android, WebOS, BlackBerry, MacOSX, Windows, Linux and Other.
+     * @readonly
      */
     name: null,
 
     /**
      * @property {Ext.Version} version
-     * Read-only, refer to {@link Ext.Version}
+     * Refer to {@link Ext.Version}.
+     * @readonly
      */
     version: null,
 
@@ -147,4 +135,3 @@ Ext.define('Ext.env.OS', {
     Ext.os = new Ext.env.OS();
 
 });
-

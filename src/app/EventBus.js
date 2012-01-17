@@ -1,24 +1,11 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.app.EventBus
  * @private
  */
 Ext.define('Ext.app.EventBus', {
     requires: [
-        'Ext.util.Event'
+        'Ext.util.Event',
+        'Ext.Component'
     ],
     mixins: {
         observable: 'Ext.util.Observable'
@@ -49,23 +36,26 @@ Ext.define('Ext.app.EventBus', {
             // Loop over all the selectors that are bound to this event
             for (selector in selectors) {
                 // Check if the target matches the selector
-                if (target.is(selector)) {
+                if (selectors.hasOwnProperty(selector) && target.is(selector)) {
                     // Loop over all the controllers that are bound to this selector
                     controllers = selectors[selector];
                     for (id in controllers) {
-                        // Loop over all the events that are bound to this selector on this controller
-                        events = controllers[id];
-                        for (i = 0, ln = events.length; i < ln; i++) {
-                            event = events[i];
-                            // Fire the event!
-                            if (event.fire.apply(event, Array.prototype.slice.call(args, 1)) === false) {
-                                return false;
-                            };
+                        if (controllers.hasOwnProperty(id)) {
+                            // Loop over all the events that are bound to this selector on this controller
+                            events = controllers[id];
+                            for (i = 0, ln = events.length; i < ln; i++) {
+                                event = events[i];
+                                // Fire the event!
+                                if (event.fire.apply(event, Array.prototype.slice.call(args, 1)) === false) {
+                                    return false;
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+        return true;
     },
 
     control: function(selectors, listeners, controller) {
@@ -84,7 +74,7 @@ Ext.define('Ext.app.EventBus', {
             Ext.Object.each(listeners, function(ev, listener) {
                 var options = {},
                     scope = controller,
-                    event = Ext.create('Ext.util.Event', controller, ev);
+                    event = new Ext.util.Event(controller, ev);
 
                 // Normalize the listener
                 if (Ext.isObject(listener)) {

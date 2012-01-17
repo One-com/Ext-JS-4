@@ -1,22 +1,8 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
- * @class Ext.Shadow
- * Simple class that can provide a shadow effect for any element.  Note that the element MUST be absolutely positioned,
- * and the shadow does not provide any shimming.  This should be used only in simple cases -- for more advanced
- * functionality that can also provide the same shadow effect, see the {@link Ext.Layer} class.
+ * Simple class that can provide a shadow effect for any element.  Note that the element
+ * MUST be absolutely positioned, and the shadow does not provide any shimming.  This
+ * should be used only in simple cases - for more advanced functionality that can also
+ * provide the same shadow effect, see the {@link Ext.Layer} class.
  */
 Ext.define('Ext.Shadow', {
     requires: ['Ext.ShadowPool'],
@@ -102,12 +88,13 @@ Ext.define('Ext.Shadow', {
 
     /**
      * @cfg {String} mode
-     * The shadow display mode.  Supports the following options:<div class="mdetail-params"><ul>
-     * <li><b><tt>sides</tt></b> : Shadow displays on both sides and bottom only</li>
-     * <li><b><tt>frame</tt></b> : Shadow displays equally on all four sides</li>
-     * <li><b><tt>drop</tt></b> : Traditional bottom-right drop shadow</li>
-     * </ul></div>
+     * The shadow display mode.  Supports the following options:
+     *
+     * - sides : Shadow displays on both sides and bottom only</li>
+     * - frame : Shadow displays equally on all four sides</li>
+     * - drop : Traditional bottom-right drop shadow</li>
      */
+
     /**
      * @cfg {Number} offset
      * The number of pixels to offset the shadow from the element

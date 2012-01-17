@@ -30,6 +30,13 @@
         border-collapse: separate;
     }
 
+    // Tree with a default single column is auto width
+    // Override any inline width style set by the widget itself (through its ColumnModel) to force it to be auto width.
+    .#{$prefix}autowidth-table table.#{$prefix}grid-table {
+        table-layout: auto;
+        width: auto!important;
+    }
+
     .#{$prefix}grid-row .#{$prefix}grid-table {
         border-collapse: collapse;
     }
@@ -54,20 +61,6 @@
         border: 0 none;
     }
 
-    @if $include-ie or $compile-all {
-        .#{$prefix}border-box .#{$prefix}ie9 {
-            .#{$prefix}grid-header-ct {
-                padding-left: 1px;
-            }
-        }
-        .#{$prefix}ie6, .#{$prefix}ie7 {
-            .#{$prefix}grid-header-ct {
-                padding-left: 1px;
-            }
-        }
-
-    }
-
     .#{$prefix}column-header {
         padding: 0;
         position: absolute;
@@ -79,7 +72,6 @@
         border-bottom: 0 none;
 
         text-shadow: 0 1px 0 rgba(255, 255, 255, .3);
-        font: normal 11px/15px $font-family;
 
         @if $grid-header-color {
             color: $grid-header-color;
@@ -190,14 +182,7 @@
 
     //grid rows
     .#{$prefix}grid-row {
-        line-height: 13px;
-
         vertical-align: top;
-
-        padding: $grid-row-padding;
-
-        @include no-select;
-
         .#{$prefix}grid-cell {
             @if $grid-row-cell-color {
                 color: $grid-row-cell-color;
@@ -206,9 +191,13 @@
             background-color: $grid-row-cell-background;
             border-color: $grid-row-cell-border-color;
             border-style: $grid-row-cell-border-style;
-            border-width: $grid-row-cell-border-width;
             border-top-color: lighten($grid-row-cell-border-color, 5);
+            border-width: 0;
         }
+    }
+
+    .#{$prefix}grid-with-row-lines .#{$prefix}grid-cell {
+        border-width: $grid-row-cell-border-width;
     }
 
     .#{$prefix}grid-rowwrap-div {
@@ -273,10 +262,6 @@
     //grid cells
     .#{$prefix}grid-cell {
         overflow: hidden;
-
-        font: $grid-cell-font;
-
-        @include no-select;
     }
 
     .#{$prefix}grid-cell-inner {
@@ -285,24 +270,24 @@
         -o-text-overflow: ellipsis;
         text-overflow: ellipsis;
 
-        padding: $grid-cell-inner-padding;
+        padding: $grid-cell-inner-padding-top $grid-cell-inner-padding-horizontal $grid-cell-inner-padding-bottom;
 
         white-space: nowrap;
     }
 
-    // Action columns with a standard, 16x16 icon require less padding
-    .#{$prefix}action-col-cell .#{$prefix}grid-cell-inner {
-        padding: 1px 2px 0 2px;
+    .#{$prefix}grid-with-row-lines .#{$prefix}grid-cell-inner {
+        line-height: $grid-row-cell-line-height - 2;
+        padding-bottom: $grid-cell-inner-padding-bottom + 1;
     }
 
-    .#{$prefix}ie6,
-    .#{$prefix}ie7,
-    .#{$prefix}quirks .#{$prefix}ie9,
-    .#{$prefix}quirks .#{$prefix}ie8,
-    .#{$prefix}strict .#{$prefix}ie8 {
-        .#{$prefix}action-col-cell .#{$prefix}grid-cell-inner {
-            padding: 2px 2px 1px 2px;
-        }
+    // Action columns with a standard, 16x16 icon require less padding
+    .#{$prefix}action-col-cell .#{$prefix}grid-cell-inner {
+        line-height: 0;
+        padding: 2px;
+    }
+
+    .#{$prefix}grid-with-row-lines .#{$prefix}action-col-cell .#{$prefix}grid-cell-inner {
+        padding-top: 1px;
     }
 
     .#{$prefix}grid-row .#{$prefix}grid-cell-special {
@@ -364,30 +349,24 @@
         }
     }
 
-    //this is panel as gridpanel doesn't use a baseCls
-    .#{$prefix}panel-with-col-lines .#{$prefix}grid-row .#{$prefix}grid-cell {
+    .#{$prefix}grid-with-col-lines .#{$prefix}grid-cell {
         padding-right: 0;
         border-right: 1px solid $grid-cell-with-col-lines-border-color;
     }
 
-    @if $include-ie {
-        .#{$prefix}ie {
-            .#{$prefix}grid-cell-special {
-                border-right-width: 0 !important;
-            }
-        }
-    }
-
     .#{$prefix}property-grid {
-        .#{$prefix}grid-row .#{$prefix}grid-cell-inner {
-            padding: 3px 6px 5px;
-        }
-
         .#{$prefix}grid-row .#{$prefix}grid-property-name .#{$prefix}grid-cell-inner,
         .#{$prefix}grid-row-over .#{$prefix}grid-property-name .#{$prefix}grid-cell-inner {
             padding-left: 12px;
             background-image: theme-background-image($theme-name, 'grid/property-cell-bg.gif');
             background-repeat: no-repeat;
+            background-position: -16px 2px;
+        }
+    }
+
+    .#{$prefix}grid-with-row-lines.#{$prefix}property-grid {
+        .#{$prefix}grid-row .#{$prefix}grid-property-name .#{$prefix}grid-cell-inner,
+        .#{$prefix}grid-row-over .#{$prefix}grid-property-name .#{$prefix}grid-cell-inner {
             background-position: -16px 1px;
         }
     }
@@ -539,17 +518,19 @@
     }
 
     .#{$prefix}column-header-checkbox .#{$prefix}column-header-inner {
-        padding: 1px;
+        padding: 0;
     }
 
     .#{$prefix}grid-cell-special .#{$prefix}grid-cell-inner {
-        padding: 4px;
+        padding-left: 4px;
+        padding-right: 4px;
     }
 
     .#{$prefix}grid-row-checker,
     .#{$prefix}column-header-checkbox .#{$prefix}column-header-text {
         height: 14px;
         width: 14px;
+        line-height: 0;
         background-image: theme-background-image($theme-name, 'grid/unchecked.gif');
         background-position: -1px -1px;
         background-repeat: no-repeat;
@@ -560,23 +541,15 @@
     // Header checkbox element needs centering
     .#{$prefix}column-header-checkbox .#{$prefix}column-header-text {
         display: block;
-        margin-top: 4px;
-        margin-left: 4px;
+        margin: 0 5px;
     }
 
     @if $include-ie or $compile-all {
-        /* All IE Quirks mode need to squish the header height or the line-height will become too tall */
-        /* IE6 always needs the hack regardless of quirks/strict */
-        .#{$prefix}quirks .#{$prefix}ie, .#{$prefix}ie6 {
-            .#{$prefix}column-header-checkbox .#{$prefix}column-header-inner {
-                line-height: 18px;
-            }
-        }
-
-        /* IE 6, 7 & 9 are 1px too far to the right when centering, drop the margin 1px. */
-        .#{$prefix}ie6, .#{$prefix}ie7, .#{$prefix}ie9 {
+        /* IE6, IE7, and all IE Quirks mode need line-height to be the same as checkbox height or the header/row height will be too tall */
+        .#{$prefix}quirks .#{$prefix}ie, .#{$prefix}ie7m {
+            .#{$prefix}grid-row-checker,
             .#{$prefix}column-header-checkbox .#{$prefix}column-header-text {
-                margin-left: 3px;
+                line-height: 14px;
             }
         }
     }
@@ -585,6 +558,14 @@
         background-image: theme-background-image($theme-name, 'grid/checked.gif');
     }
 
+    .#{$prefix}grid-cell-row-checker .#{$prefix}grid-cell-inner {
+        padding-top: 4px;
+        padding-bottom: 2px;
+        line-height: $grid-row-height - 6;
+    }
+    .#{$prefix}grid-with-row-lines .#{$prefix}grid-cell-row-checker .#{$prefix}grid-cell-inner {
+        padding-top: 3px;
+    }
     .#{$prefix}grid-row-checker {
         margin-left: 1px;
 
@@ -705,6 +686,17 @@
         }
     }
 
+    // Cell Editor
+    .#{$prefix}grid-editor {
+        // Position editor text over underlying grid cell text
+        .#{$prefix}form-text {
+            padding: 0 $grid-cell-editor-field-padding-horizontal;
+        }
+        .#{$prefix}form-cb-wrap {
+            padding-top: $grid-cell-editor-checkbox-padding-top;
+        }
+    }
+  
     // Row Editor
     .#{$prefix}grid-row-editor {
         position: absolute !important;
@@ -712,13 +704,16 @@
         zoom: 1;
         overflow: visible !important;
 
-        .#{$prefix}form-field {
-            font: $grid-row-editor-font;
+        .#{$prefix}form-text {
+            padding: 0 $grid-row-editor-field-padding-horizontal;
+        }
+        .#{$prefix}form-cb-wrap {
+            padding-top: $grid-row-editor-checkbox-padding-top;
         }
         .#{$prefix}form-display-field {
-            font: $grid-row-editor-font;
+            font: $grid-editor-font;
             padding-top: 0;
-            padding-left: 4px;
+            padding-left: $grid-row-editor-field-padding-horizontal;
         }
 
         .#{$prefix}panel-body {
@@ -728,26 +723,89 @@
         }
     }
 
-    // Perfect alignment of input text with cell text
-    .#{$prefix}grid-row-editor {
-        // Align input text with text value in cell
-        .#{$prefix}form-text {
-            padding-left: 2px;
-        }
-    }
-    .#{$prefix}grid-editor {
-        // Align checkboxes input
+    // Row/Cell Editor Shared Styles
+    .#{$prefix}grid-editor, .#{$prefix}grid-row-editor {
+        // Align checkbox input
         .#{$prefix}form-cb-wrap {
             text-align: center;
         }
+        .#{$prefix}form-trigger {
+            height: $grid-row-height - $form-field-border-width;
+        }
+        .#{$prefix}form-trigger-wrap {
+            .#{$prefix}form-spinner-up, .#{$prefix}form-spinner-down {
+                background-image: theme-background-image($theme-name, 'form/spinner-small.gif');
+                height: 10px !important;
+            }
+        }
     }
+    .#{$prefix}grid {
+        .#{$prefix}grid-editor, .#{$prefix}grid-row-editor {
+            .#{$prefix}form-text {
+                font: $grid-editor-font;
+                height: $grid-row-height - 2;
+            }
+        }
+    }
+    .#{$prefix}border-box .#{$prefix}grid-editor,
+    .#{$prefix}border-box .#{$prefix}grid-row-editor {
+        .#{$prefix}form-trigger {
+            height: $grid-row-height;
+        }
+        .#{$prefix}form-text {
+            height: $grid-row-height;
+            padding-bottom: 1px; // fix for firefox/opera since they ignore line-height on inputs
+        }
+    }
+
+    @if $include-ie {
+        .#{$prefix}ie {
+            .#{$prefix}grid-editor .#{$prefix}form-text {
+                padding-left: $grid-cell-editor-field-padding-horizontal + 1;
+            }
+            .#{$prefix}grid-row-editor .#{$prefix}form-text {
+                padding-left: $grid-row-editor-field-padding-horizontal + 1;
+            }
+        }
+        .#{$prefix}ie8m {
+            .#{$prefix}grid-editor .#{$prefix}form-text,
+            .#{$prefix}grid-row-editor .#{$prefix}form-text {
+                padding-top: 1px;
+            }
+        }
+        .#{$prefix}ie6,
+        .#{$prefix}strict .#{$prefix}ie7 {
+            .#{$prefix}grid-editor .#{$prefix}form-text,
+            .#{$prefix}grid-row-editor .#{$prefix}form-text {
+                height: $grid-row-height - ($form-field-border-width * 3);
+            }
+        }
+        .#{$prefix}quirks .#{$prefix}ie9 {
+            .#{$prefix}grid-editor, .#{$prefix}grid-row-editor {
+                .#{$prefix}form-text {
+                    line-height: $grid-editor-line-height + 2;
+                }
+            }
+        }
+    }
+
+    @if $include-opera {
+        .#{$prefix}opera {
+            .#{$prefix}grid-editor .#{$prefix}form-text {
+                padding-left: $grid-cell-editor-field-padding-horizontal + 1;
+            }
+            .#{$prefix}grid-row-editor .#{$prefix}form-text {
+                padding-left: $grid-row-editor-field-padding-horizontal + 1;
+            }
+        }
+    }
+ 
 
 .#{$prefix}grid-row-editor-buttons {
         background-color: $grid-row-editor-background-color;
         position: absolute;
         bottom: -31px;
         padding: 4px;
-        width: 200px;
         height: 32px;
 
         .#{$prefix}strict & {

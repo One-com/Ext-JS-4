@@ -1,25 +1,9 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @author Ed Spencer
- * @class Ext.tab.Tab
- * @extends Ext.button.Button
- *
- * <p>Represents a single Tab in a {@link Ext.tab.Panel TabPanel}. A Tab is simply a slightly customized {@link Ext.button.Button Button},
- * styled to look like a tab. Tabs are optionally closable, and can also be disabled. Typically you will not
- * need to create Tabs manually as the framework does so automatically when you use a {@link Ext.tab.Panel TabPanel}</p>
+ * 
+ * Represents a single Tab in a {@link Ext.tab.Panel TabPanel}. A Tab is simply a slightly customized {@link Ext.button.Button Button}, 
+ * styled to look like a tab. Tabs are optionally closable, and can also be disabled. 99% of the time you will not
+ * need to create Tabs manually as the framework does so automatically when you use a {@link Ext.tab.Panel TabPanel}
  */
 Ext.define('Ext.tab.Tab', {
     extend: 'Ext.button.Button',
@@ -44,7 +28,7 @@ Ext.define('Ext.tab.Tab', {
     activeCls: 'active',
 
     /**
-     * @cfg {String} disabledCls
+     * @cfg {String} [disabledCls='x-tab-disabled']
      * The CSS class to be applied to a Tab when it is disabled.
      */
 
@@ -55,27 +39,34 @@ Ext.define('Ext.tab.Tab', {
     closableCls: 'closable',
 
     /**
-     * @cfg {Boolean} closable True to make the Tab start closable (the close icon will be visible).
+     * @cfg {Boolean} closable
+     * True to make the Tab start closable (the close icon will be visible).
      */
     closable: true,
 
     /**
      * @cfg {String} closeText
-     * The accessible text label for the close button link; only used when {@link #closable} = true.
+     * The accessible text label for the close button link; only used when {@link #cfg-closable} = true.
      */
+    //<locale>
     closeText: 'Close Tab',
+    //</locale>
 
     /**
      * @property {Boolean} active
-     * Read-only property indicating that this tab is currently active. This is NOT a public configuration.
+     * Indicates that this tab is currently active. This is NOT a public configuration.
+     * @readonly
      */
     active: false,
 
     /**
-     * @property closable
-     * @type Boolean
+     * @property {Boolean} closable
      * True if the tab is currently closable
      */
+
+    childEls: [
+        'closeEl'
+    ],
 
     scale: false,
 
@@ -122,14 +113,26 @@ Ext.define('Ext.tab.Tab', {
         }
     },
 
-    /**
-     * @ignore
-     */
-    onRender: function() {
+    getTemplateArgs: function() {
+        var me = this,
+            result = me.callParent(arguments);
+
+        if (me.closable) {
+            Ext.apply(result, {
+                closable: true,
+                closeText: me.closeText
+            });
+        }
+        return result;
+    },
+
+    beforeRender: function() {
         var me = this,
             tabBar = me.up('tabbar'),
             tabPanel = me.up('tabpanel');
-
+        
+        me.callParent();
+        
         me.addClsWithUI(me.position);
 
         // Set all the state classNames, as they need to include the UI
@@ -153,6 +156,13 @@ Ext.define('Ext.tab.Tab', {
                 me.maxWidth = tabPanel.maxTabWidth;
             }
         }
+    },
+
+    /**
+     * @ignore
+     */
+    onRender: function() {
+        var me = this;
 
         me.callParent(arguments);
 
@@ -160,9 +170,11 @@ Ext.define('Ext.tab.Tab', {
             me.activate(true);
         }
 
-        me.syncClosableElements();
-
-        me.keyNav = Ext.create('Ext.util.KeyNav', me.el, {
+        if (me.closeEl) {
+            me.closeEl.on('click', Ext.EventManager.preventDefault);
+        }
+        
+        me.keyNav = new Ext.util.KeyNav(me.el, {
             enter: me.onEnterKey,
             del: me.onDeleteKey,
             scope: me
@@ -209,7 +221,7 @@ Ext.define('Ext.tab.Tab', {
     },
 
     /**
-     * Sets the tab as either closable or not
+     * Sets the tab as either closable or not.
      * @param {Boolean} closable Pass false to make the tab not closable. Otherwise the tab will be made closable (eg a
      * close button will appear on the tab)
      */
@@ -246,24 +258,23 @@ Ext.define('Ext.tab.Tab', {
      * @private
      */
     syncClosableElements: function () {
-        var me = this;
+        var me = this,
+            closeEl = me.closeEl;
 
         if (me.closable) {
-            if (!me.closeEl) {
+            if (!closeEl) {
                 me.closeEl = me.el.createChild({
                     tag: 'a',
                     cls: me.baseCls + '-close-btn',
                     href: '#',
-                    // html: me.closeText, // removed for EXTJSIV-1719, by rob@sencha.com
                     title: me.closeText
                 }).on('click', Ext.EventManager.preventDefault);  // mon ???
             }
         } else {
-            var closeEl = me.closeEl;
             if (closeEl) {
                 closeEl.un('click', Ext.EventManager.preventDefault);
                 closeEl.remove();
-                me.closeEl = null;
+                delete me.closeEl;
             }
         }
     },
@@ -293,6 +304,7 @@ Ext.define('Ext.tab.Tab', {
         me.card = card;
         me.setText(me.title || card.title);
         me.setIconCls(me.iconCls || card.iconCls);
+        me.setIcon(me.icon || card.icon);
     },
 
     /**
@@ -369,4 +381,3 @@ Ext.define('Ext.tab.Tab', {
         }
     }
 });
-

@@ -17,7 +17,6 @@
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-chart-axis-Axis'>/**
 </span> * @class Ext.chart.axis.Axis
- * @extends Ext.chart.axis.Abstract
  *
  * Defines axis for charts. The axis position, type, style can be configured.
  * The axes are defined in an axes array of configuration objects where the type,
@@ -114,6 +113,7 @@ Ext.define('Ext.chart.axis.Axis', {
 <span id='Ext-chart-axis-Axis-cfg-majorTickSteps'>    /**
 </span>     * @cfg {Number} majorTickSteps
      * If `minimum` and `maximum` are specified it forces the number of major ticks to the specified value.
+     * If a number of major ticks is forced, it wont search for pretty numbers at the ticks.
      */
 
 <span id='Ext-chart-axis-Axis-cfg-minorTickSteps'>    /**
@@ -126,7 +126,7 @@ Ext.define('Ext.chart.axis.Axis', {
      * The title for the Axis
      */
 
-    //@private force min/max values from store
+    // @private force min/max values from store
     forceMinMax: false,
 
 <span id='Ext-chart-axis-Axis-cfg-dashSize'>    /**
@@ -178,13 +178,12 @@ Ext.define('Ext.chart.axis.Axis', {
 
         //if one series is stacked I have to aggregate the values
         //for the scale.
-        // TODO(zhangbei): the code below does not support series that stack on 1 side but non-stacked axis
-        // listed in axis config. For example, a Area series whose axis : ['left', 'bottom'].
-        // Assuming only stack on y-axis.
+
         for (i = 0, l = series.length; !aggregate &amp;&amp; i &lt; l; i++) {
-            aggregate = aggregate || (me.position == 'left' || me.position == 'right') &amp;&amp; series[i].stacked;
+            aggregate = aggregate || ln &gt; 1 &amp;&amp; series[i].stacked;
             excludes = series[i].__excludes || excludes;
         }
+
         store.each(function(record) {
             if (aggregate) {
                 if (!isFinite(min)) {
@@ -242,9 +241,10 @@ Ext.define('Ext.chart.axis.Axis', {
             max = range.max,
             outfrom, outto, out;
 
-        out = Ext.draw.Draw.snapEnds(min, max, me.majorTickSteps !== false ?  (me.majorTickSteps +1) : me.steps);
+        out = Ext.draw.Draw.snapEnds(min, max, me.majorTickSteps !== false ?  (me.majorTickSteps+1) : me.steps, (me.majorTickSteps === false));
         outfrom = out.from;
         outto = out.to;
+
         if (me.forceMinMax) {
             if (!isNaN(max)) {
                 out.to = max;
@@ -273,6 +273,7 @@ Ext.define('Ext.chart.axis.Axis', {
         if (me.adjustMinimumByMajorUnit) {
             out.from -= out.step;
         }
+
         me.prevMin = min == max? 0 : min;
         me.prevMax = max;
         return out;
@@ -315,9 +316,10 @@ Ext.define('Ext.chart.axis.Axis', {
         if (me.hidden || isNaN(step) || (from == to)) {
             return;
         }
-
+        
         me.from = stepCalcs.from;
         me.to = stepCalcs.to;
+
         if (position == 'left' || position == 'right') {
             currentX = Math.floor(x) + 0.5;
             path = [&quot;M&quot;, currentX, y, &quot;l&quot;, 0, -length];
@@ -336,6 +338,7 @@ Ext.define('Ext.chart.axis.Axis', {
             calcLabels = true;
             me.labels = [stepCalcs.from];
         }
+
         if (position == 'right' || position == 'left') {
             currentY = y - gutterY;
             currentX = x - ((position == 'left') * dashSize * 2);
@@ -348,9 +351,11 @@ Ext.define('Ext.chart.axis.Axis', {
                 }
                 inflections.push([ Math.floor(x), Math.floor(currentY) ]);
                 currentY -= delta;
+                
                 if (calcLabels) {
                     me.labels.push(me.labels[me.labels.length -1] + step);
                 }
+                
                 if (delta === 0) {
                     break;
                 }
@@ -395,6 +400,12 @@ Ext.define('Ext.chart.axis.Axis', {
                 }
             }
         }
+
+        // the label on index &quot;inflections.length-1&quot; is the last label that gets rendered
+        if(calcLabels){
+            me.labels[inflections.length-1] = +(me.labels[inflections.length-1]).toFixed(10);
+        }
+        
         if (!me.axis) {
             me.axis = me.chart.surface.add(Ext.apply({
                 type: 'path',
@@ -531,7 +542,7 @@ Ext.define('Ext.chart.axis.Axis', {
         }
     },
 
-    //@private
+    // @private
     getOrCreateLabel: function(i, text) {
         var me = this,
             labelGroup = me.labelGroup,

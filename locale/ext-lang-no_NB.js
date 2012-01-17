@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  *
  * Norwegian translation (Bokmål: no-NB)
@@ -19,15 +5,18 @@ If you are unsure which license is appropriate for your use, please contact the 
  *  
  */
 Ext.onReady(function() {
+    var cm = Ext.ClassManager, 
+        exists = Ext.Function.bind(cm.get, cm);
+
     if(Ext.Updater) {
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Laster...</div>';
     }
 
-    if(Ext.view.View){
+    if(exists('Ext.view.View')){
         Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.grid.Panel){
+    if(exists('Ext.grid.Panel')){
         Ext.grid.Panel.prototype.ddText = "{0} markert(e) rad(er)";
     }
 
@@ -35,7 +24,7 @@ Ext.onReady(function() {
         Ext.TabPanelItem.prototype.closeText = "Lukk denne fanen";
     }
 
-    if(Ext.form.field.Base){
+    if(exists('Ext.form.field.Base')){
         Ext.form.field.Base.prototype.invalidText = "Verdien i dette feltet er ugyldig";
     }
 
@@ -106,7 +95,7 @@ Ext.onReady(function() {
         };
     }
 
-    if(Ext.util.Format){
+    if(exists('Ext.util.Format')){
         Ext.apply(Ext.util.Format, {
             thousandSeparator: '.',
             decimalSeparator: ',',
@@ -115,7 +104,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Date){
+    if(exists('Ext.picker.Date')){
         Ext.apply(Ext.picker.Date.prototype, {
             todayText         : "I dag",
             minText           : "Denne datoen er før tidligste tillatte dato",
@@ -133,14 +122,14 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Month) {
+    if(exists('Ext.picker.Month')) {
         Ext.apply(Ext.picker.Month.prototype, {
             okText            : "&#160;OK&#160;",
             cancelText        : "Avbryt"
         });
     }
 
-    if(Ext.toolbar.Paging){
+    if(exists('Ext.toolbar.Paging')){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Side",
             afterPageText  : "av {0}",
@@ -154,7 +143,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Text){
+    if(exists('Ext.form.field.Text')){
         Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Den minste lengden for dette feltet er {0}",
             maxLengthText : "Den største lengden for dette feltet er {0}",
@@ -164,7 +153,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Number){
+    if(exists('Ext.form.field.Number')){
         Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Den minste verdien for dette feltet er {0}",
             maxText : "Den største verdien for dette feltet er {0}",
@@ -172,7 +161,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Date){
+    if(exists('Ext.form.field.Date')){
         Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Deaktivert",
             disabledDatesText : "Deaktivert",
@@ -184,7 +173,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.ComboBox){
+    if(exists('Ext.form.field.ComboBox')){
         Ext.apply(Ext.form.field.ComboBox.prototype, {
             valueNotFoundText : undefined
         });
@@ -193,7 +182,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.VTypes){
+    if(exists('Ext.form.field.VTypes')){
         Ext.apply(Ext.form.field.VTypes, {
             emailText    : 'Dette feltet skal være en epost adresse på formatet "bruker@domene.no"',
             urlText      : 'Dette feltet skal være en link (URL) på formatet "http:/'+'/www.domene.no"',
@@ -202,7 +191,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.HtmlEditor){
+    if(exists('Ext.form.field.HtmlEditor')){
         Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'Vennligst skriv inn URL for lenken:',
             buttonTips : {
@@ -280,7 +269,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.header.Container){
+    if(exists('Ext.grid.header.Container')){
         Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Sorter stigende",
             sortDescText : "Sorter synkende",
@@ -290,7 +279,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.GroupingFeature){
+    if(exists('Ext.grid.GroupingFeature')){
         Ext.apply(Ext.grid.GroupingFeature.prototype, {
             emptyGroupText : '(Ingen)',
             groupByText    : 'Grupper etter dette feltet',
@@ -298,7 +287,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.PropertyColumnModel){
+    if(exists('Ext.grid.PropertyColumnModel')){
         Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
             nameText   : "Navn",
             valueText  : "Verdi",
@@ -306,10 +295,4 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
-        Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype, {
-            splitTip            : "Dra for å endre størrelse.",
-            collapsibleSplitTip : "Dra for å endre størrelse. Dobbelklikk for å skjule."
-        });
-    }
 });

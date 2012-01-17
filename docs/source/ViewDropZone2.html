@@ -16,9 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-tree-ViewDropZone'>/**
-</span> * @class Ext.tree.ViewDropZone
- * @extends Ext.view.DropZone
- * @private
+</span> * @private
  */
 Ext.define('Ext.tree.ViewDropZone', {
     extend: 'Ext.view.DropZone',
@@ -49,7 +47,7 @@ Ext.define('Ext.tree.ViewDropZone', {
      */
     expandDelay : 500,
 
-    indicatorCls: 'x-tree-ddindicator',
+    indicatorCls: Ext.baseCSSPrefix + 'tree-ddindicator',
 
     // private
     expandNode : function(node) {

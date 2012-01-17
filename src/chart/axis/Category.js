@@ -1,20 +1,5 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.chart.axis.Category
- * @extends Ext.chart.axis.Axis
  *
  * A type of axis that displays items in categories. This axis is generally used to
  * display categorical information like names of items, month names, quarters, etc.
@@ -114,7 +99,7 @@ Ext.define('Ext.chart.axis.Category', {
 
     // @private creates an array of labels to be used when rendering.
     setLabels: function() {
-        var store = this.chart.store,
+        var store = this.chart.getChartStore(),
             fields = this.fields,
             ln = fields.length,
             i;
@@ -131,7 +116,7 @@ Ext.define('Ext.chart.axis.Category', {
     applyData: function() {
         this.callParent();
         this.setLabels();
-        var count = this.chart.store.getCount();
+        var count = this.chart.getChartStore().getCount();
         return {
             from: 0,
             to: count,
@@ -141,4 +126,3 @@ Ext.define('Ext.chart.axis.Category', {
         };
     }
 });
-

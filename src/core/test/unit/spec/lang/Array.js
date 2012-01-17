@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 describe("Ext.Array", function() {
     var array;
 
@@ -1154,5 +1140,59 @@ describe("Ext.Array", function() {
             });
         }
     });
-});
 
+    describe('toMap', function () {
+        var toMap = Ext.Array.toMap; // ensure we can call a direct fn
+
+        it('should handle just an array', function () {
+            var map = toMap(['a','b','c']);
+
+            expect(map.a).toEqual(1);
+            expect(map.b).toEqual(2);
+            expect(map.c).toEqual(3);
+
+            delete map.a;
+            delete map.b;
+            delete map.c;
+
+            expect(Ext.encode(map)).toEqual('{}');
+        });
+        it('should handle just an array and a property name', function () {
+            var map = toMap([
+                { name: 'aaa' },
+                { name: 'bbb' },
+                { name: 'ccc' }
+            ], 'name');
+
+            expect(map.aaa).toEqual(1);
+            expect(map.bbb).toEqual(2);
+            expect(map.ccc).toEqual(3);
+
+            delete map.aaa;
+            delete map.bbb;
+            delete map.ccc;
+
+            expect(Ext.encode(map)).toEqual('{}');
+        });
+        it('should handle just an array and a key extractor', function () {
+            var map = toMap([
+                { name: 'aaa' },
+                { name: 'bbb' },
+                { name: 'ccc' }
+            ], function (obj) {
+                return obj.name.toUpperCase();
+            });
+
+            expect(map.AAA).toEqual(1);
+            expect(map.BBB).toEqual(2);
+            expect(map.CCC).toEqual(3);
+
+            delete map.AAA;
+            delete map.BBB;
+            delete map.CCC;
+
+            expect(Ext.encode(map)).toEqual('{}');
+        });
+    })
+
+});

@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.chart.series.Line
  * @extends Ext.chart.series.Cartesian
@@ -212,10 +198,8 @@ Ext.define('Ext.chart.series.Line', {
             surface = me.chart.surface,
             shadow = me.chart.shadow,
             i, l;
+        config.highlightCfg = Ext.Object.merge({ 'stroke-width': 3 }, config.highlightCfg);
         Ext.apply(me, config, {
-            highlightCfg: {
-                'stroke-width': 3
-            },
             shadowAttributes: [{
                 "stroke-width": 6,
                 "stroke-opacity": 0.05,
@@ -313,7 +297,7 @@ Ext.define('Ext.chart.series.Line', {
             onbreak = false,
             storeIndices = [],
             markerStyle = me.markerStyle,
-            seriesStyle = me.style,
+            seriesStyle = me.seriesStyle,
             colorArrayStyle = me.colorArrayStyle,
             colorArrayLength = colorArrayStyle && colorArrayStyle.length || 0,
             isNumber = Ext.isNumber,
@@ -324,7 +308,7 @@ Ext.define('Ext.chart.series.Line', {
             shadows, shadow, shindex, fromPath, fill, fillPath, rendererAttributes,
             x, y, prevX, prevY, firstX, firstY, markerCount, i, j, ln, axis, ends, marker, markerAux, item, xValue,
             yValue, coords, xScale, yScale, minX, maxX, minY, maxY, line, animation, endMarkerStyle,
-            endLineStyle, type, count, items;
+            endLineStyle, type, count;
 
         if (me.fireEvent('beforedraw', me) === false) {
             return;
@@ -332,19 +316,30 @@ Ext.define('Ext.chart.series.Line', {
 
         //if store is empty or the series is excluded in the legend then there's nothing to draw.
         if (!storeCount || me.seriesIsHidden) {
-            items = this.items;
-            if (items) {
-                for (i = 0, ln = items.length; i < ln; ++i) {
-                    if (items[i].sprite) {
-                        items[i].sprite.hide(true);
+            me.hide();
+            me.items = [];
+            if (me.line) {
+                me.line.hide(true);
+                if (me.line.shadows) {
+                    shadows = me.line.shadows;
+                    for (j = 0, lnsh = shadows.length; j < lnsh; j++) {
+                        shadow = shadows[j];
+                        shadow.hide(true);
                     }
                 }
+                if (me.fillPath) {
+                    me.fillPath.hide(true);
+                }
             }
+            me.line = null;
+            me.fillPath = null;
             return;
         }
 
         //prepare style objects for line and markers
-        endMarkerStyle = Ext.apply(markerStyle || {}, me.markerConfig);
+        endMarkerStyle = Ext.apply(markerStyle || {}, me.markerConfig, {
+            fill: me.seriesStyle.fill || colorArrayStyle[seriesIdx % colorArrayStyle.length]
+        });
         type = endMarkerStyle.type;
         delete endMarkerStyle.type;
         endLineStyle = seriesStyle;
@@ -871,13 +866,13 @@ Ext.define('Ext.chart.series.Line', {
         }
     },
 
-    //@private Overriding highlights.js highlightItem method.
+    // @private Overriding highlights.js highlightItem method.
     highlightItem: function() {
         var me = this;
         me.callParent(arguments);
         if (me.line && !me.highlighted) {
             if (!('__strokeWidth' in me.line)) {
-                me.line.__strokeWidth = me.line.attr['stroke-width'] || 0;
+                me.line.__strokeWidth = parseFloat(me.line.attr['stroke-width']) || 0;
             }
             if (me.line.__anim) {
                 me.line.__anim.paused = true;
@@ -892,7 +887,7 @@ Ext.define('Ext.chart.series.Line', {
         }
     },
 
-    //@private Overriding highlights.js unHighlightItem method.
+    // @private Overriding highlights.js unHighlightItem method.
     unHighlightItem: function() {
         var me = this;
         me.callParent(arguments);
@@ -907,7 +902,7 @@ Ext.define('Ext.chart.series.Line', {
         }
     },
 
-    //@private called when a callout needs to be placed.
+    // @private called when a callout needs to be placed.
     onPlaceCallout : function(callout, storeItem, item, i, display, animate, index) {
         if (!display) {
             return;
@@ -1097,4 +1092,3 @@ Ext.define('Ext.chart.series.Line', {
         this.toggleAll(true);
     }
 });
-

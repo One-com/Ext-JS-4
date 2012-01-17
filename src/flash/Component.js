@@ -1,21 +1,4 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
- * @class Ext.flash.Component
- * @extends Ext.Component
- *
  * A simple Component for displaying an Adobe Flash SWF movie. The movie will be sized and can participate
  * in layout like any other Component.
  *
@@ -72,19 +55,19 @@ Ext.define('Ext.flash.Component', {
 
     /**
      * @cfg {String} flashVersion
-     * Indicates the version the flash content was published for. Defaults to <tt>'9.0.115'</tt>.
+     * Indicates the version the flash content was published for.
      */
     flashVersion : '9.0.115',
 
     /**
      * @cfg {String} backgroundColor
-     * The background color of the SWF movie. Defaults to <tt>'#ffffff'</tt>.
+     * The background color of the SWF movie.
      */
     backgroundColor: '#ffffff',
 
     /**
      * @cfg {String} wmode
-     * The wmode of the flash object. This can be used to control layering. Defaults to <tt>'opaque'</tt>.
+     * The wmode of the flash object. This can be used to control layering.
      * Set to 'transparent' to ignore the {@link #backgroundColor} and make the background of the Flash
      * movie transparent.
      */
@@ -92,47 +75,50 @@ Ext.define('Ext.flash.Component', {
 
     /**
      * @cfg {Object} flashVars
-     * A set of key value pairs to be passed to the flash object as flash variables. Defaults to <tt>undefined</tt>.
+     * A set of key value pairs to be passed to the flash object as flash variables.
      */
 
     /**
      * @cfg {Object} flashParams
      * A set of key value pairs to be passed to the flash object as parameters. Possible parameters can be found here:
-     * http://kb2.adobe.com/cps/127/tn_12701.html Defaults to <tt>undefined</tt>.
+     * http://kb2.adobe.com/cps/127/tn_12701.html
      */
 
     /**
      * @cfg {Object} flashAttributes
-     * A set of key value pairs to be passed to the flash object as attributes. Defaults to <tt>undefined</tt>.
+     * A set of key value pairs to be passed to the flash object as attributes.
      */
 
     /**
-     * @cfg {String} url
-     * The URL of the SWF file to include. Required.
+     * @cfg {String} url (required)
+     * The URL of the SWF file to include.
      */
 
     /**
-     * @cfg {String/Number} swfWidth The width of the embedded SWF movie inside the component. Defaults to "100%"
-     * so that the movie matches the width of the component.
+     * @cfg {String/Number} [swfWidth=undefined]
+     * The width of the embedded SWF movie inside the component.
+     *
+     * Defaults to "100%" so that the movie matches the width of the component.
      */
     swfWidth: '100%',
 
     /**
-     * @cfg {String/Number} swfHeight The height of the embedded SWF movie inside the component. Defaults to "100%"
-     * so that the movie matches the height of the component.
+     * @cfg {String/Number} [swfHeight=undefined]
+     * The height of the embedded SWF movie inside the component.
+     *
+     * Defaults to "100%" so that the movie matches the height of the component.
      */
     swfHeight: '100%',
 
     /**
      * @cfg {Boolean} expressInstall
      * True to prompt the user to install flash if not installed. Note that this uses
-     * Ext.FlashComponent.EXPRESS_INSTALL_URL, which should be set to the local resource. Defaults to <tt>false</tt>.
+     * Ext.FlashComponent.EXPRESS_INSTALL_URL, which should be set to the local resource.
      */
     expressInstall: false,
 
     /**
-     * @property swf
-     * @type {Ext.Element}
+     * @property {Ext.Element} swf
      * A reference to the object or embed element into which the SWF file is loaded. Only
      * populated after the component is rendered and the SWF has been successfully embedded.
      */
@@ -219,7 +205,7 @@ Ext.define('Ext.flash.Component', {
     },
 
     /**
-     * Retrieve the id of the SWF object/embed element
+     * Retrieves the id of the SWF object/embed element.
      */
     getSwfId: function() {
         return this.swfId || (this.swfId = "extswf" + this.getAutoId());
@@ -246,12 +232,11 @@ Ext.define('Ext.flash.Component', {
 
     statics: {
         /**
-         * Sets the url for installing flash if it doesn't exist. This should be set to a local resource.
+         * @property {String}
+         * The url for installing flash if it doesn't exist. This should be set to a local resource.
          * See http://www.adobe.com/devnet/flashplayer/articles/express_install.html for details.
          * @static
-         * @type String
          */
         EXPRESS_INSTALL_URL: 'http:/' + '/swfobject.googlecode.com/svn/trunk/swfobject/expressInstall.swf'
     }
 });
-

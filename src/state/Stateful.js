@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.state.Stateful
  * A mixin for being able to save the state of an object to an underlying
@@ -21,7 +7,7 @@ Ext.define('Ext.state.Stateful', {
 
     /* Begin Definitions */
 
-   mixins: {
+    mixins: {
         observable: 'Ext.util.Observable'
     },
 
@@ -171,12 +157,14 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
     },
 
     /**
-     * Add events that will trigger the state to be saved.
+     * Add events that will trigger the state to be saved. If the first argument is an
+     * array, each element of that array is the name of a state event. Otherwise, each
+     * argument passed to this method is the name of a state event.
      * @param {String/String[]} events The event name or an array of event names.
      */
     addStateEvents: function(events){
         if (!Ext.isArray(events)) {
-            events = [events];
+            events = Array.prototype.slice.call(arguments, 0);
         }
 
         var me = this,
@@ -198,7 +186,7 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
 
         if (delay > 0) {
             if (!me.stateTask) {
-                me.stateTask = Ext.create('Ext.util.DelayedTask', me.saveState, me);
+                me.stateTask = new Ext.util.DelayedTask(me.saveState, me);
             }
             me.stateTask.delay(me.saveDelay);
         } else {
@@ -333,4 +321,3 @@ Ext.state.Manager.setProvider(new Ext.state.CookieProvider({
     }
 
 });
-

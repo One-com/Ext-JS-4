@@ -1,20 +1,5 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.chart.series.Pie
- * @extends Ext.chart.series.Series
  *
  * Creates a Pie Chart. A Pie Chart is a useful visualization technique to display quantitative information for different
  * categories that also have a meaning as a whole.
@@ -23,13 +8,13 @@ If you are unsure which license is appropriate for your use, please contact the 
  *
  *     @example
  *     var store = Ext.create('Ext.data.JsonStore', {
- *         fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
+ *         fields: ['name', 'data'],
  *         data: [
- *             { 'name': 'metric one',   'data1': 10, 'data2': 12, 'data3': 14, 'data4': 8,  'data5': 13 },
- *             { 'name': 'metric two',   'data1': 7,  'data2': 8,  'data3': 16, 'data4': 10, 'data5': 3  },
- *             { 'name': 'metric three', 'data1': 5,  'data2': 2,  'data3': 14, 'data4': 12, 'data5': 7  },
- *             { 'name': 'metric four',  'data1': 2,  'data2': 14, 'data3': 6,  'data4': 1,  'data5': 23 },
- *             { 'name': 'metric five',  'data1': 27, 'data2': 38, 'data3': 36, 'data4': 13, 'data5': 33 }
+ *             { 'name': 'metric one',   'data': 10 },
+ *             { 'name': 'metric two',   'data':  7 },
+ *             { 'name': 'metric three', 'data':  5 },
+ *             { 'name': 'metric four',  'data':  2 },
+ *             { 'name': 'metric five',  'data': 27 }
  *         ]
  *     });
  *
@@ -42,7 +27,7 @@ If you are unsure which license is appropriate for your use, please contact the 
  *         theme: 'Base:gradients',
  *         series: [{
  *             type: 'pie',
- *             field: 'data1',
+ *             angleField: 'data',
  *             showInLegend: true,
  *             tips: {
  *                 trackMouse: true,
@@ -52,9 +37,9 @@ If you are unsure which license is appropriate for your use, please contact the 
  *                     // calculate and display percentage on hover
  *                     var total = 0;
  *                     store.each(function(rec) {
- *                         total += rec.get('data1');
+ *                         total += rec.get('data');
  *                     });
- *                     this.setTitle(storeItem.get('name') + ': ' + Math.round(storeItem.get('data1') / total * 100) + '%');
+ *                     this.setTitle(storeItem.get('name') + ': ' + Math.round(storeItem.get('data') / total * 100) + '%');
  *                 }
  *             },
  *             highlight: {
@@ -74,7 +59,7 @@ If you are unsure which license is appropriate for your use, please contact the 
  * In this configuration we set `pie` as the type for the series, set an object with specific style properties for highlighting options
  * (triggered when hovering elements). We also set true to `showInLegend` so all the pie slices can be represented by a legend item.
  *
- * We set `data1` as the value of the field to determine the angle span for each pie slice. We also set a label configuration object
+ * We set `data` as the value of the field to determine the angle span for each pie slice. We also set a label configuration object
  * where we set the field name of the store field to be renderer as text for the label. The labels will also be displayed rotated.
  *
  * We set `contrast` to `true` to flip the color of the label if it is to similar to the background color. Finally, we set the font family
@@ -110,6 +95,16 @@ Ext.define('Ext.chart.series.Pie', {
      * The values bound to this field name must be positive real numbers.
      */
     angleField: false,
+
+    /**
+     * @cfg {String} field
+     * Alias for {@link #angleField}.
+     */
+
+    /**
+     * @cfg {String} xField
+     * Alias for {@link #angleField}.
+     */
 
     /**
      * @cfg {String} lengthField
@@ -150,13 +145,11 @@ Ext.define('Ext.chart.series.Pie', {
             surface = chart.surface,
             store = chart.store,
             shadow = chart.shadow, i, l, cfg;
-        Ext.applyIf(me, {
-            highlightCfg: {
-                segment: {
-                    margin: 20
-                }
+        config.highlightCfg = Ext.merge({
+            segment: {
+                margin: 20
             }
-        });
+        }, config.highlightCfg);
         Ext.apply(me, config, {
             shadowAttributes: [{
                 "stroke-width": 6,
@@ -193,12 +186,19 @@ Ext.define('Ext.chart.series.Pie', {
             }
         }
         surface.customAttributes.segment = function(opt) {
-            return me.getSegment(opt);
+            //Browsers will complain if we create a path
+            //element that has no path commands. So ensure a dummy 
+            //path command for an empty path.
+            var ans = me.getSegment(opt);
+            if (!ans.path || ans.path.length === 0) {
+                ans.path = ['M', 0, 0];
+            }
+            return ans;
         };
         me.__excludes = me.__excludes || [];
     },
 
-    //@private updates some onbefore render parameters.
+    // @private updates some onbefore render parameters.
     initialize: function() {
         var me = this,
             store = me.chart.getChartStore();
@@ -249,17 +249,8 @@ Ext.define('Ext.chart.series.Pie', {
         x4 = x + opt.endRho * c2;
         y4 = y + opt.endRho * s2;
 
-        if (Math.abs(x2 - x4) + Math.abs(y2 - y4) < delta) {
-            cm = hsqr2;
-            sm = -hsqr2;
-            flag = 1;
-        }
-
         x6 = x + opt.endRho * cm;
         y6 = y + opt.endRho * sm;
-
-        // TODO(bei): It seems that the canvas engine cannot render half circle command correctly on IE.
-        // Better fix the VML engine for half circles.
 
         if (opt.startRho !== 0) {
             x1 = x + opt.startRho * c1;
@@ -397,7 +388,9 @@ Ext.define('Ext.chart.series.Pie', {
         }
 
         //if not store or store is empty then there's nothing to draw
-        if (!store || !store.getCount()) {
+        if (!store || !store.getCount() || me.seriesIsHidden) {
+            me.hide();
+            me.items = [];
             return;
         }
 
@@ -640,9 +633,13 @@ Ext.define('Ext.chart.series.Pie', {
             theta = Math.atan2(y, x || 1),
             dg = theta * 180 / Math.PI,
             prevDg;
+
+        opt.hidden = false;
+
         if (this.__excludes && this.__excludes[i]) {
             opt.hidden = true;
         }
+
         function fixAngle(a) {
             if (a < 0) {
                 a += 360;
@@ -1044,5 +1041,4 @@ Ext.define('Ext.chart.series.Pie', {
         return (me.colorSet && me.colorSet[index % me.colorSet.length]) || me.colorArrayStyle[index % me.colorArrayStyle.length];
     }
 });
-
 

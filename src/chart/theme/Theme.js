@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.chart.theme.Theme
  * 
@@ -171,7 +157,7 @@ function() {
 (function() {
     Ext.chart.theme = function(config, base) {
         config = config || {};
-        var i = 0, l, colors, color,
+        var i = 0, d = +new Date(), l, colors, color,
             seriesThemes, markerThemes,
             seriesTheme, markerTheme, 
             key, gradients = [],
@@ -237,7 +223,7 @@ function() {
                 if (midColor) {
                     color = midColor.getDarker(0.1).toString();
                     midColor = midColor.toString();
-                    key = 'theme-' + midColor.substr(1) + '-' + color.substr(1);
+                    key = 'theme-' + midColor.substr(1) + '-' + color.substr(1) + '-' + d;
                     gradients.push({
                         id: key,
                         angle: 45,
@@ -265,4 +251,3 @@ function() {
     };
 })();
 });
-

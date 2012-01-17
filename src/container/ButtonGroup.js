@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * Provides a container for arranging a group of related Buttons in a tabular manner.
  *
@@ -60,17 +46,20 @@ Ext.define('Ext.container.ButtonGroup', {
     alternateClassName: 'Ext.ButtonGroup',
 
     /**
-     * @cfg {Number} columns The `columns` configuration property passed to the
-     * {@link #layout configured layout manager}. See {@link Ext.layout.container.Table#columns}.
+     * @cfg {Number} columns
+     * The `columns` configuration property passed to the {@link #layout configured layout manager}.
+     * See {@link Ext.layout.container.Table#columns}.
      */
 
     /**
-     * @cfg {String} baseCls  Defaults to <tt>'x-btn-group'</tt>.  See {@link Ext.panel.Panel#baseCls}.
+     * @cfg {String} baseCls
+     * @inheritdoc
      */
     baseCls: Ext.baseCSSPrefix + 'btn-group',
 
     /**
-     * @cfg {Object} layout  Defaults to <tt>'table'</tt>.  See {@link Ext.container.Container#layout}.
+     * @cfg {Object} layout
+     * @inheritdoc
      */
     layout: {
         type: 'table'
@@ -79,7 +68,8 @@ Ext.define('Ext.container.ButtonGroup', {
     defaultType: 'button',
 
     /**
-     * @cfg {Boolean} frame  Defaults to <tt>true</tt>.  See {@link Ext.panel.Panel#frame}.
+     * @cfg {Boolean} frame
+     * @inheritdoc
      */
     frame: true,
 
@@ -103,26 +93,10 @@ Ext.define('Ext.container.ButtonGroup', {
         me.callParent(arguments);
     },
 
-    afterLayout: function() {
+    beforeRender: function() {
         var me = this;
 
-        me.callParent(arguments);
-
-        // Pugly hack for a pugly browser:
-        // If not an explicitly set width, then size the width to match the inner table
-        if (me.layout.table && (Ext.isIEQuirks || Ext.isIE6) && !me.width) {
-            var t = me.getTargetEl();
-            t.setWidth(me.layout.table.offsetWidth + t.getPadding('lr'));
-        }
-
-        // IE7 needs a forced repaint to make the top framing div expand to full width
-        if (Ext.isIE7) {
-            me.el.repaint();
-        }
-    },
-
-    afterRender: function() {
-        var me = this;
+        me.callParent();
 
         //we need to add an addition item in here so the ButtonGroup title is centered
         if (me.header) {
@@ -130,7 +104,6 @@ Ext.define('Ext.container.ButtonGroup', {
             delete me.header.items.items[0].flex;
 
             // For Centering, surround the text with two flex:1 spacers.
-            me.suspendLayout = true;
             me.header.insert(1, {
                 xtype: 'component',
                 ui   : me.ui,
@@ -141,9 +114,7 @@ Ext.define('Ext.container.ButtonGroup', {
                 ui   : me.ui,
                 flex : 1
             });
-            me.suspendLayout = false;
         }
-
         me.callParent(arguments);
     },
 
@@ -171,19 +142,23 @@ Ext.define('Ext.container.ButtonGroup', {
     }
 
     /**
-     * @cfg {Array} tools  @hide
+     * @cfg {Array} tools
+     * @private
      */
     /**
-     * @cfg {Boolean} collapsible  @hide
+     * @cfg {Boolean} collapsible
+     * @private
      */
     /**
-     * @cfg {Boolean} collapseMode  @hide
+     * @cfg {Boolean} collapseMode
+     * @private
      */
     /**
-     * @cfg {Boolean} animCollapse  @hide
+     * @cfg {Boolean} animCollapse
+     * @private
      */
     /**
-     * @cfg {Boolean} closable  @hide
+     * @cfg {Boolean} closable
+     * @private
      */
 });
-

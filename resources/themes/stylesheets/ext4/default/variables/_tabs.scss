@@ -60,7 +60,7 @@ $tabbar-border-color: $panel-header-border-color !default;
 
 //size
 $tab-height: 20px !default;
-$tab-spacing: 2px;
+$tab-spacing: 2px !default;
 
 //tab bar body border and padding
 $tabbar-top-body-border-width: 1px 1px 0 !default;
@@ -76,8 +76,10 @@ $tabbar-bottom-plain-body-padding: 3px 0 0 !default;
 $tab-closable-icon: 'tab/tab-default-close.gif' !default;
 $tab-closable-icon-width: 11px !default;
 $tab-closable-icon-height: 11px !default;
-$tab-closable-icon-top: 3px !default;
-$tab-closable-icon-right: 3px !default;
+$tab-closable-icon-top: 2px !default;
+$tab-closable-icon-right: 2px !default;
+$nbr-tab-closable-icon-top: 0px !default;
+$nbr-tab-closable-icon-right: 0px !default;
 
 //tab bar strip
 $tabbar-strip-height: 3px !default;

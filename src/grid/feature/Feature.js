@@ -1,21 +1,4 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
- * @class Ext.grid.feature.Feature
- * @extends Ext.util.Observable
- * 
  * A feature is a type of plugin that is specific to the {@link Ext.grid.Panel}. It provides several
  * hooks that allows the developer to inject additional functionality at certain points throughout the 
  * grid creation cycle. This class provides the base template methods that are available to the developer,
@@ -43,6 +26,10 @@ Ext.define('Ext.grid.feature.Feature', {
     alias: 'feature.feature',
     
     isFeature: true,
+    
+    /**
+     * True when feature is disabled.
+     */
     disabled: false,
     
     /**
@@ -82,6 +69,8 @@ Ext.define('Ext.grid.feature.Feature', {
      * This is limited to one feature that manipulates the data per grid view.
      */
     collectData: false,
+    
+    init: Ext.emptyFn,
         
     getFeatureTpl: function() {
         return '';
@@ -90,6 +79,7 @@ Ext.define('Ext.grid.feature.Feature', {
     /**
      * Abstract method to be overriden when a feature should add additional
      * arguments to its event signature. By default the event will fire:
+     *
      * - view - The underlying Ext.view.Table
      * - featureTarget - The matched element by the defined {@link #eventSelector}
      *
@@ -150,14 +140,14 @@ Ext.define('Ext.grid.feature.Feature', {
     },
     
     /**
-     * Enable a feature
+     * Enables the feature.
      */
     enable: function() {
         this.disabled = false;
     },
     
     /**
-     * Disable a feature
+     * Disables the feature.
      */
     disable: function() {
         this.disabled = true;

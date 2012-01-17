@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * Italian translation
  * By eric_void
@@ -19,15 +5,18 @@ If you are unsure which license is appropriate for your use, please contact the 
  * Updated by Federico Grilli 21/12/2007 
  */
 Ext.onReady(function(){
+    var cm = Ext.ClassManager, 
+        exists = Ext.Function.bind(cm.get, cm);
+
     if(Ext.Updater){
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Caricamento in corso...</div>';
     }
 
-    if(Ext.view.View){
+    if(exists('Ext.view.View')){
        Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.grid.Panel){
+    if(exists('Ext.grid.Panel')){
        Ext.grid.Panel.prototype.ddText = "{0} righe selezionate";
     }
 
@@ -35,7 +24,7 @@ Ext.onReady(function(){
        Ext.TabPanelItem.prototype.closeText = "Chiudi pannello";
     }
 
-    if(Ext.form.field.Base){
+    if(exists('Ext.form.field.Base')){
        Ext.form.field.Base.prototype.invalidText = "Valore non valido";
     }
 
@@ -106,7 +95,7 @@ Ext.onReady(function(){
        };
     }
 
-    if(Ext.util.Format){
+    if(exists('Ext.util.Format')){
         Ext.apply(Ext.util.Format, {
             thousandSeparator: '.',
             decimalSeparator: ',',
@@ -115,7 +104,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.picker.Date){
+    if(exists('Ext.picker.Date')){
        Ext.apply(Ext.picker.Date.prototype, {
           todayText         : "Oggi",
           minText           : "Data precedente alla data minima",
@@ -133,14 +122,14 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.picker.Month) {
+    if(exists('Ext.picker.Month')) {
       Ext.apply(Ext.picker.Month.prototype, {
           okText            : "&#160;OK&#160;",
           cancelText        : "Annulla"
       });
     }
 
-    if(Ext.toolbar.Paging){
+    if(exists('Ext.toolbar.Paging')){
        Ext.apply(Ext.PagingToolbar.prototype, {
           beforePageText : "Pagina",
           afterPageText  : "di {0}",
@@ -154,7 +143,7 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.field.Text){
+    if(exists('Ext.form.field.Text')){
        Ext.apply(Ext.form.field.Text.prototype, {
           minLengthText : "La lunghezza minima \u00E8 {0}",
           maxLengthText : "La lunghezza massima \u00E8 {0}",
@@ -164,7 +153,7 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.field.Number){
+    if(exists('Ext.form.field.Number')){
        Ext.apply(Ext.form.field.Number.prototype, {
           minText : "Il valore minimo \u00E8 {0}",
           maxText : "Il valore massimo \u00E8 {0}",
@@ -173,7 +162,7 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.field.Date){
+    if(exists('Ext.form.field.Date')){
        Ext.apply(Ext.form.field.Date.prototype, {
           disabledDaysText  : "Disabilitato",
           disabledDatesText : "Disabilitato",
@@ -185,7 +174,7 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.field.ComboBox){
+    if(exists('Ext.form.field.ComboBox')){
        Ext.apply(Ext.form.field.ComboBox.prototype, {
           valueNotFoundText : undefined
        });
@@ -194,7 +183,7 @@ Ext.onReady(function(){
         });
     }
 
-    if(Ext.form.field.VTypes){
+    if(exists('Ext.form.field.VTypes')){
        Ext.apply(Ext.form.field.VTypes, {
           emailText    : 'Il campo deve essere un indirizzo e-mail nel formato "user@example.com"',
           urlText      : 'Il campo deve essere un indirizzo web nel formato "http:/'+'/www.example.com"',
@@ -203,7 +192,7 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.form.field.HtmlEditor){
+    if(exists('Ext.form.field.HtmlEditor')){
       Ext.apply(Ext.form.field.HtmlEditor.prototype, {
         createLinkText : 'Inserire un URL per il link:',
         buttonTips : {
@@ -281,7 +270,7 @@ Ext.onReady(function(){
       });
     }
 
-    if(Ext.grid.header.Container){
+    if(exists('Ext.grid.header.Container')){
        Ext.apply(Ext.grid.header.Container.prototype, {
           sortAscText  : "Ordinamento crescente",
           sortDescText : "Ordinamento decrescente",
@@ -291,7 +280,7 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.grid.GroupingFeature){
+    if(exists('Ext.grid.GroupingFeature')){
       Ext.apply(Ext.grid.GroupingFeature.prototype, {
         emptyGroupText : '(Nessun dato)',
         groupByText    : 'Raggruppa per questo campo',
@@ -299,7 +288,7 @@ Ext.onReady(function(){
       });
     }
 
-    if(Ext.grid.PropertyColumnModel){
+    if(exists('Ext.grid.PropertyColumnModel')){
        Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
           nameText   : "Nome",
           valueText  : "Valore",
@@ -307,12 +296,5 @@ Ext.onReady(function(){
        });
     }
 
-    if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
-       Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype, {
-          splitTip            : "Trascina per cambiare dimensioni.",
-          collapsibleSplitTip : "Trascina per cambiare dimensioni. Doppio click per nascondere."
-       });
-    }
 
 });
-

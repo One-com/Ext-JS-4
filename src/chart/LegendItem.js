@@ -1,20 +1,5 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.chart.LegendItem
- * @extends Ext.draw.CompositeSprite
  * A single item of a legend (marker plus label)
  */
 Ext.define('Ext.chart.LegendItem', {
@@ -79,14 +64,16 @@ Ext.define('Ext.chart.LegendItem', {
                     "stroke-width": series.lineWidth,
                     "stroke-linejoin": "round",
                     "stroke-dasharray": series.dash,
-                    stroke: seriesStyle.stroke || '#000',
+                    stroke: seriesStyle.stroke || series.getLegendColor(index) || '#000',
                     style: {
                         cursor: 'pointer'
                     }
                 }));
             }
             if (series.showMarkers || seriesType === 'scatter') {
-                markerConfig = Ext.apply(series.markerStyle, series.markerConfig || {});
+                markerConfig = Ext.apply(series.markerStyle, series.markerConfig || {}, {
+                    fill: series.getLegendColor(index)
+                });
                 me.add('marker', Ext.chart.Shape[markerConfig.type](surface, {
                     fill: markerConfig.fill,
                     x: 8.5,
@@ -222,4 +209,3 @@ Ext.define('Ext.chart.LegendItem', {
         }
     }
 });
-

@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * List compiled by mystix on the extjs.com forums.
  * Thank you Mystix!
@@ -20,15 +6,18 @@ If you are unsure which license is appropriate for your use, please contact the 
  * by Thys Meintjes (20 July 2007)
  */
 Ext.onReady(function() {
+    var cm = Ext.ClassManager, 
+        exists = Ext.Function.bind(cm.get, cm);
+
     if (Ext.Updater) {
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Besig om te laai...</div>';
     }
     /* Ext single string translations */
-    if(Ext.view.View){
+    if(exists('Ext.view.View')){
         Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.grid.Panel){
+    if(exists('Ext.grid.Panel')){
         Ext.grid.Panel.prototype.ddText = "{0} geselekteerde ry(e)";
     }
 
@@ -36,7 +25,7 @@ Ext.onReady(function() {
         Ext.TabPanelItem.prototype.closeText = "Maak die oortjie toe";
     }
 
-    if(Ext.form.field.Base){
+    if(exists('Ext.form.field.Base')){
         Ext.form.field.Base.prototype.invalidText = "Die waarde in hierdie veld is foutief";
     }
 
@@ -81,7 +70,7 @@ Ext.onReady(function() {
         };
     }
 
-    if(Ext.util.Format){
+    if(exists('Ext.util.Format')){
         Ext.apply(Ext.util.Format, {
             thousandSeparator: '.',
             decimalSeparator: ',',
@@ -90,7 +79,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Date){
+    if(exists('Ext.picker.Date')){
         Ext.apply(Ext.picker.Date.prototype, {
             todayText         : "Vandag",
             minText           : "Hierdie datum is vroër as die minimum datum",
@@ -108,7 +97,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.toolbar.Paging){
+    if(exists('Ext.toolbar.Paging')){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "Bladsy",
             afterPageText  : "van {0}",
@@ -122,7 +111,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Text){
+    if(exists('Ext.form.field.Text')){
         Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "Die minimum lengte van die veld is {0}",
             maxLengthText : "Die maximum lengte van die veld is {0}",
@@ -132,7 +121,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Number){
+    if(exists('Ext.form.field.Number')){
         Ext.apply(Ext.form.field.Number.prototype, {
             minText : "Die minimum waarde vir die veld is {0}",
             maxText : "Die maximum waarde vir die veld is {0}",
@@ -140,7 +129,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Date){
+    if(exists('Ext.form.field.Date')){
         Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "Afgeskakel",
             disabledDatesText : "Afgeskakel",
@@ -152,7 +141,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.ComboBox){
+    if(exists('Ext.form.field.ComboBox')){
         Ext.apply(Ext.form.field.ComboBox.prototype, {
             valueNotFoundText : undefined
         });
@@ -161,7 +150,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.VTypes){
+    if(exists('Ext.form.field.VTypes')){
         Ext.apply(Ext.form.field.VTypes, {
             emailText    : "Hierdie veld moet 'n e-pos adres wees met die formaat 'gebruiker@domein.za'",
             urlText      : "Hierdie veld moet 'n URL wees me die formaat 'http:/'+'/www.domein.za'",
@@ -170,7 +159,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.header.Container){
+    if(exists('Ext.grid.header.Container')){
         Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "Sorteer Oplopend",
             sortDescText : "Sorteer Aflopend",
@@ -180,7 +169,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.PropertyColumnModel){
+    if(exists('Ext.grid.PropertyColumnModel')){
         Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
             nameText   : "Naam",
             valueText  : "Waarde",
@@ -188,10 +177,4 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
-        Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype, {
-            splitTip            : "Trek om grootte aan te pas.",
-            collapsibleSplitTip : "Trek om grootte aan te pas. Dubbel-klik om weg te steek."
-        });
-    }
 });

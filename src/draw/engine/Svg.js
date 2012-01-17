@@ -1,20 +1,5 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.draw.engine.Svg
- * @extends Ext.draw.Surface
  * Provides specific methods to draw with SVG.
  */
 Ext.define('Ext.draw.engine.Svg', {
@@ -43,7 +28,7 @@ Ext.define('Ext.draw.engine.Svg', {
         strokeOpacity: "stroke-opacity",
         strokeLinejoin: "stroke-linejoin"
     },
-    
+
     parsers: {},
 
     minDefaults: {
@@ -138,7 +123,7 @@ Ext.define('Ext.draw.engine.Svg', {
         }
         sprite.el = Ext.get(el);
         this.applyZIndex(sprite); //performs the insertion
-        sprite.matrix = Ext.create('Ext.draw.Matrix');
+        sprite.matrix = new Ext.draw.Matrix();
         sprite.bbox = {
             plain: 0,
             transform: 0
@@ -205,7 +190,7 @@ Ext.define('Ext.draw.engine.Svg', {
 
     transform: function(sprite) {
         var me = this,
-            matrix = Ext.create('Ext.draw.Matrix'),
+            matrix = new Ext.draw.Matrix(),
             transforms = sprite.transformations,
             transformsLength = transforms.length,
             i = 0,
@@ -380,18 +365,33 @@ Ext.define('Ext.draw.engine.Svg', {
     tuneText: function (sprite, attrs) {
         var el = sprite.el.dom,
             tspans = [],
-            height, tspan, text, i, ln, texts, factor;
+            height, tspan, text, i, ln, texts, factor, x;
 
         if (attrs.hasOwnProperty("text")) {
-           tspans = this.setText(sprite, attrs.text);
+            //only create new tspans for text lines if the text has been 
+            //updated or if it's the first time we're setting the text
+            //into the sprite.
+
+            //get the actual rendered text.
+            text = sprite.tspans && Ext.Array.map(sprite.tspans, function(t) { return t.textContent; }).join('');
+
+            if (!sprite.tspans || attrs.text != text) {
+                tspans = this.setText(sprite, attrs.text);
+                sprite.tspans = tspans;
+            //for all other cases reuse the tspans previously created.
+            } else {
+                tspans = sprite.tspans || [];
+            }
         }
         // Normalize baseline via a DY shift of first tspan. Shift other rows by height * line height (1.2)
         if (tspans.length) {
             height = this.getBBoxText(sprite).height;
+            x = sprite.el.dom.getAttribute("x");
             for (i = 0, ln = tspans.length; i < ln; i++) {
                 // The text baseline for FireFox 3.0 and 3.5 is different than other SVG implementations
                 // so we are going to normalize that here
                 factor = (Ext.isFF3_0 || Ext.isFF3_5) ? 2 : 4;
+                tspans[i].setAttribute("x", x);
                 tspans[i].setAttribute("dy", i ? height * 1.2 : height / factor);
             }
             sprite.dirty = true;
@@ -401,7 +401,6 @@ Ext.define('Ext.draw.engine.Svg', {
     setText: function(sprite, textString) {
          var me = this,
              el = sprite.el.dom,
-             x = el.getAttribute("x"),
              tspans = [],
              height, tspan, text, i, ln, texts;
         
@@ -415,7 +414,6 @@ Ext.define('Ext.draw.engine.Svg', {
             if (text) {
                 tspan = me.createSvgElement("tspan");
                 tspan.appendChild(document.createTextNode(Ext.htmlDecode(text)));
-                tspan.setAttribute("x", x);
                 el.appendChild(tspan);
                 tspans[i] = tspan;
             }
@@ -497,7 +495,6 @@ Ext.define('Ext.draw.engine.Svg', {
         }
         if (sprite.type == 'text' && attrs.font && sprite.dirtyFont) {
             el.set({ style: "font: " + attrs.font});
-            sprite.dirtyFont = false;
         }
         if (sprite.type == "image") {
             el.dom.setAttributeNS(me.xlink, "href", attrs.src);
@@ -529,6 +526,7 @@ Ext.define('Ext.draw.engine.Svg', {
         if (sprite.type == 'text') {
             me.tuneText(sprite, attrs);
         }
+        sprite.dirtyFont = false;
 
         //set styles
         style = sattr.style;
@@ -598,7 +596,7 @@ Ext.define('Ext.draw.engine.Svg', {
     },
 
     createItem: function (config) {
-        var sprite = Ext.create('Ext.draw.Sprite', config);
+        var sprite = new Ext.draw.Sprite(config);
         sprite.surface = this;
         return sprite;
     },

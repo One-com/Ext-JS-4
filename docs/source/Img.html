@@ -16,10 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-Img'>/**
-</span> * @class Ext.Img
- * @extends Ext.Component
- *
- * Simple helper class for easily creating image components. This simply renders an image tag to the DOM
+</span> * Simple helper class for easily creating image components. This simply renders an image tag to the DOM
  * with the configured src.
  *
  * {@img Ext.Img/Ext.Img.png Ext.Img component}
@@ -37,21 +34,33 @@
 Ext.define('Ext.Img', {
     extend: 'Ext.Component',
     alias: ['widget.image', 'widget.imagecomponent'],
-<span id='Ext-Img-cfg-src'>    /** @cfg {String} src The image src */
-</span>    src: '',
+
+    autoEl: 'img',
+
+<span id='Ext-Img-cfg-src'>    /**
+</span>     * @cfg {String} src
+     * The image src.
+     */
+    src: '',
+
+<span id='Ext-Img-cfg-alt'>    /**
+</span>     * @cfg {String} alt
+     * The descriptive text for non-visual UI description.
+     */
+    alt: '',
 
     getElConfig: function() {
-        return {
-            tag: 'img',
-            src: this.src
-        };
+        return Ext.apply(this.callParent(), {
+            src: this.src,
+            alt: this.alt
+        });
     },
     
     // null out this function, we can't set any html inside the image
     initRenderTpl: Ext.emptyFn,
     
 <span id='Ext-Img-method-setSrc'>    /**
-</span>     * Updates the {@link #src} of the image
+</span>     * Updates the {@link #src} of the image.
      */
     setSrc: function(src) {
         var me = this,

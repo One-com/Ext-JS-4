@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @class Ext.util.HashMap
  * <p>
@@ -52,7 +38,7 @@ Ext.define('Ext.util.HashMap', {
      */
     constructor: function(config) {
         config = config || {};
-        
+
         var me = this,
             keyFn = config.keyFn;
 
@@ -92,7 +78,7 @@ Ext.define('Ext.util.HashMap', {
 
         me.mixins.observable.constructor.call(me, config);
         me.clear(true);
-        
+
         if (keyFn) {
             me.getKey = keyFn;
         }
@@ -134,7 +120,7 @@ Ext.define('Ext.util.HashMap', {
     },
 
     /**
-     * Adds an item to the collection. Fires the {@link #add} event when complete.
+     * Adds an item to the collection. Fires the {@link #event-add} event when complete.
      * @param {String} key <p>The key to associate with the item, or the new item.</p>
      * <p>If a {@link #getKey} implementation was specified for this HashMap,
      * or if the key of the stored items is in a property called <tt><b>id</b></tt>,
@@ -167,7 +153,7 @@ Ext.define('Ext.util.HashMap', {
 
     /**
      * Replaces an item in the hash. If the key doesn't exist, the
-     * {@link #add} method will be used.
+     * {@link #method-add} method will be used.
      * @param {String} key The key of the item.
      * @param {Object} value The new value for the item.
      * @return {Object} The new value of the item.
@@ -361,4 +347,3 @@ Ext.define('Ext.util.HashMap', {
         return undefined;
     }
 });
-

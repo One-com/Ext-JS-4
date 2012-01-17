@@ -1,32 +1,21 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * Korean Translations By nicetip
  * 05 September 2007
  * Modify by techbug / 25 February 2008
  */
 Ext.onReady(function() {
+    var cm = Ext.ClassManager, 
+        exists = Ext.Function.bind(cm.get, cm);
+
     if(Ext.Updater){
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">로딩중...</div>';
     }
 
-    if(Ext.view.View){
+    if(exists('Ext.view.View')){
         Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.grid.Panel){
+    if(exists('Ext.grid.Panel')){
         Ext.grid.Panel.prototype.ddText = "{0} 개가 선택되었습니다.";
     }
 
@@ -34,7 +23,7 @@ Ext.onReady(function() {
         Ext.TabPanelItem.prototype.closeText = "닫기";
     }
 
-    if(Ext.form.field.Base){
+    if(exists('Ext.form.field.Base')){
         Ext.form.field.Base.prototype.invalidText = "올바른 값이 아닙니다.";
     }
 
@@ -77,7 +66,7 @@ Ext.onReady(function() {
         };
     }
 
-    if(Ext.util.Format){
+    if(exists('Ext.util.Format')){
         Ext.apply(Ext.util.Format, {
             thousandSeparator: ',',
             decimalSeparator: '.',
@@ -86,7 +75,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Date){
+    if(exists('Ext.picker.Date')){
         Ext.apply(Ext.picker.Date.prototype, {
             todayText         : "오늘",
             minText           : "최소 날짜범위를 넘었습니다.",
@@ -104,14 +93,14 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.picker.Month) {
+    if(exists('Ext.picker.Month')) {
         Ext.apply(Ext.picker.Month.prototype, {
             okText            : "확인",
             cancelText        : "취소"
         });
     }
 
-    if(Ext.toolbar.Paging){
+    if(exists('Ext.toolbar.Paging')){
         Ext.apply(Ext.PagingToolbar.prototype, {
             beforePageText : "페이지",
             afterPageText  : "/ {0}",
@@ -125,7 +114,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Text){
+    if(exists('Ext.form.field.Text')){
         Ext.apply(Ext.form.field.Text.prototype, {
             minLengthText : "최소길이는 {0}입니다.",
             maxLengthText : "최대길이는 {0}입니다.",
@@ -135,7 +124,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Number){
+    if(exists('Ext.form.field.Number')){
         Ext.apply(Ext.form.field.Number.prototype, {
             minText : "최소값은 {0}입니다.",
             maxText : "최대값은 {0}입니다.",
@@ -143,7 +132,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.Date){
+    if(exists('Ext.form.field.Date')){
         Ext.apply(Ext.form.field.Date.prototype, {
             disabledDaysText  : "비활성",
             disabledDatesText : "비활성",
@@ -154,7 +143,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.ComboBox){
+    if(exists('Ext.form.field.ComboBox')){
         Ext.apply(Ext.form.field.ComboBox.prototype, {
             valueNotFoundText : undefined
         });
@@ -163,7 +152,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.VTypes){
+    if(exists('Ext.form.field.VTypes')){
         Ext.apply(Ext.form.field.VTypes, {
             emailText    : '이메일 주소 형식에 맞게 입력해야합니다. (예: "user@example.com")',
             urlText      : 'URL 형식에 맞게 입력해야합니다. (예: "http:/'+'/www.example.com")',
@@ -172,7 +161,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.form.field.HtmlEditor){
+    if(exists('Ext.form.field.HtmlEditor')){
         Ext.apply(Ext.form.field.HtmlEditor.prototype, {
             createLinkText : 'URL을 입력해주세요:',
             buttonTips : {
@@ -250,7 +239,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.header.Container){
+    if(exists('Ext.grid.header.Container')){
         Ext.apply(Ext.grid.header.Container.prototype, {
             sortAscText  : "오름차순 정렬",
             sortDescText : "내림차순 정렬",
@@ -260,7 +249,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.GroupingFeature){
+    if(exists('Ext.grid.GroupingFeature')){
         Ext.apply(Ext.grid.GroupingFeature.prototype, {
             emptyGroupText : '(None)',
             groupByText    : '현재 필드로 그룹핑합니다.',
@@ -269,7 +258,7 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.grid.PropertyColumnModel){
+    if(exists('Ext.grid.PropertyColumnModel')){
         Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
             nameText   : "항목",
             valueText  : "값",
@@ -277,12 +266,5 @@ Ext.onReady(function() {
         });
     }
 
-    if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
-        Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype, {
-            splitTip            : "크기변경을 위해 드래그하세요.",
-            collapsibleSplitTip : "크기변경을 위해 드래그, 숨기기 위해 더블클릭 하세요."
-        });
-    }
 
 });
-

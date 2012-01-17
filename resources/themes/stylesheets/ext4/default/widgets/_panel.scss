@@ -75,14 +75,6 @@
             height: 100%;
         }
     }
-
-    // Vertical headers must be inline blocks so that they acquire width from the content
-    .#{$prefix}panel-header-vertical, .#{$prefix}panel-header-vertical .#{$prefix}panel-header-body,
-    .#{$prefix}btn-group-header-vertical, .#{$prefix}btn-group-header-vertical .#{$prefix}btn-group-header-body,
-    .#{$prefix}window-header-vertical, .#{$prefix}window-header-vertical .#{$prefix}window-header-body {
-        display: -moz-inline-stack;
-        display: inline-block;
-    }
     
     .#{$prefix}panel-header-text-container {
         overflow: hidden;
@@ -190,8 +182,8 @@
         );
     }
 
-    .x-panel-header-plain,
-    .x-panel-body-plain {
+    .#{$prefix}panel-header-plain,
+    .#{$prefix}panel-body-plain {
         border: 0;
         padding: 0;
     }

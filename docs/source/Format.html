@@ -15,7 +15,8 @@
   </script>
 </head>
 <body onload="prettyPrint(); highlight();">
-  <pre class="prettyprint lang-js"><span id='Ext-util-Format'>/**
+  <pre class="prettyprint lang-js">//&lt;localeInfo useApply=&quot;true&quot; /&gt;
+<span id='Ext-util-Format'>/**
 </span> * @class Ext.util.Format
 
 This class is a centralized place for formatting functions. It includes
@@ -86,28 +87,36 @@ XTemplates can also directly use Ext.util.Format functions:
          * &lt;p&gt;The character that the {@link #number} function uses as a thousand separator.&lt;/p&gt;
          * &lt;p&gt;This may be overridden in a locale file.&lt;/p&gt;
          */
+        //&lt;locale&gt;
         thousandSeparator: ',',
+        //&lt;/locale&gt;
 
 <span id='Ext-util-Format-property-decimalSeparator'>        /**
 </span>         * @property {String} decimalSeparator
          * &lt;p&gt;The character that the {@link #number} function uses as a decimal point.&lt;/p&gt;
          * &lt;p&gt;This may be overridden in a locale file.&lt;/p&gt;
          */
+        //&lt;locale&gt;
         decimalSeparator: '.',
+        //&lt;/locale&gt;
 
 <span id='Ext-util-Format-property-currencyPrecision'>        /**
 </span>         * @property {Number} currencyPrecision
          * &lt;p&gt;The number of decimal places that the {@link #currency} function displays.&lt;/p&gt;
          * &lt;p&gt;This may be overridden in a locale file.&lt;/p&gt;
          */
+        //&lt;locale&gt;
         currencyPrecision: 2,
+        //&lt;/locale&gt;
 
 <span id='Ext-util-Format-property-currencySign'>        /**
 </span>         * @property {String} currencySign
          * &lt;p&gt;The currency sign that the {@link #currency} function displays.&lt;/p&gt;
          * &lt;p&gt;This may be overridden in a locale file.&lt;/p&gt;
          */
+         //&lt;locale&gt;
         currencySign: '$',
+        //&lt;/locale&gt;
 
 <span id='Ext-util-Format-property-currencyAtEnd'>        /**
 </span>         * @property {Boolean} currencyAtEnd
@@ -115,7 +124,9 @@ XTemplates can also directly use Ext.util.Format functions:
          * append the currency sign to the formatted value.&lt;/p&gt;
          * &lt;p&gt;This may be overridden in a locale file.&lt;/p&gt;
          */
+        //&lt;locale&gt;
         currencyAtEnd: false,
+        //&lt;/locale&gt;
 
 <span id='Ext-util-Format-method-undef'>        /**
 </span>         * Checks a reference and converts it to empty string if it is undefined
@@ -191,7 +202,7 @@ XTemplates can also directly use Ext.util.Format functions:
                 v = -v;
                 negativeSign = '-';
             }
-            decimals = decimals || UtilFormat.currencyPrecision;
+            decimals = Ext.isDefined(decimals) ? decimals : UtilFormat.currencyPrecision;
             format += format + (decimals &gt; 0 ? '.' : '');
             for (; i &lt; decimals; i++) {
                 format += '0';
@@ -362,7 +373,7 @@ XTemplates can also directly use Ext.util.Format functions:
             }
 
             if (1 &lt; psplit.length) {
-                v = v.toFixed(psplit[1].length);
+                v = Ext.Number.toFixed(v, psplit[1].length);
             } else if(2 &lt; psplit.length) {
                 //&lt;debug&gt;
                 Ext.Error.raise({
@@ -374,7 +385,7 @@ XTemplates can also directly use Ext.util.Format functions:
                 });
                 //&lt;/debug&gt;
             } else {
-                v = v.toFixed(0);
+                v = Ext.Number.toFixed(v, 0);
             }
 
             var fnum = v.toString();
@@ -454,49 +465,49 @@ XTemplates can also directly use Ext.util.Format functions:
 <span id='Ext-util-Format-method-capitalize'>        /**
 </span>         * Alias for {@link Ext.String#capitalize}.
          * @method
-         * @alias Ext.String#capitalize
+         * @inheritdoc Ext.String#capitalize
          */
         capitalize: Ext.String.capitalize,
 
 <span id='Ext-util-Format-method-ellipsis'>        /**
 </span>         * Alias for {@link Ext.String#ellipsis}.
          * @method
-         * @alias Ext.String#ellipsis
+         * @inheritdoc Ext.String#ellipsis
          */
         ellipsis: Ext.String.ellipsis,
 
 <span id='Ext-util-Format-method-format'>        /**
 </span>         * Alias for {@link Ext.String#format}.
          * @method
-         * @alias Ext.String#format
+         * @inheritdoc Ext.String#format
          */
         format: Ext.String.format,
 
 <span id='Ext-util-Format-method-htmlDecode'>        /**
 </span>         * Alias for {@link Ext.String#htmlDecode}.
          * @method
-         * @alias Ext.String#htmlDecode
+         * @inheritdoc Ext.String#htmlDecode
          */
         htmlDecode: Ext.String.htmlDecode,
 
 <span id='Ext-util-Format-method-htmlEncode'>        /**
 </span>         * Alias for {@link Ext.String#htmlEncode}.
          * @method
-         * @alias Ext.String#htmlEncode
+         * @inheritdoc Ext.String#htmlEncode
          */
         htmlEncode: Ext.String.htmlEncode,
 
 <span id='Ext-util-Format-method-leftPad'>        /**
 </span>         * Alias for {@link Ext.String#leftPad}.
          * @method
-         * @alias Ext.String#leftPad
+         * @inheritdoc Ext.String#leftPad
          */
         leftPad: Ext.String.leftPad,
 
 <span id='Ext-util-Format-method-trim'>        /**
 </span>         * Alias for {@link Ext.String#trim}.
          * @method
-         * @alias Ext.String#trim
+         * @inheritdoc Ext.String#trim
          */
         trim : Ext.String.trim,
 

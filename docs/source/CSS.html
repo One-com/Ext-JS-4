@@ -16,8 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-util-CSS'>/**
-</span> * @class Ext.util.CSS
- * Utility class for manipulating CSS rules
+</span> * Utility class for manipulating CSS rules
  * @singleton
  */
 Ext.define('Ext.util.CSS', function() {
@@ -133,10 +132,10 @@ Ext.define('Ext.util.CSS', function() {
         },
 
 <span id='Ext-util-CSS-method-getRules'>        /**
-</span>        * Gets all css rules for the document
-        * @param {Boolean} refreshCache true to refresh the internal cache
-        * @return {Object} An object (hash) of rules indexed by selector
-        */
+</span>         * Gets all css rules for the document
+         * @param {Boolean} refreshCache true to refresh the internal cache
+         * @return {Object} An object (hash) of rules indexed by selector
+         */
         getRules : function(refreshCache) {
             if (rules === null || refreshCache) {
                 rules = {};

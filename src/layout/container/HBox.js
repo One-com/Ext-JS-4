@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * A layout that arranges items horizontally across a Container. This layout optionally divides available horizontal
  * space between child items containing a numeric `flex` configuration.
@@ -64,45 +50,63 @@ Ext.define('Ext.layout.container.HBox', {
      */
     align: 'top', // top, middle, stretch, strechmax
 
-    //@private
-    alignCenteringString: 'middle',
-
     type : 'hbox',
 
     direction: 'horizontal',
 
-    // When creating an argument list to setSize, use this order
-    parallelSizeIndex: 0,
-    perpendicularSizeIndex: 1,
+    horizontal: true,
 
-    parallelPrefix: 'width',
-    parallelPrefixCap: 'Width',
-    parallelLT: 'l',
-    parallelRB: 'r',
-    parallelBefore: 'left',
-    parallelBeforeCap: 'Left',
-    parallelAfter: 'right',
-    parallelPosition: 'x',
+    names: {
+        // parallel
+        lr: 'lr',
+        left: 'left',// 'before',
+        leftCap: 'Left',
+        right: 'right',// 'after',
+        position: 'left',
+        width: 'width',
+        widthCap: 'Width',
+        widthIndex: 0,
+        x: 'x',
 
-    perpendicularPrefix: 'height',
-    perpendicularPrefixCap: 'Height',
-    perpendicularLT: 't',
-    perpendicularRB: 'b',
-    perpendicularLeftTop: 'top',
-    perpendicularRightBottom: 'bottom',
-    perpendicularPosition: 'y',
-    configureItem: function(item) {
-        if (item.flex) {
-            item.layoutManagedWidth = 1;
-        } else {
-            item.layoutManagedWidth = 2;
+        // perpendicular
+        center: 'middle',
+        top: 'top',
+        topPosition: 'top',
+        bottom: 'bottom',
+        height: 'height',
+        heightCap: 'Height',
+        heightIndex: 1,
+        y: 'y'
+    },
+
+    sizePolicy: {
+        flex: {
+            '': {
+                setsWidth: 1,
+                setsHeight: 0
+            },
+            stretch: {
+                setsWidth: 1,
+                setsHeight: 1
+            },
+            stretchmax: {
+                readsHeight: 1,
+                setsWidth: 1,
+                setsHeight: 1
+            }
+        },
+        '': {
+            setsWidth: 0,
+            setsHeight: 0
+        },
+        stretch: {
+            setsWidth: 0,
+            setsHeight: 1
+        },
+        stretchmax: {
+            readsHeight: 1,
+            setsWidth: 0,
+            setsHeight: 1
         }
-
-        if (this.align === 'stretch' || this.align === 'stretchmax') {
-            item.layoutManagedHeight = 1;
-        } else {
-            item.layoutManagedHeight = 2;
-        }
-        this.callParent(arguments);
-    }
+    }            
 });

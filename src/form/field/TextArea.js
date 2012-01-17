@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * @docauthor Robert Dougan <rob@sencha.com>
  *
@@ -45,16 +31,27 @@ Ext.define('Ext.form.field.TextArea', {
     extend:'Ext.form.field.Text',
     alias: ['widget.textareafield', 'widget.textarea'],
     alternateClassName: 'Ext.form.TextArea',
-    requires: ['Ext.XTemplate', 'Ext.layout.component.field.TextArea'],
+    requires: [
+        'Ext.XTemplate', 
+        'Ext.layout.component.field.TextArea',
+        'Ext.util.DelayedTask'
+    ],
 
     fieldSubTpl: [
-        '<textarea id="{id}" ',
-            '<tpl if="name">name="{name}" </tpl>',
-            '<tpl if="rows">rows="{rows}" </tpl>',
-            '<tpl if="cols">cols="{cols}" </tpl>',
-            '<tpl if="tabIdx">tabIndex="{tabIdx}" </tpl>',
-            'class="{fieldCls} {typeCls}" ',
-            'autocomplete="off">',
+        '<textarea id="{id}" {inputAttrTpl}',
+            '<tpl if="name"> name="{name}"</tpl>',
+            '<tpl if="rows"> rows="{rows}" </tpl>',
+            '<tpl if="cols"> cols="{cols}" </tpl>',
+            '<tpl if="placeholder"> placeholder="{placeholder}"</tpl>',
+            '<tpl if="size"> size="{size}"</tpl>',
+            '<tpl if="maxLength !== undefined"> maxlength="{maxLength}"</tpl>',
+            '<tpl if="readOnly"> readonly="readonly"</tpl>',
+            '<tpl if="disabled"> disabled="disabled"</tpl>',
+            '<tpl if="tabIdx"> tabIndex="{tabIdx}"</tpl>',
+            ' class="{fieldCls} {typeCls}" ',
+            '<tpl if="fieldStyle"> style="{fieldStyle}"</tpl>',
+            ' autocomplete="off">',
+            '<tpl if="value">{value}</tpl>',
         '</textarea>',
         {
             compiled: true,
@@ -90,17 +87,16 @@ Ext.define('Ext.form.field.TextArea', {
     cols: 20,
 
     /**
-     * @cfg {Number} cols
-     * An initial value for the 'cols' attribute on the textarea element. This is only used if the component has no
-     * configured {@link #width} and is not given a width by its container's layout.
+     * @cfg {Number} rows
+     * An initial value for the 'rows' attribute on the textarea element. This is only used if the component has no
+     * configured {@link #height} and is not given a height by its container's layout. Defaults to 4.
      */
     rows: 4,
 
     /**
      * @cfg {Boolean} enterIsSpecial
-     * True if you want the enter key to be classed as a special key. Special keys are generally navigation keys
-     * (arrows, space, enter). Setting the config property to true would mean that you could not insert returns into the
-     * textarea.
+     * True if you want the ENTER key to be classed as a special key and the {@link #specialkey} event to be fired
+     * when ENTER is pressed.
      */
     enterIsSpecial: false,
 
@@ -115,34 +111,70 @@ Ext.define('Ext.form.field.TextArea', {
     componentLayout: 'textareafield',
 
     // private
-    onRender: function(ct, position) {
-        var me = this;
-        Ext.applyIf(me.subTplData, {
+    getSubTplData: function() {
+        var me = this,
+            fieldStyle = me.getFieldStyle(),
+            ret = me.callParent();
+
+        if (me.grow) {
+            if (me.preventScrollbars) {
+                ret.fieldStyle = (fieldStyle||'') + ';overflow:hidden;height:' + me.growMin + 'px';
+            }
+        }
+
+        Ext.applyIf(ret, {
             cols: me.cols,
             rows: me.rows
         });
 
-        me.callParent(arguments);
+        return ret;
     },
 
-    // private
-    afterRender: function(){
+    afterRender: function () {
         var me = this;
 
         me.callParent(arguments);
 
-        if (me.grow) {
-            if (me.preventScrollbars) {
-                me.inputEl.setStyle('overflow', 'hidden');
-            }
-            me.inputEl.setHeight(me.growMin);
+        me.needsMaxCheck = me.enforceMaxLength && !Ext.supports.TextAreaMaxLength;
+        if (me.needsMaxCheck) {
+            me.inputEl.on('paste', me.onPaste, me);
+        }
+    },
+
+    onPaste: function(e){
+        var me = this;
+        if (!me.pasteTask) {
+            me.pasteTask = new Ext.util.DelayedTask(me.pasteCheck, me);
+        }
+        // since we can't get the paste data, we'll give the area a chance to populate
+        me.pasteTask.delay(1);
+    },
+    
+    pasteCheck: function(){
+        var me = this,
+            value = me.getValue(),
+            max = me.maxLength;
+            
+        if (value.length > max) {
+            value = value.substr(0, max);
+            me.setValue(value);
         }
     },
 
     // private
     fireKey: function(e) {
-        if (e.isSpecialKey() && (this.enterIsSpecial || (e.getKey() !== e.ENTER || e.hasModifier()))) {
-            this.fireEvent('specialkey', this, e);
+        var me = this,
+            value;
+            
+        if (e.isSpecialKey() && (me.enterIsSpecial || (e.getKey() !== e.ENTER || e.hasModifier()))) {
+            me.fireEvent('specialkey', me, e);
+        }
+        
+        if (me.needsMaxCheck) {
+            value = me.getValue();
+            if (value.length >= me.maxLength) {
+                e.stopEvent();
+            }
         }
     },
 
@@ -158,7 +190,15 @@ Ext.define('Ext.form.field.TextArea', {
             me.doComponentLayout();
             height = me.inputEl.getHeight();
             if (height !== me.lastInputHeight) {
-                me.fireEvent('autosize', height);
+                /**
+                 * @event autosize
+                 * Fires when the {@link #autoSize} function is triggered and the field is resized according to
+                 * the grow/growMin/growMax configs as a result. This event provides a hook for the developer
+                 * to apply additional logic at runtime to resize the field if needed.
+                 * @param {Ext.form.field.Text} this
+                 * @param {Number} height
+                 */
+                me.fireEvent('autosize', me, height);
                 me.lastInputHeight = height;
             }
         }
@@ -169,17 +209,12 @@ Ext.define('Ext.form.field.TextArea', {
         this.callParent(arguments);
         this.getActionEl().dom.setAttribute('aria-multiline', true);
     },
-
-    /**
-     * To get the natural width of the textarea element, we do a simple calculation based on the 'cols' config.
-     * We use hard-coded numbers to approximate what browsers do natively, to avoid having to read any styles which
-     * would hurt performance. Overrides Labelable method.
-     * @protected
-     */
-    getBodyNaturalWidth: function() {
-        return Math.round(this.cols * 6.5) + 20;
+    
+    beforeDestroy: function(){
+        var task = this.pasteTask;
+        if (task) {
+            task.delay();
+        }    
+        this.callParent();
     }
-
 });
-
-

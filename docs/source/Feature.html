@@ -16,10 +16,7 @@
 </head>
 <body onload="prettyPrint(); highlight();">
   <pre class="prettyprint lang-js"><span id='Ext-grid-feature-Feature'>/**
-</span> * @class Ext.grid.feature.Feature
- * @extends Ext.util.Observable
- * 
- * A feature is a type of plugin that is specific to the {@link Ext.grid.Panel}. It provides several
+</span> * A feature is a type of plugin that is specific to the {@link Ext.grid.Panel}. It provides several
  * hooks that allows the developer to inject additional functionality at certain points throughout the 
  * grid creation cycle. This class provides the base template methods that are available to the developer,
  * it should be extended.
@@ -46,6 +43,10 @@ Ext.define('Ext.grid.feature.Feature', {
     alias: 'feature.feature',
     
     isFeature: true,
+    
+<span id='Ext-grid-feature-Feature-property-disabled'>    /**
+</span>     * True when feature is disabled.
+     */
     disabled: false,
     
 <span id='Ext-grid-feature-Feature-property-hasFeatureEvent'>    /**
@@ -85,6 +86,8 @@ Ext.define('Ext.grid.feature.Feature', {
      * This is limited to one feature that manipulates the data per grid view.
      */
     collectData: false,
+    
+    init: Ext.emptyFn,
         
     getFeatureTpl: function() {
         return '';
@@ -93,6 +96,7 @@ Ext.define('Ext.grid.feature.Feature', {
 <span id='Ext-grid-feature-Feature-method-getFireEventArgs'>    /**
 </span>     * Abstract method to be overriden when a feature should add additional
      * arguments to its event signature. By default the event will fire:
+     *
      * - view - The underlying Ext.view.Table
      * - featureTarget - The matched element by the defined {@link #eventSelector}
      *
@@ -153,14 +157,14 @@ Ext.define('Ext.grid.feature.Feature', {
     },
     
 <span id='Ext-grid-feature-Feature-method-enable'>    /**
-</span>     * Enable a feature
+</span>     * Enables the feature.
      */
     enable: function() {
         this.disabled = false;
     },
     
 <span id='Ext-grid-feature-Feature-method-disable'>    /**
-</span>     * Disable a feature
+</span>     * Disables the feature.
      */
     disable: function() {
         this.disabled = true;

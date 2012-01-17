@@ -1,6 +1,7 @@
 @mixin extjs-window {
     .#{$prefix}window {
         outline: none;
+        overflow: hidden;
         
         .#{$prefix}window-wrap {
             position: relative;

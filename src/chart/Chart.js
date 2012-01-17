@@ -1,17 +1,3 @@
-/*
-
-This file is part of Ext JS 4
-
-Copyright (c) 2011 Sencha Inc
-
-Contact:  http://www.sencha.com/contact
-
-GNU General Public License Usage
-This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-*/
 /**
  * Charts provide a flexible way to achieve a wide range of data visualization capablitities.
  * Each Chart gets its data directly from a {@link Ext.data.Store Store}, and automatically
@@ -89,6 +75,7 @@ If you are unsure which license is appropriate for your use, please contact the 
  *                 type: 'Time',
  *                 position: 'bottom',
  *                 fields: ['date'],
+ *                 groupBy: 'hour',
  *                 dateFormat: 'ga'
  *             }
  *         ]
@@ -100,7 +87,8 @@ If you are unsure which license is appropriate for your use, please contact the 
  * 
  * The horizontal axis is a {@link Ext.chart.axis.Time Time Axis} and is positioned on the bottom edge of the Chart.
  * It represents the bounds of the data contained in the "WeatherPoint" Model's "date" field.
- * The {@link Ext.chart.axis.Time#cfg-dateFormat dateFormat}
+ * The {@link Ext.chart.axis.Time#cfg-groupBy groupBy} configuration is used to specify that this axis
+ * will group times in one-hour increments, and the {@link Ext.chart.axis.Time#cfg-dateFormat dateFormat}
  * configuration tells the Time Axis how to format it's labels.
  * 
  * Here's what the Chart looks like now that it has its Axes configured:
@@ -160,7 +148,8 @@ Ext.define('Ext.chart.Chart', {
     mixins: {
         themeManager: 'Ext.chart.theme.Theme',
         mask: 'Ext.chart.Mask',
-        navigation: 'Ext.chart.Navigation'
+        navigation: 'Ext.chart.Navigation',
+        bindable: 'Ext.util.Bindable'
     },
 
     requires: [
@@ -334,7 +323,7 @@ Ext.define('Ext.chart.Chart', {
     constructor: function(config) {
         var me = this,
             defaultAnim;
-            
+
         config = Ext.apply({}, config);
         me.initTheme(config.theme || me.theme);
         if (me.gradients) {
@@ -355,7 +344,11 @@ Ext.define('Ext.chart.Chart', {
                 config.animate = defaultAnim;
             }
         }
-        me.mixins.mask.constructor.call(me, config);
+
+        if (config.enableMask) {
+            me.mixins.mask.constructor.call(me, config);
+        }
+
         me.mixins.navigation.constructor.call(me, config);
         me.callParent([config]);
     },
@@ -404,17 +397,17 @@ Ext.define('Ext.chart.Chart', {
         me.maxGutter = [0, 0];
         me.store = Ext.data.StoreManager.lookup(me.store);
         axes = me.axes;
-        me.axes = Ext.create('Ext.util.MixedCollection', false, function(a) { return a.position; });
+        me.axes = new Ext.util.MixedCollection(false, function(a) { return a.position; });
         if (axes) {
             me.axes.addAll(axes);
         }
         series = me.series;
-        me.series = Ext.create('Ext.util.MixedCollection', false, function(a) { return a.seriesId || (a.seriesId = Ext.id(null, 'ext-chart-series-')); });
+        me.series = new Ext.util.MixedCollection(false, function(a) { return a.seriesId || (a.seriesId = Ext.id(null, 'ext-chart-series-')); });
         if (series) {
             me.series.addAll(series);
         }
         if (me.legend !== false) {
-            me.legend = Ext.create('Ext.chart.Legend', Ext.applyIf({chart:me}, me.legend));
+            me.legend = new Ext.chart.Legend(Ext.applyIf({chart:me}, me.legend));
         }
 
         me.on({
@@ -541,7 +534,7 @@ Ext.define('Ext.chart.Chart', {
             position = me.getEventXY(e),
             item;
 
-        if (me.mask) {
+        if (me.enableMask) {
             me.mixins.mask.onMouseDown.call(me, e);
         }
         // Ask each series if it has an item corresponding to (not necessarily exactly
@@ -564,7 +557,7 @@ Ext.define('Ext.chart.Chart', {
             position = me.getEventXY(e),
             item;
 
-        if (me.mask) {
+        if (me.enableMask) {
             me.mixins.mask.onMouseUp.call(me, e);
         }
         // Ask each series if it has an item corresponding to (not necessarily exactly
@@ -587,7 +580,8 @@ Ext.define('Ext.chart.Chart', {
             position = me.getEventXY(e),
             item, last, storeItem, storeField;
 
-        if (me.mask) {
+        
+        if (me.enableMask) {
             me.mixins.mask.onMouseMove.call(me, e);
         }
         // Ask each series if it has an item corresponding to (not necessarily exactly
@@ -631,7 +625,7 @@ Ext.define('Ext.chart.Chart', {
     // @private handle mouse leave event.
     onMouseLeave: function(e) {
         var me = this;
-        if (me.mask) {
+        if (me.enableMask) {
             me.mixins.mask.onMouseLeave.call(me, e);
         }
         me.series.each(function(series) {
@@ -643,7 +637,7 @@ Ext.define('Ext.chart.Chart', {
     delayRefresh: function() {
         var me = this;
         if (!me.refreshTask) {
-            me.refreshTask = Ext.create('Ext.util.DelayedTask', me.refresh, me);
+            me.refreshTask = new Ext.util.DelayedTask(me.refresh, me);
         }
         me.refreshTask.delay(me.refreshBuffer);
     },
@@ -659,39 +653,25 @@ Ext.define('Ext.chart.Chart', {
         }
     },
 
-    /**
-     * Changes the data store bound to this chart and refreshes it.
-     * @param {Ext.data.Store} store The store to bind to this chart
-     */
     bindStore: function(store, initial) {
         var me = this;
-        if (!initial && me.store) {
-            if (store !== me.store && me.store.autoDestroy) {
-                me.store.destroyStore();
-            }
-            else {
-                me.store.un('datachanged', me.refresh, me);
-                me.store.un('add', me.delayRefresh, me);
-                me.store.un('remove', me.delayRefresh, me);
-                me.store.un('update', me.delayRefresh, me);
-                me.store.un('clear', me.refresh, me);
-            }
-        }
-        if (store) {
-            store = Ext.data.StoreManager.lookup(store);
-            store.on({
-                scope: me,
-                datachanged: me.refresh,
-                add: me.delayRefresh,
-                remove: me.delayRefresh,
-                update: me.delayRefresh,
-                clear: me.refresh
-            });
-        }
-        me.store = store;
-        if (store && !initial) {
+        me.mixins.bindable.bindStore.apply(me, arguments);
+        if (me.store && !initial) {
             me.refresh();
         }
+    },
+    
+    getStoreListeners: function() {
+        var refresh = this.refresh,
+            delayRefresh = this.delayRefresh;
+            
+        return {
+            refresh: refresh,
+            add: delayRefresh,
+            remove: delayRefresh,
+            update: delayRefresh,
+            clear: refresh
+        };
     },
 
     // @private Create Axis
@@ -898,7 +878,28 @@ Ext.define('Ext.chart.Chart', {
             series.fireEvent('afterrender');
         }
     },
-
+    /**
+     * Saves the chart by either triggering a download or returning a string containing the chart data. 
+     * The action depends on the export type specified in the passed configuration.
+     *
+     * Possible export types:
+     * - "image/png"
+     * - "image/svg+xml"
+     *
+     * Other configuration properties:
+     * - width
+     *
+     * Example usage:
+     *
+     * chart.save({
+     *      type: 'image/png'
+     * });
+     *
+     * @param {Object} config (required) Object which contains information about the export-type
+     */
+    save: function(config){
+        return Ext.draw.Surface.save(config, this.surface);
+    },
     // @private remove gently.
     destroy: function() {
         Ext.destroy(this.surface);
@@ -906,4 +907,3 @@ Ext.define('Ext.chart.Chart', {
         this.callParent(arguments);
     }
 });
-
